@@ -64,4 +64,4 @@ Once the application is running, you can access the **Swagger UI** documentation
 
 ## 📜 License
 
-BC
+CC-BY-NC-SA-4.0
