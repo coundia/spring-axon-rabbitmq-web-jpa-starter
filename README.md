@@ -7,14 +7,14 @@
 git clone https://github.com/coundia/spring-axon-rabbitmq-starter.git
 ```
 
-# run docker-compose and mvn test-run or run
+# Run docker and excute this command postgres and Rabbitmq
 
 ```sh
 docker compose -f src/main/docker/main.yml up -d
 
 
 ```
-# launch tests
+# Run tests
 
 ```sh
 mvn spring-boot:test-run
