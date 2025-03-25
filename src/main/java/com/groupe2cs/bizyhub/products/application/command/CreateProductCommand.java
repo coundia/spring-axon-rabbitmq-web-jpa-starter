@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+import java.io.Serializable;
+
 @Getter
 @AllArgsConstructor
-public class CreateProductCommand {
-
+public class CreateProductCommand implements Serializable {
     @TargetAggregateIdentifier
-    private String id;
-    private Double price;
     private String name;
+    private Double price;
+
 }

@@ -81,12 +81,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.axonframework.extensions.amqp</groupId>
-			<artifactId>axon-amqp</artifactId>
-			<version>4.11.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.axonframework</groupId>
 			<artifactId>axon-spring-boot-autoconfigure</artifactId>
 			<version>4.11.1</version>

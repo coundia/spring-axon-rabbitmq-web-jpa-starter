@@ -18,15 +18,16 @@ public class AddProductControllerTests extends BaseIntegrationTests {
 
     @Test
     void it_should_be_able_to_add_product() {
-        ProductAggregate productModel = ProductAggregate.create(
-                ProductPrice.create(1000),
-                ProductName.create("Product 1")
+        ProductAggregate productModel = new ProductAggregate(
+                ProductName.create("Product 1"),
+                ProductPrice.create(1000)
+
         );
 
         ProductRequestDTO productRequestDTO = ProductMapper.toRequestDto(productModel);
         HttpEntity<ProductRequestDTO> request = new HttpEntity<>(productRequestDTO);
 
-        String url = getBaseUrl() + "/products/add";
+        String url = getBaseUrl() + "/products/";
 
         System.out.println(url);
 

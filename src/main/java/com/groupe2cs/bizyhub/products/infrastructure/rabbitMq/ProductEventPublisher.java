@@ -1,7 +1,7 @@
 package com.groupe2cs.bizyhub.products.infrastructure.rabbitMq;
 
 
-import com.groupe2cs.bizyhub.products.application.CommandHandler.ProductCommandHandler;
+import com.groupe2cs.bizyhub.products.application.projections.ProductProjection;
 import com.groupe2cs.bizyhub.products.application.event.ProductCreatedEvent;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -23,7 +23,7 @@ public class ProductEventPublisher {
     @EventHandler
     public void on(ProductCreatedEvent productCreatedEvent){
 
-        Logger.getLogger(ProductCommandHandler.class.getName()).info("Publishing event: " + productCreatedEvent);
+        Logger.getLogger(ProductProjection.class.getName()).info("Publishing event: " + productCreatedEvent);
 
         rabbitTemplate.convertAndSend("axon-exchange","product.created",productCreatedEvent);
     }
