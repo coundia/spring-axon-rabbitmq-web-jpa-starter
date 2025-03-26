@@ -1,7 +1,9 @@
 package com.groupe2cs.bizyhub.products.domain.aggregate;
 
 import com.groupe2cs.bizyhub.products.application.command.CreateProductCommand;
+import com.groupe2cs.bizyhub.products.application.command.DeleteProductCommand;
 import com.groupe2cs.bizyhub.products.application.event.ProductCreatedEvent;
+import com.groupe2cs.bizyhub.products.application.event.ProductDeletedEvent;
 import com.groupe2cs.bizyhub.products.domain.valueObject.ProductId;
 import com.groupe2cs.bizyhub.products.domain.valueObject.ProductName;
 import com.groupe2cs.bizyhub.products.domain.valueObject.ProductPrice;
@@ -32,12 +34,6 @@ public class ProductAggregate {
         this.isDeleted = false;
     }
 
-    @CommandHandler
-    public ProductAggregate(CreateProductCommand command) {
-        this.id = ProductId.create(UUID.randomUUID().toString());
-        apply(new ProductCreatedEvent(this.getId().value(), command.getPrice(), command.getName()));
-    }
-
     public ProductId getId() {
         return id;
     }
@@ -52,6 +48,18 @@ public class ProductAggregate {
 
     public Boolean isDeleted() {
         return isDeleted;
+    }
+
+    @CommandHandler
+    public ProductAggregate(CreateProductCommand command) {
+        this.id = ProductId.create(UUID.randomUUID().toString());
+        apply(new ProductCreatedEvent(this.getId().value(), command.getPrice(), command.getName()));
+    }
+
+    @CommandHandler
+    public ProductAggregate(DeleteProductCommand command) {
+         this.id = ProductId.create(UUID.randomUUID().toString());
+         apply(new ProductDeletedEvent(command.getProductId().value()));
     }
 
     @EventSourcingHandler

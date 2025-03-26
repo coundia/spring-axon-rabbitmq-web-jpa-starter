@@ -1,49 +1,24 @@
 GET http://127.0.0.1:8080/actuator
-Accept: application/vnd.spring-boot.actuator.v3+json
-
-<> 2025-03-23T161556.200.json
-
 ###
-
 GET http://127.0.0.1:8080/actuator/health
-Accept: application/vnd.spring-boot.actuator.v3+json
-
-<> 2025-03-23T190940.200.json
-<> 2025-03-23T161616.200.json
-<> 2025-03-23T161553.200.json
-
 ###
-
 GET http://127.0.0.1:8081/api/v1/status
-
-<> 2025-03-23T190938.404.json
-<> 2025-03-23T190923.500.json
-<> 2025-03-23T190921.500.json
-<> 2025-03-23T190733.500.json
-
 ###
-
 POST http://127.0.0.1:8081/api/v1/commands/products/
 Content-Type: application/json
 
 {
   "price": 999,
-  "name": "Product 12"
+  "name": "iPhone 16"
 }
 
-<> 2025-03-25T184512.200.json
+<> 2025-03-26T144644.200.json
 
 ###
-
-GET http://127.0.0.1:8081/api/v1/queries/products?page=1&limit=2
-
+GET http://127.0.0.1:8081/api/v1/queries/products
 ###
+DELETE http://127.0.0.1:8081/api/v1/commands/products/ffe7969a-4e2d-4db3-9d78-3752e9d2ef1c
 
-
-###
-
-GET http://127.0.0.1:8081/api/v1/queries/products/name?name=product
-Content-Type: application/json
-
+<> 2025-03-26T144652.404.json
 ###
 

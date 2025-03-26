@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.products.presentation.controller;
 import com.groupe2cs.bizyhub.products.application.dto.ListProductResponseDTO;
 import com.groupe2cs.bizyhub.products.application.query.ListProductsQuery;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.data.domain.PageRequest;
@@ -24,7 +25,8 @@ public class ListProductController {
         this.queryGateway = queryGateway;
     }
 
-    @GetMapping
+    @GetMapping("/")
+    @Operation(description = "List all products")
     public CompletableFuture<ResponseEntity<ListProductResponseDTO>> listProduct(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int limit) {

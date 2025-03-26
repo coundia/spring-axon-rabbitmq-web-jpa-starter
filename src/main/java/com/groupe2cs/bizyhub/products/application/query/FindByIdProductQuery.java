@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class GetProductQuery {
-    private ProductId id;
+public class FindByIdProductQuery {
+
+    private ProductId productId;
 }

@@ -25,7 +25,7 @@ public class BaseIntegrationTests {
     public String host;
 
     public String getBaseUrl() {
-        return this.host + this.port + "/api/";
+        return this.host +":" +this.port + "/api/";
     }
 
 }
