@@ -2,8 +2,10 @@ package com.groupe2cs.bizyhub.products.domain.aggregate;
 
 import com.groupe2cs.bizyhub.products.application.command.CreateProductCommand;
 import com.groupe2cs.bizyhub.products.application.command.DeleteProductCommand;
+import com.groupe2cs.bizyhub.products.application.command.UpdateNameProductCommand;
 import com.groupe2cs.bizyhub.products.application.event.ProductCreatedEvent;
 import com.groupe2cs.bizyhub.products.application.event.ProductDeletedEvent;
+import com.groupe2cs.bizyhub.products.application.event.UpdateNameProductEvent;
 import com.groupe2cs.bizyhub.products.domain.valueObject.ProductId;
 import com.groupe2cs.bizyhub.products.domain.valueObject.ProductName;
 import com.groupe2cs.bizyhub.products.domain.valueObject.ProductPrice;
@@ -34,18 +36,6 @@ public class ProductAggregate {
         this.isDeleted = false;
     }
 
-    @CommandHandler
-    public ProductAggregate(CreateProductCommand command) {
-        this.id = ProductId.create(UUID.randomUUID().toString());
-        apply(new ProductCreatedEvent(this.getId().value(), command.getPrice(), command.getName()));
-    }
-
-    @CommandHandler
-    public ProductAggregate(DeleteProductCommand command) {
-        this.id = ProductId.create(UUID.randomUUID().toString());
-        apply(new ProductDeletedEvent(command.getProductId().value()));
-    }
-
     public ProductId getId() {
         return id;
     }
@@ -68,6 +58,24 @@ public class ProductAggregate {
         this.price = ProductPrice.create(event.getPrice());
         this.name = ProductName.create(event.getName());
         this.isDeleted = false;
+    }
+
+    @CommandHandler
+    public ProductAggregate(CreateProductCommand command) {
+        this.id = ProductId.create(UUID.randomUUID().toString());
+        apply(new ProductCreatedEvent(this.getId().value(), command.getPrice(), command.getName()));
+    }
+
+    @CommandHandler
+    public ProductAggregate(DeleteProductCommand command) {
+        this.id = ProductId.create(UUID.randomUUID().toString());
+        apply(new ProductDeletedEvent(command.getProductId().value()));
+    }
+
+    @CommandHandler
+    public ProductAggregate(UpdateNameProductCommand command) {
+        this.id = ProductId.create(UUID.randomUUID().toString());
+        apply(new UpdateNameProductEvent(command.getProductId().value(),command.getProductName().value()));
     }
 
 }
