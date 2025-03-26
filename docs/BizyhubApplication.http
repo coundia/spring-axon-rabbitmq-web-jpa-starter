@@ -39,3 +39,11 @@ GET http://127.0.0.1:8081/api/v1/queries/products?page=1&limit=2
 
 ###
 
+
+###
+
+GET http://127.0.0.1:8081/api/v1/queries/products/name?name=product
+Content-Type: application/json
+
+###
+
