@@ -3,7 +3,7 @@ package com.groupe2cs.bizyhub.products.domain.valueObject;
 
 import java.io.Serializable;
 
-public class ProductId  implements Serializable {
+public class ProductId implements Serializable {
     private final String id;
 
     public ProductId(String id) {

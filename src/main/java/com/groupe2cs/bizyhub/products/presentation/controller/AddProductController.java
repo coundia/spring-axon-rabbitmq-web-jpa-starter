@@ -28,7 +28,7 @@ public class AddProductController {
         this.commandGateway = commandGateway;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(summary = "Add a new product", description = "Creates a new product and returns the created entity")
     public CompletableFuture<ResponseEntity<ProductResponseDTO>> addProduct(@RequestBody ProductRequestDTO productRequestDTO) {
 

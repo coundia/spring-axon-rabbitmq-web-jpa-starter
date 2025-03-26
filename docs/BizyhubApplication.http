@@ -1,8 +1,11 @@
 GET http://127.0.0.1:8080/actuator
+
 ###
 GET http://127.0.0.1:8080/actuator/health
+
 ###
 GET http://127.0.0.1:8081/api/v1/status
+
 ###
 POST http://127.0.0.1:8081/api/v1/commands/products/
 Content-Type: application/json
@@ -16,9 +19,11 @@ Content-Type: application/json
 
 ###
 GET http://127.0.0.1:8081/api/v1/queries/products
+
 ###
 DELETE http://127.0.0.1:8081/api/v1/commands/products/ffe7969a-4e2d-4db3-9d78-3752e9d2ef1c
 
 <> 2025-03-26T144652.404.json
+
 ###
 

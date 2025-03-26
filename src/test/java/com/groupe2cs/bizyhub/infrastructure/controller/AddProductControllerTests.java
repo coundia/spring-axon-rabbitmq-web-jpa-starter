@@ -27,9 +27,7 @@ public class AddProductControllerTests extends BaseIntegrationTests {
         ProductRequestDTO productRequestDTO = ProductMapper.toRequestDto(productModel);
         HttpEntity<ProductRequestDTO> request = new HttpEntity<>(productRequestDTO);
 
-        String url = getBaseUrl() + "/products/";
-
-        System.out.println(url);
+        String url = getBaseUrl() + "v1/commands/products";
 
         ResponseEntity<ProductResponseDTO> response = testRestTemplate.postForEntity(url, request, ProductResponseDTO.class);
 

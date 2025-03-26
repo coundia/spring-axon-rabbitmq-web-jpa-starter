@@ -34,6 +34,18 @@ public class ProductAggregate {
         this.isDeleted = false;
     }
 
+    @CommandHandler
+    public ProductAggregate(CreateProductCommand command) {
+        this.id = ProductId.create(UUID.randomUUID().toString());
+        apply(new ProductCreatedEvent(this.getId().value(), command.getPrice(), command.getName()));
+    }
+
+    @CommandHandler
+    public ProductAggregate(DeleteProductCommand command) {
+        this.id = ProductId.create(UUID.randomUUID().toString());
+        apply(new ProductDeletedEvent(command.getProductId().value()));
+    }
+
     public ProductId getId() {
         return id;
     }
@@ -48,18 +60,6 @@ public class ProductAggregate {
 
     public Boolean isDeleted() {
         return isDeleted;
-    }
-
-    @CommandHandler
-    public ProductAggregate(CreateProductCommand command) {
-        this.id = ProductId.create(UUID.randomUUID().toString());
-        apply(new ProductCreatedEvent(this.getId().value(), command.getPrice(), command.getName()));
-    }
-
-    @CommandHandler
-    public ProductAggregate(DeleteProductCommand command) {
-         this.id = ProductId.create(UUID.randomUUID().toString());
-         apply(new ProductDeletedEvent(command.getProductId().value()));
     }
 
     @EventSourcingHandler

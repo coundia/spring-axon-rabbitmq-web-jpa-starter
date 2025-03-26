@@ -25,7 +25,7 @@ public class ListProductController {
         this.queryGateway = queryGateway;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(description = "List all products")
     public CompletableFuture<ResponseEntity<ListProductResponseDTO>> listProduct(
             @RequestParam(defaultValue = "0") int page,

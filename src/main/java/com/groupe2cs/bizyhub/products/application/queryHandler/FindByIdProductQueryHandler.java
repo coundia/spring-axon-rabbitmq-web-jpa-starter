@@ -19,7 +19,7 @@ public class FindByIdProductQueryHandler {
     public Product handle(FindByIdProductQuery query) {
         return repository.findById(
                 query.getProductId().value()).orElseThrow(
-                () -> new RuntimeException("Product with id " + query.getProductId()+ " not found")
+                () -> new RuntimeException("Product with id " + query.getProductId() + " not found")
         );
     }
 }

@@ -19,7 +19,7 @@ tasks:
   test:
     desc: Run tests
     cmds:
-      - ./mvnw spring-boot:test-run
+      - mvn test
     sources:
       - "src/**/*.java"
     generates:
