@@ -27,14 +27,13 @@ public class ListProductController {
 
     @GetMapping
     public CompletableFuture<ResponseEntity<ListProductResponseDTO>> listProduct(
-            @RequestParam Map<String, String> filters,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int limit) {
 
         Pageable pageable = PageRequest.of(page, limit);
 
         CompletableFuture<ListProductResponseDTO> response = queryGateway.query(
-                new ListProductsQuery(filters, pageable),
+                new ListProductsQuery(pageable),
                 ListProductResponseDTO.class
         );
 
