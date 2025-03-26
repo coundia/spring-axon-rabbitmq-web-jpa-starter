@@ -27,7 +27,7 @@ public class ListProductControllerTest extends BaseIntegrationTests {
         productRepository.save(new Product(UUID.randomUUID().toString(), "Product1", 100.0));
         productRepository.save(new Product(UUID.randomUUID().toString(), "Product2", 200.0));
 
-        ResponseEntity< ListProductResponseDTO> response = this.testRestTemplate.getForEntity(
+        ResponseEntity<ListProductResponseDTO> response = this.testRestTemplate.getForEntity(
                 this.getBaseUrl() + "v1/queries/products?page=0&limit=1",
                 ListProductResponseDTO.class
         );

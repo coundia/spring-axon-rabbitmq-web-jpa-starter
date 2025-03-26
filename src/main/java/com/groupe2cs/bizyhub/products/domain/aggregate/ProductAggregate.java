@@ -17,18 +17,25 @@ import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 @Aggregate
 public class ProductAggregate {
     @AggregateIdentifier
-    private  ProductId id;
-    private  ProductPrice price;
-    private  ProductName name;
-    private  Boolean isDeleted;
+    private ProductId id;
+    private ProductPrice price;
+    private ProductName name;
+    private Boolean isDeleted;
 
-    protected ProductAggregate() {}
+    protected ProductAggregate() {
+    }
 
-    public ProductAggregate(ProductName name, ProductPrice price ) {
+    public ProductAggregate(ProductName name, ProductPrice price) {
         this.id = ProductId.create(UUID.randomUUID().toString());
         this.price = price;
         this.name = name;
         this.isDeleted = false;
+    }
+
+    @CommandHandler
+    public ProductAggregate(CreateProductCommand command) {
+        this.id = ProductId.create(UUID.randomUUID().toString());
+        apply(new ProductCreatedEvent(this.getId().value(), command.getPrice(), command.getName()));
     }
 
     public ProductId getId() {
@@ -45,13 +52,6 @@ public class ProductAggregate {
 
     public Boolean isDeleted() {
         return isDeleted;
-    }
-
-
-    @CommandHandler
-    public ProductAggregate(CreateProductCommand command) {
-        this.id = ProductId.create(UUID.randomUUID().toString());
-        apply(new ProductCreatedEvent(this.getId().value(), command.getPrice(), command.getName()));
     }
 
     @EventSourcingHandler

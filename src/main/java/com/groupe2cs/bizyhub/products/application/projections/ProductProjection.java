@@ -19,7 +19,7 @@ public class ProductProjection {
     @EventHandler
     public void on(ProductCreatedEvent event) {
 
-        Product product = new Product(event.getId(),event.getName(), event.getPrice());
+        Product product = new Product(event.getId(), event.getName(), event.getPrice());
         productRepository.save(product);
     }
 

@@ -1,4 +1,4 @@
-package com.groupe2cs.bizyhub.products.infrastructure.rabbitMq;
+package com.groupe2cs.bizyhub.shared.infrastructure.rabbitMq;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -15,6 +15,7 @@ public class RabbitMQConfig {
     public Jackson2JsonMessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
+
     @Bean
     public DirectExchange exchange() {
         return new DirectExchange("axon-exchange");

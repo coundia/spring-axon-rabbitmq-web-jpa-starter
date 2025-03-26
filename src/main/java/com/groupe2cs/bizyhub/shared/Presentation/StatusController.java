@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StatusController {
 
     @GetMapping("/status")
-    public String getStatus(){
+    public String getStatus() {
         return "UP";
     }
 }

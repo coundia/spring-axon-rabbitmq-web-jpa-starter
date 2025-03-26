@@ -18,7 +18,7 @@ public class ProductModelTests extends BaseUnitTests {
     void it_should_create_product_with_valid_values() {
         ProductPrice price = ProductPrice.create(100);
         ProductName name = ProductName.create("Test Product");
-        ProductAggregate product = new ProductAggregate(name,price);
+        ProductAggregate product = new ProductAggregate(name, price);
         assertThat(product.getId()).isNotNull();
         assertThat(product.getPrice()).isEqualTo(price);
         assertThat(product.getName()).isEqualTo(name);

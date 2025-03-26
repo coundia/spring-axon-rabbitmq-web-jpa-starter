@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Getter
 @AllArgsConstructor
-public class ProductCreatedEvent implements  Serializable {
+public class ProductCreatedEvent implements Serializable {
     private String id;
     private Double price;
     private String name;

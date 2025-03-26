@@ -7,12 +7,12 @@ public class ProductName {
         this.name = name;
     }
 
-    public String value() {
-        return this.name;
-    }
-
     public static ProductName create(String name) {
         return new ProductName(name);
+    }
+
+    public String value() {
+        return this.name;
     }
 
     @Override

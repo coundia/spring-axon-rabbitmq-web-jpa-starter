@@ -18,7 +18,7 @@ services:
       - "5432:5432"
     restart: always
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "bizyhub", "-d", "bizyhub"]
+      test: [ "CMD", "pg_isready", "-U", "bizyhub", "-d", "bizyhub" ]
       interval: 10s
       retries: 5
 
@@ -30,7 +30,7 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: bizyhub
       RABBITMQ_DEFAULT_PASS: bizyhub
-#      RABBITMQ_DEFAULT_VHOST: bizyhub
+    #      RABBITMQ_DEFAULT_VHOST: bizyhub
     ports:
       - "15672:15672"  # RabbitMQ Management UI
       - "5672:5672"    # RabbitMQ protocol
@@ -38,7 +38,7 @@ services:
       - rabbitmq_data:/var/lib/rabbitmq
     restart: always
     healthcheck:
-      test: ["CMD", "rabbitmqctl", "status"]
+      test: [ "CMD", "rabbitmqctl", "status" ]
       interval: 10s
       retries: 5
 

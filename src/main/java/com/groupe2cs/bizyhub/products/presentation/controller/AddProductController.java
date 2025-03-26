@@ -37,14 +37,14 @@ public class AddProductController {
         return commandGateway.send(createProductCommand)
                 .thenApply(
                         productId -> {
-                    log.info("Product created successfully with ID: {}", productId);
-                    ProductResponseDTO productResponseDTO = new ProductResponseDTO(
-                            productId.toString(),
-                            productRequestDTO.name,
-                            productRequestDTO.price
-                    );
-                    return ResponseEntity.ok(productResponseDTO);
-                })
+                            log.info("Product created successfully with ID: {}", productId);
+                            ProductResponseDTO productResponseDTO = new ProductResponseDTO(
+                                    productId.toString(),
+                                    productRequestDTO.name,
+                                    productRequestDTO.price
+                            );
+                            return ResponseEntity.ok(productResponseDTO);
+                        })
                 .exceptionally(ex -> {
                     log.error("Failed to create product: {}", ex.getMessage());
                     return ResponseEntity.internalServerError().build();

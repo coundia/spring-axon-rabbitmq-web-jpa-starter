@@ -6,12 +6,16 @@ public class ProductPrice {
 
     private final double price;
 
-    public ProductPrice(double price){
-        if(price < 0.0){
+    public ProductPrice(double price) {
+        if (price < 0.0) {
             throw new PriceNotCorrect("Price not correct");
         }
 
         this.price = price;
+    }
+
+    public static ProductPrice create(double price) {
+        return new ProductPrice(price);
     }
 
     @Override
@@ -27,12 +31,8 @@ public class ProductPrice {
         return Double.hashCode(price);
     }
 
-    public double value(){
+    public double value() {
         return price;
-    }
-
-    public static ProductPrice create(double price){
-        return new ProductPrice(price);
     }
 
     @Override

@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "product")
-public class Product{
+public class Product {
     @Id
 //    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;

@@ -21,7 +21,7 @@ public class CreateProductCommandTest extends BaseUnitTests {
 
     @Test
     void it_should_send_command_to_command_gateway() {
-        CreateProductCommand command = new CreateProductCommand( "Product 1",100.0);
+        CreateProductCommand command = new CreateProductCommand("Product 1", 100.0);
 
         commandGateway.send(command);
 
@@ -29,8 +29,8 @@ public class CreateProductCommandTest extends BaseUnitTests {
         verify(commandGateway, times(1)).send(commandCaptor.capture());
 
         CreateProductCommand sentCommand = commandCaptor.getValue();
-        assert(sentCommand.getPrice() == 100.0);
-        assert(sentCommand.getName().equals("Product 1"));
+        assert (sentCommand.getPrice() == 100.0);
+        assert (sentCommand.getName().equals("Product 1"));
     }
 
     @Test

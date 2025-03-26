@@ -1,29 +1,29 @@
-Cette structure est une implémentation classique de l'architecture hexagonale avec DDD. 
+Cette structure est une implémentation classique de l'architecture hexagonale avec DDD.
 Voici comment chaque couche s’intègre avec Axon + CQRS
 
 src/
-├── presentation/     # Couches exposant l'API (REST, GraphQL, WebSockets)
-│   ├── controller/
-│   ├── security/
-│   └── dto/
-├── application/      # Couches applicatives (CQRS - Command/Query Handlers)
-│   ├── command/
-│   ├── query/
-│   ├── service/
-│   ├── saga/
-│   └── projection/
-├── domain/          # Cœur métier (DDD - Aggregates, Events, Value Objects)
-│   ├── model/
-│   ├── aggregate/
-│   ├── event/
-│   ├── command/
-│   ├── exception/
-│   └── repository/
-└── infrastructure/   # Couche technique (DB, Messaging, Security, etc.)
+├── presentation/ # Couches exposant l'API (REST, GraphQL, WebSockets)
+│ ├── controller/
+│ ├── security/
+│ └── dto/
+├── application/ # Couches applicatives (CQRS - Command/Query Handlers)
+│ ├── command/
+│ ├── query/
+│ ├── service/
+│ ├── saga/
+│ └── projection/
+├── domain/ # Cœur métier (DDD - Aggregates, Events, Value Objects)
+│ ├── model/
+│ ├── aggregate/
+│ ├── event/
+│ ├── command/
+│ ├── exception/
+│ └── repository/
+└── infrastructure/ # Couche technique (DB, Messaging, Security, etc.)
 ├── persistence/
-│   ├── repository/
-│   ├── entity/
-│   └── projection/
+│ ├── repository/
+│ ├── entity/
+│ └── projection/
 ├── messaging/ (RabbitMQ, Kafka)
 ├── config/ (Axon, Security, etc.)
 ├── eventstore/ (Event sourcing avec Axon)
