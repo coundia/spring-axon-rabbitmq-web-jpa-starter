@@ -1,19 +1,16 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
 
-import com.groupe2cs.bizyhub.products.application.dto.ProductResponseDTO;
+import com.groupe2cs.bizyhub.products.application.dto.ListProductResponseDTO;
 import com.groupe2cs.bizyhub.products.application.query.ListProductsQuery;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -29,20 +26,20 @@ public class ListProductController {
     }
 
     @GetMapping
-    public CompletableFuture<ResponseEntity<List<ProductResponseDTO>>> listProduct(
+    public CompletableFuture<ResponseEntity<ListProductResponseDTO>> listProduct(
             @RequestParam Map<String, String> filters,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "10") int limit) {
 
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, limit);
 
-        CompletableFuture<List<ProductResponseDTO>> response = queryGateway.query(
+        CompletableFuture<ListProductResponseDTO> response = queryGateway.query(
                 new ListProductsQuery(filters, pageable),
-                ResponseTypes.multipleInstancesOf(ProductResponseDTO.class)
+                ListProductResponseDTO.class
         );
 
         return response.thenApply(productResponseDTOList -> {
-            if (productResponseDTOList.isEmpty()) {
+            if (productResponseDTOList.getProducts().isEmpty()) {
                 throw new ProductNotFoundException("No products found");
             }
             return ResponseEntity.ok(productResponseDTOList);

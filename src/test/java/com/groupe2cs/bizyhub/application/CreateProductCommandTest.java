@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupe2cs.bizyhub.products.application.command.CreateProductCommand;
 import com.groupe2cs.bizyhub.products.application.event.ProductCreatedEvent;
-import com.groupe2cs.bizyhub.products.domain.aggregate.ProductAggregate;
 import com.groupe2cs.bizyhub.shared.BaseUnitTests;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Assertions;
@@ -12,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class CreateProductCommandTest extends BaseUnitTests {
 

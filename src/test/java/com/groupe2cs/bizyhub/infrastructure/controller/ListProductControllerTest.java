@@ -1,6 +1,6 @@
 package com.groupe2cs.bizyhub.infrastructure.controller;
 
-import com.groupe2cs.bizyhub.products.application.dto.ProductResponseDTO;
+import com.groupe2cs.bizyhub.products.application.dto.ListProductResponseDTO;
 import com.groupe2cs.bizyhub.products.infrastructure.entity.Product;
 import com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository;
 import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
@@ -27,13 +27,17 @@ public class ListProductControllerTest extends BaseIntegrationTests {
         productRepository.save(new Product(UUID.randomUUID().toString(), "Product1", 100.0));
         productRepository.save(new Product(UUID.randomUUID().toString(), "Product2", 200.0));
 
-        ResponseEntity<ProductResponseDTO[]> response = this.testRestTemplate.getForEntity(
-                this.getBaseUrl() + "v1/queries/products?page=0&size=1",
-                ProductResponseDTO[].class
+        ResponseEntity< ListProductResponseDTO> response = this.testRestTemplate.getForEntity(
+                this.getBaseUrl() + "v1/queries/products?page=0&limit=1",
+                ListProductResponseDTO.class
         );
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().length).isEqualTo(1);
+        assertThat(response.getBody().getProducts().size()).isEqualTo(1);
+        assertThat(response.getBody().getLimit()).isEqualTo(1);
+        assertThat(response.getBody().getCurrentPages()).isEqualTo(0);
+        assertThat(response.getBody().getTotalPages()).isEqualTo(2);
+        assertThat(response.getBody().getTotalElements()).isEqualTo(2);
     }
 }
