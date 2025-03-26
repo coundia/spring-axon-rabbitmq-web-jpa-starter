@@ -23,7 +23,7 @@ GET http://127.0.0.1:8081/api/v1/status
 
 ###
 
-POST http://127.0.0.1:8081/api/v1/products/
+POST http://127.0.0.1:8081/api/v1/commands/products/
 Content-Type: application/json
 
 {
@@ -32,6 +32,10 @@ Content-Type: application/json
 }
 
 <> 2025-03-25T184512.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/v1/queries/products?page=0&size=1
 
 ###
 

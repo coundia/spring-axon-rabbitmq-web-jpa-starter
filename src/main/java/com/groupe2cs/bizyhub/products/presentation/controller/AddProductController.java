@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api/v1/commands/products")
 @Tag(name = "Product Controller", description = "Endpoints for managing products")
 @Slf4j
 public class AddProductController {

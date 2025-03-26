@@ -13,7 +13,7 @@ public class StatusControllerTests extends BaseIntegrationTests {
 
     @Test
     void it_should_be_able_get_status() {
-        ResponseEntity<String> response = testRestTemplate.getForEntity(host +":" +port + "/api/v1/status", String.class);
+        ResponseEntity<String> response = testRestTemplate.getForEntity(this.getBaseUrl()+ "/v1/status", String.class);
         assertThat(response.getBody()).isNotEmpty();
         Assertions.assertEquals(response.getStatusCode().value(), HttpStatus.OK.value());
     }

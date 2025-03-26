@@ -18,7 +18,7 @@ public class ProductProjection {
 
     @EventHandler
     public void on(ProductCreatedEvent event) {
-       // System.out.println("Product created: " + event.toString());
+
         Product product = new Product(event.getId(),event.getName(), event.getPrice());
         productRepository.save(product);
     }
