@@ -10,14 +10,29 @@ tasks:
       - "target/*.jar"
 
   start:
-    desc: Run the Spring Boot application
+    desc: Run the Spring Boot application services individually
     cmds:
-      - docker compose -f src/main/docker/main.yml up -d
-      - ./mvnw spring-boot:run
+      - mvn spring-boot:run
+    interactive: false
+
+  stop:
+    desc: Stop apps
+    cmds:
+      - sh kill.ports.sh  8090
+
+  check:
+    desc: Check severs
+    cmds:
+      - curl -i http://127.0.0.1:8090/actuator/health
+
+  serve:
+    desc: Run all services using Docker Compose
+    cmds:
+      - docker compose -f docker/main.yml up -d
     interactive: true
 
   test:
-    desc: Run tests
+    desc: Run unit and integration tests
     cmds:
       - mvn test
     sources:
@@ -33,34 +48,30 @@ tasks:
       - "target/"
 
   format:
-    desc: Format Java code
+    desc: Format Java code using Spotless
     cmds:
       - ./mvnw spotless:apply
     sources:
       - "src/**/*.java"
 
   lint:
-    desc: Check Java code formatting
+    desc: Check Java code formatting using Checkstyle
     cmds:
       - ./mvnw checkstyle:check
 
   dependencies:
-    desc: Update project dependencies
+    desc: Check for updated project dependencies
     cmds:
       - ./mvnw versions:display-dependency-updates
       - ./mvnw versions:display-plugin-updates
 
   docker-build:
-    desc: Build a Docker image
+    desc: Build a Docker image for the application
     cmds:
-      - docker build -t my-spring-boot-app .
+      - docker build -t pcoundia .
+      - docker compose -f docker/main.yml up -d --build
     sources:
       - "Dockerfile"
       - "src/**"
     generates:
       - "target/*.jar"
-
-  docker-run:
-    desc: Run the application in a Docker container
-    cmds:
-      - docker run --rm -p 8080:8080 my-spring-boot-app

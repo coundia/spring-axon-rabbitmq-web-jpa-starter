@@ -25,7 +25,7 @@ Before running the application, make sure you have installed:
 Run the following command to start the Docker containers:
 
 ```sh
-docker compose -f src/main/docker/main.yml up -d
+docker compose -f docker/main.yml up -d
 ```
 
 ### 2️⃣ Run Tests
@@ -44,18 +44,55 @@ mvn spring-boot:run
 
 Once the application is running, you can access the **Swagger UI** documentation here:
 
-🔗 [http://127.0.0.1:8081/swagger-ui/index.html#/](http://127.0.0.1:8081/swagger-ui/index.html#/)
+🔗 http://127.0.0.1:8093/swagger-ui/index.html#/
+
+## Api documentation swagger
+![api.png](docs/api.png)
+
 
 ## 📁 Project Structure
 
 ```
-├── src
-│   ├── main
-│   │   ├── docker         # Docker configuration (PostgreSQL, RabbitMQ)
-│   │   ├── java           # Java source code
-│   │   ├── resources      # Configuration files (application.properties, etc.)
-│   ├── test               # Unit and integration tests
+❰pcoundia❙~/projects/spring-axon-rabbitmq-web-jpa-starter(git✱main)❱✔≻ tree -L 7 src/
+src/
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── groupe2cs
+│   │           └── bizyhub
+│   │               ├── BizyhubApplication.java
+│   │               ├── products
+│   │               │   ├── application
+│   │               │   ├── domain
+│   │               │   ├── infrastructure
+│   │               │   └── presentation
+│   │               └── shared
+│   │                   ├── Presentation
+│   │                   └── infrastructure
+│   └── resources
+│       ├── application-test.properties
+│       └── application.properties
+└── test
+    └── java
+        └── com
+            └── groupe2cs
+                └── bizyhub
+                    ├── BizyhubApplicationTests.java
+                    ├── application
+                    │   └── CreateProductCommandTest.java
+                    ├── domain
+                    │   └── ProductModelTests.java
+                    ├── infrastructure
+                    │   └── controller
+                    └── shared
+                        ├── BaseIntegrationTests.java
+                        └── BaseUnitTests.java
+
+25 directories, 8 files
+
 ```
+
+
 
 ## 🔹 Notes
 
