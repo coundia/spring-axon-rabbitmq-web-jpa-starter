@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import com.groupe2cs.bizyhub.sales.domain.*;
 import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.sales.application.command.*;
+import org.springframework.web.multipart.MultipartFile;
 
 public class SaleMapper {
 
@@ -25,11 +26,15 @@ id,
 );
 }
 
-public static CreateSaleCommand toCommand(SaleRequest request) {
+public static CreateSaleCommand toCommand(
+SaleRequest request
+, MultipartFile facture
+) {
 return new CreateSaleCommand(
  
   SaleQuantity.create(request.getQuantity()), 
   SaleTotal_price.create(request.getTotal_price()) 
+,facture
 );
 }
 

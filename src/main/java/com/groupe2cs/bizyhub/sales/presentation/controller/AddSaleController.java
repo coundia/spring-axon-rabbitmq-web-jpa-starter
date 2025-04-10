@@ -13,8 +13,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/commands/sale")
@@ -28,12 +30,12 @@ public AddSaleController(CommandGateway commandGateway) {
 this.commandGateway = commandGateway;
 }
 
-@PostMapping
+@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 @Operation(
 summary = "Create a new sale",
-description = "Creates a new sale and returns the created entity",
+description = "Creates a new sale with file uploads and returns the created entity",
 requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-description = "Sale request payload",
+description = "Sale request payload plus file(s)",
 required = true,
 content = @Content(schema = @Schema(implementation = SaleRequest.class))
 )
@@ -44,17 +46,21 @@ content = @Content(schema = @Schema(implementation = SaleResponse.class))),
 @ApiResponse(responseCode = "500", description = "Internal server error",
 content = @Content(schema = @Schema()))
 })
-public ResponseEntity<SaleResponse> addSale(@RequestBody SaleRequest saleRequest) {
+public ResponseEntity<SaleResponse> addSale(
+	@RequestPart("metadata") SaleRequest saleRequest,
+		@RequestPart("facture") MultipartFile facture
+	) {
 	try {
-	CreateSaleCommand command = SaleMapper.toCommand(saleRequest);
+	CreateSaleCommand command = SaleMapper.toCommand(
+	saleRequest,
+	facture
+	);
 	String responseId = commandGateway.sendAndWait(command).toString();
-
 	SaleResponse response = SaleMapper.toResponse(responseId, saleRequest);
-
 	return ResponseEntity.ok(response);
 	} catch (Exception ex) {
 	log.error("Failed to create sale: {}", ex.getMessage());
 	return ResponseEntity.status(500).build();
 	}
-	}
-	}
+}
+}
