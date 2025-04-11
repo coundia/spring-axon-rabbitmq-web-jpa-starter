@@ -11,7 +11,6 @@ import lombok.Builder;
 import java.util.Date;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import java.util.UUID;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Getter
@@ -25,21 +24,21 @@ private SaleId id;
 private SaleQuantity quantity;
 private SaleTotal_price total_price;
 
-  private MultipartFile facture;
+  private SaleFacture facture;
 
-	public CreateSaleCommand(
+public CreateSaleCommand(
  
    SaleQuantity quantity , 
    SaleTotal_price total_price  
-	, MultipartFile facture
-	){
-	this.id = SaleId.create(UUID.randomUUID().toString());
+, SaleFacture facture
+){
+this.id = SaleId.create(UUID.randomUUID().toString());
  
   this.quantity = quantity ; 
   this.total_price = total_price ; 
   this.facture = facture ;
 
-	}
+}
 
 
 }

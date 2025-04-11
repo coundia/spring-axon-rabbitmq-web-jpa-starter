@@ -58,7 +58,8 @@ CreateSaleCommand command = new CreateSaleCommand(
 			
 			)
 ,
-	new MockMultipartFile("facture", "fake.txt", "text/plain", "Hello".getBytes())
+	null
+	//new MockMultipartFile("facture", "fake.txt", "text/plain", "Hello".getBytes())
 );
 return commandGateway.sendAndWait(command).toString();
 }

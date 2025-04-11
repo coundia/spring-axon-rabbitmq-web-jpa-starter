@@ -11,7 +11,6 @@ import lombok.Builder;
 import java.util.Date;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import java.util.UUID;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Getter

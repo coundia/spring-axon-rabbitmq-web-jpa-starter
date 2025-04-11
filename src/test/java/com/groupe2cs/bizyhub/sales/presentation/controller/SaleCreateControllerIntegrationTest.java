@@ -19,27 +19,26 @@ void it_should_be_able_to_add_sale() {
 SaleRequest requestDTO = SaleRequest.random();
 
 MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-body.add("metadata", requestDTO);
-body.add("facture", createFile());
+		body.add("quantity", requestDTO.getQuantity().toString());
+		body.add("totalPrice", requestDTO.getTotal_price().toString());
+	body.add("facture", createFile());
 
 HttpHeaders headers = new HttpHeaders();
 headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-HttpEntity<MultiValueMap<String, Object>> request =
-new HttpEntity<>(body, headers);
+HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-String uri = "/v1/commands/sale";
+String uri = "/api/v1/commands/sale";
 ResponseEntity<SaleResponse> response =
-	this.postForEntity(uri, request, SaleResponse.class);
+	this.postForEntity(uri, requestEntity, SaleResponse.class);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	assertThat(response.getBody()).isNotNull();
 	assertThat(response.getBody().getId()).isNotNull();
-	assertThat(response.getBody().getQuantity())
-	.isEqualTo(requestDTO.getQuantity());
-	assertThat(response.getBody().getTotal_price())
-	.isEqualTo(requestDTO.getTotal_price());
 
+			assertThat(response.getBody().getQuantity().toString())
+			.isEqualTo(requestDTO.getQuantity().toString());
+			assertThat(response.getBody().getTotal_price().toString())
+			.isEqualTo(requestDTO.getTotal_price().toString());
 	}
-
-}
+	}
