@@ -19,11 +19,11 @@ private SaleRepository saleRepository;
 
 @Test
 void it_should_be_able_to_get_sale_by_id() {
-Sale entity = SaleFixtures.randomOne(saleRepository);
-String existingId = entity.getId();
+	Sale entity = SaleFixtures.randomOne(saleRepository);
+	String existingId = entity.getId();
 
-String uri = "/v1/queries/sale/by-id?id=" + existingId;
-ResponseEntity<SaleResponse> response = this.getForEntity(uri, SaleResponse.class);
+	String uri = "/v1/queries/sale/by-id?id=" + existingId;
+	ResponseEntity<SaleResponse> response = this.getForEntity(uri, SaleResponse.class);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	assertThat(response.getBody()).isNotNull();

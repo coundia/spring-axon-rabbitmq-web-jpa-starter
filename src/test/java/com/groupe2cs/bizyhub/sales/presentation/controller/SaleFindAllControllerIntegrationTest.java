@@ -21,10 +21,10 @@ private SaleRepository saleRepository;
 
 @Test
 void it_should_be_able_to_get_all_sales() {
-SaleFixtures.randomMany(saleRepository, 5);
+	SaleFixtures.randomMany(saleRepository, 5);
 
-String uri = "/v1/queries/list-sale";
-ResponseEntity<SalePagedResponse> response = this.getForEntity(uri, SalePagedResponse.class);
+	String uri = "/v1/queries/list-sale";
+	ResponseEntity<SalePagedResponse> response = this.getForEntity(uri, SalePagedResponse.class);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	assertThat(response.getBody()).isNotNull();

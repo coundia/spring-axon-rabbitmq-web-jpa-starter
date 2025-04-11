@@ -28,17 +28,16 @@ headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
 HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-String uri = "/api/v1/commands/sale";
+String uri = "/v1/commands/sale";
 ResponseEntity<SaleResponse> response =
 	this.postForEntity(uri, requestEntity, SaleResponse.class);
-
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	assertThat(response.getBody()).isNotNull();
 	assertThat(response.getBody().getId()).isNotNull();
 
-			assertThat(response.getBody().getQuantity().toString())
-			.isEqualTo(requestDTO.getQuantity().toString());
-			assertThat(response.getBody().getTotal_price().toString())
-			.isEqualTo(requestDTO.getTotal_price().toString());
+	assertThat(response.getBody().getQuantity().toString())
+	.isEqualTo(requestDTO.getQuantity().toString());
+	assertThat(response.getBody().getTotal_price().toString())
+	.isEqualTo(requestDTO.getTotal_price().toString());
 	}
 	}
