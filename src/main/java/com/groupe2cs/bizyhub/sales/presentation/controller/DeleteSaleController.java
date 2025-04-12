@@ -4,7 +4,7 @@ package com.groupe2cs.bizyhub.sales.presentation.controller;
 	import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 	import com.groupe2cs.bizyhub.sales.domain.exception.*;
 	import com.groupe2cs.bizyhub.sales.application.dto.*;
-	import com.groupe2cs.bizyhub.sales.application.query.*;
+	import com.groupe2cs.bizyhub.sales.application.usecase.*;
 
 import com.groupe2cs.bizyhub.sales.application.command.DeleteSaleCommand;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,11 +25,12 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class DeleteSaleController {
 
-private final CommandGateway commandGateway;
+private final SaleDeleteApplicationService applicationService;
 
-public DeleteSaleController(CommandGateway commandGateway) {
-this.commandGateway = commandGateway;
+public DeleteSaleController(SaleDeleteApplicationService applicationService) {
+    this.applicationService = applicationService;
 }
+
 
 @DeleteMapping("/{id}")
 @Operation(
@@ -51,7 +52,7 @@ public ResponseEntity<String> deleteSale(
 
 	try {
 	SaleId idVo = SaleId.create(id);
-	commandGateway.sendAndWait(new DeleteSaleCommand(idVo));
+	applicationService.deleteSale(idVo);
 	return ResponseEntity.ok("Sale deleted successfully");
 	} catch (Exception e) {
 	log.error("Error deleting sale with id {}: {}", id, e.getMessage());

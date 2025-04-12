@@ -14,15 +14,16 @@ import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
-public class FindByIdSaleHandler {
+public class FindBySaleQuantityHandler {
 
 private final SaleRepository repository;
 @QueryHandler
- public SaleResponse handle(FindByIdSaleQuery query) {
-	 String value = query.getId().value();
-	Sale entity = repository.findById(value)
-		.orElseThrow(() -> new SaleNotFoundException(query.getId()));
-		return SaleMapper.toResponse(entity);
+public List<SaleResponse> handle(FindBySaleQuantityQuery query) {
+Integer value = query.getQuantity().value();
+	List<Sale> entities = repository.findByQuantity(value);
+	return entities.stream()
+	.map(SaleMapper::toResponse)
+	.toList();
 	}
 
 }

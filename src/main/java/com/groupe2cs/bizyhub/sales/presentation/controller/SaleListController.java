@@ -1,7 +1,7 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
-	import com.groupe2cs.bizyhub.sales.application.dto.*;
-	import com.groupe2cs.bizyhub.sales.application.query.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.usecase.*;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +23,12 @@ import java.util.concurrent.CompletableFuture;
 @Tag(name = "Sale Queries", description = "Endpoints for listing paginated sales")
 public class SaleListController {
 
-private final QueryGateway queryGateway;
+private final SaleReadApplicationService applicationService;
 
-public SaleListController(QueryGateway queryGateway) {
-this.queryGateway = queryGateway;
+public SaleListController(SaleReadApplicationService  applicationService) {
+	this.applicationService = applicationService;
 }
+
 
 @GetMapping
 @Operation(
@@ -54,8 +54,6 @@ public SalePagedResponse list(
 @Parameter(description = "Number of items per page", example = "10")
 @RequestParam(defaultValue = "10") int limit
 ) {
-ListSaleQuery query = new ListSaleQuery(page, limit);
-CompletableFuture<SalePagedResponse> future = queryGateway.query(query, SalePagedResponse.class);
-	return future.join();
-	}
+	return applicationService.findAll(page,limit);
+ }
 }

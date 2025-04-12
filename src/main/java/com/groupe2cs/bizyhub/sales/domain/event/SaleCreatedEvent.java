@@ -17,6 +17,7 @@ public class SaleCreatedEvent implements Serializable {
 	private SaleId id;
 	private SaleQuantity quantity;
 	private SaleTotal_price total_price;
+	private SaleFacture facture;
 
 
 

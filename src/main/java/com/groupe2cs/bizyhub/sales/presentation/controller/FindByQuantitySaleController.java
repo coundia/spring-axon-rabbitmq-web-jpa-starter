@@ -27,20 +27,20 @@ import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleIn
 
 @RestController
 @RequestMapping("/api/v1/queries/")
-@Tag(name = "Sale Queries", description = "Endpoints for querying s by id")
+@Tag(name = "Sale Queries", description = "Endpoints for querying s by quantity")
 @Slf4j
-public class FindByIdSaleController {
+public class FindByQuantitySaleController {
 
 private final SaleReadApplicationService applicationService;
 
-public FindByIdSaleController(SaleReadApplicationService  applicationService) {
+public FindByQuantitySaleController(SaleReadApplicationService  applicationService) {
 	this.applicationService = applicationService;
 }
 
-@GetMapping("/by-id")
+@GetMapping("/by-quantity")
 @Operation(
-summary = "Find  by id",
-description = "Returns a single s that match the given id"
+summary = "Find  by quantity",
+description = "Returns a list of s that match the given quantity"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -49,16 +49,16 @@ content = @Content(mediaType = "application/json", schema = @Schema(implementati
 @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
 })
 
-public ResponseEntity<SaleResponse> findById(
-	@Parameter(description = "Value of the id to filter by", required = true)
-	@RequestParam String id
+public ResponseEntity<List<SaleResponse>> findByQuantity(
+	@Parameter(description = "Value of the quantity to filter by", required = true)
+	@RequestParam Integer quantity
 	) {
 	try {
 
-	var future = applicationService.findBySaleId(SaleId.create(id));
+	var future = applicationService.findBySaleQuantity(SaleQuantity.create(quantity));
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find  by id: {}", e.getMessage(), e);
+	log.error("Failed to find  by quantity: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

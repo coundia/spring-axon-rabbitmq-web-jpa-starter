@@ -19,5 +19,11 @@ Page<Sale> findAll(Pageable pageable);
 //@Query("SELECT t FROM Sale t WHERE t.id = :id")
 Optional<Sale> findById(Sale id);
 
+	@Query("SELECT t FROM Sale t WHERE t.quantity = :quantity")
+	List<Sale> findByQuantity(Integer quantity);
+	@Query("SELECT t FROM Sale t WHERE t.total_price = :total_price")
+	List<Sale> findByTotal_price(Double total_price);
+	@Query("SELECT t FROM Sale t WHERE t.facture = :facture")
+	List<Sale> findByFacture(String facture);
 
 }

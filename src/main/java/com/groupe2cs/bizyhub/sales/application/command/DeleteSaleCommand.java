@@ -12,7 +12,6 @@ import java.util.Date;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import java.util.UUID;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,8 +22,8 @@ public class DeleteSaleCommand implements Serializable {
 
 
 
-private SaleId id;
 
+private SaleId id;
 
 
 }

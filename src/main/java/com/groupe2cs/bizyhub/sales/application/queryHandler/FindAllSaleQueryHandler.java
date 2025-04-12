@@ -15,16 +15,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 @Component
-public class ListSaleQueryHandler {
+public class FindAllSaleQueryHandler {
 
 private final SaleRepository repository;
 
-public ListSaleQueryHandler(SaleRepository repository) {
+public FindAllSaleQueryHandler(SaleRepository repository) {
 	this.repository = repository;
 }
 
 @QueryHandler
-public SalePagedResponse handle(ListSaleQuery query) {
+public SalePagedResponse handle(FindAllSaleQuery query) {
 int limit = query.getLimit();
 int offset = query.getPage() * limit;
 

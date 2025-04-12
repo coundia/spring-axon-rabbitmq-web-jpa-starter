@@ -27,20 +27,20 @@ import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleIn
 
 @RestController
 @RequestMapping("/api/v1/queries/")
-@Tag(name = "Sale Queries", description = "Endpoints for querying s by id")
+@Tag(name = "Sale Queries", description = "Endpoints for querying s by facture")
 @Slf4j
-public class FindByIdSaleController {
+public class FindByFactureSaleController {
 
 private final SaleReadApplicationService applicationService;
 
-public FindByIdSaleController(SaleReadApplicationService  applicationService) {
+public FindByFactureSaleController(SaleReadApplicationService  applicationService) {
 	this.applicationService = applicationService;
 }
 
-@GetMapping("/by-id")
+@GetMapping("/by-facture")
 @Operation(
-summary = "Find  by id",
-description = "Returns a single s that match the given id"
+summary = "Find  by facture",
+description = "Returns a list of s that match the given facture"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -49,16 +49,16 @@ content = @Content(mediaType = "application/json", schema = @Schema(implementati
 @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
 })
 
-public ResponseEntity<SaleResponse> findById(
-	@Parameter(description = "Value of the id to filter by", required = true)
-	@RequestParam String id
+public ResponseEntity<List<SaleResponse>> findByFacture(
+	@Parameter(description = "Value of the facture to filter by", required = true)
+	@RequestParam String facture
 	) {
 	try {
 
-	var future = applicationService.findBySaleId(SaleId.create(id));
+	var future = applicationService.findBySaleFacture(SaleFacture.create(facture));
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find  by id: {}", e.getMessage(), e);
+	log.error("Failed to find  by facture: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

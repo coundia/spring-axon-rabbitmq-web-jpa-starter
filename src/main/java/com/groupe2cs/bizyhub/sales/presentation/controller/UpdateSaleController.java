@@ -1,22 +1,23 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
-	import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sales.application.usecase.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.mapper.*;
 
-import com.groupe2cs.bizyhub.sales.application.mapper.SaleMapper;
-import com.groupe2cs.bizyhub.sales.application.command.UpdateSaleCommand;
-import com.groupe2cs.bizyhub.sales.application.dto.SaleRequest;
-import com.groupe2cs.bizyhub.sales.application.dto.SaleResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/commands/sale")
@@ -24,57 +25,39 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class UpdateSaleController {
 
-private final CommandGateway commandGateway;
+private final SaleUpdateApplicationService applicationService;
 
-public UpdateSaleController(CommandGateway commandGateway) {
-this.commandGateway = commandGateway;
+public UpdateSaleController(SaleUpdateApplicationService  applicationService) {
+this.applicationService = applicationService;
 }
 
-@PutMapping("/{id}")
-@Operation(
-summary = "Update an existing sale",
-description = "Updates an existing sale by ID and returns the updated entity"
-)
+@Operation(summary = "Update a new sale")
 @ApiResponses(value = {
-@ApiResponse(
-responseCode = "200",
-description = "Sale updated successfully",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = SaleResponse.class))
-),
-@ApiResponse(
-responseCode = "400",
-description = "Invalid input data",
-content = @Content
-),
-@ApiResponse(
-responseCode = "500",
-description = "Internal server error",
-content = @Content
-)
+@ApiResponse(responseCode = "200", description = "Sale Updated",
+content = @Content(mediaType = "application/json",
+schema = @Schema(implementation = SaleResponse.class))),
+@ApiResponse(responseCode = "500", description = "Internal server error",
+content = @Content)
 })
-public ResponseEntity<SaleResponse> updateSale(
-	@Parameter(description = "The ID of the sale to update", required = true)
+@PutMapping(value="{id}",  consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<SaleResponse> addSale(
 	@PathVariable String id,
-
-	@RequestBody
-	@io.swagger.v3.oas.annotations.parameters.RequestBody(
-	description = "Sale data to update",
-	required = true,
-	content = @Content(schema = @Schema(implementation = SaleRequest.class))
-	)
-	SaleRequest saleRequest
+			@RequestPart("facture") MultipartFile facture,
+			@RequestParam("quantity") Integer quantity,
+			@RequestParam("totalPrice") Double totalPrice
 	) {
 	try {
+	SaleResponse response = applicationService.updateSale(
+	SaleId.create(id),
+	facture,
+		quantity,
+		totalPrice	);
 
-	UpdateSaleCommand command = SaleMapper.toUpdateCommand(id, saleRequest);
-
-	commandGateway.sendAndWait(command);
-
-	SaleResponse response = SaleMapper.toResponse(id,saleRequest);
 	return ResponseEntity.ok(response);
-	} catch (Exception e) {
-	log.error("Failed to update sale with id {}: {}", id, e.getMessage());
+
+	} catch (Exception ex) {
+	log.error("Failed to Update sale: {}", ex.getMessage(), ex);
 	return ResponseEntity.internalServerError().build();
 	}
 	}
-}
+	}

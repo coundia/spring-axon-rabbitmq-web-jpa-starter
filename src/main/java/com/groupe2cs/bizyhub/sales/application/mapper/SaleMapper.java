@@ -11,15 +11,22 @@ public class SaleMapper {
 
 public static SaleResponse toResponse(Sale entity) {
 return new SaleResponse(
-entity.getId(), entity.getQuantity(), entity.getTotal_price()
+entity.getId(), entity.getQuantity(), entity.getTotal_price(), entity.getFacture()
 );
 }
 
-public static SaleResponse toResponse(String id, SaleRequest request) {
+public static SaleResponse toResponse(CreateSaleCommand command) {
 return new SaleResponse(
-id, request.getQuantity(), request.getTotal_price()
+command.getId().value(), command.getQuantity().value(), command.getTotal_price().value(), command.getFacture().value()
 );
 }
+
+public static SaleResponse toResponse(UpdateSaleCommand command) {
+return new SaleResponse(
+command.getId().value(), command.getQuantity().value(), command.getTotal_price().value(), command.getFacture().value()
+);
+}
+
 
 public static CreateSaleCommand toCommand(
 SaleRequest request, SaleFacture facture
@@ -28,12 +35,16 @@ return new CreateSaleCommand(
 SaleQuantity.create(request.getQuantity()), SaleTotal_price.create(request.getTotal_price()), facture
 );
 }
-
-public static UpdateSaleCommand toUpdateCommand(String id, SaleRequest request) {
+public static UpdateSaleCommand toUpdateCommand(SaleId id, SaleRequest request,
+SaleFacture  facture) {
 return new UpdateSaleCommand(
-SaleId.create(id), SaleQuantity.create(request.getQuantity()), SaleTotal_price.create(request.getTotal_price())
+id, SaleQuantity.create(
+request.getQuantity()), SaleTotal_price.create(
+request.getTotal_price()),
+facture
 );
 }
+
 
 public static DeleteSaleCommand toDeleteCommand(SaleId id) {
 return new DeleteSaleCommand(id);

@@ -22,5 +22,7 @@ public class SaleResponse implements Serializable {
 	private Integer quantity;
 	@Schema(description = "", example = "")
 	private Double total_price;
+	@Schema(description = "", example = "")
+	private String facture;
 
 }

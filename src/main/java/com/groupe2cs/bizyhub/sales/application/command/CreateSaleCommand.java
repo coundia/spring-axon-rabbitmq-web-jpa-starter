@@ -12,7 +12,6 @@ import java.util.Date;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import java.util.UUID;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,21 +22,19 @@ public class CreateSaleCommand implements Serializable {
 private SaleId id;
 private SaleQuantity quantity;
 private SaleTotal_price total_price;
-
-  private SaleFacture facture;
+private SaleFacture facture;
 
 public CreateSaleCommand(
  
    SaleQuantity quantity , 
-   SaleTotal_price total_price  
-, SaleFacture facture
+   SaleTotal_price total_price , 
+   SaleFacture facture  
 ){
 this.id = SaleId.create(UUID.randomUUID().toString());
  
   this.quantity = quantity ; 
   this.total_price = total_price ; 
-  this.facture = facture ;
-
+  this.facture = facture ; 
 }
 
 

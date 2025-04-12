@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ListSaleQuery {
+public class FindAllSaleQuery {
 
 private final int page;
 private final int limit;

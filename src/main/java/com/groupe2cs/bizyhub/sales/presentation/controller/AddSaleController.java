@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
 import com.groupe2cs.bizyhub.sales.application.usecase.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
 
-import com.groupe2cs.bizyhub.sales.application.dto.SaleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,15 +15,19 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/commands/sale")
 @Tag(name = "Sale commands", description = "Endpoints for managing sales")
-@RequiredArgsConstructor
 @Slf4j
 public class AddSaleController {
 
-private final SaleApplicationService saleApplicationService;
+private final SaleCreateApplicationService applicationService;
+
+public AddSaleController(SaleCreateApplicationService  applicationService) {
+	this.applicationService = applicationService;
+}
 
 @Operation(summary = "Create a new sale")
 @ApiResponses(value = {
@@ -35,19 +39,16 @@ content = @Content)
 })
 @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public ResponseEntity<SaleResponse> addSale(
-		@RequestPart("facture") MultipartFile facture
-,
+		@RequestPart("facture") MultipartFile facture,
 			@RequestParam("quantity") Integer quantity,
 			@RequestParam("totalPrice") Double totalPrice
 	) {
 	try {
-	String responseId = saleApplicationService.createSale(
-	facture
-	, quantity, totalPrice
-	);
+	SaleResponse response = applicationService.createSale(
+	facture,
+		quantity,
+		totalPrice	);
 
-	SaleResponse response = new SaleResponse(responseId
-	, quantity, totalPrice);
 	return ResponseEntity.ok(response);
 
 	} catch (Exception ex) {

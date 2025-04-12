@@ -25,5 +25,7 @@ public class Sale {
 	private Integer quantity;
 	@Column(nullable = false)
 	private Double total_price;
+	@Column(nullable = false)
+	private String facture;
 
 }

@@ -27,6 +27,7 @@ public class SaleAggregate {
 private SaleId id;
 private SaleQuantity quantity;
 private SaleTotal_price total_price;
+private SaleFacture facture;
 
 
 @CommandHandler
@@ -34,7 +35,8 @@ public SaleAggregate(CreateSaleCommand command) {
 apply(new SaleCreatedEvent(
 		command.getId(),
 		command.getQuantity(),
-		command.getTotal_price()
+		command.getTotal_price(),
+		command.getFacture()
 ));
 }
 
@@ -50,7 +52,8 @@ public void handle(UpdateSaleCommand command) {
 apply(new SaleUpdatedEvent(
 		command.getId(),
 		command.getQuantity(),
-		command.getTotal_price()
+		command.getTotal_price(),
+		command.getFacture()
 ));
 }
 
@@ -59,6 +62,7 @@ public void on(SaleCreatedEvent event) {
 	this.id = event.getId();
 	this.quantity = event.getQuantity();
 	this.total_price = event.getTotal_price();
+	this.facture = event.getFacture();
 }
 
 @EventSourcingHandler
@@ -71,6 +75,7 @@ public void on(SaleUpdatedEvent event) {
 this.id = event.getId();
 	this.quantity = event.getQuantity();
 	this.total_price = event.getTotal_price();
+	this.facture = event.getFacture();
 }
 
 }

@@ -12,7 +12,6 @@ import java.util.Date;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import java.util.UUID;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,7 +22,7 @@ public class UpdateSaleCommand implements Serializable {
 private SaleId id;
 private SaleQuantity quantity;
 private SaleTotal_price total_price;
-
+private SaleFacture facture;
 
 
 

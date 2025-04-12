@@ -24,7 +24,8 @@ try {
 Sale entity = new Sale(
 	event.getId().value(),
 	event.getQuantity().value(),
-	event.getTotal_price().value()
+	event.getTotal_price().value(),
+	event.getFacture().value()
 );
 repository.save(entity);
 log.info("Sale inserted: {}", entity);
@@ -43,6 +44,7 @@ Sale entity = repository.findById(event.getId().value())
 	entity.setId(event.getId().value());
 	entity.setQuantity(event.getQuantity().value());
 	entity.setTotal_price(event.getTotal_price().value());
+	entity.setFacture(event.getFacture().value());
 
 repository.save(entity);
 log.info("Sale updated successfully: {}", event.getId().value());
