@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.sales.domain.valueObject;
 
+import java.util.Objects;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleIdNotValid;
 
 import java.io.Serializable;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,9 @@ this.id = id;
 }
 
 public static SaleId create(String id) {
+if (id == null || id.isBlank()) {
+throw new SaleIdNotValid("Id is invalid");
+}
 return new SaleId(id);
 }
 

@@ -26,8 +26,8 @@ import static org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf
 import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf;
 
 @RestController
-@RequestMapping("/api/v1/queries/")
-@Tag(name = "Sale Queries", description = "Endpoints for querying s by quantity")
+@RequestMapping("/api/v1/queries/sale")
+@Tag(name = "Sale Queries", description = "Endpoints for querying sales by quantity")
 @Slf4j
 public class FindByQuantitySaleController {
 
@@ -39,8 +39,8 @@ public FindByQuantitySaleController(SaleReadApplicationService  applicationServi
 
 @GetMapping("/by-quantity")
 @Operation(
-summary = "Find  by quantity",
-description = "Returns a list of s that match the given quantity"
+summary = "Find sale by quantity",
+description = "Returns a list of sales that match the given quantity"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -58,7 +58,7 @@ public ResponseEntity<List<SaleResponse>> findByQuantity(
 	var future = applicationService.findBySaleQuantity(SaleQuantity.create(quantity));
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find  by quantity: {}", e.getMessage(), e);
+	log.error("Failed to find sale by quantity: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

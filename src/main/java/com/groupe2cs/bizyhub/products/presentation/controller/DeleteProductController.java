@@ -1,67 +1,62 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
 
+	import com.groupe2cs.bizyhub.products.application.mapper.*;
+	import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+	import com.groupe2cs.bizyhub.products.domain.exception.*;
+	import com.groupe2cs.bizyhub.products.application.dto.*;
+	import com.groupe2cs.bizyhub.products.application.usecase.*;
+
 import com.groupe2cs.bizyhub.products.application.command.DeleteProductCommand;
-import com.groupe2cs.bizyhub.products.application.query.FindByIdProductQuery;
-import com.groupe2cs.bizyhub.products.domain.exception.ProductNotFoundException;
-import com.groupe2cs.bizyhub.products.domain.valueObject.ProductId;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.Product;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.queryhandling.QueryGateway;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.CompletableFuture;
-
-@Slf4j
 @RestController
-@RequestMapping("/api/v1/commands/products")
+@RequestMapping("/api/v1/commands/product")
+@Tag(name = "Product commands", description = "Endpoints for managing products")
+@Slf4j
 public class DeleteProductController {
 
-    private final CommandGateway commandGateway;
-    private final QueryGateway queryGateway;
+private final ProductDeleteApplicationService applicationService;
 
-    public DeleteProductController(CommandGateway commandGateway, QueryGateway queryGateway) {
-        this.commandGateway = commandGateway;
-        this.queryGateway = queryGateway;
-    }
-
-    @DeleteMapping("/{id}")
-    @Operation(description = "Delete a product by id")
-    public CompletableFuture<ResponseEntity<String>> deleteProduct(@PathVariable String id) {
-        if (id == null || id.isEmpty()) {
-            return CompletableFuture.completedFuture(ResponseEntity.badRequest().body("Invalid id"));
-        }
-
-        log.info("Deleting product with id: {}", id);
-
-        ProductId productId = ProductId.create(id);
-
-        return queryGateway.query(new FindByIdProductQuery(productId), Product.class)
-                .thenCompose(foundProduct -> {
-                    if (foundProduct == null) {
-                        throw new ProductNotFoundException("Product not found with id: " + id);
-                    }
-
-                    return commandGateway.send(new DeleteProductCommand(productId))
-                            .thenApply(result -> ResponseEntity.ok("Product deleted successfully"))
-                            .exceptionally(throwable -> {
-                                log.error("Error deleting product with id {}: {}", id, throwable.getMessage());
-                                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                        .body("Error deleting product: " + throwable.getMessage());
-                            });
-                })
-                .exceptionally(e -> {
-                    log.error("Product not found: {}", e.getMessage());
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-                });
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<String> productNotFoundExceptionHandler(ProductNotFoundException e) {
-        log.info("Product not found: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-    }
+public DeleteProductController(ProductDeleteApplicationService applicationService) {
+    this.applicationService = applicationService;
 }
+
+
+@DeleteMapping("/{id}")
+@Operation(
+summary = "Delete a product",
+description = "Deletes a product based on the provided identifier"
+)
+@ApiResponses(value = {
+@ApiResponse(responseCode = "200", description = "Product deleted successfully"),
+@ApiResponse(responseCode = "400", description = "Invalid ID supplied", content = @Content),
+@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+})
+public ResponseEntity<String> deleteProduct(
+	@Parameter(description = "ID of the product to delete", required = true)
+	@PathVariable String id
+	) {
+	if (id == null || id.isEmpty()) {
+	return ResponseEntity.badRequest().body("Invalid ID");
+	}
+
+	try {
+	ProductId idVo = ProductId.create(id);
+	applicationService.deleteProduct(idVo);
+	return ResponseEntity.ok("Product deleted successfully");
+	} catch (Exception e) {
+	log.error("Error deleting product with id {}: {}", id, e.getMessage());
+	return ResponseEntity.internalServerError().body("Error deleting product");
+	}
+	}
+	}

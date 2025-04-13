@@ -1,8 +1,10 @@
 package com.groupe2cs.bizyhub.sales.domain.valueObject;
 
+import java.util.Objects;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleIdNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleQuantityNotValid;
 
 import java.io.Serializable;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,9 @@ this.quantity = quantity;
 }
 
 public static SaleQuantity create(Integer quantity) {
+if (quantity < 0) {
+throw new SaleQuantityNotValid("Quantity is invalid");
+}
 return new SaleQuantity(quantity);
 }
 

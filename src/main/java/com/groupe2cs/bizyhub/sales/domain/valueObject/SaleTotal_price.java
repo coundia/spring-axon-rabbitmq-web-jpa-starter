@@ -1,8 +1,11 @@
 package com.groupe2cs.bizyhub.sales.domain.valueObject;
 
+import java.util.Objects;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleIdNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleQuantityNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleTotal_priceNotValid;
 
 import java.io.Serializable;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -22,6 +25,9 @@ this.total_price = total_price;
 }
 
 public static SaleTotal_price create(Double total_price) {
+if (total_price == null) {
+throw new SaleTotal_priceNotValid("Total_price is invalid");
+}
 return new SaleTotal_price(total_price);
 }
 

@@ -26,8 +26,8 @@ import static org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf
 import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf;
 
 @RestController
-@RequestMapping("/api/v1/queries/")
-@Tag(name = "Sale Queries", description = "Endpoints for querying s by total_price")
+@RequestMapping("/api/v1/queries/sale")
+@Tag(name = "Sale Queries", description = "Endpoints for querying sales by total_price")
 @Slf4j
 public class FindByTotal_priceSaleController {
 
@@ -39,8 +39,8 @@ public FindByTotal_priceSaleController(SaleReadApplicationService  applicationSe
 
 @GetMapping("/by-total_price")
 @Operation(
-summary = "Find  by total_price",
-description = "Returns a list of s that match the given total_price"
+summary = "Find sale by total_price",
+description = "Returns a list of sales that match the given total_price"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -58,7 +58,7 @@ public ResponseEntity<List<SaleResponse>> findByTotal_price(
 	var future = applicationService.findBySaleTotal_price(SaleTotal_price.create(total_price));
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find  by total_price: {}", e.getMessage(), e);
+	log.error("Failed to find sale by total_price: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

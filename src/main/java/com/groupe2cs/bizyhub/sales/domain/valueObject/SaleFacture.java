@@ -1,8 +1,12 @@
 package com.groupe2cs.bizyhub.sales.domain.valueObject;
 
+import java.util.Objects;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleIdNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleQuantityNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleTotal_priceNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleFactureNotValid;
 
 import java.io.Serializable;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -22,6 +26,9 @@ this.facture = facture;
 }
 
 public static SaleFacture create(String facture) {
+if (facture == null || facture.isBlank()) {
+throw new SaleFactureNotValid("Facture is invalid");
+}
 return new SaleFacture(facture);
 }
 

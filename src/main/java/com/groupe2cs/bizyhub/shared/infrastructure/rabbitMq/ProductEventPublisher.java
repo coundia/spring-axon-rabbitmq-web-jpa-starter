@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.shared.infrastructure.rabbitMq;
 
 
-import com.groupe2cs.bizyhub.products.application.event.ProductCreatedEvent;
-import com.groupe2cs.bizyhub.products.application.projections.ProductProjection;
+import com.groupe2cs.bizyhub.products.domain.event.ProductCreatedEvent;
+import com.groupe2cs.bizyhub.products.presentation.projection.ProductProjection;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;

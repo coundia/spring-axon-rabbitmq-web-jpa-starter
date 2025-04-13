@@ -26,8 +26,8 @@ import static org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf
 import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf;
 
 @RestController
-@RequestMapping("/api/v1/queries/")
-@Tag(name = "Sale Queries", description = "Endpoints for querying s by id")
+@RequestMapping("/api/v1/queries/sale")
+@Tag(name = "Sale Queries", description = "Endpoints for querying sales by id")
 @Slf4j
 public class FindByIdSaleController {
 
@@ -39,8 +39,8 @@ public FindByIdSaleController(SaleReadApplicationService  applicationService) {
 
 @GetMapping("/by-id")
 @Operation(
-summary = "Find  by id",
-description = "Returns a single s that match the given id"
+summary = "Find sale by id",
+description = "Returns a single sales that match the given id"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -58,7 +58,7 @@ public ResponseEntity<SaleResponse> findById(
 	var future = applicationService.findBySaleId(SaleId.create(id));
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find  by id: {}", e.getMessage(), e);
+	log.error("Failed to find sale by id: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

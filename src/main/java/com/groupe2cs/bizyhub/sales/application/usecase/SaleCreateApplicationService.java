@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
 
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.sales.application.mapper.*;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.sales.application.mapper.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
 import com.groupe2cs.bizyhub.sales.application.command.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class SaleCreateApplicationService {
-
 private final FileStorageService fileStorageService;
 private final CommandGateway commandGateway;
 
@@ -40,4 +39,7 @@ commandGateway.sendAndWait(command);
 
 return SaleMapper.toResponse(command);
 }
+
+
+
 }

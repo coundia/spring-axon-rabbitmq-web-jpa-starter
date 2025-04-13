@@ -1,42 +1,54 @@
 package com.groupe2cs.bizyhub.products.domain.valueObject;
 
-import com.groupe2cs.bizyhub.products.domain.exception.PriceNotCorrect;
+import java.util.Objects;
+import com.groupe2cs.bizyhub.products.domain.exception.ProductIdNotValid;
+import com.groupe2cs.bizyhub.products.domain.exception.ProductNameNotValid;
+import com.groupe2cs.bizyhub.products.domain.exception.ProductPriceNotValid;
 
-public class ProductPrice {
+import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
-    private final double price;
+@Getter
+@Setter
+@NoArgsConstructor
+@Builder
+public class ProductPrice implements Serializable {
 
-    public ProductPrice(double price) {
-        if (price < 0.0) {
-            throw new PriceNotCorrect("Price not correct");
-        }
+private Double price;
 
-        this.price = price;
-    }
+public ProductPrice(Double price) {
+this.price = price;
+}
 
-    public static ProductPrice create(double price) {
-        return new ProductPrice(price);
-    }
+public static ProductPrice create(Double price) {
+if (price == null) {
+throw new ProductPriceNotValid("Price is invalid");
+}
+return new ProductPrice(price);
+}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ProductPrice that)) return false;
+public Double value() {
+return this.price;
+}
 
-        return Double.compare(that.price, this.price) == 0;
-    }
+@Override
+public boolean equals(Object o) {
+if (this == o) return true;
+if (!(o instanceof ProductPrice that)) return false;
+return this.price.equals(that.price);
+}
 
-    @Override
-    public int hashCode() {
-        return Double.hashCode(price);
-    }
+@Override
+public int hashCode() {
+return java.util.Objects.hash(price);
+}
 
-    public double value() {
-        return price;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(price);
-    }
+@Override
+public String toString() {
+return String.valueOf(price);
+}
 }

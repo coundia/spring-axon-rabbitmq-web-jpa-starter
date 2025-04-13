@@ -26,8 +26,8 @@ import static org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf
 import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf;
 
 @RestController
-@RequestMapping("/api/v1/queries/")
-@Tag(name = "Sale Queries", description = "Endpoints for querying s by facture")
+@RequestMapping("/api/v1/queries/sale")
+@Tag(name = "Sale Queries", description = "Endpoints for querying sales by facture")
 @Slf4j
 public class FindByFactureSaleController {
 
@@ -39,8 +39,8 @@ public FindByFactureSaleController(SaleReadApplicationService  applicationServic
 
 @GetMapping("/by-facture")
 @Operation(
-summary = "Find  by facture",
-description = "Returns a list of s that match the given facture"
+summary = "Find sale by facture",
+description = "Returns a list of sales that match the given facture"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -58,7 +58,7 @@ public ResponseEntity<List<SaleResponse>> findByFacture(
 	var future = applicationService.findBySaleFacture(SaleFacture.create(facture));
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find  by facture: {}", e.getMessage(), e);
+	log.error("Failed to find sale by facture: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

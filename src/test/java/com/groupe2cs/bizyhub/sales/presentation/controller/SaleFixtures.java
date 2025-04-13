@@ -18,8 +18,8 @@ public class SaleFixtures {
 public static Sale randomOne(SaleRepository repository) {
 Sale entity = new Sale();
 entity.setId(UUID.randomUUID().toString());
-			entity.setQuantity(123);
-			entity.setTotal_price(999.99);
+					entity.setQuantity(null);
+					entity.setTotal_price(null);
 return repository.save(entity);
 }
 
@@ -49,14 +49,14 @@ String fileName = files.getName();
 CreateSaleCommand command = new CreateSaleCommand(
 SaleQuantity.create(
 		
-		123
 		
 		
+		null
 		),SaleTotal_price.create(
 		
 		
-		999.99
 		
+		null
 		),	SaleFacture.create(fileName)
 
 );

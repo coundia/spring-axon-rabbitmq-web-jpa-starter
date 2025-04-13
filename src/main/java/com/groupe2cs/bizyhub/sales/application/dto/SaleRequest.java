@@ -25,8 +25,6 @@ public class SaleRequest implements Serializable {
 
 public static SaleRequest random() {
 SaleRequest request = new SaleRequest();
-			request.setQuantity(ThreadLocalRandom.current().nextInt(1, 100));
-			request.setTotal_price(Math.round(ThreadLocalRandom.current().nextDouble(10.0, 10000.0) * 100.0) / 100.0);
 return request;
 }
 }

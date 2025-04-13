@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sales.application.usecase.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.sales.application.mapper.*;
+	import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+	import com.groupe2cs.bizyhub.sales.application.usecase.*;
+	import com.groupe2cs.bizyhub.sales.application.dto.*;
+	import com.groupe2cs.bizyhub.sales.application.mapper.*;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -49,9 +49,7 @@ public ResponseEntity<SaleResponse> addSale(
 	try {
 	SaleResponse response = applicationService.updateSale(
 	SaleId.create(id),
-	facture,
-		quantity,
-		totalPrice	);
+	facture,		quantity,		totalPrice	);
 
 	return ResponseEntity.ok(response);
 
@@ -60,4 +58,4 @@ public ResponseEntity<SaleResponse> addSale(
 	return ResponseEntity.internalServerError().build();
 	}
 	}
-	}
+}
