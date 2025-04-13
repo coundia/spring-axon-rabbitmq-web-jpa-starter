@@ -1,28 +1,22 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
 
-import com.groupe2cs.bizyhub.products.application.command.*;
-import com.groupe2cs.bizyhub.products.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-
+import com.groupe2cs.bizyhub.products.application.command.CreateProductCommand;
+import com.groupe2cs.bizyhub.products.application.dto.ProductRequest;
+import com.groupe2cs.bizyhub.products.application.dto.ProductResponse;
+import com.groupe2cs.bizyhub.products.application.mapper.ProductMapper;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class ProductCreateApplicationService {
-private final CommandGateway commandGateway;
+    private final CommandGateway commandGateway;
 
-public ProductResponse createProduct(ProductRequest request){
+    public ProductResponse createProduct(ProductRequest request) {
 
-CreateProductCommand command = ProductMapper.toCommand(
-request
-);
-commandGateway.sendAndWait(command);
-return ProductMapper.toResponse(command);
-}
-
-
+        CreateProductCommand command = ProductMapper.toCommand(request);
+        commandGateway.sendAndWait(command);
+        return ProductMapper.toResponse(command);
+    }
 }

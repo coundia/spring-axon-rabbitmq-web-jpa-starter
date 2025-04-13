@@ -9,5 +9,4 @@ public class BizyhubApplication {
     public static void main(String[] args) {
         SpringApplication.run(BizyhubApplication.class, args);
     }
-
 }

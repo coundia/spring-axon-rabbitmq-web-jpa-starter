@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.sales.application.query;
 
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleId;
 
 public class FindBySaleIdQuery {
 
-private final SaleId  id;
+    private final SaleId id;
 
-public FindBySaleIdQuery( SaleId id) {
-	this.id = id;
-}
+    public FindBySaleIdQuery(SaleId id) {
+        this.id = id;
+    }
 
-public SaleId  getId() {
-return id;
-}
+    public SaleId getId() {
+        return id;
+    }
 }

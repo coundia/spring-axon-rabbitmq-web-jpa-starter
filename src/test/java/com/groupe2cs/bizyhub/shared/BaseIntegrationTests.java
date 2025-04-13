@@ -11,10 +11,8 @@ import org.springframework.context.annotation.Profile;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        properties = "spring.config.name=application-test"
-)
+        properties = "spring.config.name=application-test")
 @Profile("test")
-
 public class BaseIntegrationTests {
 
     @LocalServerPort
@@ -25,17 +23,15 @@ public class BaseIntegrationTests {
 
     @Autowired
     public ProductRepository productRepository;
+    @Value("${host}")
+    public String host;
 
     @BeforeEach
     void setUp() {
         productRepository.deleteAll();
     }
 
-    @Value("${host}")
-    public String host;
-
     public String getBaseUrl() {
         return this.host + ":" + this.port + "/api/";
     }
-
 }

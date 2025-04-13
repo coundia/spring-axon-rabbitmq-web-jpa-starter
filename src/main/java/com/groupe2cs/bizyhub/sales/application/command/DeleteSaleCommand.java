@@ -1,16 +1,10 @@
 package com.groupe2cs.bizyhub.sales.application.command;
 
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleId;
+import lombok.*;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-import java.util.Date;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,12 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class DeleteSaleCommand implements Serializable {
-@TargetAggregateIdentifier
-
-
-
-
-private SaleId id;
-
-
+    @TargetAggregateIdentifier
+    private SaleId id;
 }

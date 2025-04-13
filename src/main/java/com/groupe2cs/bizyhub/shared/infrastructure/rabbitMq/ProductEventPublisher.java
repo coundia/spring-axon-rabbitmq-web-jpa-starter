@@ -1,6 +1,5 @@
 package com.groupe2cs.bizyhub.shared.infrastructure.rabbitMq;
 
-
 import com.groupe2cs.bizyhub.products.domain.event.ProductCreatedEvent;
 import com.groupe2cs.bizyhub.products.presentation.projection.ProductProjection;
 import org.axonframework.eventhandling.EventHandler;
@@ -14,16 +13,15 @@ public class ProductEventPublisher {
 
     private final RabbitTemplate rabbitTemplate;
 
-
     public ProductEventPublisher(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-
     @EventHandler
     public void on(ProductCreatedEvent productCreatedEvent) {
 
-        Logger.getLogger(ProductProjection.class.getName()).info("Publishing event: " + productCreatedEvent);
+        Logger.getLogger(ProductProjection.class.getName())
+                .info("Publishing event: " + productCreatedEvent);
 
         rabbitTemplate.convertAndSend("axon-exchange", "product.created", productCreatedEvent);
     }

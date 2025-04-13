@@ -1,4 +1,3 @@
-
 curl -X POST 'http://127.0.0.1:8094/api/v1/commands/sale' \
 -H 'accept: application/json' \
 -F 'quantity=1' \

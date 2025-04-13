@@ -1,15 +1,16 @@
 package com.groupe2cs.bizyhub.products.domain;
 
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import com.groupe2cs.bizyhub.products.domain.exception.*;
+import com.groupe2cs.bizyhub.products.domain.exception.ProductIdNotValid;
+import com.groupe2cs.bizyhub.products.domain.exception.ProductNameNotValid;
+import com.groupe2cs.bizyhub.products.domain.exception.ProductPriceNotValid;
+import com.groupe2cs.bizyhub.products.domain.valueObject.ProductId;
+import com.groupe2cs.bizyhub.products.domain.valueObject.ProductName;
+import com.groupe2cs.bizyhub.products.domain.valueObject.ProductPrice;
+import com.groupe2cs.bizyhub.products.shared.BaseUnitTests;
 import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.products.shared.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ProductAggregateTests extends BaseUnitTests {
 
@@ -33,14 +34,15 @@ public class ProductAggregateTests extends BaseUnitTests {
 
     @Test
     void it_should_throw_when_name_is_invalid() {
-        ProductNameNotValid error = assertThrows(ProductNameNotValid.class, () -> ProductName.create(""));
+        ProductNameNotValid error =
+                assertThrows(ProductNameNotValid.class, () -> ProductName.create(""));
         assertThat(error.getMessage()).isEqualTo("Name is invalid");
     }
 
     @Test
     void it_should_throw_when_price_is_invalid() {
-        ProductPriceNotValid error = assertThrows(ProductPriceNotValid.class, () -> ProductPrice.create(null));
+        ProductPriceNotValid error =
+                assertThrows(ProductPriceNotValid.class, () -> ProductPrice.create(null));
         assertThat(error.getMessage()).isEqualTo("Price is invalid");
     }
-
 }

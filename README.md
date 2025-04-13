@@ -47,8 +47,8 @@ Once the application is running, you can access the **Swagger UI** documentation
 🔗 http://127.0.0.1:8093/swagger-ui/index.html#/
 
 ## Api documentation swagger
-![api.png](docs/api.png)
 
+![api.png](docs/api.png)
 
 ## 📁 Project Structure
 
@@ -91,8 +91,6 @@ src/
 25 directories, 8 files
 
 ```
-
-
 
 ## 🔹 Notes
 

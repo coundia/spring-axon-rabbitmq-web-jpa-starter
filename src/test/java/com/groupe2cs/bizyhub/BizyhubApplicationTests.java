@@ -9,5 +9,4 @@ class BizyhubApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

@@ -115,6 +115,25 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>2.37.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>apply</goal> <!-- Ou check -->
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<java>
+						<googleJavaFormat/>
+					</java>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
@@ -132,7 +151,8 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/groupe2cs/spring-axon-rabbitmq-web-jpa-starter.git</connection>
-		<developerConnection>scm:git:https://github.com/groupe2cs/spring-axon-rabbitmq-web-jpa-starter.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/groupe2cs/spring-axon-rabbitmq-web-jpa-starter.git
+		</developerConnection>
 		<url>https://github.com/groupe2cs/spring-axon-rabbitmq-web-jpa-starter</url>
 	</scm>
 

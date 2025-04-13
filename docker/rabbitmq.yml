@@ -6,8 +6,8 @@ services:
   rabbitmq:
     container_name: pcoundia-rabbitmq
     image: rabbitmq:3-management
-#    networks:
-#      - pcoundia-network
+    #    networks:
+    #      - pcoundia-network
     environment:
       RABBITMQ_DEFAULT_USER: pcoundia
       RABBITMQ_DEFAULT_PASS: pcoundia
@@ -15,8 +15,8 @@ services:
     ports:
       - "15672:15672"  # RabbitMQ Management UI
       - "5672:5672"    # RabbitMQ protocol
-#    volumes:
-#      - rabbitmq_data:/var/lib/rabbitmq
+    #    volumes:
+    #      - rabbitmq_data:/var/lib/rabbitmq
     restart: always
     healthcheck:
       test: [ "CMD", "rabbitmqctl", "status" ]

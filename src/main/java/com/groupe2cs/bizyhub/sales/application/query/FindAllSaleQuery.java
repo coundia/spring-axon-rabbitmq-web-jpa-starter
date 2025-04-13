@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.sales.application.query;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -6,7 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class FindAllSaleQuery {
 
-private final int page;
-private final int limit;
-
+    private final int page;
+    private final int limit;
 }
