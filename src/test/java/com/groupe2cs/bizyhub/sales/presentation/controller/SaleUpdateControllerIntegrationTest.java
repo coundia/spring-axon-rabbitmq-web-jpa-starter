@@ -38,5 +38,8 @@ public class SaleUpdateControllerIntegrationTest extends BaseIntegrationTests {
         assertThat(found).isNotNull();
         assertThat(found.getQuantity()).isEqualTo(requestDTO.getQuantity());
         assertThat(found.getTotal_price()).isEqualTo(requestDTO.getTotal_price());
+        assertThat(found.getFacture()).isEqualTo(requestDTO.getFacture());
+        assertThat(found.getProduct()).isEqualTo(requestDTO.getProduct());
+
     }
 }

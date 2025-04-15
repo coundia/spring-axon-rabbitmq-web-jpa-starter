@@ -19,4 +19,6 @@ public class ProductUpdatedEvent implements Serializable {
     private ProductId id;
     private ProductName name;
     private ProductPrice price;
+
+
 }

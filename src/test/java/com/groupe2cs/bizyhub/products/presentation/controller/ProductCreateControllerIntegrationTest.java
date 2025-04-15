@@ -18,8 +18,7 @@ public class ProductCreateControllerIntegrationTest extends BaseIntegrationTests
         HttpEntity<ProductRequest> request = new HttpEntity<>(requestDTO);
 
         String uri = "/v1/commands/product";
-        ResponseEntity<ProductResponse> response =
-                this.postForEntity(uri, request, ProductResponse.class);
+        ResponseEntity<ProductResponse> response = this.postForEntity(uri, request, ProductResponse.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().getId()).isNotNull();

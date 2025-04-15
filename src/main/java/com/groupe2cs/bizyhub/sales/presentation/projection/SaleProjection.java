@@ -22,12 +22,13 @@ public class SaleProjection {
     @EventHandler
     public void on(SaleCreatedEvent event) {
         try {
-            Sale entity =
-                    new Sale(
-                            event.getId().value(),
-                            event.getQuantity().value(),
-                            event.getTotal_price().value(),
-                            event.getFacture().value());
+            Sale entity = new Sale(
+                    event.getId().value(),
+                    event.getQuantity().value(),
+                    event.getTotal_price().value(),
+                    event.getFacture().value(),
+                    new com.groupe2cs.bizyhub.products.infrastructure.entity.Product(event.getProduct().value())
+            );
             repository.save(entity);
             log.info("Sale inserted: {}", entity);
         } catch (Exception e) {
@@ -38,16 +39,13 @@ public class SaleProjection {
     @EventHandler
     public void on(SaleUpdatedEvent event) {
         try {
-            Sale entity =
-                    repository
-                            .findById(event.getId().value())
-                            .orElseThrow(() -> new RuntimeException("Sale not found"));
-
+            Sale entity = repository.findById(event.getId().value())
+                    .orElseThrow(() -> new RuntimeException("Sale not found"));
             entity.setId(event.getId().value());
             entity.setQuantity(event.getQuantity().value());
             entity.setTotal_price(event.getTotal_price().value());
             entity.setFacture(event.getFacture().value());
-
+            entity.setProduct(new com.groupe2cs.bizyhub.products.infrastructure.entity.Product(event.getProduct().value()));
             repository.save(entity);
             log.info("Sale updated successfully: {}", event.getId().value());
         } catch (Exception e) {

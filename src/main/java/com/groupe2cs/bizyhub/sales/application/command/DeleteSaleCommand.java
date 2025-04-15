@@ -13,5 +13,9 @@ import java.io.Serializable;
 @Builder
 public class DeleteSaleCommand implements Serializable {
     @TargetAggregateIdentifier
+
+
     private SaleId id;
+
+
 }

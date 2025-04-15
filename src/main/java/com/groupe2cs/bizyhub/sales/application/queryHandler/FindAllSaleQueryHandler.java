@@ -33,8 +33,13 @@ public class FindAllSaleQueryHandler {
 
         Page<Sale> pages = repository.findAll(pageable);
 
-        List<SaleResponse> responses = pages.stream().map(SaleMapper::toResponse).toList();
+        List<SaleResponse> responses = pages.stream()
+                .map(SaleMapper::toResponse)
+                .toList();
 
-        return SalePagedResponse.from(pages, responses);
+        return SalePagedResponse.from(
+                pages,
+                responses
+        );
     }
 }

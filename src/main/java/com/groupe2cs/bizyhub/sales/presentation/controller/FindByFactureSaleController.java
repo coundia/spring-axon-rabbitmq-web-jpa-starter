@@ -34,25 +34,19 @@ public class FindByFactureSaleController {
     @GetMapping("/by-facture")
     @Operation(
             summary = "Find sale by facture",
-            description = "Returns a list of sales that match the given facture")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Query successful",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = SaleResponse.class))),
-                    @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
+            description = "Returns a list of sales that match the given facture"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Query successful",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SaleResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+
     public ResponseEntity<List<SaleResponse>> findByFacture(
-            @Parameter(description = "Value of the facture to filter by", required = true) @RequestParam
-            String facture) {
+            @Parameter(description = "Value of the facture to filter by", required = true)
+            @RequestParam String facture
+    ) {
         try {
 
             var future = applicationService.findBySaleFacture(SaleFacture.create(facture));

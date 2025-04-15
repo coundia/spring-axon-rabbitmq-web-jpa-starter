@@ -13,10 +13,10 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
 
-    // @Query("SELECT t FROM Product t ")
+    @Query("SELECT t FROM Product t ")
     Page<Product> findAll(Pageable pageable);
 
-    // @Query("SELECT t FROM Product t WHERE t.id = :id")
+    @Query("SELECT t FROM Product t WHERE t.id = :id")
     Optional<Product> findById(Product id);
 
     @Query("SELECT t FROM Product t WHERE t.name = :name")
@@ -24,4 +24,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     @Query("SELECT t FROM Product t WHERE t.price = :price")
     List<Product> findByPrice(Double price);
+
+
 }

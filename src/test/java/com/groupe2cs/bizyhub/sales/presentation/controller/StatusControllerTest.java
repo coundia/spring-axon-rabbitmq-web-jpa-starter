@@ -13,7 +13,7 @@ public class StatusControllerTest extends BaseIntegrationTests {
         ResponseEntity<String> response = this.get("/v1/status");
 
         assertThat(response.getStatusCode().value()).isEqualTo(200);
-        // assertThat(response.getBody()).contains("\"code\":1");
-        // assertThat(response.getBody()).contains("\"message\":\"\"");
+        //assertThat(response.getBody()).contains("\"code\":1");
+        //assertThat(response.getBody()).contains("\"message\":\"\"");
     }
 }

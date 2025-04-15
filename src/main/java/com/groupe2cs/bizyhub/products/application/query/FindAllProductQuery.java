@@ -9,4 +9,5 @@ public class FindAllProductQuery {
 
     private final int page;
     private final int limit;
+
 }

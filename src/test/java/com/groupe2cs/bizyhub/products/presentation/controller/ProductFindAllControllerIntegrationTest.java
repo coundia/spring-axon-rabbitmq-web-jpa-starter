@@ -20,8 +20,7 @@ public class ProductFindAllControllerIntegrationTest extends BaseIntegrationTest
         ProductFixtures.randomMany(productRepository, 5);
 
         String uri = "/v1/queries/list-product";
-        ResponseEntity<ProductPagedResponse> response =
-                this.getForEntity(uri, ProductPagedResponse.class);
+        ResponseEntity<ProductPagedResponse> response = this.getForEntity(uri, ProductPagedResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();

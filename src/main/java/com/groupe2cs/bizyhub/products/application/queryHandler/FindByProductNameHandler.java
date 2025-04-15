@@ -21,6 +21,9 @@ public class FindByProductNameHandler {
     public List<ProductResponse> handle(FindByProductNameQuery query) {
         String value = query.getName().value();
         List<Product> entities = repository.findByName(value);
-        return entities.stream().map(ProductMapper::toResponse).toList();
+        return entities.stream()
+                .map(ProductMapper::toResponse)
+                .toList();
     }
+
 }

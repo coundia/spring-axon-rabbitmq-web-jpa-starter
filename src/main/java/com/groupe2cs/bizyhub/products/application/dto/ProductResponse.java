@@ -17,10 +17,9 @@ public class ProductResponse implements Serializable {
 
     @Schema(description = "", example = "")
     private String id;
-
     @Schema(description = "", example = "")
     private String name;
-
     @Schema(description = "", example = "")
     private Double price;
+
 }

@@ -34,25 +34,19 @@ public class FindByQuantitySaleController {
     @GetMapping("/by-quantity")
     @Operation(
             summary = "Find sale by quantity",
-            description = "Returns a list of sales that match the given quantity")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Query successful",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = SaleResponse.class))),
-                    @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
+            description = "Returns a list of sales that match the given quantity"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Query successful",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SaleResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+
     public ResponseEntity<List<SaleResponse>> findByQuantity(
-            @Parameter(description = "Value of the quantity to filter by", required = true) @RequestParam
-            Integer quantity) {
+            @Parameter(description = "Value of the quantity to filter by", required = true)
+            @RequestParam Integer quantity
+    ) {
         try {
 
             var future = applicationService.findBySaleQuantity(SaleQuantity.create(quantity));

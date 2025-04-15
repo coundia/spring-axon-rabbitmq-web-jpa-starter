@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
 public class ProductAggregateTests extends BaseUnitTests {
 
     @Test
@@ -34,15 +35,14 @@ public class ProductAggregateTests extends BaseUnitTests {
 
     @Test
     void it_should_throw_when_name_is_invalid() {
-        ProductNameNotValid error =
-                assertThrows(ProductNameNotValid.class, () -> ProductName.create(""));
+        ProductNameNotValid error = assertThrows(ProductNameNotValid.class, () -> ProductName.create(""));
         assertThat(error.getMessage()).isEqualTo("Name is invalid");
     }
 
     @Test
     void it_should_throw_when_price_is_invalid() {
-        ProductPriceNotValid error =
-                assertThrows(ProductPriceNotValid.class, () -> ProductPrice.create(null));
+        ProductPriceNotValid error = assertThrows(ProductPriceNotValid.class, () -> ProductPrice.create(null));
         assertThat(error.getMessage()).isEqualTo("Price is invalid");
     }
+
 }

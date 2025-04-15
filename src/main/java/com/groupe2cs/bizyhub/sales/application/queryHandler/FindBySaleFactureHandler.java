@@ -21,6 +21,9 @@ public class FindBySaleFactureHandler {
     public List<SaleResponse> handle(FindBySaleFactureQuery query) {
         String value = query.getFacture().value();
         List<Sale> entities = repository.findByFacture(value);
-        return entities.stream().map(SaleMapper::toResponse).toList();
+        return entities.stream()
+                .map(SaleMapper::toResponse)
+                .toList();
     }
+
 }

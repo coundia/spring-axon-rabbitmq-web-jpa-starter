@@ -15,7 +15,6 @@ public class ProductRequest implements Serializable {
 
     @Schema(description = "", example = "")
     private String name;
-
     @Schema(description = "", example = "")
     private Double price;
 

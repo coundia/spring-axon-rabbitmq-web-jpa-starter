@@ -9,4 +9,5 @@ public class FindAllSaleQuery {
 
     private final int page;
     private final int limit;
+
 }

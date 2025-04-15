@@ -32,19 +32,30 @@ public class ProductAggregate {
     private ProductName name;
     private ProductPrice price;
 
+
     @CommandHandler
     public ProductAggregate(CreateProductCommand command) {
-        apply(new ProductCreatedEvent(command.getId(), command.getName(), command.getPrice()));
+        apply(new ProductCreatedEvent(
+                command.getId(),
+                command.getName(),
+                command.getPrice()
+        ));
     }
 
     @CommandHandler
     public void handle(DeleteProductCommand command) {
-        apply(new ProductDeletedEvent(command.getId()));
+        apply(new ProductDeletedEvent(
+                command.getId()
+        ));
     }
 
     @CommandHandler
     public void handle(UpdateProductCommand command) {
-        apply(new ProductUpdatedEvent(command.getId(), command.getName(), command.getPrice()));
+        apply(new ProductUpdatedEvent(
+                command.getId(),
+                command.getName(),
+                command.getPrice()
+        ));
     }
 
     @EventSourcingHandler
@@ -65,4 +76,5 @@ public class ProductAggregate {
         this.name = event.getName();
         this.price = event.getPrice();
     }
+
 }

@@ -27,22 +27,21 @@ public class DeleteProductController {
         this.applicationService = applicationService;
     }
 
+
     @DeleteMapping("/{id}")
     @Operation(
             summary = "Delete a product",
-            description = "Deletes a product based on the provided identifier")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Product deleted successfully"),
-                    @ApiResponse(responseCode = "400", description = "Invalid ID supplied", content = @Content),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
+            description = "Deletes a product based on the provided identifier"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product deleted successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
     public ResponseEntity<String> deleteProduct(
-            @Parameter(description = "ID of the product to delete", required = true) @PathVariable
-            String id) {
+            @Parameter(description = "ID of the product to delete", required = true)
+            @PathVariable String id
+    ) {
         if (id == null || id.isEmpty()) {
             return ResponseEntity.badRequest().body("Invalid ID");
         }

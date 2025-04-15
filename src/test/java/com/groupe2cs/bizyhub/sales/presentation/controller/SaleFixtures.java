@@ -2,12 +2,12 @@ package com.groupe2cs.bizyhub.sales.presentation.controller;
 
 import com.groupe2cs.bizyhub.sales.application.command.CreateSaleCommand;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleFacture;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleProduct;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleQuantity;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleTotal_price;
 import com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale;
 import com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.mock.web.MockMultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,8 @@ public class SaleFixtures {
         entity.setId(UUID.randomUUID().toString());
         entity.setQuantity(null);
         entity.setTotal_price(null);
+        entity.setFacture(null);
+        entity.setProduct(null);
         return repository.save(entity);
     }
 
@@ -44,13 +46,26 @@ public class SaleFixtures {
     }
 
     public static String randomOneViaCommand(CommandGateway commandGateway) {
-        MockMultipartFile files =
-                new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
-        String fileName = files.getName();
-        CreateSaleCommand command =
-                new CreateSaleCommand(
-                        SaleQuantity.create(null), SaleTotal_price.create(null), SaleFacture.create(fileName));
+        CreateSaleCommand command = new CreateSaleCommand(
+                SaleQuantity.create(
 
+
+                        null
+                ), SaleTotal_price.create(
+
+
+                null
+        ), SaleFacture.create(
+
+
+                null
+        ), SaleProduct.create(
+
+
+                null
+        ));
         return commandGateway.sendAndWait(command).toString();
     }
+
+
 }

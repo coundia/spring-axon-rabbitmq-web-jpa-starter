@@ -22,47 +22,39 @@ public class ProductReadApplicationService {
 
     private final QueryGateway queryGateway;
 
+
     public ProductPagedResponse findAll(int page, int limit) {
 
         FindAllProductQuery query = new FindAllProductQuery(page, limit);
-        CompletableFuture<ProductPagedResponse> future =
-                queryGateway.query(
-                        query,
-                        org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(
-                                ProductPagedResponse.class));
+        CompletableFuture<ProductPagedResponse> future = queryGateway.query(query,
+                org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(ProductPagedResponse.class));
         return future.join();
     }
+
 
     public ProductResponse findByProductId(ProductId value) {
 
         FindByProductIdQuery query = new FindByProductIdQuery(value);
-        CompletableFuture<ProductResponse> future =
-                queryGateway.query(
-                        query,
-                        org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(
-                                ProductResponse.class));
+        CompletableFuture<ProductResponse> future = queryGateway.query(query,
+                org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(ProductResponse.class));
         return future.join();
     }
+
 
     public List<ProductResponse> findByProductName(ProductName value) {
 
         FindByProductNameQuery query = new FindByProductNameQuery(value);
-        CompletableFuture<List<ProductResponse>> future =
-                queryGateway.query(
-                        query,
-                        org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(
-                                ProductResponse.class));
+        CompletableFuture<List<ProductResponse>> future = queryGateway.query(query,
+                org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ProductResponse.class));
         return future.join();
     }
 
     public List<ProductResponse> findByProductPrice(ProductPrice value) {
 
         FindByProductPriceQuery query = new FindByProductPriceQuery(value);
-        CompletableFuture<List<ProductResponse>> future =
-                queryGateway.query(
-                        query,
-                        org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(
-                                ProductResponse.class));
+        CompletableFuture<List<ProductResponse>> future = queryGateway.query(query,
+                org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ProductResponse.class));
         return future.join();
     }
+
 }

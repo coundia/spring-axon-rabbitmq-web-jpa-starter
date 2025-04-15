@@ -1,9 +1,6 @@
 package com.groupe2cs.bizyhub.sales.domain.event;
 
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleFacture;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleId;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleQuantity;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleTotal_price;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +18,7 @@ public class SaleUpdatedEvent implements Serializable {
     private SaleQuantity quantity;
     private SaleTotal_price total_price;
     private SaleFacture facture;
+    private SaleProduct Product;
+
+
 }

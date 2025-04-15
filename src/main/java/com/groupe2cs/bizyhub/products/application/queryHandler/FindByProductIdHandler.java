@@ -19,8 +19,9 @@ public class FindByProductIdHandler {
     @QueryHandler
     public ProductResponse handle(FindByProductIdQuery query) {
         String value = query.getId().value();
-        Product entity =
-                repository.findById(value).orElseThrow(() -> new ProductNotFoundException(query.getId()));
+        Product entity = repository.findById(value)
+                .orElseThrow(() -> new ProductNotFoundException(query.getId()));
         return ProductMapper.toResponse(entity);
     }
+
 }

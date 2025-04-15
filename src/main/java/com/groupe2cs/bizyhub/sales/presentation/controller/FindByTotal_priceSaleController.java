@@ -34,26 +34,19 @@ public class FindByTotal_priceSaleController {
     @GetMapping("/by-total_price")
     @Operation(
             summary = "Find sale by total_price",
-            description = "Returns a list of sales that match the given total_price")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Query successful",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = SaleResponse.class))),
-                    @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
+            description = "Returns a list of sales that match the given total_price"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Query successful",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SaleResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+
     public ResponseEntity<List<SaleResponse>> findByTotal_price(
             @Parameter(description = "Value of the total_price to filter by", required = true)
-            @RequestParam
-            Double total_price) {
+            @RequestParam Double total_price
+    ) {
         try {
 
             var future = applicationService.findBySaleTotal_price(SaleTotal_price.create(total_price));

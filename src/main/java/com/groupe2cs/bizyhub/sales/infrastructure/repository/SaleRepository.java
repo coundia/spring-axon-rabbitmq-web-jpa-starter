@@ -13,10 +13,10 @@ import java.util.Optional;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, String> {
 
-    // @Query("SELECT t FROM Sale t ")
+    @Query("SELECT t FROM Sale t ")
     Page<Sale> findAll(Pageable pageable);
 
-    // @Query("SELECT t FROM Sale t WHERE t.id = :id")
+    @Query("SELECT t FROM Sale t WHERE t.id = :id")
     Optional<Sale> findById(Sale id);
 
     @Query("SELECT t FROM Sale t WHERE t.quantity = :quantity")
@@ -27,4 +27,9 @@ public interface SaleRepository extends JpaRepository<Sale, String> {
 
     @Query("SELECT t FROM Sale t WHERE t.facture = :facture")
     List<Sale> findByFacture(String facture);
+
+    @Query("SELECT t FROM Sale t WHERE t.product = :product")
+    List<Sale> findByProduct(String product);
+
+
 }

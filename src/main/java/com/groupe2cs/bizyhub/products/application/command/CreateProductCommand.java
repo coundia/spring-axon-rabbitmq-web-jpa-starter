@@ -20,10 +20,16 @@ public class CreateProductCommand implements Serializable {
     private ProductName name;
     private ProductPrice price;
 
-    public CreateProductCommand(ProductName name, ProductPrice price) {
+    public CreateProductCommand(
+
+            ProductName name,
+            ProductPrice price
+    ) {
         this.id = ProductId.create(UUID.randomUUID().toString());
 
         this.name = name;
         this.price = price;
     }
+
+
 }

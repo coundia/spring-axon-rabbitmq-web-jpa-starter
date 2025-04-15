@@ -25,31 +25,31 @@ public class SaleListController {
         this.applicationService = applicationService;
     }
 
+
     @GetMapping
     @Operation(
             summary = "List paginated sales",
-            description = "Returns a paginated list of sales based on page and limit parameters")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Successfully retrieved list of sales",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = SalePagedResponse.class))),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
+            description = "Returns a paginated list of sales based on page and limit parameters"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully retrieved list of sales",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SalePagedResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error",
+                    content = @Content
+            )
+    })
     public SalePagedResponse list(
             @Parameter(description = "Page number (zero-based index)", example = "0")
-            @RequestParam(defaultValue = "0")
-            int page,
+            @RequestParam(defaultValue = "0") int page,
+
             @Parameter(description = "Number of items per page", example = "10")
-            @RequestParam(defaultValue = "10")
-            int limit) {
+            @RequestParam(defaultValue = "10") int limit
+    ) {
         return applicationService.findAll(page, limit);
     }
 }

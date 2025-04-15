@@ -14,5 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class SaleDeletedEvent implements Serializable {
 
+
     private SaleId id;
+
 }

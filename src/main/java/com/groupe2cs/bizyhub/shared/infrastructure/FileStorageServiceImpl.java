@@ -23,12 +23,14 @@ public class FileStorageServiceImpl implements FileStorageService {
         try {
             Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
             Files.createDirectories(uploadPath);
+
             String originalFilename = file.getOriginalFilename();
-            String safeFilename =
-                    (originalFilename != null) ? originalFilename.replaceAll("\\s+", "_") : "file";
+            String safeFilename = (originalFilename != null) ? originalFilename.replaceAll("\\s+", "_") : "file";
             String filename = UUID.randomUUID() + "_" + safeFilename;
+
             Path filePath = uploadPath.resolve(filename);
             file.transferTo(filePath.toFile());
+
             return filePath.toString();
         } catch (IOException ex) {
             throw new RuntimeException("Failed to store file: " + ex.getMessage(), ex);

@@ -1,9 +1,6 @@
 package com.groupe2cs.bizyhub.sales.application.command;
 
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleFacture;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleId;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleQuantity;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleTotal_price;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import lombok.*;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -21,13 +18,22 @@ public class CreateSaleCommand implements Serializable {
     private SaleQuantity quantity;
     private SaleTotal_price total_price;
     private SaleFacture facture;
+    private SaleProduct Product;
 
     public CreateSaleCommand(
-            SaleQuantity quantity, SaleTotal_price total_price, SaleFacture facture) {
+
+            SaleQuantity quantity,
+            SaleTotal_price total_price,
+            SaleFacture facture,
+            SaleProduct product
+    ) {
         this.id = SaleId.create(UUID.randomUUID().toString());
 
         this.quantity = quantity;
         this.total_price = total_price;
         this.facture = facture;
+        this.Product = product;
     }
+
+
 }

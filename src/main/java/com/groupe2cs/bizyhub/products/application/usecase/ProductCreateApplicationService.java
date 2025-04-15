@@ -15,8 +15,12 @@ public class ProductCreateApplicationService {
 
     public ProductResponse createProduct(ProductRequest request) {
 
-        CreateProductCommand command = ProductMapper.toCommand(request);
+        CreateProductCommand command = ProductMapper.toCommand(
+                request
+        );
         commandGateway.sendAndWait(command);
         return ProductMapper.toResponse(command);
     }
+
+
 }

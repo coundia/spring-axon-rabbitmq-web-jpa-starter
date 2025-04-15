@@ -21,6 +21,9 @@ public class FindBySaleQuantityHandler {
     public List<SaleResponse> handle(FindBySaleQuantityQuery query) {
         Integer value = query.getQuantity().value();
         List<Sale> entities = repository.findByQuantity(value);
-        return entities.stream().map(SaleMapper::toResponse).toList();
+        return entities.stream()
+                .map(SaleMapper::toResponse)
+                .toList();
     }
+
 }

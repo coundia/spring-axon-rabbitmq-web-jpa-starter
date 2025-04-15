@@ -24,13 +24,12 @@ public class CreateProductCommandTest extends BaseUnitTests {
 
     @Test
     void it_should_send_command_to_command_gateway() {
-        CreateProductCommand command =
-                new CreateProductCommand(
-                        ProductId.create("test"), ProductName.create("test"), ProductPrice.create(99.99));
+        CreateProductCommand command = new CreateProductCommand(
+                ProductId.create("test"), ProductName.create("test"), ProductPrice.create(99.99)
+        );
         commandGateway.send(command);
 
-        ArgumentCaptor<CreateProductCommand> commandCaptor =
-                ArgumentCaptor.forClass(CreateProductCommand.class);
+        ArgumentCaptor<CreateProductCommand> commandCaptor = ArgumentCaptor.forClass(CreateProductCommand.class);
         verify(commandGateway, times(1)).send(commandCaptor.capture());
 
         CreateProductCommand sentCommand = commandCaptor.getValue();
@@ -41,9 +40,7 @@ public class CreateProductCommandTest extends BaseUnitTests {
 
     @Test
     void test_event_serialization() throws JsonProcessingException {
-        ProductCreatedEvent event =
-                new ProductCreatedEvent(
-                        ProductId.create("test"), ProductName.create("test"), ProductPrice.create(99.99));
+        ProductCreatedEvent event = new ProductCreatedEvent(ProductId.create("test"), ProductName.create("test"), ProductPrice.create(99.99));
         String json = new ObjectMapper().writeValueAsString(event);
         assertThat(json).isNotEmpty();
     }

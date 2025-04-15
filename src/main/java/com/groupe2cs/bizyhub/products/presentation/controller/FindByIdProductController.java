@@ -32,25 +32,19 @@ public class FindByIdProductController {
     @GetMapping("/by-id")
     @Operation(
             summary = "Find product by id",
-            description = "Returns a single products that match the given id")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Query successful",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = ProductResponse.class))),
-                    @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
+            description = "Returns a single products that match the given id"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Query successful",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+
     public ResponseEntity<ProductResponse> findById(
-            @Parameter(description = "Value of the id to filter by", required = true) @RequestParam
-            String id) {
+            @Parameter(description = "Value of the id to filter by", required = true)
+            @RequestParam String id
+    ) {
         try {
 
             var future = applicationService.findByProductId(ProductId.create(id));

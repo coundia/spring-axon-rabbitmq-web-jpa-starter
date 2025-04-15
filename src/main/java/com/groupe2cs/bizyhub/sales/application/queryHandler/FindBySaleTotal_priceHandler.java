@@ -21,6 +21,9 @@ public class FindBySaleTotal_priceHandler {
     public List<SaleResponse> handle(FindBySaleTotal_priceQuery query) {
         Double value = query.getTotal_price().value();
         List<Sale> entities = repository.findByTotal_price(value);
-        return entities.stream().map(SaleMapper::toResponse).toList();
+        return entities.stream()
+                .map(SaleMapper::toResponse)
+                .toList();
     }
+
 }

@@ -17,12 +17,17 @@ public class ProductUpdateApplicationService {
     private final FileStorageService fileStorageService;
     private final CommandGateway commandGateway;
 
+
     public ProductResponse updateProduct(ProductId id, ProductRequest request) {
 
-        UpdateProductCommand command = ProductMapper.toUpdateCommand(id, request);
+        UpdateProductCommand command = ProductMapper.toUpdateCommand(
+                id,
+                request
+        );
 
         commandGateway.sendAndWait(command);
 
         return ProductMapper.toResponse(command);
     }
+
 }

@@ -42,9 +42,18 @@ public class ProductFixtures {
     }
 
     public static String randomOneViaCommand(CommandGateway commandGateway) {
-        CreateProductCommand command =
-                new CreateProductCommand(ProductName.create(null), ProductPrice.create(null));
+        CreateProductCommand command = new CreateProductCommand(
+                ProductName.create(
 
+
+                        null
+                ), ProductPrice.create(
+
+
+                null
+        ));
         return commandGateway.sendAndWait(command).toString();
     }
+
+
 }

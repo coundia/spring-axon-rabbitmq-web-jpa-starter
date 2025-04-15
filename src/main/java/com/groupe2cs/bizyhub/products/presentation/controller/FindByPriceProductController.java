@@ -34,25 +34,19 @@ public class FindByPriceProductController {
     @GetMapping("/by-price")
     @Operation(
             summary = "Find product by price",
-            description = "Returns a list of products that match the given price")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Query successful",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = ProductResponse.class))),
-                    @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
+            description = "Returns a list of products that match the given price"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Query successful",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+
     public ResponseEntity<List<ProductResponse>> findByPrice(
-            @Parameter(description = "Value of the price to filter by", required = true) @RequestParam
-            Double price) {
+            @Parameter(description = "Value of the price to filter by", required = true)
+            @RequestParam Double price
+    ) {
         try {
 
             var future = applicationService.findByProductPrice(ProductPrice.create(price));

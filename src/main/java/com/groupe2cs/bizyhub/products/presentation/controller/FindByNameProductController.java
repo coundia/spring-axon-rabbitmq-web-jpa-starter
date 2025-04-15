@@ -34,25 +34,19 @@ public class FindByNameProductController {
     @GetMapping("/by-name")
     @Operation(
             summary = "Find product by name",
-            description = "Returns a list of products that match the given name")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Query successful",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = ProductResponse.class))),
-                    @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
+            description = "Returns a list of products that match the given name"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Query successful",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+
     public ResponseEntity<List<ProductResponse>> findByName(
-            @Parameter(description = "Value of the name to filter by", required = true) @RequestParam
-            String name) {
+            @Parameter(description = "Value of the name to filter by", required = true)
+            @RequestParam String name
+    ) {
         try {
 
             var future = applicationService.findByProductName(ProductName.create(name));

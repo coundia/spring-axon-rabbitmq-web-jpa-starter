@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/commands/product")
 @Tag(name = "Product commands", description = "Endpoints for managing products")
 @Slf4j
+
 public class AddProductController {
 
     private final ProductCreateApplicationService applicationService;
@@ -32,22 +33,18 @@ public class AddProductController {
     @Operation(
             summary = "Create a new product",
             description = "Creates a new product and returns the created entity",
-            requestBody =
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Product request payload",
                     required = true,
-                    content = @Content(schema = @Schema(implementation = ProductRequest.class))))
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Successfully created",
-                            content = @Content(schema = @Schema(implementation = ProductResponse.class))),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content(schema = @Schema()))
-            })
+                    content = @Content(schema = @Schema(implementation = ProductRequest.class))
+            )
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully created",
+                    content = @Content(schema = @Schema(implementation = ProductResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema()))
+    })
     public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest request) {
         try {
 

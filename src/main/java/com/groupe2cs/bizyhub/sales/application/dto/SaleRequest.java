@@ -15,9 +15,12 @@ public class SaleRequest implements Serializable {
 
     @Schema(description = "", example = "")
     private Integer quantity;
-
     @Schema(description = "", example = "")
     private Double total_price;
+    @Schema(description = "", example = "")
+    private String facture;
+    @Schema(description = "", example = "")
+    private String Product;
 
     public static SaleRequest random() {
         SaleRequest request = new SaleRequest();

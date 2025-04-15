@@ -15,7 +15,8 @@ import org.springframework.http.ResponseEntity;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        properties = "spring.config.name=application-test")
+        properties = "spring.config.name=application-test"
+)
 @Profile("test")
 @Slf4j
 public class BaseIntegrationTests {
@@ -64,15 +65,15 @@ public class BaseIntegrationTests {
 
     public HttpEntity<ByteArrayResource> createFile() {
         byte[] content = "Fake PDF content".getBytes();
-        ByteArrayResource resource =
-                new ByteArrayResource(content) {
-                    @Override
-                    public String getFilename() {
-                        return "file.pdf";
-                    }
-                };
+        ByteArrayResource resource = new ByteArrayResource(content) {
+            @Override
+            public String getFilename() {
+                return "file.pdf";
+            }
+        };
         HttpHeaders partHeaders = new HttpHeaders();
         partHeaders.setContentType(MediaType.APPLICATION_PDF);
         return new HttpEntity<>(resource, partHeaders);
     }
+
 }

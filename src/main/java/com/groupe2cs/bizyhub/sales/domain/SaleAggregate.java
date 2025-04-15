@@ -6,10 +6,7 @@ import com.groupe2cs.bizyhub.sales.application.command.UpdateSaleCommand;
 import com.groupe2cs.bizyhub.sales.domain.event.SaleCreatedEvent;
 import com.groupe2cs.bizyhub.sales.domain.event.SaleDeletedEvent;
 import com.groupe2cs.bizyhub.sales.domain.event.SaleUpdatedEvent;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleFacture;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleId;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleQuantity;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.SaleTotal_price;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,30 +30,36 @@ public class SaleAggregate {
     private SaleQuantity quantity;
     private SaleTotal_price total_price;
     private SaleFacture facture;
+    private SaleProduct Product;
+
 
     @CommandHandler
     public SaleAggregate(CreateSaleCommand command) {
-        apply(
-                new SaleCreatedEvent(
-                        command.getId(),
-                        command.getQuantity(),
-                        command.getTotal_price(),
-                        command.getFacture()));
+        apply(new SaleCreatedEvent(
+                command.getId(),
+                command.getQuantity(),
+                command.getTotal_price(),
+                command.getFacture(),
+                command.getProduct()
+        ));
     }
 
     @CommandHandler
     public void handle(DeleteSaleCommand command) {
-        apply(new SaleDeletedEvent(command.getId()));
+        apply(new SaleDeletedEvent(
+                command.getId()
+        ));
     }
 
     @CommandHandler
     public void handle(UpdateSaleCommand command) {
-        apply(
-                new SaleUpdatedEvent(
-                        command.getId(),
-                        command.getQuantity(),
-                        command.getTotal_price(),
-                        command.getFacture()));
+        apply(new SaleUpdatedEvent(
+                command.getId(),
+                command.getQuantity(),
+                command.getTotal_price(),
+                command.getFacture(),
+                command.getProduct()
+        ));
     }
 
     @EventSourcingHandler
@@ -65,6 +68,7 @@ public class SaleAggregate {
         this.quantity = event.getQuantity();
         this.total_price = event.getTotal_price();
         this.facture = event.getFacture();
+        this.Product = event.getProduct();
     }
 
     @EventSourcingHandler
@@ -78,5 +82,7 @@ public class SaleAggregate {
         this.quantity = event.getQuantity();
         this.total_price = event.getTotal_price();
         this.facture = event.getFacture();
+        this.Product = event.getProduct();
     }
+
 }

@@ -33,8 +33,13 @@ public class FindAllProductQueryHandler {
 
         Page<Product> pages = repository.findAll(pageable);
 
-        List<ProductResponse> responses = pages.stream().map(ProductMapper::toResponse).toList();
+        List<ProductResponse> responses = pages.stream()
+                .map(ProductMapper::toResponse)
+                .toList();
 
-        return ProductPagedResponse.from(pages, responses);
+        return ProductPagedResponse.from(
+                pages,
+                responses
+        );
     }
 }

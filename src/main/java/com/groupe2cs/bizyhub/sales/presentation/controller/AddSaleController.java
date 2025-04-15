@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
+import com.groupe2cs.bizyhub.sales.application.dto.SaleRequest;
 import com.groupe2cs.bizyhub.sales.application.dto.SaleResponse;
 import com.groupe2cs.bizyhub.sales.application.usecase.SaleCreateApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,15 +10,17 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/commands/sale")
 @Tag(name = "Sale commands", description = "Endpoints for managing sales")
 @Slf4j
+
 public class AddSaleController {
 
     private final SaleCreateApplicationService applicationService;
@@ -26,36 +29,31 @@ public class AddSaleController {
         this.applicationService = applicationService;
     }
 
-    @Operation(summary = "Create a new sale")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Sale created",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = SaleResponse.class))),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Internal server error",
-                            content = @Content)
-            })
-    @PostMapping(
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<SaleResponse> addSale(
-            @RequestPart("facture") MultipartFile facture,
-            @RequestParam("quantity") Integer quantity,
-            @RequestParam("totalPrice") Double totalPrice) {
+    @PostMapping
+    @Operation(
+            summary = "Create a new sale",
+            description = "Creates a new sale and returns the created entity",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Sale request payload",
+                    required = true,
+                    content = @Content(schema = @Schema(implementation = SaleRequest.class))
+            )
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully created",
+                    content = @Content(schema = @Schema(implementation = SaleResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema()))
+    })
+    public ResponseEntity<SaleResponse> addSale(@RequestBody SaleRequest request) {
         try {
-            SaleResponse response = applicationService.createSale(facture, quantity, totalPrice);
+
+            SaleResponse response = applicationService.createSale(request);
 
             return ResponseEntity.ok(response);
-
         } catch (Exception ex) {
-            log.error("Failed to create sale: {}", ex.getMessage(), ex);
-            return ResponseEntity.internalServerError().build();
+            log.error("Failed to create sale: {}", ex.getMessage());
+            return ResponseEntity.status(500).build();
         }
     }
 }

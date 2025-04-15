@@ -21,6 +21,9 @@ public class FindByProductPriceHandler {
     public List<ProductResponse> handle(FindByProductPriceQuery query) {
         Double value = query.getPrice().value();
         List<Product> entities = repository.findByPrice(value);
-        return entities.stream().map(ProductMapper::toResponse).toList();
+        return entities.stream()
+                .map(ProductMapper::toResponse)
+                .toList();
     }
+
 }

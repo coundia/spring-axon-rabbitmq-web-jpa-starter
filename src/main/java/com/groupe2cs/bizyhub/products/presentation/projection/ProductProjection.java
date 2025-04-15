@@ -22,8 +22,12 @@ public class ProductProjection {
     @EventHandler
     public void on(ProductCreatedEvent event) {
         try {
-            Product entity =
-                    new Product(event.getId().value(), event.getName().value(), event.getPrice().value());
+            Product entity = new Product(
+                    event.getId().value(),
+                    event.getName().value(),
+                    event.getPrice().value(),
+                    null
+            );
             repository.save(entity);
             log.info("Product inserted: {}", entity);
         } catch (Exception e) {
@@ -34,15 +38,11 @@ public class ProductProjection {
     @EventHandler
     public void on(ProductUpdatedEvent event) {
         try {
-            Product entity =
-                    repository
-                            .findById(event.getId().value())
-                            .orElseThrow(() -> new RuntimeException("Product not found"));
-
+            Product entity = repository.findById(event.getId().value())
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
             entity.setId(event.getId().value());
             entity.setName(event.getName().value());
             entity.setPrice(event.getPrice().value());
-
             repository.save(entity);
             log.info("Product updated successfully: {}", event.getId().value());
         } catch (Exception e) {

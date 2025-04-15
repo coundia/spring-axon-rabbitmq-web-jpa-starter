@@ -38,5 +38,6 @@ public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests
         assertThat(found).isNotNull();
         assertThat(found.getName()).isEqualTo(requestDTO.getName());
         assertThat(found.getPrice()).isEqualTo(requestDTO.getPrice());
+
     }
 }
