@@ -18,12 +18,12 @@ tasks:
   stop:
     desc: Stop apps
     cmds:
-      - sh kill.ports.sh  8090
+      - sh kill.ports.sh  8095
 
   check:
     desc: Check severs
     cmds:
-      - curl -i http://127.0.0.1:8090/actuator/health
+      - curl -i http://127.0.0.1:8095/actuator/health
 
   serve:
     desc: Run all services using Docker Compose

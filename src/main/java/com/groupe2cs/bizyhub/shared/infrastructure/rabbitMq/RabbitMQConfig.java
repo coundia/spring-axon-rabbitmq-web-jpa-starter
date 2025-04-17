@@ -22,11 +22,6 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public DirectExchange exchange2() {
-        return new DirectExchange("bizyhub-exchange");
-    }
-
-    @Bean
     public Queue queue() {
         return new Queue("axon-queue");
     }
