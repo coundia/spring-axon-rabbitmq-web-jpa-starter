@@ -15,29 +15,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+	@Autowired
+	private TransactionRepository transactionRepository;
 
-    @Autowired
-    private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-    @Test
-    void it_should_be_able_to_update_transaction() {
+	@Test
+	void it_should_be_able_to_update_transaction() {
 
-        String existingId = TransactionFixtures.randomOneViaCommand(commandGateway);
+		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway);
 
-        TransactionRequest requestDTO = TransactionRequest.random();
-        HttpEntity<TransactionRequest> request = new HttpEntity<>(requestDTO);
+		TransactionRequest requestDTO = TransactionRequest.random();
+		HttpEntity<TransactionRequest> request = new HttpEntity<>(requestDTO);
 
-        String uri = "/v1/commands/transaction/" + existingId;
-        ResponseEntity<String> response = this.put(uri, request);
+		String uri = "/v1/commands/transaction/" + existingId;
+		ResponseEntity<String> response = this.put(uri, request);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Transaction found = TransactionFixtures.byIdWaitExist(transactionRepository, existingId);
-        assertThat(found).isNotNull();
-        assertThat(found.getReference()).isEqualTo(requestDTO.getReference());
-        assertThat(found.getAmount()).isEqualTo(requestDTO.getAmount());
+		Transaction found = TransactionFixtures.byIdWaitExist(transactionRepository, existingId);
+		assertThat(found).isNotNull();
+		assertThat(found.getReference()).isEqualTo(requestDTO.getReference());
+		assertThat(found.getAmount()).isEqualTo(requestDTO.getAmount());
 
-    }
+	}
 }

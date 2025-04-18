@@ -12,17 +12,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-    @Test
-    void it_should_be_able_to_add_transaction() {
-        TransactionRequest requestDTO = TransactionRequest.random();
-        HttpEntity<TransactionRequest> request = new HttpEntity<>(requestDTO);
+	@Test
+	void it_should_be_able_to_add_transaction() {
+		TransactionRequest requestDTO = TransactionRequest.random();
+		HttpEntity<TransactionRequest> request = new HttpEntity<>(requestDTO);
 
-        String uri = "/v1/commands/transaction";
-        ResponseEntity<TransactionResponse> response = this.postForEntity(uri, request, TransactionResponse.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getId()).isNotNull();
-        assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
-        assertThat(response.getBody().getAmount()).isEqualTo(requestDTO.getAmount());
-    }
+		String uri = "/v1/commands/transaction";
+		ResponseEntity<TransactionResponse> response = this.postForEntity(uri, request, TransactionResponse.class);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isNotNull();
+		assertThat(response.getBody().getId()).isNotNull();
+		assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
+		assertThat(response.getBody().getAmount()).isEqualTo(requestDTO.getAmount());
+	}
 }

@@ -13,17 +13,17 @@ import java.util.Optional;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, String> {
 
-    @Query("SELECT t FROM Transaction t ")
-    Page<Transaction> findAll(Pageable pageable);
+	@Query("SELECT t FROM Transaction t ")
+	Page<Transaction> findAll(Pageable pageable);
 
-    @Query("SELECT t FROM Transaction t WHERE t.id = :id")
-    Optional<Transaction> findById(Transaction id);
+	@Query("SELECT t FROM Transaction t WHERE t.id = :id")
+	Optional<Transaction> findById(Transaction id);
 
-    @Query("SELECT t FROM Transaction t WHERE t.reference = :reference")
-    List<Transaction> findByReference(String reference);
+	@Query("SELECT t FROM Transaction t WHERE t.reference = :reference")
+	List<Transaction> findByReference(String reference);
 
-    @Query("SELECT t FROM Transaction t WHERE t.amount = :amount")
-    List<Transaction> findByAmount(Double amount);
+	@Query("SELECT t FROM Transaction t WHERE t.amount = :amount")
+	List<Transaction> findByAmount(Double amount);
 
 
 }

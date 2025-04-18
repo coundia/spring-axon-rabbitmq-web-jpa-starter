@@ -14,20 +14,20 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TransactionUpdateApplicationService {
 
-    private final FileStorageService fileStorageService;
-    private final CommandGateway commandGateway;
+	private final FileStorageService fileStorageService;
+	private final CommandGateway commandGateway;
 
 
-    public TransactionResponse updateTransaction(TransactionId id, TransactionRequest request) {
+	public TransactionResponse updateTransaction(TransactionId id, TransactionRequest request) {
 
-        UpdateTransactionCommand command = TransactionMapper.toUpdateCommand(
-                id,
-                request
-        );
+		UpdateTransactionCommand command = TransactionMapper.toUpdateCommand(
+				id,
+				request
+		);
 
-        commandGateway.sendAndWait(command);
+		commandGateway.sendAndWait(command);
 
-        return TransactionMapper.toResponse(command);
-    }
+		return TransactionMapper.toResponse(command);
+	}
 
 }

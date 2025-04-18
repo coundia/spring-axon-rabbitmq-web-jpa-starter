@@ -12,21 +12,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionDeleteControllerIntegrationTest extends BaseIntegrationTests {
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+	@Autowired
+	private TransactionRepository transactionRepository;
 
-    @Autowired
-    private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-    @Test
-    void it_should_be_able_to_delete_transaction() {
-        String existingId = TransactionFixtures.randomOneViaCommand(commandGateway);
-        String uri = "/v1/commands/transaction/" + existingId;
+	@Test
+	void it_should_be_able_to_delete_transaction() {
+		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway);
+		String uri = "/v1/commands/transaction/" + existingId;
 
-        ResponseEntity<String> rep = this.delete(uri);
-        assertThat(rep.getStatusCode().value()).isEqualTo(200);
+		ResponseEntity<String> rep = this.delete(uri);
+		assertThat(rep.getStatusCode().value()).isEqualTo(200);
 
-        Transaction found = TransactionFixtures.byIdWaitNotExist(transactionRepository, existingId);
-        assertThat(found).isNull();
-    }
+		Transaction found = TransactionFixtures.byIdWaitNotExist(transactionRepository, existingId);
+		assertThat(found).isNull();
+	}
 }

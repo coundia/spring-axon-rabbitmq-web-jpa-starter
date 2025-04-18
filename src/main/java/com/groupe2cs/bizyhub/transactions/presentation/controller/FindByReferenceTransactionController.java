@@ -25,35 +25,35 @@ import java.util.List;
 @Slf4j
 public class FindByReferenceTransactionController {
 
-    private final TransactionReadApplicationService applicationService;
+	private final TransactionReadApplicationService applicationService;
 
-    public FindByReferenceTransactionController(TransactionReadApplicationService applicationService) {
-        this.applicationService = applicationService;
-    }
+	public FindByReferenceTransactionController(TransactionReadApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
-    @GetMapping("/by-reference")
-    @Operation(
-            summary = "Find transaction by reference",
-            description = "Returns a list of transactions that match the given reference"
-    )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Query successful",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-    })
+	@GetMapping("/by-reference")
+	@Operation(
+			summary = "Find transaction by reference",
+			description = "Returns a list of transactions that match the given reference"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
 
-    public ResponseEntity<List<TransactionResponse>> findByReference(
-            @Parameter(description = "Value of the reference to filter by", required = true)
-            @RequestParam String reference
-    ) {
-        try {
+	public ResponseEntity<List<TransactionResponse>> findByReference(
+			@Parameter(description = "Value of the reference to filter by", required = true)
+			@RequestParam String reference
+	) {
+		try {
 
-            var future = applicationService.findByTransactionReference(TransactionReference.create(reference));
-            return ResponseEntity.ok(future);
-        } catch (Exception e) {
-            log.error("Failed to find transaction by reference: {}", e.getMessage(), e);
-            return ResponseEntity.internalServerError().build();
-        }
-    }
+			var future = applicationService.findByTransactionReference(TransactionReference.create(reference));
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find transaction by reference: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
+	}
 }

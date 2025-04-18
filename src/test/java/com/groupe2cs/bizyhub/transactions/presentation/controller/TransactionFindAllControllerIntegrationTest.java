@@ -12,18 +12,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+	@Autowired
+	private TransactionRepository transactionRepository;
 
-    @Test
-    void it_should_be_able_to_get_all_transactions() {
-        TransactionFixtures.randomMany(transactionRepository, 5);
+	@Test
+	void it_should_be_able_to_get_all_transactions() {
+		TransactionFixtures.randomMany(transactionRepository, 5);
 
-        String uri = "/v1/queries/list-transaction";
-        ResponseEntity<TransactionPagedResponse> response = this.getForEntity(uri, TransactionPagedResponse.class);
+		String uri = "/v1/queries/list-transaction";
+		ResponseEntity<TransactionPagedResponse> response = this.getForEntity(uri, TransactionPagedResponse.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getContent()).isNotEmpty();
-    }
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isNotNull();
+		assertThat(response.getBody().getContent()).isNotEmpty();
+	}
 }

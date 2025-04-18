@@ -16,28 +16,28 @@ import java.util.List;
 @Schema(name = "TransactionPagedResponse", description = "Paginated response for Transaction results")
 public class TransactionPagedResponse implements Serializable {
 
-    @Schema(description = "List of paginated Transaction items")
-    private List<TransactionResponse> content;
+	@Schema(description = "List of paginated Transaction items")
+	private List<TransactionResponse> content;
 
-    @Schema(description = "Current page number", example = "0")
-    private int page;
+	@Schema(description = "Current page number", example = "0")
+	private int page;
 
-    @Schema(description = "Page size", example = "10")
-    private int size;
+	@Schema(description = "Page size", example = "10")
+	private int size;
 
-    @Schema(description = "Total number of elements", example = "100")
-    private long totalElements;
+	@Schema(description = "Total number of elements", example = "100")
+	private long totalElements;
 
-    @Schema(description = "Total number of pages", example = "10")
-    private long totalPages;
+	@Schema(description = "Total number of pages", example = "10")
+	private long totalPages;
 
-    public static TransactionPagedResponse from(Page<Transaction> page, List<TransactionResponse> content) {
-        return TransactionPagedResponse.builder()
-                .content(content)
-                .page(page.getNumber())
-                .size(page.getSize())
-                .totalElements(page.getTotalElements())
-                .totalPages(page.getTotalPages())
-                .build();
-    }
+	public static TransactionPagedResponse from(Page<Transaction> page, List<TransactionResponse> content) {
+		return TransactionPagedResponse.builder()
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

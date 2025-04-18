@@ -15,11 +15,11 @@ import java.io.Serializable;
 @Schema(name = "TransactionResponse", description = "Response payload for Transaction")
 public class TransactionResponse implements Serializable {
 
-    @Schema(description = "", example = "")
-    private String id;
-    @Schema(description = "", example = "")
-    private String reference;
-    @Schema(description = "", example = "")
-    private Double amount;
+	@Schema(description = "", example = "")
+	private String id;
+	@Schema(description = "", example = "")
+	private String reference;
+	@Schema(description = "", example = "")
+	private Double amount;
 
 }

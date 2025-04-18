@@ -4,13 +4,13 @@ import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReferenc
 
 public class FindByTransactionReferenceQuery {
 
-    private final TransactionReference reference;
+	private final TransactionReference reference;
 
-    public FindByTransactionReferenceQuery(TransactionReference reference) {
-        this.reference = reference;
-    }
+	public FindByTransactionReferenceQuery(TransactionReference reference) {
+		this.reference = reference;
+	}
 
-    public TransactionReference getReference() {
-        return reference;
-    }
+	public TransactionReference getReference() {
+		return reference;
+	}
 }

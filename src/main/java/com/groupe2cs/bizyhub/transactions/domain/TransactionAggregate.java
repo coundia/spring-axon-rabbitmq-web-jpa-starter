@@ -27,54 +27,54 @@ import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 @Aggregate
 public class TransactionAggregate {
 
-    @AggregateIdentifier
-    private TransactionId id;
-    private TransactionReference reference;
-    private TransactionAmount amount;
+	@AggregateIdentifier
+	private TransactionId id;
+	private TransactionReference reference;
+	private TransactionAmount amount;
 
 
-    @CommandHandler
-    public TransactionAggregate(CreateTransactionCommand command) {
-        apply(new TransactionCreatedEvent(
-                command.getId(),
-                command.getReference(),
-                command.getAmount()
-        ));
-    }
+	@CommandHandler
+	public TransactionAggregate(CreateTransactionCommand command) {
+		apply(new TransactionCreatedEvent(
+				command.getId(),
+				command.getReference(),
+				command.getAmount()
+		));
+	}
 
-    @CommandHandler
-    public void handle(DeleteTransactionCommand command) {
-        apply(new TransactionDeletedEvent(
-                command.getId()
-        ));
-    }
+	@CommandHandler
+	public void handle(DeleteTransactionCommand command) {
+		apply(new TransactionDeletedEvent(
+				command.getId()
+		));
+	}
 
-    @CommandHandler
-    public void handle(UpdateTransactionCommand command) {
-        apply(new TransactionUpdatedEvent(
-                command.getId(),
-                command.getReference(),
-                command.getAmount()
-        ));
-    }
+	@CommandHandler
+	public void handle(UpdateTransactionCommand command) {
+		apply(new TransactionUpdatedEvent(
+				command.getId(),
+				command.getReference(),
+				command.getAmount()
+		));
+	}
 
-    @EventSourcingHandler
-    public void on(TransactionCreatedEvent event) {
-        this.id = event.getId();
-        this.reference = event.getReference();
-        this.amount = event.getAmount();
-    }
+	@EventSourcingHandler
+	public void on(TransactionCreatedEvent event) {
+		this.id = event.getId();
+		this.reference = event.getReference();
+		this.amount = event.getAmount();
+	}
 
-    @EventSourcingHandler
-    public void on(TransactionDeletedEvent event) {
-        this.id = event.getId();
-    }
+	@EventSourcingHandler
+	public void on(TransactionDeletedEvent event) {
+		this.id = event.getId();
+	}
 
-    @EventSourcingHandler
-    public void on(TransactionUpdatedEvent event) {
-        this.id = event.getId();
-        this.reference = event.getReference();
-        this.amount = event.getAmount();
-    }
+	@EventSourcingHandler
+	public void on(TransactionUpdatedEvent event) {
+		this.id = event.getId();
+		this.reference = event.getReference();
+		this.amount = event.getAmount();
+	}
 
 }

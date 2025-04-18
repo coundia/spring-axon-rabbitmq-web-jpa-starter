@@ -19,37 +19,37 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Transaction Queries", description = "Endpoints for listing paginated transactions")
 public class TransactionListController {
 
-    private final TransactionReadApplicationService applicationService;
+	private final TransactionReadApplicationService applicationService;
 
-    public TransactionListController(TransactionReadApplicationService applicationService) {
-        this.applicationService = applicationService;
-    }
+	public TransactionListController(TransactionReadApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
 
-    @GetMapping
-    @Operation(
-            summary = "List paginated transactions",
-            description = "Returns a paginated list of transactions based on page and limit parameters"
-    )
-    @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Successfully retrieved list of transactions",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionPagedResponse.class))
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Internal server error",
-                    content = @Content
-            )
-    })
-    public TransactionPagedResponse list(
-            @Parameter(description = "Page number (zero-based index)", example = "0")
-            @RequestParam(defaultValue = "0") int page,
+	@GetMapping
+	@Operation(
+			summary = "List paginated transactions",
+			description = "Returns a paginated list of transactions based on page and limit parameters"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(
+					responseCode = "200",
+					description = "Successfully retrieved list of transactions",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionPagedResponse.class))
+			),
+			@ApiResponse(
+					responseCode = "500",
+					description = "Internal server error",
+					content = @Content
+			)
+	})
+	public TransactionPagedResponse list(
+			@Parameter(description = "Page number (zero-based index)", example = "0")
+			@RequestParam(defaultValue = "0") int page,
 
-            @Parameter(description = "Number of items per page", example = "10")
-            @RequestParam(defaultValue = "10") int limit
-    ) {
-        return applicationService.findAll(page, limit);
-    }
+			@Parameter(description = "Number of items per page", example = "10")
+			@RequestParam(defaultValue = "10") int limit
+	) {
+		return applicationService.findAll(page, limit);
+	}
 }

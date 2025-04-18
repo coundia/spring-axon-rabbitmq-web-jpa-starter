@@ -23,35 +23,35 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class FindByIdTransactionController {
 
-    private final TransactionReadApplicationService applicationService;
+	private final TransactionReadApplicationService applicationService;
 
-    public FindByIdTransactionController(TransactionReadApplicationService applicationService) {
-        this.applicationService = applicationService;
-    }
+	public FindByIdTransactionController(TransactionReadApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
-    @GetMapping("/by-id")
-    @Operation(
-            summary = "Find transaction by id",
-            description = "Returns a single transactions that match the given id"
-    )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Query successful",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-    })
+	@GetMapping("/by-id")
+	@Operation(
+			summary = "Find transaction by id",
+			description = "Returns a single transactions that match the given id"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
 
-    public ResponseEntity<TransactionResponse> findById(
-            @Parameter(description = "Value of the id to filter by", required = true)
-            @RequestParam String id
-    ) {
-        try {
+	public ResponseEntity<TransactionResponse> findById(
+			@Parameter(description = "Value of the id to filter by", required = true)
+			@RequestParam String id
+	) {
+		try {
 
-            var future = applicationService.findByTransactionId(TransactionId.create(id));
-            return ResponseEntity.ok(future);
-        } catch (Exception e) {
-            log.error("Failed to find transaction by id: {}", e.getMessage(), e);
-            return ResponseEntity.internalServerError().build();
-        }
-    }
+			var future = applicationService.findByTransactionId(TransactionId.create(id));
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find transaction by id: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
+	}
 }

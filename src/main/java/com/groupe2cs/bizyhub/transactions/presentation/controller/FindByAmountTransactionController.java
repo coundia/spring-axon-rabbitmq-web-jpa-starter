@@ -25,35 +25,35 @@ import java.util.List;
 @Slf4j
 public class FindByAmountTransactionController {
 
-    private final TransactionReadApplicationService applicationService;
+	private final TransactionReadApplicationService applicationService;
 
-    public FindByAmountTransactionController(TransactionReadApplicationService applicationService) {
-        this.applicationService = applicationService;
-    }
+	public FindByAmountTransactionController(TransactionReadApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
-    @GetMapping("/by-amount")
-    @Operation(
-            summary = "Find transaction by amount",
-            description = "Returns a list of transactions that match the given amount"
-    )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Query successful",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-    })
+	@GetMapping("/by-amount")
+	@Operation(
+			summary = "Find transaction by amount",
+			description = "Returns a list of transactions that match the given amount"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
 
-    public ResponseEntity<List<TransactionResponse>> findByAmount(
-            @Parameter(description = "Value of the amount to filter by", required = true)
-            @RequestParam Double amount
-    ) {
-        try {
+	public ResponseEntity<List<TransactionResponse>> findByAmount(
+			@Parameter(description = "Value of the amount to filter by", required = true)
+			@RequestParam Double amount
+	) {
+		try {
 
-            var future = applicationService.findByTransactionAmount(TransactionAmount.create(amount));
-            return ResponseEntity.ok(future);
-        } catch (Exception e) {
-            log.error("Failed to find transaction by amount: {}", e.getMessage(), e);
-            return ResponseEntity.internalServerError().build();
-        }
-    }
+			var future = applicationService.findByTransactionAmount(TransactionAmount.create(amount));
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find transaction by amount: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
+	}
 }

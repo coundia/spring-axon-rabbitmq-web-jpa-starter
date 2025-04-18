@@ -14,10 +14,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class UpdateTransactionCommand implements Serializable {
-    @TargetAggregateIdentifier
-    private TransactionId id;
-    private TransactionReference reference;
-    private TransactionAmount amount;
+	@TargetAggregateIdentifier
+	private TransactionId id;
+	private TransactionReference reference;
+	private TransactionAmount amount;
 
 
 }

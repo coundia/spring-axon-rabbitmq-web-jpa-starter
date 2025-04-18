@@ -15,21 +15,21 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class CreateTransactionCommand implements Serializable {
-    @TargetAggregateIdentifier
-    private TransactionId id;
-    private TransactionReference reference;
-    private TransactionAmount amount;
+	@TargetAggregateIdentifier
+	private TransactionId id;
+	private TransactionReference reference;
+	private TransactionAmount amount;
 
-    public CreateTransactionCommand(
+	public CreateTransactionCommand(
 
-            TransactionReference reference,
-            TransactionAmount amount
-    ) {
-        this.id = TransactionId.create(UUID.randomUUID().toString());
+			TransactionReference reference,
+			TransactionAmount amount
+	) {
+		this.id = TransactionId.create(UUID.randomUUID().toString());
 
-        this.reference = reference;
-        this.amount = amount;
-    }
+		this.reference = reference;
+		this.amount = amount;
+	}
 
 
 }

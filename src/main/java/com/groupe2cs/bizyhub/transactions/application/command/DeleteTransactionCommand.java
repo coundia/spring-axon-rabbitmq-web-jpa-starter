@@ -12,10 +12,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class DeleteTransactionCommand implements Serializable {
-    @TargetAggregateIdentifier
+	@TargetAggregateIdentifier
 
 
-    private TransactionId id;
+	private TransactionId id;
 
 
 }

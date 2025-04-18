@@ -7,12 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StatusControllerTest extends BaseIntegrationTests {
 
-    //@Test
-    void it_should_status() {
-        ResponseEntity<String> response = this.get("/v1/status");
+	//@Test
+	void it_should_status() {
+		ResponseEntity<String> response = this.get("/v1/status");
 
-        assertThat(response.getStatusCode().value()).isEqualTo(200);
-        assertThat(response.getBody()).contains("\"code\":1");
-        assertThat(response.getBody()).contains("\"message\":\"\"");
-    }
+		assertThat(response.getStatusCode().value()).isEqualTo(200);
+		assertThat(response.getBody()).contains("\"code\":1");
+		assertThat(response.getBody()).contains("\"message\":\"\"");
+	}
 }

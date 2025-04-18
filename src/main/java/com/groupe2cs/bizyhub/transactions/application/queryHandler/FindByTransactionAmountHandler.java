@@ -15,15 +15,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FindByTransactionAmountHandler {
 
-    private final TransactionRepository repository;
+	private final TransactionRepository repository;
 
-    @QueryHandler
-    public List<TransactionResponse> handle(FindByTransactionAmountQuery query) {
-        Double value = query.getAmount().value();
-        List<Transaction> entities = repository.findByAmount(value);
-        return entities.stream()
-                .map(TransactionMapper::toResponse)
-                .toList();
-    }
+	@QueryHandler
+	public List<TransactionResponse> handle(FindByTransactionAmountQuery query) {
+		Double value = query.getAmount().value();
+		List<Transaction> entities = repository.findByAmount(value);
+		return entities.stream()
+				.map(TransactionMapper::toResponse)
+				.toList();
+	}
 
 }

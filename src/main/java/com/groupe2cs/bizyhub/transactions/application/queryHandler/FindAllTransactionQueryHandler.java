@@ -16,30 +16,30 @@ import java.util.List;
 @Component
 public class FindAllTransactionQueryHandler {
 
-    private final TransactionRepository repository;
+	private final TransactionRepository repository;
 
-    public FindAllTransactionQueryHandler(TransactionRepository repository) {
-        this.repository = repository;
-    }
+	public FindAllTransactionQueryHandler(TransactionRepository repository) {
+		this.repository = repository;
+	}
 
-    @QueryHandler
-    public TransactionPagedResponse handle(FindAllTransactionQuery query) {
-        int limit = query.getLimit();
-        int offset = query.getPage() * limit;
+	@QueryHandler
+	public TransactionPagedResponse handle(FindAllTransactionQuery query) {
+		int limit = query.getLimit();
+		int offset = query.getPage() * limit;
 
-        long totalElements = repository.count();
+		long totalElements = repository.count();
 
-        PageRequest pageable = PageRequest.of(offset / limit, limit);
+		PageRequest pageable = PageRequest.of(offset / limit, limit);
 
-        Page<Transaction> pages = repository.findAll(pageable);
+		Page<Transaction> pages = repository.findAll(pageable);
 
-        List<TransactionResponse> responses = pages.stream()
-                .map(TransactionMapper::toResponse)
-                .toList();
+		List<TransactionResponse> responses = pages.stream()
+				.map(TransactionMapper::toResponse)
+				.toList();
 
-        return TransactionPagedResponse.from(
-                pages,
-                responses
-        );
-    }
+		return TransactionPagedResponse.from(
+				pages,
+				responses
+		);
+	}
 }

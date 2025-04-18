@@ -23,37 +23,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class AddTransactionController {
 
-    private final TransactionCreateApplicationService applicationService;
+	private final TransactionCreateApplicationService applicationService;
 
-    public AddTransactionController(TransactionCreateApplicationService applicationService) {
-        this.applicationService = applicationService;
-    }
+	public AddTransactionController(TransactionCreateApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
-    @PostMapping
-    @Operation(
-            summary = "Create a new transaction",
-            description = "Creates a new transaction and returns the created entity",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Transaction request payload",
-                    required = true,
-                    content = @Content(schema = @Schema(implementation = TransactionRequest.class))
-            )
-    )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully created",
-                    content = @Content(schema = @Schema(implementation = TransactionResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = @Content(schema = @Schema()))
-    })
-    public ResponseEntity<TransactionResponse> addTransaction(@RequestBody TransactionRequest request) {
-        try {
+	@PostMapping
+	@Operation(
+			summary = "Create a new transaction",
+			description = "Creates a new transaction and returns the created entity",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+					description = "Transaction request payload",
+					required = true,
+					content = @Content(schema = @Schema(implementation = TransactionRequest.class))
+			)
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Successfully created",
+					content = @Content(schema = @Schema(implementation = TransactionResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<TransactionResponse> addTransaction(@RequestBody TransactionRequest request) {
+		try {
 
-            TransactionResponse response = applicationService.createTransaction(request);
+			TransactionResponse response = applicationService.createTransaction(request);
 
-            return ResponseEntity.ok(response);
-        } catch (Exception ex) {
-            log.error("Failed to create transaction: {}", ex.getMessage());
-            return ResponseEntity.status(500).build();
-        }
-    }
+			return ResponseEntity.ok(response);
+		} catch (Exception ex) {
+			log.error("Failed to create transaction: {}", ex.getMessage());
+			return ResponseEntity.status(500).build();
+		}
+	}
 }

@@ -14,37 +14,37 @@ import java.io.Serializable;
 @Builder
 public class TransactionReference implements Serializable {
 
-    private String reference;
+	private String reference;
 
-    public TransactionReference(String reference) {
-        this.reference = reference;
-    }
+	public TransactionReference(String reference) {
+		this.reference = reference;
+	}
 
-    public static TransactionReference create(String reference) {
-        if (reference == null || reference.isBlank()) {
-            throw new TransactionReferenceNotValid("Reference is invalid");
-        }
-        return new TransactionReference(reference);
-    }
+	public static TransactionReference create(String reference) {
+		if (reference == null || reference.isBlank()) {
+			throw new TransactionReferenceNotValid("Reference is invalid");
+		}
+		return new TransactionReference(reference);
+	}
 
-    public String value() {
-        return this.reference;
-    }
+	public String value() {
+		return this.reference;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TransactionReference that)) return false;
-        return this.reference.equals(that.reference);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TransactionReference that)) return false;
+		return this.reference.equals(that.reference);
+	}
 
-    @Override
-    public int hashCode() {
-        return java.util.Objects.hash(reference);
-    }
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(reference);
+	}
 
-    @Override
-    public String toString() {
-        return String.valueOf(reference);
-    }
+	@Override
+	public String toString() {
+		return String.valueOf(reference);
+	}
 }

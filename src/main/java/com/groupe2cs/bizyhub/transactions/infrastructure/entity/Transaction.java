@@ -15,24 +15,24 @@ import lombok.*;
 @Table(name = "transactions")
 public class Transaction {
 
-    @Id
-    private String id;
+	@Id
+	private String id;
 
-    @Column(nullable = false)
-    private String reference;
-    @Column(nullable = false)
-    private Double amount;
+	@Column(nullable = false)
+	private String reference;
+	@Column(nullable = false)
+	private Double amount;
 
-    public Transaction(String id) {
-        this.id = id;
-    }
+	public Transaction(String id) {
+		this.id = id;
+	}
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id='" + id + '\'' +
-                ", reference=" + reference +
-                ", amount=" + amount +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Transaction{" +
+				"id='" + id + '\'' +
+				", reference=" + reference +
+				", amount=" + amount +
+				'}';
+	}
 }

@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class FindByTransactionIdHandler {
 
-    private final TransactionRepository repository;
+	private final TransactionRepository repository;
 
-    @QueryHandler
-    public TransactionResponse handle(FindByTransactionIdQuery query) {
-        String value = query.getId().value();
-        Transaction entity = repository.findById(value)
-                .orElseThrow(() -> new TransactionNotFoundException(query.getId()));
-        return TransactionMapper.toResponse(entity);
-    }
+	@QueryHandler
+	public TransactionResponse handle(FindByTransactionIdQuery query) {
+		String value = query.getId().value();
+		Transaction entity = repository.findById(value)
+				.orElseThrow(() -> new TransactionNotFoundException(query.getId()));
+		return TransactionMapper.toResponse(entity);
+	}
 
 }

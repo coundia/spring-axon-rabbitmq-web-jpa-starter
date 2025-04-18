@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class FindAllTransactionQuery {
 
-    private final int page;
-    private final int limit;
+	private final int page;
+	private final int limit;
 
 }

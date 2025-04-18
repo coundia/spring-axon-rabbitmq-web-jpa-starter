@@ -16,9 +16,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class TransactionCreatedEvent implements Serializable {
 
-    private TransactionId id;
-    private TransactionReference reference;
-    private TransactionAmount amount;
+	private TransactionId id;
+	private TransactionReference reference;
+	private TransactionAmount amount;
 
 
 }
