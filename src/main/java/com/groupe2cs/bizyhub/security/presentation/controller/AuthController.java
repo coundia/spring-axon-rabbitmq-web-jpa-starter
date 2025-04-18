@@ -36,6 +36,7 @@ public class AuthController {
 					AuthResponseDto
 							.builder()
 							.token(token)
+							.username(user.getUsername())
 							.code(1)
 							.message("Login successful")
 							.build()
@@ -47,7 +48,7 @@ public class AuthController {
 									.builder()
 									.token(null)
 									.code(0)
-									.message("UNAUTHORIZED")
+									.message(e.getMessage())
 									.build()
 					);
 		}

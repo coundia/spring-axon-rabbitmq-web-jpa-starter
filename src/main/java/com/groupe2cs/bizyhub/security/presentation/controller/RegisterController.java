@@ -29,7 +29,7 @@ public class RegisterController {
 									.builder()
 									.token(null)
 									.code(0)
-									.message("BAD_REQUEST")
+									.message(e.getMessage())
 									.build()
 					);
 		}

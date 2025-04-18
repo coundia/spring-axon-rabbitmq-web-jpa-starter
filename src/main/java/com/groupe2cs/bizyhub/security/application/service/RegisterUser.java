@@ -33,6 +33,7 @@ public class RegisterUser {
 		return AuthResponseDto
 				.builder()
 				.token(token)
+				.username(user.getUsername())
 				.code(1)
 				.message("Login successful")
 				.build();

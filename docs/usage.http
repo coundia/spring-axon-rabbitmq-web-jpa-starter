@@ -1,0 +1,62 @@
+# curl -X 'POST'
+#  'http://127.0.0.1:8095/api/auth/register'
+#  -H 'accept: */*'
+#  -H 'Content-Type: application/json'
+#  -d '{
+#  "username": "admin",
+#  "password": "admin"
+#}'
+POST http://127.0.0.1:8095/api/auth/register
+accept: */*
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+###
+
+# curl -X 'POST'
+#  'http://127.0.0.1:8095/api/auth/login'
+#  -H 'accept: */*'
+#  -H 'Content-Type: application/json'
+#  -d '{
+#  "username": "admin",
+#  "password": "admin"
+#}'
+POST http://127.0.0.1:8095/api/auth/login
+accept: */*
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+###
+
+
+POST http://127.0.0.1:8095/api/auth/register
+accept: */*
+Content-Type: application/json
+
+{
+  "username": "string",
+  "password": "string"
+}
+
+###
+
+POST http://127.0.0.1:8095/api/v1/commands/transaction
+accept: */*
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0NTAwMDY5NywiZXhwIjoxNzQ1MDM2Njk3fQ.mIc3-ALDasLCBiFaDx2pKzEWCOWAENSuMnUYgzmK2Y0
+
+{
+  "reference": "string",
+  "amount": 0
+}
+
+###
+

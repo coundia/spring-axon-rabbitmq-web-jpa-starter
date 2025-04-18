@@ -22,7 +22,7 @@ public class TransactionRequest implements Serializable {
 	public static TransactionRequest random() {
 		TransactionRequest request = new TransactionRequest();
 		request.setReference(UUID.randomUUID().toString());
-		request.setAmount(2333.2);
+		request.setAmount(9997.76);
 		return request;
 	}
 }

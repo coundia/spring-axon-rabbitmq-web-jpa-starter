@@ -29,7 +29,7 @@ public class CreateTransactionCommandTest extends BaseUnitTests {
 		CreateTransactionCommand command = new CreateTransactionCommand(
 				TransactionId.create(UUID.randomUUID().toString()),
 				TransactionReference.create(UUID.randomUUID().toString()),
-				TransactionAmount.create(2166.24)
+				TransactionAmount.create(3665.59)
 		);
 		commandGateway.send(command);
 
@@ -53,7 +53,7 @@ public class CreateTransactionCommandTest extends BaseUnitTests {
 				event =
 				new TransactionCreatedEvent(TransactionId.create(UUID.randomUUID().toString()),
 						TransactionReference.create(UUID.randomUUID().toString()),
-						TransactionAmount.create(2166.24));
+						TransactionAmount.create(3665.59));
 		String json = new ObjectMapper().writeValueAsString(event);
 		assertThat(json).isNotEmpty();
 	}
