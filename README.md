@@ -50,11 +50,9 @@ Once the application is running, you can access the **Swagger UI** documentation
 
 ![api.png](docs/api.png)
 
-
 ## RabbitMQ Management
 
 http://localhost:15672/#/queues
-
 
 ![rabbitMq.png](docs/rabbitMq.png)
 
@@ -72,7 +70,9 @@ http://localhost:15672/#/queues
 Vor [tree.md](docs/tree.md)
 
 ```
+
 Projet généré par : https://github.com/coundia/axon-web-cqrs-generator
+
 ## 🔹 Notes
 
 - The application follows the **CQRS pattern**, separating command and query models.
