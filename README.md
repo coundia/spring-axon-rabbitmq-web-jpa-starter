@@ -71,6 +71,10 @@ Vor [tree.md](docs/tree.md)
 
 ```
 
+## Test
+![test.passed.png](docs/test.passed.png)
+
+
 Projet généré par : https://github.com/coundia/axon-web-cqrs-generator
 
 ## 🔹 Notes
