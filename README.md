@@ -61,45 +61,18 @@ http://localhost:15672/#/queues
 ## 📁 Project Structure
 
 ```
-❰pcoundia❙~/projects/spring-axon-rabbitmq-web-jpa-starter(git✱main)❱✔≻ tree -L 7 src/
-src/
-├── main
-│   ├── java
-│   │   └── com
-│   │       └── groupe2cs
-│   │           └── bizyhub
-│   │               ├── BizyhubApplication.java
-│   │               ├── products
-│   │               │   ├── application
-│   │               │   ├── domain
-│   │               │   ├── infrastructure
-│   │               │   └── presentation
-│   │               └── shared
-│   │                   ├── Presentation
-│   │                   └── infrastructure
-│   └── resources
-│       ├── application-test.properties
-│       └── application.properties
-└── test
-    └── java
-        └── com
-            └── groupe2cs
-                └── bizyhub
-                    ├── BizyhubApplicationTests.java
-                    ├── application
-                    │   └── CreateProductCommandTest.java
-                    ├── domain
-                    │   └── ProductModelTests.java
-                    ├── infrastructure
-                    │   └── controller
-                    └── shared
-                        ├── BaseIntegrationTests.java
-                        └── BaseUnitTests.java
 
-25 directories, 8 files
+- `domain/`: logique métier, agrégats, events, value objects
+- `application/`: services, DTOs, command/query handlers
+- `infrastructure/`: persistance (JPA), messaging (RabbitMQ)
+- `presentation/`: API REST (commandes & queries)
+- `templates/`: fichiers mustache pour la génération de code
+- `shared/`: utilitaires
+
+Vor [tree.md](docs/tree.md)
 
 ```
-
+Projet généré par : https://github.com/coundia/axon-web-cqrs-generator
 ## 🔹 Notes
 
 - The application follows the **CQRS pattern**, separating command and query models.
