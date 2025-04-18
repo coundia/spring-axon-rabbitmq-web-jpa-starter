@@ -50,6 +50,14 @@ Once the application is running, you can access the **Swagger UI** documentation
 
 ![api.png](docs/api.png)
 
+
+## RabbitMQ Management
+
+http://localhost:15672/#/queues
+
+
+![rabbitMq.png](docs/rabbitMq.png)
+
 ## 📁 Project Structure
 
 ```
