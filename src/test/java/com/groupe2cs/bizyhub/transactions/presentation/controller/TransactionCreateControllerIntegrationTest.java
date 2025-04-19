@@ -4,7 +4,6 @@ import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -14,11 +13,10 @@ public class TransactionCreateControllerIntegrationTest extends BaseIntegrationT
 
 	@Test
 	void it_should_be_able_to_add_transaction() {
-		TransactionRequest requestDTO = TransactionRequest.random();
-		HttpEntity<TransactionRequest> request = new HttpEntity<>(requestDTO);
 
+		TransactionRequest requestDTO = TransactionRequest.random();
 		String uri = "/v1/commands/transaction";
-		ResponseEntity<TransactionResponse> response = this.postForEntity(uri, request, TransactionResponse.class);
+		ResponseEntity<TransactionResponse> response = this.postForEntity(uri, requestDTO, TransactionResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();

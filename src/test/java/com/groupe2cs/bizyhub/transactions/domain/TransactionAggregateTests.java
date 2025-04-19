@@ -21,7 +21,7 @@ public class TransactionAggregateTests extends BaseUnitTests {
 	void it_should_create_transaction_with_valid_values() {
 		TransactionId id = TransactionId.create(UUID.randomUUID().toString());
 		TransactionReference reference = TransactionReference.create(UUID.randomUUID().toString());
-		TransactionAmount amount = TransactionAmount.create(501.36);
+		TransactionAmount amount = TransactionAmount.create(90.68);
 		TransactionAggregate transaction = new TransactionAggregate(id, reference, amount);
 		assertThat(transaction.getId()).isNotNull();
 		assertThat(transaction.getId()).isEqualTo(id);

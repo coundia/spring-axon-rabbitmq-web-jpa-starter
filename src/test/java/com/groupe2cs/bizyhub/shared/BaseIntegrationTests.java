@@ -1,6 +1,9 @@
 package com.groupe2cs.bizyhub.shared;
 
+import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
+import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,37 +33,80 @@ public class BaseIntegrationTests {
 	@Autowired
 	public TestRestTemplate testRestTemplate;
 
+	public HttpHeaders headers;
+
+	@BeforeEach
+	void authenticate() {
+
+		headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		AuthRequestDto authRequest = AuthRequestDto.builder()
+				.username("username" + java.util.UUID.randomUUID())
+				.password("testpass" + java.util.UUID.randomUUID())
+				.build();
+
+		ResponseEntity<AuthResponseDto> response = testRestTemplate.postForEntity(
+				getBaseUrl() + "/auth/register",
+				new HttpEntity<>(authRequest),
+				AuthResponseDto.class
+		);
+
+		if (response.getStatusCode().isError()) {
+			throw new RuntimeException("Failed to register test user +: " + response.getBody().toString());
+		}
+
+		String token = response.getBody().getToken();
+		headers.setBearerAuth(token);
+
+
+	}
+
 	public String getBaseUrl() {
-		String uri = "http://" + this.host + ":" + this.port + "/api";
-		log.info("***************** URI ********************");
+		String uri = "http://" + host + ":" + port + "/api";
 		log.info(uri);
 		return uri;
 	}
 
 	public ResponseEntity<String> get(String uri) {
-		return testRestTemplate.getForEntity(this.getBaseUrl() + uri, String.class);
+		return testRestTemplate.exchange(getBaseUrl() + uri, org.springframework.http.HttpMethod.GET, new
+				HttpEntity<>(headers), String.class);
 	}
 
-	public ResponseEntity<String> delete(String uri) {
-		testRestTemplate.delete(this.getBaseUrl() + uri);
-		return ResponseEntity.ok().build();
+	public ResponseEntity
+			<String> delete(String uri) {
+		return testRestTemplate.exchange(getBaseUrl() + uri, org.springframework.http.HttpMethod.DELETE, new
+				HttpEntity<>(headers), String.class);
+	}
+
+	public <T> ResponseEntity<T> postForEntity(String uri, Object request, Class
+			<T> responseType) {
+		return testRestTemplate.postForEntity(
+				getBaseUrl() + uri,
+				new HttpEntity<>(request, headers),
+				responseType
+		);
+	}
+
+	public <T> ResponseEntity
+			<T> getForEntity(String uri, Class
+			<T> responseType) {
+		return testRestTemplate.exchange(getBaseUrl() + uri,
+				org.springframework.http.HttpMethod.GET, new HttpEntity<>(headers), responseType);
 	}
 
 	public ResponseEntity<String> post(String uri, Object request) {
-		return testRestTemplate.postForEntity(this.getBaseUrl() + uri, request, String.class);
+		return testRestTemplate.postForEntity(
+				getBaseUrl() + uri,
+				new HttpEntity<>(request, headers),
+				String.class
+		);
 	}
 
 	public ResponseEntity<String> put(String uri, Object request) {
-		testRestTemplate.put(this.getBaseUrl() + uri, request);
-		return ResponseEntity.ok().build();
-	}
-
-	public <T> ResponseEntity<T> postForEntity(String uri, Object request, Class<T> responseType) {
-		return this.testRestTemplate.postForEntity(this.getBaseUrl() + uri, request, responseType);
-	}
-
-	public <T> ResponseEntity<T> getForEntity(String uri, Class<T> responseType) {
-		return this.testRestTemplate.getForEntity(this.getBaseUrl() + uri, responseType);
+		return testRestTemplate.exchange(getBaseUrl() + uri,
+				org.springframework.http.HttpMethod.PUT, new HttpEntity<>(request, headers),
+				String.class);
 	}
 
 	public HttpEntity<ByteArrayResource> createFile() {
@@ -73,7 +119,7 @@ public class BaseIntegrationTests {
 		};
 		HttpHeaders partHeaders = new HttpHeaders();
 		partHeaders.setContentType(MediaType.APPLICATION_PDF);
+		partHeaders.setBearerAuth(headers.getFirst(HttpHeaders.AUTHORIZATION));
 		return new HttpEntity<>(resource, partHeaders);
 	}
-
 }

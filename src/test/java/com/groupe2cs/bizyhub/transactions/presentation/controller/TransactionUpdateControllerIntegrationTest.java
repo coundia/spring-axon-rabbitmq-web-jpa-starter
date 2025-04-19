@@ -7,7 +7,6 @@ import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionR
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -27,10 +26,9 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
 		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway);
 
 		TransactionRequest requestDTO = TransactionRequest.random();
-		HttpEntity<TransactionRequest> request = new HttpEntity<>(requestDTO);
 
 		String uri = "/v1/commands/transaction/" + existingId;
-		ResponseEntity<String> response = this.put(uri, request);
+		ResponseEntity<String> response = this.put(uri, requestDTO);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
