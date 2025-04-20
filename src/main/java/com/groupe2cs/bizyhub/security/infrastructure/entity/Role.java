@@ -1,11 +1,18 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+import java.util.ArrayList;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.*;
 
 @Getter
 @Setter
@@ -21,12 +28,18 @@ public class Role {
 
 	@Column(nullable = false, unique = true)
 	private String name;
+	@OneToMany(mappedBy = "role",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<RolePermission> rolePermissions = new ArrayList<>();
+	public Role(String id) {
+	this.id = id;
+}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(
-			name = "role_permissions",
-			joinColumns = @JoinColumn(name = "role_id"),
-			inverseJoinColumns = @JoinColumn(name = "permission_id")
-	)
-	private Set<Permission> permissions = new HashSet<>();
+	@Override
+ public String toString() {
+	return "Role{" +
+	"id='" + id + '\'' +
+		", name=" + name +
+		", rolePermissions=" + rolePermissions +
+	'}';
+	}
 }

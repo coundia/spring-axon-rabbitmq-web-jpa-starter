@@ -1,10 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
-import java.io.Serializable;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import java.util.UUID;
+import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -19,10 +24,4 @@ public class TransactionRequest implements Serializable {
 	@Schema(description = "", example = "")
 	private Double amount;
 
-	public static TransactionRequest random() {
-		TransactionRequest request = new TransactionRequest();
-		request.setReference(UUID.randomUUID().toString());
-		request.setAmount(620.28);
-		return request;
-	}
 }

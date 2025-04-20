@@ -1,0 +1,72 @@
+package com.groupe2cs.bizyhub.security.presentation.controller;
+
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import java.util.UUID;
+
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.mock.web.MockMultipartFile;
+import java.util.concurrent.TimeUnit;
+import static org.awaitility.Awaitility.await;
+
+public class UserRoleFixtures {
+
+public static UserRole randomOne(UserRoleRepository repository) {
+	UserRole entity = new UserRole();
+	entity.setId(UUID.randomUUID().toString());
+	return repository.save(entity);
+}
+
+public static UserRole existingOrRandom(UserRoleRepository repository) {
+	return repository.findAll().stream().findFirst().orElseGet(() -> randomOne(repository));
+}
+
+public static UserRole byId(UserRoleRepository repository, String id) {
+
+	return repository.findById(id).orElse(null);
+}
+
+public static UserRole byIdWaitExist(UserRoleRepository repository, String id) {
+
+	await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
+
+	return repository.findById(id).orElse(null);
+}
+
+public static UserRole byIdWaitNotExist(UserRoleRepository repository, String id) {
+
+	await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
+
+return repository.findById(id).orElse(null);
+}
+
+public static List<UserRole> randomMany(UserRoleRepository repository, int count) {
+	List<UserRole> items = new ArrayList<>();
+	for (int i = 0; i < count; i++) {
+	items.add(randomOne(repository));
+	}
+	return items;
+}
+
+public static void deleteAll(UserRoleRepository repository) {
+	repository.deleteAll();
+}
+
+public static CreateUserRoleCommand randomOneViaCommand(CommandGateway commandGateway) {
+		CreateUserRoleCommand command = new CreateUserRoleCommand(
+UserRoleUser.create(
+				UserFixtures.randomOneViaCommand(commandGateway).getId().value()),UserRoleRole.create(
+				RoleFixtures.randomOneViaCommand(commandGateway).getId().value())		);
+	 commandGateway.sendAndWait(command);
+
+	return command;
+}
+
+}

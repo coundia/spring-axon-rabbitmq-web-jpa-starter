@@ -1,11 +1,18 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+import java.util.ArrayList;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.*;
 
 @Getter
 @Setter
@@ -21,15 +28,24 @@ public class User {
 
 	@Column(nullable = false, unique = true)
 	private String username;
-
-	@Column(nullable = false)
+	@Column(nullable = false, unique = false)
 	private String password;
+	@Column(nullable = true, unique = true)
+	private String email;
+	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<UserRole> userRoles = new ArrayList<>();
+	public User(String id) {
+	this.id = id;
+}
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "user_roles",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id")
-	)
-	private Set<Role> roles = new HashSet<>();
+	@Override
+ public String toString() {
+	return "User{" +
+	"id='" + id + '\'' +
+		", username=" + username +
+		", password=" + password +
+		", email=" + email +
+		", userRoles=" + userRoles +
+	'}';
+	}
 }

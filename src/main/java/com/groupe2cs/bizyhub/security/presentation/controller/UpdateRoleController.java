@@ -1,0 +1,56 @@
+package com.groupe2cs.bizyhub.security.presentation.controller;
+
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.application.usecase.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import lombok.AllArgsConstructor;
+
+@RestController
+@RequestMapping("/api/v1/commands/role")
+@Tag(name = "Role commands", description = "Endpoints for managing roles")
+@Slf4j
+public class UpdateRoleController {
+
+private final RoleUpdateApplicationService applicationService;
+
+public UpdateRoleController(RoleUpdateApplicationService  applicationService) {
+this.applicationService = applicationService;
+}
+
+@Operation(summary = "Update a new role")
+@ApiResponses(value = {
+@ApiResponse(responseCode = "200", description = "Role Updated",
+content = @Content(mediaType = "application/json",
+schema = @Schema(implementation = RoleResponse.class))),
+@ApiResponse(responseCode = "500", description = "Internal server error",
+content = @Content)
+})
+@PutMapping(value="{id}",  consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<RoleResponse> updateRole(@PathVariable String id, @RequestBody RoleRequest request) { {
+	try {
+
+	RoleResponse response = applicationService.updateRole(RoleId.create(id), request);
+
+	return ResponseEntity.ok(response);
+
+	} catch (Exception ex) {
+	log.error("Failed to Update role: {}", ex.getMessage(), ex);
+	return ResponseEntity.internalServerError().build();
+	}
+	}
+}
+}

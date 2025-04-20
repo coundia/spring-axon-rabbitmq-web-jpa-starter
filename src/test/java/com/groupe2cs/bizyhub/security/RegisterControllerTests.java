@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.security;
-
+import com.groupe2cs.bizyhub.security.application.service.*;
+import com.groupe2cs.bizyhub.security.infrastructure.config.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
-import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,63 +24,63 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class RegisterControllerTests {
 
-	@Autowired
-	private MockMvc mockMvc;
+@Autowired
+private MockMvc mockMvc;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+@Autowired
+private ObjectMapper objectMapper;
 
-	@Autowired
-	private UserRepository userRepository;
+@Autowired
+private UserRepository userRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+@Autowired
+private PasswordEncoder passwordEncoder;
 
-	@BeforeEach
-	void setUp() {
-		userRepository.deleteAll();
-	}
+@BeforeEach
+void setUp() {
+userRepository.deleteAll();
+}
 
-	@Test
-	void it_should_register_user_and_return_token() throws Exception {
-		AuthRequestDto request = new AuthRequestDto();
-		request.setUsername("newuser");
-		request.setPassword("newpassword");
+@Test
+void it_should_register_user_and_return_token() throws Exception {
+AuthRequestDto request = new AuthRequestDto();
+request.setUsername("newuser");
+request.setPassword("newpassword");
 
-		String response = mockMvc.perform(post("/api/auth/register")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(request)))
-				.andExpect(status().isOk())
-				.andReturn().getResponse().getContentAsString();
+String response = mockMvc.perform(post("/api/auth/register")
+.contentType(MediaType.APPLICATION_JSON)
+.content(objectMapper.writeValueAsString(request)))
+.andExpect(status().isOk())
+.andReturn().getResponse().getContentAsString();
 
-		AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
-		assertThat(dto.getToken()).isNotNull();
-	}
+AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
+assertThat(dto.getToken()).isNotNull();
+}
 
-	@Test
-	void it_should_not_register_user_if_username_exists() throws Exception {
-		User user = User.builder()
-				.id(UUID.randomUUID().toString())
-				.username("admin")
-				.password(passwordEncoder.encode("admin"))
-				.build();
-		userRepository.save(user);
+@Test
+void it_should_not_register_user_if_username_exists() throws Exception {
+User user = User.builder()
+.id(UUID.randomUUID().toString())
+.username("admin")
+.password(passwordEncoder.encode("admin"))
+.build();
+userRepository.save(user);
 
-		AuthRequestDto request = new AuthRequestDto();
-		request.setUsername("admin");
-		request.setPassword("admin");
+AuthRequestDto request = new AuthRequestDto();
+request.setUsername("admin");
+request.setPassword("admin");
 
-		mockMvc.perform(post("/api/auth/register")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(request)))
-				.andExpect(status().isBadRequest());
-	}
+mockMvc.perform(post("/api/auth/register")
+.contentType(MediaType.APPLICATION_JSON)
+.content(objectMapper.writeValueAsString(request)))
+.andExpect(status().isBadRequest());
+}
 
-	@Test
-	void it_should_return_bad_request_when_input_invalid() throws Exception {
-		mockMvc.perform(post("/api/auth/register")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content("{}"))
-				.andExpect(status().isBadRequest());
-	}
+@Test
+void it_should_return_bad_request_when_input_invalid() throws Exception {
+mockMvc.perform(post("/api/auth/register")
+.contentType(MediaType.APPLICATION_JSON)
+.content("{}"))
+.andExpect(status().isBadRequest());
+}
 }
