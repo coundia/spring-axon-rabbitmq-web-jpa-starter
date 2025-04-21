@@ -1,13 +1,12 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import java.io.Serializable;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -22,7 +21,5 @@ public class UserResponse implements Serializable {
 	private String username;
 	@Schema(description = "", example = "")
 	private String password;
-	@Schema(description = "", example = "")
-	private String email;
 
 }

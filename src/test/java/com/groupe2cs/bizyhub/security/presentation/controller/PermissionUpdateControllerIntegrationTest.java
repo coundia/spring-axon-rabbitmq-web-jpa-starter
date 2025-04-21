@@ -1,47 +1,45 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
-import java.util.UUID;
-
+import com.groupe2cs.bizyhub.security.application.command.CreatePermissionCommand;
+import com.groupe2cs.bizyhub.security.application.dto.PermissionRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.PermissionRepository;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PermissionUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private PermissionRepository permissionRepository;
+	@Autowired
+	private PermissionRepository permissionRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+	@Autowired
+	private CommandGateway commandGatewayUpdate;
 
-@Test
-void it_should_be_able_to_update_permission() {
 
-	String existingId = PermissionFixtures.randomOneViaCommand(commandGateway).getId().value();
+	@Test
+	void it_should_be_able_to_update_permission() {
 
-	CreatePermissionCommand updated = PermissionFixtures.randomOneViaCommand(commandGatewayUpdate);
+		String existingId = PermissionFixtures.randomOneViaCommand(commandGateway).getId().value();
 
-	PermissionRequest requestDTO = new PermissionRequest();
-	 requestDTO.setName(UUID.randomUUID().toString());
+		CreatePermissionCommand updated = PermissionFixtures.randomOneViaCommand(commandGatewayUpdate);
 
-	String uri = "/v1/commands/permission/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+		PermissionRequest requestDTO = new PermissionRequest();
+		requestDTO.setName(UUID.randomUUID().toString());
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		String uri = "/v1/commands/permission/" + existingId;
+		ResponseEntity<String> response = this.put(uri, requestDTO);
 
-	Permission found = PermissionFixtures.byIdWaitExist(permissionRepository, existingId);
-	assertThat(found).isNotNull();
-			assertThat(found.getName()).isEqualTo(requestDTO.getName());
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 	}
 }

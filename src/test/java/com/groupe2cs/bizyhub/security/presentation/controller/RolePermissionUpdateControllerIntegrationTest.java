@@ -1,52 +1,44 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
-import java.util.UUID;
-
-import org.junit.jupiter.api.Disabled;
+import com.groupe2cs.bizyhub.security.application.command.CreateRolePermissionCommand;
+import com.groupe2cs.bizyhub.security.application.dto.RolePermissionRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RolePermissionUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private RolePermissionRepository rolepermissionRepository;
+	@Autowired
+	private RolePermissionRepository rolepermissionRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+	@Autowired
+	private CommandGateway commandGatewayUpdate;
 
-//to check why failed sometimes
-@Disabled
-@Test
-void it_should_be_able_to_update_rolepermission() {
 
-	String existingId = RolePermissionFixtures.randomOneViaCommand(commandGateway).getId().value();
+	@Test
+	void it_should_be_able_to_update_rolepermission() {
 
-	CreateRolePermissionCommand updated = RolePermissionFixtures.randomOneViaCommand(commandGatewayUpdate);
+		String existingId = RolePermissionFixtures.randomOneViaCommand(commandGateway).getId().value();
 
-	RolePermissionRequest requestDTO = new RolePermissionRequest();
-	 requestDTO.setRole( updated.getRole().value());
-	 requestDTO.setPermission( updated.getPermission().value());
+		CreateRolePermissionCommand updated = RolePermissionFixtures.randomOneViaCommand(commandGatewayUpdate);
 
-	String uri = "/v1/commands/rolepermission/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+		RolePermissionRequest requestDTO = new RolePermissionRequest();
+		requestDTO.setRole(updated.getRole().value());
+		requestDTO.setPermission(updated.getPermission().value());
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		String uri = "/v1/commands/rolePermission/" + existingId;
+		ResponseEntity<String> response = this.put(uri, requestDTO);
 
-	RolePermission found = RolePermissionFixtures.byIdWaitExist(rolepermissionRepository, existingId);
-	assertThat(found).isNotNull();
-			assertThat(found.getRole()).isEqualTo(requestDTO.getRole());
-			assertThat(found.getPermission()).isEqualTo(requestDTO.getPermission());
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 	}
 }

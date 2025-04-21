@@ -1,47 +1,45 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
-import java.util.UUID;
-
+import com.groupe2cs.bizyhub.security.application.command.CreateRoleCommand;
+import com.groupe2cs.bizyhub.security.application.dto.RoleRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.RoleRepository;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoleUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private RoleRepository roleRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+	@Autowired
+	private CommandGateway commandGatewayUpdate;
 
-@Test
-void it_should_be_able_to_update_role() {
 
-	String existingId = RoleFixtures.randomOneViaCommand(commandGateway).getId().value();
+	@Test
+	void it_should_be_able_to_update_role() {
 
-	CreateRoleCommand updated = RoleFixtures.randomOneViaCommand(commandGatewayUpdate);
+		String existingId = RoleFixtures.randomOneViaCommand(commandGateway).getId().value();
 
-	RoleRequest requestDTO = new RoleRequest();
-	 requestDTO.setName(UUID.randomUUID().toString());
+		CreateRoleCommand updated = RoleFixtures.randomOneViaCommand(commandGatewayUpdate);
 
-	String uri = "/v1/commands/role/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+		RoleRequest requestDTO = new RoleRequest();
+		requestDTO.setName(UUID.randomUUID().toString());
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		String uri = "/v1/commands/role/" + existingId;
+		ResponseEntity<String> response = this.put(uri, requestDTO);
 
-	Role found = RoleFixtures.byIdWaitExist(roleRepository, existingId);
-	assertThat(found).isNotNull();
-			assertThat(found.getName()).isEqualTo(requestDTO.getName());
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 	}
 }

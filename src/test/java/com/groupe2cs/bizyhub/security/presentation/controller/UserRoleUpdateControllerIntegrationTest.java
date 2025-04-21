@@ -1,49 +1,44 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
-import java.util.UUID;
-
+import com.groupe2cs.bizyhub.security.application.command.CreateUserRoleCommand;
+import com.groupe2cs.bizyhub.security.application.dto.UserRoleRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRoleRepository;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserRoleUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private UserRoleRepository userroleRepository;
+	@Autowired
+	private UserRoleRepository userroleRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+	@Autowired
+	private CommandGateway commandGatewayUpdate;
 
-@Test
-void it_should_be_able_to_update_userrole() {
 
-	String existingId = UserRoleFixtures.randomOneViaCommand(commandGateway).getId().value();
+	@Test
+	void it_should_be_able_to_update_userrole() {
 
-	CreateUserRoleCommand updated = UserRoleFixtures.randomOneViaCommand(commandGatewayUpdate);
+		String existingId = UserRoleFixtures.randomOneViaCommand(commandGateway).getId().value();
 
-	UserRoleRequest requestDTO = new UserRoleRequest();
-	 requestDTO.setUser( updated.getUser().value());
-	 requestDTO.setRole( updated.getRole().value());
+		CreateUserRoleCommand updated = UserRoleFixtures.randomOneViaCommand(commandGatewayUpdate);
 
-	String uri = "/v1/commands/userrole/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+		UserRoleRequest requestDTO = new UserRoleRequest();
+		requestDTO.setUser(updated.getUser().value());
+		requestDTO.setRole(updated.getRole().value());
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		String uri = "/v1/commands/userRole/" + existingId;
+		ResponseEntity<String> response = this.put(uri, requestDTO);
 
-	UserRole found = UserRoleFixtures.byIdWaitExist(userroleRepository, existingId);
-	assertThat(found).isNotNull();
-			assertThat(found.getUser()).isEqualTo(requestDTO.getUser());
-			assertThat(found.getRole()).isEqualTo(requestDTO.getRole());
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 	}
 }

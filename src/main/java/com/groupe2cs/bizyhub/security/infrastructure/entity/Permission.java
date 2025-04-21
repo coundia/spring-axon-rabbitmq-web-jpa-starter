@@ -1,15 +1,10 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-
-import java.util.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.*;
 
 @Getter
 @Setter
@@ -25,15 +20,16 @@ public class Permission {
 
 	@Column(nullable = false, unique = true)
 	private String name;
+
 	public Permission(String id) {
-	this.id = id;
-}
+		this.id = id;
+	}
 
 	@Override
- public String toString() {
-	return "Permission{" +
-	"id='" + id + '\'' +
-		", name=" + name +
-	'}';
+	public String toString() {
+		return "Permission{" +
+				"id='" + id + '\'' +
+				", name=" + name +
+				'}';
 	}
 }

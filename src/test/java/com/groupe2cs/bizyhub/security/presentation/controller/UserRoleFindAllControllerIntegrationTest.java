@@ -1,34 +1,35 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
-import java.util.UUID;
-
+import com.groupe2cs.bizyhub.security.application.dto.UserRolePagedResponse;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRoleRepository;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class UserRoleFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private UserRoleRepository userroleRepository;
+	@Autowired
+	private UserRoleRepository userroleRepository;
 
-@Test
-void it_should_be_able_to_get_all_userroles() {
-	UserRoleFixtures.randomMany(userroleRepository, 5);
+	@Autowired
+	private CommandGateway commandGateway;
 
-	String uri = "/v1/queries/list-userrole";
-	ResponseEntity<UserRolePagedResponse> response = this.getForEntity(uri, UserRolePagedResponse.class);
+	@Test
+	void it_should_be_able_to_get_all_userroles() {
+		List<?> list = UserRoleFixtures.randomManyViaCommand(commandGateway, 5);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-	assertThat(response.getBody()).isNotNull();
-	assertThat(response.getBody().getContent()).isNotEmpty();
+		String uri = "/v1/queries/userRoles";
+		ResponseEntity<UserRolePagedResponse> response = this.getForEntity(uri, UserRolePagedResponse.class);
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isNotNull();
+		assertThat(response.getBody().getContent()).isNotEmpty();
 	}
 }

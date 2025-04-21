@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
 
 public class FindByPermissionNameQuery {
 
-private final PermissionName  name;
+	private final PermissionName name;
 
-public FindByPermissionNameQuery( PermissionName name) {
-	this.name = name;
-}
+	public FindByPermissionNameQuery(PermissionName name) {
+		this.name = name;
+	}
 
-public PermissionName  getName() {
-return name;
-}
+	public PermissionName getName() {
+		return name;
+	}
 }
