@@ -18,7 +18,7 @@ public class Transaction {
 	@Id
 	private String id;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = true, unique = true)
 	private String reference;
 	@Column(nullable = false, unique = false)
 	private Double amount;
