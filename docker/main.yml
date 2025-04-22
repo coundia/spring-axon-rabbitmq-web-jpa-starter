@@ -18,3 +18,7 @@ services:
       file: ./rabbitmq.yml
       service: rabbitmq
 
+  maildev:
+    extends:
+      file: ./maildev.yml
+      service: maildev

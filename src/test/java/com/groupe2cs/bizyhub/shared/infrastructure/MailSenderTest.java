@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.shared.infrastructure;
 
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
+
 import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,7 +19,7 @@ public class MailSenderTest {
 
 		MailSender service = new MailSenderImpl(mailSender);
 
-		service.send("to@example.com", "subject", "content");
+		service.send("noreply@example.com", "to@example.com", "subject", "content");
 
 		verify(mailSender, times(1)).send(any(MimeMessage.class));
 	}
