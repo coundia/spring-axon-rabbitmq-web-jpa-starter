@@ -35,7 +35,7 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
 
 		TransactionRequest requestDTO = new TransactionRequest();
 		requestDTO.setReference(UUID.randomUUID().toString());
-		requestDTO.setAmount(7997.85);
+		requestDTO.setAmount(2948.58);
 
 		String uri = "/v1/commands/transaction/" + existingId;
 		ResponseEntity<String> response = this.put(uri, requestDTO);

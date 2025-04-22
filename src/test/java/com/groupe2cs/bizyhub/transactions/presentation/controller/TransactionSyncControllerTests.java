@@ -27,7 +27,7 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 				.deltas(List.of(
 						TransactionDeltaDto.builder()
 								.reference(UUID.randomUUID().toString())
-								.amount(5289.76)
+								.amount(1000.87)
 								.type("CREATE")
 								.build()
 				))
@@ -53,7 +53,7 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 						TransactionDeltaDto.builder()
 								.id(existingId)
 								.reference(UUID.randomUUID().toString())
-								.amount(5289.76)
+								.amount(1000.87)
 								.type("UPDATE")
 								.build()
 				))
