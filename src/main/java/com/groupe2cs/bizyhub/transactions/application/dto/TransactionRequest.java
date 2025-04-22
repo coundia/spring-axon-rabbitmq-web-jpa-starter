@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,10 +19,10 @@ import java.io.Serializable;
 @Schema(name = "TransactionRequest", description = "Request payload for Transaction operations")
 public class TransactionRequest implements Serializable {
 
-	@Schema(description = "", example = "d1edd28d-ef53-4b66-afe4-cfec5c510ab9")
+	@Schema(description = "", example = "d92dd41b-6ed4-4b2c-a4ed-2dd2704d11e3")
 	private String reference;
 
-	@Schema(description = "", example = "8898.91")
+	@Schema(description = "", example = "5664.63")
 	private Double amount;
 
 
