@@ -15,8 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
 	private final AuthenticationManager authenticationManager;
-	private final UserDetailsService userDetailsService;
 	private final JwtService jwtService;
 
 	@PostMapping("/login")
@@ -42,28 +40,21 @@ public class AuthController {
 			)
 	)
 	@ApiResponses(value = {
-			@ApiResponse(
-					responseCode = "200",
-					description = "Login successful",
-					content = @Content(schema = @Schema(implementation = AuthResponseDto.class))
-			),
-			@ApiResponse(
-					responseCode = "401",
-					description = "Unauthorized - invalid credentials",
-					content = @Content(schema = @Schema(implementation = AuthResponseDto.class))
-			)
+			@ApiResponse(responseCode = "200", description = "Login successful", content = @Content(schema = @Schema(implementation = AuthResponseDto.class))),
+			@ApiResponse(responseCode = "401", description = "Unauthorized - invalid credentials", content = @Content(schema = @Schema(implementation = AuthResponseDto.class)))
 	})
 	public ResponseEntity<AuthResponseDto> authenticate(@org.springframework.web.bind.annotation.RequestBody AuthRequestDto request) {
 		try {
-			authenticationManager.authenticate(
+			Authentication authentication = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
 			);
-			UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
-			String token = jwtService.generateToken(user);
+
+			String token = jwtService.generateToken(authentication);
+
 			return ResponseEntity.ok(
 					AuthResponseDto.builder()
 							.token(token)
-							.username(user.getUsername())
+							.username(authentication.getName())
 							.code(1)
 							.message("Login successful")
 							.build()

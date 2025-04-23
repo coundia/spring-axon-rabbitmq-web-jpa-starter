@@ -20,7 +20,7 @@ public class TransactionFixtures {
 		Transaction entity = new Transaction();
 		entity.setId(UUID.randomUUID().toString());
 		entity.setReference(UUID.randomUUID().toString());
-		entity.setAmount(6206.15);
+		entity.setAmount(223.78);
 		return repository.save(entity);
 	}
 
@@ -71,7 +71,7 @@ public class TransactionFixtures {
 		CreateTransactionCommand command = new CreateTransactionCommand(
 				TransactionReference.create(
 						UUID.randomUUID().toString()), TransactionAmount.create(
-				6206.15));
+				223.78));
 		commandGateway.sendAndWait(command);
 
 		return command;

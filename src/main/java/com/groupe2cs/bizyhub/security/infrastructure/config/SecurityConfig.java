@@ -1,11 +1,13 @@
 package com.groupe2cs.bizyhub.security.infrastructure.config;
 
 
+import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,15 +17,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @EnableMethodSecurity(prePostEnabled = true)
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-	private final JwtAuthenticationFilter jwtAuthFilter;
+	@Value("${security.jwt.secret:''}")
+	private String jwtKey;
 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -35,39 +47,49 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
 		http
-				.csrf(
-						csrf -> csrf.disable()
+				.csrf(csrf -> csrf.disable())
+				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(auth -> auth
+						.requestMatchers(
+								"/api/auth/**",
+								"/api/v1/status",
+								"/swagger-ui.html",
+								"/swagger-ui/**",
+								"/v3/api-docs/**",
+								"/v3/api-docs.yaml",
+								"/swagger-resources/**",
+								"/webjars/**"
+						).permitAll()
+						.anyRequest().authenticated()
 				)
-				.authorizeHttpRequests(
-						auth -> auth
-								.requestMatchers(
-										"/api/auth/**",
-										"/api/v1/status",
-										"/swagger-ui.html",
-										"/swagger-ui/**",
-										"/v3/api-docs/**",
-										"/v3/api-docs.yaml",
-										"/swagger-resources/**",
-										"/webjars/**"
-								).permitAll()
-								.anyRequest().authenticated()
-				)
-				.sessionManagement(
-						sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
+				.oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()));
 
 		return http.build();
 	}
 
 	@Bean
-	public OpenAPI customOpenAPI() {
+	public JwtDecoder jwtDecoder() {
+		return NimbusJwtDecoder
+				.withSecretKey(getSecretKey())
+				.macAlgorithm(MacAlgorithm.HS512)
+				.build();
+	}
 
+	@Bean
+	public JwtEncoder jwtEncoder() {
+		return new NimbusJwtEncoder(new ImmutableSecret<>(getSecretKey()));
+	}
+
+	private SecretKey getSecretKey() {
+		byte[] keyBytes = java.util.Base64.getDecoder().decode(jwtKey);
+		return new SecretKeySpec(keyBytes, "HmacSHA512");
+	}
+
+	@Bean
+	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
 				.info(new Info().title("API").version("1.0"))
 				.addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
@@ -78,6 +100,4 @@ public class SecurityConfig {
 										.scheme("bearer")
 										.bearerFormat("JWT")));
 	}
-
-
 }

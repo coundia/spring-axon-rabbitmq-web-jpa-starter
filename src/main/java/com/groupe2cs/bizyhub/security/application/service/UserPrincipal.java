@@ -19,15 +19,19 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (user == null || user.getUserRoles() == null) return Set.of();
 
 		return user.getUserRoles().stream()
 				.map(UserRole::getRole)
+				.filter(role -> role.getRolePermissions() != null)
 				.flatMap(role -> role.getRolePermissions().stream())
 				.map(rp -> new SimpleGrantedAuthority(rp.getPermission().getName()))
 				.collect(Collectors.toSet());
 	}
 
 	public Set<String> getRoles() {
+		if (user == null || user.getUserRoles() == null) return Set.of();
+
 		return user.getUserRoles().stream()
 				.map(UserRole::getRole)
 				.map(Role::getName)
@@ -36,12 +40,12 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return user.getPassword();
+		return user != null ? user.getPassword() : null;
 	}
 
 	@Override
 	public String getUsername() {
-		return user.getUsername();
+		return user != null ? user.getUsername() : null;
 	}
 
 	@Override
@@ -64,3 +68,4 @@ public class UserPrincipal implements UserDetails {
 		return true;
 	}
 }
+
