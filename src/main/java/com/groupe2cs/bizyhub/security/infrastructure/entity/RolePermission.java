@@ -1,17 +1,7 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-
-import java.util.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -31,16 +21,17 @@ public class RolePermission {
 	@ManyToOne
 	@JoinColumn(name = "permission_id", nullable = false)
 	private Permission permission;
+
 	public RolePermission(String id) {
-	this.id = id;
-}
+		this.id = id;
+	}
 
 	@Override
- public String toString() {
-	return "RolePermission{" +
-	"id='" + id + '\'' +
-		", role=" + role +
-		", permission=" + permission +
-	'}';
+	public String toString() {
+		return "RolePermission{" +
+				"id='" + id + '\'' +
+				", role=" + role +
+				", permission=" + permission +
+				'}';
 	}
 }

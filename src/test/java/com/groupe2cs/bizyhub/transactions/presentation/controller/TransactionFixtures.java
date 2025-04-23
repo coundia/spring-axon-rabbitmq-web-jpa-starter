@@ -16,65 +16,65 @@ import static org.awaitility.Awaitility.await;
 
 public class TransactionFixtures {
 
-public static Transaction randomOne(TransactionRepository repository) {
-	Transaction entity = new Transaction();
-	entity.setId(UUID.randomUUID().toString());
-			entity.setReference(UUID.randomUUID().toString());
-	entity.setAmount(2732.75);
-	return repository.save(entity);
-}
-
-public static Transaction existingOrRandom(TransactionRepository repository) {
-	return repository.findAll().stream().findFirst().orElseGet(() -> randomOne(repository));
-}
-
-public static Transaction byId(TransactionRepository repository, String id) {
-
-	return repository.findById(id).orElse(null);
-}
-
-public static Transaction byIdWaitExist(TransactionRepository repository, String id) {
-
-	await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-
-	return repository.findById(id).orElse(null);
-}
-
-public static Transaction byIdWaitNotExist(TransactionRepository repository, String id) {
-
-	await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-
-return repository.findById(id).orElse(null);
-}
-
-public static List<Transaction> randomMany(TransactionRepository repository, int count) {
-	List<Transaction> items = new ArrayList<>();
-	for (int i = 0; i < count; i++) {
-	items.add(randomOne(repository));
+	public static Transaction randomOne(TransactionRepository repository) {
+		Transaction entity = new Transaction();
+		entity.setId(UUID.randomUUID().toString());
+		entity.setReference(UUID.randomUUID().toString());
+		entity.setAmount(3914.41);
+		return repository.save(entity);
 	}
-	return items;
-}
 
-public static List<CreateTransactionCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
+	public static Transaction existingOrRandom(TransactionRepository repository) {
+		return repository.findAll().stream().findFirst().orElseGet(() -> randomOne(repository));
+	}
+
+	public static Transaction byId(TransactionRepository repository, String id) {
+
+		return repository.findById(id).orElse(null);
+	}
+
+	public static Transaction byIdWaitExist(TransactionRepository repository, String id) {
+
+		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
+
+		return repository.findById(id).orElse(null);
+	}
+
+	public static Transaction byIdWaitNotExist(TransactionRepository repository, String id) {
+
+		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
+
+		return repository.findById(id).orElse(null);
+	}
+
+	public static List<Transaction> randomMany(TransactionRepository repository, int count) {
+		List<Transaction> items = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			items.add(randomOne(repository));
+		}
+		return items;
+	}
+
+	public static List<CreateTransactionCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
 		List<CreateTransactionCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			items.add(randomOneViaCommand(commandGateway));
 		}
-	return items;
-}
+		return items;
+	}
 
-public static void deleteAll(TransactionRepository repository) {
-	repository.deleteAll();
-}
+	public static void deleteAll(TransactionRepository repository) {
+		repository.deleteAll();
+	}
 
-public static CreateTransactionCommand randomOneViaCommand(CommandGateway commandGateway) {
+	public static CreateTransactionCommand randomOneViaCommand(CommandGateway commandGateway) {
 		CreateTransactionCommand command = new CreateTransactionCommand(
-TransactionReference.create(
-				UUID.randomUUID().toString()),TransactionAmount.create(
-				2732.75));
-	 commandGateway.sendAndWait(command);
+				TransactionReference.create(
+						UUID.randomUUID().toString()), TransactionAmount.create(
+				3914.41));
+		commandGateway.sendAndWait(command);
 
-	return command;
-}
+		return command;
+	}
 
 }

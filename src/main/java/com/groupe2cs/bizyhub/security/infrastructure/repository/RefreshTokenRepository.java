@@ -1,6 +1,6 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.RefreshToken;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,10 +18,13 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
 
 	@Query("SELECT t FROM RefreshToken t WHERE t.id = :id")
 	Optional<RefreshToken> findById(RefreshToken id);
+
 	@Query("SELECT t FROM RefreshToken t WHERE t.token = :token")
 	Optional<RefreshToken> findByToken(String token);
+
 	@Query("SELECT t FROM RefreshToken t WHERE t.username = :username")
 	Optional<RefreshToken> findByUsername(String username);
+
 	@Query("SELECT t FROM RefreshToken t WHERE t.expiration = :expiration")
 	List<RefreshToken> findByExpiration(java.time.Instant expiration);
 

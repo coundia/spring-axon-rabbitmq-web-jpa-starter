@@ -24,81 +24,78 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class AuthControllerTests {
 
-@Autowired
-private MockMvc mockMvc;
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	@Autowired
+	private MockMvc mockMvc;
+	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
+	private UserRepository userRepository;
 
-@Autowired
-private ObjectMapper objectMapper;
+	@BeforeEach
+	void setUp() {
+		userRepository.deleteAll();
 
-@Autowired
-private UserRepository userRepository;
+		User user = User.builder()
+				.id(UUID.randomUUID().toString())
+				.username("admin")
+				.password(passwordEncoder.encode("admin"))
+				.build();
 
-@Autowired
-PasswordEncoder passwordEncoder;
+		userRepository.save(user);
+	}
 
-@BeforeEach
-void setUp() {
-userRepository.deleteAll();
+	@Test
+	void it_should_return_jwt_token_when_credentials_are_valid() throws Exception {
+		AuthRequestDto request = new AuthRequestDto();
+		request.setUsername("admin");
+		request.setPassword("admin");
 
-User user = User.builder()
-.id(UUID.randomUUID().toString())
-.username("admin")
-.password(passwordEncoder.encode("admin"))
-.build();
+		String response = mockMvc.perform(post("/api/auth/login")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(request)))
+				.andExpect(status().isOk())
+				.andReturn().getResponse().getContentAsString();
 
-userRepository.save(user);
-}
+		AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
+		assertThat(dto.getToken()).isNotNull();
+		assertThat(dto.getUsername()).isEqualTo("admin");
+		assertThat(dto.getCode()).isEqualTo(1);
+		assertThat(dto.getMessage()).isEqualTo("Login successful");
+		assertThat(dto.getExpirationAt()).isNotNull();
 
-@Test
-void it_should_return_jwt_token_when_credentials_are_valid() throws Exception {
-AuthRequestDto request = new AuthRequestDto();
-request.setUsername("admin");
-request.setPassword("admin");
+	}
 
-String response = mockMvc.perform(post("/api/auth/login")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(request)))
-.andExpect(status().isOk())
-.andReturn().getResponse().getContentAsString();
+	@Test
+	void it_should_return_unauthorized_when_user_not_exist() throws Exception {
+		AuthRequestDto request = new AuthRequestDto();
+		request.setUsername("unknown");
+		request.setPassword("admin");
 
-AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
-assertThat(dto.getToken()).isNotNull();
-assertThat(dto.getUsername()).isEqualTo("admin");
-assertThat(dto.getCode()).isEqualTo(1);
-assertThat(dto.getMessage()).isEqualTo("Login successful");
-assertThat(dto.getExpirationAt()).isNotNull();
+		mockMvc.perform(post("/api/auth/login")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(request)))
+				.andExpect(status().isUnauthorized());
+	}
 
-}
+	@Test
+	void it_should_return_unauthorized_when_password_invalid() throws Exception {
+		AuthRequestDto request = new AuthRequestDto();
+		request.setUsername("admin");
+		request.setPassword("wrong");
 
-@Test
-void it_should_return_unauthorized_when_user_not_exist() throws Exception {
-AuthRequestDto request = new AuthRequestDto();
-request.setUsername("unknown");
-request.setPassword("admin");
+		mockMvc.perform(post("/api/auth/login")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(request)))
+				.andExpect(status().isUnauthorized());
+	}
 
-mockMvc.perform(post("/api/auth/login")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(request)))
-.andExpect(status().isUnauthorized());
-}
-
-@Test
-void it_should_return_unauthorized_when_password_invalid() throws Exception {
-AuthRequestDto request = new AuthRequestDto();
-request.setUsername("admin");
-request.setPassword("wrong");
-
-mockMvc.perform(post("/api/auth/login")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(request)))
-.andExpect(status().isUnauthorized());
-}
-
-@Test
-void it_should_return_unauthorized_request_when_body_empty() throws Exception {
-mockMvc.perform(post("/api/auth/login")
-.contentType(MediaType.APPLICATION_JSON)
-.content("{}"))
-.andExpect(status().isUnauthorized());
-}
+	@Test
+	void it_should_return_unauthorized_request_when_body_empty() throws Exception {
+		mockMvc.perform(post("/api/auth/login")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content("{}"))
+				.andExpect(status().isUnauthorized());
+	}
 }

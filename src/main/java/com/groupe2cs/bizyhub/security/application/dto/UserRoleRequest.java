@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Schema(name = "UserRoleRequest", description = "Request payload for UserRole operations")
 public class UserRoleRequest implements Serializable {
 
-	@Schema(description = "", example = "6655d3f8-3c77-4e4e-9278-31118f53e611")
+	@Schema(description = "", example = "a714f91f-8789-4b71-a879-9a3efe65ddd2")
 	private String user;
 
-	@Schema(description = "", example = "c4963550-91e2-462b-a988-c8853e2d5212")
+	@Schema(description = "", example = "aa0c30dd-e491-4b69-a26a-ee9f222ec3a8")
 	private String role;
 
 

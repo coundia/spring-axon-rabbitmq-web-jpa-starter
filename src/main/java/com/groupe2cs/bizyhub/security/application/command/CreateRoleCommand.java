@@ -1,15 +1,11 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleId;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleName;
+import lombok.*;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-import java.util.Date;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import java.util.UUID;
 
 @Getter
@@ -18,17 +14,18 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class CreateRoleCommand implements Serializable {
-@TargetAggregateIdentifier
+	@TargetAggregateIdentifier
 	@Builder.Default
 	private RoleId id = RoleId.create(UUID.randomUUID().toString());
- 	private RoleName name;
+	private RoleName name;
+
 	public CreateRoleCommand(
- 
-   RoleName name  
-		){
-			this.id = RoleId.create(UUID.randomUUID().toString());
- 
-  this.name = name ; 
+
+			RoleName name
+	) {
+		this.id = RoleId.create(UUID.randomUUID().toString());
+
+		this.name = name;
 	}
 
 

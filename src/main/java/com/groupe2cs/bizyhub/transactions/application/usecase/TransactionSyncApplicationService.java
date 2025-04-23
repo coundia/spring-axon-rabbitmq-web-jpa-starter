@@ -21,22 +21,22 @@ public class TransactionSyncApplicationService {
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
 				case "CREATE" -> commandGateway.sendAndWait(
-					CreateTransactionCommand.builder()
+						CreateTransactionCommand.builder()
 								.reference(TransactionReference.create(d.getReference()))
 								.amount(TransactionAmount.create(d.getAmount()))
-						.build()
-		);
-		case "UPDATE" -> commandGateway.sendAndWait(
-					UpdateTransactionCommand.builder()
+								.build()
+				);
+				case "UPDATE" -> commandGateway.sendAndWait(
+						UpdateTransactionCommand.builder()
 								.id(TransactionId.create(d.getId()))
 								.reference(TransactionReference.create(d.getReference()))
 								.amount(TransactionAmount.create(d.getAmount()))
-						.build()
-		);
-		case "DELETE" -> commandGateway.sendAndWait(
-					DeleteTransactionCommand.builder()
-									.id(TransactionId.create(d.getId()) )
-									.build()
+								.build()
+				);
+				case "DELETE" -> commandGateway.sendAndWait(
+						DeleteTransactionCommand.builder()
+								.id(TransactionId.create(d.getId()))
+								.build()
 				);
 			}
 		}

@@ -15,18 +15,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Test
-void it_should_be_able_to_add_transaction() {
+	@Test
+	void it_should_be_able_to_add_transaction() {
 
 		TransactionRequest requestDTO = new TransactionRequest();
 
 		requestDTO.setReference(UUID.randomUUID().toString());
-	requestDTO.setAmount(1295.66);
+		requestDTO.setAmount(9226.4);
 
- 		String uri = "/v1/commands/transaction";
+		String uri = "/v1/commands/transaction";
 		ResponseEntity<TransactionResponse> response = this.postForEntity(uri, requestDTO, TransactionResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody()).isNotNull();

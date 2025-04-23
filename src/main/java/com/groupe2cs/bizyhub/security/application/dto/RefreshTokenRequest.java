@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Schema(name = "RefreshTokenRequest", description = "Request payload for RefreshToken operations")
 public class RefreshTokenRequest implements Serializable {
 
-	@Schema(description = "", example = "f91c8f38-befe-48a4-87a3-158e7d2930c7")
+	@Schema(description = "", example = "082b482c-d33d-4030-a73b-1ca7b502a4fa")
 	private String token;
 
-	@Schema(description = "", example = "31bc142f-6c60-483f-b3d3-1a60d86d4f86")
+	@Schema(description = "", example = "29541124-82da-4584-9489-4b46004b6f82")
 	private String username;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")

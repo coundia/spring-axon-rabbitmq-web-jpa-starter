@@ -18,39 +18,39 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RegisterUser {
 
-private final UserRepository userRepository;
-private final PasswordEncoder passwordEncoder;
-private final JwtService jwtService;
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
 
-public AuthResponseDto handle(AuthRequestDto request) {
-if (userRepository.findByUsername(request.getUsername()).isPresent()) {
-throw new IllegalArgumentException("Username already exists");
-}
+	public AuthResponseDto handle(AuthRequestDto request) {
+		if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+			throw new IllegalArgumentException("Username already exists");
+		}
 
-User user = User.builder()
-.id(UUID.randomUUID().toString())
-.username(request.getUsername())
-.password(passwordEncoder.encode(request.getPassword()))
-.build();
+		User user = User.builder()
+				.id(UUID.randomUUID().toString())
+				.username(request.getUsername())
+				.password(passwordEncoder.encode(request.getPassword()))
+				.build();
 
-userRepository.save(user);
+		userRepository.save(user);
 
-Authentication authentication = new UsernamePasswordAuthenticationToken(
-user.getUsername(),
-null,
-List.of(new SimpleGrantedAuthority("ROLE_USER"))
-);
+		Authentication authentication = new UsernamePasswordAuthenticationToken(
+				user.getUsername(),
+				null,
+				List.of(new SimpleGrantedAuthority("ROLE_USER"))
+		);
 
-String token = jwtService.generateToken(authentication);
+		String token = jwtService.generateToken(authentication);
 
-return AuthResponseDto.builder()
-.token(token)
-.username(user.getUsername())
-.code(1)
-.expirationAt(jwtService.extractExpiration(token))
-.message("Login successful")
-.build();
-}
+		return AuthResponseDto.builder()
+				.token(token)
+				.username(user.getUsername())
+				.code(1)
+				.expirationAt(jwtService.extractExpiration(token))
+				.message("Login successful")
+				.build();
+	}
 }
 
 

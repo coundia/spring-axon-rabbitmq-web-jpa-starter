@@ -18,47 +18,49 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class RefreshTokenReadApplicationService {
 
-private final QueryGateway queryGateway;
+	private final QueryGateway queryGateway;
 
 
-public RefreshTokenPagedResponse findAll(int page, int limit) {
+	public RefreshTokenPagedResponse findAll(int page, int limit) {
 
-	FindAllRefreshTokenQuery query = new FindAllRefreshTokenQuery(page, limit);
-	CompletableFuture<RefreshTokenPagedResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RefreshTokenPagedResponse.class));
-	return future.join();
-}
-
-
-public RefreshTokenResponse findByRefreshTokenId(RefreshTokenId value) {
-
-	FindByRefreshTokenIdQuery query = new FindByRefreshTokenIdQuery(value);
-	CompletableFuture<RefreshTokenResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RefreshTokenResponse.class));
-	return future.join();
-}
+		FindAllRefreshTokenQuery query = new FindAllRefreshTokenQuery(page, limit);
+		CompletableFuture<RefreshTokenPagedResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RefreshTokenPagedResponse.class));
+		return future.join();
+	}
 
 
-public List<RefreshTokenResponse> findByRefreshTokenToken(RefreshTokenToken value) {
+	public RefreshTokenResponse findByRefreshTokenId(RefreshTokenId value) {
 
-	FindByRefreshTokenTokenQuery query = new FindByRefreshTokenTokenQuery(value);
-	CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
-	return future.join();
-}
-public List<RefreshTokenResponse> findByRefreshTokenUsername(RefreshTokenUsername value) {
+		FindByRefreshTokenIdQuery query = new FindByRefreshTokenIdQuery(value);
+		CompletableFuture<RefreshTokenResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RefreshTokenResponse.class));
+		return future.join();
+	}
 
-	FindByRefreshTokenUsernameQuery query = new FindByRefreshTokenUsernameQuery(value);
-	CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
-	return future.join();
-}
-public List<RefreshTokenResponse> findByRefreshTokenExpiration(RefreshTokenExpiration value) {
 
-	FindByRefreshTokenExpirationQuery query = new FindByRefreshTokenExpirationQuery(value);
-	CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
-	return future.join();
-}
+	public List<RefreshTokenResponse> findByRefreshTokenToken(RefreshTokenToken value) {
+
+		FindByRefreshTokenTokenQuery query = new FindByRefreshTokenTokenQuery(value);
+		CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
+		return future.join();
+	}
+
+	public List<RefreshTokenResponse> findByRefreshTokenUsername(RefreshTokenUsername value) {
+
+		FindByRefreshTokenUsernameQuery query = new FindByRefreshTokenUsernameQuery(value);
+		CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
+		return future.join();
+	}
+
+	public List<RefreshTokenResponse> findByRefreshTokenExpiration(RefreshTokenExpiration value) {
+
+		FindByRefreshTokenExpirationQuery query = new FindByRefreshTokenExpirationQuery(value);
+		CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
+		return future.join();
+	}
 
 }

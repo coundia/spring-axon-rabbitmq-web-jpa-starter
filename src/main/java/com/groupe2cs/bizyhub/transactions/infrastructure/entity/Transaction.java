@@ -1,15 +1,10 @@
 package com.groupe2cs.bizyhub.transactions.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-
-import java.util.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.*;
 
 @Getter
 @Setter
@@ -27,16 +22,17 @@ public class Transaction {
 	private String reference;
 	@Column(nullable = false, unique = false)
 	private Double amount;
+
 	public Transaction(String id) {
-	this.id = id;
-}
+		this.id = id;
+	}
 
 	@Override
- public String toString() {
-	return "Transaction{" +
-	"id='" + id + '\'' +
-		", reference=" + reference +
-		", amount=" + amount +
-	'}';
+	public String toString() {
+		return "Transaction{" +
+				"id='" + id + '\'' +
+				", reference=" + reference +
+				", amount=" + amount +
+				'}';
 	}
 }

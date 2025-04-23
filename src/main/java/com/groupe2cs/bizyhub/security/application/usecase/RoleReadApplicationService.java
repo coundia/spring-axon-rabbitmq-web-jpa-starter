@@ -18,33 +18,33 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class RoleReadApplicationService {
 
-private final QueryGateway queryGateway;
+	private final QueryGateway queryGateway;
 
 
-public RolePagedResponse findAll(int page, int limit) {
+	public RolePagedResponse findAll(int page, int limit) {
 
-	FindAllRoleQuery query = new FindAllRoleQuery(page, limit);
-	CompletableFuture<RolePagedResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RolePagedResponse.class));
-	return future.join();
-}
-
-
-public RoleResponse findByRoleId(RoleId value) {
-
-	FindByRoleIdQuery query = new FindByRoleIdQuery(value);
-	CompletableFuture<RoleResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RoleResponse.class));
-	return future.join();
-}
+		FindAllRoleQuery query = new FindAllRoleQuery(page, limit);
+		CompletableFuture<RolePagedResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RolePagedResponse.class));
+		return future.join();
+	}
 
 
-public List<RoleResponse> findByRoleName(RoleName value) {
+	public RoleResponse findByRoleId(RoleId value) {
 
-	FindByRoleNameQuery query = new FindByRoleNameQuery(value);
-	CompletableFuture<List<RoleResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RoleResponse.class));
-	return future.join();
-}
+		FindByRoleIdQuery query = new FindByRoleIdQuery(value);
+		CompletableFuture<RoleResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RoleResponse.class));
+		return future.join();
+	}
+
+
+	public List<RoleResponse> findByRoleName(RoleName value) {
+
+		FindByRoleNameQuery query = new FindByRoleNameQuery(value);
+		CompletableFuture<List<RoleResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RoleResponse.class));
+		return future.join();
+	}
 
 }

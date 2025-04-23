@@ -18,33 +18,33 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class PermissionReadApplicationService {
 
-private final QueryGateway queryGateway;
+	private final QueryGateway queryGateway;
 
 
-public PermissionPagedResponse findAll(int page, int limit) {
+	public PermissionPagedResponse findAll(int page, int limit) {
 
-	FindAllPermissionQuery query = new FindAllPermissionQuery(page, limit);
-	CompletableFuture<PermissionPagedResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(PermissionPagedResponse.class));
-	return future.join();
-}
-
-
-public PermissionResponse findByPermissionId(PermissionId value) {
-
-	FindByPermissionIdQuery query = new FindByPermissionIdQuery(value);
-	CompletableFuture<PermissionResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(PermissionResponse.class));
-	return future.join();
-}
+		FindAllPermissionQuery query = new FindAllPermissionQuery(page, limit);
+		CompletableFuture<PermissionPagedResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(PermissionPagedResponse.class));
+		return future.join();
+	}
 
 
-public List<PermissionResponse> findByPermissionName(PermissionName value) {
+	public PermissionResponse findByPermissionId(PermissionId value) {
 
-	FindByPermissionNameQuery query = new FindByPermissionNameQuery(value);
-	CompletableFuture<List<PermissionResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(PermissionResponse.class));
-	return future.join();
-}
+		FindByPermissionIdQuery query = new FindByPermissionIdQuery(value);
+		CompletableFuture<PermissionResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(PermissionResponse.class));
+		return future.join();
+	}
+
+
+	public List<PermissionResponse> findByPermissionName(PermissionName value) {
+
+		FindByPermissionNameQuery query = new FindByPermissionNameQuery(value);
+		CompletableFuture<List<PermissionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(PermissionResponse.class));
+		return future.join();
+	}
 
 }

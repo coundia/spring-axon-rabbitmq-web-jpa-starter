@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TransactionCreateApplicationService {
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public TransactionResponse createTransaction(TransactionRequest request){
+	public TransactionResponse createTransaction(TransactionRequest request) {
 
-CreateTransactionCommand command = TransactionMapper.toCommand(
-request
-);
-commandGateway.sendAndWait(command);
-return TransactionMapper.toResponse(command);
-}
+		CreateTransactionCommand command = TransactionMapper.toCommand(
+				request
+		);
+		commandGateway.sendAndWait(command);
+		return TransactionMapper.toResponse(command);
+	}
 
 
 }

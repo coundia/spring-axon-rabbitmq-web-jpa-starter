@@ -16,31 +16,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private TransactionRepository transactionRepository;
+	@Autowired
+	private TransactionRepository transactionRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+	@Autowired
+	private CommandGateway commandGatewayUpdate;
 
 
-@Test
-void it_should_be_able_to_update_transaction() {
+	@Test
+	void it_should_be_able_to_update_transaction() {
 
-	String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
 
-	CreateTransactionCommand updated = TransactionFixtures.randomOneViaCommand(commandGatewayUpdate);
+		CreateTransactionCommand updated = TransactionFixtures.randomOneViaCommand(commandGatewayUpdate);
 
-	TransactionRequest requestDTO = new TransactionRequest();
-	 requestDTO.setReference(UUID.randomUUID().toString());
-	requestDTO.setAmount(3801.86);
+		TransactionRequest requestDTO = new TransactionRequest();
+		requestDTO.setReference(UUID.randomUUID().toString());
+		requestDTO.setAmount(3608.8);
 
-	String uri = "/v1/commands/transaction/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+		String uri = "/v1/commands/transaction/" + existingId;
+		ResponseEntity<String> response = this.put(uri, requestDTO);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 	}
 }

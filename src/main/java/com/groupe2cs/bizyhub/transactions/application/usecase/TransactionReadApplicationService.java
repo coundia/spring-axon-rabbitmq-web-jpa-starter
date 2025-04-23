@@ -20,40 +20,41 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class TransactionReadApplicationService {
 
-private final QueryGateway queryGateway;
+	private final QueryGateway queryGateway;
 
 
-public TransactionPagedResponse findAll(int page, int limit) {
+	public TransactionPagedResponse findAll(int page, int limit) {
 
-	FindAllTransactionQuery query = new FindAllTransactionQuery(page, limit);
-	CompletableFuture<TransactionPagedResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(TransactionPagedResponse.class));
-	return future.join();
-}
-
-
-public TransactionResponse findByTransactionId(TransactionId value) {
-
-	FindByTransactionIdQuery query = new FindByTransactionIdQuery(value);
-	CompletableFuture<TransactionResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(TransactionResponse.class));
-	return future.join();
-}
+		FindAllTransactionQuery query = new FindAllTransactionQuery(page, limit);
+		CompletableFuture<TransactionPagedResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(TransactionPagedResponse.class));
+		return future.join();
+	}
 
 
-public List<TransactionResponse> findByTransactionReference(TransactionReference value) {
+	public TransactionResponse findByTransactionId(TransactionId value) {
 
-	FindByTransactionReferenceQuery query = new FindByTransactionReferenceQuery(value);
-	CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
-	return future.join();
-}
-public List<TransactionResponse> findByTransactionAmount(TransactionAmount value) {
+		FindByTransactionIdQuery query = new FindByTransactionIdQuery(value);
+		CompletableFuture<TransactionResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(TransactionResponse.class));
+		return future.join();
+	}
 
-	FindByTransactionAmountQuery query = new FindByTransactionAmountQuery(value);
-	CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
-	return future.join();
-}
+
+	public List<TransactionResponse> findByTransactionReference(TransactionReference value) {
+
+		FindByTransactionReferenceQuery query = new FindByTransactionReferenceQuery(value);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionAmount(TransactionAmount value) {
+
+		FindByTransactionAmountQuery query = new FindByTransactionAmountQuery(value);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
 
 }

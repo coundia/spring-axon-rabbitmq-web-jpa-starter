@@ -13,16 +13,16 @@ import java.io.Serializable;
 @Schema(name = "TransactionDeltaDto", description = "Delta DTO for transaction changes")
 public class TransactionDeltaDto implements Serializable {
 
-    @Schema(description = "Identifier of the transaction", example = "uuid")
-    private String id;
+	@Schema(description = "Identifier of the transaction", example = "uuid")
+	private String id;
 
-    @Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
+	@Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
 	@Builder.Default
-    private String type = "CREATE";
+	private String type = "CREATE";
 
-	@Schema(description = "", example = "fbdf0ec4-0a38-41de-a1db-e5a37b799a43")
-		private String reference;
-	@Schema(description = "", example = "4367.65")
-		private Double amount;
+	@Schema(description = "", example = "bc189bf6-c586-433f-bb89-b0fdde8fce70")
+	private String reference;
+	@Schema(description = "", example = "6959.8")
+	private Double amount;
 
 }

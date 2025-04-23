@@ -15,54 +15,57 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class ApiKeyReadApplicationService {
 
-private final QueryGateway queryGateway;
+	private final QueryGateway queryGateway;
 
 
-public ApiKeyPagedResponse findAll(int page, int limit) {
+	public ApiKeyPagedResponse findAll(int page, int limit) {
 
-	FindAllApiKeyQuery query = new FindAllApiKeyQuery(page, limit);
-	CompletableFuture<ApiKeyPagedResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(ApiKeyPagedResponse.class));
-	return future.join();
-}
-
-
-public ApiKeyResponse findByApiKeyId(ApiKeyId value) {
-
-	FindByApiKeyIdQuery query = new FindByApiKeyIdQuery(value);
-	CompletableFuture<ApiKeyResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(ApiKeyResponse.class));
-	return future.join();
-}
+		FindAllApiKeyQuery query = new FindAllApiKeyQuery(page, limit);
+		CompletableFuture<ApiKeyPagedResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(ApiKeyPagedResponse.class));
+		return future.join();
+	}
 
 
-public List<ApiKeyResponse> findByApiKeyKey(ApiKeyKey value) {
+	public ApiKeyResponse findByApiKeyId(ApiKeyId value) {
 
-	FindByApiKeyKeyQuery query = new FindByApiKeyKeyQuery(value);
-	CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
-	return future.join();
-}
-public List<ApiKeyResponse> findByApiKeyUsername(ApiKeyUsername value) {
+		FindByApiKeyIdQuery query = new FindByApiKeyIdQuery(value);
+		CompletableFuture<ApiKeyResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(ApiKeyResponse.class));
+		return future.join();
+	}
 
-	FindByApiKeyUsernameQuery query = new FindByApiKeyUsernameQuery(value);
-	CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
-	return future.join();
-}
-public List<ApiKeyResponse> findByApiKeyCreatedAt(ApiKeyCreatedAt value) {
 
-	FindByApiKeyCreatedAtQuery query = new FindByApiKeyCreatedAtQuery(value);
-	CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
-	return future.join();
-}
-public List<ApiKeyResponse> findByApiKeyExpiration(ApiKeyExpiration value) {
+	public List<ApiKeyResponse> findByApiKeyKey(ApiKeyKey value) {
 
-	FindByApiKeyExpirationQuery query = new FindByApiKeyExpirationQuery(value);
-	CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
-	return future.join();
-}
+		FindByApiKeyKeyQuery query = new FindByApiKeyKeyQuery(value);
+		CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
+		return future.join();
+	}
+
+	public List<ApiKeyResponse> findByApiKeyUsername(ApiKeyUsername value) {
+
+		FindByApiKeyUsernameQuery query = new FindByApiKeyUsernameQuery(value);
+		CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
+		return future.join();
+	}
+
+	public List<ApiKeyResponse> findByApiKeyCreatedAt(ApiKeyCreatedAt value) {
+
+		FindByApiKeyCreatedAtQuery query = new FindByApiKeyCreatedAtQuery(value);
+		CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
+		return future.join();
+	}
+
+	public List<ApiKeyResponse> findByApiKeyExpiration(ApiKeyExpiration value) {
+
+		FindByApiKeyExpirationQuery query = new FindByApiKeyExpirationQuery(value);
+		CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
+		return future.join();
+	}
 
 }
