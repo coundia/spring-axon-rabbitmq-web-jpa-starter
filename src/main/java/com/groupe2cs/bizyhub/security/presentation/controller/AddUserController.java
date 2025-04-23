@@ -1,22 +1,23 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.application.dto.UserRequest;
-import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
-import com.groupe2cs.bizyhub.security.application.usecase.UserCreateApplicationService;
+import com.groupe2cs.bizyhub.security.application.usecase.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.extern.slf4j.Slf4j;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
 
 @PreAuthorize("@userGate.canCreate(authentication)")
 
@@ -27,37 +28,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class AddUserController {
 
-	private final UserCreateApplicationService applicationService;
+private final UserCreateApplicationService applicationService;
 
-	public AddUserController(UserCreateApplicationService applicationService) {
-		this.applicationService = applicationService;
+public AddUserController(UserCreateApplicationService applicationService) {
+	this.applicationService = applicationService;
+}
+
+@PostMapping
+@Operation(
+summary = "Create a new user",
+description = "Creates a new user and returns the created entity",
+requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+description = "User request payload",
+required = true,
+content = @Content(schema = @Schema(implementation = UserRequest.class))
+)
+)
+@ApiResponses(value = {
+@ApiResponse(responseCode = "200", description = "Successfully created",
+content = @Content(schema = @Schema(implementation = UserResponse.class))),
+@ApiResponse(responseCode = "500", description = "Internal server error",
+content = @Content(schema = @Schema()))
+})
+public ResponseEntity<UserResponse> addUser(@Valid @RequestBody UserRequest request) {
+	try {
+
+	UserResponse response =  applicationService.createUser(request);
+
+	return ResponseEntity.ok(response);
+	} catch (Exception ex) {
+	log.error("Failed to create user: {}", ex.getMessage());
+	return ResponseEntity.status(500).build();
 	}
-
-	@PostMapping
-	@Operation(
-			summary = "Create a new user",
-			description = "Creates a new user and returns the created entity",
-			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-					description = "User request payload",
-					required = true,
-					content = @Content(schema = @Schema(implementation = UserRequest.class))
-			)
-	)
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Successfully created",
-					content = @Content(schema = @Schema(implementation = UserResponse.class))),
-			@ApiResponse(responseCode = "500", description = "Internal server error",
-					content = @Content(schema = @Schema()))
-	})
-	public ResponseEntity<UserResponse> addUser(@Valid @RequestBody UserRequest request) {
-		try {
-
-			UserResponse response = applicationService.createUser(request);
-
-			return ResponseEntity.ok(response);
-		} catch (Exception ex) {
-			log.error("Failed to create user: {}", ex.getMessage());
-			return ResponseEntity.status(500).build();
-		}
-	}
+}
 }

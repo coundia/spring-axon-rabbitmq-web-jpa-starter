@@ -21,40 +21,38 @@ import static org.mockito.Mockito.verify;
 
 public class CreateTransactionCommandTest extends BaseUnitTests {
 
-	@Mock
-	private CommandGateway commandGateway;
+@Mock
+private CommandGateway commandGateway;
 
-	@Test
-	void it_should_send_command_to_command_gateway() {
-		CreateTransactionCommand command = new CreateTransactionCommand(
-				TransactionId.create(UUID.randomUUID().toString()),
-				TransactionReference.create(UUID.randomUUID().toString()),
-				TransactionAmount.create(4114.28)
-		);
-		commandGateway.send(command);
+@Test
+void it_should_send_command_to_command_gateway() {
+CreateTransactionCommand command = new CreateTransactionCommand(
+		TransactionId.create(UUID.randomUUID().toString()),
+		TransactionReference.create(UUID.randomUUID().toString()),
+		TransactionAmount.create(5246.68)
+);
+commandGateway.send(command);
 
-		ArgumentCaptor<CreateTransactionCommand>
-				commandCaptor =
-				ArgumentCaptor.forClass(CreateTransactionCommand.class);
-		verify(commandGateway, times(1)).send(commandCaptor.capture());
+ArgumentCaptor<CreateTransactionCommand> commandCaptor = ArgumentCaptor.forClass(CreateTransactionCommand.class);
+verify(commandGateway, times(1)).send(commandCaptor.capture());
 
-		CreateTransactionCommand sentCommand = commandCaptor.getValue();
-		assertThat(sentCommand.getId().value()).isEqualTo(
-				command.getId().value());
-		assertThat(sentCommand.getReference().value()).isEqualTo(
-				command.getReference().value());
-		assertThat(sentCommand.getAmount().value()).isEqualTo(
-				command.getAmount().value());
-	}
+CreateTransactionCommand sentCommand = commandCaptor.getValue();
+assertThat(sentCommand.getId().value()).isEqualTo(
+command.getId().value());
+assertThat(sentCommand.getReference().value()).isEqualTo(
+command.getReference().value());
+assertThat(sentCommand.getAmount().value()).isEqualTo(
+command.getAmount().value());
+}
 
-	@Test
-	void test_event_serialization() throws JsonProcessingException {
-		TransactionCreatedEvent
-				event =
-				new TransactionCreatedEvent(TransactionId.create(UUID.randomUUID().toString()),
-						TransactionReference.create(UUID.randomUUID().toString()),
-						TransactionAmount.create(4114.28));
-		String json = new ObjectMapper().writeValueAsString(event);
-		assertThat(json).isNotEmpty();
-	}
+@Test
+void test_event_serialization() throws JsonProcessingException {
+	TransactionCreatedEvent
+			event =
+			new TransactionCreatedEvent(TransactionId.create(UUID.randomUUID().toString()),
+					TransactionReference.create(UUID.randomUUID().toString()),
+					TransactionAmount.create(5246.68));
+String json = new ObjectMapper().writeValueAsString(event);
+assertThat(json).isNotEmpty();
+}
 }

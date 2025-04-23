@@ -1,13 +1,15 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
-import lombok.*;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import java.util.Date;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import java.util.UUID;
 
 @Getter
@@ -16,24 +18,23 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class CreatePasswordResetCommand implements Serializable {
-	@TargetAggregateIdentifier
+@TargetAggregateIdentifier
 	@Builder.Default
 	private PasswordResetId id = PasswordResetId.create(UUID.randomUUID().toString());
-	private PasswordResetToken token;
-	private PasswordResetUsername username;
-	private PasswordResetExpiration expiration;
-
+ 	private PasswordResetToken token;
+ 	private PasswordResetUsername username;
+ 	private PasswordResetExpiration expiration;
 	public CreatePasswordResetCommand(
-
-			PasswordResetToken token,
-			PasswordResetUsername username,
-			PasswordResetExpiration expiration
-	) {
-		this.id = PasswordResetId.create(UUID.randomUUID().toString());
-
-		this.token = token;
-		this.username = username;
-		this.expiration = expiration;
+ 
+   PasswordResetToken token , 
+   PasswordResetUsername username , 
+   PasswordResetExpiration expiration  
+		){
+			this.id = PasswordResetId.create(UUID.randomUUID().toString());
+ 
+  this.token = token ; 
+  this.username = username ; 
+  this.expiration = expiration ; 
 	}
 
 

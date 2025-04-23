@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Schema(name = "RoleRequest", description = "Request payload for Role operations")
 public class RoleRequest implements Serializable {
 
-	@Schema(description = "", example = "1b6efd90-ce33-4359-86d4-46537a33848c")
+	@Schema(description = "", example = "0313b4f7-bfaf-4b21-bc34-9e4e12dd826f")
 	private String name;
 
 

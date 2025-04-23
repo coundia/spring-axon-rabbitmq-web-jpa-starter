@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.infrastructure.config;
 
 
+
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -34,70 +35,70 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-	@Value("${security.jwt.secret:''}")
-	private String jwtKey;
+@Value("${security.jwt.secret:''}")
+private String jwtKey;
 
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-		return config.getAuthenticationManager();
-	}
+@Bean
+public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+return config.getAuthenticationManager();
+}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+@Bean
+public PasswordEncoder passwordEncoder() {
+return new BCryptPasswordEncoder();
+}
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-				.csrf(csrf -> csrf.disable())
-				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(auth -> auth
-						.requestMatchers(
-								"/api/auth/**",
-								"/api/v1/status",
-								"/swagger-ui.html",
-								"/swagger-ui/**",
-								"/v3/api-docs/**",
-								"/v3/api-docs.yaml",
-								"/swagger-resources/**",
-								"/webjars/**"
-						).permitAll()
-						.anyRequest().authenticated()
-				)
-				.oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()));
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+http
+.csrf(csrf -> csrf.disable())
+.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+.authorizeHttpRequests(auth -> auth
+.requestMatchers(
+"/api/auth/**",
+"/api/v1/status",
+"/swagger-ui.html",
+"/swagger-ui/**",
+"/v3/api-docs/**",
+"/v3/api-docs.yaml",
+"/swagger-resources/**",
+"/webjars/**"
+).permitAll()
+.anyRequest().authenticated()
+)
+.oauth2ResourceServer(oauth2 ->  oauth2.jwt(withDefaults()));
 
-		return http.build();
-	}
+return http.build();
+}
 
-	@Bean
-	public JwtDecoder jwtDecoder() {
-		return NimbusJwtDecoder
-				.withSecretKey(getSecretKey())
-				.macAlgorithm(MacAlgorithm.HS512)
-				.build();
-	}
+@Bean
+public JwtDecoder jwtDecoder() {
+return NimbusJwtDecoder
+.withSecretKey(getSecretKey())
+.macAlgorithm(MacAlgorithm.HS512)
+.build();
+}
 
-	@Bean
-	public JwtEncoder jwtEncoder() {
-		return new NimbusJwtEncoder(new ImmutableSecret<>(getSecretKey()));
-	}
+@Bean
+public JwtEncoder jwtEncoder() {
+return new NimbusJwtEncoder(new ImmutableSecret<>(getSecretKey()));
+}
 
-	private SecretKey getSecretKey() {
-		byte[] keyBytes = java.util.Base64.getDecoder().decode(jwtKey);
-		return new SecretKeySpec(keyBytes, "HmacSHA512");
-	}
+private SecretKey getSecretKey() {
+byte[] keyBytes = java.util.Base64.getDecoder().decode(jwtKey);
+return new SecretKeySpec(keyBytes, "HmacSHA512");
+}
 
-	@Bean
-	public OpenAPI customOpenAPI() {
-		return new OpenAPI()
-				.info(new Info().title("API").version("1.0"))
-				.addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
-				.components(new io.swagger.v3.oas.models.Components()
-						.addSecuritySchemes("bearerAuth",
-								new SecurityScheme()
-										.type(SecurityScheme.Type.HTTP)
-										.scheme("bearer")
-										.bearerFormat("JWT")));
-	}
+@Bean
+public OpenAPI customOpenAPI() {
+return new OpenAPI()
+.info(new Info().title("API").version("1.0"))
+.addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+.components(new io.swagger.v3.oas.models.Components()
+.addSecuritySchemes("bearerAuth",
+new SecurityScheme()
+.type(SecurityScheme.Type.HTTP)
+.scheme("bearer")
+.bearerFormat("JWT")));
+}
 }

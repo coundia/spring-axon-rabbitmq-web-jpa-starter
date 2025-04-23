@@ -1,30 +1,33 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import java.util.UUID;
 
-import com.groupe2cs.bizyhub.security.application.dto.UserRoleRequest;
-import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
-import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
-import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserRoleCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-	@Autowired
-	private CommandGateway commandGateway;
+@Autowired
+private CommandGateway commandGateway;
 
-	@Test
-	void it_should_be_able_to_add_userrole() {
+@Test
+void it_should_be_able_to_add_userrole() {
 
 		UserRoleRequest requestDTO = new UserRoleRequest();
 
 		requestDTO.setUser(UserFixtures.randomOneViaCommand(commandGateway).getId().value());
 		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway).getId().value());
 
-		String uri = "/v1/commands/userRole";
+ 		String uri = "/v1/commands/userRole";
 		ResponseEntity<UserRoleResponse> response = this.postForEntity(uri, requestDTO, UserRoleResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody()).isNotNull();

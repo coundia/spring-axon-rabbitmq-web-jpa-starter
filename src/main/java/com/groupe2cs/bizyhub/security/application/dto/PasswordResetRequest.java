@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Schema(name = "PasswordResetRequest", description = "Request payload for PasswordReset operations")
 public class PasswordResetRequest implements Serializable {
 
-	@Schema(description = "", example = "1f3a04a7-a41c-4498-aea4-73805b1fbdcb")
+	@Schema(description = "", example = "d02c9018-7794-4044-9281-e7eb3f5c603f")
 	private String token;
 
-	@Schema(description = "", example = "6f4dc22b-4a57-4fcf-b37a-7d75bf21bbd9")
+	@Schema(description = "", example = "96e35b7e-9313-4866-af74-2d0c72e34dc6")
 	private String username;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")

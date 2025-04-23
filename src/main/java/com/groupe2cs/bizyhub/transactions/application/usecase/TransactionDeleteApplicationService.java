@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TransactionDeleteApplicationService {
 
-	private final CommandGateway commandGateway;
+private final CommandGateway commandGateway;
 
-	public void deleteTransaction(TransactionId idVo) {
+public void deleteTransaction(TransactionId idVo) {
 
-		DeleteTransactionCommand command = new DeleteTransactionCommand(idVo);
-		commandGateway.sendAndWait(command);
-	}
+DeleteTransactionCommand command = new DeleteTransactionCommand(idVo);
+commandGateway.sendAndWait(command);
+}
 }

@@ -20,41 +20,40 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class UserReadApplicationService {
 
-	private final QueryGateway queryGateway;
+private final QueryGateway queryGateway;
 
 
-	public UserPagedResponse findAll(int page, int limit) {
+public UserPagedResponse findAll(int page, int limit) {
 
-		FindAllUserQuery query = new FindAllUserQuery(page, limit);
-		CompletableFuture<UserPagedResponse> future = queryGateway.query(query,
-				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(UserPagedResponse.class));
-		return future.join();
-	}
-
-
-	public UserResponse findByUserId(UserId value) {
-
-		FindByUserIdQuery query = new FindByUserIdQuery(value);
-		CompletableFuture<UserResponse> future = queryGateway.query(query,
-				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(UserResponse.class));
-		return future.join();
-	}
+	FindAllUserQuery query = new FindAllUserQuery(page, limit);
+	CompletableFuture<UserPagedResponse> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(UserPagedResponse.class));
+	return future.join();
+}
 
 
-	public List<UserResponse> findByUserUsername(UserUsername value) {
+public UserResponse findByUserId(UserId value) {
 
-		FindByUserUsernameQuery query = new FindByUserUsernameQuery(value);
-		CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
-				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
-		return future.join();
-	}
+	FindByUserIdQuery query = new FindByUserIdQuery(value);
+	CompletableFuture<UserResponse> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(UserResponse.class));
+	return future.join();
+}
 
-	public List<UserResponse> findByUserPassword(UserPassword value) {
 
-		FindByUserPasswordQuery query = new FindByUserPasswordQuery(value);
-		CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
-				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
-		return future.join();
-	}
+public List<UserResponse> findByUserUsername(UserUsername value) {
+
+	FindByUserUsernameQuery query = new FindByUserUsernameQuery(value);
+	CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
+	return future.join();
+}
+public List<UserResponse> findByUserPassword(UserPassword value) {
+
+	FindByUserPasswordQuery query = new FindByUserPasswordQuery(value);
+	CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
+	return future.join();
+}
 
 }

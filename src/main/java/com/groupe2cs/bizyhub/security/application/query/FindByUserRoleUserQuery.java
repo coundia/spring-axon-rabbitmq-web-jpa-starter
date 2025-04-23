@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 public class FindByUserRoleUserQuery {
 
-	private final UserRoleUser user;
+private final UserRoleUser  user;
 
-	public FindByUserRoleUserQuery(UserRoleUser user) {
-		this.user = user;
-	}
+public FindByUserRoleUserQuery( UserRoleUser user) {
+	this.user = user;
+}
 
-	public UserRoleUser getUser() {
-		return user;
-	}
+public UserRoleUser  getUser() {
+return user;
+}
 }

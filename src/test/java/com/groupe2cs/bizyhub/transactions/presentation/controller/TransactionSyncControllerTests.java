@@ -24,84 +24,84 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 	@Test
 	void it_should_initiate_sync_of_transactions() {
 		TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
-				.deltas(List.of(
-						TransactionDeltaDto.builder()
-								.reference(UUID.randomUUID().toString())
-								.amount(8597.04)
-								.type("CREATE")
-								.build()
-				))
-				.build();
+		.deltas(List.of(
+		TransactionDeltaDto.builder()
+.reference(UUID.randomUUID().toString())
+				.amount(1933.33)
+		.type("CREATE")
+		.build()
+		))
+		.build();
 
-		String uri = "/api/v1/commands/transaction/sync";
-		HttpEntity<TransactionSyncRequest> request = new HttpEntity<>(requestDTO, headers);
+	String uri = "/api/v1/commands/transaction/sync";
+	HttpEntity<TransactionSyncRequest> request = new HttpEntity<>(requestDTO, headers);
 		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody()).isNotNull();
-		assertThat(response.getBody().getCode()).isEqualTo(1);
-		assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
-	}
+			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+			assertThat(response.getBody()).isNotNull();
+			assertThat(response.getBody().getCode()).isEqualTo(1);
+			assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
+			}
 
-	@Test
-	void it_should_initiate_update_of_transactions() {
+			@Test
+			void it_should_initiate_update_of_transactions() {
 
-		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
+			String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
 
-		TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
-				.deltas(List.of(
-						TransactionDeltaDto.builder()
-								.id(existingId)
-								.reference(UUID.randomUUID().toString())
-								.amount(8597.04)
-								.type("UPDATE")
-								.build()
-				))
-				.build();
+			TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
+			.deltas(List.of(
+			TransactionDeltaDto.builder()
+			.id(existingId)
+.reference(UUID.randomUUID().toString())
+					.amount(1933.33)
+			.type("UPDATE")
+			.build()
+			))
+			.build();
 
-		String uri = "/api/v1/commands/transaction/sync";
-		HttpEntity<TransactionSyncRequest> request = new HttpEntity<>(requestDTO, headers);
-		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
+			String uri = "/api/v1/commands/transaction/sync";
+			HttpEntity<TransactionSyncRequest> request = new HttpEntity<>(requestDTO, headers);
+				ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody().getCode()).isEqualTo(1);
-		assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
-	}
+					assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+					assertThat(response.getBody().getCode()).isEqualTo(1);
+					assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
+					}
 
-	@Test
-	void it_should_initiate_delete_of_transactions() {
-		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
-		TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
-				.deltas(List.of(
-						TransactionDeltaDto.builder()
-								.id(existingId)
-								.type("DELETE")
-								.build()
-				))
-				.build();
+					@Test
+					void it_should_initiate_delete_of_transactions() {
+					String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
+					TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
+					.deltas(List.of(
+					TransactionDeltaDto.builder()
+					.id(existingId)
+					.type("DELETE")
+					.build()
+					))
+					.build();
 
-		String uri = "/api/v1/commands/transaction/sync";
-		HttpEntity<TransactionSyncRequest> request = new HttpEntity<>(requestDTO, headers);
-		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
+					String uri = "/api/v1/commands/transaction/sync";
+					HttpEntity<TransactionSyncRequest> request = new HttpEntity<>(requestDTO, headers);
+						ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody().getCode()).isEqualTo(1);
-		assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
-	}
+							assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+							assertThat(response.getBody().getCode()).isEqualTo(1);
+							assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
+							}
 
-	@Test
-	void it_should_handle_empty_delta_list() {
+							@Test
+							void it_should_handle_empty_delta_list() {
 
-		TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
-				.deltas(List.of())
-				.build();
+							TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
+							.deltas(List.of())
+							.build();
 
-		String uri = "/api/v1/commands/transaction/sync";
-		HttpEntity<TransactionSyncRequest> request = new HttpEntity<>(requestDTO, headers);
-		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
+							String uri = "/api/v1/commands/transaction/sync";
+							HttpEntity<TransactionSyncRequest> request = new HttpEntity<>(requestDTO, headers);
+								ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody().getCode()).isEqualTo(1);
-		assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
-	}
+									assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+									assertThat(response.getBody().getCode()).isEqualTo(1);
+									assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
+				}
 }

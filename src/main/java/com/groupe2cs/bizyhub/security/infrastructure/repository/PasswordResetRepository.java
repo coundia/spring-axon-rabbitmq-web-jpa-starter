@@ -1,6 +1,6 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.PasswordReset;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,13 +18,10 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
 
 	@Query("SELECT t FROM PasswordReset t WHERE t.id = :id")
 	Optional<PasswordReset> findById(PasswordReset id);
-
 	@Query("SELECT t FROM PasswordReset t WHERE t.token = :token")
 	Optional<PasswordReset> findByToken(String token);
-
 	@Query("SELECT t FROM PasswordReset t WHERE t.username = :username")
 	List<PasswordReset> findByUsername(String username);
-
 	@Query("SELECT t FROM PasswordReset t WHERE t.expiration = :expiration")
 	List<PasswordReset> findByExpiration(java.time.Instant expiration);
 

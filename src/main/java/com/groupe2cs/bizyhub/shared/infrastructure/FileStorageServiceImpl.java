@@ -15,25 +15,25 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FileStorageServiceImpl implements FileStorageService {
 
-	@Value("${app.file.upload-dir:uploads}")
-	private String uploadDir;
+@Value("${app.file.upload-dir:uploads}")
+private String uploadDir;
 
-	@Override
-	public String storeFile(MultipartFile file) {
-		try {
-			Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
-			Files.createDirectories(uploadPath);
+@Override
+public String storeFile(MultipartFile file) {
+	try {
+	Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
+	Files.createDirectories(uploadPath);
 
-			String originalFilename = file.getOriginalFilename();
-			String safeFilename = (originalFilename != null) ? originalFilename.replaceAll("\\s+", "_") : "file";
-			String filename = UUID.randomUUID() + "_" + safeFilename;
+	String originalFilename = file.getOriginalFilename();
+	String safeFilename = (originalFilename != null) ? originalFilename.replaceAll("\\s+", "_") : "file";
+	String filename = UUID.randomUUID() + "_" + safeFilename;
 
-			Path filePath = uploadPath.resolve(filename);
-			file.transferTo(filePath.toFile());
+	Path filePath = uploadPath.resolve(filename);
+	file.transferTo(filePath.toFile());
 
-			return filePath.toString();
-		} catch (IOException ex) {
-			throw new RuntimeException("Failed to store file: " + ex.getMessage(), ex);
-		}
-	}
+return filePath.toString();
+} catch (IOException ex) {
+	throw new RuntimeException("Failed to store file: " + ex.getMessage(), ex);
+}
+}
 }

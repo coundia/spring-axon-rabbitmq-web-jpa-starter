@@ -1,14 +1,12 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
-import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
+	import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -19,6 +17,7 @@ public class UserCreatedEvent implements Serializable {
 	private UserId id;
 	private UserUsername username;
 	private UserPassword password;
+
 
 
 }

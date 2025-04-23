@@ -1,26 +1,28 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
 
-import com.groupe2cs.bizyhub.security.application.command.CreatePasswordResetCommand;
-import com.groupe2cs.bizyhub.security.application.dto.PasswordResetRequest;
-import com.groupe2cs.bizyhub.security.application.dto.PasswordResetResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.PasswordResetMapper;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class PasswordResetCreateApplicationService {
-	private final CommandGateway commandGateway;
+private final CommandGateway commandGateway;
 
-	public PasswordResetResponse createPasswordReset(PasswordResetRequest request) {
+public PasswordResetResponse createPasswordReset(PasswordResetRequest request){
 
-		CreatePasswordResetCommand command = PasswordResetMapper.toCommand(
-				request
-		);
-		commandGateway.sendAndWait(command);
-		return PasswordResetMapper.toResponse(command);
-	}
+CreatePasswordResetCommand command = PasswordResetMapper.toCommand(
+request
+);
+commandGateway.sendAndWait(command);
+return PasswordResetMapper.toResponse(command);
+}
 
 
 }

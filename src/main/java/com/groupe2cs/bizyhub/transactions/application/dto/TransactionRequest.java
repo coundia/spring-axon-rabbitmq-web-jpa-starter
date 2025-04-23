@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Schema(name = "TransactionRequest", description = "Request payload for Transaction operations")
 public class TransactionRequest implements Serializable {
 
-	@Schema(description = "", example = "d1f6a5ed-e81e-4592-8f88-0163453bf9f3")
+	@Schema(description = "", example = "52716b99-ac14-4075-9650-e1c73db44d9c")
 	private String reference;
 
-	@Schema(description = "", example = "4522.08")
+	@Schema(description = "", example = "7556.28")
 	private Double amount;
 
 
