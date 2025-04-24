@@ -1,8 +1,10 @@
 package com.groupe2cs.bizyhub.security.domain;
 
+import com.groupe2cs.bizyhub.security.domain.exception.RolePermissionCreatedByNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.RolePermissionIdNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.RolePermissionPermissionNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.RolePermissionRoleNotValid;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
@@ -22,11 +24,13 @@ public class RolePermissionAggregateTests extends BaseUnitTests {
 		RolePermissionId id = RolePermissionId.create(UUID.randomUUID().toString());
 		RolePermissionRole role = RolePermissionRole.create(UUID.randomUUID().toString());
 		RolePermissionPermission permission = RolePermissionPermission.create(UUID.randomUUID().toString());
-		RolePermissionAggregate rolePermission = new RolePermissionAggregate(id, role, permission);
+		RolePermissionCreatedBy createdBy = RolePermissionCreatedBy.create(UUID.randomUUID().toString());
+		RolePermissionAggregate rolePermission = new RolePermissionAggregate(id, role, permission, createdBy);
 		assertThat(rolePermission.getId()).isNotNull();
 		assertThat(rolePermission.getId()).isEqualTo(id);
 		assertThat(rolePermission.getRole()).isEqualTo(role);
 		assertThat(rolePermission.getPermission()).isEqualTo(permission);
+		assertThat(rolePermission.getCreatedBy()).isEqualTo(createdBy);
 	}
 
 	@Test
@@ -51,6 +55,14 @@ public class RolePermissionAggregateTests extends BaseUnitTests {
 				error =
 				assertThrows(RolePermissionPermissionNotValid.class, () -> RolePermissionPermission.create(""));
 		assertThat(error.getMessage()).isEqualTo("Permission is invalid");
+	}
+
+	@Test
+	void it_should_throw_when_createdBy_is_invalid() {
+		RolePermissionCreatedByNotValid
+				error =
+				assertThrows(RolePermissionCreatedByNotValid.class, () -> RolePermissionCreatedBy.create(""));
+		assertThat(error.getMessage()).isEqualTo("CreatedBy is invalid");
 	}
 
 }

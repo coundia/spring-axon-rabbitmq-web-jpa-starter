@@ -3,7 +3,6 @@ package com.groupe2cs.bizyhub.security.application.queryHandler;
 import com.groupe2cs.bizyhub.security.application.dto.PermissionResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.PermissionMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByPermissionNameQuery;
-import com.groupe2cs.bizyhub.security.domain.exception.PermissionNotFoundException;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PermissionRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class FindByPermissionNameHandler {
 	public PermissionResponse handle(FindByPermissionNameQuery query) {
 		String value = query.getName().value();
 		Permission entity = repository.findByName(value)
-				.orElseThrow(() -> new PermissionNotFoundException("Name", value));
+				.orElse(null);
+
+		if (entity == null) {
+			return null;
+		}
+
 		return PermissionMapper.toResponse(entity);
 	}
 

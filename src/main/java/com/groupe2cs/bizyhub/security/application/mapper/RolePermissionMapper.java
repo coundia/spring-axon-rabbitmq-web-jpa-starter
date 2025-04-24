@@ -10,48 +10,53 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermissio
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
 
-
 public class RolePermissionMapper {
 
 	public static RolePermissionResponse toResponse(RolePermission entity) {
-		return new RolePermissionResponse(
-				entity.getId(),
-				entity.getRole().getId(),
-				entity.getPermission().getId()
-		);
+		return RolePermissionResponse.builder()
+				.id(entity.getId())
+				.role(entity.getRole().getId())
+				.permission(entity.getPermission().getId())
+				.build();
 	}
 
 	public static RolePermissionResponse toResponse(CreateRolePermissionCommand command) {
-		return new RolePermissionResponse(
-				command.getId().value(), command.getRole().value(), command.getPermission().value()
-		);
+		return RolePermissionResponse.builder()
+				.id(command.getId().value())
+				.role(command.getRole().value())
+				.permission(command.getPermission().value())
+				.build();
 	}
 
 	public static RolePermissionResponse toResponse(UpdateRolePermissionCommand command) {
-		return new RolePermissionResponse(
-				command.getId().value(), command.getRole().value(), command.getPermission().value()
-		);
+		return RolePermissionResponse.builder()
+				.id(command.getId().value())
+				.role(command.getRole().value())
+				.permission(command.getPermission().value())
+				.build();
 	}
-
 
 	public static CreateRolePermissionCommand toCommand(
 			RolePermissionRequest request
 	) {
-		return new CreateRolePermissionCommand(
-				RolePermissionRole.create(request.getRole()), RolePermissionPermission.create(request.getPermission())
-		);
+		return CreateRolePermissionCommand.builder()
+				.role(RolePermissionRole.create(request.getRole()))
+				.permission(RolePermissionPermission.create(request.getPermission()))
+				.build();
 	}
 
 	public static UpdateRolePermissionCommand toUpdateCommand(RolePermissionId id, RolePermissionRequest request) {
-		return new UpdateRolePermissionCommand(
-				id,
-				RolePermissionRole.create(request.getRole()),
-				RolePermissionPermission.create(request.getPermission())
-		);
+		return UpdateRolePermissionCommand.builder()
+				.id(id)
+				.role(RolePermissionRole.create(request.getRole()))
+				.permission(RolePermissionPermission.create(request.getPermission()))
+				.build();
 	}
 
 
 	public static DeleteRolePermissionCommand toDeleteCommand(RolePermissionId id) {
-		return new DeleteRolePermissionCommand(id);
+		return DeleteRolePermissionCommand.builder()
+				.id(id)
+				.build();
 	}
 }

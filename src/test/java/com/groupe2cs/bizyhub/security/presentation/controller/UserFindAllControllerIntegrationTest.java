@@ -23,7 +23,7 @@ public class UserFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_be_able_to_get_all_users() {
-		List<?> list = UserFixtures.randomManyViaCommand(commandGateway, 5);
+		List<?> list = UserFixtures.randomManyViaCommand(commandGateway, 5, getUserId());
 
 		String uri = "/v1/queries/users";
 		ResponseEntity<UserPagedResponse> response = this.getForEntity(uri, UserPagedResponse.class);

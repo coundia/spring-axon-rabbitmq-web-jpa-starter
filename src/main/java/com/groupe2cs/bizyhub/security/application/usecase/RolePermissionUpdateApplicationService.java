@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateRolePermissionCo
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RolePermissionMapper;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +19,18 @@ public class RolePermissionUpdateApplicationService {
 	private final CommandGateway commandGateway;
 
 
-	public RolePermissionResponse updateRolePermission(RolePermissionId id, RolePermissionRequest request) {
+	public RolePermissionResponse updateRolePermission(RolePermissionId id, RolePermissionRequest request,
+													   String createdBy
+	) {
 
 		UpdateRolePermissionCommand command = RolePermissionMapper.toUpdateCommand(
 				id,
 				request
 		);
+
+		if (createdBy != null) {
+			command.setCreatedBy(RolePermissionCreatedBy.create(createdBy));
+		}
 
 		commandGateway.sendAndWait(command);
 

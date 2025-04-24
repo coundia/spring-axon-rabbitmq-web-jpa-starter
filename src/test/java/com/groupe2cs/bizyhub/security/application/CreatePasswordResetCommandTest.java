@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupe2cs.bizyhub.security.application.command.CreatePasswordResetCommand;
 import com.groupe2cs.bizyhub.security.domain.event.PasswordResetCreatedEvent;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.BaseUnitTests;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
@@ -31,7 +28,8 @@ public class CreatePasswordResetCommandTest extends BaseUnitTests {
 				PasswordResetId.create(UUID.randomUUID().toString()),
 				PasswordResetToken.create(UUID.randomUUID().toString()),
 				PasswordResetUsername.create(UUID.randomUUID().toString()),
-				PasswordResetExpiration.create(java.time.Instant.now().plusSeconds(3600))
+				PasswordResetExpiration.create(java.time.Instant.now().plusSeconds(3600)),
+				PasswordResetCreatedBy.create(UUID.randomUUID().toString())
 		);
 		commandGateway.send(command);
 
@@ -49,6 +47,8 @@ public class CreatePasswordResetCommandTest extends BaseUnitTests {
 				command.getUsername().value());
 		assertThat(sentCommand.getExpiration().value()).isEqualTo(
 				command.getExpiration().value());
+		assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
+				command.getCreatedBy().value());
 	}
 
 	@Test
@@ -58,7 +58,8 @@ public class CreatePasswordResetCommandTest extends BaseUnitTests {
 				new PasswordResetCreatedEvent(PasswordResetId.create(UUID.randomUUID().toString()),
 						PasswordResetToken.create(UUID.randomUUID().toString()),
 						PasswordResetUsername.create(UUID.randomUUID().toString()),
-						PasswordResetExpiration.create(java.time.Instant.now().plusSeconds(3600)));
+						PasswordResetExpiration.create(java.time.Instant.now().plusSeconds(3600)),
+						PasswordResetCreatedBy.create(UUID.randomUUID().toString()));
 		String json = new ObjectMapper().writeValueAsString(event);
 		assertThat(json).isNotEmpty();
 	}

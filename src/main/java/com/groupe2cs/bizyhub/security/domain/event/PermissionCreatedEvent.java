@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class PermissionCreatedEvent implements Serializable {
 
 	private PermissionId id;
 	private PermissionName name;
+	private PermissionCreatedBy createdBy;
 
 
 }

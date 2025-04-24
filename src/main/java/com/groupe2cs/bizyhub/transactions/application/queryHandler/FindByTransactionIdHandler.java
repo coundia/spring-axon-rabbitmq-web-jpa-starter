@@ -3,7 +3,6 @@ package com.groupe2cs.bizyhub.transactions.application.queryHandler;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
 import com.groupe2cs.bizyhub.transactions.application.mapper.TransactionMapper;
 import com.groupe2cs.bizyhub.transactions.application.query.FindByTransactionIdQuery;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionNotFoundException;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class FindByTransactionIdHandler {
 	public TransactionResponse handle(FindByTransactionIdQuery query) {
 		String value = query.getId().value();
 		Transaction entity = repository.findById(value)
-				.orElseThrow(() -> new TransactionNotFoundException("Id", value));
+				.orElse(null);
+
+		if (entity == null) {
+			return null;
+		}
+
 		return TransactionMapper.toResponse(entity);
 	}
 

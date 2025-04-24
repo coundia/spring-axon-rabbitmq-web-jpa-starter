@@ -2,6 +2,7 @@ package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
 import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionAmount;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository;
@@ -17,10 +18,11 @@ import static org.awaitility.Awaitility.await;
 public class TransactionFixtures {
 
 	public static Transaction randomOne(TransactionRepository repository) {
-		Transaction entity = new Transaction();
-		entity.setId(UUID.randomUUID().toString());
-		entity.setReference(UUID.randomUUID().toString());
-		entity.setAmount(3914.41);
+		Transaction entity = Transaction.builder()
+				.id(UUID.randomUUID().toString())
+				.reference(UUID.randomUUID().toString())
+				.amount(3507.74)
+				.build();
 		return repository.save(entity);
 	}
 
@@ -29,21 +31,16 @@ public class TransactionFixtures {
 	}
 
 	public static Transaction byId(TransactionRepository repository, String id) {
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static Transaction byIdWaitExist(TransactionRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static Transaction byIdWaitNotExist(TransactionRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-
 		return repository.findById(id).orElse(null);
 	}
 
@@ -55,10 +52,10 @@ public class TransactionFixtures {
 		return items;
 	}
 
-	public static List<CreateTransactionCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
+	public static List<CreateTransactionCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
 		List<CreateTransactionCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway));
+			items.add(randomOneViaCommand(commandGateway, userId));
 		}
 		return items;
 	}
@@ -67,14 +64,16 @@ public class TransactionFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateTransactionCommand randomOneViaCommand(CommandGateway commandGateway) {
-		CreateTransactionCommand command = new CreateTransactionCommand(
-				TransactionReference.create(
-						UUID.randomUUID().toString()), TransactionAmount.create(
-				3914.41));
-		commandGateway.sendAndWait(command);
+	public static CreateTransactionCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
 
+		CreateTransactionCommand command = CreateTransactionCommand.builder()
+				.reference(TransactionReference.create(UUID.randomUUID().toString()))
+				.amount(TransactionAmount.create(3507.74))
+				.build();
+
+		command.setCreatedBy(TransactionCreatedBy.create(userId));
+
+		commandGateway.sendAndWait(command);
 		return command;
 	}
-
 }

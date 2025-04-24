@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.RoleRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RoleResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.RoleUpdateApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleId;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@roleGate.canEdit(authentication, #id)")
@@ -39,11 +42,18 @@ public class UpdateRoleController {
 					content = @Content)
 	})
 	@PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RoleResponse> updateRole(@Valid @PathVariable String id, @RequestBody RoleRequest request) {
+	public ResponseEntity<RoleResponse> updateRole(
+			@Valid @PathVariable String id,
+			@RequestBody RoleRequest request,
+			@AuthenticationPrincipal Jwt jwt
+	) {
 		{
 			try {
 
-				RoleResponse response = applicationService.updateRole(RoleId.create(id), request);
+				RoleResponse response = applicationService.updateRole(RoleId.create(id),
+						request,
+						RequestContext.getUserId(jwt)
+				);
 
 				return ResponseEntity.ok(response);
 

@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionC
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
 import com.groupe2cs.bizyhub.transactions.application.mapper.TransactionMapper;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -18,12 +19,18 @@ public class TransactionUpdateApplicationService {
 	private final CommandGateway commandGateway;
 
 
-	public TransactionResponse updateTransaction(TransactionId id, TransactionRequest request) {
+	public TransactionResponse updateTransaction(TransactionId id, TransactionRequest request,
+												 String createdBy
+	) {
 
 		UpdateTransactionCommand command = TransactionMapper.toUpdateCommand(
 				id,
 				request
 		);
+
+		if (createdBy != null) {
+			command.setCreatedBy(TransactionCreatedBy.create(createdBy));
+		}
 
 		commandGateway.sendAndWait(command);
 

@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.command.CreateRolePermissionCo
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RolePermissionMapper;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,17 @@ import org.springframework.stereotype.Service;
 public class RolePermissionCreateApplicationService {
 	private final CommandGateway commandGateway;
 
-	public RolePermissionResponse createRolePermission(RolePermissionRequest request) {
+	public RolePermissionResponse createRolePermission(RolePermissionRequest request,
+													   String createdBy) {
 
 		CreateRolePermissionCommand command = RolePermissionMapper.toCommand(
 				request
 		);
+
+		if (createdBy != null) {
+			command.setCreatedBy(RolePermissionCreatedBy.create(createdBy));
+		}
+
 		commandGateway.sendAndWait(command);
 		return RolePermissionMapper.toResponse(command);
 	}

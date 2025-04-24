@@ -9,45 +9,48 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
 
-
 public class PermissionMapper {
 
 	public static PermissionResponse toResponse(Permission entity) {
-		return new PermissionResponse(
-				entity.getId(),
-				entity.getName()
-		);
+		return PermissionResponse.builder()
+				.id(entity.getId())
+				.name(entity.getName())
+				.build();
 	}
 
 	public static PermissionResponse toResponse(CreatePermissionCommand command) {
-		return new PermissionResponse(
-				command.getId().value(), command.getName().value()
-		);
+		return PermissionResponse.builder()
+				.id(command.getId().value())
+				.name(command.getName().value())
+				.build();
 	}
 
 	public static PermissionResponse toResponse(UpdatePermissionCommand command) {
-		return new PermissionResponse(
-				command.getId().value(), command.getName().value()
-		);
+		return PermissionResponse.builder()
+				.id(command.getId().value())
+				.name(command.getName().value())
+				.build();
 	}
-
 
 	public static CreatePermissionCommand toCommand(
 			PermissionRequest request
 	) {
-		return new CreatePermissionCommand(
-				PermissionName.create(request.getName())
-		);
+		return CreatePermissionCommand.builder()
+				.name(PermissionName.create(request.getName()))
+				.build();
 	}
 
 	public static UpdatePermissionCommand toUpdateCommand(PermissionId id, PermissionRequest request) {
-		return new UpdatePermissionCommand(
-				id, PermissionName.create(request.getName())
-		);
+		return UpdatePermissionCommand.builder()
+				.id(id)
+				.name(PermissionName.create(request.getName()))
+				.build();
 	}
 
 
 	public static DeletePermissionCommand toDeleteCommand(PermissionId id) {
-		return new DeletePermissionCommand(id);
+		return DeletePermissionCommand.builder()
+				.id(id)
+				.build();
 	}
 }

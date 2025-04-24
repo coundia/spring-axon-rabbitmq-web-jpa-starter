@@ -1,6 +1,6 @@
 package com.groupe2cs.bizyhub.security.infrastructure.config;
 
-
+import com.groupe2cs.bizyhub.security.application.service.CustomUserDetailsService;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -12,7 +12,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,20 +28,26 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@EnableMethodSecurity(prePostEnabled = true)
 @Configuration
+@EnableMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-	@Value("${security.jwt.secret:''}")
+	private final CustomUserDetailsService userDetailsService;
+
+	@Value("${security.jwt.secret}")
 	private String jwtKey;
 
 	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-		return config.getAuthenticationManager();
+	public AuthenticationManager authenticationManager() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(passwordEncoder());
+		return new ProviderManager(authProvider);
 	}
 
 	@Bean
@@ -85,7 +92,7 @@ public class SecurityConfig {
 	}
 
 	private SecretKey getSecretKey() {
-		byte[] keyBytes = java.util.Base64.getDecoder().decode(jwtKey);
+		byte[] keyBytes = Base64.getDecoder().decode(jwtKey);
 		return new SecretKeySpec(keyBytes, "HmacSHA512");
 	}
 
@@ -118,4 +125,3 @@ public class SecurityConfig {
 		return registration;
 	}
 }
-

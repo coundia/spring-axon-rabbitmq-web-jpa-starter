@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.domain.event.PasswordResetCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.PasswordResetDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.PasswordResetUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.PasswordReset;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PasswordResetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
@@ -26,17 +27,21 @@ public class PasswordResetProjection {
 	@EventHandler
 	public void on(PasswordResetCreatedEvent event) {
 		try {
-			PasswordReset entity = new PasswordReset(
-					event.getId().value(),
-					event.getToken().value(),
-					event.getUsername().value(),
-					event.getExpiration().value()
-			);
+			PasswordReset entity = PasswordReset.builder()
+					.id(event.getId().value())
+					.token(event.getToken().value())
+					.username(event.getUsername().value())
+					.expiration(event.getExpiration().value())
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("PasswordReset inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving PasswordReset: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -46,10 +51,17 @@ public class PasswordResetProjection {
 		try {
 			PasswordReset entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("PasswordReset not found"));
+
 			entity.setId(event.getId().value());
 			entity.setToken(event.getToken().value());
 			entity.setUsername(event.getUsername().value());
 			entity.setExpiration(event.getExpiration().value());
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("PasswordReset updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

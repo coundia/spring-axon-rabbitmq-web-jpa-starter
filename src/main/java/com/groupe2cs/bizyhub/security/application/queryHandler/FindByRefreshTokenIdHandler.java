@@ -3,7 +3,6 @@ package com.groupe2cs.bizyhub.security.application.queryHandler;
 import com.groupe2cs.bizyhub.security.application.dto.RefreshTokenResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RefreshTokenMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByRefreshTokenIdQuery;
-import com.groupe2cs.bizyhub.security.domain.exception.RefreshTokenNotFoundException;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RefreshToken;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class FindByRefreshTokenIdHandler {
 	public RefreshTokenResponse handle(FindByRefreshTokenIdQuery query) {
 		String value = query.getId().value();
 		RefreshToken entity = repository.findById(value)
-				.orElseThrow(() -> new RefreshTokenNotFoundException("Id", value));
+				.orElse(null);
+
+		if (entity == null) {
+			return null;
+		}
+
 		return RefreshTokenMapper.toResponse(entity);
 	}
 

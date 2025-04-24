@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,6 +22,9 @@ public class RolePermission {
 	@ManyToOne
 	@JoinColumn(name = "permission_id", nullable = false)
 	private Permission permission;
+	@ManyToOne
+	@JoinColumn(name = "createdBy_id", nullable = true)
+	private User createdBy;
 
 	public RolePermission(String id) {
 		this.id = id;
@@ -32,6 +36,7 @@ public class RolePermission {
 				"id='" + id + '\'' +
 				", role=" + role +
 				", permission=" + permission +
+				", createdBy=" + createdBy +
 				'}';
 	}
 }

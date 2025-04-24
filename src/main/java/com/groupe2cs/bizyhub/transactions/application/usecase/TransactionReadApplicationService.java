@@ -2,11 +2,9 @@ package com.groupe2cs.bizyhub.transactions.application.usecase;
 
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionPagedResponse;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
-import com.groupe2cs.bizyhub.transactions.application.query.FindAllTransactionQuery;
-import com.groupe2cs.bizyhub.transactions.application.query.FindByTransactionAmountQuery;
-import com.groupe2cs.bizyhub.transactions.application.query.FindByTransactionIdQuery;
-import com.groupe2cs.bizyhub.transactions.application.query.FindByTransactionReferenceQuery;
+import com.groupe2cs.bizyhub.transactions.application.query.*;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionAmount;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +50,14 @@ public class TransactionReadApplicationService {
 	public List<TransactionResponse> findByTransactionAmount(TransactionAmount value) {
 
 		FindByTransactionAmountQuery query = new FindByTransactionAmountQuery(value);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionCreatedBy(TransactionCreatedBy value) {
+
+		FindByTransactionCreatedByQuery query = new FindByTransactionCreatedByQuery(value);
 		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
 		return future.join();

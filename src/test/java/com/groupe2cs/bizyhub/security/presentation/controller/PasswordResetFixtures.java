@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.command.CreatePasswordResetCommand;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
@@ -18,11 +19,12 @@ import static org.awaitility.Awaitility.await;
 public class PasswordResetFixtures {
 
 	public static PasswordReset randomOne(PasswordResetRepository repository) {
-		PasswordReset entity = new PasswordReset();
-		entity.setId(UUID.randomUUID().toString());
-		entity.setToken(UUID.randomUUID().toString());
-		entity.setUsername(UUID.randomUUID().toString());
-		entity.setExpiration(java.time.Instant.now().plusSeconds(3600));
+		PasswordReset entity = PasswordReset.builder()
+				.id(UUID.randomUUID().toString())
+				.token(UUID.randomUUID().toString())
+				.username(UUID.randomUUID().toString())
+				.expiration(java.time.Instant.now().plusSeconds(3600))
+				.build();
 		return repository.save(entity);
 	}
 
@@ -31,21 +33,16 @@ public class PasswordResetFixtures {
 	}
 
 	public static PasswordReset byId(PasswordResetRepository repository, String id) {
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static PasswordReset byIdWaitExist(PasswordResetRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static PasswordReset byIdWaitNotExist(PasswordResetRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-
 		return repository.findById(id).orElse(null);
 	}
 
@@ -57,10 +54,10 @@ public class PasswordResetFixtures {
 		return items;
 	}
 
-	public static List<CreatePasswordResetCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
+	public static List<CreatePasswordResetCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
 		List<CreatePasswordResetCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway));
+			items.add(randomOneViaCommand(commandGateway, userId));
 		}
 		return items;
 	}
@@ -69,15 +66,17 @@ public class PasswordResetFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreatePasswordResetCommand randomOneViaCommand(CommandGateway commandGateway) {
-		CreatePasswordResetCommand command = new CreatePasswordResetCommand(
-				PasswordResetToken.create(
-						UUID.randomUUID().toString()), PasswordResetUsername.create(
-				UUID.randomUUID().toString()), PasswordResetExpiration.create(
-				java.time.Instant.now().plusSeconds(3600)));
-		commandGateway.sendAndWait(command);
+	public static CreatePasswordResetCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
 
+		CreatePasswordResetCommand command = CreatePasswordResetCommand.builder()
+				.token(PasswordResetToken.create(UUID.randomUUID().toString()))
+				.username(PasswordResetUsername.create(UUID.randomUUID().toString()))
+				.expiration(PasswordResetExpiration.create(java.time.Instant.now().plusSeconds(3600)))
+				.build();
+
+		command.setCreatedBy(PasswordResetCreatedBy.create(userId));
+
+		commandGateway.sendAndWait(command);
 		return command;
 	}
-
 }

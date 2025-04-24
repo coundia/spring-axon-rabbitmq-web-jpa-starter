@@ -6,10 +6,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateRefreshTokenComm
 import com.groupe2cs.bizyhub.security.domain.event.RefreshTokenCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RefreshTokenDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RefreshTokenUpdatedEvent;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +30,7 @@ public class RefreshTokenAggregate {
 	private RefreshTokenToken token;
 	private RefreshTokenUsername username;
 	private RefreshTokenExpiration expiration;
+	private RefreshTokenCreatedBy createdBy;
 
 
 	@CommandHandler
@@ -41,7 +39,8 @@ public class RefreshTokenAggregate {
 				command.getId(),
 				command.getToken(),
 				command.getUsername(),
-				command.getExpiration()
+				command.getExpiration(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -58,7 +57,8 @@ public class RefreshTokenAggregate {
 				command.getId(),
 				command.getToken(),
 				command.getUsername(),
-				command.getExpiration()
+				command.getExpiration(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -68,6 +68,7 @@ public class RefreshTokenAggregate {
 		this.token = event.getToken();
 		this.username = event.getUsername();
 		this.expiration = event.getExpiration();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -81,6 +82,7 @@ public class RefreshTokenAggregate {
 		this.token = event.getToken();
 		this.username = event.getUsername();
 		this.expiration = event.getExpiration();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }

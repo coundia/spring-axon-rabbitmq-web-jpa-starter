@@ -23,7 +23,7 @@ public class PermissionFindAllControllerIntegrationTest extends BaseIntegrationT
 
 	@Test
 	void it_should_be_able_to_get_all_permissions() {
-		List<?> list = PermissionFixtures.randomManyViaCommand(commandGateway, 5);
+		List<?> list = PermissionFixtures.randomManyViaCommand(commandGateway, 5, getUserId());
 
 		String uri = "/v1/queries/permissions";
 		ResponseEntity<PermissionPagedResponse> response = this.getForEntity(uri, PermissionPagedResponse.class);

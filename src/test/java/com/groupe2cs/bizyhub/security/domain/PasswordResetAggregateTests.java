@@ -1,13 +1,7 @@
 package com.groupe2cs.bizyhub.security.domain;
 
-import com.groupe2cs.bizyhub.security.domain.exception.PasswordResetExpirationNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.PasswordResetIdNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.PasswordResetTokenNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.PasswordResetUsernameNotValid;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
+import com.groupe2cs.bizyhub.security.domain.exception.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.BaseUnitTests;
 import org.junit.jupiter.api.Test;
 
@@ -25,12 +19,14 @@ public class PasswordResetAggregateTests extends BaseUnitTests {
 		PasswordResetToken token = PasswordResetToken.create(UUID.randomUUID().toString());
 		PasswordResetUsername username = PasswordResetUsername.create(UUID.randomUUID().toString());
 		PasswordResetExpiration expiration = PasswordResetExpiration.create(java.time.Instant.now().plusSeconds(3600));
-		PasswordResetAggregate passwordReset = new PasswordResetAggregate(id, token, username, expiration);
+		PasswordResetCreatedBy createdBy = PasswordResetCreatedBy.create(UUID.randomUUID().toString());
+		PasswordResetAggregate passwordReset = new PasswordResetAggregate(id, token, username, expiration, createdBy);
 		assertThat(passwordReset.getId()).isNotNull();
 		assertThat(passwordReset.getId()).isEqualTo(id);
 		assertThat(passwordReset.getToken()).isEqualTo(token);
 		assertThat(passwordReset.getUsername()).isEqualTo(username);
 		assertThat(passwordReset.getExpiration()).isEqualTo(expiration);
+		assertThat(passwordReset.getCreatedBy()).isEqualTo(createdBy);
 	}
 
 	@Test
@@ -61,6 +57,14 @@ public class PasswordResetAggregateTests extends BaseUnitTests {
 				error =
 				assertThrows(PasswordResetExpirationNotValid.class, () -> PasswordResetExpiration.create(null));
 		assertThat(error.getMessage()).isEqualTo("Expiration is invalid");
+	}
+
+	@Test
+	void it_should_throw_when_createdBy_is_invalid() {
+		PasswordResetCreatedByNotValid
+				error =
+				assertThrows(PasswordResetCreatedByNotValid.class, () -> PasswordResetCreatedBy.create(""));
+		assertThat(error.getMessage()).isEqualTo("CreatedBy is invalid");
 	}
 
 }

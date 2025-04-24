@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateApiKeyCommand;
 import com.groupe2cs.bizyhub.security.application.dto.ApiKeyRequest;
 import com.groupe2cs.bizyhub.security.application.dto.ApiKeyResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.ApiKeyMapper;
+import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyId;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +19,18 @@ public class ApiKeyUpdateApplicationService {
 	private final CommandGateway commandGateway;
 
 
-	public ApiKeyResponse updateApiKey(ApiKeyId id, ApiKeyRequest request) {
+	public ApiKeyResponse updateApiKey(ApiKeyId id, ApiKeyRequest request,
+									   String createdBy
+	) {
 
 		UpdateApiKeyCommand command = ApiKeyMapper.toUpdateCommand(
 				id,
 				request
 		);
+
+		if (createdBy != null) {
+			command.setCreatedBy(ApiKeyCreatedBy.create(createdBy));
+		}
 
 		commandGateway.sendAndWait(command);
 

@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.transactions.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.AbstractAuditableEntity;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -12,16 +12,20 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
+@EntityListeners(AuditListener.class)
 @Table(name = "transactions")
-public class Transaction {
+public class Transaction extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
-	@Column(nullable = true, unique = true)
+	@Column(nullable = true, unique = true, length = 250)
 	private String reference;
-	@Column(nullable = false, unique = false)
+	@Column(nullable = false, unique = false, length = 250)
 	private Double amount;
+	@ManyToOne
+	@JoinColumn(name = "createdBy_id", nullable = true)
+	private User createdBy;
 
 	public Transaction(String id) {
 		this.id = id;
@@ -33,6 +37,7 @@ public class Transaction {
 				"id='" + id + '\'' +
 				", reference=" + reference +
 				", amount=" + amount +
+				", createdBy=" + createdBy +
 				'}';
 	}
 }

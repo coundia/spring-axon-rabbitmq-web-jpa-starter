@@ -19,5 +19,7 @@ public class RolePermissionResponse implements Serializable {
 	private String role;
 	@Schema(description = "", example = "")
 	private String permission;
+	@Schema(description = "", example = "")
+	private String createdBy;
 
 }

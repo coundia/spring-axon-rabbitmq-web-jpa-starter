@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,6 +25,9 @@ public class User {
 	private String password;
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<UserRole> userRoles = new HashSet<>();
+	@ManyToOne
+	@JoinColumn(name = "createdBy_id", nullable = true)
+	private User createdBy;
 
 	public User(String id) {
 		this.id = id;
@@ -36,6 +40,7 @@ public class User {
 				", username=" + username +
 				", password=" + password +
 				", userRoles=" + userRoles +
+				", createdBy=" + createdBy +
 				'}';
 	}
 }

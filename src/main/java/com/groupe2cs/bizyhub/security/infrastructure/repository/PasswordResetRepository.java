@@ -28,4 +28,7 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
 	@Query("SELECT t FROM PasswordReset t WHERE t.expiration = :expiration")
 	List<PasswordReset> findByExpiration(java.time.Instant expiration);
 
+	@Query("SELECT t FROM PasswordReset t WHERE t.createdBy = :createdBy")
+	List<PasswordReset> findByCreatedBy(String createdBy);
+
 }

@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.domain.event.RefreshTokenCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RefreshTokenDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RefreshTokenUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RefreshToken;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RefreshTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
@@ -26,17 +27,21 @@ public class RefreshTokenProjection {
 	@EventHandler
 	public void on(RefreshTokenCreatedEvent event) {
 		try {
-			RefreshToken entity = new RefreshToken(
-					event.getId().value(),
-					event.getToken().value(),
-					event.getUsername().value(),
-					event.getExpiration().value()
-			);
+			RefreshToken entity = RefreshToken.builder()
+					.id(event.getId().value())
+					.token(event.getToken().value())
+					.username(event.getUsername().value())
+					.expiration(event.getExpiration().value())
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("RefreshToken inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving RefreshToken: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -46,10 +51,17 @@ public class RefreshTokenProjection {
 		try {
 			RefreshToken entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("RefreshToken not found"));
+
 			entity.setId(event.getId().value());
 			entity.setToken(event.getToken().value());
 			entity.setUsername(event.getUsername().value());
 			entity.setExpiration(event.getExpiration().value());
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("RefreshToken updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

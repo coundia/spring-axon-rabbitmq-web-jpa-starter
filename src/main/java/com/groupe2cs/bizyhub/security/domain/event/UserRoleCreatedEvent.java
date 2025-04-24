@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
@@ -19,6 +20,7 @@ public class UserRoleCreatedEvent implements Serializable {
 	private UserRoleId id;
 	private UserRoleUser user;
 	private UserRoleRole role;
+	private UserRoleCreatedBy createdBy;
 
 
 }

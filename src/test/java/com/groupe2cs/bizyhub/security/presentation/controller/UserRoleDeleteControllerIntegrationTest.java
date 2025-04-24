@@ -20,7 +20,7 @@ public class UserRoleDeleteControllerIntegrationTest extends BaseIntegrationTest
 
 	@Test
 	void it_should_be_able_to_delete_userrole() {
-		String existingId = UserRoleFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = UserRoleFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 		String uri = "/v1/commands/userRole/" + existingId;
 
 		ResponseEntity<String> rep = this.delete(uri);

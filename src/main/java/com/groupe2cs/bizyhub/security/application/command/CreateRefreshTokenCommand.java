@@ -1,9 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import lombok.*;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -22,18 +19,21 @@ public class CreateRefreshTokenCommand implements Serializable {
 	private RefreshTokenToken token;
 	private RefreshTokenUsername username;
 	private RefreshTokenExpiration expiration;
+	private RefreshTokenCreatedBy createdBy;
 
 	public CreateRefreshTokenCommand(
 
 			RefreshTokenToken token,
 			RefreshTokenUsername username,
-			RefreshTokenExpiration expiration
+			RefreshTokenExpiration expiration,
+			RefreshTokenCreatedBy createdBy
 	) {
 		this.id = RefreshTokenId.create(UUID.randomUUID().toString());
 
 		this.token = token;
 		this.username = username;
 		this.expiration = expiration;
+		this.createdBy = createdBy;
 	}
 
 

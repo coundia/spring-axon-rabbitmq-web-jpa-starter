@@ -27,9 +27,9 @@ public class UserRoleUpdateControllerIntegrationTest extends BaseIntegrationTest
 	@Test
 	void it_should_be_able_to_update_userrole() {
 
-		String existingId = UserRoleFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = UserRoleFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 
-		CreateUserRoleCommand updated = UserRoleFixtures.randomOneViaCommand(commandGatewayUpdate);
+		CreateUserRoleCommand updated = UserRoleFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
 
 		UserRoleRequest requestDTO = new UserRoleRequest();
 		requestDTO.setUser(updated.getUser().value());

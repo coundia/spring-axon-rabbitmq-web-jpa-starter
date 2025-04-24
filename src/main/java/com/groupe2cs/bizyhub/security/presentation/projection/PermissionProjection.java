@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.domain.event.PermissionCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.PermissionDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.PermissionUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PermissionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
@@ -26,15 +27,19 @@ public class PermissionProjection {
 	@EventHandler
 	public void on(PermissionCreatedEvent event) {
 		try {
-			Permission entity = new Permission(
-					event.getId().value(),
-					event.getName().value()
-			);
+			Permission entity = Permission.builder()
+					.id(event.getId().value())
+					.name(event.getName().value())
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("Permission inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving Permission: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -44,8 +49,15 @@ public class PermissionProjection {
 		try {
 			Permission entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("Permission not found"));
+
 			entity.setId(event.getId().value());
 			entity.setName(event.getName().value());
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("Permission updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

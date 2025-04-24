@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupe2cs.bizyhub.security.application.command.CreateRoleCommand;
 import com.groupe2cs.bizyhub.security.domain.event.RoleCreatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleName;
 import com.groupe2cs.bizyhub.shared.BaseUnitTests;
@@ -26,7 +27,9 @@ public class CreateRoleCommandTest extends BaseUnitTests {
 	@Test
 	void it_should_send_command_to_command_gateway() {
 		CreateRoleCommand command = new CreateRoleCommand(
-				RoleId.create(UUID.randomUUID().toString()), RoleName.create(UUID.randomUUID().toString())
+				RoleId.create(UUID.randomUUID().toString()),
+				RoleName.create(UUID.randomUUID().toString()),
+				RoleCreatedBy.create(UUID.randomUUID().toString())
 		);
 		commandGateway.send(command);
 
@@ -38,6 +41,8 @@ public class CreateRoleCommandTest extends BaseUnitTests {
 				command.getId().value());
 		assertThat(sentCommand.getName().value()).isEqualTo(
 				command.getName().value());
+		assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
+				command.getCreatedBy().value());
 	}
 
 	@Test
@@ -45,7 +50,8 @@ public class CreateRoleCommandTest extends BaseUnitTests {
 		RoleCreatedEvent
 				event =
 				new RoleCreatedEvent(RoleId.create(UUID.randomUUID().toString()),
-						RoleName.create(UUID.randomUUID().toString()));
+						RoleName.create(UUID.randomUUID().toString()),
+						RoleCreatedBy.create(UUID.randomUUID().toString()));
 		String json = new ObjectMapper().writeValueAsString(event);
 		assertThat(json).isNotEmpty();
 	}

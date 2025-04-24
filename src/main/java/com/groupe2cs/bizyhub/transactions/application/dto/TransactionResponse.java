@@ -19,5 +19,7 @@ public class TransactionResponse implements Serializable {
 	private String reference;
 	@Schema(description = "", example = "")
 	private Double amount;
+	@Schema(description = "", example = "")
+	private String createdBy;
 
 }

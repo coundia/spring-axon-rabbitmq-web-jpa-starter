@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdatePermissionComman
 import com.groupe2cs.bizyhub.security.domain.event.PermissionCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.PermissionDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.PermissionUpdatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
 import lombok.AllArgsConstructor;
@@ -29,13 +30,15 @@ public class PermissionAggregate {
 	@AggregateIdentifier
 	private PermissionId id;
 	private PermissionName name;
+	private PermissionCreatedBy createdBy;
 
 
 	@CommandHandler
 	public PermissionAggregate(CreatePermissionCommand command) {
 		apply(new PermissionCreatedEvent(
 				command.getId(),
-				command.getName()
+				command.getName(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -50,7 +53,8 @@ public class PermissionAggregate {
 	public void handle(UpdatePermissionCommand command) {
 		apply(new PermissionUpdatedEvent(
 				command.getId(),
-				command.getName()
+				command.getName(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -58,6 +62,7 @@ public class PermissionAggregate {
 	public void on(PermissionCreatedEvent event) {
 		this.id = event.getId();
 		this.name = event.getName();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -69,6 +74,7 @@ public class PermissionAggregate {
 	public void on(PermissionUpdatedEvent event) {
 		this.id = event.getId();
 		this.name = event.getName();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }

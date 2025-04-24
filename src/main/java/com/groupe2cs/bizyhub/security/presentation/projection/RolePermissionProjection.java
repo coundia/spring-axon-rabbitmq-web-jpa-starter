@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.domain.event.RolePermissionUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
@@ -28,16 +29,20 @@ public class RolePermissionProjection {
 	@EventHandler
 	public void on(RolePermissionCreatedEvent event) {
 		try {
-			RolePermission entity = new RolePermission(
-					event.getId().value(),
-					new Role(event.getRole().value()),
-					new Permission(event.getPermission().value())
-			);
+			RolePermission entity = RolePermission.builder()
+					.id(event.getId().value())
+					.role(new Role(event.getRole().value()))
+					.permission(new Permission(event.getPermission().value()))
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("RolePermission inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving RolePermission: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -47,9 +52,16 @@ public class RolePermissionProjection {
 		try {
 			RolePermission entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("RolePermission not found"));
+
 			entity.setId(event.getId().value());
 			entity.setRole(new Role(event.getRole().value()));
 			entity.setPermission(new Permission(event.getPermission().value()));
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("RolePermission updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

@@ -1,10 +1,7 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.command.CreateApiKeyCommand;
-import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyCreatedAt;
-import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyKey;
-import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKey;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.ApiKeyRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -19,12 +16,13 @@ import static org.awaitility.Awaitility.await;
 public class ApiKeyFixtures {
 
 	public static ApiKey randomOne(ApiKeyRepository repository) {
-		ApiKey entity = new ApiKey();
-		entity.setId(UUID.randomUUID().toString());
-		entity.setKey(UUID.randomUUID().toString());
-		entity.setUsername(UUID.randomUUID().toString());
-		entity.setCreatedAt(java.time.Instant.now().plusSeconds(3600));
-		entity.setExpiration(java.time.Instant.now().plusSeconds(3600));
+		ApiKey entity = ApiKey.builder()
+				.id(UUID.randomUUID().toString())
+				.key(UUID.randomUUID().toString())
+				.username(UUID.randomUUID().toString())
+				.createdAt(java.time.Instant.now().plusSeconds(3600))
+				.expiration(java.time.Instant.now().plusSeconds(3600))
+				.build();
 		return repository.save(entity);
 	}
 
@@ -33,21 +31,16 @@ public class ApiKeyFixtures {
 	}
 
 	public static ApiKey byId(ApiKeyRepository repository, String id) {
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static ApiKey byIdWaitExist(ApiKeyRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static ApiKey byIdWaitNotExist(ApiKeyRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-
 		return repository.findById(id).orElse(null);
 	}
 
@@ -59,10 +52,10 @@ public class ApiKeyFixtures {
 		return items;
 	}
 
-	public static List<CreateApiKeyCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
+	public static List<CreateApiKeyCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
 		List<CreateApiKeyCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway));
+			items.add(randomOneViaCommand(commandGateway, userId));
 		}
 		return items;
 	}
@@ -71,16 +64,18 @@ public class ApiKeyFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateApiKeyCommand randomOneViaCommand(CommandGateway commandGateway) {
-		CreateApiKeyCommand command = new CreateApiKeyCommand(
-				ApiKeyKey.create(
-						UUID.randomUUID().toString()), ApiKeyUsername.create(
-				UUID.randomUUID().toString()), ApiKeyCreatedAt.create(
-				java.time.Instant.now().plusSeconds(3600)), ApiKeyExpiration.create(
-				java.time.Instant.now().plusSeconds(3600)));
-		commandGateway.sendAndWait(command);
+	public static CreateApiKeyCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
 
+		CreateApiKeyCommand command = CreateApiKeyCommand.builder()
+				.key(ApiKeyKey.create(UUID.randomUUID().toString()))
+				.username(ApiKeyUsername.create(UUID.randomUUID().toString()))
+				.createdAt(ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)))
+				.expiration(ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)))
+				.build();
+
+		command.setCreatedBy(ApiKeyCreatedBy.create(userId));
+
+		commandGateway.sendAndWait(command);
 		return command;
 	}
-
 }

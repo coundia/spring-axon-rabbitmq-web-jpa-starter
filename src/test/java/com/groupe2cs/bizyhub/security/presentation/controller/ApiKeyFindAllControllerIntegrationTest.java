@@ -23,7 +23,7 @@ public class ApiKeyFindAllControllerIntegrationTest extends BaseIntegrationTests
 
 	@Test
 	void it_should_be_able_to_get_all_apikeys() {
-		List<?> list = ApiKeyFixtures.randomManyViaCommand(commandGateway, 5);
+		List<?> list = ApiKeyFixtures.randomManyViaCommand(commandGateway, 5, getUserId());
 
 		String uri = "/v1/queries/apiKeys";
 		ResponseEntity<ApiKeyPagedResponse> response = this.getForEntity(uri, ApiKeyPagedResponse.class);

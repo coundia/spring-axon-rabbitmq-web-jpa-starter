@@ -23,7 +23,7 @@ public class TransactionFindAllControllerIntegrationTest extends BaseIntegration
 
 	@Test
 	void it_should_be_able_to_get_all_transactions() {
-		List<?> list = TransactionFixtures.randomManyViaCommand(commandGateway, 5);
+		List<?> list = TransactionFixtures.randomManyViaCommand(commandGateway, 5, getUserId());
 
 		String uri = "/v1/queries/transactions";
 		ResponseEntity<TransactionPagedResponse> response = this.getForEntity(uri, TransactionPagedResponse.class);

@@ -20,13 +20,15 @@ public class ApiKeyAggregateTests extends BaseUnitTests {
 		ApiKeyUsername username = ApiKeyUsername.create(UUID.randomUUID().toString());
 		ApiKeyCreatedAt createdAt = ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600));
 		ApiKeyExpiration expiration = ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600));
-		ApiKeyAggregate apiKey = new ApiKeyAggregate(id, key, username, createdAt, expiration);
+		ApiKeyCreatedBy createdBy = ApiKeyCreatedBy.create(UUID.randomUUID().toString());
+		ApiKeyAggregate apiKey = new ApiKeyAggregate(id, key, username, createdAt, expiration, createdBy);
 		assertThat(apiKey.getId()).isNotNull();
 		assertThat(apiKey.getId()).isEqualTo(id);
 		assertThat(apiKey.getKey()).isEqualTo(key);
 		assertThat(apiKey.getUsername()).isEqualTo(username);
 		assertThat(apiKey.getCreatedAt()).isEqualTo(createdAt);
 		assertThat(apiKey.getExpiration()).isEqualTo(expiration);
+		assertThat(apiKey.getCreatedBy()).isEqualTo(createdBy);
 	}
 
 	@Test
@@ -59,6 +61,12 @@ public class ApiKeyAggregateTests extends BaseUnitTests {
 				error =
 				assertThrows(ApiKeyExpirationNotValid.class, () -> ApiKeyExpiration.create(null));
 		assertThat(error.getMessage()).isEqualTo("Expiration is invalid");
+	}
+
+	@Test
+	void it_should_throw_when_createdBy_is_invalid() {
+		ApiKeyCreatedByNotValid error = assertThrows(ApiKeyCreatedByNotValid.class, () -> ApiKeyCreatedBy.create(""));
+		assertThat(error.getMessage()).isEqualTo("CreatedBy is invalid");
 	}
 
 }

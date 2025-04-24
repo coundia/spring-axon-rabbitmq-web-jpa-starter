@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.transactions.domain.event;
 
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionAmount;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class TransactionCreatedEvent implements Serializable {
 	private TransactionId id;
 	private TransactionReference reference;
 	private TransactionAmount amount;
+	private TransactionCreatedBy createdBy;
 
 
 }

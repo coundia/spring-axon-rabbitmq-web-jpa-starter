@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
 import com.groupe2cs.bizyhub.transactions.application.usecase.TransactionUpdateApplicationService;
@@ -15,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@transactionGate.canEdit(authentication, #id)")
@@ -39,11 +42,18 @@ public class UpdateTransactionController {
 					content = @Content)
 	})
 	@PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TransactionResponse> updateTransaction(@Valid @PathVariable String id, @RequestBody TransactionRequest request) {
+	public ResponseEntity<TransactionResponse> updateTransaction(
+			@Valid @PathVariable String id,
+			@RequestBody TransactionRequest request,
+			@AuthenticationPrincipal Jwt jwt
+	) {
 		{
 			try {
 
-				TransactionResponse response = applicationService.updateTransaction(TransactionId.create(id), request);
+				TransactionResponse response = applicationService.updateTransaction(TransactionId.create(id),
+						request,
+						RequestContext.getUserId(jwt)
+				);
 
 				return ResponseEntity.ok(response);
 

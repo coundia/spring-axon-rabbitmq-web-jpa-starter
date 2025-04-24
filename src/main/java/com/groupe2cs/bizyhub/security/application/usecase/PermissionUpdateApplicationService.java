@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdatePermissionComman
 import com.groupe2cs.bizyhub.security.application.dto.PermissionRequest;
 import com.groupe2cs.bizyhub.security.application.dto.PermissionResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.PermissionMapper;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +19,18 @@ public class PermissionUpdateApplicationService {
 	private final CommandGateway commandGateway;
 
 
-	public PermissionResponse updatePermission(PermissionId id, PermissionRequest request) {
+	public PermissionResponse updatePermission(PermissionId id, PermissionRequest request,
+											   String createdBy
+	) {
 
 		UpdatePermissionCommand command = PermissionMapper.toUpdateCommand(
 				id,
 				request
 		);
+
+		if (createdBy != null) {
+			command.setCreatedBy(PermissionCreatedBy.create(createdBy));
+		}
 
 		commandGateway.sendAndWait(command);
 

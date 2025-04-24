@@ -29,13 +29,13 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
 	@Test
 	void it_should_be_able_to_update_transaction() {
 
-		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 
-		CreateTransactionCommand updated = TransactionFixtures.randomOneViaCommand(commandGatewayUpdate);
+		CreateTransactionCommand updated = TransactionFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
 
 		TransactionRequest requestDTO = new TransactionRequest();
 		requestDTO.setReference(UUID.randomUUID().toString());
-		requestDTO.setAmount(3608.8);
+		requestDTO.setAmount(1566.54);
 
 		String uri = "/v1/commands/transaction/" + existingId;
 		ResponseEntity<String> response = this.put(uri, requestDTO);

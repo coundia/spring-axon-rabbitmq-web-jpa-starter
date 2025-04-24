@@ -19,6 +19,7 @@ public class ApiKeyUpdatedEvent implements Serializable {
 	private ApiKeyUsername username;
 	private ApiKeyCreatedAt createdAt;
 	private ApiKeyExpiration expiration;
+	private ApiKeyCreatedBy createdBy;
 
 
 }

@@ -29,9 +29,9 @@ public class ApiKeyUpdateControllerIntegrationTest extends BaseIntegrationTests 
 	@Test
 	void it_should_be_able_to_update_apikey() {
 
-		String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 
-		CreateApiKeyCommand updated = ApiKeyFixtures.randomOneViaCommand(commandGatewayUpdate);
+		CreateApiKeyCommand updated = ApiKeyFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
 
 		ApiKeyRequest requestDTO = new ApiKeyRequest();
 		requestDTO.setKey(UUID.randomUUID().toString());

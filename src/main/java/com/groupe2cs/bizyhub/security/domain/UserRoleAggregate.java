@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateUserRoleCommand;
 import com.groupe2cs.bizyhub.security.domain.event.UserRoleCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.UserRoleDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.UserRoleUpdatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
@@ -31,6 +32,7 @@ public class UserRoleAggregate {
 	private UserRoleId id;
 	private UserRoleUser user;
 	private UserRoleRole role;
+	private UserRoleCreatedBy createdBy;
 
 
 	@CommandHandler
@@ -38,7 +40,8 @@ public class UserRoleAggregate {
 		apply(new UserRoleCreatedEvent(
 				command.getId(),
 				command.getUser(),
-				command.getRole()
+				command.getRole(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -54,7 +57,8 @@ public class UserRoleAggregate {
 		apply(new UserRoleUpdatedEvent(
 				command.getId(),
 				command.getUser(),
-				command.getRole()
+				command.getRole(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -63,6 +67,7 @@ public class UserRoleAggregate {
 		this.id = event.getId();
 		this.user = event.getUser();
 		this.role = event.getRole();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -75,6 +80,7 @@ public class UserRoleAggregate {
 		this.id = event.getId();
 		this.user = event.getUser();
 		this.role = event.getRole();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }

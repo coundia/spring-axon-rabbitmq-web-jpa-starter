@@ -29,7 +29,8 @@ public class CreateApiKeyCommandTest extends BaseUnitTests {
 				ApiKeyKey.create(UUID.randomUUID().toString()),
 				ApiKeyUsername.create(UUID.randomUUID().toString()),
 				ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)),
-				ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600))
+				ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)),
+				ApiKeyCreatedBy.create(UUID.randomUUID().toString())
 		);
 		commandGateway.send(command);
 
@@ -47,6 +48,8 @@ public class CreateApiKeyCommandTest extends BaseUnitTests {
 				command.getCreatedAt().value());
 		assertThat(sentCommand.getExpiration().value()).isEqualTo(
 				command.getExpiration().value());
+		assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
+				command.getCreatedBy().value());
 	}
 
 	@Test
@@ -57,7 +60,8 @@ public class CreateApiKeyCommandTest extends BaseUnitTests {
 						ApiKeyKey.create(UUID.randomUUID().toString()),
 						ApiKeyUsername.create(UUID.randomUUID().toString()),
 						ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)),
-						ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)));
+						ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)),
+						ApiKeyCreatedBy.create(UUID.randomUUID().toString()));
 		String json = new ObjectMapper().writeValueAsString(event);
 		assertThat(json).isNotEmpty();
 	}

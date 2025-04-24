@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
@@ -19,6 +20,7 @@ public class UserUpdatedEvent implements Serializable {
 	private UserId id;
 	private UserUsername username;
 	private UserPassword password;
+	private UserCreatedBy createdBy;
 
 
 }

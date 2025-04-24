@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.shared.BaseUnitTests;
 import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionCreatedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionAmount;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -29,7 +30,8 @@ public class CreateTransactionCommandTest extends BaseUnitTests {
 		CreateTransactionCommand command = new CreateTransactionCommand(
 				TransactionId.create(UUID.randomUUID().toString()),
 				TransactionReference.create(UUID.randomUUID().toString()),
-				TransactionAmount.create(4605.9)
+				TransactionAmount.create(9163.45),
+				TransactionCreatedBy.create(UUID.randomUUID().toString())
 		);
 		commandGateway.send(command);
 
@@ -45,6 +47,8 @@ public class CreateTransactionCommandTest extends BaseUnitTests {
 				command.getReference().value());
 		assertThat(sentCommand.getAmount().value()).isEqualTo(
 				command.getAmount().value());
+		assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
+				command.getCreatedBy().value());
 	}
 
 	@Test
@@ -53,7 +57,8 @@ public class CreateTransactionCommandTest extends BaseUnitTests {
 				event =
 				new TransactionCreatedEvent(TransactionId.create(UUID.randomUUID().toString()),
 						TransactionReference.create(UUID.randomUUID().toString()),
-						TransactionAmount.create(4605.9));
+						TransactionAmount.create(9163.45),
+						TransactionCreatedBy.create(UUID.randomUUID().toString()));
 		String json = new ObjectMapper().writeValueAsString(event);
 		assertThat(json).isNotEmpty();
 	}

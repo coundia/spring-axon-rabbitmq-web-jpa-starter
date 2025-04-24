@@ -23,7 +23,6 @@ import java.time.Instant;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-
 @Service
 @RequiredArgsConstructor
 public class PasswordResetService {
@@ -38,11 +37,11 @@ public class PasswordResetService {
 		String token = UUID.randomUUID().toString();
 		Instant expiration = Instant.now().plusSeconds(3600);
 
-		var command = new CreatePasswordResetCommand(
-				new PasswordResetToken(token),
-				new PasswordResetUsername(email),
-				new PasswordResetExpiration(expiration)
-		);
+		var command = CreatePasswordResetCommand.builder()
+				.token(PasswordResetToken.create(token))
+				.username(PasswordResetUsername.create(email))
+				.expiration(PasswordResetExpiration.create(expiration))
+				.build();
 
 		commandGateway.sendAndWait(command);
 		return token;
@@ -51,7 +50,7 @@ public class PasswordResetService {
 	@Transactional
 	public boolean resetPassword(String token, String newPassword) {
 		try {
-			var query = new FindByPasswordResetTokenQuery(new PasswordResetToken(token));
+			var query = new FindByPasswordResetTokenQuery(PasswordResetToken.create(token));
 			var tokenEntity = queryGateway.query(query, PasswordResetResponse.class).get();
 
 			if (tokenEntity == null || tokenEntity.getExpiration().isBefore(Instant.now())) return false;
@@ -61,7 +60,10 @@ public class PasswordResetService {
 
 			user.setPassword(encoder.encode(newPassword));
 
-			var deleteCommand = new DeletePasswordResetCommand(new PasswordResetId(tokenEntity.getId()));
+			var deleteCommand = DeletePasswordResetCommand.builder()
+					.id(PasswordResetId.create(tokenEntity.getId()))
+					.build();
+
 			commandGateway.send(deleteCommand);
 			return true;
 
@@ -72,12 +74,11 @@ public class PasswordResetService {
 
 	@EventHandler
 	public void on(PasswordResetCreatedEvent event) {
-
 		this.mailSender.send(
 				"noreply@pcoundia.com",
 				event.getUsername().value(),
 				"Password Reset",
-				"Your token: " + event.getToken());
-
+				"Your token: " + event.getToken()
+		);
 	}
 }

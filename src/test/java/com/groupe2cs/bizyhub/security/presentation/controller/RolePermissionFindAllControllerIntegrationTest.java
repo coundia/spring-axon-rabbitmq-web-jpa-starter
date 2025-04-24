@@ -23,7 +23,7 @@ public class RolePermissionFindAllControllerIntegrationTest extends BaseIntegrat
 
 	@Test
 	void it_should_be_able_to_get_all_rolepermissions() {
-		List<?> list = RolePermissionFixtures.randomManyViaCommand(commandGateway, 5);
+		List<?> list = RolePermissionFixtures.randomManyViaCommand(commandGateway, 5, getUserId());
 
 		String uri = "/v1/queries/rolePermissions";
 		ResponseEntity<RolePermissionPagedResponse>

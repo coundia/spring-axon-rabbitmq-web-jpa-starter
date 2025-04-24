@@ -29,9 +29,9 @@ public class UserUpdateControllerIntegrationTest extends BaseIntegrationTests {
 	@Test
 	void it_should_be_able_to_update_user() {
 
-		String existingId = UserFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = UserFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 
-		CreateUserCommand updated = UserFixtures.randomOneViaCommand(commandGatewayUpdate);
+		CreateUserCommand updated = UserFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
 
 		UserRequest requestDTO = new UserRequest();
 		requestDTO.setUsername(UUID.randomUUID().toString());

@@ -25,4 +25,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 	@Query("SELECT t FROM User t WHERE t.password = :password")
 	List<User> findByPassword(String password);
 
+	@Query("SELECT t FROM User t WHERE t.createdBy = :createdBy")
+	List<User> findByCreatedBy(String createdBy);
+
 }

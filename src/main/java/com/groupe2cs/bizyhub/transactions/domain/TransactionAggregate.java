@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.transactions.domain.event.TransactionCreatedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionDeletedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionUpdatedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionAmount;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class TransactionAggregate {
 	private TransactionId id;
 	private TransactionReference reference;
 	private TransactionAmount amount;
+	private TransactionCreatedBy createdBy;
 
 
 	@CommandHandler
@@ -38,7 +40,8 @@ public class TransactionAggregate {
 		apply(new TransactionCreatedEvent(
 				command.getId(),
 				command.getReference(),
-				command.getAmount()
+				command.getAmount(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -54,7 +57,8 @@ public class TransactionAggregate {
 		apply(new TransactionUpdatedEvent(
 				command.getId(),
 				command.getReference(),
-				command.getAmount()
+				command.getAmount(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -63,6 +67,7 @@ public class TransactionAggregate {
 		this.id = event.getId();
 		this.reference = event.getReference();
 		this.amount = event.getAmount();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -75,6 +80,7 @@ public class TransactionAggregate {
 		this.id = event.getId();
 		this.reference = event.getReference();
 		this.amount = event.getAmount();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }

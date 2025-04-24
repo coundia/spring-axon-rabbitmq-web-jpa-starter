@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.command.CreateUserCommand;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
@@ -17,10 +18,11 @@ import static org.awaitility.Awaitility.await;
 public class UserFixtures {
 
 	public static User randomOne(UserRepository repository) {
-		User entity = new User();
-		entity.setId(UUID.randomUUID().toString());
-		entity.setUsername(UUID.randomUUID().toString());
-		entity.setPassword(UUID.randomUUID().toString());
+		User entity = User.builder()
+				.id(UUID.randomUUID().toString())
+				.username(UUID.randomUUID().toString())
+				.password(UUID.randomUUID().toString())
+				.build();
 		return repository.save(entity);
 	}
 
@@ -29,21 +31,16 @@ public class UserFixtures {
 	}
 
 	public static User byId(UserRepository repository, String id) {
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static User byIdWaitExist(UserRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static User byIdWaitNotExist(UserRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-
 		return repository.findById(id).orElse(null);
 	}
 
@@ -55,10 +52,10 @@ public class UserFixtures {
 		return items;
 	}
 
-	public static List<CreateUserCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
+	public static List<CreateUserCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
 		List<CreateUserCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway));
+			items.add(randomOneViaCommand(commandGateway, userId));
 		}
 		return items;
 	}
@@ -67,14 +64,16 @@ public class UserFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateUserCommand randomOneViaCommand(CommandGateway commandGateway) {
-		CreateUserCommand command = new CreateUserCommand(
-				UserUsername.create(
-						UUID.randomUUID().toString()), UserPassword.create(
-				UUID.randomUUID().toString()));
-		commandGateway.sendAndWait(command);
+	public static CreateUserCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
 
+		CreateUserCommand command = CreateUserCommand.builder()
+				.username(UserUsername.create(UUID.randomUUID().toString()))
+				.password(UserPassword.create(UUID.randomUUID().toString()))
+				.build();
+
+		command.setCreatedBy(UserCreatedBy.create(userId));
+
+		commandGateway.sendAndWait(command);
 		return command;
 	}
-
 }

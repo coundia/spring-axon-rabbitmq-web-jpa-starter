@@ -21,5 +21,7 @@ public class RefreshTokenResponse implements Serializable {
 	private String username;
 	@Schema(description = "", example = "")
 	private java.time.Instant expiration;
+	@Schema(description = "", example = "")
+	private String createdBy;
 
 }

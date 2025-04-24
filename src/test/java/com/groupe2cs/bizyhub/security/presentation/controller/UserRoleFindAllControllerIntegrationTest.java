@@ -23,7 +23,7 @@ public class UserRoleFindAllControllerIntegrationTest extends BaseIntegrationTes
 
 	@Test
 	void it_should_be_able_to_get_all_userroles() {
-		List<?> list = UserRoleFixtures.randomManyViaCommand(commandGateway, 5);
+		List<?> list = UserRoleFixtures.randomManyViaCommand(commandGateway, 5, getUserId());
 
 		String uri = "/v1/queries/userRoles";
 		ResponseEntity<UserRolePagedResponse> response = this.getForEntity(uri, UserRolePagedResponse.class);

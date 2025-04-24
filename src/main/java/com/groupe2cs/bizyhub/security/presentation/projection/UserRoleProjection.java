@@ -28,16 +28,20 @@ public class UserRoleProjection {
 	@EventHandler
 	public void on(UserRoleCreatedEvent event) {
 		try {
-			UserRole entity = new UserRole(
-					event.getId().value(),
-					new User(event.getUser().value()),
-					new Role(event.getRole().value())
-			);
+			UserRole entity = UserRole.builder()
+					.id(event.getId().value())
+					.user(new User(event.getUser().value()))
+					.role(new Role(event.getRole().value()))
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("UserRole inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving UserRole: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -47,9 +51,16 @@ public class UserRoleProjection {
 		try {
 			UserRole entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("UserRole not found"));
+
 			entity.setId(event.getId().value());
 			entity.setUser(new User(event.getUser().value()));
 			entity.setRole(new Role(event.getRole().value()));
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("UserRole updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

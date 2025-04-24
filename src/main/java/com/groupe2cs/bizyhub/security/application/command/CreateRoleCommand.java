@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleName;
 import lombok.*;
@@ -18,14 +19,17 @@ public class CreateRoleCommand implements Serializable {
 	@Builder.Default
 	private RoleId id = RoleId.create(UUID.randomUUID().toString());
 	private RoleName name;
+	private RoleCreatedBy createdBy;
 
 	public CreateRoleCommand(
 
-			RoleName name
+			RoleName name,
+			RoleCreatedBy createdBy
 	) {
 		this.id = RoleId.create(UUID.randomUUID().toString());
 
 		this.name = name;
+		this.createdBy = createdBy;
 	}
 
 

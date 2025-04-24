@@ -31,6 +31,7 @@ public class ApiKeyAggregate {
 	private ApiKeyUsername username;
 	private ApiKeyCreatedAt createdAt;
 	private ApiKeyExpiration expiration;
+	private ApiKeyCreatedBy createdBy;
 
 
 	@CommandHandler
@@ -40,7 +41,8 @@ public class ApiKeyAggregate {
 				command.getKey(),
 				command.getUsername(),
 				command.getCreatedAt(),
-				command.getExpiration()
+				command.getExpiration(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -58,7 +60,8 @@ public class ApiKeyAggregate {
 				command.getKey(),
 				command.getUsername(),
 				command.getCreatedAt(),
-				command.getExpiration()
+				command.getExpiration(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -69,6 +72,7 @@ public class ApiKeyAggregate {
 		this.username = event.getUsername();
 		this.createdAt = event.getCreatedAt();
 		this.expiration = event.getExpiration();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -83,6 +87,7 @@ public class ApiKeyAggregate {
 		this.username = event.getUsername();
 		this.createdAt = event.getCreatedAt();
 		this.expiration = event.getExpiration();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }

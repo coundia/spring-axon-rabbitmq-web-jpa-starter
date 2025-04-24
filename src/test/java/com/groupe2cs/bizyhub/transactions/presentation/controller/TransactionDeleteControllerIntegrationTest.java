@@ -20,7 +20,7 @@ public class TransactionDeleteControllerIntegrationTest extends BaseIntegrationT
 
 	@Test
 	void it_should_be_able_to_delete_transaction() {
-		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 		String uri = "/v1/commands/transaction/" + existingId;
 
 		ResponseEntity<String> rep = this.delete(uri);

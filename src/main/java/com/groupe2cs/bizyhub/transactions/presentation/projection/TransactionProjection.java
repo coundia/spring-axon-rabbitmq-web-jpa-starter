@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.transactions.presentation.projection;
 
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionCreatedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionDeletedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionUpdatedEvent;
@@ -26,16 +27,21 @@ public class TransactionProjection {
 	@EventHandler
 	public void on(TransactionCreatedEvent event) {
 		try {
-			Transaction entity = new Transaction(
-					event.getId().value(),
-					event.getReference().value(),
-					event.getAmount().value()
-			);
+			Transaction entity = Transaction.builder()
+					.id(event.getId().value())
+					.reference(event.getReference().value())
+					.amount(event.getAmount().value())
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				//todo : check if the user exists
+				//entity.setCreatedBy( new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("Transaction inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving Transaction: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -45,9 +51,16 @@ public class TransactionProjection {
 		try {
 			Transaction entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("Transaction not found"));
+
 			entity.setId(event.getId().value());
 			entity.setReference(event.getReference().value());
 			entity.setAmount(event.getAmount().value());
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("Transaction updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

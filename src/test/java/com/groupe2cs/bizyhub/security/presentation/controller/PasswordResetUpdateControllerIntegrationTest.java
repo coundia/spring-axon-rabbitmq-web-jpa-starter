@@ -29,9 +29,11 @@ public class PasswordResetUpdateControllerIntegrationTest extends BaseIntegratio
 	@Test
 	void it_should_be_able_to_update_passwordreset() {
 
-		String existingId = PasswordResetFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = PasswordResetFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 
-		CreatePasswordResetCommand updated = PasswordResetFixtures.randomOneViaCommand(commandGatewayUpdate);
+		CreatePasswordResetCommand
+				updated =
+				PasswordResetFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
 
 		PasswordResetRequest requestDTO = new PasswordResetRequest();
 		requestDTO.setToken(UUID.randomUUID().toString());

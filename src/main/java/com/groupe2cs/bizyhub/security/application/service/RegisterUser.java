@@ -7,11 +7,9 @@ import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -33,12 +31,12 @@ public class RegisterUser {
 				.password(passwordEncoder.encode(request.getPassword()))
 				.build();
 
-		userRepository.save(user);
+		UserPrincipal userPrincipal = new UserPrincipal(user);
 
 		Authentication authentication = new UsernamePasswordAuthenticationToken(
-				user.getUsername(),
+				userPrincipal,
 				null,
-				List.of(new SimpleGrantedAuthority("ROLE_USER"))
+				userPrincipal.getAuthorities()
 		);
 
 		String token = jwtService.generateToken(authentication);

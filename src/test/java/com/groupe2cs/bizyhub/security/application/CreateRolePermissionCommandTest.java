@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupe2cs.bizyhub.security.application.command.CreateRolePermissionCommand;
 import com.groupe2cs.bizyhub.security.domain.event.RolePermissionCreatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
@@ -29,7 +30,8 @@ public class CreateRolePermissionCommandTest extends BaseUnitTests {
 		CreateRolePermissionCommand command = new CreateRolePermissionCommand(
 				RolePermissionId.create(UUID.randomUUID().toString()),
 				RolePermissionRole.create(UUID.randomUUID().toString()),
-				RolePermissionPermission.create(UUID.randomUUID().toString())
+				RolePermissionPermission.create(UUID.randomUUID().toString()),
+				RolePermissionCreatedBy.create(UUID.randomUUID().toString())
 		);
 		commandGateway.send(command);
 
@@ -45,6 +47,8 @@ public class CreateRolePermissionCommandTest extends BaseUnitTests {
 				command.getRole().value());
 		assertThat(sentCommand.getPermission().value()).isEqualTo(
 				command.getPermission().value());
+		assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
+				command.getCreatedBy().value());
 	}
 
 	@Test
@@ -53,7 +57,8 @@ public class CreateRolePermissionCommandTest extends BaseUnitTests {
 				event =
 				new RolePermissionCreatedEvent(RolePermissionId.create(UUID.randomUUID().toString()),
 						RolePermissionRole.create(UUID.randomUUID().toString()),
-						RolePermissionPermission.create(UUID.randomUUID().toString()));
+						RolePermissionPermission.create(UUID.randomUUID().toString()),
+						RolePermissionCreatedBy.create(UUID.randomUUID().toString()));
 		String json = new ObjectMapper().writeValueAsString(event);
 		assertThat(json).isNotEmpty();
 	}

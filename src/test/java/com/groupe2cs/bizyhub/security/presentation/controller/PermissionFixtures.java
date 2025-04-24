@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.command.CreatePermissionCommand;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PermissionRepository;
@@ -16,9 +17,10 @@ import static org.awaitility.Awaitility.await;
 public class PermissionFixtures {
 
 	public static Permission randomOne(PermissionRepository repository) {
-		Permission entity = new Permission();
-		entity.setId(UUID.randomUUID().toString());
-		entity.setName(UUID.randomUUID().toString());
+		Permission entity = Permission.builder()
+				.id(UUID.randomUUID().toString())
+				.name(UUID.randomUUID().toString())
+				.build();
 		return repository.save(entity);
 	}
 
@@ -27,21 +29,16 @@ public class PermissionFixtures {
 	}
 
 	public static Permission byId(PermissionRepository repository, String id) {
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static Permission byIdWaitExist(PermissionRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static Permission byIdWaitNotExist(PermissionRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-
 		return repository.findById(id).orElse(null);
 	}
 
@@ -53,10 +50,10 @@ public class PermissionFixtures {
 		return items;
 	}
 
-	public static List<CreatePermissionCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
+	public static List<CreatePermissionCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
 		List<CreatePermissionCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway));
+			items.add(randomOneViaCommand(commandGateway, userId));
 		}
 		return items;
 	}
@@ -65,13 +62,15 @@ public class PermissionFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreatePermissionCommand randomOneViaCommand(CommandGateway commandGateway) {
-		CreatePermissionCommand command = new CreatePermissionCommand(
-				PermissionName.create(
-						UUID.randomUUID().toString()));
-		commandGateway.sendAndWait(command);
+	public static CreatePermissionCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
 
+		CreatePermissionCommand command = CreatePermissionCommand.builder()
+				.name(PermissionName.create(UUID.randomUUID().toString()))
+				.build();
+
+		command.setCreatedBy(PermissionCreatedBy.create(userId));
+
+		commandGateway.sendAndWait(command);
 		return command;
 	}
-
 }

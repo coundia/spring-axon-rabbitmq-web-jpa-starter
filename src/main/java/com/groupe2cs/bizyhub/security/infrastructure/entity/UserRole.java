@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,6 +22,9 @@ public class UserRole {
 	@ManyToOne
 	@JoinColumn(name = "role_id", nullable = false)
 	private Role role;
+	@ManyToOne
+	@JoinColumn(name = "createdBy_id", nullable = true)
+	private User createdBy;
 
 	public UserRole(String id) {
 		this.id = id;
@@ -32,6 +36,7 @@ public class UserRole {
 				"id='" + id + '\'' +
 				", user=" + user +
 				", role=" + role +
+				", createdBy=" + createdBy +
 				'}';
 	}
 }

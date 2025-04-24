@@ -1,9 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import lombok.*;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -20,6 +17,7 @@ public class UpdatePasswordResetCommand implements Serializable {
 	private PasswordResetToken token;
 	private PasswordResetUsername username;
 	private PasswordResetExpiration expiration;
+	private PasswordResetCreatedBy createdBy;
 
 
 }

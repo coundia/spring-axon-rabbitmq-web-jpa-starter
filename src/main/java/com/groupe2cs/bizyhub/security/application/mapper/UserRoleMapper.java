@@ -10,46 +10,53 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 
-
 public class UserRoleMapper {
 
 	public static UserRoleResponse toResponse(UserRole entity) {
-		return new UserRoleResponse(
-				entity.getId(),
-				entity.getUser().getId(),
-				entity.getRole().getId()
-		);
+		return UserRoleResponse.builder()
+				.id(entity.getId())
+				.user(entity.getUser().getId())
+				.role(entity.getRole().getId())
+				.build();
 	}
 
 	public static UserRoleResponse toResponse(CreateUserRoleCommand command) {
-		return new UserRoleResponse(
-				command.getId().value(), command.getUser().value(), command.getRole().value()
-		);
+		return UserRoleResponse.builder()
+				.id(command.getId().value())
+				.user(command.getUser().value())
+				.role(command.getRole().value())
+				.build();
 	}
 
 	public static UserRoleResponse toResponse(UpdateUserRoleCommand command) {
-		return new UserRoleResponse(
-				command.getId().value(), command.getUser().value(), command.getRole().value()
-		);
+		return UserRoleResponse.builder()
+				.id(command.getId().value())
+				.user(command.getUser().value())
+				.role(command.getRole().value())
+				.build();
 	}
-
 
 	public static CreateUserRoleCommand toCommand(
 			UserRoleRequest request
 	) {
-		return new CreateUserRoleCommand(
-				UserRoleUser.create(request.getUser()), UserRoleRole.create(request.getRole())
-		);
+		return CreateUserRoleCommand.builder()
+				.user(UserRoleUser.create(request.getUser()))
+				.role(UserRoleRole.create(request.getRole()))
+				.build();
 	}
 
 	public static UpdateUserRoleCommand toUpdateCommand(UserRoleId id, UserRoleRequest request) {
-		return new UpdateUserRoleCommand(
-				id, UserRoleUser.create(request.getUser()), UserRoleRole.create(request.getRole())
-		);
+		return UpdateUserRoleCommand.builder()
+				.id(id)
+				.user(UserRoleUser.create(request.getUser()))
+				.role(UserRoleRole.create(request.getRole()))
+				.build();
 	}
 
 
 	public static DeleteUserRoleCommand toDeleteCommand(UserRoleId id) {
-		return new DeleteUserRoleCommand(id);
+		return DeleteUserRoleCommand.builder()
+				.id(id)
+				.build();
 	}
 }

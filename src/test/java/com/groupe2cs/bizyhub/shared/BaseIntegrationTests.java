@@ -11,10 +11,11 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+
+import java.util.Map;
 
 @SpringBootTest(
 		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -24,6 +25,8 @@ import org.springframework.http.ResponseEntity;
 @Slf4j
 public class BaseIntegrationTests {
 
+	public String userId;
+
 	@LocalServerPort
 	public int port;
 
@@ -32,12 +35,12 @@ public class BaseIntegrationTests {
 
 	@Autowired
 	public TestRestTemplate testRestTemplate;
-
 	public HttpHeaders headers;
+	@Autowired
+	private JwtDecoder jwtDecoder;
 
 	@BeforeEach
 	void authenticate() {
-
 		headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -53,13 +56,13 @@ public class BaseIntegrationTests {
 		);
 
 		if (response.getStatusCode().isError()) {
-			throw new RuntimeException("Failed to register test user +: " + response.getBody().toString());
+			throw new RuntimeException("Failed to authenticate test user: " + response.getBody());
 		}
 
 		String token = response.getBody().getToken();
 		headers.setBearerAuth(token);
 
-
+		userId = getUserId();
 	}
 
 	public String getBaseUrl() {
@@ -68,44 +71,44 @@ public class BaseIntegrationTests {
 		return uri;
 	}
 
+	public Map<String, Object> getTokenClaims() {
+		String token = headers.getFirst(HttpHeaders.AUTHORIZATION).replace("Bearer ", "");
+		Jwt jwt = jwtDecoder.decode(token);
+		log.info("Claims: {}", jwt.getClaims());
+		return jwt.getClaims();
+	}
+
+	public String getUserId() {
+		return (String) getTokenClaims().get("userId");
+	}
+
 	public ResponseEntity<String> get(String uri) {
-		return testRestTemplate.exchange(getBaseUrl() + uri, org.springframework.http.HttpMethod.GET, new
-				HttpEntity<>(headers), String.class);
+		return testRestTemplate.exchange(getBaseUrl() + uri, HttpMethod.GET, new HttpEntity<>(headers), String.class);
 	}
 
-	public ResponseEntity
-			<String> delete(String uri) {
-		return testRestTemplate.exchange(getBaseUrl() + uri, org.springframework.http.HttpMethod.DELETE, new
-				HttpEntity<>(headers), String.class);
-	}
-
-	public <T> ResponseEntity<T> postForEntity(String uri, Object request, Class
-			<T> responseType) {
-		return testRestTemplate.postForEntity(
-				getBaseUrl() + uri,
-				new HttpEntity<>(request, headers),
-				responseType
-		);
-	}
-
-	public <T> ResponseEntity
-			<T> getForEntity(String uri, Class
-			<T> responseType) {
+	public ResponseEntity<String> delete(String uri) {
 		return testRestTemplate.exchange(getBaseUrl() + uri,
-				org.springframework.http.HttpMethod.GET, new HttpEntity<>(headers), responseType);
+				HttpMethod.DELETE,
+				new HttpEntity<>(headers),
+				String.class);
+	}
+
+	public <T> ResponseEntity<T> postForEntity(String uri, Object request, Class<T> responseType) {
+		return testRestTemplate.postForEntity(getBaseUrl() + uri, new HttpEntity<>(request, headers), responseType);
+	}
+
+	public <T> ResponseEntity<T> getForEntity(String uri, Class<T> responseType) {
+		return testRestTemplate.exchange(getBaseUrl() + uri, HttpMethod.GET, new HttpEntity<>(headers), responseType);
 	}
 
 	public ResponseEntity<String> post(String uri, Object request) {
-		return testRestTemplate.postForEntity(
-				getBaseUrl() + uri,
-				new HttpEntity<>(request, headers),
-				String.class
-		);
+		return testRestTemplate.postForEntity(getBaseUrl() + uri, new HttpEntity<>(request, headers), String.class);
 	}
 
 	public ResponseEntity<String> put(String uri, Object request) {
 		return testRestTemplate.exchange(getBaseUrl() + uri,
-				org.springframework.http.HttpMethod.PUT, new HttpEntity<>(request, headers),
+				HttpMethod.PUT,
+				new HttpEntity<>(request, headers),
 				String.class);
 	}
 

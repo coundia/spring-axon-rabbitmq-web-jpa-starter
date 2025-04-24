@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
@@ -19,6 +20,7 @@ public class RolePermissionCreatedEvent implements Serializable {
 	private RolePermissionId id;
 	private RolePermissionRole role;
 	private RolePermissionPermission permission;
+	private RolePermissionCreatedBy createdBy;
 
 
 }

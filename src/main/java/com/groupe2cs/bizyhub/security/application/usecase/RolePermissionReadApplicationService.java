@@ -2,10 +2,8 @@ package com.groupe2cs.bizyhub.security.application.usecase;
 
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionPagedResponse;
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
-import com.groupe2cs.bizyhub.security.application.query.FindAllRolePermissionQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByRolePermissionIdQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByRolePermissionPermissionQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByRolePermissionRoleQuery;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
@@ -52,6 +50,14 @@ public class RolePermissionReadApplicationService {
 	public List<RolePermissionResponse> findByRolePermissionPermission(RolePermissionPermission value) {
 
 		FindByRolePermissionPermissionQuery query = new FindByRolePermissionPermissionQuery(value);
+		CompletableFuture<List<RolePermissionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RolePermissionResponse.class));
+		return future.join();
+	}
+
+	public List<RolePermissionResponse> findByRolePermissionCreatedBy(RolePermissionCreatedBy value) {
+
+		FindByRolePermissionCreatedByQuery query = new FindByRolePermissionCreatedByQuery(value);
 		CompletableFuture<List<RolePermissionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RolePermissionResponse.class));
 		return future.join();

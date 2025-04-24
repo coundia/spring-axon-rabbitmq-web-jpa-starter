@@ -2,10 +2,8 @@ package com.groupe2cs.bizyhub.security.application.usecase;
 
 import com.groupe2cs.bizyhub.security.application.dto.UserRolePagedResponse;
 import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
-import com.groupe2cs.bizyhub.security.application.query.FindAllUserRoleQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByUserRoleIdQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByUserRoleRoleQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByUserRoleUserQuery;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
@@ -52,6 +50,14 @@ public class UserRoleReadApplicationService {
 	public List<UserRoleResponse> findByUserRoleRole(UserRoleRole value) {
 
 		FindByUserRoleRoleQuery query = new FindByUserRoleRoleQuery(value);
+		CompletableFuture<List<UserRoleResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserRoleResponse.class));
+		return future.join();
+	}
+
+	public List<UserRoleResponse> findByUserRoleCreatedBy(UserRoleCreatedBy value) {
+
+		FindByUserRoleCreatedByQuery query = new FindByUserRoleCreatedByQuery(value);
 		CompletableFuture<List<UserRoleResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserRoleResponse.class));
 		return future.join();

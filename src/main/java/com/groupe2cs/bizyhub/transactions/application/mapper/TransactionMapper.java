@@ -10,46 +10,53 @@ import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction;
 
-
 public class TransactionMapper {
 
 	public static TransactionResponse toResponse(Transaction entity) {
-		return new TransactionResponse(
-				entity.getId(),
-				entity.getReference(),
-				entity.getAmount()
-		);
+		return TransactionResponse.builder()
+				.id(entity.getId())
+				.reference(entity.getReference())
+				.amount(entity.getAmount())
+				.build();
 	}
 
 	public static TransactionResponse toResponse(CreateTransactionCommand command) {
-		return new TransactionResponse(
-				command.getId().value(), command.getReference().value(), command.getAmount().value()
-		);
+		return TransactionResponse.builder()
+				.id(command.getId().value())
+				.reference(command.getReference().value())
+				.amount(command.getAmount().value())
+				.build();
 	}
 
 	public static TransactionResponse toResponse(UpdateTransactionCommand command) {
-		return new TransactionResponse(
-				command.getId().value(), command.getReference().value(), command.getAmount().value()
-		);
+		return TransactionResponse.builder()
+				.id(command.getId().value())
+				.reference(command.getReference().value())
+				.amount(command.getAmount().value())
+				.build();
 	}
-
 
 	public static CreateTransactionCommand toCommand(
 			TransactionRequest request
 	) {
-		return new CreateTransactionCommand(
-				TransactionReference.create(request.getReference()), TransactionAmount.create(request.getAmount())
-		);
+		return CreateTransactionCommand.builder()
+				.reference(TransactionReference.create(request.getReference()))
+				.amount(TransactionAmount.create(request.getAmount()))
+				.build();
 	}
 
 	public static UpdateTransactionCommand toUpdateCommand(TransactionId id, TransactionRequest request) {
-		return new UpdateTransactionCommand(
-				id, TransactionReference.create(request.getReference()), TransactionAmount.create(request.getAmount())
-		);
+		return UpdateTransactionCommand.builder()
+				.id(id)
+				.reference(TransactionReference.create(request.getReference()))
+				.amount(TransactionAmount.create(request.getAmount()))
+				.build();
 	}
 
 
 	public static DeleteTransactionCommand toDeleteCommand(TransactionId id) {
-		return new DeleteTransactionCommand(id);
+		return DeleteTransactionCommand.builder()
+				.id(id)
+				.build();
 	}
 }

@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.command.CreateUserRoleCommand;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
@@ -17,8 +18,9 @@ import static org.awaitility.Awaitility.await;
 public class UserRoleFixtures {
 
 	public static UserRole randomOne(UserRoleRepository repository) {
-		UserRole entity = new UserRole();
-		entity.setId(UUID.randomUUID().toString());
+		UserRole entity = UserRole.builder()
+				.id(UUID.randomUUID().toString())
+				.build();
 		return repository.save(entity);
 	}
 
@@ -27,21 +29,16 @@ public class UserRoleFixtures {
 	}
 
 	public static UserRole byId(UserRoleRepository repository, String id) {
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static UserRole byIdWaitExist(UserRoleRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static UserRole byIdWaitNotExist(UserRoleRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-
 		return repository.findById(id).orElse(null);
 	}
 
@@ -53,10 +50,10 @@ public class UserRoleFixtures {
 		return items;
 	}
 
-	public static List<CreateUserRoleCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
+	public static List<CreateUserRoleCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
 		List<CreateUserRoleCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway));
+			items.add(randomOneViaCommand(commandGateway, userId));
 		}
 		return items;
 	}
@@ -65,14 +62,16 @@ public class UserRoleFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateUserRoleCommand randomOneViaCommand(CommandGateway commandGateway) {
-		CreateUserRoleCommand command = new CreateUserRoleCommand(
-				UserRoleUser.create(
-						UserFixtures.randomOneViaCommand(commandGateway).getId().value()), UserRoleRole.create(
-				RoleFixtures.randomOneViaCommand(commandGateway).getId().value()));
-		commandGateway.sendAndWait(command);
+	public static CreateUserRoleCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
 
+		CreateUserRoleCommand command = CreateUserRoleCommand.builder()
+				.user(UserRoleUser.create(UserFixtures.randomOneViaCommand(commandGateway, userId).getId().value()))
+				.role(UserRoleRole.create(RoleFixtures.randomOneViaCommand(commandGateway, userId).getId().value()))
+				.build();
+
+		command.setCreatedBy(UserRoleCreatedBy.create(userId));
+
+		commandGateway.sendAndWait(command);
 		return command;
 	}
-
 }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,5 +21,8 @@ public interface PermissionRepository extends JpaRepository<Permission, String> 
 
 	@Query("SELECT t FROM Permission t WHERE t.name = :name")
 	Optional<Permission> findByName(String name);
+
+	@Query("SELECT t FROM Permission t WHERE t.createdBy = :createdBy")
+	List<Permission> findByCreatedBy(String createdBy);
 
 }

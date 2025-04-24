@@ -1,8 +1,10 @@
 package com.groupe2cs.bizyhub.security.domain;
 
+import com.groupe2cs.bizyhub.security.domain.exception.UserCreatedByNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserIdNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserPasswordNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserUsernameNotValid;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
@@ -22,11 +24,13 @@ public class UserAggregateTests extends BaseUnitTests {
 		UserId id = UserId.create(UUID.randomUUID().toString());
 		UserUsername username = UserUsername.create(UUID.randomUUID().toString());
 		UserPassword password = UserPassword.create(UUID.randomUUID().toString());
-		UserAggregate user = new UserAggregate(id, username, password);
+		UserCreatedBy createdBy = UserCreatedBy.create(UUID.randomUUID().toString());
+		UserAggregate user = new UserAggregate(id, username, password, createdBy);
 		assertThat(user.getId()).isNotNull();
 		assertThat(user.getId()).isEqualTo(id);
 		assertThat(user.getUsername()).isEqualTo(username);
 		assertThat(user.getPassword()).isEqualTo(password);
+		assertThat(user.getCreatedBy()).isEqualTo(createdBy);
 	}
 
 	@Test
@@ -45,6 +49,12 @@ public class UserAggregateTests extends BaseUnitTests {
 	void it_should_throw_when_password_is_invalid() {
 		UserPasswordNotValid error = assertThrows(UserPasswordNotValid.class, () -> UserPassword.create(""));
 		assertThat(error.getMessage()).isEqualTo("Password is invalid");
+	}
+
+	@Test
+	void it_should_throw_when_createdBy_is_invalid() {
+		UserCreatedByNotValid error = assertThrows(UserCreatedByNotValid.class, () -> UserCreatedBy.create(""));
+		assertThat(error.getMessage()).isEqualTo("CreatedBy is invalid");
 	}
 
 }

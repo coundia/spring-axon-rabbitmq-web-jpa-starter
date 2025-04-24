@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
 import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionSyncRequest;
 import com.groupe2cs.bizyhub.transactions.application.usecase.TransactionSyncApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +14,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,10 +41,14 @@ public class TransactionSyncController {
 			@ApiResponse(responseCode = "500", description = "Internal server error",
 					content = @Content(schema = @Schema()))
 	})
-	public ResponseEntity<ApiResponseDto> syncTransaction(@Valid @RequestBody TransactionSyncRequest request) {
+	public ResponseEntity<ApiResponseDto> syncTransaction(
+			@AuthenticationPrincipal Jwt jwt,
+			@Valid @RequestBody TransactionSyncRequest request) {
 		try {
-
-			applicationService.syncTransaction(request);
+			applicationService.syncTransaction(
+					request,
+					RequestContext.getUserId(jwt)
+			);
 			return ResponseEntity.ok(ApiResponseDto.builder()
 					.code(1)
 					.message("Sync in progress")

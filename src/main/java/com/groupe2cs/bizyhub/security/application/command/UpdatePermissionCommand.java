@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
 import lombok.*;
@@ -16,6 +17,7 @@ public class UpdatePermissionCommand implements Serializable {
 	@TargetAggregateIdentifier
 	private PermissionId id;
 	private PermissionName name;
+	private PermissionCreatedBy createdBy;
 
 
 }

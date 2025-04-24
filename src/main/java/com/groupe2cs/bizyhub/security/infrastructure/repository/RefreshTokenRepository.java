@@ -28,4 +28,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
 	@Query("SELECT t FROM RefreshToken t WHERE t.expiration = :expiration")
 	List<RefreshToken> findByExpiration(java.time.Instant expiration);
 
+	@Query("SELECT t FROM RefreshToken t WHERE t.createdBy = :createdBy")
+	List<RefreshToken> findByCreatedBy(String createdBy);
+
 }

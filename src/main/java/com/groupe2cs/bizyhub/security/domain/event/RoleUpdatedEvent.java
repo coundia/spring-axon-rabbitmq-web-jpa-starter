@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleName;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class RoleUpdatedEvent implements Serializable {
 
 	private RoleId id;
 	private RoleName name;
+	private RoleCreatedBy createdBy;
 
 
 }

@@ -1,7 +1,5 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,5 +25,7 @@ public interface RolePermissionRepository extends JpaRepository<RolePermission, 
 	@Query("SELECT t FROM RolePermission t WHERE t.permission = :permission")
 	List<RolePermission> findByPermission(String permission);
 
-	Optional<RolePermission> findByRoleAndPermission(Role role, Permission permission);
+	@Query("SELECT t FROM RolePermission t WHERE t.createdBy = :createdBy")
+	List<RolePermission> findByCreatedBy(String createdBy);
+
 }

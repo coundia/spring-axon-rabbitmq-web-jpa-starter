@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupe2cs.bizyhub.security.application.command.CreateUserCommand;
 import com.groupe2cs.bizyhub.security.domain.event.UserCreatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
@@ -29,7 +30,8 @@ public class CreateUserCommandTest extends BaseUnitTests {
 		CreateUserCommand command = new CreateUserCommand(
 				UserId.create(UUID.randomUUID().toString()),
 				UserUsername.create(UUID.randomUUID().toString()),
-				UserPassword.create(UUID.randomUUID().toString())
+				UserPassword.create(UUID.randomUUID().toString()),
+				UserCreatedBy.create(UUID.randomUUID().toString())
 		);
 		commandGateway.send(command);
 
@@ -43,6 +45,8 @@ public class CreateUserCommandTest extends BaseUnitTests {
 				command.getUsername().value());
 		assertThat(sentCommand.getPassword().value()).isEqualTo(
 				command.getPassword().value());
+		assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
+				command.getCreatedBy().value());
 	}
 
 	@Test
@@ -51,7 +55,8 @@ public class CreateUserCommandTest extends BaseUnitTests {
 				event =
 				new UserCreatedEvent(UserId.create(UUID.randomUUID().toString()),
 						UserUsername.create(UUID.randomUUID().toString()),
-						UserPassword.create(UUID.randomUUID().toString()));
+						UserPassword.create(UUID.randomUUID().toString()),
+						UserCreatedBy.create(UUID.randomUUID().toString()));
 		String json = new ObjectMapper().writeValueAsString(event);
 		assertThat(json).isNotEmpty();
 	}

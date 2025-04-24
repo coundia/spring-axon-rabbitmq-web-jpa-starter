@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
+
 @Service
 @RequiredArgsConstructor
 public class JwtService {
@@ -29,10 +30,20 @@ public class JwtService {
 				.map(Object::toString)
 				.collect(Collectors.joining(" "));
 
+		UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+
+		String userId = userPrincipal.getId();
+
+
+		if (userId == null) {
+			throw new IllegalArgumentException("User ID ");
+		}
+
 		var claims = JwtClaimsSet.builder()
 				.issuedAt(now)
 				.expiresAt(now.plus(tokenValidityInSeconds, ChronoUnit.SECONDS))
 				.subject(authentication.getName())
+				.claim("userId", userId)
 				.claim("scope", authorities)
 				.build();
 

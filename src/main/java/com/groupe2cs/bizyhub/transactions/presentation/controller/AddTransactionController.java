@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
 import com.groupe2cs.bizyhub.transactions.application.usecase.TransactionCreateApplicationService;
@@ -13,6 +14,8 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,10 +52,14 @@ public class AddTransactionController {
 			@ApiResponse(responseCode = "500", description = "Internal server error",
 					content = @Content(schema = @Schema()))
 	})
-	public ResponseEntity<TransactionResponse> addTransaction(@Valid @RequestBody TransactionRequest request) {
+	public ResponseEntity<TransactionResponse> addTransaction(@Valid @RequestBody TransactionRequest request,
+															  @AuthenticationPrincipal Jwt jwt) {
 		try {
 
-			TransactionResponse response = applicationService.createTransaction(request);
+			TransactionResponse response = applicationService.createTransaction(
+					request,
+					RequestContext.getUserId(jwt)
+			);
 
 			return ResponseEntity.ok(response);
 		} catch (Exception ex) {

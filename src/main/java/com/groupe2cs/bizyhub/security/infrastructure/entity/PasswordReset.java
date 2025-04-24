@@ -1,10 +1,8 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
 
 @Getter
 @Setter
@@ -24,6 +22,9 @@ public class PasswordReset {
 	private String username;
 	@Column(nullable = false, unique = false)
 	private java.time.Instant expiration;
+	@ManyToOne
+	@JoinColumn(name = "createdBy_id", nullable = true)
+	private User createdBy;
 
 	public PasswordReset(String id) {
 		this.id = id;
@@ -36,6 +37,7 @@ public class PasswordReset {
 				", token=" + token +
 				", username=" + username +
 				", expiration=" + expiration +
+				", createdBy=" + createdBy +
 				'}';
 	}
 }

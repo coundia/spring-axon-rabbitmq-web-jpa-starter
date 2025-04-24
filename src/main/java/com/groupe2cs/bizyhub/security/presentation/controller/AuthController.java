@@ -45,6 +45,7 @@ public class AuthController {
 	})
 	public ResponseEntity<AuthResponseDto> authenticate(@org.springframework.web.bind.annotation.RequestBody AuthRequestDto request) {
 		try {
+
 			Authentication authentication = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
 			);

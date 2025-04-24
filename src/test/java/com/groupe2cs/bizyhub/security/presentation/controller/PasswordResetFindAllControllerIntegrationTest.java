@@ -23,7 +23,7 @@ public class PasswordResetFindAllControllerIntegrationTest extends BaseIntegrati
 
 	@Test
 	void it_should_be_able_to_get_all_passwordresets() {
-		List<?> list = PasswordResetFixtures.randomManyViaCommand(commandGateway, 5);
+		List<?> list = PasswordResetFixtures.randomManyViaCommand(commandGateway, 5, getUserId());
 
 		String uri = "/v1/queries/passwordResets";
 		ResponseEntity<PasswordResetPagedResponse> response = this.getForEntity(uri, PasswordResetPagedResponse.class);

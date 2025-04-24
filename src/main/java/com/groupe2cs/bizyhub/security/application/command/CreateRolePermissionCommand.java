@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
@@ -20,16 +21,19 @@ public class CreateRolePermissionCommand implements Serializable {
 	private RolePermissionId id = RolePermissionId.create(UUID.randomUUID().toString());
 	private RolePermissionRole role;
 	private RolePermissionPermission permission;
+	private RolePermissionCreatedBy createdBy;
 
 	public CreateRolePermissionCommand(
 
 			RolePermissionRole role,
-			RolePermissionPermission permission
+			RolePermissionPermission permission,
+			RolePermissionCreatedBy createdBy
 	) {
 		this.id = RolePermissionId.create(UUID.randomUUID().toString());
 
 		this.role = role;
 		this.permission = permission;
+		this.createdBy = createdBy;
 	}
 
 

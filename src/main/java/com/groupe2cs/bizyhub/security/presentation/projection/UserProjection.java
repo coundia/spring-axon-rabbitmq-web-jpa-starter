@@ -26,17 +26,20 @@ public class UserProjection {
 	@EventHandler
 	public void on(UserCreatedEvent event) {
 		try {
-			User entity = new User(
-					event.getId().value(),
-					event.getUsername().value(),
-					event.getPassword().value(),
-					null
-			);
+			User entity = User.builder()
+					.id(event.getId().value())
+					.username(event.getUsername().value())
+					.password(event.getPassword().value())
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("User inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving User: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -46,9 +49,16 @@ public class UserProjection {
 		try {
 			User entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("User not found"));
+
 			entity.setId(event.getId().value());
 			entity.setUsername(event.getUsername().value());
 			entity.setPassword(event.getPassword().value());
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("User updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

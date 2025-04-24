@@ -19,5 +19,7 @@ public class UserRoleResponse implements Serializable {
 	private String user;
 	@Schema(description = "", example = "")
 	private String role;
+	@Schema(description = "", example = "")
+	private String createdBy;
 
 }

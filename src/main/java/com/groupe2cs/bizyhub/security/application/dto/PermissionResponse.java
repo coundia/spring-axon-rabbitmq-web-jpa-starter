@@ -17,5 +17,7 @@ public class PermissionResponse implements Serializable {
 	private String id;
 	@Schema(description = "", example = "")
 	private String name;
+	@Schema(description = "", example = "")
+	private String createdBy;
 
 }

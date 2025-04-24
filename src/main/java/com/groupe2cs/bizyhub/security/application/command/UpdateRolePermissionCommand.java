@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
@@ -18,6 +19,7 @@ public class UpdateRolePermissionCommand implements Serializable {
 	private RolePermissionId id;
 	private RolePermissionRole role;
 	private RolePermissionPermission permission;
+	private RolePermissionCreatedBy createdBy;
 
 
 }

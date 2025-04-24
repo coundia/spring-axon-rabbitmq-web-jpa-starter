@@ -71,13 +71,13 @@ public class SecurityInitializer {
 
 	private void assignPermissionsToRole(Role role) {
 		permissionRepository.findAll().forEach(permission ->
-				rolePermissionRepository.findByRoleAndPermission(role, permission).orElseGet(() ->
-						rolePermissionRepository.save(RolePermission.builder()
+				//rolePermissionRepository.findByRoleAndPermission(role, permission).orElseGet(() ->
+				rolePermissionRepository.save(RolePermission.builder()
 								.id(UUID.randomUUID().toString())
 								.role(role)
 								.permission(permission)
 								.build()
-						)
+						//)
 				)
 		);
 	}

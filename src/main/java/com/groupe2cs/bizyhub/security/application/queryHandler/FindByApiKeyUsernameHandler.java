@@ -3,7 +3,6 @@ package com.groupe2cs.bizyhub.security.application.queryHandler;
 import com.groupe2cs.bizyhub.security.application.dto.ApiKeyResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.ApiKeyMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByApiKeyUsernameQuery;
-import com.groupe2cs.bizyhub.security.domain.exception.ApiKeyNotFoundException;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKey;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.ApiKeyRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class FindByApiKeyUsernameHandler {
 	public ApiKeyResponse handle(FindByApiKeyUsernameQuery query) {
 		String value = query.getUsername().value();
 		ApiKey entity = repository.findByUsername(value)
-				.orElseThrow(() -> new ApiKeyNotFoundException("Username", value));
+				.orElse(null);
+
+		if (entity == null) {
+			return null;
+		}
+
 		return ApiKeyMapper.toResponse(entity);
 	}
 

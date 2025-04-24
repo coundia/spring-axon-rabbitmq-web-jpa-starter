@@ -29,22 +29,31 @@ public class RefreshTokenService {
 	private final QueryGateway queryGateway;
 
 	public void save(String token) {
-
 		try {
-
 			Jwt jwt = jwtDecoder.decode(token);
 			String username = jwt.getSubject();
 			Instant expiration = jwt.getExpiresAt();
 
-			invalidate(username);
+			try {
+				CompletableFuture<RefreshTokenResponse> future = queryGateway.query(
+						new FindByRefreshTokenUsernameQuery(RefreshTokenUsername.create(username)),
+						RefreshTokenResponse.class
+				);
+
+				RefreshTokenResponse existing = future.join();
+				commandGateway.sendAndWait(new DeleteRefreshTokenCommand(RefreshTokenId.create(existing.getId())));
+			} catch (Exception e) {
+				log.info("No existing refresh token found for {}. Proceeding to save new.", username);
+			}
 
 			commandGateway.sendAndWait(CreateRefreshTokenCommand.builder()
 					.token(RefreshTokenToken.create(token))
 					.username(RefreshTokenUsername.create(username))
 					.expiration(RefreshTokenExpiration.create(expiration))
 					.build());
+
 		} catch (Exception e) {
-			log.info("Error while saving refresh token: {}", e.getMessage());
+			log.error("Error while saving refresh token: {}", e.getMessage(), e);
 		}
 	}
 
@@ -56,34 +65,31 @@ public class RefreshTokenService {
 			);
 
 			RefreshTokenResponse response = future.join();
+
 			if (Instant.now().isAfter(response.getExpiration())) {
-				invalidate(username);
+				commandGateway.sendAndWait(new DeleteRefreshTokenCommand(RefreshTokenId.create(response.getId())));
 				return false;
 			}
+
 			return response.getToken().equals(token);
 		} catch (Exception e) {
-			log.info("Error while checking refresh token validity: {}", e.getMessage());
+			log.warn("Refresh token validation failed for {}: {}", username, e.getMessage());
 			return false;
 		}
 	}
 
 	public void invalidate(String username) {
-
-		try {
-
-			CompletableFuture<RefreshTokenResponse> future = queryGateway.query(
-					new FindByRefreshTokenUsernameQuery(RefreshTokenUsername.create(username)),
-					RefreshTokenResponse.class
-			);
-			RefreshTokenResponse response = future.join();
-
-			if (response == null) {
-				log.info("No refresh token found for user {}", username);
-				return;
+		queryGateway.query(
+				new FindByRefreshTokenUsernameQuery(RefreshTokenUsername.create(username)),
+				RefreshTokenResponse.class
+		).handle((response, ex) -> {
+			if (ex != null || response == null) {
+				log.info("No refresh token to invalidate for {}", username);
+				return null;
 			}
 			commandGateway.sendAndWait(new DeleteRefreshTokenCommand(RefreshTokenId.create(response.getId())));
-		} catch (Exception e) {
-			log.info("Error while invalidating refresh token: {}", e.getMessage());
-		}
+			log.info("Refresh token invalidated for {}", username);
+			return null;
+		});
 	}
 }

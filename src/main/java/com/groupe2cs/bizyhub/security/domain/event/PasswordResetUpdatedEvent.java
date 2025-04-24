@@ -1,9 +1,6 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +18,7 @@ public class PasswordResetUpdatedEvent implements Serializable {
 	private PasswordResetToken token;
 	private PasswordResetUsername username;
 	private PasswordResetExpiration expiration;
+	private PasswordResetCreatedBy createdBy;
 
 
 }

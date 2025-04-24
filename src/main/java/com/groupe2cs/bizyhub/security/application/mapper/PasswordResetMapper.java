@@ -11,58 +11,58 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.PasswordReset;
 
-
 public class PasswordResetMapper {
 
 	public static PasswordResetResponse toResponse(PasswordReset entity) {
-		return new PasswordResetResponse(
-				entity.getId(),
-				entity.getToken(),
-				entity.getUsername(),
-				entity.getExpiration()
-		);
+		return PasswordResetResponse.builder()
+				.id(entity.getId())
+				.token(entity.getToken())
+				.username(entity.getUsername())
+				.expiration(entity.getExpiration())
+				.build();
 	}
 
 	public static PasswordResetResponse toResponse(CreatePasswordResetCommand command) {
-		return new PasswordResetResponse(
-				command.getId().value(),
-				command.getToken().value(),
-				command.getUsername().value(),
-				command.getExpiration().value()
-		);
+		return PasswordResetResponse.builder()
+				.id(command.getId().value())
+				.token(command.getToken().value())
+				.username(command.getUsername().value())
+				.expiration(command.getExpiration().value())
+				.build();
 	}
 
 	public static PasswordResetResponse toResponse(UpdatePasswordResetCommand command) {
-		return new PasswordResetResponse(
-				command.getId().value(),
-				command.getToken().value(),
-				command.getUsername().value(),
-				command.getExpiration().value()
-		);
+		return PasswordResetResponse.builder()
+				.id(command.getId().value())
+				.token(command.getToken().value())
+				.username(command.getUsername().value())
+				.expiration(command.getExpiration().value())
+				.build();
 	}
-
 
 	public static CreatePasswordResetCommand toCommand(
 			PasswordResetRequest request
 	) {
-		return new CreatePasswordResetCommand(
-				PasswordResetToken.create(request.getToken()),
-				PasswordResetUsername.create(request.getUsername()),
-				PasswordResetExpiration.create(request.getExpiration())
-		);
+		return CreatePasswordResetCommand.builder()
+				.token(PasswordResetToken.create(request.getToken()))
+				.username(PasswordResetUsername.create(request.getUsername()))
+				.expiration(PasswordResetExpiration.create(request.getExpiration()))
+				.build();
 	}
 
 	public static UpdatePasswordResetCommand toUpdateCommand(PasswordResetId id, PasswordResetRequest request) {
-		return new UpdatePasswordResetCommand(
-				id,
-				PasswordResetToken.create(request.getToken()),
-				PasswordResetUsername.create(request.getUsername()),
-				PasswordResetExpiration.create(request.getExpiration())
-		);
+		return UpdatePasswordResetCommand.builder()
+				.id(id)
+				.token(PasswordResetToken.create(request.getToken()))
+				.username(PasswordResetUsername.create(request.getUsername()))
+				.expiration(PasswordResetExpiration.create(request.getExpiration()))
+				.build();
 	}
 
 
 	public static DeletePasswordResetCommand toDeleteCommand(PasswordResetId id) {
-		return new DeletePasswordResetCommand(id);
+		return DeletePasswordResetCommand.builder()
+				.id(id)
+				.build();
 	}
 }

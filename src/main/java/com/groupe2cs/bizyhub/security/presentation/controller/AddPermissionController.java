@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.dto.PermissionRequest;
 import com.groupe2cs.bizyhub.security.application.dto.PermissionResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.PermissionCreateApplicationService;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,6 +14,8 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,10 +52,14 @@ public class AddPermissionController {
 			@ApiResponse(responseCode = "500", description = "Internal server error",
 					content = @Content(schema = @Schema()))
 	})
-	public ResponseEntity<PermissionResponse> addPermission(@Valid @RequestBody PermissionRequest request) {
+	public ResponseEntity<PermissionResponse> addPermission(@Valid @RequestBody PermissionRequest request,
+															@AuthenticationPrincipal Jwt jwt) {
 		try {
 
-			PermissionResponse response = applicationService.createPermission(request);
+			PermissionResponse response = applicationService.createPermission(
+					request,
+					RequestContext.getUserId(jwt)
+			);
 
 			return ResponseEntity.ok(response);
 		} catch (Exception ex) {

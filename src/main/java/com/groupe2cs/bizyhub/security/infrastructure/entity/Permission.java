@@ -1,10 +1,8 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
 
 @Getter
 @Setter
@@ -20,6 +18,9 @@ public class Permission {
 
 	@Column(nullable = false, unique = true)
 	private String name;
+	@ManyToOne
+	@JoinColumn(name = "createdBy_id", nullable = true)
+	private User createdBy;
 
 	public Permission(String id) {
 		this.id = id;
@@ -30,6 +31,7 @@ public class Permission {
 		return "Permission{" +
 				"id='" + id + '\'' +
 				", name=" + name +
+				", createdBy=" + createdBy +
 				'}';
 	}
 }

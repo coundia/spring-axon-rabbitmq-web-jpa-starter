@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.domain.event.RoleCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RoleDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RoleUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
@@ -26,16 +27,19 @@ public class RoleProjection {
 	@EventHandler
 	public void on(RoleCreatedEvent event) {
 		try {
-			Role entity = new Role(
-					event.getId().value(),
-					event.getName().value(),
-					null
-			);
+			Role entity = Role.builder()
+					.id(event.getId().value())
+					.name(event.getName().value())
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("Role inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving Role: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -45,8 +49,15 @@ public class RoleProjection {
 		try {
 			Role entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("Role not found"));
+
 			entity.setId(event.getId().value());
 			entity.setName(event.getName().value());
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("Role updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

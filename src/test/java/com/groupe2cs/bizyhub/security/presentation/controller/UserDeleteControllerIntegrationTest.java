@@ -20,7 +20,7 @@ public class UserDeleteControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_be_able_to_delete_user() {
-		String existingId = UserFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = UserFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 		String uri = "/v1/commands/user/" + existingId;
 
 		ResponseEntity<String> rep = this.delete(uri);

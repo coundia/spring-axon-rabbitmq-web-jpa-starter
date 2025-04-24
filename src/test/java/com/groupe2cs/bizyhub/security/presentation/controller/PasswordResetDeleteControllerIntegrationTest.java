@@ -20,7 +20,7 @@ public class PasswordResetDeleteControllerIntegrationTest extends BaseIntegratio
 
 	@Test
 	void it_should_be_able_to_delete_passwordreset() {
-		String existingId = PasswordResetFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = PasswordResetFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 		String uri = "/v1/commands/passwordReset/" + existingId;
 
 		ResponseEntity<String> rep = this.delete(uri);

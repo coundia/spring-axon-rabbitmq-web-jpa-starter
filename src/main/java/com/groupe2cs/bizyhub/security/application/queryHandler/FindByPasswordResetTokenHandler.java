@@ -3,7 +3,6 @@ package com.groupe2cs.bizyhub.security.application.queryHandler;
 import com.groupe2cs.bizyhub.security.application.dto.PasswordResetResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.PasswordResetMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByPasswordResetTokenQuery;
-import com.groupe2cs.bizyhub.security.domain.exception.PasswordResetNotFoundException;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.PasswordReset;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PasswordResetRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class FindByPasswordResetTokenHandler {
 	public PasswordResetResponse handle(FindByPasswordResetTokenQuery query) {
 		String value = query.getToken().value();
 		PasswordReset entity = repository.findByToken(value)
-				.orElseThrow(() -> new PasswordResetNotFoundException("Token", value));
+				.orElse(null);
+
+		if (entity == null) {
+			return null;
+		}
+
 		return PasswordResetMapper.toResponse(entity);
 	}
 

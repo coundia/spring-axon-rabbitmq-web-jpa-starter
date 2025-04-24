@@ -3,7 +3,6 @@ package com.groupe2cs.bizyhub.security.application.queryHandler;
 import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.UserRoleMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByUserRoleIdQuery;
-import com.groupe2cs.bizyhub.security.domain.exception.UserRoleNotFoundException;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class FindByUserRoleIdHandler {
 	public UserRoleResponse handle(FindByUserRoleIdQuery query) {
 		String value = query.getId().value();
 		UserRole entity = repository.findById(value)
-				.orElseThrow(() -> new UserRoleNotFoundException("Id", value));
+				.orElse(null);
+
+		if (entity == null) {
+			return null;
+		}
+
 		return UserRoleMapper.toResponse(entity);
 	}
 

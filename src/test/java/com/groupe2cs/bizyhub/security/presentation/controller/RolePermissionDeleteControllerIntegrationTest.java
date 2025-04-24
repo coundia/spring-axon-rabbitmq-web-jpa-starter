@@ -20,7 +20,7 @@ public class RolePermissionDeleteControllerIntegrationTest extends BaseIntegrati
 
 	@Test
 	void it_should_be_able_to_delete_rolepermission() {
-		String existingId = RolePermissionFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = RolePermissionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 		String uri = "/v1/commands/rolePermission/" + existingId;
 
 		ResponseEntity<String> rep = this.delete(uri);

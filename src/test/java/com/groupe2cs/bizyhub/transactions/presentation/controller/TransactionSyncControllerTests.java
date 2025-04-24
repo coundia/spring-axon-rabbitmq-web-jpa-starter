@@ -27,7 +27,7 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 				.deltas(List.of(
 						TransactionDeltaDto.builder()
 								.reference(UUID.randomUUID().toString())
-								.amount(2922.61)
+								.amount(2566.11)
 								.type("CREATE")
 								.build()
 				))
@@ -46,14 +46,14 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 	@Test
 	void it_should_initiate_update_of_transactions() {
 
-		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 
 		TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
 				.deltas(List.of(
 						TransactionDeltaDto.builder()
 								.id(existingId)
 								.reference(UUID.randomUUID().toString())
-								.amount(2922.61)
+								.amount(704.99)
 								.type("UPDATE")
 								.build()
 				))
@@ -70,7 +70,7 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 
 	@Test
 	void it_should_initiate_delete_of_transactions() {
-		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 		TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
 				.deltas(List.of(
 						TransactionDeltaDto.builder()

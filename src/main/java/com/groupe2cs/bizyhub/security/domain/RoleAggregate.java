@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateRoleCommand;
 import com.groupe2cs.bizyhub.security.domain.event.RoleCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RoleDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RoleUpdatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleName;
 import lombok.AllArgsConstructor;
@@ -29,13 +30,15 @@ public class RoleAggregate {
 	@AggregateIdentifier
 	private RoleId id;
 	private RoleName name;
+	private RoleCreatedBy createdBy;
 
 
 	@CommandHandler
 	public RoleAggregate(CreateRoleCommand command) {
 		apply(new RoleCreatedEvent(
 				command.getId(),
-				command.getName()
+				command.getName(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -50,7 +53,8 @@ public class RoleAggregate {
 	public void handle(UpdateRoleCommand command) {
 		apply(new RoleUpdatedEvent(
 				command.getId(),
-				command.getName()
+				command.getName(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -58,6 +62,7 @@ public class RoleAggregate {
 	public void on(RoleCreatedEvent event) {
 		this.id = event.getId();
 		this.name = event.getName();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -69,6 +74,7 @@ public class RoleAggregate {
 	public void on(RoleUpdatedEvent event) {
 		this.id = event.getId();
 		this.name = event.getName();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }

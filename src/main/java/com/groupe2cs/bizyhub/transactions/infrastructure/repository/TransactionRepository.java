@@ -25,4 +25,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
 	@Query("SELECT t FROM Transaction t WHERE t.amount = :amount")
 	List<Transaction> findByAmount(Double amount);
 
+	@Query("SELECT t FROM Transaction t WHERE t.createdBy = :createdBy")
+	List<Transaction> findByCreatedBy(String createdBy);
+
 }

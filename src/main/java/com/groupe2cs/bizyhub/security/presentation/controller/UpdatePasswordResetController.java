@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.PasswordResetRequest;
 import com.groupe2cs.bizyhub.security.application.dto.PasswordResetResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.PasswordResetUpdateApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@passwordResetGate.canEdit(authentication, #id)")
@@ -39,13 +42,18 @@ public class UpdatePasswordResetController {
 					content = @Content)
 	})
 	@PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PasswordResetResponse> updatePasswordReset(@Valid @PathVariable String id, @RequestBody PasswordResetRequest request) {
+	public ResponseEntity<PasswordResetResponse> updatePasswordReset(
+			@Valid @PathVariable String id,
+			@RequestBody PasswordResetRequest request,
+			@AuthenticationPrincipal Jwt jwt
+	) {
 		{
 			try {
 
-				PasswordResetResponse
-						response =
-						applicationService.updatePasswordReset(PasswordResetId.create(id), request);
+				PasswordResetResponse response = applicationService.updatePasswordReset(PasswordResetId.create(id),
+						request,
+						RequestContext.getUserId(jwt)
+				);
 
 				return ResponseEntity.ok(response);
 

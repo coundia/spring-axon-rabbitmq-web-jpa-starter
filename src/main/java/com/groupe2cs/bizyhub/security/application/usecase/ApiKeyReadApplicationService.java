@@ -68,4 +68,12 @@ public class ApiKeyReadApplicationService {
 		return future.join();
 	}
 
+	public List<ApiKeyResponse> findByApiKeyCreatedBy(ApiKeyCreatedBy value) {
+
+		FindByApiKeyCreatedByQuery query = new FindByApiKeyCreatedByQuery(value);
+		CompletableFuture<List<ApiKeyResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ApiKeyResponse.class));
+		return future.join();
+	}
+
 }

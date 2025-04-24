@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.domain.event.ApiKeyCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.ApiKeyDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.ApiKeyUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKey;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.ApiKeyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
@@ -26,18 +27,22 @@ public class ApiKeyProjection {
 	@EventHandler
 	public void on(ApiKeyCreatedEvent event) {
 		try {
-			ApiKey entity = new ApiKey(
-					event.getId().value(),
-					event.getKey().value(),
-					event.getUsername().value(),
-					event.getCreatedAt().value(),
-					event.getExpiration().value()
-			);
+			ApiKey entity = ApiKey.builder()
+					.id(event.getId().value())
+					.key(event.getKey().value())
+					.username(event.getUsername().value())
+					.createdAt(event.getCreatedAt().value())
+					.expiration(event.getExpiration().value())
+					.build();
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
 			repository.save(entity);
 			log.info("ApiKey inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving ApiKey: {}", e.getMessage(), e);
-
 			throw e;
 		}
 	}
@@ -47,11 +52,18 @@ public class ApiKeyProjection {
 		try {
 			ApiKey entity = repository.findById(event.getId().value())
 					.orElseThrow(() -> new RuntimeException("ApiKey not found"));
+
 			entity.setId(event.getId().value());
 			entity.setKey(event.getKey().value());
 			entity.setUsername(event.getUsername().value());
 			entity.setCreatedAt(event.getCreatedAt().value());
 			entity.setExpiration(event.getExpiration().value());
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+
 			repository.save(entity);
 			log.info("ApiKey updated successfully: {}", event.getId().value());
 		} catch (Exception e) {

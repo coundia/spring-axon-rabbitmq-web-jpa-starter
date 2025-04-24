@@ -3,7 +3,6 @@ package com.groupe2cs.bizyhub.security.application.queryHandler;
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RolePermissionMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByRolePermissionIdQuery;
-import com.groupe2cs.bizyhub.security.domain.exception.RolePermissionNotFoundException;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class FindByRolePermissionIdHandler {
 	public RolePermissionResponse handle(FindByRolePermissionIdQuery query) {
 		String value = query.getId().value();
 		RolePermission entity = repository.findById(value)
-				.orElseThrow(() -> new RolePermissionNotFoundException("Id", value));
+				.orElse(null);
+
+		if (entity == null) {
+			return null;
+		}
+
 		return RolePermissionMapper.toResponse(entity);
 	}
 

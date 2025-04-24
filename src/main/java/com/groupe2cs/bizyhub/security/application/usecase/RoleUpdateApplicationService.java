@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateRoleCommand;
 import com.groupe2cs.bizyhub.security.application.dto.RoleRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RoleResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RoleMapper;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleId;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +19,18 @@ public class RoleUpdateApplicationService {
 	private final CommandGateway commandGateway;
 
 
-	public RoleResponse updateRole(RoleId id, RoleRequest request) {
+	public RoleResponse updateRole(RoleId id, RoleRequest request,
+								   String createdBy
+	) {
 
 		UpdateRoleCommand command = RoleMapper.toUpdateCommand(
 				id,
 				request
 		);
+
+		if (createdBy != null) {
+			command.setCreatedBy(RoleCreatedBy.create(createdBy));
+		}
 
 		commandGateway.sendAndWait(command);
 

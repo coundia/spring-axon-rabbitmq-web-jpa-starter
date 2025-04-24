@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.command.CreateRoleCommand;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleName;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RoleRepository;
@@ -16,9 +17,10 @@ import static org.awaitility.Awaitility.await;
 public class RoleFixtures {
 
 	public static Role randomOne(RoleRepository repository) {
-		Role entity = new Role();
-		entity.setId(UUID.randomUUID().toString());
-		entity.setName(UUID.randomUUID().toString());
+		Role entity = Role.builder()
+				.id(UUID.randomUUID().toString())
+				.name(UUID.randomUUID().toString())
+				.build();
 		return repository.save(entity);
 	}
 
@@ -27,21 +29,16 @@ public class RoleFixtures {
 	}
 
 	public static Role byId(RoleRepository repository, String id) {
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static Role byIdWaitExist(RoleRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-
 		return repository.findById(id).orElse(null);
 	}
 
 	public static Role byIdWaitNotExist(RoleRepository repository, String id) {
-
 		await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-
 		return repository.findById(id).orElse(null);
 	}
 
@@ -53,10 +50,10 @@ public class RoleFixtures {
 		return items;
 	}
 
-	public static List<CreateRoleCommand> randomManyViaCommand(CommandGateway commandGateway, int count) {
+	public static List<CreateRoleCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
 		List<CreateRoleCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway));
+			items.add(randomOneViaCommand(commandGateway, userId));
 		}
 		return items;
 	}
@@ -65,13 +62,15 @@ public class RoleFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateRoleCommand randomOneViaCommand(CommandGateway commandGateway) {
-		CreateRoleCommand command = new CreateRoleCommand(
-				RoleName.create(
-						UUID.randomUUID().toString()));
-		commandGateway.sendAndWait(command);
+	public static CreateRoleCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
 
+		CreateRoleCommand command = CreateRoleCommand.builder()
+				.name(RoleName.create(UUID.randomUUID().toString()))
+				.build();
+
+		command.setCreatedBy(RoleCreatedBy.create(userId));
+
+		commandGateway.sendAndWait(command);
 		return command;
 	}
-
 }

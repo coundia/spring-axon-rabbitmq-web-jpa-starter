@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.application.service;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.IdentifiableUser;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class UserPrincipal implements UserDetails {
+public class UserPrincipal implements UserDetails, IdentifiableUser {
 
 	private final User user;
 
@@ -67,5 +68,15 @@ public class UserPrincipal implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+
+	@Override
+	public String getId() {
+
+		if (user == null)
+			return null;
+
+		return user.getId();
+	}
+
 }
 

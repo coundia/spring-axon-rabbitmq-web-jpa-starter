@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.UserRequest;
 import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.UserUpdateApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@userGate.canEdit(authentication, #id)")
@@ -39,11 +42,18 @@ public class UpdateUserController {
 					content = @Content)
 	})
 	@PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserResponse> updateUser(@Valid @PathVariable String id, @RequestBody UserRequest request) {
+	public ResponseEntity<UserResponse> updateUser(
+			@Valid @PathVariable String id,
+			@RequestBody UserRequest request,
+			@AuthenticationPrincipal Jwt jwt
+	) {
 		{
 			try {
 
-				UserResponse response = applicationService.updateUser(UserId.create(id), request);
+				UserResponse response = applicationService.updateUser(UserId.create(id),
+						request,
+						RequestContext.getUserId(jwt)
+				);
 
 				return ResponseEntity.ok(response);
 

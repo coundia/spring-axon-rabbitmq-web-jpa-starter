@@ -3,7 +3,6 @@ package com.groupe2cs.bizyhub.security.application.queryHandler;
 import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.UserMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByUserIdQuery;
-import com.groupe2cs.bizyhub.security.domain.exception.UserNotFoundException;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class FindByUserIdHandler {
 	public UserResponse handle(FindByUserIdQuery query) {
 		String value = query.getId().value();
 		User entity = repository.findById(value)
-				.orElseThrow(() -> new UserNotFoundException("Id", value));
+				.orElse(null);
+
+		if (entity == null) {
+			return null;
+		}
+
 		return UserMapper.toResponse(entity);
 	}
 

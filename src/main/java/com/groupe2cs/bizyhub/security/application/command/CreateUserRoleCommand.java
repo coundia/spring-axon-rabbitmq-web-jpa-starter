@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
@@ -20,16 +21,19 @@ public class CreateUserRoleCommand implements Serializable {
 	private UserRoleId id = UserRoleId.create(UUID.randomUUID().toString());
 	private UserRoleUser user;
 	private UserRoleRole role;
+	private UserRoleCreatedBy createdBy;
 
 	public CreateUserRoleCommand(
 
 			UserRoleUser user,
-			UserRoleRole role
+			UserRoleRole role,
+			UserRoleCreatedBy createdBy
 	) {
 		this.id = UserRoleId.create(UUID.randomUUID().toString());
 
 		this.user = user;
 		this.role = role;
+		this.createdBy = createdBy;
 	}
 
 

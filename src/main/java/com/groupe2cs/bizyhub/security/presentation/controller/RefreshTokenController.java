@@ -3,20 +3,18 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
 import com.groupe2cs.bizyhub.security.application.service.RefreshTokenService;
+import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Tag(name = "Auth", description = "Refresh token")
 @RestController
@@ -41,10 +39,12 @@ public class RefreshTokenController {
 
 		String username = jwt.getSubject();
 
+		UserPrincipal userPrincipal = (UserPrincipal) userDetailsService.loadUserByUsername(username);
+
 		Authentication authentication = new UsernamePasswordAuthenticationToken(
-				username,
+				userPrincipal,
 				null,
-				List.of(new SimpleGrantedAuthority("ROLE_USER"))
+				userPrincipal.getAuthorities()
 		);
 		String accessToken = jwtService.generateToken(authentication);
 

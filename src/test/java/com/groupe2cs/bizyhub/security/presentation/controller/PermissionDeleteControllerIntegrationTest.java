@@ -20,7 +20,7 @@ public class PermissionDeleteControllerIntegrationTest extends BaseIntegrationTe
 
 	@Test
 	void it_should_be_able_to_delete_permission() {
-		String existingId = PermissionFixtures.randomOneViaCommand(commandGateway).getId().value();
+		String existingId = PermissionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
 		String uri = "/v1/commands/permission/" + existingId;
 
 		ResponseEntity<String> rep = this.delete(uri);

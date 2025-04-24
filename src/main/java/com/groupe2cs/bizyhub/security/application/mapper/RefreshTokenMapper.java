@@ -11,58 +11,58 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenToken;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenUsername;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RefreshToken;
 
-
 public class RefreshTokenMapper {
 
 	public static RefreshTokenResponse toResponse(RefreshToken entity) {
-		return new RefreshTokenResponse(
-				entity.getId(),
-				entity.getToken(),
-				entity.getUsername(),
-				entity.getExpiration()
-		);
+		return RefreshTokenResponse.builder()
+				.id(entity.getId())
+				.token(entity.getToken())
+				.username(entity.getUsername())
+				.expiration(entity.getExpiration())
+				.build();
 	}
 
 	public static RefreshTokenResponse toResponse(CreateRefreshTokenCommand command) {
-		return new RefreshTokenResponse(
-				command.getId().value(),
-				command.getToken().value(),
-				command.getUsername().value(),
-				command.getExpiration().value()
-		);
+		return RefreshTokenResponse.builder()
+				.id(command.getId().value())
+				.token(command.getToken().value())
+				.username(command.getUsername().value())
+				.expiration(command.getExpiration().value())
+				.build();
 	}
 
 	public static RefreshTokenResponse toResponse(UpdateRefreshTokenCommand command) {
-		return new RefreshTokenResponse(
-				command.getId().value(),
-				command.getToken().value(),
-				command.getUsername().value(),
-				command.getExpiration().value()
-		);
+		return RefreshTokenResponse.builder()
+				.id(command.getId().value())
+				.token(command.getToken().value())
+				.username(command.getUsername().value())
+				.expiration(command.getExpiration().value())
+				.build();
 	}
-
 
 	public static CreateRefreshTokenCommand toCommand(
 			RefreshTokenRequest request
 	) {
-		return new CreateRefreshTokenCommand(
-				RefreshTokenToken.create(request.getToken()),
-				RefreshTokenUsername.create(request.getUsername()),
-				RefreshTokenExpiration.create(request.getExpiration())
-		);
+		return CreateRefreshTokenCommand.builder()
+				.token(RefreshTokenToken.create(request.getToken()))
+				.username(RefreshTokenUsername.create(request.getUsername()))
+				.expiration(RefreshTokenExpiration.create(request.getExpiration()))
+				.build();
 	}
 
 	public static UpdateRefreshTokenCommand toUpdateCommand(RefreshTokenId id, RefreshTokenRequest request) {
-		return new UpdateRefreshTokenCommand(
-				id,
-				RefreshTokenToken.create(request.getToken()),
-				RefreshTokenUsername.create(request.getUsername()),
-				RefreshTokenExpiration.create(request.getExpiration())
-		);
+		return UpdateRefreshTokenCommand.builder()
+				.id(id)
+				.token(RefreshTokenToken.create(request.getToken()))
+				.username(RefreshTokenUsername.create(request.getUsername()))
+				.expiration(RefreshTokenExpiration.create(request.getExpiration()))
+				.build();
 	}
 
 
 	public static DeleteRefreshTokenCommand toDeleteCommand(RefreshTokenId id) {
-		return new DeleteRefreshTokenCommand(id);
+		return DeleteRefreshTokenCommand.builder()
+				.id(id)
+				.build();
 	}
 }

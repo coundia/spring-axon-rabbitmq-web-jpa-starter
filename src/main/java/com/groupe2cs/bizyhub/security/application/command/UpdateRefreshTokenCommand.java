@@ -1,9 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import lombok.*;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -20,6 +17,7 @@ public class UpdateRefreshTokenCommand implements Serializable {
 	private RefreshTokenToken token;
 	private RefreshTokenUsername username;
 	private RefreshTokenExpiration expiration;
+	private RefreshTokenCreatedBy createdBy;
 
 
 }

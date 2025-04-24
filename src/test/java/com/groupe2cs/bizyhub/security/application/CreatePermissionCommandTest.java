@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupe2cs.bizyhub.security.application.command.CreatePermissionCommand;
 import com.groupe2cs.bizyhub.security.domain.event.PermissionCreatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
 import com.groupe2cs.bizyhub.shared.BaseUnitTests;
@@ -26,7 +27,9 @@ public class CreatePermissionCommandTest extends BaseUnitTests {
 	@Test
 	void it_should_send_command_to_command_gateway() {
 		CreatePermissionCommand command = new CreatePermissionCommand(
-				PermissionId.create(UUID.randomUUID().toString()), PermissionName.create(UUID.randomUUID().toString())
+				PermissionId.create(UUID.randomUUID().toString()),
+				PermissionName.create(UUID.randomUUID().toString()),
+				PermissionCreatedBy.create(UUID.randomUUID().toString())
 		);
 		commandGateway.send(command);
 
@@ -38,6 +41,8 @@ public class CreatePermissionCommandTest extends BaseUnitTests {
 				command.getId().value());
 		assertThat(sentCommand.getName().value()).isEqualTo(
 				command.getName().value());
+		assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
+				command.getCreatedBy().value());
 	}
 
 	@Test
@@ -45,7 +50,8 @@ public class CreatePermissionCommandTest extends BaseUnitTests {
 		PermissionCreatedEvent
 				event =
 				new PermissionCreatedEvent(PermissionId.create(UUID.randomUUID().toString()),
-						PermissionName.create(UUID.randomUUID().toString()));
+						PermissionName.create(UUID.randomUUID().toString()),
+						PermissionCreatedBy.create(UUID.randomUUID().toString()));
 		String json = new ObjectMapper().writeValueAsString(event);
 		assertThat(json).isNotEmpty();
 	}

@@ -31,4 +31,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 	@Query("SELECT t FROM ApiKey t WHERE t.expiration = :expiration")
 	List<ApiKey> findByExpiration(java.time.Instant expiration);
 
+	@Query("SELECT t FROM ApiKey t WHERE t.createdBy = :createdBy")
+	List<ApiKey> findByCreatedBy(String createdBy);
+
 }

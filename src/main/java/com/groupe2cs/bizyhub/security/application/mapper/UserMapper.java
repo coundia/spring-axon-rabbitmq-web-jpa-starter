@@ -10,46 +10,53 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 
-
 public class UserMapper {
 
 	public static UserResponse toResponse(User entity) {
-		return new UserResponse(
-				entity.getId(),
-				entity.getUsername(),
-				entity.getPassword()
-		);
+		return UserResponse.builder()
+				.id(entity.getId())
+				.username(entity.getUsername())
+				.password(entity.getPassword())
+				.build();
 	}
 
 	public static UserResponse toResponse(CreateUserCommand command) {
-		return new UserResponse(
-				command.getId().value(), command.getUsername().value(), command.getPassword().value()
-		);
+		return UserResponse.builder()
+				.id(command.getId().value())
+				.username(command.getUsername().value())
+				.password(command.getPassword().value())
+				.build();
 	}
 
 	public static UserResponse toResponse(UpdateUserCommand command) {
-		return new UserResponse(
-				command.getId().value(), command.getUsername().value(), command.getPassword().value()
-		);
+		return UserResponse.builder()
+				.id(command.getId().value())
+				.username(command.getUsername().value())
+				.password(command.getPassword().value())
+				.build();
 	}
-
 
 	public static CreateUserCommand toCommand(
 			UserRequest request
 	) {
-		return new CreateUserCommand(
-				UserUsername.create(request.getUsername()), UserPassword.create(request.getPassword())
-		);
+		return CreateUserCommand.builder()
+				.username(UserUsername.create(request.getUsername()))
+				.password(UserPassword.create(request.getPassword()))
+				.build();
 	}
 
 	public static UpdateUserCommand toUpdateCommand(UserId id, UserRequest request) {
-		return new UpdateUserCommand(
-				id, UserUsername.create(request.getUsername()), UserPassword.create(request.getPassword())
-		);
+		return UpdateUserCommand.builder()
+				.id(id)
+				.username(UserUsername.create(request.getUsername()))
+				.password(UserPassword.create(request.getPassword()))
+				.build();
 	}
 
 
 	public static DeleteUserCommand toDeleteCommand(UserId id) {
-		return new DeleteUserCommand(id);
+		return DeleteUserCommand.builder()
+				.id(id)
+				.build();
 	}
 }

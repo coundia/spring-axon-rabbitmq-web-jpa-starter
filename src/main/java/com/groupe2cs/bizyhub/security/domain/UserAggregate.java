@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateUserCommand;
 import com.groupe2cs.bizyhub.security.domain.event.UserCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.UserDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.UserUpdatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
@@ -31,6 +32,7 @@ public class UserAggregate {
 	private UserId id;
 	private UserUsername username;
 	private UserPassword password;
+	private UserCreatedBy createdBy;
 
 
 	@CommandHandler
@@ -38,7 +40,8 @@ public class UserAggregate {
 		apply(new UserCreatedEvent(
 				command.getId(),
 				command.getUsername(),
-				command.getPassword()
+				command.getPassword(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -54,7 +57,8 @@ public class UserAggregate {
 		apply(new UserUpdatedEvent(
 				command.getId(),
 				command.getUsername(),
-				command.getPassword()
+				command.getPassword(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -63,6 +67,7 @@ public class UserAggregate {
 		this.id = event.getId();
 		this.username = event.getUsername();
 		this.password = event.getPassword();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -75,6 +80,7 @@ public class UserAggregate {
 		this.id = event.getId();
 		this.username = event.getUsername();
 		this.password = event.getPassword();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }

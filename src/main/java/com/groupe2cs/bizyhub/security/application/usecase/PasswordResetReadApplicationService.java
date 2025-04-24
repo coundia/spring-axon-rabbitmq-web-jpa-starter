@@ -3,10 +3,7 @@ package com.groupe2cs.bizyhub.security.application.usecase;
 import com.groupe2cs.bizyhub.security.application.dto.PasswordResetPagedResponse;
 import com.groupe2cs.bizyhub.security.application.dto.PasswordResetResponse;
 import com.groupe2cs.bizyhub.security.application.query.*;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -58,6 +55,14 @@ public class PasswordResetReadApplicationService {
 	public List<PasswordResetResponse> findByPasswordResetExpiration(PasswordResetExpiration value) {
 
 		FindByPasswordResetExpirationQuery query = new FindByPasswordResetExpirationQuery(value);
+		CompletableFuture<List<PasswordResetResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(PasswordResetResponse.class));
+		return future.join();
+	}
+
+	public List<PasswordResetResponse> findByPasswordResetCreatedBy(PasswordResetCreatedBy value) {
+
+		FindByPasswordResetCreatedByQuery query = new FindByPasswordResetCreatedByQuery(value);
 		CompletableFuture<List<PasswordResetResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(PasswordResetResponse.class));
 		return future.join();

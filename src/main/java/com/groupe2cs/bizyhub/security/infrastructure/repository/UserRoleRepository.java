@@ -1,7 +1,5 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,5 +25,7 @@ public interface UserRoleRepository extends JpaRepository<UserRole, String> {
 	@Query("SELECT t FROM UserRole t WHERE t.role = :role")
 	List<UserRole> findByRole(String role);
 
-	Optional<UserRole> findByUserAndRole(User user, Role role);
+	@Query("SELECT t FROM UserRole t WHERE t.createdBy = :createdBy")
+	List<UserRole> findByCreatedBy(String createdBy);
+
 }

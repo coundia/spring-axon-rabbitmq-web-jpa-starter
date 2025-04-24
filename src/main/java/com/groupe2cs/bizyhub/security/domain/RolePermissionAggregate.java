@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateRolePermissionCo
 import com.groupe2cs.bizyhub.security.domain.event.RolePermissionCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RolePermissionDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.RolePermissionUpdatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
@@ -31,6 +32,7 @@ public class RolePermissionAggregate {
 	private RolePermissionId id;
 	private RolePermissionRole role;
 	private RolePermissionPermission permission;
+	private RolePermissionCreatedBy createdBy;
 
 
 	@CommandHandler
@@ -38,7 +40,8 @@ public class RolePermissionAggregate {
 		apply(new RolePermissionCreatedEvent(
 				command.getId(),
 				command.getRole(),
-				command.getPermission()
+				command.getPermission(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -54,7 +57,8 @@ public class RolePermissionAggregate {
 		apply(new RolePermissionUpdatedEvent(
 				command.getId(),
 				command.getRole(),
-				command.getPermission()
+				command.getPermission(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -63,6 +67,7 @@ public class RolePermissionAggregate {
 		this.id = event.getId();
 		this.role = event.getRole();
 		this.permission = event.getPermission();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -75,6 +80,7 @@ public class RolePermissionAggregate {
 		this.id = event.getId();
 		this.role = event.getRole();
 		this.permission = event.getPermission();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }

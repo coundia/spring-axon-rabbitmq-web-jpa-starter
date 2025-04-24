@@ -2,10 +2,8 @@ package com.groupe2cs.bizyhub.security.application.usecase;
 
 import com.groupe2cs.bizyhub.security.application.dto.UserPagedResponse;
 import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
-import com.groupe2cs.bizyhub.security.application.query.FindAllUserQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByUserIdQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByUserPasswordQuery;
-import com.groupe2cs.bizyhub.security.application.query.FindByUserUsernameQuery;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
@@ -52,6 +50,14 @@ public class UserReadApplicationService {
 	public List<UserResponse> findByUserPassword(UserPassword value) {
 
 		FindByUserPasswordQuery query = new FindByUserPasswordQuery(value);
+		CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
+		return future.join();
+	}
+
+	public List<UserResponse> findByUserCreatedBy(UserCreatedBy value) {
+
+		FindByUserCreatedByQuery query = new FindByUserCreatedByQuery(value);
 		CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
 		return future.join();

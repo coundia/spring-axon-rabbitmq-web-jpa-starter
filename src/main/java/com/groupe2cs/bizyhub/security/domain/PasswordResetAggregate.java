@@ -6,10 +6,7 @@ import com.groupe2cs.bizyhub.security.application.command.UpdatePasswordResetCom
 import com.groupe2cs.bizyhub.security.domain.event.PasswordResetCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.PasswordResetDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.PasswordResetUpdatedEvent;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +30,7 @@ public class PasswordResetAggregate {
 	private PasswordResetToken token;
 	private PasswordResetUsername username;
 	private PasswordResetExpiration expiration;
+	private PasswordResetCreatedBy createdBy;
 
 
 	@CommandHandler
@@ -41,7 +39,8 @@ public class PasswordResetAggregate {
 				command.getId(),
 				command.getToken(),
 				command.getUsername(),
-				command.getExpiration()
+				command.getExpiration(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -58,7 +57,8 @@ public class PasswordResetAggregate {
 				command.getId(),
 				command.getToken(),
 				command.getUsername(),
-				command.getExpiration()
+				command.getExpiration(),
+				command.getCreatedBy()
 		));
 	}
 
@@ -68,6 +68,7 @@ public class PasswordResetAggregate {
 		this.token = event.getToken();
 		this.username = event.getUsername();
 		this.expiration = event.getExpiration();
+		this.createdBy = event.getCreatedBy();
 	}
 
 	@EventSourcingHandler
@@ -81,6 +82,7 @@ public class PasswordResetAggregate {
 		this.token = event.getToken();
 		this.username = event.getUsername();
 		this.expiration = event.getExpiration();
+		this.createdBy = event.getCreatedBy();
 	}
 
 }
