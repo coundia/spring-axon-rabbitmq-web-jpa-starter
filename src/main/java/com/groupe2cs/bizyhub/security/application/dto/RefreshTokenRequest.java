@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,10 +19,10 @@ import java.io.Serializable;
 @Schema(name = "RefreshTokenRequest", description = "Request payload for RefreshToken operations")
 public class RefreshTokenRequest implements Serializable {
 
-	@Schema(description = "", example = "4c358630-778f-4f05-82f2-dad9f0445672")
+	@Schema(description = "", example = "57a8ef6f-aa09-4f9c-8475-a3cb1397abd8")
 	private String token;
 
-	@Schema(description = "", example = "29e3c280-4129-4b0f-8a51-22a86b0d597d")
+	@Schema(description = "", example = "39e8e367-3f99-4635-9d3a-29e55289a6e4")
 	private String username;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")

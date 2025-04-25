@@ -1,10 +1,16 @@
 package com.groupe2cs.bizyhub.tenant.application.command;
 
 import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
-import lombok.*;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import java.util.Date;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -12,14 +18,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class UpdateTenantCommand implements Serializable {
-	@TargetAggregateIdentifier
+@TargetAggregateIdentifier
 	private TenantId id;
-	private TenantName name;
-	private TenantDescription description;
-	private TenantDomain domain;
-	private TenantLanguage language;
-	private TenantActive active;
-	private TenantCreatedBy createdBy;
+ 	private TenantName name;
+ 	private TenantDescription description;
+ 	private TenantDomain domain;
+ 	private TenantLanguage language;
+ 	private TenantActive active;
+ 	private TenantCreatedBy createdBy;
 
 
 }

@@ -1,26 +1,28 @@
 package com.groupe2cs.bizyhub.security.application.queryHandler;
 
-import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.UserMapper;
-import com.groupe2cs.bizyhub.security.application.query.FindByUserIdQuery;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.exception.*;
 import lombok.RequiredArgsConstructor;
-import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
+import java.util.List;
+import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
 public class FindByUserIdHandler {
 
-	private final UserRepository repository;
+private final UserRepository repository;
+@QueryHandler
 
-	@QueryHandler
-
-	public UserResponse handle(FindByUserIdQuery query) {
-		String value = query.getId().value();
-		User entity = repository.findById(value)
-				.orElse(null);
+ public UserResponse handle(FindByUserIdQuery query) {
+	String value = query.getId().value();
+	CustomUser entity = repository.findById(value)
+		.orElse(null);
 
 		if (entity == null) {
 			return null;

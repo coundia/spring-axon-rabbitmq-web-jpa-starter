@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 public class FindByRefreshTokenUsernameQuery {
 
-	private final RefreshTokenUsername username;
+private final RefreshTokenUsername  username;
 
-	public FindByRefreshTokenUsernameQuery(RefreshTokenUsername username) {
-		this.username = username;
-	}
+public FindByRefreshTokenUsernameQuery( RefreshTokenUsername username) {
+	this.username = username;
+}
 
-	public RefreshTokenUsername getUsername() {
-		return username;
-	}
+public RefreshTokenUsername  getUsername() {
+return username;
+}
 }

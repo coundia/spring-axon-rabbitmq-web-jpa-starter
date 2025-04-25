@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,10 +19,10 @@ import java.io.Serializable;
 @Schema(name = "PasswordResetRequest", description = "Request payload for PasswordReset operations")
 public class PasswordResetRequest implements Serializable {
 
-	@Schema(description = "", example = "2eb51365-1b2c-40d2-9772-e3ac137d7ce4")
+	@Schema(description = "", example = "09d8b3df-136c-44d2-a73f-7e1a774ce7d3")
 	private String token;
 
-	@Schema(description = "", example = "9aedd577-bca1-455d-959a-b6618f4ac316")
+	@Schema(description = "", example = "ab04cde1-5496-4eb9-8204-725ddbb22d5a")
 	private String username;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")

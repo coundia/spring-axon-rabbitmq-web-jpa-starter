@@ -1,5 +1,10 @@
 package com.groupe2cs.bizyhub.tenant.infrastructure;
 
+	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+	import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+	import com.groupe2cs.bizyhub.tenant.infrastructure.CurrentTenantIdentifierResolverImpl;
+
+import com.groupe2cs.bizyhub.tenant.infrastructure.CurrentTenantIdentifierResolverImpl;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -20,44 +25,44 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CurrentTenantIdentifierResolverTest {
 
-	@Mock
-	private TenantRepository tenantRepository;
+@Mock
+private TenantRepository tenantRepository;
 
-	@InjectMocks
-	private CurrentTenantIdentifierResolverImpl resolver;
+@InjectMocks
+private CurrentTenantIdentifierResolverImpl resolver;
 
-	@AfterEach
-	void cleanup() {
-		RequestContextHolder.resetRequestAttributes();
-	}
+@AfterEach
+void cleanup() {
+RequestContextHolder.resetRequestAttributes();
+}
 
-	@Test
-	void whenNoRequestAttributes_thenReturnDefaultTenant() {
-		RequestContextHolder.resetRequestAttributes();
-		assertEquals("default", resolver.resolveCurrentTenantIdentifier());
-	}
+@Test
+void whenNoRequestAttributes_thenReturnDefaultTenant() {
+RequestContextHolder.resetRequestAttributes();
+assertEquals("default", resolver.resolveCurrentTenantIdentifier());
+}
 
-	@Test
-	void whenHeaderPresent_thenReturnHeaderValue() {
-		when(tenantRepository.findByName("tenant123"))
-				.thenReturn(Optional.of(Tenant.builder().id("tenant123").build()));
+@Test
+void whenHeaderPresent_thenReturnHeaderValue() {
+when(tenantRepository.findByName("tenant123"))
+.thenReturn(Optional.of(Tenant.builder().id("tenant123").build()));
 
-		MockHttpServletRequest request = new MockHttpServletRequest();
-		request.addHeader("X-Tenant-ID", "tenant123");
-		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+MockHttpServletRequest request = new MockHttpServletRequest();
+request.addHeader("X-Tenant-ID", "tenant123");
+RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-		assertEquals("tenant123", resolver.resolveCurrentTenantIdentifier());
-	}
+assertEquals("tenant123", resolver.resolveCurrentTenantIdentifier());
+}
 
-	@Test
-	void whenHeaderBlank_thenReturnDefaultTenant() {
-		when(tenantRepository.findByName("default"))
-				.thenReturn(Optional.of(Tenant.builder().id("default").build()));
+@Test
+void whenHeaderBlank_thenReturnDefaultTenant() {
+when(tenantRepository.findByName("default"))
+.thenReturn(Optional.of(Tenant.builder().id("default").build()));
 
-		MockHttpServletRequest request = new MockHttpServletRequest();
-		request.addHeader("X-Tenant-ID", "");
-		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+MockHttpServletRequest request = new MockHttpServletRequest();
+request.addHeader("X-Tenant-ID", "");
+RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-		assertEquals("default", resolver.resolveCurrentTenantIdentifier());
-	}
+assertEquals("default", resolver.resolveCurrentTenantIdentifier());
+}
 }

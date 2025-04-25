@@ -1,17 +1,20 @@
 package com.groupe2cs.bizyhub.security;
+	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+	import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+	import com.groupe2cs.bizyhub.security.application.dto.*;
+	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
+	import com.groupe2cs.bizyhub.security.application.service.*;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
-import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.transaction.TestTransaction;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
@@ -22,65 +25,75 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RegisterControllerTests {
+@Transactional
+class RegisterControllerTests {
 
-	@Autowired
-	private MockMvc mockMvc;
+@Autowired
+private MockMvc mockMvc;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+@Autowired
+private ObjectMapper objectMapper;
 
-	@Autowired
-	private UserRepository userRepository;
+@Autowired
+private UserRepository userRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+@Autowired
+private PasswordEncoder passwordEncoder;
 
-	@BeforeEach
-	void setUp() {
-		userRepository.deleteAll();
-	}
-
-	@Test
-	void it_should_register_user_and_return_token() throws Exception {
-		AuthRequestDto request = new AuthRequestDto();
-		request.setUsername("newuser");
-		request.setPassword("newpassword");
-
-		String response = mockMvc.perform(post("/api/auth/register")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(request)))
-				.andExpect(status().isOk())
-				.andReturn().getResponse().getContentAsString();
-
-		AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
-		assertThat(dto.getToken()).isNotNull();
-	}
-
-	@Test
-	void it_should_not_register_user_if_username_exists() throws Exception {
-		User user = User.builder()
-				.id(UUID.randomUUID().toString())
-				.username("admin")
-				.password(passwordEncoder.encode("admin"))
-				.build();
-		userRepository.save(user);
-
-		AuthRequestDto request = new AuthRequestDto();
-		request.setUsername("admin");
-		request.setPassword("admin");
-
-		mockMvc.perform(post("/api/auth/register")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(request)))
-				.andExpect(status().isBadRequest());
-	}
-
-	@Test
-	void it_should_return_bad_request_when_input_invalid() throws Exception {
-		mockMvc.perform(post("/api/auth/register")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content("{}"))
-				.andExpect(status().isBadRequest());
-	}
+private void createUser(String username, String password) {
+if (userRepository.findByUsername(username).isEmpty()) {
+CustomUser user = CustomUser.builder()
+.id(UUID.randomUUID().toString())
+.username(username)
+.password(passwordEncoder.encode(password))
+.build();
+userRepository.save(user);
+TestTransaction.flagForCommit();
+TestTransaction.end();
+TestTransaction.start();
 }
+}
+
+@Test
+void it_should_register_user_and_return_token() throws Exception {
+AuthRequestDto request = new AuthRequestDto();
+request.setUsername("newuser");
+request.setPassword("newpassword");
+
+String response = mockMvc.perform(post("/api/auth/register")
+.contentType(MediaType.APPLICATION_JSON)
+.content(objectMapper.writeValueAsString(request)))
+.andExpect(status().isOk())
+.andReturn().getResponse().getContentAsString();
+
+AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
+assertThat(dto.getToken()).isNotNull();
+assertThat(dto.getUsername()).isEqualTo("newuser");
+assertThat(dto.getCode()).isEqualTo(1);
+assertThat(dto.getMessage()).isEqualTo("Registration successful");
+assertThat(dto.getExpirationAt()).isNotNull();
+}
+
+@Test
+void it_should_not_register_user_if_username_exists() throws Exception {
+createUser("admin", "admin");
+
+AuthRequestDto request = new AuthRequestDto();
+request.setUsername("admin");
+request.setPassword("admin");
+
+mockMvc.perform(post("/api/auth/register")
+.contentType(MediaType.APPLICATION_JSON)
+.content(objectMapper.writeValueAsString(request)))
+.andExpect(status().isBadRequest());
+}
+
+@Test
+void it_should_return_bad_request_when_input_invalid() throws Exception {
+mockMvc.perform(post("/api/auth/register")
+.contentType(MediaType.APPLICATION_JSON)
+.content("{}"))
+.andExpect(status().isBadRequest());
+}
+}
+

@@ -14,24 +14,24 @@ public class RequestContextFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	throws IOException, ServletException {
 
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
+	HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-		String tenantId = httpRequest.getHeader("X-Tenant-ID");
-		if (tenantId != null) {
-			//RequestContext.setTenantId(tenantId);
-		}
+	String tenantId = httpRequest.getHeader("X-Tenant-ID");
+	if (tenantId != null) {
+		//RequestContext.setTenantId(tenantId);
+	}
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null && auth.getPrincipal() instanceof UserPrincipal principal) {
-			//RequestContext.setUsername(principal.getUsername());
-		}
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	if (auth != null && auth.getPrincipal() instanceof UserPrincipal principal) {
+		//RequestContext.setUsername(principal.getUsername());
+	}
 
-		try {
-			chain.doFilter(request, response);
-		} finally {
-			//RequestContext.clear();
-		}
+	try {
+		chain.doFilter(request, response);
+	} finally {
+		//RequestContext.clear();
+	}
 	}
 }

@@ -1,8 +1,18 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+
+import java.util.*;
 
 
 @Getter
@@ -12,40 +22,39 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "api_keys")
-public class ApiKey {
+public class ApiKey  {
 
 	@Id
 	private String id;
 
-	@Column(nullable = false, unique = true, length = 2048)
+	@Column(nullable = false, unique = true  , length = 768  )
 	private String appKey;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true    )
 	private String username;
-	@Column(nullable = false, unique = false)
+	@Column(nullable = false, unique = false    )
 	private java.time.Instant createdAt;
-	@Column(nullable = false, unique = false)
+	@Column(nullable = false, unique = false    )
 	private java.time.Instant expiration;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
-	private User createdBy;
+	private CustomUser createdBy;
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
-
 	public ApiKey(String id) {
 		this.id = id;
 	}
 
 	@Override
-	public String toString() {
+ 	public String toString() {
 		return "ApiKey{" +
-				"id='" + id + '\'' +
-				", appKey=" + appKey +
-				", username=" + username +
-				", createdAt=" + createdAt +
-				", expiration=" + expiration +
-				", createdBy=" + createdBy +
-				", tenant=" + tenant +
-				'}';
+		"id='" + id + '\'' +
+			", appKey=" + appKey +
+			", username=" + username +
+			", createdAt=" + createdAt +
+			", expiration=" + expiration +
+			", createdBy=" + createdBy +
+			", tenant=" + tenant +
+		'}';
 	}
 }

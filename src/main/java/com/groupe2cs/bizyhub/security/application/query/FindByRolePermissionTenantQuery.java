@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionTenant;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 public class FindByRolePermissionTenantQuery {
 
-	private final RolePermissionTenant tenant;
+private final RolePermissionTenant  tenant;
 
-	public FindByRolePermissionTenantQuery(RolePermissionTenant tenant) {
-		this.tenant = tenant;
-	}
+public FindByRolePermissionTenantQuery( RolePermissionTenant tenant) {
+	this.tenant = tenant;
+}
 
-	public RolePermissionTenant getTenant() {
-		return tenant;
-	}
+public RolePermissionTenant  getTenant() {
+return tenant;
+}
 }

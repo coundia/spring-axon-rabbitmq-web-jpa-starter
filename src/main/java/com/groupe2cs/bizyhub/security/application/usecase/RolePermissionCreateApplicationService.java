@@ -1,33 +1,34 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
 
-import com.groupe2cs.bizyhub.security.application.command.CreateRolePermissionCommand;
-import com.groupe2cs.bizyhub.security.application.dto.RolePermissionRequest;
-import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.RolePermissionMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class RolePermissionCreateApplicationService {
-	private final CommandGateway commandGateway;
+private final CommandGateway commandGateway;
 
-	public RolePermissionResponse createRolePermission(RolePermissionRequest request,
-													   String createdBy) {
+public RolePermissionResponse createRolePermission(RolePermissionRequest request,
+String createdBy ){
 
-		CreateRolePermissionCommand command = RolePermissionMapper.toCommand(
-				request
-		);
+CreateRolePermissionCommand command = RolePermissionMapper.toCommand(
+request
+);
 
-		if (createdBy != null) {
-			command.setCreatedBy(RolePermissionCreatedBy.create(createdBy));
-		}
+if(createdBy != null) {
+	command.setCreatedBy( RolePermissionCreatedBy.create(createdBy));
+}
 
-		commandGateway.sendAndWait(command);
-		return RolePermissionMapper.toResponse(command);
-	}
+commandGateway.sendAndWait(command);
+return RolePermissionMapper.toResponse(command);
+}
 
 
 }

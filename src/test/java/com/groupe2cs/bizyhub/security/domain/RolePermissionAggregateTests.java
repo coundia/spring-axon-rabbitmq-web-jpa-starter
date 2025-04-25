@@ -1,72 +1,56 @@
 package com.groupe2cs.bizyhub.security.domain;
 
-import com.groupe2cs.bizyhub.security.domain.exception.*;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.BaseUnitTests;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.domain.exception.*;
 
 
 public class RolePermissionAggregateTests extends BaseUnitTests {
 
-	@Test
-	void it_should_create_rolePermission_with_valid_values() {
-		RolePermissionId id = RolePermissionId.create(UUID.randomUUID().toString());
-		RolePermissionRole role = RolePermissionRole.create(UUID.randomUUID().toString());
-		RolePermissionPermission permission = RolePermissionPermission.create(UUID.randomUUID().toString());
-		RolePermissionCreatedBy createdBy = RolePermissionCreatedBy.create(UUID.randomUUID().toString());
-		RolePermissionTenant tenant = RolePermissionTenant.create(UUID.randomUUID().toString());
-		RolePermissionAggregate rolePermission = new RolePermissionAggregate(id, role, permission, createdBy, tenant);
-		assertThat(rolePermission.getId()).isNotNull();
-		assertThat(rolePermission.getId()).isEqualTo(id);
-		assertThat(rolePermission.getRole()).isEqualTo(role);
-		assertThat(rolePermission.getPermission()).isEqualTo(permission);
-		assertThat(rolePermission.getCreatedBy()).isEqualTo(createdBy);
-		assertThat(rolePermission.getTenant()).isEqualTo(tenant);
-	}
+@Test
+void it_should_create_rolePermission_with_valid_values() {
+	RolePermissionId id = RolePermissionId.create(UUID.randomUUID().toString());
+	RolePermissionRole role = RolePermissionRole.create(UUID.randomUUID().toString());
+	RolePermissionPermission permission = RolePermissionPermission.create(UUID.randomUUID().toString());
+	RolePermissionCreatedBy createdBy = RolePermissionCreatedBy.create(UUID.randomUUID().toString());
+	RolePermissionTenant tenant = RolePermissionTenant.create(UUID.randomUUID().toString());
+	RolePermissionAggregate rolePermission = new RolePermissionAggregate(id, role, permission, createdBy, tenant);
+	assertThat(rolePermission.getId()).isNotNull();
+	assertThat(rolePermission.getId()).isEqualTo(id);
+	assertThat(rolePermission.getRole()).isEqualTo(role);
+	assertThat(rolePermission.getPermission()).isEqualTo(permission);
+	assertThat(rolePermission.getCreatedBy()).isEqualTo(createdBy);
+	assertThat(rolePermission.getTenant()).isEqualTo(tenant);
+}
 
-	@Test
-	void it_should_throw_when_id_is_invalid() {
-		RolePermissionIdNotValid
-				error =
-				assertThrows(RolePermissionIdNotValid.class, () -> RolePermissionId.create(""));
+		@Test
+		void it_should_throw_when_id_is_invalid() {
+		RolePermissionIdNotValid error = assertThrows(RolePermissionIdNotValid.class, () -> RolePermissionId.create(""));
 		assertThat(error.getMessage()).isEqualTo("Id is invalid");
-	}
-
-	@Test
-	void it_should_throw_when_role_is_invalid() {
-		RolePermissionRoleNotValid
-				error =
-				assertThrows(RolePermissionRoleNotValid.class, () -> RolePermissionRole.create(""));
+		}
+		@Test
+		void it_should_throw_when_role_is_invalid() {
+		RolePermissionRoleNotValid error = assertThrows(RolePermissionRoleNotValid.class, () -> RolePermissionRole.create(""));
 		assertThat(error.getMessage()).isEqualTo("Role is invalid");
-	}
-
-	@Test
-	void it_should_throw_when_permission_is_invalid() {
-		RolePermissionPermissionNotValid
-				error =
-				assertThrows(RolePermissionPermissionNotValid.class, () -> RolePermissionPermission.create(""));
+		}
+		@Test
+		void it_should_throw_when_permission_is_invalid() {
+		RolePermissionPermissionNotValid error = assertThrows(RolePermissionPermissionNotValid.class, () -> RolePermissionPermission.create(""));
 		assertThat(error.getMessage()).isEqualTo("Permission is invalid");
-	}
-
-	@Test
-	void it_should_throw_when_createdBy_is_invalid() {
-		RolePermissionCreatedByNotValid
-				error =
-				assertThrows(RolePermissionCreatedByNotValid.class, () -> RolePermissionCreatedBy.create(""));
+		}
+		@Test
+		void it_should_throw_when_createdBy_is_invalid() {
+		RolePermissionCreatedByNotValid error = assertThrows(RolePermissionCreatedByNotValid.class, () -> RolePermissionCreatedBy.create(""));
 		assertThat(error.getMessage()).isEqualTo("CreatedBy is invalid");
-	}
-
-	@Test
-	void it_should_throw_when_tenant_is_invalid() {
-		RolePermissionTenantNotValid
-				error =
-				assertThrows(RolePermissionTenantNotValid.class, () -> RolePermissionTenant.create(""));
+		}
+		@Test
+		void it_should_throw_when_tenant_is_invalid() {
+		RolePermissionTenantNotValid error = assertThrows(RolePermissionTenantNotValid.class, () -> RolePermissionTenant.create(""));
 		assertThat(error.getMessage()).isEqualTo("Tenant is invalid");
-	}
+		}
 
 }

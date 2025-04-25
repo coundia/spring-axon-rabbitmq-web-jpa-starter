@@ -1,6 +1,6 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,25 +12,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<CustomUser, String> {
 
-	@Query("SELECT t FROM User t ")
-	Page<User> findAll(Pageable pageable);
+	@Query("SELECT t FROM CustomUser t ")
+	Page<CustomUser> findAll(Pageable pageable);
 
-	@Query("SELECT t FROM User t WHERE t.id = :id")
-	Optional<User> findById(User id);
+	@Query("SELECT t FROM CustomUser t WHERE t.id = :id")
+	Optional<CustomUser> findById(CustomUser id);
+	@Query("SELECT t FROM CustomUser t WHERE t.username = :username")
+	Optional<CustomUser> findByUsername(String username);
+	@Query("SELECT t FROM CustomUser t WHERE t.password = :password")
+	List<CustomUser> findByPassword(String password);
+	@Query("SELECT t FROM CustomUser t WHERE t.createdBy = :createdBy")
+	List<CustomUser> findByCreatedBy(String createdBy);
+	@Query("SELECT t FROM CustomUser t WHERE t.tenant = :tenant")
+	List<CustomUser> findByTenant(String tenant);
 
-	@Query("SELECT t FROM User t WHERE t.username = :username")
-	Optional<User> findByUsername(String username);
-
-	@Query("SELECT t FROM User t WHERE t.password = :password")
-	List<User> findByPassword(String password);
-
-	@Query("SELECT t FROM User t WHERE t.createdBy = :createdBy")
-	List<User> findByCreatedBy(String createdBy);
-
-	@Query("SELECT t FROM User t WHERE t.tenant = :tenant")
-	List<User> findByTenant(String tenant);
-
-	Optional<User> findByCreatedByAndTenant(User createdBy, Tenant tenant);
+	Optional<CustomUser> findByCreatedByAndTenant(CustomUser createdBy, Tenant tenant);
 }

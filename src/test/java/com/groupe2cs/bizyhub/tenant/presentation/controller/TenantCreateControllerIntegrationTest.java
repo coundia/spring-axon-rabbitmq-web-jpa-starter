@@ -1,25 +1,28 @@
 package com.groupe2cs.bizyhub.tenant.presentation.controller;
-
-import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
-import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
-import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.presentation.controller.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.presentation.controller.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.application.command.*;
 import java.util.UUID;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TenantCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-	@Autowired
-	private CommandGateway commandGateway;
+@Autowired
+private CommandGateway commandGateway;
 
-	@Test
-	void it_should_be_able_to_add_tenant() {
+@Test
+void it_should_be_able_to_add_tenant() {
 
 		TenantRequest requestDTO = new TenantRequest();
 
@@ -29,7 +32,7 @@ public class TenantCreateControllerIntegrationTest extends BaseIntegrationTests 
 		requestDTO.setLanguage(UUID.randomUUID().toString());
 		requestDTO.setActive(false);
 
-		String uri = "/v1/commands/tenant";
+ 		String uri = "/v1/commands/tenant";
 		ResponseEntity<TenantResponse> response = this.postForEntity(uri, requestDTO, TenantResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody()).isNotNull();

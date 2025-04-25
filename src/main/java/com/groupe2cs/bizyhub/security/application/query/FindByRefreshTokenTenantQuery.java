@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenTenant;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 public class FindByRefreshTokenTenantQuery {
 
-	private final RefreshTokenTenant tenant;
+private final RefreshTokenTenant  tenant;
 
-	public FindByRefreshTokenTenantQuery(RefreshTokenTenant tenant) {
-		this.tenant = tenant;
-	}
+public FindByRefreshTokenTenantQuery( RefreshTokenTenant tenant) {
+	this.tenant = tenant;
+}
 
-	public RefreshTokenTenant getTenant() {
-		return tenant;
-	}
+public RefreshTokenTenant  getTenant() {
+return tenant;
+}
 }

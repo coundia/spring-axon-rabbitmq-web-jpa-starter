@@ -1,45 +1,46 @@
 package com.groupe2cs.bizyhub.security.application.queryHandler;
 
-import com.groupe2cs.bizyhub.security.application.dto.UserPagedResponse;
-import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.UserMapper;
-import com.groupe2cs.bizyhub.security.application.query.FindAllUserQuery;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import org.axonframework.queryhandling.QueryHandler;
+import org.springframework.stereotype.Component;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+
+import org.axonframework.queryhandling.QueryHandler;
+import org.springframework.stereotype.Component;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class FindAllUserQueryHandler {
 
-	private final UserRepository repository;
+private final UserRepository repository;
 
-	public FindAllUserQueryHandler(UserRepository repository) {
-		this.repository = repository;
-	}
+public FindAllUserQueryHandler(UserRepository repository) {
+	this.repository = repository;
+}
 
-	@QueryHandler
-	public UserPagedResponse handle(FindAllUserQuery query) {
-		int limit = query.getLimit();
-		int offset = query.getPage() * limit;
+@QueryHandler
+public UserPagedResponse handle(FindAllUserQuery query) {
+int limit = query.getLimit();
+int offset = query.getPage() * limit;
 
-		long totalElements = repository.count();
+long totalElements = repository.count();
 
-		PageRequest pageable = PageRequest.of(offset / limit, limit);
+PageRequest pageable = PageRequest.of(offset / limit, limit);
 
-		Page<User> pages = repository.findAll(pageable);
+Page<CustomUser> pages = repository.findAll(pageable);
 
-		List<UserResponse> responses = pages.stream()
-				.map(UserMapper::toResponse)
-				.toList();
+List<UserResponse> responses = pages.stream()
+	.map(UserMapper::toResponse)
+	.toList();
 
-		return UserPagedResponse.from(
-				pages,
-				responses
-		);
+	return UserPagedResponse.from(
+	pages,
+	responses
+	);
 	}
 }

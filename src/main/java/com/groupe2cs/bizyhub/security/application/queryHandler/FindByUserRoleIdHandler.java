@@ -1,26 +1,28 @@
 package com.groupe2cs.bizyhub.security.application.queryHandler;
 
-import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.UserRoleMapper;
-import com.groupe2cs.bizyhub.security.application.query.FindByUserRoleIdQuery;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRoleRepository;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.exception.*;
 import lombok.RequiredArgsConstructor;
-import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
+import java.util.List;
+import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
 public class FindByUserRoleIdHandler {
 
-	private final UserRoleRepository repository;
+private final UserRoleRepository repository;
+@QueryHandler
 
-	@QueryHandler
-
-	public UserRoleResponse handle(FindByUserRoleIdQuery query) {
-		String value = query.getId().value();
-		UserRole entity = repository.findById(value)
-				.orElse(null);
+ public UserRoleResponse handle(FindByUserRoleIdQuery query) {
+	String value = query.getId().value();
+	UserRole entity = repository.findById(value)
+		.orElse(null);
 
 		if (entity == null) {
 			return null;

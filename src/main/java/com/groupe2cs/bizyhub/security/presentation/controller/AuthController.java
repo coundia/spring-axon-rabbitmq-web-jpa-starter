@@ -1,8 +1,7 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
+import com.groupe2cs.bizyhub.security.application.service.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
 
-import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
-import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
-import com.groupe2cs.bizyhub.security.application.service.JwtService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,49 +25,51 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-	private final AuthenticationManager authenticationManager;
-	private final JwtService jwtService;
+private final AuthenticationManager authenticationManager;
+private final JwtService jwtService;
 
-	@PostMapping("/login")
-	@Operation(
-			summary = "Authenticate user",
-			description = "Authenticates a user with username and password, and returns a JWT token",
-			requestBody = @RequestBody(
-					description = "Authentication credentials",
-					required = true,
-					content = @Content(schema = @Schema(implementation = AuthRequestDto.class))
-			)
-	)
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Login successful", content = @Content(schema = @Schema(implementation = AuthResponseDto.class))),
-			@ApiResponse(responseCode = "401", description = "Unauthorized - invalid credentials", content = @Content(schema = @Schema(implementation = AuthResponseDto.class)))
-	})
-	public ResponseEntity<AuthResponseDto> authenticate(@org.springframework.web.bind.annotation.RequestBody AuthRequestDto request) {
-		try {
+@PostMapping("/login")
+@Operation(
+summary = "Authenticate user",
+description = "Authenticates a user with username and password, and returns a JWT token",
+requestBody = @RequestBody(
+description = "Authentication credentials",
+required = true,
+content = @Content(schema = @Schema(implementation = AuthRequestDto.class))
+)
+)
+@ApiResponses(value = {
+@ApiResponse(responseCode = "200", description = "Login successful", content = @Content(schema = @Schema(implementation = AuthResponseDto.class))),
+@ApiResponse(responseCode = "401", description = "Unauthorized - invalid credentials", content = @Content(schema = @Schema(implementation = AuthResponseDto.class)))
+})
+public ResponseEntity<AuthResponseDto> authenticate(@org.springframework.web.bind.annotation.RequestBody AuthRequestDto request) {
+	try {
 
-			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-			);
+	Authentication authentication = authenticationManager.authenticate(
+			new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+	);
 
-			String token = jwtService.generateToken(authentication);
+	String token = jwtService.generateToken(authentication);
 
-			return ResponseEntity.ok(
-					AuthResponseDto.builder()
-							.token(token)
-							.username(authentication.getName())
-							.expirationAt(jwtService.extractExpiration(token))
-							.code(1)
-							.message("Login successful")
-							.build()
-			);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body(AuthResponseDto.builder()
-							.token(null)
-							.code(0)
-							.message("Unauthorized")
-							.build());
-		}
+	String tenantId = jwtService.extractTenantId(token);
+
+	return ResponseEntity.ok(
+	AuthResponseDto.builder()
+	.token(token)
+	.tenant(tenantId)
+	.username(authentication.getName())
+	.expirationAt(jwtService.extractExpiration(token))
+	.code(1)
+	.message("Login successful")
+	.build()
+	);
+	} catch (Exception e) {
+	e.printStackTrace();
+	return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	.body(AuthResponseDto.builder()
+	.code(0)
+	.message("Unauthorized")
+	.build());
 	}
-}
+	}
+	}

@@ -1,11 +1,21 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+import java.util.ArrayList;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
-import java.util.HashSet;
-import java.util.Set;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+
+import java.util.*;
 
 
 @Getter
@@ -15,34 +25,33 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role  {
 
 	@Id
 	private String id;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true    )
 	private String name;
-	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "role",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<RolePermission> rolePermissions = new HashSet<>();
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
-	private User createdBy;
+	private CustomUser createdBy;
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
-
 	public Role(String id) {
 		this.id = id;
 	}
 
 	@Override
-	public String toString() {
+ 	public String toString() {
 		return "Role{" +
-				"id='" + id + '\'' +
-				", name=" + name +
-				", rolePermissions=" + rolePermissions +
-				", createdBy=" + createdBy +
-				", tenant=" + tenant +
-				'}';
+		"id='" + id + '\'' +
+			", name=" + name +
+			", rolePermissions=" + rolePermissions +
+			", createdBy=" + createdBy +
+			", tenant=" + tenant +
+		'}';
 	}
 }
