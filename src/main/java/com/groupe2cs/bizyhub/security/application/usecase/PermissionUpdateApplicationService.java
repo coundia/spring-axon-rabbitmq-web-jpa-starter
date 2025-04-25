@@ -1,40 +1,41 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
 
-import com.groupe2cs.bizyhub.security.application.command.UpdatePermissionCommand;
-import com.groupe2cs.bizyhub.security.application.dto.PermissionRequest;
-import com.groupe2cs.bizyhub.security.application.dto.PermissionResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.PermissionMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
-import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class PermissionUpdateApplicationService {
 
-	private final FileStorageService fileStorageService;
-	private final CommandGateway commandGateway;
+private final FileStorageService fileStorageService;
+private final CommandGateway commandGateway;
 
 
-	public PermissionResponse updatePermission(PermissionId id, PermissionRequest request,
-											   String createdBy
-	) {
+public PermissionResponse updatePermission(PermissionId id,PermissionRequest request,
+String createdBy 
+){
 
-		UpdatePermissionCommand command = PermissionMapper.toUpdateCommand(
-				id,
-				request
-		);
+UpdatePermissionCommand command = PermissionMapper.toUpdateCommand(
+id,
+request
+);
 
-		if (createdBy != null) {
-			command.setCreatedBy(PermissionCreatedBy.create(createdBy));
-		}
+if(createdBy != null) {
+command.setCreatedBy( PermissionCreatedBy.create(createdBy));
+}
 
-		commandGateway.sendAndWait(command);
+commandGateway.sendAndWait(command);
 
-		return PermissionMapper.toResponse(command);
-	}
+return PermissionMapper.toResponse(command);
+}
 
 }

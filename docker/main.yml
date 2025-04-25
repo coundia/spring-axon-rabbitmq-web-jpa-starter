@@ -22,3 +22,8 @@ services:
     extends:
       file: ./maildev.yml
       service: maildev
+
+  mysql:
+    extends:
+      file: ./mysql.yml
+      service: mysql

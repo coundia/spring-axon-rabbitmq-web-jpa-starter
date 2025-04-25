@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,10 +19,10 @@ import java.io.Serializable;
 @Schema(name = "UserRequest", description = "Request payload for User operations")
 public class UserRequest implements Serializable {
 
-	@Schema(description = "", example = "413b73d6-9001-42a6-86f0-d356963b178e")
+	@Schema(description = "", example = "a1d75024-cbd5-42ae-a0ce-9c89a9cb1802")
 	private String username;
 
-	@Schema(description = "", example = "e590a846-ade8-41fc-a4d8-5f083fb911c3")
+	@Schema(description = "", example = "0e6571a1-c721-47c4-81c1-05cbfaa0b86c")
 	private String password;
 
 

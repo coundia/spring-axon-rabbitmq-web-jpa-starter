@@ -1,54 +1,64 @@
 package com.groupe2cs.bizyhub.security.application.service;
+	import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+	import com.groupe2cs.bizyhub.security.application.dto.*;
 
-import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
-import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class RegisterUser {
 
-	private final UserRepository userRepository;
-	private final PasswordEncoder passwordEncoder;
-	private final JwtService jwtService;
+private final UserRepository userRepository;
+private final PasswordEncoder passwordEncoder;
+private final JwtService jwtService;
 
-	public AuthResponseDto handle(AuthRequestDto request) {
-		if (userRepository.findByUsername(request.getUsername()).isPresent()) {
-			throw new IllegalArgumentException("Username already exists");
-		}
+public AuthResponseDto handle(AuthRequestDto request,String tenantId) {
+if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+	throw new IllegalArgumentException("Username already exists");
+}
 
-		User user = User.builder()
-				.id(UUID.randomUUID().toString())
-				.username(request.getUsername())
-				.password(passwordEncoder.encode(request.getPassword()))
-				.build();
+User user = User.builder()
+.id(UUID.randomUUID().toString())
+.username(request.getUsername())
+.password(passwordEncoder.encode(request.getPassword()))
+.tenant(new Tenant(tenantId))
+.build();
 
-		UserPrincipal userPrincipal = new UserPrincipal(user);
+log.info("Registering user: {}", user.getUsername());
+userRepository.save(user);
 
-		Authentication authentication = new UsernamePasswordAuthenticationToken(
-				userPrincipal,
-				null,
-				userPrincipal.getAuthorities()
-		);
+UserPrincipal userPrincipal = new UserPrincipal(user);
 
-		String token = jwtService.generateToken(authentication);
+Authentication authentication = new UsernamePasswordAuthenticationToken(
+	userPrincipal,
+	null,
+	userPrincipal.getAuthorities()
+);
 
-		return AuthResponseDto.builder()
-				.token(token)
-				.username(user.getUsername())
-				.code(1)
-				.expirationAt(jwtService.extractExpiration(token))
-				.message("Login successful")
-				.build();
-	}
+String token = jwtService.generateToken(authentication);
+
+String tenant = user.getTenant() != null ? user.getTenant().getName() : null;
+
+return AuthResponseDto.builder()
+.token(token)
+.username(user.getUsername())
+.code(1)
+.expirationAt(jwtService.extractExpiration(token))
+.message("Login successful")
+.tenant(tenant)
+.build();
+}
 }
 
 

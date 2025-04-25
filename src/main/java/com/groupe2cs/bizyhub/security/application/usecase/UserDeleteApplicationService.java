@@ -1,20 +1,25 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
 
-import com.groupe2cs.bizyhub.security.application.command.DeleteUserCommand;
-import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class UserDeleteApplicationService {
 
-	private final CommandGateway commandGateway;
+private final CommandGateway commandGateway;
 
-	public void deleteUser(UserId idVo) {
+public void deleteUser(UserId idVo) {
 
-		DeleteUserCommand command = new DeleteUserCommand(idVo);
-		commandGateway.sendAndWait(command);
-	}
+DeleteUserCommand command = new DeleteUserCommand(idVo);
+commandGateway.sendAndWait(command);
+}
 }

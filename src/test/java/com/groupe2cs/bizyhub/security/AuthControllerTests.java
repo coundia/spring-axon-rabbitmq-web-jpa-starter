@@ -1,10 +1,11 @@
 package com.groupe2cs.bizyhub.security;
+import com.groupe2cs.bizyhub.security.application.service.*;
+import com.groupe2cs.bizyhub.security.infrastructure.config.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
-import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,88 +15,93 @@ import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.UUID;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AuthControllerTests {
 
-	@Autowired
-	PasswordEncoder passwordEncoder;
-	@Autowired
-	private MockMvc mockMvc;
-	@Autowired
-	private ObjectMapper objectMapper;
-	@Autowired
-	private UserRepository userRepository;
+@Autowired
+private MockMvc mockMvc;
 
-	@BeforeEach
-	void setUp() {
-		userRepository.deleteAll();
+@Autowired
+private ObjectMapper objectMapper;
 
-		User user = User.builder()
-				.id(UUID.randomUUID().toString())
-				.username("admin")
-				.password(passwordEncoder.encode("admin"))
-				.build();
+@Autowired
+private UserRepository userRepository;
 
-		userRepository.save(user);
-	}
+@Autowired
+PasswordEncoder passwordEncoder;
 
-	@Test
-	void it_should_return_jwt_token_when_credentials_are_valid() throws Exception {
-		AuthRequestDto request = new AuthRequestDto();
-		request.setUsername("admin");
-		request.setPassword("admin");
+@BeforeEach
+void setUp() {
+userRepository.deleteAll();
 
-		String response = mockMvc.perform(post("/api/auth/login")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(request)))
-				.andExpect(status().isOk())
-				.andReturn().getResponse().getContentAsString();
+User user = User.builder()
+.id(UUID.randomUUID().toString())
+.username("admin")
+.password(passwordEncoder.encode("admin"))
+.build();
 
-		AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
-		assertThat(dto.getToken()).isNotNull();
-		assertThat(dto.getUsername()).isEqualTo("admin");
-		assertThat(dto.getCode()).isEqualTo(1);
-		assertThat(dto.getMessage()).isEqualTo("Login successful");
-		assertThat(dto.getExpirationAt()).isNotNull();
+userRepository.save(user);
+}
 
-	}
+@Test
+void it_should_return_jwt_token_when_credentials_are_valid() throws Exception {
+AuthRequestDto request = new AuthRequestDto();
+request.setUsername("admin");
+request.setPassword("admin");
 
-	@Test
-	void it_should_return_unauthorized_when_user_not_exist() throws Exception {
-		AuthRequestDto request = new AuthRequestDto();
-		request.setUsername("unknown");
-		request.setPassword("admin");
+String response = mockMvc.perform(post("/api/auth/login")
+.contentType(MediaType.APPLICATION_JSON)
+.content(objectMapper.writeValueAsString(request)))
+.andExpect(status().isOk())
+.andReturn().getResponse().getContentAsString();
 
-		mockMvc.perform(post("/api/auth/login")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(request)))
-				.andExpect(status().isUnauthorized());
-	}
+AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
+assertThat(dto.getToken()).isNotNull();
+assertThat(dto.getUsername()).isEqualTo("admin");
+assertThat(dto.getCode()).isEqualTo(1);
+assertThat(dto.getMessage()).isEqualTo("Login successful");
+assertThat(dto.getExpirationAt()).isNotNull();
 
-	@Test
-	void it_should_return_unauthorized_when_password_invalid() throws Exception {
-		AuthRequestDto request = new AuthRequestDto();
-		request.setUsername("admin");
-		request.setPassword("wrong");
+}
 
-		mockMvc.perform(post("/api/auth/login")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(request)))
-				.andExpect(status().isUnauthorized());
-	}
+@Test
+void it_should_return_unauthorized_when_user_not_exist() throws Exception {
+AuthRequestDto request = new AuthRequestDto();
+request.setUsername("unknown");
+request.setPassword("admin");
 
-	@Test
-	void it_should_return_unauthorized_request_when_body_empty() throws Exception {
-		mockMvc.perform(post("/api/auth/login")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content("{}"))
-				.andExpect(status().isUnauthorized());
-	}
+mockMvc.perform(post("/api/auth/login")
+.contentType(MediaType.APPLICATION_JSON)
+.content(objectMapper.writeValueAsString(request)))
+.andExpect(status().isUnauthorized());
+}
+
+@Test
+void it_should_return_unauthorized_when_password_invalid() throws Exception {
+AuthRequestDto request = new AuthRequestDto();
+request.setUsername("admin");
+request.setPassword("wrong");
+
+mockMvc.perform(post("/api/auth/login")
+.contentType(MediaType.APPLICATION_JSON)
+.content(objectMapper.writeValueAsString(request)))
+.andExpect(status().isUnauthorized());
+}
+
+@Test
+void it_should_return_unauthorized_request_when_body_empty() throws Exception {
+mockMvc.perform(post("/api/auth/login")
+.contentType(MediaType.APPLICATION_JSON)
+.content("{}"))
+.andExpect(status().isUnauthorized());
+}
 }

@@ -1,31 +1,41 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
-import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.presentation.controller.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.presentation.controller.TenantFixtures;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.http.HttpStatus;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 
 public class RolePermissionFindByIdControllerIntegrationTest extends BaseIntegrationTests {
 
-	@Autowired
-	private RolePermissionRepository rolepermissionRepository;
+@Autowired
+private CommandGateway commandGateway;
 
-	@Test
-	void it_should_be_able_to_get_rolepermission_by_id() {
-		RolePermission entity = RolePermissionFixtures.randomOne(rolepermissionRepository);
-		String existingId = entity.getId();
+@Autowired
+private RolePermissionRepository repository;
 
-		String uri = "/v1/queries/rolePermission/id?id=" + existingId;
-		ResponseEntity<RolePermissionResponse> response = this.getForEntity(uri, RolePermissionResponse.class);
+@Test
+void it_should_be_able_to_get_rolepermission_by_id() {
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody()).isNotNull();
-		assertThat(response.getBody().getId()).isEqualTo(existingId);
+	String existingId = RolePermissionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+
+	 RolePermissionFixtures.byIdWaitExist(repository, existingId);
+
+	String uri = "/v1/queries/rolePermission/id?id=" + existingId;
+	ResponseEntity<RolePermissionResponse> response = this.getForEntity(uri, RolePermissionResponse.class);
+
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+	assertThat(response.getBody()).isNotNull();
+	assertThat(response.getBody().getId()).isEqualTo(existingId);
 	}
 }

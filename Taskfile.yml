@@ -70,6 +70,8 @@ tasks:
     cmds:
       - docker build -t pcoundia .
       - docker compose -f docker/main.yml up -d --build
+
+
     sources:
       - "Dockerfile"
       - "src/**"

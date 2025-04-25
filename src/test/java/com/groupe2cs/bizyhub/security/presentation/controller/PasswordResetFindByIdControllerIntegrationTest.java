@@ -1,31 +1,41 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.application.dto.PasswordResetResponse;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.PasswordReset;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.PasswordResetRepository;
-import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.presentation.controller.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.presentation.controller.TenantFixtures;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.http.HttpStatus;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 
 public class PasswordResetFindByIdControllerIntegrationTest extends BaseIntegrationTests {
 
-	@Autowired
-	private PasswordResetRepository passwordresetRepository;
+@Autowired
+private CommandGateway commandGateway;
 
-	@Test
-	void it_should_be_able_to_get_passwordreset_by_id() {
-		PasswordReset entity = PasswordResetFixtures.randomOne(passwordresetRepository);
-		String existingId = entity.getId();
+@Autowired
+private PasswordResetRepository repository;
 
-		String uri = "/v1/queries/passwordReset/id?id=" + existingId;
-		ResponseEntity<PasswordResetResponse> response = this.getForEntity(uri, PasswordResetResponse.class);
+@Test
+void it_should_be_able_to_get_passwordreset_by_id() {
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody()).isNotNull();
-		assertThat(response.getBody().getId()).isEqualTo(existingId);
+	String existingId = PasswordResetFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+
+	 PasswordResetFixtures.byIdWaitExist(repository, existingId);
+
+	String uri = "/v1/queries/passwordReset/id?id=" + existingId;
+	ResponseEntity<PasswordResetResponse> response = this.getForEntity(uri, PasswordResetResponse.class);
+
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+	assertThat(response.getBody()).isNotNull();
+	assertThat(response.getBody().getId()).isEqualTo(existingId);
 	}
 }

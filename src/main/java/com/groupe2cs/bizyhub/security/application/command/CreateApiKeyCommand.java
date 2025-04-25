@@ -1,10 +1,15 @@
 package com.groupe2cs.bizyhub.security.application.command;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import lombok.*;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import java.util.Date;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import java.util.UUID;
 
 @Getter
@@ -13,30 +18,32 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class CreateApiKeyCommand implements Serializable {
-	@TargetAggregateIdentifier
+@TargetAggregateIdentifier
 	@Builder.Default
 	private ApiKeyId id = ApiKeyId.create(UUID.randomUUID().toString());
-	private ApiKeyKey key;
-	private ApiKeyUsername username;
-	private ApiKeyCreatedAt createdAt;
-	private ApiKeyExpiration expiration;
-	private ApiKeyCreatedBy createdBy;
-
+ 	private ApiKeyAppKey appKey;
+ 	private ApiKeyUsername username;
+ 	private ApiKeyCreatedAt createdAt;
+ 	private ApiKeyExpiration expiration;
+ 	private ApiKeyCreatedBy createdBy;
+ 	private ApiKeyTenant tenant;
 	public CreateApiKeyCommand(
-
-			ApiKeyKey key,
-			ApiKeyUsername username,
-			ApiKeyCreatedAt createdAt,
-			ApiKeyExpiration expiration,
-			ApiKeyCreatedBy createdBy
-	) {
-		this.id = ApiKeyId.create(UUID.randomUUID().toString());
-
-		this.key = key;
-		this.username = username;
-		this.createdAt = createdAt;
-		this.expiration = expiration;
-		this.createdBy = createdBy;
+ 
+   ApiKeyAppKey appKey , 
+   ApiKeyUsername username , 
+   ApiKeyCreatedAt createdAt , 
+   ApiKeyExpiration expiration , 
+   ApiKeyCreatedBy createdBy , 
+   ApiKeyTenant tenant  
+		){
+			this.id = ApiKeyId.create(UUID.randomUUID().toString());
+ 
+  this.appKey = appKey ; 
+  this.username = username ; 
+  this.createdAt = createdAt ; 
+  this.expiration = expiration ; 
+  this.createdBy = createdBy ; 
+  this.tenant = tenant ; 
 	}
 
 

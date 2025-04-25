@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenId;
+	import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -14,7 +14,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class RefreshTokenDeletedEvent implements Serializable {
 
+	
+	
+	
+	
+	
+	
 
-	private RefreshTokenId id;
+private RefreshTokenId id;
 
 }

@@ -1,0 +1,13 @@
+name: pcoundia
+services:
+  mysql:
+    image: mysql:8
+    container_name: pcoundia-mysql-1
+    environment:
+      - MYSQL_ROOT_PASSWORD=pcoundia_test
+      - MYSQL_USER=pcoundia_test
+      - MYSQL_PASSWORD=pcoundia_test
+      - MYSQL_DATABASE=pcoundia_test
+    ports:
+      - 3306:3306
+
