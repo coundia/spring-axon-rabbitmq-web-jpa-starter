@@ -1,13 +1,12 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
 
-import com.groupe2cs.bizyhub.security.application.mapper.*;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.security.application.dto.UserPagedResponse;
+import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
 import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -16,54 +15,57 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class UserReadApplicationService {
 
-private final QueryGateway queryGateway;
+	private final QueryGateway queryGateway;
 
 
-public UserPagedResponse findAll(int page, int limit) {
+	public UserPagedResponse findAll(int page, int limit) {
 
-	FindAllUserQuery query = new FindAllUserQuery(page, limit);
-	CompletableFuture<UserPagedResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(UserPagedResponse.class));
-	return future.join();
-}
-
-
-public UserResponse findByUserId(UserId value) {
-
-	FindByUserIdQuery query = new FindByUserIdQuery(value);
-	CompletableFuture<UserResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(UserResponse.class));
-	return future.join();
-}
+		FindAllUserQuery query = new FindAllUserQuery(page, limit);
+		CompletableFuture<UserPagedResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(UserPagedResponse.class));
+		return future.join();
+	}
 
 
-public List<UserResponse> findByUserUsername(UserUsername value) {
+	public UserResponse findByUserId(UserId value) {
 
-	FindByUserUsernameQuery query = new FindByUserUsernameQuery(value);
-	CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
-	return future.join();
-}
-public List<UserResponse> findByUserPassword(UserPassword value) {
+		FindByUserIdQuery query = new FindByUserIdQuery(value);
+		CompletableFuture<UserResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(UserResponse.class));
+		return future.join();
+	}
 
-	FindByUserPasswordQuery query = new FindByUserPasswordQuery(value);
-	CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
-	return future.join();
-}
-public List<UserResponse> findByUserCreatedBy(UserCreatedBy value) {
 
-	FindByUserCreatedByQuery query = new FindByUserCreatedByQuery(value);
-	CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
-	return future.join();
-}
-public List<UserResponse> findByUserTenant(UserTenant value) {
+	public List<UserResponse> findByUserUsername(UserUsername value) {
 
-	FindByUserTenantQuery query = new FindByUserTenantQuery(value);
-	CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
-	return future.join();
-}
+		FindByUserUsernameQuery query = new FindByUserUsernameQuery(value);
+		CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
+		return future.join();
+	}
+
+	public List<UserResponse> findByUserPassword(UserPassword value) {
+
+		FindByUserPasswordQuery query = new FindByUserPasswordQuery(value);
+		CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
+		return future.join();
+	}
+
+	public List<UserResponse> findByUserCreatedBy(UserCreatedBy value) {
+
+		FindByUserCreatedByQuery query = new FindByUserCreatedByQuery(value);
+		CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
+		return future.join();
+	}
+
+	public List<UserResponse> findByUserTenant(UserTenant value) {
+
+		FindByUserTenantQuery query = new FindByUserTenantQuery(value);
+		CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
+		return future.join();
+	}
 
 }

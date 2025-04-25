@@ -1,13 +1,13 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
 
-
 import lombok.AllArgsConstructor;
-import java.io.Serializable;
-import java.time.Instant;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Builder;
+
+import java.io.Serializable;
+import java.time.Instant;
 
 @Data
 @NoArgsConstructor

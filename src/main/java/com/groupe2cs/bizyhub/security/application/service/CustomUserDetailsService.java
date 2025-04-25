@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.service;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,9 +16,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-	return userRepository
-					.findByUsername(username)
-					.map(UserPrincipal::new)
-					.orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+		return userRepository
+				.findByUsername(username)
+				.map(UserPrincipal::new)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 	}
 }

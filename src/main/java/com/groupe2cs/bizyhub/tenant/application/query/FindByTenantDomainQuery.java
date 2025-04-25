@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.tenant.application.query;
 
-import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.TenantDomain;
 
 public class FindByTenantDomainQuery {
 
-private final TenantDomain  domain;
+	private final TenantDomain domain;
 
-public FindByTenantDomainQuery( TenantDomain domain) {
-	this.domain = domain;
-}
+	public FindByTenantDomainQuery(TenantDomain domain) {
+		this.domain = domain;
+	}
 
-public TenantDomain  getDomain() {
-return domain;
-}
+	public TenantDomain getDomain() {
+		return domain;
+	}
 }

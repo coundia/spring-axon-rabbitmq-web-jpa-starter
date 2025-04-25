@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenId;
 
 public class FindByRefreshTokenIdQuery {
 
-private final RefreshTokenId  id;
+	private final RefreshTokenId id;
 
-public FindByRefreshTokenIdQuery( RefreshTokenId id) {
-	this.id = id;
-}
+	public FindByRefreshTokenIdQuery(RefreshTokenId id) {
+		this.id = id;
+	}
 
-public RefreshTokenId  getId() {
-return id;
-}
+	public RefreshTokenId getId() {
+		return id;
+	}
 }

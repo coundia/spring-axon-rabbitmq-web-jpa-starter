@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
 public class FakeMailSender implements MailSender {
 	@Override
 	public void send(String from, String to, String subject, String content) {
-		log.info("FAKE MAIL → from: {}, To: {}, Subject: {}, Content: {}",from, to, subject, content);
+		log.info("FAKE MAIL → from: {}, To: {}, Subject: {}, Content: {}", from, to, subject, content);
 	}
 }

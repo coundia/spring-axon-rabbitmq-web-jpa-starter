@@ -1,18 +1,8 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-
-import java.util.*;
+import lombok.*;
 
 
 @Getter
@@ -22,7 +12,7 @@ import java.util.*;
 @Builder
 @Entity
 @Table(name = "role_permissions")
-public class RolePermission  {
+public class RolePermission {
 
 	@Id
 	private String id;
@@ -39,18 +29,19 @@ public class RolePermission  {
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
+
 	public RolePermission(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "RolePermission{" +
-		"id='" + id + '\'' +
-			", role=" + role +
-			", permission=" + permission +
-			", createdBy=" + createdBy +
-			", tenant=" + tenant +
-		'}';
+				"id='" + id + '\'' +
+				", role=" + role +
+				", permission=" + permission +
+				", createdBy=" + createdBy +
+				", tenant=" + tenant +
+				'}';
 	}
 }

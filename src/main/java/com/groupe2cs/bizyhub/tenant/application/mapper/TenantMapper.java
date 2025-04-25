@@ -1,73 +1,75 @@
 package com.groupe2cs.bizyhub.tenant.application.mapper;
 
-	import com.groupe2cs.bizyhub.tenant.application.dto.*;
-	import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
-	import com.groupe2cs.bizyhub.tenant.domain.*;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.tenant.application.command.*;
+import com.groupe2cs.bizyhub.tenant.application.command.CreateTenantCommand;
+import com.groupe2cs.bizyhub.tenant.application.command.DeleteTenantCommand;
+import com.groupe2cs.bizyhub.tenant.application.command.UpdateTenantCommand;
+import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
+import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 
 public class TenantMapper {
 
-public static TenantResponse toResponse(Tenant entity) {
-return TenantResponse.builder()
-		.id(entity.getId())
-		.name(entity.getName())
-		.description(entity.getDescription())
-		.domain(entity.getDomain())
-		.language(entity.getLanguage())
-		.active(entity.getActive())
-.build();
-}
+	public static TenantResponse toResponse(Tenant entity) {
+		return TenantResponse.builder()
+				.id(entity.getId())
+				.name(entity.getName())
+				.description(entity.getDescription())
+				.domain(entity.getDomain())
+				.language(entity.getLanguage())
+				.active(entity.getActive())
+				.build();
+	}
 
-public static TenantResponse toResponse(CreateTenantCommand command) {
-return TenantResponse.builder()
-	.id(command.getId().value())
-	.name(command.getName().value())
-	.description(command.getDescription().value())
-	.domain(command.getDomain().value())
-	.language(command.getLanguage().value())
-	.active(command.getActive().value())
-.build();
-}
+	public static TenantResponse toResponse(CreateTenantCommand command) {
+		return TenantResponse.builder()
+				.id(command.getId().value())
+				.name(command.getName().value())
+				.description(command.getDescription().value())
+				.domain(command.getDomain().value())
+				.language(command.getLanguage().value())
+				.active(command.getActive().value())
+				.build();
+	}
 
-public static TenantResponse toResponse(UpdateTenantCommand command) {
-return TenantResponse.builder()
-	.id(command.getId().value())
-	.name(command.getName().value())
-	.description(command.getDescription().value())
-	.domain(command.getDomain().value())
-	.language(command.getLanguage().value())
-	.active(command.getActive().value())
-.build();
-}
+	public static TenantResponse toResponse(UpdateTenantCommand command) {
+		return TenantResponse.builder()
+				.id(command.getId().value())
+				.name(command.getName().value())
+				.description(command.getDescription().value())
+				.domain(command.getDomain().value())
+				.language(command.getLanguage().value())
+				.active(command.getActive().value())
+				.build();
+	}
 
-public static CreateTenantCommand toCommand(
-TenantRequest request
-) {
-return CreateTenantCommand.builder()
-	.name(TenantName.create(request.getName()))
-	.description(TenantDescription.create(request.getDescription()))
-	.domain(TenantDomain.create(request.getDomain()))
-	.language(TenantLanguage.create(request.getLanguage()))
-	.active(TenantActive.create(request.getActive()))
-.build();
-}
+	public static CreateTenantCommand toCommand(
+			TenantRequest request
+	) {
+		return CreateTenantCommand.builder()
+				.name(TenantName.create(request.getName()))
+				.description(TenantDescription.create(request.getDescription()))
+				.domain(TenantDomain.create(request.getDomain()))
+				.language(TenantLanguage.create(request.getLanguage()))
+				.active(TenantActive.create(request.getActive()))
+				.build();
+	}
 
 	public static UpdateTenantCommand toUpdateCommand(TenantId id, TenantRequest request) {
-	return UpdateTenantCommand.builder()
-	.id(id)
-		.name(TenantName.create(request.getName()))
-		.description(TenantDescription.create(request.getDescription()))
-		.domain(TenantDomain.create(request.getDomain()))
-		.language(TenantLanguage.create(request.getLanguage()))
-		.active(TenantActive.create(request.getActive()))
-	.build();
+		return UpdateTenantCommand.builder()
+				.id(id)
+				.name(TenantName.create(request.getName()))
+				.description(TenantDescription.create(request.getDescription()))
+				.domain(TenantDomain.create(request.getDomain()))
+				.language(TenantLanguage.create(request.getLanguage()))
+				.active(TenantActive.create(request.getActive()))
+				.build();
 	}
 
 
-public static DeleteTenantCommand toDeleteCommand(TenantId id) {
-return DeleteTenantCommand.builder()
-.id(id)
-.build();
-}
+	public static DeleteTenantCommand toDeleteCommand(TenantId id) {
+		return DeleteTenantCommand.builder()
+				.id(id)
+				.build();
+	}
 }
