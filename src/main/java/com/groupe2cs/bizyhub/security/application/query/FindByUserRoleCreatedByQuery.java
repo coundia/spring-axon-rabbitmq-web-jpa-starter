@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleCreatedBy;
 
 public class FindByUserRoleCreatedByQuery {
 
-private final UserRoleCreatedBy  createdBy;
+	private final UserRoleCreatedBy createdBy;
 
-public FindByUserRoleCreatedByQuery( UserRoleCreatedBy createdBy) {
-	this.createdBy = createdBy;
-}
+	public FindByUserRoleCreatedByQuery(UserRoleCreatedBy createdBy) {
+		this.createdBy = createdBy;
+	}
 
-public UserRoleCreatedBy  getCreatedBy() {
-return createdBy;
-}
+	public UserRoleCreatedBy getCreatedBy() {
+		return createdBy;
+	}
 }

@@ -19,12 +19,16 @@ public interface UserRepository extends JpaRepository<CustomUser, String> {
 
 	@Query("SELECT t FROM CustomUser t WHERE t.id = :id")
 	Optional<CustomUser> findById(CustomUser id);
+
 	@Query("SELECT t FROM CustomUser t WHERE t.username = :username")
 	Optional<CustomUser> findByUsername(String username);
+
 	@Query("SELECT t FROM CustomUser t WHERE t.password = :password")
 	List<CustomUser> findByPassword(String password);
+
 	@Query("SELECT t FROM CustomUser t WHERE t.createdBy = :createdBy")
 	List<CustomUser> findByCreatedBy(String createdBy);
+
 	@Query("SELECT t FROM CustomUser t WHERE t.tenant = :tenant")
 	List<CustomUser> findByTenant(String tenant);
 
