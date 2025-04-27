@@ -126,7 +126,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0NTAwMDY5NywiZXhwIjoxNzQ1MDM
 
 ## Api documentation swagger
 
-![api1.png](docs/api1.png)![api.png](docs/api.png)
+![api1.png](docs/api1.png) 
 ![api2.png](docs/api2.png)
 
 ## RabbitMQ Management
