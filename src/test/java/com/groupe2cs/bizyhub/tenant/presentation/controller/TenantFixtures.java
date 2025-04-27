@@ -5,7 +5,6 @@ package com.groupe2cs.bizyhub.tenant.presentation.controller;
 	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
 	import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
 	import com.groupe2cs.bizyhub.security.presentation.controller.UserFixtures;
-	import com.groupe2cs.bizyhub.tenant.presentation.controller.TenantFixtures;
 	import com.groupe2cs.bizyhub.tenant.application.command.*;
 	import java.util.UUID;
 

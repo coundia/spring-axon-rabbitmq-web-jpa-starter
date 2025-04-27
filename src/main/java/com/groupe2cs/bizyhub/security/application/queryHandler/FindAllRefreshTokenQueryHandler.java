@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.application.mapper.RefreshTokenMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindAllRefreshTokenQuery;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RefreshToken;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RefreshTokenRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,12 +27,19 @@ public class FindAllRefreshTokenQueryHandler {
 	public RefreshTokenPagedResponse handle(FindAllRefreshTokenQuery query) {
 		int limit = query.getLimit();
 		int offset = query.getPage() * limit;
+		MetaRequest metaRequest = query.getMetaRequest();
 
 		long totalElements = repository.count();
 
 		PageRequest pageable = PageRequest.of(offset / limit, limit);
+		Page<RefreshToken> pages = null;
 
-		Page<RefreshToken> pages = repository.findAll(pageable);
+		if (metaRequest.isAdmin()) {
+			pages = repository.findAll(pageable);
+			//pages = repository.findAllByTenantId(pageable, metaRequest.getTenantId());
+		} else {
+			pages = repository.findByCreatedById(pageable, metaRequest.getUserId());
+		}
 
 		List<RefreshTokenResponse> responses = pages.stream()
 				.map(RefreshTokenMapper::toResponse)

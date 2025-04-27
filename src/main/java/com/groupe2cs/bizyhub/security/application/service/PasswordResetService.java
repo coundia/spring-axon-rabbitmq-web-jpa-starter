@@ -10,6 +10,7 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +51,8 @@ public class PasswordResetService {
 	@Transactional
 	public boolean resetPassword(String token, String newPassword) {
 		try {
-			var query = new FindByPasswordResetTokenQuery(PasswordResetToken.create(token));
+			MetaRequest metaRequest = new MetaRequest();
+			var query = new FindByPasswordResetTokenQuery(PasswordResetToken.create(token), metaRequest);
 			var tokenEntity = queryGateway.query(query, PasswordResetResponse.class).get();
 
 			if (tokenEntity == null || tokenEntity.getExpiration().isBefore(Instant.now())) return false;

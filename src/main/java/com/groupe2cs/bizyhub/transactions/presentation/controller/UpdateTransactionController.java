@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
@@ -50,9 +51,14 @@ public class UpdateTransactionController {
 		{
 			try {
 
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+
 				TransactionResponse response = applicationService.updateTransaction(TransactionId.create(id),
 						request,
-						RequestContext.getUserId(jwt)
+						metaRequest
 				);
 
 				return ResponseEntity.ok(response);

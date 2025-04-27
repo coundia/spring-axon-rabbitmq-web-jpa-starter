@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.transactions.application.command.DeleteTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ public class TransactionDeleteApplicationService {
 
 	private final CommandGateway commandGateway;
 
-	public void deleteTransaction(TransactionId idVo) {
+	public void deleteTransaction(TransactionId idVo, MetaRequest metaRequest) {
 
 		DeleteTransactionCommand command = new DeleteTransactionCommand(idVo);
 		commandGateway.sendAndWait(command);

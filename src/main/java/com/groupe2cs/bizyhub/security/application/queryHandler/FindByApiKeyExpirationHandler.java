@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.security.application.mapper.ApiKeyMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByApiKeyExpirationQuery;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKey;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.ApiKeyRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,11 @@ public class FindByApiKeyExpirationHandler {
 
 	@QueryHandler
 	public List<ApiKeyResponse> handle(FindByApiKeyExpirationQuery query) {
+
+		MetaRequest metaRequest = query.getMetaRequest();
+
 		java.time.Instant value = query.getExpiration().value();
-		List<ApiKey> entities = repository.findByExpiration(value);
+		List<ApiKey> entities = repository.findByExpirationAndCreatedById(value, metaRequest.getUserId());
 		return entities.stream()
 				.map(ApiKeyMapper::toResponse)
 				.toList();

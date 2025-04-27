@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.tenant.application.queryHandler;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
 import com.groupe2cs.bizyhub.tenant.application.mapper.TenantMapper;
 import com.groupe2cs.bizyhub.tenant.application.query.FindByTenantNameQuery;
@@ -18,8 +19,11 @@ public class FindByTenantNameHandler {
 	@QueryHandler
 
 	public TenantResponse handle(FindByTenantNameQuery query) {
+
+		MetaRequest metaRequest = query.getMetaRequest();
+
 		String value = query.getName().value();
-		Tenant entity = repository.findByName(value)
+		Tenant entity = repository.findByNameAndCreatedById(value, metaRequest.getUserId())
 				.orElse(null);
 
 		if (entity == null) {

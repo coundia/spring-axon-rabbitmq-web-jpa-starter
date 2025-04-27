@@ -28,9 +28,9 @@ void it_should_be_able_to_add_role() {
 
 		requestDTO.setName(UUID.randomUUID().toString());
 
- 		String uri = "/v1/commands/role";
+ 		String uri = "/v1/admin/commands/role";
 		ResponseEntity<RoleResponse> response = this.postForEntity(uri, requestDTO, RoleResponse.class);
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getName()).isEqualTo(requestDTO.getName());

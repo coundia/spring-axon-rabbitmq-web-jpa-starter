@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.transactions.application.queryHandler;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
 import com.groupe2cs.bizyhub.transactions.application.mapper.TransactionMapper;
 import com.groupe2cs.bizyhub.transactions.application.query.FindByTransactionCreatedByQuery;
@@ -19,8 +20,11 @@ public class FindByTransactionCreatedByHandler {
 
 	@QueryHandler
 	public List<TransactionResponse> handle(FindByTransactionCreatedByQuery query) {
+
+		MetaRequest metaRequest = query.getMetaRequest();
+
 		String value = query.getCreatedBy().value();
-		List<Transaction> entities = repository.findByCreatedBy(value);
+		List<Transaction> entities = repository.findByCreatedByIdAndCreatedById(value, metaRequest.getUserId());
 		return entities.stream()
 				.map(TransactionMapper::toResponse)
 				.toList();

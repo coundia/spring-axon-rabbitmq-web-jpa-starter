@@ -1,5 +1,7 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.AbstractAuditableEntity;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,20 +9,22 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "roles")
-public class Role {
+@EntityListeners(AuditListener.class)
+@Table(name = "")
+public class Role extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
-	@Column(nullable = false, unique = true)
+
+	@Column(nullable = false,
+			unique = true)
 	private String name;
 	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<RolePermission> rolePermissions = new HashSet<>();

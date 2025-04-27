@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.domain.event.PermissionUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PermissionRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
@@ -35,6 +36,10 @@ public class PermissionProjection {
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
 
 			repository.save(entity);
 			log.info("Permission inserted: {}", entity);
@@ -57,6 +62,9 @@ public class PermissionProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 			repository.save(entity);
 			log.info("Permission updated successfully: {}", event.getId().value());

@@ -1,16 +1,19 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@RequiredArgsConstructor
+@Getter
+@Setter
+@Builder
 public class FindByUserRoleRoleQuery {
 
 	private final UserRoleRole role;
+	private final MetaRequest metaRequest;
 
-	public FindByUserRoleRoleQuery(UserRoleRole role) {
-		this.role = role;
-	}
-
-	public UserRoleRole getRole() {
-		return role;
-	}
 }

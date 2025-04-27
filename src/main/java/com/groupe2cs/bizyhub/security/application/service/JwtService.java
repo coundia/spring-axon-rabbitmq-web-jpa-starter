@@ -32,6 +32,9 @@ public class JwtService {
 				.map(Object::toString)
 				.collect(Collectors.joining(" "));
 
+		Boolean isAdmin = authentication.getAuthorities().stream()
+				.anyMatch(a -> a.getAuthority().equals("IS_ADMIN"));
+
 		UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
 		String userId = userPrincipal.getId();
@@ -52,6 +55,7 @@ public class JwtService {
 				.expiresAt(now.plus(tokenValidityInSeconds, ChronoUnit.SECONDS))
 				.subject(authentication.getName())
 				.claim("userId", userId)
+				.claim("isAdmin", isAdmin)
 				.claim("tenantId", tenantId)
 				.claim("scope", authorities)
 				.build();

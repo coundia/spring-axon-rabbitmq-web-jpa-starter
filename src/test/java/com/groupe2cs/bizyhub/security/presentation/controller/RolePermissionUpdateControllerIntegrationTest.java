@@ -40,7 +40,7 @@ void it_should_be_able_to_update_rolepermission() {
 	 requestDTO.setRole( updated.getRole().value());
 	 requestDTO.setPermission( updated.getPermission().value());
 
-	String uri = "/v1/commands/rolePermission/" + existingId;
+	String uri = "/v1/admin/commands/rolePermission/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

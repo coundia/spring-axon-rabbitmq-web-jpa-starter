@@ -38,7 +38,7 @@ void it_should_be_able_to_update_transaction() {
 
 	TransactionRequest requestDTO = new TransactionRequest();
 	 requestDTO.setReference(UUID.randomUUID().toString());
-	 requestDTO.setAmount(1049.71);
+	 requestDTO.setAmount(4256.03);
 
 	String uri = "/v1/commands/transaction/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);

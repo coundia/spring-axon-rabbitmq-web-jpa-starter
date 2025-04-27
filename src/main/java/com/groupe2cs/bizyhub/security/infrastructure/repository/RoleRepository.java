@@ -1,12 +1,9 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,20 +12,28 @@ import java.util.Optional;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
 
-	@Query("SELECT t FROM Role t ")
 	Page<Role> findAll(Pageable pageable);
 
-	@Query("SELECT t FROM Role t WHERE t.id = :id")
-	Optional<Role> findById(Role id);
+	Optional<Role> findById(String id);
 
-	@Query("SELECT t FROM Role t WHERE t.name = :name")
+	Optional<Role> findByIdAndCreatedById(String id, String createdById);
+
+	Page<Role> findByCreatedById(Pageable pageable, String createdById);
+
+	Page<Role> findAllByTenantId(Pageable pageable, String tenantId);
+
+
+	Optional<Role> findByNameAndCreatedById(String name, String createdById);
+
 	Optional<Role> findByName(String name);
 
-	@Query("SELECT t FROM Role t WHERE t.createdBy = :createdBy")
-	List<Role> findByCreatedBy(String createdBy);
+	List<Role> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
-	@Query("SELECT t FROM Role t WHERE t.tenant = :tenant")
-	List<Role> findByTenant(String tenant);
+	List<Role> findByTenantIdAndCreatedById(String tenant, String createdById);
 
-	Optional<Role> findByCreatedByAndTenant(CustomUser createdBy, Tenant tenant);
+	Optional<Role> findByCreatedByIdAndTenantId(
+			String createdBy,
+			String tenant
+	);
+
 }

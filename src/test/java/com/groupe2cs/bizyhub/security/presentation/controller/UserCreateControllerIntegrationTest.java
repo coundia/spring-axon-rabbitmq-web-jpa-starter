@@ -29,9 +29,9 @@ void it_should_be_able_to_add_user() {
 		requestDTO.setUsername(UUID.randomUUID().toString());
 		requestDTO.setPassword(UUID.randomUUID().toString());
 
- 		String uri = "/v1/commands/user";
+ 		String uri = "/v1/admin/commands/user";
 		ResponseEntity<UserResponse> response = this.postForEntity(uri, requestDTO, UserResponse.class);
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getUsername()).isEqualTo(requestDTO.getUsername());

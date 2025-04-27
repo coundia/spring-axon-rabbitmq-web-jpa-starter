@@ -1,16 +1,19 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@RequiredArgsConstructor
+@Getter
+@Setter
+@Builder
 public class FindByRolePermissionIdQuery {
 
 	private final RolePermissionId id;
+	private final MetaRequest metaRequest;
 
-	public FindByRolePermissionIdQuery(RolePermissionId id) {
-		this.id = id;
-	}
-
-	public RolePermissionId getId() {
-		return id;
-	}
 }

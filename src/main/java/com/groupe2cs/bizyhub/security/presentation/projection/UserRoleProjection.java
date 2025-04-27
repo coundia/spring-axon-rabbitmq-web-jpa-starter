@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRoleRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
@@ -37,6 +38,10 @@ public class UserRoleProjection {
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
 
 			repository.save(entity);
 			log.info("UserRole inserted: {}", entity);
@@ -60,6 +65,9 @@ public class UserRoleProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 			repository.save(entity);
 			log.info("UserRole updated successfully: {}", event.getId().value());

@@ -20,9 +20,13 @@ public class Transaction extends AbstractAuditableEntity {
 	@Id
 	private String id;
 
-	@Column(nullable = true, unique = true, length = 250)
+
+	@Column(nullable = true,
+			unique = true, length = 250)
 	private String reference;
-	@Column(nullable = false, unique = false, length = 250)
+
+	@Column(nullable = false,
+			unique = false, length = 250)
 	private Double amount;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)

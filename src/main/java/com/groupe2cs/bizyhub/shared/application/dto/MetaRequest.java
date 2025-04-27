@@ -11,7 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class MetaRequest implements Serializable {
-	private String createdBy;
+	private String userId;
 	private String tenantId;
 	private String apiKey;
 	private String domain;
@@ -19,5 +19,10 @@ public class MetaRequest implements Serializable {
 	private String ip;
 	private String version;
 	private String platform;
+	private Boolean isAdmin;
+
+	public Boolean isAdmin() {
+		return this.isAdmin != null && this.isAdmin;
+	}
 
 }

@@ -5,9 +5,12 @@ import com.groupe2cs.bizyhub.security.application.mapper.ApiKeyMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByApiKeyUsernameQuery;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKey;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.ApiKeyRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -16,17 +19,16 @@ public class FindByApiKeyUsernameHandler {
 	private final ApiKeyRepository repository;
 
 	@QueryHandler
+	public List<ApiKeyResponse> handle(FindByApiKeyUsernameQuery query) {
 
-	public ApiKeyResponse handle(FindByApiKeyUsernameQuery query) {
+		MetaRequest metaRequest = query.getMetaRequest();
+
 		String value = query.getUsername().value();
-		ApiKey entity = repository.findByUsername(value)
-				.orElse(null);
-
-		if (entity == null) {
-			return null;
-		}
-
-		return ApiKeyMapper.toResponse(entity);
+		List<ApiKey> entities = repository.findByUsernameAndCreatedById(value, metaRequest.getUserId());
+		return entities.stream()
+				.map(ApiKeyMapper::toResponse)
+				.toList();
 	}
+
 
 }

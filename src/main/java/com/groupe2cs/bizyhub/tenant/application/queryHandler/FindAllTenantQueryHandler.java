@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.tenant.application.queryHandler;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantPagedResponse;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
 import com.groupe2cs.bizyhub.tenant.application.mapper.TenantMapper;
@@ -26,12 +27,19 @@ public class FindAllTenantQueryHandler {
 	public TenantPagedResponse handle(FindAllTenantQuery query) {
 		int limit = query.getLimit();
 		int offset = query.getPage() * limit;
+		MetaRequest metaRequest = query.getMetaRequest();
 
 		long totalElements = repository.count();
 
 		PageRequest pageable = PageRequest.of(offset / limit, limit);
+		Page<Tenant> pages = null;
 
-		Page<Tenant> pages = repository.findAll(pageable);
+		if (metaRequest.isAdmin()) {
+			pages = repository.findAll(pageable);
+			//pages = repository.findAllByTenantId(pageable, metaRequest.getTenantId());
+		} else {
+			pages = repository.findByCreatedById(pageable, metaRequest.getUserId());
+		}
 
 		List<TenantResponse> responses = pages.stream()
 				.map(TenantMapper::toResponse)

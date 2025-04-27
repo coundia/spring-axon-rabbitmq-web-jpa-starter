@@ -11,15 +11,20 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 class ApiKeyFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
@@ -29,56 +34,58 @@ private CommandGateway commandGateway;
 @Autowired
 private ApiKeyRepository apiKeyRepository;
 
-private void waitForApiKey(String ApiKeyId) {
-long timeout = Duration.ofSeconds(5).toMillis();
-long start = System.currentTimeMillis();
-while (System.currentTimeMillis() - start < timeout) {
-if (apiKeyRepository.findById(ApiKeyId).isPresent()) {
-return;
-}
-try {
-Thread.sleep(100);
-} catch (InterruptedException ignored) {
-}
-}
-throw new RuntimeException("ApiKey not found after timeout: " + ApiKeyId);
+@Test
+void it_should_return_only_user_apiKeys_for_normal_user() throws Exception {
+String userId = login("user", "user");
+List<CreateApiKeyCommand> userCommands =
+ApiKeyFixtures.randomManyViaCommand(commandGateway, 3, userId);
+userCommands.forEach(cmd ->
+ApiKeyFixtures.byIdWaitExist(apiKeyRepository, cmd.getId().value())
+);
+
+login("user", "user");
+ResponseEntity<ApiKeyPagedResponse> response = this.getForEntity(
+"/v1/queries/apiKeys",
+ApiKeyPagedResponse.class
+);
+
+assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+List<ApiKeyResponse> content = response.getBody().getContent();
+assertThat(content).hasSizeGreaterThanOrEqualTo(3);
+
+List<String> expectedIds = userCommands.stream()
+.map(cmd -> cmd.getId().value())
+.collect(Collectors.toList());
+assertThat(content)
+.extracting(apiKey -> apiKey.getId())
+.containsExactlyInAnyOrderElementsOf(expectedIds);
 }
 
 @Test
-void it_should_be_able_to_get_all_ApiKeys_as_admin() {
-var userId = login("admin", "admin");
+void it_should_return_all_apiKeys_for_admin() throws Exception {
+String userId = login("user", "user");
+List<CreateApiKeyCommand> userCommands =
+ApiKeyFixtures.randomManyViaCommand(commandGateway, 5, userId);
+userCommands.forEach(cmd ->
+ApiKeyFixtures.byIdWaitExist(apiKeyRepository, cmd.getId().value())
+);
 
-//ApiKeyFixtures.deleteAll(apiKeyRepository);
+String adminId = login("admin", "admin");
+List<CreateApiKeyCommand> adminCommands =
+ApiKeyFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+adminCommands.forEach(cmd ->
+ApiKeyFixtures.byIdWaitExist(apiKeyRepository, cmd.getId().value())
+);
 
-List<CreateApiKeyCommand> commands = ApiKeyFixtures
-	.randomManyViaCommand(commandGateway, 5, userId);
+login("admin", "admin");
+ResponseEntity<ApiKeyPagedResponse> response = this.getForEntity(
+"/v1/queries/apiKeys",
+ApiKeyPagedResponse.class
+);
 
-	commands.forEach(cmd -> waitForApiKey(cmd.getId().value()));
+assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+List<ApiKeyResponse> content = response.getBody().getContent();
+assertThat(content).hasSizeGreaterThanOrEqualTo(10);
 
-	String uri = "/v1/queries/apiKeys";
-	ResponseEntity<ApiKeyPagedResponse> response = this.getForEntity(uri, ApiKeyPagedResponse.class);
-
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody()).isNotNull();
-		assertThat(response.getBody().getContent()).hasSizeGreaterThanOrEqualTo(5);
-		}
-
-		@Test
-		void it_should_only_return_user_ApiKeys_as_normal_user() {
-		var userId = login("user", "user");
-
-		List<CreateApiKeyCommand> list1 = ApiKeyFixtures.randomManyViaCommand(commandGateway, 3, userId);
-			List<CreateApiKeyCommand> list2 = ApiKeyFixtures.randomManyViaCommand(commandGateway, 2, userId);
-
-				list1.forEach(cmd -> waitForApiKey(cmd.getId().value()));
-				list2.forEach(cmd -> waitForApiKey(cmd.getId().value()));
-
-				String uri = "/v1/queries/apiKeys";
-				ResponseEntity<ApiKeyPagedResponse> response = this.getForEntity(uri, ApiKeyPagedResponse.class);
-
-					assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-					assertThat(response.getBody()).isNotNull();
-					assertThat(response.getBody().getContent())
-					.allSatisfy(ApiKey -> assertThat(ApiKey.getCreatedBy()).isEqualTo(userId));
-					}
-					}
+}
+}

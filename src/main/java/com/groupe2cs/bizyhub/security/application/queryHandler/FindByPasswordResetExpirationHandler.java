@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.security.application.mapper.PasswordResetMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByPasswordResetExpirationQuery;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.PasswordReset;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PasswordResetRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,11 @@ public class FindByPasswordResetExpirationHandler {
 
 	@QueryHandler
 	public List<PasswordResetResponse> handle(FindByPasswordResetExpirationQuery query) {
+
+		MetaRequest metaRequest = query.getMetaRequest();
+
 		java.time.Instant value = query.getExpiration().value();
-		List<PasswordReset> entities = repository.findByExpiration(value);
+		List<PasswordReset> entities = repository.findByExpirationAndCreatedById(value, metaRequest.getUserId());
 		return entities.stream()
 				.map(PasswordResetMapper::toResponse)
 				.toList();

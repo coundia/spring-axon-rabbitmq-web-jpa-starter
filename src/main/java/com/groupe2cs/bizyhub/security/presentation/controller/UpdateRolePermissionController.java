@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.RolePermissionRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.RolePermissionUpdateApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@rolePermissionGate.canEdit(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/commands/rolePermission")
+@RequestMapping("/api/v1/admin/commands/rolePermission")
 @Tag(name = "RolePermission commands", description = "Endpoints for managing rolePermissions")
 @Slf4j
 public class UpdateRolePermissionController {
@@ -50,9 +51,14 @@ public class UpdateRolePermissionController {
 		{
 			try {
 
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+
 				RolePermissionResponse response = applicationService.updateRolePermission(RolePermissionId.create(id),
 						request,
-						RequestContext.getUserId(jwt)
+						metaRequest
 				);
 
 				return ResponseEntity.ok(response);

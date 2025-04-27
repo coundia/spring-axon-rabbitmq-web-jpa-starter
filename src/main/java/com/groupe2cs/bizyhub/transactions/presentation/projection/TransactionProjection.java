@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.transactions.presentation.projection;
 
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionCreatedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionDeletedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionUpdatedEvent;
@@ -36,6 +37,10 @@ public class TransactionProjection {
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
 
 			repository.save(entity);
 			log.info("Transaction inserted: {}", entity);
@@ -59,6 +64,9 @@ public class TransactionProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 			repository.save(entity);
 			log.info("Transaction updated successfully: {}", event.getId().value());

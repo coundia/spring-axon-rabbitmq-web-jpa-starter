@@ -4,8 +4,8 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateRolePermissionCo
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RolePermissionMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -20,7 +20,7 @@ public class RolePermissionUpdateApplicationService {
 
 
 	public RolePermissionResponse updateRolePermission(RolePermissionId id, RolePermissionRequest request,
-													   String createdBy
+													   MetaRequest metaRequest
 	) {
 
 		UpdateRolePermissionCommand command = RolePermissionMapper.toUpdateCommand(
@@ -28,8 +28,8 @@ public class RolePermissionUpdateApplicationService {
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(RolePermissionCreatedBy.create(createdBy));
+		if (metaRequest.getTenantId() != null) {
+			//command.setTenant(RolePermissionTenant.create(metaRequest.getTenantId()));
 		}
 
 		commandGateway.sendAndWait(command);

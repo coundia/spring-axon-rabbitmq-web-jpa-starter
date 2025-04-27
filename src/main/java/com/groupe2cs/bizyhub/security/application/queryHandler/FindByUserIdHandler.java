@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.security.application.mapper.UserMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByUserIdQuery;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,11 @@ public class FindByUserIdHandler {
 	@QueryHandler
 
 	public UserResponse handle(FindByUserIdQuery query) {
+
+		MetaRequest metaRequest = query.getMetaRequest();
+
 		String value = query.getId().value();
-		CustomUser entity = repository.findById(value)
+		CustomUser entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
 				.orElse(null);
 
 		if (entity == null) {

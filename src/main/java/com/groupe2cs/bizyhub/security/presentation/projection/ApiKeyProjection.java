@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.domain.event.ApiKeyUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKey;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.ApiKeyRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
@@ -38,6 +39,10 @@ public class ApiKeyProjection {
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
 
 			repository.save(entity);
 			log.info("ApiKey inserted: {}", entity);
@@ -63,6 +68,9 @@ public class ApiKeyProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 			repository.save(entity);
 			log.info("ApiKey updated successfully: {}", event.getId().value());

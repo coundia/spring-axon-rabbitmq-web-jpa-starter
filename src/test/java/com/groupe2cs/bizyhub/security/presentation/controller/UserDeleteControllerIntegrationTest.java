@@ -30,7 +30,7 @@ void it_should_be_able_to_delete_user() {
 
 	UserFixtures.byIdWaitExist(userRepository, existingId);
 
-	String uri = "/v1/commands/user/" + existingId;
+	String uri = "/v1/admin/commands/user/" + existingId;
 
 	ResponseEntity<String> rep = this.delete(uri);
 	assertThat(rep.getStatusCode().value()).isEqualTo(200);

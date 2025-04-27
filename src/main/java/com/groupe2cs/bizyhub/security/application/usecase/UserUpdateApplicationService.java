@@ -4,8 +4,8 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateUserCommand;
 import com.groupe2cs.bizyhub.security.application.dto.UserRequest;
 import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.UserMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -20,7 +20,7 @@ public class UserUpdateApplicationService {
 
 
 	public UserResponse updateUser(UserId id, UserRequest request,
-								   String createdBy
+								   MetaRequest metaRequest
 	) {
 
 		UpdateUserCommand command = UserMapper.toUpdateCommand(
@@ -28,8 +28,8 @@ public class UserUpdateApplicationService {
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(UserCreatedBy.create(createdBy));
+		if (metaRequest.getTenantId() != null) {
+			//command.setTenant(UserTenant.create(metaRequest.getTenantId()));
 		}
 
 		commandGateway.sendAndWait(command);

@@ -25,7 +25,5 @@ public class TenantResponse implements Serializable {
 	private String language;
 	@Schema(description = "", example = "")
 	private Boolean active;
-	@Schema(description = "", example = "")
-	private String createdBy;
 
 }

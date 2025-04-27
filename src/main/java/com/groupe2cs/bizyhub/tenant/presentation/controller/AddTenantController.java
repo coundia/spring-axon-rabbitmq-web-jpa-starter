@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.tenant.presentation.controller;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/v1/commands/tenant")
+@RequestMapping("/api/v1/admin/commands/tenant")
 @Tag(name = "Tenant commands", description = "Endpoints for managing tenants")
 @Slf4j
 
@@ -45,7 +47,7 @@ public class AddTenantController {
 			)
 	)
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Successfully created",
+			@ApiResponse(responseCode = "201", description = "Successfully created",
 					content = @Content(schema = @Schema(implementation = TenantResponse.class))),
 			@ApiResponse(responseCode = "500", description = "Internal server error",
 					content = @Content(schema = @Schema()))
@@ -54,12 +56,16 @@ public class AddTenantController {
 													@AuthenticationPrincipal Jwt jwt) {
 		try {
 
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt))
+					.build();
+
 			TenantResponse response = applicationService.createTenant(
 					request,
-					RequestContext.getUserId(jwt)
+					metaRequest
 			);
 
-			return ResponseEntity.ok(response);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		} catch (Exception ex) {
 			//e.printStackTrace();
 			log.error("Failed to create tenant: {}", ex.getMessage());

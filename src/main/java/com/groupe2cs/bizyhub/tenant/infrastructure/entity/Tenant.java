@@ -17,15 +17,26 @@ public class Tenant {
 	@Id
 	private String id;
 
-	@Column(nullable = false, unique = true)
+
+	@Column(nullable = false,
+			unique = true)
 	private String name;
-	@Column(nullable = true, unique = false, length = 768)
+
+	@Column(nullable = true, columnDefinition = "TEXT",
+
+			unique = false)
 	private String description;
-	@Column(nullable = true, unique = false)
+
+	@Column(nullable = true,
+			unique = false)
 	private String domain;
-	@Column(nullable = true, unique = false)
+
+	@Column(nullable = true,
+			unique = false)
 	private String language;
-	@Column(nullable = true, unique = false)
+
+	@Column(nullable = true,
+			unique = false)
 	private Boolean active;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)

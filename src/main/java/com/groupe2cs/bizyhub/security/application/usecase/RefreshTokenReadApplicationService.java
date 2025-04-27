@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.RefreshTokenPagedResponse;
 import com.groupe2cs.bizyhub.security.application.dto.RefreshTokenResponse;
 import com.groupe2cs.bizyhub.security.application.query.*;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -18,59 +19,74 @@ public class RefreshTokenReadApplicationService {
 	private final QueryGateway queryGateway;
 
 
-	public RefreshTokenPagedResponse findAll(int page, int limit) {
+	public RefreshTokenPagedResponse findAll(int page, int limit, MetaRequest metaRequest) {
 
-		FindAllRefreshTokenQuery query = new FindAllRefreshTokenQuery(page, limit);
+		FindAllRefreshTokenQuery query = new FindAllRefreshTokenQuery(page, limit, metaRequest);
 		CompletableFuture<RefreshTokenPagedResponse> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RefreshTokenPagedResponse.class));
 		return future.join();
 	}
 
 
-	public RefreshTokenResponse findByRefreshTokenId(RefreshTokenId value) {
+	public RefreshTokenResponse findByRefreshTokenId(RefreshTokenId value, MetaRequest metaRequest) {
 
-		FindByRefreshTokenIdQuery query = new FindByRefreshTokenIdQuery(value);
+		FindByRefreshTokenIdQuery query = new FindByRefreshTokenIdQuery(value, metaRequest);
 		CompletableFuture<RefreshTokenResponse> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RefreshTokenResponse.class));
 		return future.join();
 	}
 
 
-	public List<RefreshTokenResponse> findByRefreshTokenToken(RefreshTokenToken value) {
+	public List<RefreshTokenResponse> findByRefreshTokenToken(
+			RefreshTokenToken value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRefreshTokenTokenQuery query = new FindByRefreshTokenTokenQuery(value);
+		FindByRefreshTokenTokenQuery query = new FindByRefreshTokenTokenQuery(value, metaRequest);
 		CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
 		return future.join();
 	}
 
-	public List<RefreshTokenResponse> findByRefreshTokenUsername(RefreshTokenUsername value) {
+	public List<RefreshTokenResponse> findByRefreshTokenUsername(
+			RefreshTokenUsername value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRefreshTokenUsernameQuery query = new FindByRefreshTokenUsernameQuery(value);
+		FindByRefreshTokenUsernameQuery query = new FindByRefreshTokenUsernameQuery(value, metaRequest);
 		CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
 		return future.join();
 	}
 
-	public List<RefreshTokenResponse> findByRefreshTokenExpiration(RefreshTokenExpiration value) {
+	public List<RefreshTokenResponse> findByRefreshTokenExpiration(
+			RefreshTokenExpiration value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRefreshTokenExpirationQuery query = new FindByRefreshTokenExpirationQuery(value);
+		FindByRefreshTokenExpirationQuery query = new FindByRefreshTokenExpirationQuery(value, metaRequest);
 		CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
 		return future.join();
 	}
 
-	public List<RefreshTokenResponse> findByRefreshTokenCreatedBy(RefreshTokenCreatedBy value) {
+	public List<RefreshTokenResponse> findByRefreshTokenCreatedBy(
+			RefreshTokenCreatedBy value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRefreshTokenCreatedByQuery query = new FindByRefreshTokenCreatedByQuery(value);
+		FindByRefreshTokenCreatedByQuery query = new FindByRefreshTokenCreatedByQuery(value, metaRequest);
 		CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
 		return future.join();
 	}
 
-	public List<RefreshTokenResponse> findByRefreshTokenTenant(RefreshTokenTenant value) {
+	public List<RefreshTokenResponse> findByRefreshTokenTenant(
+			RefreshTokenTenant value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRefreshTokenTenantQuery query = new FindByRefreshTokenTenantQuery(value);
+		FindByRefreshTokenTenantQuery query = new FindByRefreshTokenTenantQuery(value, metaRequest);
 		CompletableFuture<List<RefreshTokenResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RefreshTokenResponse.class));
 		return future.join();

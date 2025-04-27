@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTransactionCommand command = new CreateTransactionCommand(
- TransactionId.create(UUID.randomUUID().toString()) ,  TransactionReference.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(6652.72) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
+ TransactionId.create(UUID.randomUUID().toString()) ,  TransactionReference.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(8666.38) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

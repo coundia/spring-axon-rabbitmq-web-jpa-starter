@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.tenant.domain;
 
-import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import java.util.UUID;
-import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.tenant.domain.exception.*;
+import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
+import java.util.UUID;
 
 
 public class TenantAggregateTests extends BaseUnitTests {
@@ -18,7 +18,7 @@ void it_should_create_tenant_with_valid_values() {
 	TenantDescription description = TenantDescription.create(UUID.randomUUID().toString());
 	TenantDomain domain = TenantDomain.create(UUID.randomUUID().toString());
 	TenantLanguage language = TenantLanguage.create(UUID.randomUUID().toString());
-	TenantActive active = TenantActive.create(true);
+	TenantActive active = TenantActive.create(false);
 	TenantCreatedBy createdBy = TenantCreatedBy.create(UUID.randomUUID().toString());
 	TenantAggregate tenant = new TenantAggregate(id, name, description, domain, language, active, createdBy);
 	assertThat(tenant.getId()).isNotNull();

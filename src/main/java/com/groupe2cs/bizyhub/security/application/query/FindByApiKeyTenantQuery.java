@@ -1,16 +1,19 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyTenant;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@RequiredArgsConstructor
+@Getter
+@Setter
+@Builder
 public class FindByApiKeyTenantQuery {
 
 	private final ApiKeyTenant tenant;
+	private final MetaRequest metaRequest;
 
-	public FindByApiKeyTenantQuery(ApiKeyTenant tenant) {
-		this.tenant = tenant;
-	}
-
-	public ApiKeyTenant getTenant() {
-		return tenant;
-	}
 }

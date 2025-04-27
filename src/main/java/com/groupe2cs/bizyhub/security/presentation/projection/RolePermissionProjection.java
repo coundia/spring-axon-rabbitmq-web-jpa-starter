@@ -8,6 +8,7 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
@@ -38,6 +39,10 @@ public class RolePermissionProjection {
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
 
 			repository.save(entity);
 			log.info("RolePermission inserted: {}", entity);
@@ -61,6 +66,9 @@ public class RolePermissionProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 			repository.save(entity);
 			log.info("RolePermission updated successfully: {}", event.getId().value());

@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.tenant.presentation.controller;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
@@ -20,7 +21,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/commands/tenant")
+@RequestMapping("/api/v1/admin/commands/tenant")
 @Tag(name = "Tenant commands", description = "Endpoints for managing tenants")
 @Slf4j
 public class UpdateTenantController {
@@ -48,9 +49,14 @@ public class UpdateTenantController {
 		{
 			try {
 
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt))
+						.build();
+
+
 				TenantResponse response = applicationService.updateTenant(TenantId.create(id),
 						request,
-						RequestContext.getUserId(jwt)
+						metaRequest
 				);
 
 				return ResponseEntity.ok(response);

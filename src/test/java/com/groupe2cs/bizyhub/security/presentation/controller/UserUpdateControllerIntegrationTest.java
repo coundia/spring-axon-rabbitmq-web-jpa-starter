@@ -40,7 +40,7 @@ void it_should_be_able_to_update_user() {
 	 requestDTO.setUsername(UUID.randomUUID().toString());
 	 requestDTO.setPassword(UUID.randomUUID().toString());
 
-	String uri = "/v1/commands/user/" + existingId;
+	String uri = "/v1/admin/commands/user/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

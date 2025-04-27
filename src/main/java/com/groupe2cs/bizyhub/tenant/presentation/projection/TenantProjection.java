@@ -40,6 +40,7 @@ public class TenantProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+
 			repository.save(entity);
 			log.info("Tenant inserted: {}", entity);
 		} catch (Exception e) {

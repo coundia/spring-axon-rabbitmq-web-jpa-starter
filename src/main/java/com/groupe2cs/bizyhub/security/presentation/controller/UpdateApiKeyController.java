@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.ApiKeyRequest;
 import com.groupe2cs.bizyhub.security.application.dto.ApiKeyResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.ApiKeyUpdateApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -50,9 +51,14 @@ public class UpdateApiKeyController {
 		{
 			try {
 
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+
 				ApiKeyResponse response = applicationService.updateApiKey(ApiKeyId.create(id),
 						request,
-						RequestContext.getUserId(jwt)
+						metaRequest
 				);
 
 				return ResponseEntity.ok(response);

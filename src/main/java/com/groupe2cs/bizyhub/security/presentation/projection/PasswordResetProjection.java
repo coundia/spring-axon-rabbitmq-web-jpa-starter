@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.domain.event.PasswordResetUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.PasswordReset;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PasswordResetRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
@@ -37,6 +38,10 @@ public class PasswordResetProjection {
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
 
 			repository.save(entity);
 			log.info("PasswordReset inserted: {}", entity);
@@ -61,6 +66,9 @@ public class PasswordResetProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 			repository.save(entity);
 			log.info("PasswordReset updated successfully: {}", event.getId().value());

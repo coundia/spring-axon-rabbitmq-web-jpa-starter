@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.infrastructure.config;
 import com.groupe2cs.bizyhub.security.application.dto.ApiKeyResponse;
 import com.groupe2cs.bizyhub.security.application.query.FindByApiKeyAppKeyQuery;
 import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyAppKey;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -50,10 +51,12 @@ public class ApiKeyFilter implements Filter {
 		}
 
 		try {
+			MetaRequest metaRequest = new MetaRequest();
+
 			ApiKeyResponse
 					apiKeyResponse =
-					queryGateway.query(new FindByApiKeyAppKeyQuery(ApiKeyAppKey.create(apiKey)), ApiKeyResponse.class)
-							.join();
+					queryGateway.query(new FindByApiKeyAppKeyQuery(ApiKeyAppKey.create(apiKey), metaRequest),
+							ApiKeyResponse.class).join();
 			log.info("Valid API Key: '{}' for '{}'", apiKey, apiKeyResponse.getUsername());
 			chain.doFilter(request, response);
 		} catch (Exception e) {

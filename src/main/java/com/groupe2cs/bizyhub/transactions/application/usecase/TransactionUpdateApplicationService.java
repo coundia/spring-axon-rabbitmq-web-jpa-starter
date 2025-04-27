@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
 import com.groupe2cs.bizyhub.transactions.application.mapper.TransactionMapper;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -20,7 +20,7 @@ public class TransactionUpdateApplicationService {
 
 
 	public TransactionResponse updateTransaction(TransactionId id, TransactionRequest request,
-												 String createdBy
+												 MetaRequest metaRequest
 	) {
 
 		UpdateTransactionCommand command = TransactionMapper.toUpdateCommand(
@@ -28,8 +28,8 @@ public class TransactionUpdateApplicationService {
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(TransactionCreatedBy.create(createdBy));
+		if (metaRequest.getTenantId() != null) {
+			//command.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
 		}
 
 		commandGateway.sendAndWait(command);

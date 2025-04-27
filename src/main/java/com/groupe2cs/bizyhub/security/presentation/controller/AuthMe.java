@@ -2,6 +2,7 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,6 +46,8 @@ public class AuthMe {
 
 		log.info("Auth/me User claims: {}", jwt.getClaims());
 		String username = jwt.getSubject();
+
+		MetaRequest metaRequest = new MetaRequest();
 
 		UserPrincipal userPrincipal = (UserPrincipal) userDetailsService.loadUserByUsername(username);
 

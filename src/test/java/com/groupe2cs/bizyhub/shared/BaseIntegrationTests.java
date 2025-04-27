@@ -48,7 +48,6 @@ login("admin", "admin");
 
 public String getBaseUrl() {
 String uri = "http://" + host + ":" + port + "/api";
-log.info(uri);
 return uri;
 }
 
@@ -64,10 +63,12 @@ return (String) getTokenClaims().get("userId");
 }
 
 public ResponseEntity<String> get(String uri) {
+	log.info("Request URI: {}", getBaseUrl() + uri);
 	return testRestTemplate.exchange(getBaseUrl() + uri, HttpMethod.GET, new HttpEntity<>(headers), String.class);
 	}
 
 	public ResponseEntity<String> delete(String uri) {
+		log.info("Request URI: {}", getBaseUrl() + uri);
 		return testRestTemplate.exchange(getBaseUrl() + uri,
 		HttpMethod.DELETE,
 		new HttpEntity<>(headers),
@@ -75,18 +76,22 @@ public ResponseEntity<String> get(String uri) {
 		}
 
 		public <T> ResponseEntity<T> postForEntity(String uri, Object request, Class<T> responseType) {
+			log.info("Request URI: {}", getBaseUrl() + uri);
 			return testRestTemplate.postForEntity(getBaseUrl() + uri, new HttpEntity<>(request, headers), responseType);
 			}
 
 			public <T> ResponseEntity<T> getForEntity(String uri, Class<T> responseType) {
+				log.info("Request URI: {}", getBaseUrl() + uri);
 				return testRestTemplate.exchange(getBaseUrl() + uri, HttpMethod.GET, new HttpEntity<>(headers), responseType);
 				}
 
 				public ResponseEntity<String> post(String uri, Object request) {
+					log.info("Request URI: {}", getBaseUrl() + uri);
 					return testRestTemplate.postForEntity(getBaseUrl() + uri, new HttpEntity<>(request, headers), String.class);
 					}
 
 					public ResponseEntity<String> put(String uri, Object request) {
+						log.info("Request URI: {}", getBaseUrl() + uri);
 						return testRestTemplate.exchange(getBaseUrl() + uri,
 						HttpMethod.PUT,
 						new HttpEntity<>(request, headers),

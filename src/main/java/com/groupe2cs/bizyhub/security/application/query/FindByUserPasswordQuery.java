@@ -1,16 +1,19 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@RequiredArgsConstructor
+@Getter
+@Setter
+@Builder
 public class FindByUserPasswordQuery {
 
 	private final UserPassword password;
+	private final MetaRequest metaRequest;
 
-	public FindByUserPasswordQuery(UserPassword password) {
-		this.password = password;
-	}
-
-	public UserPassword getPassword() {
-		return password;
-	}
 }

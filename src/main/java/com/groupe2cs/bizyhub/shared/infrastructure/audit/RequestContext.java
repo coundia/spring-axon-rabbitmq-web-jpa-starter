@@ -23,10 +23,14 @@ public class RequestContext {
 	public static String getTenantId(Jwt jwt) {
 		Object claim = jwt.getClaims().get("tenantId");
 		if (claim == null) {
-			log.warn("Missing 'tenantId' in JWT claims");
-			return null;
+			log.error("Missing 'tenantId' in JWT claims");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Tenant ID is required");
 		}
 		return claim.toString();
+	}
+
+	public static Boolean isAdmin(Jwt jwt) {
+		return jwt.getClaimAsString("isAdmin") != null && jwt.getClaimAsString("isAdmin").equals("true");
 	}
 
 }

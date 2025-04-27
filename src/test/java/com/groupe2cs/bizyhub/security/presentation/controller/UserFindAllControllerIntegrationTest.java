@@ -11,15 +11,20 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 class UserFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
@@ -29,56 +34,49 @@ private CommandGateway commandGateway;
 @Autowired
 private UserRepository userRepository;
 
-private void waitForUser(String UserId) {
-long timeout = Duration.ofSeconds(5).toMillis();
-long start = System.currentTimeMillis();
-while (System.currentTimeMillis() - start < timeout) {
-if (userRepository.findById(UserId).isPresent()) {
-return;
-}
-try {
-Thread.sleep(100);
-} catch (InterruptedException ignored) {
-}
-}
-throw new RuntimeException("User not found after timeout: " + UserId);
+@Test
+void it_should_return_only_user_users_for_normal_user() throws Exception {
+String userId = login("user", "user");
+List<CreateUserCommand> userCommands =
+UserFixtures.randomManyViaCommand(commandGateway, 3, userId);
+userCommands.forEach(cmd ->
+UserFixtures.byIdWaitExist(userRepository, cmd.getId().value())
+);
+
+login("user", "user");
+ResponseEntity<UserPagedResponse> response = this.getForEntity(
+"/v1/admin/queries/users",
+UserPagedResponse.class
+);
+assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+
 }
 
 @Test
-void it_should_be_able_to_get_all_Users_as_admin() {
-var userId = login("admin", "admin");
+void it_should_return_all_users_for_admin() throws Exception {
+String userId = login("user", "user");
+List<CreateUserCommand> userCommands =
+UserFixtures.randomManyViaCommand(commandGateway, 5, userId);
+userCommands.forEach(cmd ->
+UserFixtures.byIdWaitExist(userRepository, cmd.getId().value())
+);
 
-//UserFixtures.deleteAll(userRepository);
+String adminId = login("admin", "admin");
+List<CreateUserCommand> adminCommands =
+UserFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+adminCommands.forEach(cmd ->
+UserFixtures.byIdWaitExist(userRepository, cmd.getId().value())
+);
 
-List<CreateUserCommand> commands = UserFixtures
-	.randomManyViaCommand(commandGateway, 5, userId);
+login("admin", "admin");
+ResponseEntity<UserPagedResponse> response = this.getForEntity(
+"/v1/admin/queries/users",
+UserPagedResponse.class
+);
 
-	commands.forEach(cmd -> waitForUser(cmd.getId().value()));
+assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+List<UserResponse> content = response.getBody().getContent();
+assertThat(content).hasSizeGreaterThanOrEqualTo(10);
 
-	String uri = "/v1/queries/users";
-	ResponseEntity<UserPagedResponse> response = this.getForEntity(uri, UserPagedResponse.class);
-
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody()).isNotNull();
-		assertThat(response.getBody().getContent()).hasSizeGreaterThanOrEqualTo(5);
-		}
-
-		@Test
-		void it_should_only_return_user_Users_as_normal_user() {
-		var userId = login("user", "user");
-
-		List<CreateUserCommand> list1 = UserFixtures.randomManyViaCommand(commandGateway, 3, userId);
-			List<CreateUserCommand> list2 = UserFixtures.randomManyViaCommand(commandGateway, 2, userId);
-
-				list1.forEach(cmd -> waitForUser(cmd.getId().value()));
-				list2.forEach(cmd -> waitForUser(cmd.getId().value()));
-
-				String uri = "/v1/queries/users";
-				ResponseEntity<UserPagedResponse> response = this.getForEntity(uri, UserPagedResponse.class);
-
-					assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-					assertThat(response.getBody()).isNotNull();
-					assertThat(response.getBody().getContent())
-					.allSatisfy(User -> assertThat(User.getCreatedBy()).isEqualTo(userId));
-					}
-					}
+}
+}

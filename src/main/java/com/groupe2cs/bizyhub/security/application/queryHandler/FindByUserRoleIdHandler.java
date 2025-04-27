@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.security.application.mapper.UserRoleMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByUserRoleIdQuery;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRoleRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,11 @@ public class FindByUserRoleIdHandler {
 	@QueryHandler
 
 	public UserRoleResponse handle(FindByUserRoleIdQuery query) {
+
+		MetaRequest metaRequest = query.getMetaRequest();
+
 		String value = query.getId().value();
-		UserRole entity = repository.findById(value)
+		UserRole entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
 				.orElse(null);
 
 		if (entity == null) {

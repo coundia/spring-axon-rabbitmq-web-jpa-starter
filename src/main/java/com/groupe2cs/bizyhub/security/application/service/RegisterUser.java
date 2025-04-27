@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
 import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +24,15 @@ public class RegisterUser {
 	private final PasswordEncoder passwordEncoder;
 	private final JwtService jwtService;
 
-	public AuthResponseDto handle(AuthRequestDto request, String tenantId) {
+	public AuthResponseDto handle(AuthRequestDto request, MetaRequest metaRequest) {
+
 		if (userRepository.findByUsername(request.getUsername()).isPresent()) {
 			throw new IllegalArgumentException("Username already exists");
+		}
+
+		String tenantId = metaRequest.getTenantId();
+		if (tenantId == null) {
+			throw new IllegalArgumentException("Tenant ID is required - when multi-tenant");
 		}
 
 		CustomUser user = CustomUser.builder()

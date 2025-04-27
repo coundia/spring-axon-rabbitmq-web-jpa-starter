@@ -1,9 +1,10 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.security.presentation.controller.UserFixtures;
 import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.presentation.controller.UserFixtures;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 		.deltas(List.of(
 		TransactionDeltaDto.builder()
 .reference(UUID.randomUUID().toString())
-.amount(8558.99)
+.amount(702.04)
 		.type("CREATE")
 		.build()
 		))
@@ -51,7 +52,7 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 			TransactionDeltaDto.builder()
 			.id(existingId)
 .reference(UUID.randomUUID().toString())
-.amount(8558.99)
+.amount(702.04)
 			.type("UPDATE")
 			.build()
 			))

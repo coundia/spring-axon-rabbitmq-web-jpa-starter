@@ -29,9 +29,9 @@ void it_should_be_able_to_add_userrole() {
 		requestDTO.setUser(UserFixtures.randomOneViaCommand(commandGateway, userId).getId().value());
 		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway, userId).getId().value());
 
- 		String uri = "/v1/commands/userRole";
+ 		String uri = "/v1/admin/commands/userRole";
 		ResponseEntity<UserRoleResponse> response = this.postForEntity(uri, requestDTO, UserRoleResponse.class);
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getUser()).isEqualTo(requestDTO.getUser());

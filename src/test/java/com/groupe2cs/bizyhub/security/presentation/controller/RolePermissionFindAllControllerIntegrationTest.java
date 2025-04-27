@@ -11,15 +11,20 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 class RolePermissionFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
@@ -29,56 +34,49 @@ private CommandGateway commandGateway;
 @Autowired
 private RolePermissionRepository rolePermissionRepository;
 
-private void waitForRolePermission(String RolePermissionId) {
-long timeout = Duration.ofSeconds(5).toMillis();
-long start = System.currentTimeMillis();
-while (System.currentTimeMillis() - start < timeout) {
-if (rolePermissionRepository.findById(RolePermissionId).isPresent()) {
-return;
-}
-try {
-Thread.sleep(100);
-} catch (InterruptedException ignored) {
-}
-}
-throw new RuntimeException("RolePermission not found after timeout: " + RolePermissionId);
+@Test
+void it_should_return_only_user_rolePermissions_for_normal_user() throws Exception {
+String userId = login("user", "user");
+List<CreateRolePermissionCommand> userCommands =
+RolePermissionFixtures.randomManyViaCommand(commandGateway, 3, userId);
+userCommands.forEach(cmd ->
+RolePermissionFixtures.byIdWaitExist(rolePermissionRepository, cmd.getId().value())
+);
+
+login("user", "user");
+ResponseEntity<RolePermissionPagedResponse> response = this.getForEntity(
+"/v1/admin/queries/rolePermissions",
+RolePermissionPagedResponse.class
+);
+assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+
 }
 
 @Test
-void it_should_be_able_to_get_all_RolePermissions_as_admin() {
-var userId = login("admin", "admin");
+void it_should_return_all_rolePermissions_for_admin() throws Exception {
+String userId = login("user", "user");
+List<CreateRolePermissionCommand> userCommands =
+RolePermissionFixtures.randomManyViaCommand(commandGateway, 5, userId);
+userCommands.forEach(cmd ->
+RolePermissionFixtures.byIdWaitExist(rolePermissionRepository, cmd.getId().value())
+);
 
-//RolePermissionFixtures.deleteAll(rolePermissionRepository);
+String adminId = login("admin", "admin");
+List<CreateRolePermissionCommand> adminCommands =
+RolePermissionFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+adminCommands.forEach(cmd ->
+RolePermissionFixtures.byIdWaitExist(rolePermissionRepository, cmd.getId().value())
+);
 
-List<CreateRolePermissionCommand> commands = RolePermissionFixtures
-	.randomManyViaCommand(commandGateway, 5, userId);
+login("admin", "admin");
+ResponseEntity<RolePermissionPagedResponse> response = this.getForEntity(
+"/v1/admin/queries/rolePermissions",
+RolePermissionPagedResponse.class
+);
 
-	commands.forEach(cmd -> waitForRolePermission(cmd.getId().value()));
+assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+List<RolePermissionResponse> content = response.getBody().getContent();
+assertThat(content).hasSizeGreaterThanOrEqualTo(10);
 
-	String uri = "/v1/queries/rolePermissions";
-	ResponseEntity<RolePermissionPagedResponse> response = this.getForEntity(uri, RolePermissionPagedResponse.class);
-
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody()).isNotNull();
-		assertThat(response.getBody().getContent()).hasSizeGreaterThanOrEqualTo(5);
-		}
-
-		@Test
-		void it_should_only_return_user_RolePermissions_as_normal_user() {
-		var userId = login("user", "user");
-
-		List<CreateRolePermissionCommand> list1 = RolePermissionFixtures.randomManyViaCommand(commandGateway, 3, userId);
-			List<CreateRolePermissionCommand> list2 = RolePermissionFixtures.randomManyViaCommand(commandGateway, 2, userId);
-
-				list1.forEach(cmd -> waitForRolePermission(cmd.getId().value()));
-				list2.forEach(cmd -> waitForRolePermission(cmd.getId().value()));
-
-				String uri = "/v1/queries/rolePermissions";
-				ResponseEntity<RolePermissionPagedResponse> response = this.getForEntity(uri, RolePermissionPagedResponse.class);
-
-					assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-					assertThat(response.getBody()).isNotNull();
-					assertThat(response.getBody().getContent())
-					.allSatisfy(RolePermission -> assertThat(RolePermission.getCreatedBy()).isEqualTo(userId));
-					}
-					}
+}
+}

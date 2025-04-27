@@ -40,7 +40,7 @@ void it_should_be_able_to_update_userrole() {
 	 requestDTO.setUser( updated.getUser().value());
 	 requestDTO.setRole( updated.getRole().value());
 
-	String uri = "/v1/commands/userRole/" + existingId;
+	String uri = "/v1/admin/commands/userRole/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

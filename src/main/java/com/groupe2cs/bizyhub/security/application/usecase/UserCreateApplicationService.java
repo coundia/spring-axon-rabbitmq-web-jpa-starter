@@ -5,6 +5,8 @@ import com.groupe2cs.bizyhub.security.application.dto.UserRequest;
 import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.UserMapper;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserTenant;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -15,15 +17,15 @@ public class UserCreateApplicationService {
 	private final CommandGateway commandGateway;
 
 	public UserResponse createUser(UserRequest request,
-								   String createdBy) {
+								   MetaRequest metaRequest
+	) {
 
 		CreateUserCommand command = UserMapper.toCommand(
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(UserCreatedBy.create(createdBy));
-		}
+		command.setCreatedBy(UserCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(UserTenant.create(metaRequest.getTenantId()));
 
 		commandGateway.sendAndWait(command);
 		return UserMapper.toResponse(command);

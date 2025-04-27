@@ -39,7 +39,7 @@ void it_should_be_able_to_update_permission() {
 	PermissionRequest requestDTO = new PermissionRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
 
-	String uri = "/v1/commands/permission/" + existingId;
+	String uri = "/v1/admin/commands/permission/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

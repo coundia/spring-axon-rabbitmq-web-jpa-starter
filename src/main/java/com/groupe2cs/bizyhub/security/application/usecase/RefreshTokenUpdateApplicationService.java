@@ -4,8 +4,8 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateRefreshTokenComm
 import com.groupe2cs.bizyhub.security.application.dto.RefreshTokenRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RefreshTokenResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RefreshTokenMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -20,7 +20,7 @@ public class RefreshTokenUpdateApplicationService {
 
 
 	public RefreshTokenResponse updateRefreshToken(RefreshTokenId id, RefreshTokenRequest request,
-												   String createdBy
+												   MetaRequest metaRequest
 	) {
 
 		UpdateRefreshTokenCommand command = RefreshTokenMapper.toUpdateCommand(
@@ -28,8 +28,8 @@ public class RefreshTokenUpdateApplicationService {
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(RefreshTokenCreatedBy.create(createdBy));
+		if (metaRequest.getTenantId() != null) {
+			//command.setTenant(RefreshTokenTenant.create(metaRequest.getTenantId()));
 		}
 
 		commandGateway.sendAndWait(command);

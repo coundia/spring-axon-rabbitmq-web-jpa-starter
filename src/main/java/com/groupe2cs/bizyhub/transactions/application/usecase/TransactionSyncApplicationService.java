@@ -1,13 +1,11 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.application.command.DeleteTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionSyncRequest;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionAmount;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,10 @@ public class TransactionSyncApplicationService {
 
 	private final CommandGateway commandGateway;
 
-	public void syncTransaction(TransactionSyncRequest request, String userId) {
+	public void syncTransaction(TransactionSyncRequest request,
+								MetaRequest metaRequest
+
+	) {
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
 				case "CREATE" -> {
@@ -27,9 +28,11 @@ public class TransactionSyncApplicationService {
 							.reference(TransactionReference.create(d.getReference()))
 							.amount(TransactionAmount.create(d.getAmount()))
 							.build();
-
-					if (userId != null) {
-						command.setCreatedBy(TransactionCreatedBy.create(userId));
+					if (metaRequest.getTenantId() != null) {
+						command.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
+					}
+					if (metaRequest.getUserId() != null) {
+						command.setCreatedBy(TransactionCreatedBy.create(metaRequest.getUserId()));
 					}
 
 					commandGateway.sendAndWait(
@@ -44,8 +47,11 @@ public class TransactionSyncApplicationService {
 							.amount(TransactionAmount.create(d.getAmount()))
 							.build();
 
-					if (userId != null) {
-						//update.setUpdatedBy(TransactionUpdatedBy.create(userId));
+					if (metaRequest.getTenantId() != null) {
+						//command.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
+					}
+					if (metaRequest.getUserId() != null) {
+						//command.setCreatedBy( TransactionCreatedBy.create(metaRequest.getUserId()));
 					}
 
 					commandGateway.sendAndWait(
@@ -58,8 +64,12 @@ public class TransactionSyncApplicationService {
 							.id(TransactionId.create(d.getId()))
 							.build();
 
-					if (userId != null) {
-						//delete.setDeletedBy(TransactionDeletedBy.create(userId));
+					if (metaRequest.getTenantId() != null) {
+						//delete.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
+					}
+
+					if (metaRequest.getUserId() != null) {
+						//delete.setCreatedBy( TransactionCreatedBy.create(metaRequest.getUserId()));
 					}
 					commandGateway.sendAndWait(
 							delete

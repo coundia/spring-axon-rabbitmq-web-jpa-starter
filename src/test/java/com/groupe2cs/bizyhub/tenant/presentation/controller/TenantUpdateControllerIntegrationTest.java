@@ -5,7 +5,6 @@ import com.groupe2cs.bizyhub.tenant.application.dto.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.presentation.controller.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.presentation.controller.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.application.command.*;
 import java.util.UUID;
 
@@ -41,9 +40,9 @@ void it_should_be_able_to_update_tenant() {
 	 requestDTO.setDescription(UUID.randomUUID().toString());
 	 requestDTO.setDomain(UUID.randomUUID().toString());
 	 requestDTO.setLanguage(UUID.randomUUID().toString());
-	 requestDTO.setActive(false);
+	 requestDTO.setActive(true);
 
-	String uri = "/v1/commands/tenant/" + existingId;
+	String uri = "/v1/admin/commands/tenant/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

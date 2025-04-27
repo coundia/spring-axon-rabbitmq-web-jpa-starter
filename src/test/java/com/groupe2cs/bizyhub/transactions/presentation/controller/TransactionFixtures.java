@@ -24,7 +24,7 @@ public static Transaction randomOne(TransactionRepository repository) {
 Transaction entity = Transaction.builder()
 .id(UUID.randomUUID().toString())
 			.reference(UUID.randomUUID().toString())
-			.amount(4968.49)
+			.amount(4007.74)
 .build();
 return repository.save(entity);
 }
@@ -71,7 +71,7 @@ public static List<CreateTransactionCommand> randomManyViaCommand(CommandGateway
 
 		CreateTransactionCommand command = CreateTransactionCommand.builder()
 			.reference(TransactionReference.create(UUID.randomUUID().toString()))
-			.amount(TransactionAmount.create(4968.49))
+			.amount(TransactionAmount.create(4007.74))
 		.build();
 
 		command.setCreatedBy(TransactionCreatedBy.create(userId));

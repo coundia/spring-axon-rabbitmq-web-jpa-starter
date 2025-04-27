@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import java.util.UUID;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.transactions.domain.exception.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.UUID;
 
 
 public class TransactionAggregateTests extends BaseUnitTests {
@@ -15,7 +15,7 @@ public class TransactionAggregateTests extends BaseUnitTests {
 void it_should_create_transaction_with_valid_values() {
 	TransactionId id = TransactionId.create(UUID.randomUUID().toString());
 	TransactionReference reference = TransactionReference.create(UUID.randomUUID().toString());
-	TransactionAmount amount = TransactionAmount.create(3922.91);
+	TransactionAmount amount = TransactionAmount.create(4707.45);
 	TransactionCreatedBy createdBy = TransactionCreatedBy.create(UUID.randomUUID().toString());
 	TransactionTenant tenant = TransactionTenant.create(UUID.randomUUID().toString());
 	TransactionAggregate transaction = new TransactionAggregate(id, reference, amount, createdBy, tenant);

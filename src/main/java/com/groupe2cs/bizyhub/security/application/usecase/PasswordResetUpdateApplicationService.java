@@ -4,8 +4,8 @@ import com.groupe2cs.bizyhub.security.application.command.UpdatePasswordResetCom
 import com.groupe2cs.bizyhub.security.application.dto.PasswordResetRequest;
 import com.groupe2cs.bizyhub.security.application.dto.PasswordResetResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.PasswordResetMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -20,7 +20,7 @@ public class PasswordResetUpdateApplicationService {
 
 
 	public PasswordResetResponse updatePasswordReset(PasswordResetId id, PasswordResetRequest request,
-													 String createdBy
+													 MetaRequest metaRequest
 	) {
 
 		UpdatePasswordResetCommand command = PasswordResetMapper.toUpdateCommand(
@@ -28,8 +28,8 @@ public class PasswordResetUpdateApplicationService {
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(PasswordResetCreatedBy.create(createdBy));
+		if (metaRequest.getTenantId() != null) {
+			//command.setTenant(PasswordResetTenant.create(metaRequest.getTenantId()));
 		}
 
 		commandGateway.sendAndWait(command);

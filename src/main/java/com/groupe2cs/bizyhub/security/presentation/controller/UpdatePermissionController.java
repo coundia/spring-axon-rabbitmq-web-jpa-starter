@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.PermissionRequest;
 import com.groupe2cs.bizyhub.security.application.dto.PermissionResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.PermissionUpdateApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@permissionGate.canEdit(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/commands/permission")
+@RequestMapping("/api/v1/admin/commands/permission")
 @Tag(name = "Permission commands", description = "Endpoints for managing permissions")
 @Slf4j
 public class UpdatePermissionController {
@@ -50,9 +51,14 @@ public class UpdatePermissionController {
 		{
 			try {
 
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+
 				PermissionResponse response = applicationService.updatePermission(PermissionId.create(id),
 						request,
-						RequestContext.getUserId(jwt)
+						metaRequest
 				);
 
 				return ResponseEntity.ok(response);

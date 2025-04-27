@@ -2,7 +2,8 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
 import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
-import com.groupe2cs.bizyhub.security.application.service.JwtService;
+import com.groupe2cs.bizyhub.security.application.service.AuthService;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,11 +12,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-	private final AuthenticationManager authenticationManager;
-	private final JwtService jwtService;
+	private final AuthService authService;
+	private final CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
 
 	@PostMapping("/login")
 	@Operation(
@@ -43,31 +42,22 @@ public class AuthController {
 			@ApiResponse(responseCode = "200", description = "Login successful", content = @Content(schema = @Schema(implementation = AuthResponseDto.class))),
 			@ApiResponse(responseCode = "401", description = "Unauthorized - invalid credentials", content = @Content(schema = @Schema(implementation = AuthResponseDto.class)))
 	})
-	public ResponseEntity<AuthResponseDto> authenticate(@org.springframework.web.bind.annotation.RequestBody AuthRequestDto request) {
+	public ResponseEntity<AuthResponseDto> authenticate(
+			@org.springframework.web.bind.annotation.RequestBody AuthRequestDto request
+	) {
+
 		try {
 
-			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-			);
+			MetaRequest metaRequest = new MetaRequest();
+			metaRequest.setTenantId(currentTenantIdentifierResolver.resolveCurrentTenantIdentifier());
 
-			String token = jwtService.generateToken(authentication);
-
-			String tenantId = jwtService.extractTenantId(token);
-
-			return ResponseEntity.ok(
-					AuthResponseDto.builder()
-							.token(token)
-							.tenant(tenantId)
-							.username(authentication.getName())
-							.expirationAt(jwtService.extractExpiration(token))
-							.code(1)
-							.message("Login successful")
-							.build()
-			);
+			AuthResponseDto response = authService.handle(request, metaRequest);
+			return ResponseEntity.ok(response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body(AuthResponseDto.builder()
+							.token(null)
 							.code(0)
 							.message("Unauthorized")
 							.build());

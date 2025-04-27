@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.RolePermissionPagedRespons
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
 import com.groupe2cs.bizyhub.security.application.query.*;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -18,51 +19,63 @@ public class RolePermissionReadApplicationService {
 	private final QueryGateway queryGateway;
 
 
-	public RolePermissionPagedResponse findAll(int page, int limit) {
+	public RolePermissionPagedResponse findAll(int page, int limit, MetaRequest metaRequest) {
 
-		FindAllRolePermissionQuery query = new FindAllRolePermissionQuery(page, limit);
+		FindAllRolePermissionQuery query = new FindAllRolePermissionQuery(page, limit, metaRequest);
 		CompletableFuture<RolePermissionPagedResponse> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RolePermissionPagedResponse.class));
 		return future.join();
 	}
 
 
-	public RolePermissionResponse findByRolePermissionId(RolePermissionId value) {
+	public RolePermissionResponse findByRolePermissionId(RolePermissionId value, MetaRequest metaRequest) {
 
-		FindByRolePermissionIdQuery query = new FindByRolePermissionIdQuery(value);
+		FindByRolePermissionIdQuery query = new FindByRolePermissionIdQuery(value, metaRequest);
 		CompletableFuture<RolePermissionResponse> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(RolePermissionResponse.class));
 		return future.join();
 	}
 
 
-	public List<RolePermissionResponse> findByRolePermissionRole(RolePermissionRole value) {
+	public List<RolePermissionResponse> findByRolePermissionRole(
+			RolePermissionRole value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRolePermissionRoleQuery query = new FindByRolePermissionRoleQuery(value);
+		FindByRolePermissionRoleQuery query = new FindByRolePermissionRoleQuery(value, metaRequest);
 		CompletableFuture<List<RolePermissionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RolePermissionResponse.class));
 		return future.join();
 	}
 
-	public List<RolePermissionResponse> findByRolePermissionPermission(RolePermissionPermission value) {
+	public List<RolePermissionResponse> findByRolePermissionPermission(
+			RolePermissionPermission value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRolePermissionPermissionQuery query = new FindByRolePermissionPermissionQuery(value);
+		FindByRolePermissionPermissionQuery query = new FindByRolePermissionPermissionQuery(value, metaRequest);
 		CompletableFuture<List<RolePermissionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RolePermissionResponse.class));
 		return future.join();
 	}
 
-	public List<RolePermissionResponse> findByRolePermissionCreatedBy(RolePermissionCreatedBy value) {
+	public List<RolePermissionResponse> findByRolePermissionCreatedBy(
+			RolePermissionCreatedBy value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRolePermissionCreatedByQuery query = new FindByRolePermissionCreatedByQuery(value);
+		FindByRolePermissionCreatedByQuery query = new FindByRolePermissionCreatedByQuery(value, metaRequest);
 		CompletableFuture<List<RolePermissionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RolePermissionResponse.class));
 		return future.join();
 	}
 
-	public List<RolePermissionResponse> findByRolePermissionTenant(RolePermissionTenant value) {
+	public List<RolePermissionResponse> findByRolePermissionTenant(
+			RolePermissionTenant value,
+			MetaRequest metaRequest
+	) {
 
-		FindByRolePermissionTenantQuery query = new FindByRolePermissionTenantQuery(value);
+		FindByRolePermissionTenantQuery query = new FindByRolePermissionTenantQuery(value, metaRequest);
 		CompletableFuture<List<RolePermissionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(RolePermissionResponse.class));
 		return future.join();

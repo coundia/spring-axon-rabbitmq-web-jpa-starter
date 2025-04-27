@@ -31,7 +31,7 @@ void it_should_be_able_to_get_role_by_id() {
 
 	 RoleFixtures.byIdWaitExist(repository, existingId);
 
-	String uri = "/v1/queries/role/id?id=" + existingId;
+	String uri = "/v1/admin/queries/role/id?id=" + existingId;
 	ResponseEntity<RoleResponse> response = this.getForEntity(uri, RoleResponse.class);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.tenant.infrastructure;
 
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 	import com.groupe2cs.bizyhub.tenant.infrastructure.CurrentTenantIdentifierResolverImpl;
+	import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 
 import com.groupe2cs.bizyhub.tenant.infrastructure.CurrentTenantIdentifierResolverImpl;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;

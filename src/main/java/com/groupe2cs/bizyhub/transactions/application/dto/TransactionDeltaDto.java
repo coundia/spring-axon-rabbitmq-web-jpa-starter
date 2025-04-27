@@ -20,9 +20,9 @@ public class TransactionDeltaDto implements Serializable {
 	@Builder.Default
 	private String type = "CREATE";
 
-	@Schema(description = "", example = "52a02023-7798-48cf-aab0-a11e213faff9")
+	@Schema(description = "", example = "ea2815f4-7989-4036-9a4a-a2ea89fcee8b")
 	private String reference;
-	@Schema(description = "", example = "3134.21")
+	@Schema(description = "", example = "6355.78")
 	private Double amount;
 
 }

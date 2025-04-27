@@ -5,6 +5,8 @@ import com.groupe2cs.bizyhub.security.application.dto.RefreshTokenRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RefreshTokenResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RefreshTokenMapper;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenCreatedBy;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RefreshTokenTenant;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -15,15 +17,15 @@ public class RefreshTokenCreateApplicationService {
 	private final CommandGateway commandGateway;
 
 	public RefreshTokenResponse createRefreshToken(RefreshTokenRequest request,
-												   String createdBy) {
+												   MetaRequest metaRequest
+	) {
 
 		CreateRefreshTokenCommand command = RefreshTokenMapper.toCommand(
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(RefreshTokenCreatedBy.create(createdBy));
-		}
+		command.setCreatedBy(RefreshTokenCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(RefreshTokenTenant.create(metaRequest.getTenantId()));
 
 		commandGateway.sendAndWait(command);
 		return RefreshTokenMapper.toResponse(command);

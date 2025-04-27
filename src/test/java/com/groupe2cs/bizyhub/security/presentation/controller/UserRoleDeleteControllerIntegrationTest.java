@@ -30,7 +30,7 @@ void it_should_be_able_to_delete_userrole() {
 
 	UserRoleFixtures.byIdWaitExist(userroleRepository, existingId);
 
-	String uri = "/v1/commands/userRole/" + existingId;
+	String uri = "/v1/admin/commands/userRole/" + existingId;
 
 	ResponseEntity<String> rep = this.delete(uri);
 	assertThat(rep.getStatusCode().value()).isEqualTo(200);

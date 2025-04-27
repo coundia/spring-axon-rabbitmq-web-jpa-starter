@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.security.domain.event.RefreshTokenUpdatedEvent;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RefreshToken;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RefreshTokenRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
@@ -37,6 +38,10 @@ public class RefreshTokenProjection {
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
 
 			repository.save(entity);
 			log.info("RefreshToken inserted: {}", entity);
@@ -61,6 +66,9 @@ public class RefreshTokenProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 			repository.save(entity);
 			log.info("RefreshToken updated successfully: {}", event.getId().value());

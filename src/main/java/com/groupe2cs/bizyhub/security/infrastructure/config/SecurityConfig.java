@@ -24,13 +24,13 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
@@ -71,9 +71,12 @@ public class SecurityConfig {
 								"/swagger-resources/**",
 								"/webjars/**"
 						).permitAll()
+						.requestMatchers("/api/v1/admin/**").hasAuthority("IS_ADMIN")
 						.anyRequest().authenticated()
 				)
-				.oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()));
+				.oauth2ResourceServer(oauth2 -> oauth2
+						.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
+				);
 
 		return http.build();
 	}
@@ -123,5 +126,17 @@ public class SecurityConfig {
 		registration.addUrlPatterns("/api/v1/*");
 		registration.setOrder(1);
 		return registration;
+	}
+
+
+	@Bean
+	public JwtAuthenticationConverter jwtAuthenticationConverter() {
+		JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+		grantedAuthoritiesConverter.setAuthoritiesClaimName("scope");
+		grantedAuthoritiesConverter.setAuthorityPrefix("");
+
+		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+		return jwtAuthenticationConverter;
 	}
 }

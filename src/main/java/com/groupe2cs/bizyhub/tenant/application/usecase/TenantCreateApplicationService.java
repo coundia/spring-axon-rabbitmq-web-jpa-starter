@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.tenant.application.usecase;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.tenant.application.command.CreateTenantCommand;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
@@ -15,15 +16,14 @@ public class TenantCreateApplicationService {
 	private final CommandGateway commandGateway;
 
 	public TenantResponse createTenant(TenantRequest request,
-									   String createdBy) {
+									   MetaRequest metaRequest
+	) {
 
 		CreateTenantCommand command = TenantMapper.toCommand(
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(TenantCreatedBy.create(createdBy));
-		}
+		command.setCreatedBy(TenantCreatedBy.create(metaRequest.getUserId()));
 
 		commandGateway.sendAndWait(command);
 		return TenantMapper.toResponse(command);

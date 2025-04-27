@@ -1,13 +1,19 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import lombok.AllArgsConstructor;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@RequiredArgsConstructor
 @Getter
-@AllArgsConstructor
+@Setter
+@Builder
 public class FindAllUserQuery {
 
 	private final int page;
 	private final int limit;
+	private final MetaRequest metaRequest;
 
 }

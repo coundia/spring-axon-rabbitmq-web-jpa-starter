@@ -4,8 +4,8 @@ import com.groupe2cs.bizyhub.security.application.command.UpdateRoleCommand;
 import com.groupe2cs.bizyhub.security.application.dto.RoleRequest;
 import com.groupe2cs.bizyhub.security.application.dto.RoleResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.RoleMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.RoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -20,7 +20,7 @@ public class RoleUpdateApplicationService {
 
 
 	public RoleResponse updateRole(RoleId id, RoleRequest request,
-								   String createdBy
+								   MetaRequest metaRequest
 	) {
 
 		UpdateRoleCommand command = RoleMapper.toUpdateCommand(
@@ -28,8 +28,8 @@ public class RoleUpdateApplicationService {
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(RoleCreatedBy.create(createdBy));
+		if (metaRequest.getTenantId() != null) {
+			//command.setTenant(RoleTenant.create(metaRequest.getTenantId()));
 		}
 
 		commandGateway.sendAndWait(command);

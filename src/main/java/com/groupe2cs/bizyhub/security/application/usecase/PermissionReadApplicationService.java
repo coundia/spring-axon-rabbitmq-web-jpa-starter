@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionTenant;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -21,43 +22,52 @@ public class PermissionReadApplicationService {
 	private final QueryGateway queryGateway;
 
 
-	public PermissionPagedResponse findAll(int page, int limit) {
+	public PermissionPagedResponse findAll(int page, int limit, MetaRequest metaRequest) {
 
-		FindAllPermissionQuery query = new FindAllPermissionQuery(page, limit);
+		FindAllPermissionQuery query = new FindAllPermissionQuery(page, limit, metaRequest);
 		CompletableFuture<PermissionPagedResponse> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(PermissionPagedResponse.class));
 		return future.join();
 	}
 
 
-	public PermissionResponse findByPermissionId(PermissionId value) {
+	public PermissionResponse findByPermissionId(PermissionId value, MetaRequest metaRequest) {
 
-		FindByPermissionIdQuery query = new FindByPermissionIdQuery(value);
+		FindByPermissionIdQuery query = new FindByPermissionIdQuery(value, metaRequest);
 		CompletableFuture<PermissionResponse> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(PermissionResponse.class));
 		return future.join();
 	}
 
 
-	public List<PermissionResponse> findByPermissionName(PermissionName value) {
+	public List<PermissionResponse> findByPermissionName(
+			PermissionName value,
+			MetaRequest metaRequest
+	) {
 
-		FindByPermissionNameQuery query = new FindByPermissionNameQuery(value);
+		FindByPermissionNameQuery query = new FindByPermissionNameQuery(value, metaRequest);
 		CompletableFuture<List<PermissionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(PermissionResponse.class));
 		return future.join();
 	}
 
-	public List<PermissionResponse> findByPermissionCreatedBy(PermissionCreatedBy value) {
+	public List<PermissionResponse> findByPermissionCreatedBy(
+			PermissionCreatedBy value,
+			MetaRequest metaRequest
+	) {
 
-		FindByPermissionCreatedByQuery query = new FindByPermissionCreatedByQuery(value);
+		FindByPermissionCreatedByQuery query = new FindByPermissionCreatedByQuery(value, metaRequest);
 		CompletableFuture<List<PermissionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(PermissionResponse.class));
 		return future.join();
 	}
 
-	public List<PermissionResponse> findByPermissionTenant(PermissionTenant value) {
+	public List<PermissionResponse> findByPermissionTenant(
+			PermissionTenant value,
+			MetaRequest metaRequest
+	) {
 
-		FindByPermissionTenantQuery query = new FindByPermissionTenantQuery(value);
+		FindByPermissionTenantQuery query = new FindByPermissionTenantQuery(value, metaRequest);
 		CompletableFuture<List<PermissionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(PermissionResponse.class));
 		return future.join();

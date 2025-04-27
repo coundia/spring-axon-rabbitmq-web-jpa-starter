@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.security.application.mapper.RolePermissionMapper;
 import com.groupe2cs.bizyhub.security.application.query.FindByRolePermissionTenantQuery;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,11 @@ public class FindByRolePermissionTenantHandler {
 
 	@QueryHandler
 	public List<RolePermissionResponse> handle(FindByRolePermissionTenantQuery query) {
+
+		MetaRequest metaRequest = query.getMetaRequest();
+
 		String value = query.getTenant().value();
-		List<RolePermission> entities = repository.findByTenant(value);
+		List<RolePermission> entities = repository.findByTenantIdAndCreatedById(value, metaRequest.getUserId());
 		return entities.stream()
 				.map(RolePermissionMapper::toResponse)
 				.toList();

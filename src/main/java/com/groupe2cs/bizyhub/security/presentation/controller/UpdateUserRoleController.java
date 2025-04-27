@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.UserRoleRequest;
 import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.UserRoleUpdateApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@userRoleGate.canEdit(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/commands/userRole")
+@RequestMapping("/api/v1/admin/commands/userRole")
 @Tag(name = "UserRole commands", description = "Endpoints for managing userRoles")
 @Slf4j
 public class UpdateUserRoleController {
@@ -50,9 +51,14 @@ public class UpdateUserRoleController {
 		{
 			try {
 
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+
 				UserRoleResponse response = applicationService.updateUserRole(UserRoleId.create(id),
 						request,
-						RequestContext.getUserId(jwt)
+						metaRequest
 				);
 
 				return ResponseEntity.ok(response);

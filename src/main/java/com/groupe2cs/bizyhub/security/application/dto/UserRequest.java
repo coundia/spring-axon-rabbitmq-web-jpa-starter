@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Schema(name = "UserRequest", description = "Request payload for User operations")
 public class UserRequest implements Serializable {
 
-	@Schema(description = "", example = "f7ff0ec9-3dc7-49a1-ba46-dacd32052c63")
+	@Schema(description = "", example = "aa528779-72a9-461f-9fe1-0e604b046b5e")
 	private String username;
 
-	@Schema(description = "", example = "96e38a71-4da2-41e7-a35d-926ff819efef")
+	@Schema(description = "", example = "2c38a099-9dde-447f-a127-91cac8f21712")
 	private String password;
 
 

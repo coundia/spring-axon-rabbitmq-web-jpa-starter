@@ -1,12 +1,9 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RefreshToken;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,26 +12,30 @@ import java.util.Optional;
 @Repository
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, String> {
 
-	@Query("SELECT t FROM RefreshToken t ")
 	Page<RefreshToken> findAll(Pageable pageable);
 
-	@Query("SELECT t FROM RefreshToken t WHERE t.id = :id")
-	Optional<RefreshToken> findById(RefreshToken id);
+	Optional<RefreshToken> findById(String id);
 
-	@Query("SELECT t FROM RefreshToken t WHERE t.token = :token")
-	Optional<RefreshToken> findByToken(String token);
+	Optional<RefreshToken> findByIdAndCreatedById(String id, String createdById);
 
-	@Query("SELECT t FROM RefreshToken t WHERE t.username = :username")
-	Optional<RefreshToken> findByUsername(String username);
+	Page<RefreshToken> findByCreatedById(Pageable pageable, String createdById);
 
-	@Query("SELECT t FROM RefreshToken t WHERE t.expiration = :expiration")
-	List<RefreshToken> findByExpiration(java.time.Instant expiration);
+	Page<RefreshToken> findAllByTenantId(Pageable pageable, String tenantId);
 
-	@Query("SELECT t FROM RefreshToken t WHERE t.createdBy = :createdBy")
-	List<RefreshToken> findByCreatedBy(String createdBy);
 
-	@Query("SELECT t FROM RefreshToken t WHERE t.tenant = :tenant")
-	List<RefreshToken> findByTenant(String tenant);
+	List<RefreshToken> findByTokenAndCreatedById(String token, String createdById);
 
-	Optional<RefreshToken> findByCreatedByAndTenant(CustomUser createdBy, Tenant tenant);
+	List<RefreshToken> findByUsernameAndCreatedById(String username, String createdById);
+
+	List<RefreshToken> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
+
+	List<RefreshToken> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
+
+	List<RefreshToken> findByTenantIdAndCreatedById(String tenant, String createdById);
+
+	Optional<RefreshToken> findByCreatedByIdAndTenantId(
+			String createdBy,
+			String tenant
+	);
+
 }

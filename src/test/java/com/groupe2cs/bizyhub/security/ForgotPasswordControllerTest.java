@@ -1,10 +1,11 @@
 package com.groupe2cs.bizyhub.security;
 
-	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.security.application.dto.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
 	import com.groupe2cs.bizyhub.security.application.service.*;
+	import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+	import com.groupe2cs.bizyhub.security.application.dto.*;
+	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

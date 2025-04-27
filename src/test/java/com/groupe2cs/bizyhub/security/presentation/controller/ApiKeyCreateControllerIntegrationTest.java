@@ -33,7 +33,7 @@ void it_should_be_able_to_add_apikey() {
 
  		String uri = "/v1/commands/apiKey";
 		ResponseEntity<ApiKeyResponse> response = this.postForEntity(uri, requestDTO, ApiKeyResponse.class);
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getAppKey()).isEqualTo(requestDTO.getAppKey());

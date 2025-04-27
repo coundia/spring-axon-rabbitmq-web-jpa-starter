@@ -1,7 +1,8 @@
 package com.groupe2cs.bizyhub.security;
 
-import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.*;

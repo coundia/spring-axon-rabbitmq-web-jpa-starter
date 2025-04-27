@@ -29,9 +29,9 @@ void it_should_be_able_to_add_rolepermission() {
 		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway, userId).getId().value());
 		requestDTO.setPermission(PermissionFixtures.randomOneViaCommand(commandGateway, userId).getId().value());
 
- 		String uri = "/v1/commands/rolePermission";
+ 		String uri = "/v1/admin/commands/rolePermission";
 		ResponseEntity<RolePermissionResponse> response = this.postForEntity(uri, requestDTO, RolePermissionResponse.class);
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getRole()).isEqualTo(requestDTO.getRole());

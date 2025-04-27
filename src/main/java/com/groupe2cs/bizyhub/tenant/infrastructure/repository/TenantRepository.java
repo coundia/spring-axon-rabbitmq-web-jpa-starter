@@ -4,7 +4,6 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,28 +12,28 @@ import java.util.Optional;
 @Repository
 public interface TenantRepository extends JpaRepository<Tenant, String> {
 
-	@Query("SELECT t FROM Tenant t ")
 	Page<Tenant> findAll(Pageable pageable);
 
-	@Query("SELECT t FROM Tenant t WHERE t.id = :id")
-	Optional<Tenant> findById(Tenant id);
+	Optional<Tenant> findById(String id);
 
-	@Query("SELECT t FROM Tenant t WHERE t.name = :name")
+	Optional<Tenant> findByIdAndCreatedById(String id, String createdById);
+
+	Page<Tenant> findByCreatedById(Pageable pageable, String createdById);
+
+
+	Optional<Tenant> findByNameAndCreatedById(String name, String createdById);
+
 	Optional<Tenant> findByName(String name);
 
-	@Query("SELECT t FROM Tenant t WHERE t.description = :description")
-	List<Tenant> findByDescription(String description);
+	List<Tenant> findByDescriptionAndCreatedById(String description, String createdById);
 
-	@Query("SELECT t FROM Tenant t WHERE t.domain = :domain")
-	List<Tenant> findByDomain(String domain);
+	List<Tenant> findByDomainAndCreatedById(String domain, String createdById);
 
-	@Query("SELECT t FROM Tenant t WHERE t.language = :language")
-	List<Tenant> findByLanguage(String language);
+	List<Tenant> findByLanguageAndCreatedById(String language, String createdById);
 
-	@Query("SELECT t FROM Tenant t WHERE t.active = :active")
-	List<Tenant> findByActive(Boolean active);
+	List<Tenant> findByActiveAndCreatedById(Boolean active, String createdById);
 
-	@Query("SELECT t FROM Tenant t WHERE t.createdBy = :createdBy")
-	List<Tenant> findByCreatedBy(String createdBy);
+	List<Tenant> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
+
 
 }

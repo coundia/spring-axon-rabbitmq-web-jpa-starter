@@ -39,7 +39,7 @@ void it_should_be_able_to_update_role() {
 	RoleRequest requestDTO = new RoleRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
 
-	String uri = "/v1/commands/role/" + existingId;
+	String uri = "/v1/admin/commands/role/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

@@ -3,6 +3,8 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.RolePermissionReadApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,6 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +26,7 @@ import java.util.List;
 
 @PreAuthorize("@rolePermissionGate.canRead(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/queries/rolePermission")
+@RequestMapping("/api/v1/admin/queries/rolePermission")
 @Tag(name = "RolePermission Queries", description = "Endpoints for querying rolePermissions by permission")
 @Slf4j
 public class FindByPermissionRolePermissionController {
@@ -46,12 +50,19 @@ public class FindByPermissionRolePermissionController {
 	})
 
 	public ResponseEntity<List<RolePermissionResponse>> findByPermission(
+			@AuthenticationPrincipal Jwt jwt,
 			@Parameter(description = "Value of the permission to filter by", required = true)
 			@RequestParam String permission
 	) {
 		try {
 
-			var future = applicationService.findByRolePermissionPermission(RolePermissionPermission.create(permission));
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			var future = applicationService.findByRolePermissionPermission(RolePermissionPermission
+					.create(permission), metaRequest);
+
 			return ResponseEntity.ok(future);
 		} catch (Exception e) {
 			log.error("Failed to find rolePermission by permission: {}", e.getMessage(), e);

@@ -31,7 +31,7 @@ void it_should_be_able_to_get_permission_by_id() {
 
 	 PermissionFixtures.byIdWaitExist(repository, existingId);
 
-	String uri = "/v1/queries/permission/id?id=" + existingId;
+	String uri = "/v1/admin/queries/permission/id?id=" + existingId;
 	ResponseEntity<PermissionResponse> response = this.getForEntity(uri, PermissionResponse.class);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

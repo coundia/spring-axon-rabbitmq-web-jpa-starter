@@ -30,7 +30,7 @@ void it_should_be_able_to_delete_rolepermission() {
 
 	RolePermissionFixtures.byIdWaitExist(rolepermissionRepository, existingId);
 
-	String uri = "/v1/commands/rolePermission/" + existingId;
+	String uri = "/v1/admin/commands/rolePermission/" + existingId;
 
 	ResponseEntity<String> rep = this.delete(uri);
 	assertThat(rep.getStatusCode().value()).isEqualTo(200);

@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.application.dto.UserRequest;
 import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
 import com.groupe2cs.bizyhub.security.application.usecase.UserUpdateApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@userGate.canEdit(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/commands/user")
+@RequestMapping("/api/v1/admin/commands/user")
 @Tag(name = "User commands", description = "Endpoints for managing users")
 @Slf4j
 public class UpdateUserController {
@@ -50,9 +51,14 @@ public class UpdateUserController {
 		{
 			try {
 
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+
 				UserResponse response = applicationService.updateUser(UserId.create(id),
 						request,
-						RequestContext.getUserId(jwt)
+						metaRequest
 				);
 
 				return ResponseEntity.ok(response);

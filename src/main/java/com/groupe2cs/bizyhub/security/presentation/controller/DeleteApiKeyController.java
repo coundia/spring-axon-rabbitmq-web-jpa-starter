@@ -2,6 +2,8 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.usecase.ApiKeyDeleteApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +46,8 @@ public class DeleteApiKeyController {
 	})
 	public ResponseEntity<String> deleteApiKey(
 			@Parameter(description = "ID of the apiKey to delete", required = true)
-			@PathVariable String id
+			@PathVariable String id,
+			@AuthenticationPrincipal Jwt jwt
 	) {
 		if (id == null || id.isEmpty()) {
 			return ResponseEntity.badRequest().body("Invalid ID");
@@ -50,7 +55,13 @@ public class DeleteApiKeyController {
 
 		try {
 			ApiKeyId idVo = ApiKeyId.create(id);
-			applicationService.deleteApiKey(idVo);
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			applicationService.deleteApiKey(idVo, metaRequest);
+
 			return ResponseEntity.ok("ApiKey deleted successfully");
 		} catch (Exception e) {
 			log.error("Error deleting apiKey with id {}: {}", id, e.getMessage());

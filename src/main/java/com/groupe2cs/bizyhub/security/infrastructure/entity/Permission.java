@@ -1,9 +1,10 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.AbstractAuditableEntity;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import jakarta.persistence.*;
 import lombok.*;
-
 
 @Getter
 @Setter
@@ -11,13 +12,16 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
+@EntityListeners(AuditListener.class)
 @Table(name = "permissions")
-public class Permission {
+public class Permission extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
-	@Column(nullable = false, unique = true)
+
+	@Column(nullable = false,
+			unique = true)
 	private String name;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)

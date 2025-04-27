@@ -31,7 +31,7 @@ void it_should_be_able_to_get_user_by_id() {
 
 	 UserFixtures.byIdWaitExist(repository, existingId);
 
-	String uri = "/v1/queries/user/id?id=" + existingId;
+	String uri = "/v1/admin/queries/user/id?id=" + existingId;
 	ResponseEntity<UserResponse> response = this.getForEntity(uri, UserResponse.class);
 
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

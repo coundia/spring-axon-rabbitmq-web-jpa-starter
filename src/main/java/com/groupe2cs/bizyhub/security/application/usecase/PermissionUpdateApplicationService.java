@@ -4,8 +4,8 @@ import com.groupe2cs.bizyhub.security.application.command.UpdatePermissionComman
 import com.groupe2cs.bizyhub.security.application.dto.PermissionRequest;
 import com.groupe2cs.bizyhub.security.application.dto.PermissionResponse;
 import com.groupe2cs.bizyhub.security.application.mapper.PermissionMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -20,7 +20,7 @@ public class PermissionUpdateApplicationService {
 
 
 	public PermissionResponse updatePermission(PermissionId id, PermissionRequest request,
-											   String createdBy
+											   MetaRequest metaRequest
 	) {
 
 		UpdatePermissionCommand command = PermissionMapper.toUpdateCommand(
@@ -28,8 +28,8 @@ public class PermissionUpdateApplicationService {
 				request
 		);
 
-		if (createdBy != null) {
-			command.setCreatedBy(PermissionCreatedBy.create(createdBy));
+		if (metaRequest.getTenantId() != null) {
+			//command.setTenant(PermissionTenant.create(metaRequest.getTenantId()));
 		}
 
 		commandGateway.sendAndWait(command);

@@ -19,9 +19,5 @@ public class UserResponse implements Serializable {
 	private String username;
 	@Schema(description = "", example = "")
 	private String password;
-	@Schema(description = "", example = "")
-	private String createdBy;
-	@Schema(description = "", example = "")
-	private String tenant;
 
 }

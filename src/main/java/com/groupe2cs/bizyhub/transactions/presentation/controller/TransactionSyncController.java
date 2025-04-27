@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
 import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionSyncRequest;
 import com.groupe2cs.bizyhub.transactions.application.usecase.TransactionSyncApplicationService;
@@ -45,9 +46,13 @@ public class TransactionSyncController {
 			@AuthenticationPrincipal Jwt jwt,
 			@Valid @RequestBody TransactionSyncRequest request) {
 		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
 			applicationService.syncTransaction(
 					request,
-					RequestContext.getUserId(jwt)
+					metaRequest
 			);
 			return ResponseEntity.ok(ApiResponseDto.builder()
 					.code(1)

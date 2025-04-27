@@ -5,7 +5,6 @@ import com.groupe2cs.bizyhub.tenant.application.dto.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.presentation.controller.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.presentation.controller.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.application.command.*;
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ void it_should_be_able_to_delete_tenant() {
 
 	TenantFixtures.byIdWaitExist(tenantRepository, existingId);
 
-	String uri = "/v1/commands/tenant/" + existingId;
+	String uri = "/v1/admin/commands/tenant/" + existingId;
 
 	ResponseEntity<String> rep = this.delete(uri);
 	assertThat(rep.getStatusCode().value()).isEqualTo(200);

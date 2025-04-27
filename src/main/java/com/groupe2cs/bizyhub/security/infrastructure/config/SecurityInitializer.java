@@ -24,7 +24,7 @@ public class SecurityInitializer {
 	private static final String USER_USERNAME = "user";
 	private static final String PASSWORD_ADMIN = "admin";
 	private static final String PASSWORD_USER = "user";
-	private static final Set<String> DEFAULT_PERMISSIONS = Set.of("READ", "WRITE", "DELETE");
+	private static final Set<String> DEFAULT_PERMISSIONS = Set.of("READ", "WRITE", "DELETE", "IS_ADMIN");
 
 	private final RoleRepository roleRepository;
 	private final PermissionRepository permissionRepository;

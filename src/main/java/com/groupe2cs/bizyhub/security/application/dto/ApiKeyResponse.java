@@ -23,9 +23,5 @@ public class ApiKeyResponse implements Serializable {
 	private java.time.Instant createdAt;
 	@Schema(description = "", example = "")
 	private java.time.Instant expiration;
-	@Schema(description = "", example = "")
-	private String createdBy;
-	@Schema(description = "", example = "")
-	private String tenant;
 
 }

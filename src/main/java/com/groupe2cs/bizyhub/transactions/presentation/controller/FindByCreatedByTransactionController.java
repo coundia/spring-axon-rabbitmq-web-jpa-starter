@@ -1,5 +1,7 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
 import com.groupe2cs.bizyhub.transactions.application.usecase.TransactionReadApplicationService;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
@@ -13,6 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,12 +50,19 @@ public class FindByCreatedByTransactionController {
 	})
 
 	public ResponseEntity<List<TransactionResponse>> findByCreatedBy(
+			@AuthenticationPrincipal Jwt jwt,
 			@Parameter(description = "Value of the createdBy to filter by", required = true)
 			@RequestParam String createdBy
 	) {
 		try {
 
-			var future = applicationService.findByTransactionCreatedBy(TransactionCreatedBy.create(createdBy));
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			var future = applicationService.findByTransactionCreatedBy(TransactionCreatedBy
+					.create(createdBy), metaRequest);
+
 			return ResponseEntity.ok(future);
 		} catch (Exception e) {
 			log.error("Failed to find transaction by createdBy: {}", e.getMessage(), e);

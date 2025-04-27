@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
 import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
 import com.groupe2cs.bizyhub.security.application.service.RegisterUser;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -51,10 +52,16 @@ public class RegisterController {
 	})
 	public ResponseEntity<AuthResponseDto> register(@RequestBody AuthRequestDto request) {
 		try {
-			return ResponseEntity.ok(registerUser.handle(
-					request,
-					currentTenantIdentifierResolver.resolveCurrentTenantIdentifier()
-			));
+
+			MetaRequest metaRequest = new MetaRequest();
+
+			metaRequest.setTenantId(currentTenantIdentifierResolver.resolveCurrentTenantIdentifier());
+			return ResponseEntity.ok(
+					registerUser.handle(
+							request,
+							metaRequest
+					)
+			);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
