@@ -45,7 +45,7 @@ public class AuthService {
 		}
 
 
-		String token = jwtService.generateToken(authentication);
+		String token = jwtService.generateToken(authentication, metaRequest);
 
 
 		return AuthResponseDto.builder()

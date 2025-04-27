@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class FindByRoleNameHandler {
@@ -17,20 +19,16 @@ public class FindByRoleNameHandler {
 	private final RoleRepository repository;
 
 	@QueryHandler
-
-	public RoleResponse handle(FindByRoleNameQuery query) {
+	public List<RoleResponse> handle(FindByRoleNameQuery query) {
 
 		MetaRequest metaRequest = query.getMetaRequest();
 
 		String value = query.getName().value();
-		Role entity = repository.findByNameAndCreatedById(value, metaRequest.getUserId())
-				.orElse(null);
-
-		if (entity == null) {
-			return null;
-		}
-
-		return RoleMapper.toResponse(entity);
+		List<Role> entities = repository.findByNameAndCreatedById(value, metaRequest.getUserId());
+		return entities.stream()
+				.map(RoleMapper::toResponse)
+				.toList();
 	}
+
 
 }

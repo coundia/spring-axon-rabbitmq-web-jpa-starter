@@ -24,7 +24,7 @@ public class CustomUser extends AbstractAuditableEntity {
 
 
 	@Column(nullable = false,
-			unique = true)
+			unique = false)
 	private String username;
 
 	@Column(nullable = false,

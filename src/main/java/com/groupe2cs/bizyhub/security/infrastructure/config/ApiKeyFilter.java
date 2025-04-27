@@ -9,11 +9,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
+
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
+
 
 @Component
 @RequiredArgsConstructor
@@ -30,13 +36,13 @@ public class ApiKeyFilter implements Filter {
 			throws IOException, ServletException {
 
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		String apiKey = httpRequest.getHeader("X-API-KEY");
+		String apiKey = httpRequest.getHeader(API_KEY_HEADER);
 
 		String requestURI = httpRequest.getRequestURI();
 
 		if (
-				requestURI.startsWith("/api/v1/queries/apiKey") ||
-						requestURI.startsWith("/api/v1/commands/apiKey") ||
+				requestURI.startsWith("/api/v1/admin/queries/apiKey") ||
+						requestURI.startsWith("/api/v1/admin/commands/apiKey") ||
 						activeApiKeyService.equals("false")
 		) {
 			log.info("Skipping API Key validation for request: {}", requestURI);
@@ -53,11 +59,30 @@ public class ApiKeyFilter implements Filter {
 		try {
 			MetaRequest metaRequest = new MetaRequest();
 
-			ApiKeyResponse
+			List<ApiKeyResponse>
 					apiKeyResponse =
 					queryGateway.query(new FindByApiKeyAppKeyQuery(ApiKeyAppKey.create(apiKey), metaRequest),
-							ApiKeyResponse.class).join();
-			log.info("Valid API Key: '{}' for '{}'", apiKey, apiKeyResponse.getUsername());
+							ResponseTypes.multipleInstancesOf(ApiKeyResponse.class)
+
+					).join();
+
+			if (apiKeyResponse.isEmpty()) {
+				log.warn("Invalid API Key: '{}' ", apiKey);
+				((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid API Key");
+				return;
+			}
+			ApiKeyResponse apiKeyResponse1 = apiKeyResponse.get(0);
+			if (!apiKeyResponse1.getActive()) {
+				log.warn("API Key is inactive: '{}' ", apiKey);
+				((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "API Key is inactive");
+				return;
+			}
+
+			if (apiKeyResponse1.getExpiration().isBefore(Instant.now())) {
+				log.warn("API Key is expired: '{}' ", apiKey);
+				((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "API Key is expired");
+				return;
+			}
 			chain.doFilter(request, response);
 		} catch (Exception e) {
 			log.warn("Invalid API Key: '{}' ", apiKey);
@@ -66,6 +91,13 @@ public class ApiKeyFilter implements Filter {
 		}
 	}
 }
+
+
+
+
+
+
+
 
 
 

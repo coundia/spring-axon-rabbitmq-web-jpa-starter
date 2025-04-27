@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class FindByUserUsernameHandler {
@@ -17,20 +19,16 @@ public class FindByUserUsernameHandler {
 	private final UserRepository repository;
 
 	@QueryHandler
-
-	public UserResponse handle(FindByUserUsernameQuery query) {
+	public List<UserResponse> handle(FindByUserUsernameQuery query) {
 
 		MetaRequest metaRequest = query.getMetaRequest();
 
 		String value = query.getUsername().value();
-		CustomUser entity = repository.findByUsernameAndCreatedById(value, metaRequest.getUserId())
-				.orElse(null);
-
-		if (entity == null) {
-			return null;
-		}
-
-		return UserMapper.toResponse(entity);
+		List<CustomUser> entities = repository.findByUsernameAndCreatedById(value, metaRequest.getUserId());
+		return entities.stream()
+				.map(UserMapper::toResponse)
+				.toList();
 	}
+
 
 }

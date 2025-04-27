@@ -18,6 +18,7 @@ public class CreateApiKeyCommand implements Serializable {
 	private ApiKeyId id = ApiKeyId.create(UUID.randomUUID().toString());
 	private ApiKeyAppKey appKey;
 	private ApiKeyUsername username;
+	private ApiKeyActive active;
 	private ApiKeyCreatedAt createdAt;
 	private ApiKeyExpiration expiration;
 	private ApiKeyCreatedBy createdBy;
@@ -27,6 +28,7 @@ public class CreateApiKeyCommand implements Serializable {
 
 			ApiKeyAppKey appKey,
 			ApiKeyUsername username,
+			ApiKeyActive active,
 			ApiKeyCreatedAt createdAt,
 			ApiKeyExpiration expiration,
 			ApiKeyCreatedBy createdBy,
@@ -36,6 +38,7 @@ public class CreateApiKeyCommand implements Serializable {
 
 		this.appKey = appKey;
 		this.username = username;
+		this.active = active;
 		this.createdAt = createdAt;
 		this.expiration = expiration;
 		this.createdBy = createdBy;

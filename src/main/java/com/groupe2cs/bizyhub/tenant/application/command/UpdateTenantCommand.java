@@ -19,6 +19,7 @@ public class UpdateTenantCommand implements Serializable {
 	private TenantDomain domain;
 	private TenantLanguage language;
 	private TenantActive active;
+	private TenantTenant tenant;
 	private TenantCreatedBy createdBy;
 
 

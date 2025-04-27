@@ -34,7 +34,7 @@ public class PasswordResetService {
 	private final QueryGateway queryGateway;
 	private final MailSender mailSender;
 
-	public String createToken(String email) {
+	public String createToken(String email, MetaRequest metaRequest) {
 		String token = UUID.randomUUID().toString();
 		Instant expiration = Instant.now().plusSeconds(3600);
 
@@ -49,15 +49,18 @@ public class PasswordResetService {
 	}
 
 	@Transactional
-	public boolean resetPassword(String token, String newPassword) {
+	public boolean resetPassword(String token, String newPassword, MetaRequest metaRequest) {
 		try {
-			MetaRequest metaRequest = new MetaRequest();
+
 			var query = new FindByPasswordResetTokenQuery(PasswordResetToken.create(token), metaRequest);
 			var tokenEntity = queryGateway.query(query, PasswordResetResponse.class).get();
 
 			if (tokenEntity == null || tokenEntity.getExpiration().isBefore(Instant.now())) return false;
 
-			var user = userRepo.findByUsername(tokenEntity.getUsername()).orElse(null);
+			var
+					user =
+					userRepo.findByUsernameAndTenantId(tokenEntity.getUsername(), metaRequest.getTenantId())
+							.orElse(null);
 			if (user == null) return false;
 
 			user.setPassword(encoder.encode(newPassword));

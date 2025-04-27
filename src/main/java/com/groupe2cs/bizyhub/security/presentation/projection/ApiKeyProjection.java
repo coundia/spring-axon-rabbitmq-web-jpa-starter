@@ -32,6 +32,7 @@ public class ApiKeyProjection {
 					.id(event.getId().value())
 					.appKey(event.getAppKey().value())
 					.username(event.getUsername().value())
+					.active(event.getActive().value())
 					.createdAt(event.getCreatedAt().value())
 					.expiration(event.getExpiration().value())
 					.build();
@@ -61,6 +62,7 @@ public class ApiKeyProjection {
 			entity.setId(event.getId().value());
 			entity.setAppKey(event.getAppKey().value());
 			entity.setUsername(event.getUsername().value());
+			entity.setActive(event.getActive().value());
 			entity.setCreatedAt(event.getCreatedAt().value());
 			entity.setExpiration(event.getExpiration().value());
 

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @PreAuthorize("@apiKeyGate.canDelete(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/commands/apiKey")
+@RequestMapping("/api/v1/admin/commands/apiKey")
 @Tag(name = "ApiKey commands", description = "Endpoints for managing apiKeys")
 @Slf4j
 public class DeleteApiKeyController {

@@ -24,7 +24,7 @@ public class Role extends AbstractAuditableEntity {
 
 
 	@Column(nullable = false,
-			unique = true)
+			unique = false)
 	private String name;
 	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<RolePermission> rolePermissions = new HashSet<>();

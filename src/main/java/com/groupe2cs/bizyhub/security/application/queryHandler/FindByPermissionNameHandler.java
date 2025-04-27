@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class FindByPermissionNameHandler {
@@ -17,20 +19,16 @@ public class FindByPermissionNameHandler {
 	private final PermissionRepository repository;
 
 	@QueryHandler
-
-	public PermissionResponse handle(FindByPermissionNameQuery query) {
+	public List<PermissionResponse> handle(FindByPermissionNameQuery query) {
 
 		MetaRequest metaRequest = query.getMetaRequest();
 
 		String value = query.getName().value();
-		Permission entity = repository.findByNameAndCreatedById(value, metaRequest.getUserId())
-				.orElse(null);
-
-		if (entity == null) {
-			return null;
-		}
-
-		return PermissionMapper.toResponse(entity);
+		List<Permission> entities = repository.findByNameAndCreatedById(value, metaRequest.getUserId());
+		return entities.stream()
+				.map(PermissionMapper::toResponse)
+				.toList();
 	}
+
 
 }

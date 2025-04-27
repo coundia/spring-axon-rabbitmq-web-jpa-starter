@@ -4,6 +4,8 @@ import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
 import com.groupe2cs.bizyhub.security.application.service.RefreshTokenService;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,9 @@ public class RefreshTokenController {
 							.build());
 		}
 
+		MetaRequest metaRequest = new MetaRequest();
+		metaRequest.setTenantId(RequestContext.getTenantId(jwt));
+
 		String username = jwt.getSubject();
 
 		UserPrincipal principal = (UserPrincipal) userDetailsService.loadUserByUsername(username);
@@ -46,7 +51,7 @@ public class RefreshTokenController {
 				null,
 				principal.getAuthorities()
 		);
-		String accessToken = jwtService.generateToken(authentication);
+		String accessToken = jwtService.generateToken(authentication, metaRequest);
 
 		return ResponseEntity.ok(
 				AuthResponseDto.builder()

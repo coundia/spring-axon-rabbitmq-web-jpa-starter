@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
 
-	Page<Role> findAll(Pageable pageable);
+	//Page<Role> findAll(Pageable pageable);
 
-	Optional<Role> findById(String id);
+	//Optional<Role> findById(String id);
 
 	Optional<Role> findByIdAndCreatedById(String id, String createdById);
 
@@ -23,17 +23,23 @@ public interface RoleRepository extends JpaRepository<Role, String> {
 	Page<Role> findAllByTenantId(Pageable pageable, String tenantId);
 
 
-	Optional<Role> findByNameAndCreatedById(String name, String createdById);
+	List<Role> findByNameAndCreatedById(String name, String createdById);
 
-	Optional<Role> findByName(String name);
+	Optional<Role> findByNameAndTenantName(String name, String tenantName);
+
+	Optional<Role> findByNameAndTenantId(String name, String tenantId);
 
 	List<Role> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+	Optional<Role> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
+
+	Optional<Role> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
+
 	List<Role> findByTenantIdAndCreatedById(String tenant, String createdById);
 
-	Optional<Role> findByCreatedByIdAndTenantId(
-			String createdBy,
-			String tenant
-	);
+	Optional<Role> findByTenantIdAndTenantName(String tenant, String tenantName);
+
+	Optional<Role> findByTenantIdAndTenantId(String tenant, String tenantId);
+
 
 }

@@ -32,6 +32,7 @@ public class TenantAggregate {
 	private TenantDomain domain;
 	private TenantLanguage language;
 	private TenantActive active;
+	private TenantTenant tenant;
 	private TenantCreatedBy createdBy;
 
 
@@ -44,6 +45,7 @@ public class TenantAggregate {
 				command.getDomain(),
 				command.getLanguage(),
 				command.getActive(),
+				command.getTenant(),
 				command.getCreatedBy()
 		));
 	}
@@ -64,6 +66,7 @@ public class TenantAggregate {
 				command.getDomain(),
 				command.getLanguage(),
 				command.getActive(),
+				command.getTenant(),
 				command.getCreatedBy()
 		));
 	}
@@ -76,6 +79,7 @@ public class TenantAggregate {
 		this.domain = event.getDomain();
 		this.language = event.getLanguage();
 		this.active = event.getActive();
+		this.tenant = event.getTenant();
 		this.createdBy = event.getCreatedBy();
 	}
 
@@ -92,6 +96,7 @@ public class TenantAggregate {
 		this.domain = event.getDomain();
 		this.language = event.getLanguage();
 		this.active = event.getActive();
+		this.tenant = event.getTenant();
 		this.createdBy = event.getCreatedBy();
 	}
 

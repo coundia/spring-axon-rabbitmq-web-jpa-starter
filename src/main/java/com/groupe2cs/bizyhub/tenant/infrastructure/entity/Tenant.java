@@ -39,6 +39,9 @@ public class Tenant {
 			unique = false)
 	private Boolean active;
 	@ManyToOne
+	@JoinColumn(name = "tenant_id", nullable = true)
+	private Tenant tenant;
+	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private CustomUser createdBy;
 
@@ -55,6 +58,7 @@ public class Tenant {
 				", domain=" + domain +
 				", language=" + language +
 				", active=" + active +
+				", tenant=" + tenant +
 				", createdBy=" + createdBy +
 				'}';
 	}

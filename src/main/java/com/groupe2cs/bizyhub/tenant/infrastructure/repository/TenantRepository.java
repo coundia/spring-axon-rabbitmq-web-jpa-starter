@@ -12,28 +12,58 @@ import java.util.Optional;
 @Repository
 public interface TenantRepository extends JpaRepository<Tenant, String> {
 
-	Page<Tenant> findAll(Pageable pageable);
+	//Page<Tenant> findAll(Pageable pageable);
 
-	Optional<Tenant> findById(String id);
+	//Optional<Tenant> findById(String id);
 
 	Optional<Tenant> findByIdAndCreatedById(String id, String createdById);
 
 	Page<Tenant> findByCreatedById(Pageable pageable, String createdById);
 
 
+	Optional<Tenant> findByName(String name);
+
 	Optional<Tenant> findByNameAndCreatedById(String name, String createdById);
 
-	Optional<Tenant> findByName(String name);
+	Optional<Tenant> findByNameAndTenantName(String name, String tenantName);
+
+	Optional<Tenant> findByNameAndTenantId(String name, String tenantId);
 
 	List<Tenant> findByDescriptionAndCreatedById(String description, String createdById);
 
+	Optional<Tenant> findByDescriptionAndTenantName(String description, String tenantName);
+
+	Optional<Tenant> findByDescriptionAndTenantId(String description, String tenantId);
+
 	List<Tenant> findByDomainAndCreatedById(String domain, String createdById);
+
+	Optional<Tenant> findByDomainAndTenantName(String domain, String tenantName);
+
+	Optional<Tenant> findByDomainAndTenantId(String domain, String tenantId);
 
 	List<Tenant> findByLanguageAndCreatedById(String language, String createdById);
 
+	Optional<Tenant> findByLanguageAndTenantName(String language, String tenantName);
+
+	Optional<Tenant> findByLanguageAndTenantId(String language, String tenantId);
+
 	List<Tenant> findByActiveAndCreatedById(Boolean active, String createdById);
 
+	Optional<Tenant> findByActiveAndTenantName(Boolean active, String tenantName);
+
+	Optional<Tenant> findByActiveAndTenantId(Boolean active, String tenantId);
+
+	List<Tenant> findByTenantIdAndCreatedById(String tenant, String createdById);
+
+	Optional<Tenant> findByTenantIdAndTenantName(String tenant, String tenantName);
+
+	Optional<Tenant> findByTenantIdAndTenantId(String tenant, String tenantId);
+
 	List<Tenant> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
+
+	Optional<Tenant> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
+
+	Optional<Tenant> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
 
 
 }

@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface PasswordResetRepository extends JpaRepository<PasswordReset, String> {
 
-	Page<PasswordReset> findAll(Pageable pageable);
+	//Page<PasswordReset> findAll(Pageable pageable);
 
-	Optional<PasswordReset> findById(String id);
+	//Optional<PasswordReset> findById(String id);
 
 	Optional<PasswordReset> findByIdAndCreatedById(String id, String createdById);
 
@@ -25,17 +25,33 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
 
 	List<PasswordReset> findByTokenAndCreatedById(String token, String createdById);
 
+	Optional<PasswordReset> findByTokenAndTenantName(String token, String tenantName);
+
+	Optional<PasswordReset> findByTokenAndTenantId(String token, String tenantId);
+
 	List<PasswordReset> findByUsernameAndCreatedById(String username, String createdById);
+
+	Optional<PasswordReset> findByUsernameAndTenantName(String username, String tenantName);
+
+	Optional<PasswordReset> findByUsernameAndTenantId(String username, String tenantId);
 
 	List<PasswordReset> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
 
+	Optional<PasswordReset> findByExpirationAndTenantName(java.time.Instant expiration, String tenantName);
+
+	Optional<PasswordReset> findByExpirationAndTenantId(java.time.Instant expiration, String tenantId);
+
 	List<PasswordReset> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
+
+	Optional<PasswordReset> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
+
+	Optional<PasswordReset> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
 
 	List<PasswordReset> findByTenantIdAndCreatedById(String tenant, String createdById);
 
-	Optional<PasswordReset> findByCreatedByIdAndTenantId(
-			String createdBy,
-			String tenant
-	);
+	Optional<PasswordReset> findByTenantIdAndTenantName(String tenant, String tenantName);
+
+	Optional<PasswordReset> findByTenantIdAndTenantId(String tenant, String tenantId);
+
 
 }

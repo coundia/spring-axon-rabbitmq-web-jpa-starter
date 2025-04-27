@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.service;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
+
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.IS_ADMIN;
 
 
 @Slf4j
@@ -26,25 +29,24 @@ public class JwtService {
 	@Value("${security.jwt.expiration}")
 	private long tokenValidityInSeconds;
 
-	public String generateToken(Authentication authentication) {
+	public String generateToken(Authentication authentication, MetaRequest metaRequest) {
 		Instant now = Instant.now();
 		var authorities = authentication.getAuthorities().stream()
 				.map(Object::toString)
 				.collect(Collectors.joining(" "));
 
 		Boolean isAdmin = authentication.getAuthorities().stream()
-				.anyMatch(a -> a.getAuthority().equals("IS_ADMIN"));
+				.anyMatch(a -> a.getAuthority().equals(IS_ADMIN));
 
 		UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
 		String userId = userPrincipal.getId();
 
-		String tenantId = userPrincipal.getTenantId();
+		String tenantId = metaRequest.getTenantId();
 
 		if (tenantId == null) {
-			tenantId = "NA";
+			throw new IllegalArgumentException("Tenant ID ");
 		}
-
 
 		if (userId == null) {
 			throw new IllegalArgumentException("User ID ");
@@ -64,7 +66,7 @@ public class JwtService {
 
 		String token = jwtEncoder.encode(JwtEncoderParameters.from(header, claims)).getTokenValue();
 
-		refreshTokenService.save(token);
+		refreshTokenService.save(token, metaRequest);
 
 		return token;
 	}

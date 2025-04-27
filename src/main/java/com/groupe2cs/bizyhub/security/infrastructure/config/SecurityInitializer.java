@@ -11,20 +11,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
+
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
 
 @Component
 @RequiredArgsConstructor
 public class SecurityInitializer {
-
-	private static final String ROLE_ADMIN = "ROLE_ADMIN";
-	private static final String ROLE_USER = "ROLE_USER";
-	private static final String ADMIN_USERNAME = "admin";
-	private static final String USER_USERNAME = "user";
-	private static final String PASSWORD_ADMIN = "admin";
-	private static final String PASSWORD_USER = "user";
-	private static final Set<String> DEFAULT_PERMISSIONS = Set.of("READ", "WRITE", "DELETE", "IS_ADMIN");
 
 	private final RoleRepository roleRepository;
 	private final PermissionRepository permissionRepository;
@@ -41,13 +34,13 @@ public class SecurityInitializer {
 		assignPermissionsToRole(roles.get(ROLE_ADMIN));
 		createUserIfNotExist(ADMIN_USERNAME, PASSWORD_ADMIN, roles.get(ROLE_ADMIN));
 		createUserIfNotExist(USER_USERNAME, PASSWORD_USER, roles.get(ROLE_USER));
-		addTenantAndAssignToUser("default", ADMIN_USERNAME);
-		addTenantAndAssignToUser("default", USER_USERNAME);
+		addTenantAndAssignToUser(DEFAULT_TENANT, ADMIN_USERNAME);
+		addTenantAndAssignToUser(DEFAULT_TENANT, USER_USERNAME);
 	}
 
 	private void createPermissions() {
 		DEFAULT_PERMISSIONS.forEach(name ->
-				permissionRepository.findByName(name).orElseGet(() ->
+				permissionRepository.findByNameAndTenantName(name, DEFAULT_TENANT).orElseGet(() ->
 						permissionRepository.save(Permission.builder()
 								.id(UUID.randomUUID().toString())
 								.name(name)
@@ -65,7 +58,7 @@ public class SecurityInitializer {
 	}
 
 	private Role findOrCreateRole(String name) {
-		return roleRepository.findByName(name).orElseGet(() ->
+		return roleRepository.findByNameAndTenantName(name, DEFAULT_TENANT).orElseGet(() ->
 				roleRepository.save(Role.builder()
 						.id(UUID.randomUUID().toString())
 						.name(name)
@@ -86,7 +79,7 @@ public class SecurityInitializer {
 	}
 
 	private void createUserIfNotExist(String username, String rawPassword, Role role) {
-		userRepository.findByUsername(username).orElseGet(() -> {
+		userRepository.findByUsernameAndTenantName(username, DEFAULT_TENANT).orElseGet(() -> {
 			var user = userRepository.save(CustomUser.builder()
 					.id(UUID.randomUUID().toString())
 					.username(username)
@@ -110,7 +103,7 @@ public class SecurityInitializer {
 						.name(tenantName)
 						.build()
 				));
-		userRepository.findByUsername(username).ifPresent(user -> {
+		userRepository.findByUsernameAndTenantName(username, null).ifPresent(user -> {
 			user.setTenant(tenant);
 			userRepository.save(user);
 		});

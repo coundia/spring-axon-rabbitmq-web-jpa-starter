@@ -31,6 +31,10 @@ public class ApiKey extends AbstractAuditableEntity {
 
 	@Column(nullable = false,
 			unique = false)
+	private Boolean active;
+
+	@Column(nullable = false,
+			unique = false)
 	private java.time.Instant createdAt;
 
 	@Column(nullable = false,
@@ -53,6 +57,7 @@ public class ApiKey extends AbstractAuditableEntity {
 				"id='" + id + '\'' +
 				", appKey=" + appKey +
 				", username=" + username +
+				", active=" + active +
 				", createdAt=" + createdAt +
 				", expiration=" + expiration +
 				", createdBy=" + createdBy +

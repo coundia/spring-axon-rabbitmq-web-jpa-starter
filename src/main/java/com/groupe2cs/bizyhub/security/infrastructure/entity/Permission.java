@@ -21,7 +21,7 @@ public class Permission extends AbstractAuditableEntity {
 
 
 	@Column(nullable = false,
-			unique = true)
+			unique = false)
 	private String name;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)

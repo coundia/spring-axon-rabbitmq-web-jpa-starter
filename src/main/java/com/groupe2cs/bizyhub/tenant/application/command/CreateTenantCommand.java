@@ -21,6 +21,7 @@ public class CreateTenantCommand implements Serializable {
 	private TenantDomain domain;
 	private TenantLanguage language;
 	private TenantActive active;
+	private TenantTenant tenant;
 	private TenantCreatedBy createdBy;
 
 	public CreateTenantCommand(
@@ -30,6 +31,7 @@ public class CreateTenantCommand implements Serializable {
 			TenantDomain domain,
 			TenantLanguage language,
 			TenantActive active,
+			TenantTenant tenant,
 			TenantCreatedBy createdBy
 	) {
 		this.id = TenantId.create(UUID.randomUUID().toString());
@@ -39,6 +41,7 @@ public class CreateTenantCommand implements Serializable {
 		this.domain = domain;
 		this.language = language;
 		this.active = active;
+		this.tenant = tenant;
 		this.createdBy = createdBy;
 	}
 

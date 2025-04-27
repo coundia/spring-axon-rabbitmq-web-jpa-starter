@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, String> {
 
-	Page<Transaction> findAll(Pageable pageable);
+	//Page<Transaction> findAll(Pageable pageable);
 
-	Optional<Transaction> findById(String id);
+	//Optional<Transaction> findById(String id);
 
 	Optional<Transaction> findByIdAndCreatedById(String id, String createdById);
 
@@ -23,19 +23,31 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
 	Page<Transaction> findAllByTenantId(Pageable pageable, String tenantId);
 
 
+	Optional<Transaction> findByReference(String reference);
+
 	Optional<Transaction> findByReferenceAndCreatedById(String reference, String createdById);
 
-	Optional<Transaction> findByReference(String reference);
+	Optional<Transaction> findByReferenceAndTenantName(String reference, String tenantName);
+
+	Optional<Transaction> findByReferenceAndTenantId(String reference, String tenantId);
 
 	List<Transaction> findByAmountAndCreatedById(Double amount, String createdById);
 
+	Optional<Transaction> findByAmountAndTenantName(Double amount, String tenantName);
+
+	Optional<Transaction> findByAmountAndTenantId(Double amount, String tenantId);
+
 	List<Transaction> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
+
+	Optional<Transaction> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
+
+	Optional<Transaction> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
 
 	List<Transaction> findByTenantIdAndCreatedById(String tenant, String createdById);
 
-	Optional<Transaction> findByCreatedByIdAndTenantId(
-			String createdBy,
-			String tenant
-	);
+	Optional<Transaction> findByTenantIdAndTenantName(String tenant, String tenantName);
+
+	Optional<Transaction> findByTenantIdAndTenantId(String tenant, String tenantId);
+
 
 }

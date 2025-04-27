@@ -26,7 +26,7 @@ import java.util.List;
 
 @PreAuthorize("@apiKeyGate.canRead(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/queries/apiKey")
+@RequestMapping("/api/v1/admin/queries/apiKey")
 @Tag(name = "ApiKey Queries", description = "Endpoints for querying apiKeys by createdAt")
 @Slf4j
 public class FindByCreatedAtApiKeyController {

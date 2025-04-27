@@ -26,13 +26,14 @@ public class RegisterUser {
 
 	public AuthResponseDto handle(AuthRequestDto request, MetaRequest metaRequest) {
 
-		if (userRepository.findByUsername(request.getUsername()).isPresent()) {
-			throw new IllegalArgumentException("Username already exists");
-		}
-
 		String tenantId = metaRequest.getTenantId();
 		if (tenantId == null) {
 			throw new IllegalArgumentException("Tenant ID is required - when multi-tenant");
+		}
+
+		if (userRepository.findByUsernameAndTenantId(request.getUsername(), tenantId).isPresent()) {
+			log.error("User with username {} already exists in tenant {}", request.getUsername(), tenantId);
+			throw new IllegalArgumentException("Username “admin” already exists in tenant");
 		}
 
 		CustomUser user = CustomUser.builder()
@@ -53,7 +54,7 @@ public class RegisterUser {
 				userPrincipal.getAuthorities()
 		);
 
-		String token = jwtService.generateToken(authentication);
+		String token = jwtService.generateToken(authentication, metaRequest);
 
 		return AuthResponseDto.builder()
 				.token(token)

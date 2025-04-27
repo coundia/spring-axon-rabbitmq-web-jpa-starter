@@ -15,6 +15,7 @@ public class ApiKeyMapper {
 				.id(entity.getId())
 				.appKey(entity.getAppKey())
 				.username(entity.getUsername())
+				.active(entity.getActive())
 				.createdAt(entity.getCreatedAt())
 				.expiration(entity.getExpiration())
 				.build();
@@ -25,6 +26,7 @@ public class ApiKeyMapper {
 				.id(command.getId().value())
 				.appKey(command.getAppKey().value())
 				.username(command.getUsername().value())
+				.active(command.getActive().value())
 				.createdAt(command.getCreatedAt().value())
 				.expiration(command.getExpiration().value())
 				.build();
@@ -35,6 +37,7 @@ public class ApiKeyMapper {
 				.id(command.getId().value())
 				.appKey(command.getAppKey().value())
 				.username(command.getUsername().value())
+				.active(command.getActive().value())
 				.createdAt(command.getCreatedAt().value())
 				.expiration(command.getExpiration().value())
 				.build();
@@ -46,6 +49,7 @@ public class ApiKeyMapper {
 		return CreateApiKeyCommand.builder()
 				.appKey(ApiKeyAppKey.create(request.getAppKey()))
 				.username(ApiKeyUsername.create(request.getUsername()))
+				.active(ApiKeyActive.create(request.getActive()))
 				.createdAt(ApiKeyCreatedAt.create(request.getCreatedAt()))
 				.expiration(ApiKeyExpiration.create(request.getExpiration()))
 				.build();
@@ -56,6 +60,7 @@ public class ApiKeyMapper {
 				.id(id)
 				.appKey(ApiKeyAppKey.create(request.getAppKey()))
 				.username(ApiKeyUsername.create(request.getUsername()))
+				.active(ApiKeyActive.create(request.getActive()))
 				.createdAt(ApiKeyCreatedAt.create(request.getCreatedAt()))
 				.expiration(ApiKeyExpiration.create(request.getExpiration()))
 				.build();

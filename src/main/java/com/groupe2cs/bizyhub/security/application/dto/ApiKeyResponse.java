@@ -20,6 +20,8 @@ public class ApiKeyResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String username;
 	@Schema(description = "", example = "")
+	private Boolean active;
+	@Schema(description = "", example = "")
 	private java.time.Instant createdAt;
 	@Schema(description = "", example = "")
 	private java.time.Instant expiration;

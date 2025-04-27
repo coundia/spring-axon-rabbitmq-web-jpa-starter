@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface PermissionRepository extends JpaRepository<Permission, String> {
 
-	Page<Permission> findAll(Pageable pageable);
+	//Page<Permission> findAll(Pageable pageable);
 
-	Optional<Permission> findById(String id);
+	//Optional<Permission> findById(String id);
 
 	Optional<Permission> findByIdAndCreatedById(String id, String createdById);
 
@@ -23,17 +23,23 @@ public interface PermissionRepository extends JpaRepository<Permission, String> 
 	Page<Permission> findAllByTenantId(Pageable pageable, String tenantId);
 
 
-	Optional<Permission> findByNameAndCreatedById(String name, String createdById);
+	List<Permission> findByNameAndCreatedById(String name, String createdById);
 
-	Optional<Permission> findByName(String name);
+	Optional<Permission> findByNameAndTenantName(String name, String tenantName);
+
+	Optional<Permission> findByNameAndTenantId(String name, String tenantId);
 
 	List<Permission> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+	Optional<Permission> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
+
+	Optional<Permission> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
+
 	List<Permission> findByTenantIdAndCreatedById(String tenant, String createdById);
 
-	Optional<Permission> findByCreatedByIdAndTenantId(
-			String createdBy,
-			String tenant
-	);
+	Optional<Permission> findByTenantIdAndTenantName(String tenant, String tenantName);
+
+	Optional<Permission> findByTenantIdAndTenantId(String tenant, String tenantId);
+
 
 }

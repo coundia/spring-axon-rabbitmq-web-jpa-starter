@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Schema(name = "RolePermissionRequest", description = "Request payload for RolePermission operations")
 public class RolePermissionRequest implements Serializable {
 
-	@Schema(description = "", example = "8e104c28-59f8-4fe2-97a7-49ef0d3c4aaa")
+	@Schema(description = "", example = "8fa61867-9acf-469a-833d-ef896551c166")
 	private String role;
 
-	@Schema(description = "", example = "479cf1d5-9448-4c6b-bc4d-662a5984ed6a")
+	@Schema(description = "", example = "3bdc5537-a992-4a10-9b8e-f8636b9f119c")
 	private String permission;
 
 

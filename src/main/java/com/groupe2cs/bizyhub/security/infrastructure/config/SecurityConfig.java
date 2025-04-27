@@ -32,6 +32,10 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.TENANT_HEADER;
+
+
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
@@ -106,16 +110,22 @@ public class SecurityConfig {
 				.addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
 				.addSecurityItem(new SecurityRequirement().addList("ApiKeyAuth"))
 				.components(new io.swagger.v3.oas.models.Components()
+						.addSecuritySchemes("tenantName",
+								new SecurityScheme()
+										.type(SecurityScheme.Type.APIKEY)
+										.in(SecurityScheme.In.HEADER)
+										.name(TENANT_HEADER))
+						.addSecuritySchemes("ApiKeyAuth",
+								new SecurityScheme()
+										.type(SecurityScheme.Type.APIKEY)
+										.in(SecurityScheme.In.HEADER)
+										.name(API_KEY_HEADER))
 						.addSecuritySchemes("bearerAuth",
 								new SecurityScheme()
 										.type(SecurityScheme.Type.HTTP)
 										.scheme("bearer")
 										.bearerFormat("JWT"))
-						.addSecuritySchemes("ApiKeyAuth",
-								new SecurityScheme()
-										.type(SecurityScheme.Type.APIKEY)
-										.in(SecurityScheme.In.HEADER)
-										.name("X-API-KEY"))
+
 				);
 	}
 

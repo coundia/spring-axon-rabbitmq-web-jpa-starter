@@ -17,6 +17,7 @@ public class ApiKeyUpdatedEvent implements Serializable {
 	private ApiKeyId id;
 	private ApiKeyAppKey appKey;
 	private ApiKeyUsername username;
+	private ApiKeyActive active;
 	private ApiKeyCreatedAt createdAt;
 	private ApiKeyExpiration expiration;
 	private ApiKeyCreatedBy createdBy;

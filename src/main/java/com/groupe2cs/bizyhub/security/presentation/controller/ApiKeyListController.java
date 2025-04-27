@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @PreAuthorize("@apiKeyGate.canList(authentication)")
 @RestController
-@RequestMapping("/api/v1/queries/apiKeys")
+@RequestMapping("/api/v1/admin/queries/apiKeys")
 @Tag(name = "ApiKey Queries", description = "Endpoints for listing paginated apiKeys")
 public class ApiKeyListController {
 

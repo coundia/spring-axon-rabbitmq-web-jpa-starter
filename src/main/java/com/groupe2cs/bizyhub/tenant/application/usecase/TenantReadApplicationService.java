@@ -92,6 +92,17 @@ public class TenantReadApplicationService {
 		return future.join();
 	}
 
+	public List<TenantResponse> findByTenantTenant(
+			TenantTenant value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTenantTenantQuery query = new FindByTenantTenantQuery(value, metaRequest);
+		CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
+		return future.join();
+	}
+
 	public List<TenantResponse> findByTenantCreatedBy(
 			TenantCreatedBy value,
 			MetaRequest metaRequest

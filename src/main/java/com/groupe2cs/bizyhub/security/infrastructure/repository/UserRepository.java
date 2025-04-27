@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<CustomUser, String> {
 
-	Page<CustomUser> findAll(Pageable pageable);
+	//Page<CustomUser> findAll(Pageable pageable);
 
-	Optional<CustomUser> findById(String id);
+	//Optional<CustomUser> findById(String id);
 
 	Optional<CustomUser> findByIdAndCreatedById(String id, String createdById);
 
@@ -23,19 +23,29 @@ public interface UserRepository extends JpaRepository<CustomUser, String> {
 	Page<CustomUser> findAllByTenantId(Pageable pageable, String tenantId);
 
 
-	Optional<CustomUser> findByUsernameAndCreatedById(String username, String createdById);
+	List<CustomUser> findByUsernameAndCreatedById(String username, String createdById);
 
-	Optional<CustomUser> findByUsername(String username);
+	Optional<CustomUser> findByUsernameAndTenantName(String username, String tenantName);
+
+	Optional<CustomUser> findByUsernameAndTenantId(String username, String tenantId);
 
 	List<CustomUser> findByPasswordAndCreatedById(String password, String createdById);
 
+	Optional<CustomUser> findByPasswordAndTenantName(String password, String tenantName);
+
+	Optional<CustomUser> findByPasswordAndTenantId(String password, String tenantId);
+
 	List<CustomUser> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
+
+	Optional<CustomUser> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
+
+	Optional<CustomUser> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
 
 	List<CustomUser> findByTenantIdAndCreatedById(String tenant, String createdById);
 
-	Optional<CustomUser> findByCreatedByIdAndTenantId(
-			String createdBy,
-			String tenant
-	);
+	Optional<CustomUser> findByTenantIdAndTenantName(String tenant, String tenantName);
+
+	Optional<CustomUser> findByTenantIdAndTenantId(String tenant, String tenantId);
+
 
 }

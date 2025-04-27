@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @PreAuthorize("@apiKeyGate.canRead(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/queries/apiKey")
+@RequestMapping("/api/v1/admin/queries/apiKey")
 @Tag(name = "ApiKey Queries", description = "Endpoints for querying apiKeys by id")
 @Slf4j
 public class FindByIdApiKeyController {
