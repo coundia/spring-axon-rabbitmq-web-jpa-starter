@@ -4,6 +4,8 @@ import com.groupe2cs.bizyhub.security.application.command.CreateRolePermissionCo
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionPermission;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionRole;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RolePermissionTenant;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -50,10 +52,10 @@ public class RolePermissionFixtures {
 		return items;
 	}
 
-	public static List<CreateRolePermissionCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
+	public static List<CreateRolePermissionCommand> randomManyViaCommand(CommandGateway commandGateway, int count, CustomUser user) {
 		List<CreateRolePermissionCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway, userId));
+			items.add(randomOneViaCommand(commandGateway, user));
 		}
 		return items;
 	}
@@ -62,16 +64,17 @@ public class RolePermissionFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateRolePermissionCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
+	public static CreateRolePermissionCommand randomOneViaCommand(CommandGateway commandGateway, CustomUser user) {
+
 
 		CreateRolePermissionCommand command = CreateRolePermissionCommand.builder()
-				.role(RolePermissionRole.create(RoleFixtures.randomOneViaCommand(commandGateway, userId).getId()
-						.value()))
-				.permission(RolePermissionPermission.create(PermissionFixtures.randomOneViaCommand(commandGateway,
-						userId).getId().value()))
+				.role(RolePermissionRole.create(RoleFixtures.randomOneViaCommand(commandGateway, user).getId().value()))
+				.permission(RolePermissionPermission.create(PermissionFixtures.randomOneViaCommand(commandGateway, user)
+						.getId().value()))
 				.build();
 
-		command.setCreatedBy(RolePermissionCreatedBy.create(userId));
+		command.setCreatedBy(RolePermissionCreatedBy.create(user.getId()));
+		command.setTenant(RolePermissionTenant.create(user.getTenant().getId()));
 
 		commandGateway.sendAndWait(command);
 		return command;

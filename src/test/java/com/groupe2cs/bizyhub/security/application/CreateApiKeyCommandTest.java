@@ -25,7 +25,7 @@ public class CreateApiKeyCommandTest extends BaseUnitTests {
 				ApiKeyId.create(UUID.randomUUID().toString()),
 				ApiKeyAppKey.create(UUID.randomUUID().toString()),
 				ApiKeyUsername.create(UUID.randomUUID().toString()),
-				ApiKeyActive.create(true),
+				ApiKeyActive.create(false),
 				ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)),
 				ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)),
 				ApiKeyCreatedBy.create(UUID.randomUUID().toString()),

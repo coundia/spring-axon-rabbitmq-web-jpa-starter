@@ -2,6 +2,8 @@ package com.groupe2cs.bizyhub.shared;
 
 import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
 import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import java.util.Map;
 public class BaseIntegrationTests {
 
 	public String userId;
+	public CustomUser user;
 
 	@LocalServerPort
 	public int port;
@@ -60,6 +63,14 @@ public class BaseIntegrationTests {
 
 	public String getUserId() {
 		return (String) getTokenClaims().get("userId");
+	}
+
+	public String getTenantId() {
+		return (String) getTokenClaims().get("tenantId");
+	}
+
+	public CustomUser getCurrentUser() {
+		return user;
 	}
 
 	public ResponseEntity<String> get(String uri) {
@@ -112,7 +123,8 @@ public class BaseIntegrationTests {
 		return new HttpEntity<>(resource, partHeaders);
 	}
 
-	public String login(String login, String password) {
+	public CustomUser login(String login, String password) {
+
 		headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -135,6 +147,13 @@ public class BaseIntegrationTests {
 		headers.setBearerAuth(token);
 
 		userId = getUserId();
-		return getUserId();
+		user = CustomUser.builder()
+				.id(userId)
+				.tenant(new Tenant(getTenantId()))
+				.username(login)
+				.password(password)
+				.build();
+		return user;
+
 	}
 }

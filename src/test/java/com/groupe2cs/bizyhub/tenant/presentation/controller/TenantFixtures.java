@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.tenant.presentation.controller;
 
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.tenant.application.command.CreateTenantCommand;
 import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
@@ -53,10 +54,10 @@ public class TenantFixtures {
 		return items;
 	}
 
-	public static List<CreateTenantCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
+	public static List<CreateTenantCommand> randomManyViaCommand(CommandGateway commandGateway, int count, CustomUser user) {
 		List<CreateTenantCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway, userId));
+			items.add(randomOneViaCommand(commandGateway, user));
 		}
 		return items;
 	}
@@ -65,7 +66,8 @@ public class TenantFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateTenantCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
+	public static CreateTenantCommand randomOneViaCommand(CommandGateway commandGateway, CustomUser user) {
+
 
 		CreateTenantCommand command = CreateTenantCommand.builder()
 				.name(TenantName.create(UUID.randomUUID().toString()))
@@ -75,7 +77,8 @@ public class TenantFixtures {
 				.active(TenantActive.create(false))
 				.build();
 
-		command.setCreatedBy(TenantCreatedBy.create(userId));
+		command.setCreatedBy(TenantCreatedBy.create(user.getId()));
+		command.setTenant(TenantTenant.create(user.getTenant().getId()));
 
 		commandGateway.sendAndWait(command);
 		return command;

@@ -27,9 +27,9 @@ class ApiKeyFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_only_user_apiKeys_for_normal_user() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateApiKeyCommand> userCommands =
-				ApiKeyFixtures.randomManyViaCommand(commandGateway, 3, userId);
+				ApiKeyFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
 		userCommands.forEach(cmd ->
 				ApiKeyFixtures.byIdWaitExist(apiKeyRepository, cmd.getId().value())
 		);
@@ -45,16 +45,16 @@ class ApiKeyFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_all_apiKeys_for_admin() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateApiKeyCommand> userCommands =
-				ApiKeyFixtures.randomManyViaCommand(commandGateway, 5, userId);
+				ApiKeyFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
 		userCommands.forEach(cmd ->
 				ApiKeyFixtures.byIdWaitExist(apiKeyRepository, cmd.getId().value())
 		);
 
-		String adminId = login("admin", "admin");
+
 		List<CreateApiKeyCommand> adminCommands =
-				ApiKeyFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+				ApiKeyFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
 		adminCommands.forEach(cmd ->
 				ApiKeyFixtures.byIdWaitExist(apiKeyRepository, cmd.getId().value())
 		);

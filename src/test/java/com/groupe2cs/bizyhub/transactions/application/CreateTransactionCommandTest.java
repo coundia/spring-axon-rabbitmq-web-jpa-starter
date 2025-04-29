@@ -24,7 +24,7 @@ public class CreateTransactionCommandTest extends BaseUnitTests {
 		CreateTransactionCommand command = new CreateTransactionCommand(
 				TransactionId.create(UUID.randomUUID().toString()),
 				TransactionReference.create(UUID.randomUUID().toString()),
-				TransactionAmount.create(7744.41),
+				TransactionAmount.create(2514.81),
 				TransactionCreatedBy.create(UUID.randomUUID().toString()),
 				TransactionTenant.create(UUID.randomUUID().toString())
 		);

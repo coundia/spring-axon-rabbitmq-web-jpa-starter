@@ -20,7 +20,7 @@ public class RoleDeleteControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_be_able_to_delete_role() {
-		String existingId = RoleFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = RoleFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		RoleFixtures.byIdWaitExist(roleRepository, existingId);
 

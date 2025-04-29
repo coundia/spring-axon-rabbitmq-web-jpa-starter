@@ -20,7 +20,7 @@ public class ApiKeyDeleteControllerIntegrationTest extends BaseIntegrationTests 
 
 	@Test
 	void it_should_be_able_to_delete_apikey() {
-		String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		ApiKeyFixtures.byIdWaitExist(apikeyRepository, existingId);
 

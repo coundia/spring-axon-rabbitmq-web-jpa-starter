@@ -29,8 +29,8 @@ public class ApiKeyUpdateControllerIntegrationTest extends BaseIntegrationTests 
 	@Test
 	void it_should_be_able_to_update_apikey() {
 
-		String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
-		CreateApiKeyCommand updated = ApiKeyFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
+		String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
+		CreateApiKeyCommand updated = ApiKeyFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
 
 		ApiKeyFixtures.byIdWaitExist(apikeyRepository, existingId);
 		ApiKeyFixtures.byIdWaitExist(apikeyRepository, updated.getId().value());
@@ -38,7 +38,7 @@ public class ApiKeyUpdateControllerIntegrationTest extends BaseIntegrationTests 
 		ApiKeyRequest requestDTO = new ApiKeyRequest();
 		requestDTO.setAppKey(UUID.randomUUID().toString());
 		requestDTO.setUsername(UUID.randomUUID().toString());
-		requestDTO.setActive(true);
+		requestDTO.setActive(false);
 		requestDTO.setCreatedAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setExpiration(java.time.Instant.now().plusSeconds(3600));
 

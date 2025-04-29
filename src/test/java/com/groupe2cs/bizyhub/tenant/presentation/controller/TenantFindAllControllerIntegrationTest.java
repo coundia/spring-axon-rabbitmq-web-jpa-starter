@@ -27,9 +27,9 @@ class TenantFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_only_user_tenants_for_normal_user() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateTenantCommand> userCommands =
-				TenantFixtures.randomManyViaCommand(commandGateway, 3, userId);
+				TenantFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
 		userCommands.forEach(cmd ->
 				TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
 		);
@@ -45,16 +45,16 @@ class TenantFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_all_tenants_for_admin() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateTenantCommand> userCommands =
-				TenantFixtures.randomManyViaCommand(commandGateway, 5, userId);
+				TenantFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
 		userCommands.forEach(cmd ->
 				TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
 		);
 
-		String adminId = login("admin", "admin");
+
 		List<CreateTenantCommand> adminCommands =
-				TenantFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+				TenantFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
 		adminCommands.forEach(cmd ->
 				TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
 		);

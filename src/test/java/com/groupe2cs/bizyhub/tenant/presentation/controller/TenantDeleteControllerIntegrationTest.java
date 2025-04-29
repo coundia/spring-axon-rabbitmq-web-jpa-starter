@@ -20,7 +20,7 @@ public class TenantDeleteControllerIntegrationTest extends BaseIntegrationTests 
 
 	@Test
 	void it_should_be_able_to_delete_tenant() {
-		String existingId = TenantFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = TenantFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		TenantFixtures.byIdWaitExist(tenantRepository, existingId);
 

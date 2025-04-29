@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,39 +13,47 @@ import java.util.Optional;
 @Repository
 public interface UserRoleRepository extends JpaRepository<UserRole, String> {
 
-	//Page<UserRole> findAll(Pageable pageable);
-
-	//Optional<UserRole> findById(String id);
-
+	@Query("SELECT e FROM UserRole e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByIdAndCreatedById(String id, String createdById);
 
-	Page<UserRole> findByCreatedById(Pageable pageable, String createdById);
+	Page<UserRole> findByCreatedById(String createdById, Pageable pageable);
 
-	Page<UserRole> findAllByTenantId(Pageable pageable, String tenantId);
+	Page<UserRole> findAllByTenantId(String tenantId, Pageable pageable);
 
-
+	@Query("SELECT e FROM UserRole e WHERE e.user.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<UserRole> findByUserIdAndCreatedById(String user, String createdById);
 
+	@Query("SELECT e FROM UserRole e WHERE e.user.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByUserIdAndTenantName(String user, String tenantName);
 
+	@Query("SELECT e FROM UserRole e WHERE e.user.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByUserIdAndTenantId(String user, String tenantId);
 
+	@Query("SELECT e FROM UserRole e WHERE e.role.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<UserRole> findByRoleIdAndCreatedById(String role, String createdById);
 
+	@Query("SELECT e FROM UserRole e WHERE e.role.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByRoleIdAndTenantName(String role, String tenantName);
 
+	@Query("SELECT e FROM UserRole e WHERE e.role.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByRoleIdAndTenantId(String role, String tenantId);
 
+	@Query("SELECT e FROM UserRole e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<UserRole> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+	@Query("SELECT e FROM UserRole e WHERE e.createdBy.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
 
+	@Query("SELECT e FROM UserRole e WHERE e.createdBy.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
 
+	@Query("SELECT e FROM UserRole e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<UserRole> findByTenantIdAndCreatedById(String tenant, String createdById);
 
+	@Query("SELECT e FROM UserRole e WHERE e.tenant.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByTenantIdAndTenantName(String tenant, String tenantName);
 
+	@Query("SELECT e FROM UserRole e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
 	Optional<UserRole> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 

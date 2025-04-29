@@ -27,9 +27,9 @@ class TransactionFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_only_user_transactions_for_normal_user() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateTransactionCommand> userCommands =
-				TransactionFixtures.randomManyViaCommand(commandGateway, 3, userId);
+				TransactionFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
 		userCommands.forEach(cmd ->
 				TransactionFixtures.byIdWaitExist(transactionRepository, cmd.getId().value())
 		);
@@ -57,16 +57,16 @@ class TransactionFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_all_transactions_for_admin() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateTransactionCommand> userCommands =
-				TransactionFixtures.randomManyViaCommand(commandGateway, 5, userId);
+				TransactionFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
 		userCommands.forEach(cmd ->
 				TransactionFixtures.byIdWaitExist(transactionRepository, cmd.getId().value())
 		);
 
-		String adminId = login("admin", "admin");
+
 		List<CreateTransactionCommand> adminCommands =
-				TransactionFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+				TransactionFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
 		adminCommands.forEach(cmd ->
 				TransactionFixtures.byIdWaitExist(transactionRepository, cmd.getId().value())
 		);

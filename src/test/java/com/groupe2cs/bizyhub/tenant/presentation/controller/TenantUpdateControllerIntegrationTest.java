@@ -29,8 +29,8 @@ public class TenantUpdateControllerIntegrationTest extends BaseIntegrationTests 
 	@Test
 	void it_should_be_able_to_update_tenant() {
 
-		String existingId = TenantFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
-		CreateTenantCommand updated = TenantFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
+		String existingId = TenantFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
+		CreateTenantCommand updated = TenantFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
 
 		TenantFixtures.byIdWaitExist(tenantRepository, existingId);
 		TenantFixtures.byIdWaitExist(tenantRepository, updated.getId().value());
@@ -40,7 +40,7 @@ public class TenantUpdateControllerIntegrationTest extends BaseIntegrationTests 
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setDomain(UUID.randomUUID().toString());
 		requestDTO.setLanguage(UUID.randomUUID().toString());
-		requestDTO.setActive(false);
+		requestDTO.setActive(true);
 
 		String uri = "/v1/admin/commands/tenant/" + existingId;
 		ResponseEntity<String> response = this.put(uri, requestDTO);

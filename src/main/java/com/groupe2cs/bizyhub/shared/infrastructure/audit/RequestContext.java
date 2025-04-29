@@ -14,7 +14,7 @@ public class RequestContext {
 	public static String getUserId(Jwt jwt) {
 		Object claim = jwt.getClaims().get("userId");
 		if (claim == null) {
-			log.error("Missing 'userId' in JWT claims");
+			log.error("[RequestContext] Missing 'userId' in JWT claims");
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User ID is required");
 		}
 		return claim.toString();
@@ -23,15 +23,16 @@ public class RequestContext {
 	public static String getTenantId(Jwt jwt) {
 		Object claim = jwt.getClaims().get("tenantId");
 		if (claim == null) {
-			log.error("Missing 'tenantId' in JWT claims");
+			log.error("[RequestContext] Missing 'tenantId' in JWT claims");
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Tenant ID is required");
 		}
-		return claim.toString();
+		String tenantId = claim.toString();
+		log.info("[RequestContext] Tenant ID: {}", tenantId);
+		return tenantId;
 	}
 
 	public static Boolean isAdmin(Jwt jwt) {
-		return jwt.getClaimAsString("isAdmin") != null && jwt.getClaimAsString("isAdmin").equals("true");
+		return "true".equals(jwt.getClaimAsString("isAdmin"));
 	}
-
 }
 

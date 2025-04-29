@@ -22,7 +22,9 @@ public class RolePermissionFindByIdControllerIntegrationTest extends BaseIntegra
 	@Test
 	void it_should_be_able_to_get_rolepermission_by_id() {
 
-		String existingId = RolePermissionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String
+				existingId =
+				RolePermissionFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		RolePermissionFixtures.byIdWaitExist(repository, existingId);
 

@@ -27,7 +27,7 @@ public class CreateTenantCommandTest extends BaseUnitTests {
 				TenantDescription.create(UUID.randomUUID().toString()),
 				TenantDomain.create(UUID.randomUUID().toString()),
 				TenantLanguage.create(UUID.randomUUID().toString()),
-				TenantActive.create(false),
+				TenantActive.create(true),
 				TenantTenant.create(UUID.randomUUID().toString()),
 				TenantCreatedBy.create(UUID.randomUUID().toString())
 		);

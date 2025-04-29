@@ -21,8 +21,8 @@ public class UserRoleCreateControllerIntegrationTest extends BaseIntegrationTest
 
 		UserRoleRequest requestDTO = new UserRoleRequest();
 
-		requestDTO.setUser(UserFixtures.randomOneViaCommand(commandGateway, userId).getId().value());
-		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway, userId).getId().value());
+		requestDTO.setUser(UserFixtures.randomOneViaCommand(commandGateway, user).getId().value());
+		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway, user).getId().value());
 
 		String uri = "/v1/admin/commands/userRole";
 		ResponseEntity<UserRoleResponse> response = this.postForEntity(uri, requestDTO, UserRoleResponse.class);

@@ -29,8 +29,10 @@ public class PermissionUpdateControllerIntegrationTest extends BaseIntegrationTe
 	@Test
 	void it_should_be_able_to_update_permission() {
 
-		String existingId = PermissionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
-		CreatePermissionCommand updated = PermissionFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
+		String existingId = PermissionFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
+		CreatePermissionCommand
+				updated =
+				PermissionFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
 
 		PermissionFixtures.byIdWaitExist(permissionRepository, existingId);
 		PermissionFixtures.byIdWaitExist(permissionRepository, updated.getId().value());

@@ -55,7 +55,7 @@ public class FindByTenantTenantController {
 		try {
 
 			MetaRequest metaRequest = MetaRequest.builder()
-					.userId(RequestContext.getUserId(jwt))
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
 					.build();
 
 			var future = applicationService.findByTenantTenant(TenantTenant

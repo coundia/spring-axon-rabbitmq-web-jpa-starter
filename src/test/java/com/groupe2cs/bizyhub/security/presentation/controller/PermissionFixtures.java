@@ -3,6 +3,8 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.command.CreatePermissionCommand;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionTenant;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.PermissionRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -50,10 +52,10 @@ public class PermissionFixtures {
 		return items;
 	}
 
-	public static List<CreatePermissionCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
+	public static List<CreatePermissionCommand> randomManyViaCommand(CommandGateway commandGateway, int count, CustomUser user) {
 		List<CreatePermissionCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway, userId));
+			items.add(randomOneViaCommand(commandGateway, user));
 		}
 		return items;
 	}
@@ -62,13 +64,15 @@ public class PermissionFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreatePermissionCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
+	public static CreatePermissionCommand randomOneViaCommand(CommandGateway commandGateway, CustomUser user) {
+
 
 		CreatePermissionCommand command = CreatePermissionCommand.builder()
 				.name(PermissionName.create(UUID.randomUUID().toString()))
 				.build();
 
-		command.setCreatedBy(PermissionCreatedBy.create(userId));
+		command.setCreatedBy(PermissionCreatedBy.create(user.getId()));
+		command.setTenant(PermissionTenant.create(user.getTenant().getId()));
 
 		commandGateway.sendAndWait(command);
 		return command;

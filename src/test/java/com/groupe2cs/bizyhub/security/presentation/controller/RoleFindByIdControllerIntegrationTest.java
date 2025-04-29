@@ -22,7 +22,7 @@ public class RoleFindByIdControllerIntegrationTest extends BaseIntegrationTests 
 	@Test
 	void it_should_be_able_to_get_role_by_id() {
 
-		String existingId = RoleFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = RoleFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		RoleFixtures.byIdWaitExist(repository, existingId);
 

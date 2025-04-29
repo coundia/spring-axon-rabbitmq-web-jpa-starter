@@ -27,10 +27,12 @@ public class RolePermissionUpdateControllerIntegrationTest extends BaseIntegrati
 	@Test
 	void it_should_be_able_to_update_rolepermission() {
 
-		String existingId = RolePermissionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String
+				existingId =
+				RolePermissionFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 		CreateRolePermissionCommand
 				updated =
-				RolePermissionFixtures.randomOneViaCommand(commandGatewayUpdate, getUserId());
+				RolePermissionFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
 
 		RolePermissionFixtures.byIdWaitExist(rolepermissionRepository, existingId);
 		RolePermissionFixtures.byIdWaitExist(rolepermissionRepository, updated.getId().value());

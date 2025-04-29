@@ -39,6 +39,9 @@ public class TenantProjection {
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 
 			repository.save(entity);
@@ -66,6 +69,11 @@ public class TenantProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
+			if (entity.getTenant() == null && event.getTenant() != null) {
+				log.info("Tenant is null on entity, it will be,  updated with tenant ID: {}",
+						event.getTenant().value());
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 			repository.save(entity);
 			log.info("Tenant updated successfully: {}", event.getId().value());

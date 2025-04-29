@@ -3,6 +3,8 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.command.CreateRoleCommand;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.RoleName;
+import com.groupe2cs.bizyhub.security.domain.valueObject.RoleTenant;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RoleRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -50,10 +52,10 @@ public class RoleFixtures {
 		return items;
 	}
 
-	public static List<CreateRoleCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
+	public static List<CreateRoleCommand> randomManyViaCommand(CommandGateway commandGateway, int count, CustomUser user) {
 		List<CreateRoleCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway, userId));
+			items.add(randomOneViaCommand(commandGateway, user));
 		}
 		return items;
 	}
@@ -62,13 +64,15 @@ public class RoleFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateRoleCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
+	public static CreateRoleCommand randomOneViaCommand(CommandGateway commandGateway, CustomUser user) {
+
 
 		CreateRoleCommand command = CreateRoleCommand.builder()
 				.name(RoleName.create(UUID.randomUUID().toString()))
 				.build();
 
-		command.setCreatedBy(RoleCreatedBy.create(userId));
+		command.setCreatedBy(RoleCreatedBy.create(user.getId()));
+		command.setTenant(RoleTenant.create(user.getTenant().getId()));
 
 		commandGateway.sendAndWait(command);
 		return command;

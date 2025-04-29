@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.security.application.query.FindAllUserQuery;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
+@Slf4j
 @Component
 public class FindAllUserQueryHandler {
 
@@ -29,16 +32,16 @@ public class FindAllUserQueryHandler {
 		int offset = query.getPage() * limit;
 		MetaRequest metaRequest = query.getMetaRequest();
 
-		long totalElements = repository.count();
-
 		PageRequest pageable = PageRequest.of(offset / limit, limit);
 		Page<CustomUser> pages = null;
 
 		if (metaRequest.isAdmin()) {
-			pages = repository.findAll(pageable);
-			//pages = repository.findAllByTenantId(pageable, metaRequest.getTenantId());
+
+			log.info("Admin user, fetching all Users");
+			pages = repository.findAllByTenantId(metaRequest.getTenantId(), pageable);
 		} else {
-			pages = repository.findByCreatedById(pageable, metaRequest.getUserId());
+			log.info("Non-admin user, fetching Users by userId");
+			pages = repository.findByCreatedById(metaRequest.getUserId(), pageable);
 		}
 
 		List<UserResponse> responses = pages.stream()

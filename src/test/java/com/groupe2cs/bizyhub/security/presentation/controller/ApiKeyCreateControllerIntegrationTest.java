@@ -25,7 +25,7 @@ public class ApiKeyCreateControllerIntegrationTest extends BaseIntegrationTests 
 
 		requestDTO.setAppKey(UUID.randomUUID().toString());
 		requestDTO.setUsername(UUID.randomUUID().toString());
-		requestDTO.setActive(false);
+		requestDTO.setActive(true);
 		requestDTO.setCreatedAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setExpiration(java.time.Instant.now().plusSeconds(3600));
 

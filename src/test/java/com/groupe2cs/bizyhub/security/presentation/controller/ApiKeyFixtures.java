@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.command.CreateApiKeyCommand;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKey;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.ApiKeyRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 
@@ -20,7 +21,7 @@ public class ApiKeyFixtures {
 				.id(UUID.randomUUID().toString())
 				.appKey(UUID.randomUUID().toString())
 				.username(UUID.randomUUID().toString())
-				.active(true)
+				.active(false)
 				.createdAt(java.time.Instant.now().plusSeconds(3600))
 				.expiration(java.time.Instant.now().plusSeconds(3600))
 				.build();
@@ -53,10 +54,10 @@ public class ApiKeyFixtures {
 		return items;
 	}
 
-	public static List<CreateApiKeyCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
+	public static List<CreateApiKeyCommand> randomManyViaCommand(CommandGateway commandGateway, int count, CustomUser user) {
 		List<CreateApiKeyCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway, userId));
+			items.add(randomOneViaCommand(commandGateway, user));
 		}
 		return items;
 	}
@@ -65,17 +66,19 @@ public class ApiKeyFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateApiKeyCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
+	public static CreateApiKeyCommand randomOneViaCommand(CommandGateway commandGateway, CustomUser user) {
+
 
 		CreateApiKeyCommand command = CreateApiKeyCommand.builder()
 				.appKey(ApiKeyAppKey.create(UUID.randomUUID().toString()))
 				.username(ApiKeyUsername.create(UUID.randomUUID().toString()))
-				.active(ApiKeyActive.create(true))
+				.active(ApiKeyActive.create(false))
 				.createdAt(ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.expiration(ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)))
 				.build();
 
-		command.setCreatedBy(ApiKeyCreatedBy.create(userId));
+		command.setCreatedBy(ApiKeyCreatedBy.create(user.getId()));
+		command.setTenant(ApiKeyTenant.create(user.getTenant().getId()));
 
 		commandGateway.sendAndWait(command);
 		return command;

@@ -5,15 +5,13 @@ import com.groupe2cs.bizyhub.security.application.command.DeletePasswordResetCom
 import com.groupe2cs.bizyhub.security.application.dto.PasswordResetResponse;
 import com.groupe2cs.bizyhub.security.application.query.FindByPasswordResetTokenQuery;
 import com.groupe2cs.bizyhub.security.domain.event.PasswordResetCreatedEvent;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetExpiration;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetId;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetToken;
-import com.groupe2cs.bizyhub.security.domain.valueObject.PasswordResetUsername;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryGateway;
@@ -24,10 +22,12 @@ import java.time.Instant;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PasswordResetService {
 
+	//todo refactor (remove UserRepository) to use a query to get the user (full CQRS)
 	private final UserRepository userRepo;
 	private final PasswordEncoder encoder;
 	private final CommandGateway commandGateway;
@@ -42,6 +42,7 @@ public class PasswordResetService {
 				.token(PasswordResetToken.create(token))
 				.username(PasswordResetUsername.create(email))
 				.expiration(PasswordResetExpiration.create(expiration))
+				.tenant(PasswordResetTenant.create(metaRequest.getTenantId()))
 				.build();
 
 		commandGateway.sendAndWait(command);
@@ -53,35 +54,67 @@ public class PasswordResetService {
 		try {
 
 			var query = new FindByPasswordResetTokenQuery(PasswordResetToken.create(token), metaRequest);
-			var tokenEntity = queryGateway.query(query, PasswordResetResponse.class).get();
+			var tokenEntity = queryGateway.query(
+					query,
+					PasswordResetResponse.class
+			).get();
 
-			if (tokenEntity == null || tokenEntity.getExpiration().isBefore(Instant.now())) return false;
+			if (tokenEntity == null) {
+				log.error("Token not found for token: {}", token);
+				return false;
+			}
 
-			var
-					user =
+			if (tokenEntity.getExpiration().isBefore(Instant.now())) {
+				log.error("Token expired for token: {}", token);
+				return false;
+			}
+			;
+
+//todo move to full CQRS , by using a query to get the user
+			var user =
 					userRepo.findByUsernameAndTenantId(tokenEntity.getUsername(), metaRequest.getTenantId())
 							.orElse(null);
-			if (user == null) return false;
+			if (user == null) {
+				log.info("User not found for username: {}", tokenEntity.getUsername());
+				return false;
+			}
 
 			user.setPassword(encoder.encode(newPassword));
 
+//todo move to full CQRS , by using a command to delete the user
 			var deleteCommand = DeletePasswordResetCommand.builder()
 					.id(PasswordResetId.create(tokenEntity.getId()))
 					.build();
 
+			log.info("Deleting password reset token for user: {}", tokenEntity.getId());
+
 			commandGateway.send(deleteCommand);
+
+			log.info("Password reset successfully for user: {}", tokenEntity.getUsername());
 			return true;
 
 		} catch (InterruptedException | ExecutionException e) {
+			log.error("Error while resetting password: {}", e.getMessage());
+			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@EventHandler
 	public void on(PasswordResetCreatedEvent event) {
+
+		String email = event.getUsername().value();
+
+		log.info("Password reset event triggered for email: {}", email);
+		if (!mailSender.isValidEmail(email)) {
+			email = "contact@pcoundia.com";
+			log.info("Email is null or empty, using default email: {}", email);
+		}
+
+		log.info("Sending password reset email to: {}", event.getUsername().value());
 		this.mailSender.send(
 				"noreply@pcoundia.com",
-				event.getUsername().value(),
+				email,
 				"Password Reset",
 				"Your token: " + event.getToken()
 		);

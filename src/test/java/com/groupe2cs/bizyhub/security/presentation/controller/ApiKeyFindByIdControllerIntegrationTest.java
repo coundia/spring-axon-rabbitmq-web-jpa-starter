@@ -22,7 +22,7 @@ public class ApiKeyFindByIdControllerIntegrationTest extends BaseIntegrationTest
 	@Test
 	void it_should_be_able_to_get_apikey_by_id() {
 
-		String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		ApiKeyFixtures.byIdWaitExist(repository, existingId);
 

@@ -32,8 +32,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
-import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
-import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.TENANT_HEADER;
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
 
 
 @Configuration
@@ -68,6 +67,7 @@ public class SecurityConfig {
 						.requestMatchers(
 								"/api/auth/**",
 								"/api/v1/status",
+								"/api/v1/status/fallback",
 								"/swagger-ui.html",
 								"/swagger-ui/**",
 								"/v3/api-docs/**",
@@ -75,7 +75,7 @@ public class SecurityConfig {
 								"/swagger-resources/**",
 								"/webjars/**"
 						).permitAll()
-						.requestMatchers("/api/v1/admin/**").hasAuthority("IS_ADMIN")
+						.requestMatchers("/api/v1/admin/**").hasAuthority(IS_ADMIN)
 						.anyRequest().authenticated()
 				)
 				.oauth2ResourceServer(oauth2 -> oauth2
@@ -107,27 +107,29 @@ public class SecurityConfig {
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
 				.info(new Info().title("API").version("1.0"))
-				.addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
-				.addSecurityItem(new SecurityRequirement().addList("ApiKeyAuth"))
+				.addSecurityItem(new SecurityRequirement()
+						.addList("bearerAuth")
+						.addList("ApiKeyAuth")
+						.addList("tenantName"))
 				.components(new io.swagger.v3.oas.models.Components()
-						.addSecuritySchemes("tenantName",
-								new SecurityScheme()
-										.type(SecurityScheme.Type.APIKEY)
-										.in(SecurityScheme.In.HEADER)
-										.name(TENANT_HEADER))
-						.addSecuritySchemes("ApiKeyAuth",
-								new SecurityScheme()
-										.type(SecurityScheme.Type.APIKEY)
-										.in(SecurityScheme.In.HEADER)
-										.name(API_KEY_HEADER))
 						.addSecuritySchemes("bearerAuth",
 								new SecurityScheme()
 										.type(SecurityScheme.Type.HTTP)
 										.scheme("bearer")
 										.bearerFormat("JWT"))
-
+						.addSecuritySchemes("ApiKeyAuth",
+								new SecurityScheme()
+										.type(SecurityScheme.Type.APIKEY)
+										.in(SecurityScheme.In.HEADER)
+										.name(API_KEY_HEADER))
+						.addSecuritySchemes("tenantName",
+								new SecurityScheme()
+										.type(SecurityScheme.Type.APIKEY)
+										.in(SecurityScheme.In.HEADER)
+										.name(TENANT_HEADER))
 				);
 	}
+
 
 	@Bean(name = "apiKeyFilterBean")
 	public FilterRegistrationBean<ApiKeyFilter> apiKeyFilter(ApiKeyFilter filter) {

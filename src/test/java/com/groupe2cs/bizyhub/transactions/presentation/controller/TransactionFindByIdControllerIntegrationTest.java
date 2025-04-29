@@ -22,7 +22,7 @@ public class TransactionFindByIdControllerIntegrationTest extends BaseIntegratio
 	@Test
 	void it_should_be_able_to_get_transaction_by_id() {
 
-		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = TransactionFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		TransactionFixtures.byIdWaitExist(repository, existingId);
 

@@ -8,6 +8,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,40 +29,57 @@ public class SecurityInitializer {
 	private final TenantRepository tenantRepository;
 
 	@PostConstruct
+	@Transactional
 	public void init() {
-		createPermissions();
-		var roles = createRoles();
+
+		var tenant = findOrCreateTenant(DEFAULT_TENANT);
+
+		createPermissions(tenant);
+
+		var roles = createRoles(tenant);
+
 		assignPermissionsToRole(roles.get(ROLE_ADMIN));
-		createUserIfNotExist(ADMIN_USERNAME, PASSWORD_ADMIN, roles.get(ROLE_ADMIN));
-		createUserIfNotExist(USER_USERNAME, PASSWORD_USER, roles.get(ROLE_USER));
-		addTenantAndAssignToUser(DEFAULT_TENANT, ADMIN_USERNAME);
-		addTenantAndAssignToUser(DEFAULT_TENANT, USER_USERNAME);
+
+		createUserIfNotExist(tenant, ADMIN_USERNAME, PASSWORD_ADMIN, roles.get(ROLE_ADMIN));
+		createUserIfNotExist(tenant, USER_USERNAME, PASSWORD_USER, roles.get(ROLE_USER));
 	}
 
-	private void createPermissions() {
+	private Tenant findOrCreateTenant(String tenantName) {
+		return tenantRepository.findByName(tenantName).orElseGet(() ->
+				tenantRepository.save(Tenant.builder()
+						.id(UUID.randomUUID().toString())
+						.name(tenantName)
+						.build()
+				)
+		);
+	}
+
+	private void createPermissions(Tenant tenant) {
 		DEFAULT_PERMISSIONS.forEach(name ->
-				permissionRepository.findByNameAndTenantName(name, DEFAULT_TENANT).orElseGet(() ->
+				permissionRepository.findByNameAndTenantName(name, tenant.getName()).orElseGet(() ->
 						permissionRepository.save(Permission.builder()
 								.id(UUID.randomUUID().toString())
 								.name(name)
+								.tenant(tenant)
 								.build()
 						)
 				)
 		);
 	}
 
-	private Map<String, Role> createRoles() {
+	private Map<String, Role> createRoles(Tenant tenant) {
 		var result = new HashMap<String, Role>();
-		result.put(ROLE_ADMIN, findOrCreateRole(ROLE_ADMIN));
-		result.put(ROLE_USER, findOrCreateRole(ROLE_USER));
+		result.put(ROLE_ADMIN, findOrCreateRole(tenant, ROLE_ADMIN));
+		result.put(ROLE_USER, findOrCreateRole(tenant, ROLE_USER));
 		return result;
 	}
 
-	private Role findOrCreateRole(String name) {
-		return roleRepository.findByNameAndTenantName(name, DEFAULT_TENANT).orElseGet(() ->
+	private Role findOrCreateRole(Tenant tenant, String name) {
+		return roleRepository.findByNameAndTenantName(name, tenant.getName()).orElseGet(() ->
 				roleRepository.save(Role.builder()
 						.id(UUID.randomUUID().toString())
 						.name(name)
+						.tenant(tenant)
 						.build()
 				)
 		);
@@ -78,13 +96,15 @@ public class SecurityInitializer {
 		);
 	}
 
-	private void createUserIfNotExist(String username, String rawPassword, Role role) {
-		userRepository.findByUsernameAndTenantName(username, DEFAULT_TENANT).orElseGet(() -> {
+	private void createUserIfNotExist(Tenant tenant, String username, String rawPassword, Role role) {
+		userRepository.findByUsernameAndTenantName(username, tenant.getName()).orElseGet(() -> {
 			var user = userRepository.save(CustomUser.builder()
 					.id(UUID.randomUUID().toString())
 					.username(username)
 					.password(passwordEncoder.encode(rawPassword))
-					.build());
+					.tenant(tenant)
+					.build()
+			);
 
 			userRoleRepository.save(UserRole.builder()
 					.id(UUID.randomUUID().toString())
@@ -92,20 +112,8 @@ public class SecurityInitializer {
 					.role(role)
 					.build()
 			);
-			return user;
-		});
-	}
 
-	private void addTenantAndAssignToUser(String tenantName, String username) {
-		var tenant = tenantRepository.findByName(tenantName).orElseGet(() ->
-				tenantRepository.save(Tenant.builder()
-						.id(UUID.randomUUID().toString())
-						.name(tenantName)
-						.build()
-				));
-		userRepository.findByUsernameAndTenantName(username, null).ifPresent(user -> {
-			user.setTenant(tenant);
-			userRepository.save(user);
+			return user;
 		});
 	}
 }

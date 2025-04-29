@@ -70,7 +70,9 @@ public class ApiKeyProjection {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));
 			}
 
-			if (event.getTenant() != null) {
+			if (entity.getTenant() == null && event.getTenant() != null) {
+				log.info("Tenant is null on entity, it will be,  updated with tenant ID: {}",
+						event.getTenant().value());
 				entity.setTenant(new Tenant(event.getTenant().value()));
 			}
 

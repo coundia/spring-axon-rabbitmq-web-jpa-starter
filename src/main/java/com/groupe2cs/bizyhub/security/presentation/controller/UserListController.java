@@ -62,8 +62,6 @@ public class UserListController {
 				.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
 				.build();
 
-		Boolean isAdmin = RequestContext.isAdmin(jwt);
-
 		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 		return applicationService.findAll(page, limit, metaRequest);

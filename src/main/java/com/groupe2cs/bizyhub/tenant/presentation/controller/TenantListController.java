@@ -57,10 +57,8 @@ public class TenantListController {
 	) {
 
 		MetaRequest metaRequest = MetaRequest.builder()
-				.userId(RequestContext.getUserId(jwt))
+				.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
 				.build();
-
-		Boolean isAdmin = RequestContext.isAdmin(jwt);
 
 		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 

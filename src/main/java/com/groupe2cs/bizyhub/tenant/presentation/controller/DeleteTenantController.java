@@ -55,7 +55,7 @@ public class DeleteTenantController {
 			TenantId idVo = TenantId.create(id);
 
 			MetaRequest metaRequest = MetaRequest.builder()
-					.userId(RequestContext.getUserId(jwt))
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
 					.build();
 
 			applicationService.deleteTenant(idVo, metaRequest);

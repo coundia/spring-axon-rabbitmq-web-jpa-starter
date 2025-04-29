@@ -22,7 +22,7 @@ public class PermissionFindByIdControllerIntegrationTest extends BaseIntegration
 	@Test
 	void it_should_be_able_to_get_permission_by_id() {
 
-		String existingId = PermissionFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = PermissionFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		PermissionFixtures.byIdWaitExist(repository, existingId);
 

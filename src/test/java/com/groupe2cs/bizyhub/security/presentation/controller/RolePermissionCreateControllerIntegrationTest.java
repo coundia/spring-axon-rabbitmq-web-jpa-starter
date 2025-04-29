@@ -21,8 +21,8 @@ public class RolePermissionCreateControllerIntegrationTest extends BaseIntegrati
 
 		RolePermissionRequest requestDTO = new RolePermissionRequest();
 
-		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway, userId).getId().value());
-		requestDTO.setPermission(PermissionFixtures.randomOneViaCommand(commandGateway, userId).getId().value());
+		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway, user).getId().value());
+		requestDTO.setPermission(PermissionFixtures.randomOneViaCommand(commandGateway, user).getId().value());
 
 		String uri = "/v1/admin/commands/rolePermission";
 		ResponseEntity<RolePermissionResponse>

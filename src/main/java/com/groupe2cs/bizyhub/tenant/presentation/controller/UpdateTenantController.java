@@ -50,7 +50,7 @@ public class UpdateTenantController {
 			try {
 
 				MetaRequest metaRequest = MetaRequest.builder()
-						.userId(RequestContext.getUserId(jwt))
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
 						.build();
 
 

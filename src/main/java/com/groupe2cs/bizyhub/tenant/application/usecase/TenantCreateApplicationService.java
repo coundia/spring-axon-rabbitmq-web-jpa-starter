@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
 import com.groupe2cs.bizyhub.tenant.application.mapper.TenantMapper;
 import com.groupe2cs.bizyhub.tenant.domain.valueObject.TenantCreatedBy;
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.TenantTenant;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class TenantCreateApplicationService {
 		);
 
 		command.setCreatedBy(TenantCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(TenantTenant.create(metaRequest.getTenantId()));
 
 		commandGateway.sendAndWait(command);
 		return TenantMapper.toResponse(command);

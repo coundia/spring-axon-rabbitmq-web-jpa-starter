@@ -22,7 +22,7 @@ public class UserFindByIdControllerIntegrationTest extends BaseIntegrationTests 
 	@Test
 	void it_should_be_able_to_get_user_by_id() {
 
-		String existingId = UserFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = UserFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		UserFixtures.byIdWaitExist(repository, existingId);
 

@@ -27,9 +27,9 @@ class PermissionFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_only_user_permissions_for_normal_user() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreatePermissionCommand> userCommands =
-				PermissionFixtures.randomManyViaCommand(commandGateway, 3, userId);
+				PermissionFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
 		userCommands.forEach(cmd ->
 				PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
 		);
@@ -45,16 +45,16 @@ class PermissionFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_all_permissions_for_admin() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreatePermissionCommand> userCommands =
-				PermissionFixtures.randomManyViaCommand(commandGateway, 5, userId);
+				PermissionFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
 		userCommands.forEach(cmd ->
 				PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
 		);
 
-		String adminId = login("admin", "admin");
+
 		List<CreatePermissionCommand> adminCommands =
-				PermissionFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+				PermissionFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
 		adminCommands.forEach(cmd ->
 				PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
 		);

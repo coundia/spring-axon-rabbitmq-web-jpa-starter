@@ -1,9 +1,10 @@
 package com.groupe2cs.bizyhub.tenant.infrastructure.entity;
 
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.AbstractAuditableEntity;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 import jakarta.persistence.*;
 import lombok.*;
-
 
 @Getter
 @Setter
@@ -11,8 +12,9 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
+@EntityListeners(AuditListener.class)
 @Table(name = "tenants")
-public class Tenant {
+public class Tenant extends AbstractAuditableEntity {
 
 	@Id
 	private String id;

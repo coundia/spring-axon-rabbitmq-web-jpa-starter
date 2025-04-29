@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.command.CreateUserCommand;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserPassword;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserTenant;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
@@ -52,10 +53,10 @@ public class UserFixtures {
 		return items;
 	}
 
-	public static List<CreateUserCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
+	public static List<CreateUserCommand> randomManyViaCommand(CommandGateway commandGateway, int count, CustomUser user) {
 		List<CreateUserCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway, userId));
+			items.add(randomOneViaCommand(commandGateway, user));
 		}
 		return items;
 	}
@@ -64,14 +65,16 @@ public class UserFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateUserCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
+	public static CreateUserCommand randomOneViaCommand(CommandGateway commandGateway, CustomUser user) {
+
 
 		CreateUserCommand command = CreateUserCommand.builder()
 				.username(UserUsername.create(UUID.randomUUID().toString()))
 				.password(UserPassword.create(UUID.randomUUID().toString()))
 				.build();
 
-		command.setCreatedBy(UserCreatedBy.create(userId));
+		command.setCreatedBy(UserCreatedBy.create(user.getId()));
+		command.setTenant(UserTenant.create(user.getTenant().getId()));
 
 		commandGateway.sendAndWait(command);
 		return command;

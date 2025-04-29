@@ -3,7 +3,9 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.command.CreateUserRoleCommand;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleCreatedBy;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleTenant;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRoleRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -50,10 +52,10 @@ public class UserRoleFixtures {
 		return items;
 	}
 
-	public static List<CreateUserRoleCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
+	public static List<CreateUserRoleCommand> randomManyViaCommand(CommandGateway commandGateway, int count, CustomUser user) {
 		List<CreateUserRoleCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway, userId));
+			items.add(randomOneViaCommand(commandGateway, user));
 		}
 		return items;
 	}
@@ -62,14 +64,16 @@ public class UserRoleFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateUserRoleCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
+	public static CreateUserRoleCommand randomOneViaCommand(CommandGateway commandGateway, CustomUser user) {
+
 
 		CreateUserRoleCommand command = CreateUserRoleCommand.builder()
-				.user(UserRoleUser.create(UserFixtures.randomOneViaCommand(commandGateway, userId).getId().value()))
-				.role(UserRoleRole.create(RoleFixtures.randomOneViaCommand(commandGateway, userId).getId().value()))
+				.user(UserRoleUser.create(UserFixtures.randomOneViaCommand(commandGateway, user).getId().value()))
+				.role(UserRoleRole.create(RoleFixtures.randomOneViaCommand(commandGateway, user).getId().value()))
 				.build();
 
-		command.setCreatedBy(UserRoleCreatedBy.create(userId));
+		command.setCreatedBy(UserRoleCreatedBy.create(user.getId()));
+		command.setTenant(UserRoleTenant.create(user.getTenant().getId()));
 
 		commandGateway.sendAndWait(command);
 		return command;

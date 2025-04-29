@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Schema(name = "PermissionRequest", description = "Request payload for Permission operations")
 public class PermissionRequest implements Serializable {
 
-	@Schema(description = "", example = "5aa0d77e-235a-4625-b042-ca6ec0400f0a")
+	@Schema(description = "", example = "bbc7ee0d-e45a-44b9-a1f8-3b5d133fc587")
 	private String name;
 
 

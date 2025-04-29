@@ -27,9 +27,9 @@ class UserRoleFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_only_user_userRoles_for_normal_user() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateUserRoleCommand> userCommands =
-				UserRoleFixtures.randomManyViaCommand(commandGateway, 3, userId);
+				UserRoleFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
 		userCommands.forEach(cmd ->
 				UserRoleFixtures.byIdWaitExist(userRoleRepository, cmd.getId().value())
 		);
@@ -45,16 +45,16 @@ class UserRoleFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_all_userRoles_for_admin() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateUserRoleCommand> userCommands =
-				UserRoleFixtures.randomManyViaCommand(commandGateway, 5, userId);
+				UserRoleFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
 		userCommands.forEach(cmd ->
 				UserRoleFixtures.byIdWaitExist(userRoleRepository, cmd.getId().value())
 		);
 
-		String adminId = login("admin", "admin");
+
 		List<CreateUserRoleCommand> adminCommands =
-				UserRoleFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+				UserRoleFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
 		adminCommands.forEach(cmd ->
 				UserRoleFixtures.byIdWaitExist(userRoleRepository, cmd.getId().value())
 		);

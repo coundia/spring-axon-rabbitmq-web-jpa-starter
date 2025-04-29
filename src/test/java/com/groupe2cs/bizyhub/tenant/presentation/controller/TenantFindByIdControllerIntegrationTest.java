@@ -22,7 +22,7 @@ public class TenantFindByIdControllerIntegrationTest extends BaseIntegrationTest
 	@Test
 	void it_should_be_able_to_get_tenant_by_id() {
 
-		String existingId = TenantFixtures.randomOneViaCommand(commandGateway, getUserId()).getId().value();
+		String existingId = TenantFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
 
 		TenantFixtures.byIdWaitExist(repository, existingId);
 

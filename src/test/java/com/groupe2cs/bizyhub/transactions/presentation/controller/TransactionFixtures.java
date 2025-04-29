@@ -1,9 +1,11 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
+import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
 import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionAmount;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionTenant;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -21,7 +23,7 @@ public class TransactionFixtures {
 		Transaction entity = Transaction.builder()
 				.id(UUID.randomUUID().toString())
 				.reference(UUID.randomUUID().toString())
-				.amount(4769.71)
+				.amount(3370.54)
 				.build();
 		return repository.save(entity);
 	}
@@ -52,10 +54,10 @@ public class TransactionFixtures {
 		return items;
 	}
 
-	public static List<CreateTransactionCommand> randomManyViaCommand(CommandGateway commandGateway, int count, String userId) {
+	public static List<CreateTransactionCommand> randomManyViaCommand(CommandGateway commandGateway, int count, CustomUser user) {
 		List<CreateTransactionCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			items.add(randomOneViaCommand(commandGateway, userId));
+			items.add(randomOneViaCommand(commandGateway, user));
 		}
 		return items;
 	}
@@ -64,14 +66,16 @@ public class TransactionFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateTransactionCommand randomOneViaCommand(CommandGateway commandGateway, String userId) {
+	public static CreateTransactionCommand randomOneViaCommand(CommandGateway commandGateway, CustomUser user) {
+
 
 		CreateTransactionCommand command = CreateTransactionCommand.builder()
 				.reference(TransactionReference.create(UUID.randomUUID().toString()))
-				.amount(TransactionAmount.create(4769.71))
+				.amount(TransactionAmount.create(3370.54))
 				.build();
 
-		command.setCreatedBy(TransactionCreatedBy.create(userId));
+		command.setCreatedBy(TransactionCreatedBy.create(user.getId()));
+		command.setTenant(TransactionTenant.create(user.getTenant().getId()));
 
 		commandGateway.sendAndWait(command);
 		return command;

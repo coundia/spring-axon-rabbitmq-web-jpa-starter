@@ -27,9 +27,9 @@ class UserFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_only_user_users_for_normal_user() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateUserCommand> userCommands =
-				UserFixtures.randomManyViaCommand(commandGateway, 3, userId);
+				UserFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
 		userCommands.forEach(cmd ->
 				UserFixtures.byIdWaitExist(userRepository, cmd.getId().value())
 		);
@@ -45,16 +45,16 @@ class UserFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 	@Test
 	void it_should_return_all_users_for_admin() throws Exception {
-		String userId = login("user", "user");
+
 		List<CreateUserCommand> userCommands =
-				UserFixtures.randomManyViaCommand(commandGateway, 5, userId);
+				UserFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
 		userCommands.forEach(cmd ->
 				UserFixtures.byIdWaitExist(userRepository, cmd.getId().value())
 		);
 
-		String adminId = login("admin", "admin");
+
 		List<CreateUserCommand> adminCommands =
-				UserFixtures.randomManyViaCommand(commandGateway, 5, adminId);
+				UserFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
 		adminCommands.forEach(cmd ->
 				UserFixtures.byIdWaitExist(userRepository, cmd.getId().value())
 		);
