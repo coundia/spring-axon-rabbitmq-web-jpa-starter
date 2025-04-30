@@ -25,8 +25,17 @@ public class TransactionSyncApplicationService {
 				case "CREATE" -> {
 
 					CreateTransactionCommand command = CreateTransactionCommand.builder()
-							.reference(TransactionReference.create(d.getReference()))
 							.amount(TransactionAmount.create(d.getAmount()))
+							.dateOperation(TransactionDateOperation.create(d.getDateOperation()))
+							.description(TransactionDescription.create(d.getDescription()))
+							.reference(TransactionReference.create(d.getReference()))
+							.isRecurring(TransactionIsRecurring.create(d.getIsRecurring()))
+							.isExcluToRapport(TransactionIsExcluToRapport.create(d.getIsExcluToRapport()))
+							.status(TransactionStatus.create(d.getStatus()))
+							.balance(TransactionBalance.create(d.getBalance()))
+							.category(TransactionCategory.create(d.getCategory()))
+							.updatedAt(TransactionUpdatedAt.create(d.getUpdatedAt()))
+							.createdAt(TransactionCreatedAt.create(d.getCreatedAt()))
 							.build();
 					if (metaRequest.getTenantId() != null) {
 						command.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
@@ -43,8 +52,17 @@ public class TransactionSyncApplicationService {
 				case "UPDATE" -> {
 					UpdateTransactionCommand update = UpdateTransactionCommand.builder()
 							.id(TransactionId.create(d.getId()))
-							.reference(TransactionReference.create(d.getReference()))
 							.amount(TransactionAmount.create(d.getAmount()))
+							.dateOperation(TransactionDateOperation.create(d.getDateOperation()))
+							.description(TransactionDescription.create(d.getDescription()))
+							.reference(TransactionReference.create(d.getReference()))
+							.isRecurring(TransactionIsRecurring.create(d.getIsRecurring()))
+							.isExcluToRapport(TransactionIsExcluToRapport.create(d.getIsExcluToRapport()))
+							.status(TransactionStatus.create(d.getStatus()))
+							.balance(TransactionBalance.create(d.getBalance()))
+							.category(TransactionCategory.create(d.getCategory()))
+							.updatedAt(TransactionUpdatedAt.create(d.getUpdatedAt()))
+							.createdAt(TransactionCreatedAt.create(d.getCreatedAt()))
 							.build();
 
 					if (metaRequest.getTenantId() != null) {

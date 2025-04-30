@@ -27,8 +27,17 @@ public class TransactionAggregate {
 
 	@AggregateIdentifier
 	private TransactionId id;
-	private TransactionReference reference;
 	private TransactionAmount amount;
+	private TransactionDateOperation dateOperation;
+	private TransactionDescription description;
+	private TransactionReference reference;
+	private TransactionIsRecurring isRecurring;
+	private TransactionIsExcluToRapport isExcluToRapport;
+	private TransactionStatus status;
+	private TransactionBalance balance;
+	private TransactionCategory category;
+	private TransactionUpdatedAt updatedAt;
+	private TransactionCreatedAt createdAt;
 	private TransactionCreatedBy createdBy;
 	private TransactionTenant tenant;
 
@@ -37,8 +46,17 @@ public class TransactionAggregate {
 	public TransactionAggregate(CreateTransactionCommand command) {
 		apply(new TransactionCreatedEvent(
 				command.getId(),
-				command.getReference(),
 				command.getAmount(),
+				command.getDateOperation(),
+				command.getDescription(),
+				command.getReference(),
+				command.getIsRecurring(),
+				command.getIsExcluToRapport(),
+				command.getStatus(),
+				command.getBalance(),
+				command.getCategory(),
+				command.getUpdatedAt(),
+				command.getCreatedAt(),
 				command.getCreatedBy(),
 				command.getTenant()
 		));
@@ -55,8 +73,17 @@ public class TransactionAggregate {
 	public void handle(UpdateTransactionCommand command) {
 		apply(new TransactionUpdatedEvent(
 				command.getId(),
-				command.getReference(),
 				command.getAmount(),
+				command.getDateOperation(),
+				command.getDescription(),
+				command.getReference(),
+				command.getIsRecurring(),
+				command.getIsExcluToRapport(),
+				command.getStatus(),
+				command.getBalance(),
+				command.getCategory(),
+				command.getUpdatedAt(),
+				command.getCreatedAt(),
 				command.getCreatedBy(),
 				command.getTenant()
 		));
@@ -65,8 +92,17 @@ public class TransactionAggregate {
 	@EventSourcingHandler
 	public void on(TransactionCreatedEvent event) {
 		this.id = event.getId();
-		this.reference = event.getReference();
 		this.amount = event.getAmount();
+		this.dateOperation = event.getDateOperation();
+		this.description = event.getDescription();
+		this.reference = event.getReference();
+		this.isRecurring = event.getIsRecurring();
+		this.isExcluToRapport = event.getIsExcluToRapport();
+		this.status = event.getStatus();
+		this.balance = event.getBalance();
+		this.category = event.getCategory();
+		this.updatedAt = event.getUpdatedAt();
+		this.createdAt = event.getCreatedAt();
 		this.createdBy = event.getCreatedBy();
 		this.tenant = event.getTenant();
 	}
@@ -79,8 +115,17 @@ public class TransactionAggregate {
 	@EventSourcingHandler
 	public void on(TransactionUpdatedEvent event) {
 		this.id = event.getId();
-		this.reference = event.getReference();
 		this.amount = event.getAmount();
+		this.dateOperation = event.getDateOperation();
+		this.description = event.getDescription();
+		this.reference = event.getReference();
+		this.isRecurring = event.getIsRecurring();
+		this.isExcluToRapport = event.getIsExcluToRapport();
+		this.status = event.getStatus();
+		this.balance = event.getBalance();
+		this.category = event.getCategory();
+		this.updatedAt = event.getUpdatedAt();
+		this.createdAt = event.getCreatedAt();
 		this.createdBy = event.getCreatedBy();
 		this.tenant = event.getTenant();
 	}

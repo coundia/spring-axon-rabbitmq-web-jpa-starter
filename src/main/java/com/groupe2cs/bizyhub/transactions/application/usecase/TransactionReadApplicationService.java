@@ -37,6 +37,39 @@ public class TransactionReadApplicationService {
 	}
 
 
+	public List<TransactionResponse> findByTransactionAmount(
+			TransactionAmount value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionAmountQuery query = new FindByTransactionAmountQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionDateOperation(
+			TransactionDateOperation value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionDateOperationQuery query = new FindByTransactionDateOperationQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionDescription(
+			TransactionDescription value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionDescriptionQuery query = new FindByTransactionDescriptionQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
 	public List<TransactionResponse> findByTransactionReference(
 			TransactionReference value,
 			MetaRequest metaRequest
@@ -48,12 +81,78 @@ public class TransactionReadApplicationService {
 		return future.join();
 	}
 
-	public List<TransactionResponse> findByTransactionAmount(
-			TransactionAmount value,
+	public List<TransactionResponse> findByTransactionIsRecurring(
+			TransactionIsRecurring value,
 			MetaRequest metaRequest
 	) {
 
-		FindByTransactionAmountQuery query = new FindByTransactionAmountQuery(value, metaRequest);
+		FindByTransactionIsRecurringQuery query = new FindByTransactionIsRecurringQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionIsExcluToRapport(
+			TransactionIsExcluToRapport value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionIsExcluToRapportQuery query = new FindByTransactionIsExcluToRapportQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionStatus(
+			TransactionStatus value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionStatusQuery query = new FindByTransactionStatusQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionBalance(
+			TransactionBalance value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionBalanceQuery query = new FindByTransactionBalanceQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionCategory(
+			TransactionCategory value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionCategoryQuery query = new FindByTransactionCategoryQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionUpdatedAt(
+			TransactionUpdatedAt value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionUpdatedAtQuery query = new FindByTransactionUpdatedAtQuery(value, metaRequest);
+		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
+		return future.join();
+	}
+
+	public List<TransactionResponse> findByTransactionCreatedAt(
+			TransactionCreatedAt value,
+			MetaRequest metaRequest
+	) {
+
+		FindByTransactionCreatedAtQuery query = new FindByTransactionCreatedAtQuery(value, metaRequest);
 		CompletableFuture<List<TransactionResponse>> future = queryGateway.query(query,
 				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionResponse.class));
 		return future.join();

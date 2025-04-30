@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionPagedResponse;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;

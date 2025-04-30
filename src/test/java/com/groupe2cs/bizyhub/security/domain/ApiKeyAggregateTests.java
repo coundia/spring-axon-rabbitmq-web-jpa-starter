@@ -18,7 +18,7 @@ public class ApiKeyAggregateTests extends BaseUnitTests {
 		ApiKeyId id = ApiKeyId.create(UUID.randomUUID().toString());
 		ApiKeyAppKey appKey = ApiKeyAppKey.create(UUID.randomUUID().toString());
 		ApiKeyUsername username = ApiKeyUsername.create(UUID.randomUUID().toString());
-		ApiKeyActive active = ApiKeyActive.create(true);
+		ApiKeyActive active = ApiKeyActive.create(false);
 		ApiKeyCreatedAt createdAt = ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600));
 		ApiKeyExpiration expiration = ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600));
 		ApiKeyCreatedBy createdBy = ApiKeyCreatedBy.create(UUID.randomUUID().toString());

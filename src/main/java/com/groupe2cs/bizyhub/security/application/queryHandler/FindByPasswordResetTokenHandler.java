@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class FindByPasswordResetTokenHandler {
@@ -17,20 +19,15 @@ public class FindByPasswordResetTokenHandler {
 	private final PasswordResetRepository repository;
 
 	@QueryHandler
-	public PasswordResetResponse handle(FindByPasswordResetTokenQuery query) {
+	public List<PasswordResetResponse> handle(FindByPasswordResetTokenQuery query) {
 
 		MetaRequest metaRequest = query.getMetaRequest();
 
 		String value = query.getToken().value();
-		PasswordReset entity = repository.findByTokenAndTenantId(value, metaRequest.getTenantId()).orElse(null);
-
-		if (entity == null) {
-			throw new IllegalArgumentException("Token not found : " +
-					query.getToken().value() + " , tenant: " + metaRequest.getTenantId());
-		}
-
-		return PasswordResetMapper.toResponse(entity);
-
+		List<PasswordReset> entities = repository.findByTokenAndCreatedById(value, metaRequest.getUserId());
+		return entities.stream()
+				.map(PasswordResetMapper::toResponse)
+				.toList();
 	}
 
 

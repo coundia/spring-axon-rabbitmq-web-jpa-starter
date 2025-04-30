@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class FindByTransactionReferenceHandler {
@@ -17,20 +19,16 @@ public class FindByTransactionReferenceHandler {
 	private final TransactionRepository repository;
 
 	@QueryHandler
-
-	public TransactionResponse handle(FindByTransactionReferenceQuery query) {
+	public List<TransactionResponse> handle(FindByTransactionReferenceQuery query) {
 
 		MetaRequest metaRequest = query.getMetaRequest();
 
 		String value = query.getReference().value();
-		Transaction entity = repository.findByReferenceAndCreatedById(value, metaRequest.getUserId())
-				.orElse(null);
-
-		if (entity == null) {
-			return null;
-		}
-
-		return TransactionMapper.toResponse(entity);
+		List<Transaction> entities = repository.findByReferenceAndCreatedById(value, metaRequest.getUserId());
+		return entities.stream()
+				.map(TransactionMapper::toResponse)
+				.toList();
 	}
+
 
 }

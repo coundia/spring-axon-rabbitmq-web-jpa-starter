@@ -23,15 +23,37 @@ public class TransactionCreateControllerIntegrationTest extends BaseIntegrationT
 
 		TransactionRequest requestDTO = new TransactionRequest();
 
+		requestDTO.setAmount(471.14);
+		requestDTO.setDateOperation(java.time.Instant.now().plusSeconds(3600));
+		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setReference(UUID.randomUUID().toString());
-		requestDTO.setAmount(9595.51);
+		requestDTO.setIsRecurring(true);
+		requestDTO.setIsExcluToRapport(true);
+		requestDTO.setStatus(UUID.randomUUID().toString());
+		requestDTO.setBalance(com.groupe2cs.bizyhub.balances.infrastructure.entity.BalanceFixtures.randomOneViaCommand(
+				commandGateway,
+				user).getId().value());
+		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(
+				commandGateway,
+				user).getId().value());
+		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
+		requestDTO.setCreatedAt(java.time.Instant.now().plusSeconds(3600));
 
 		String uri = "/v1/commands/transaction";
 		ResponseEntity<TransactionResponse> response = this.postForEntity(uri, requestDTO, TransactionResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
-		assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
 		assertThat(response.getBody().getAmount()).isEqualTo(requestDTO.getAmount());
+		assertThat(response.getBody().getDateOperation()).isEqualTo(requestDTO.getDateOperation());
+		assertThat(response.getBody().getDescription()).isEqualTo(requestDTO.getDescription());
+		assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
+		assertThat(response.getBody().getIsRecurring()).isEqualTo(requestDTO.getIsRecurring());
+		assertThat(response.getBody().getIsExcluToRapport()).isEqualTo(requestDTO.getIsExcluToRapport());
+		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());
+		assertThat(response.getBody().getBalance()).isEqualTo(requestDTO.getBalance());
+		assertThat(response.getBody().getCategory()).isEqualTo(requestDTO.getCategory());
+		assertThat(response.getBody().getUpdatedAt()).isEqualTo(requestDTO.getUpdatedAt());
+		assertThat(response.getBody().getCreatedAt()).isEqualTo(requestDTO.getCreatedAt());
 	}
 }

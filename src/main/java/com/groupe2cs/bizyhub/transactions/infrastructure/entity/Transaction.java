@@ -21,13 +21,74 @@ public class Transaction extends AbstractAuditableEntity {
 	private String id;
 
 
+	@Column(nullable = false,
+			unique = false,
+			length = 250
+	)
+	@Builder.Default
+	private Double amount = 0.0;
+
 	@Column(nullable = true,
-			unique = true, length = 250)
+			unique = false,
+			length = 250
+	)
+
+	private java.time.Instant dateOperation;
+
+	@Column(nullable = true,
+			unique = false,
+			length = 250
+	)
+
+	private String description;
+
+	@Column(nullable = true,
+			unique = false,
+			length = 250
+	)
+
 	private String reference;
 
-	@Column(nullable = false,
-			unique = false, length = 250)
-	private Double amount;
+	@Column(nullable = true,
+			unique = false,
+			length = 250
+	)
+	@Builder.Default
+	private Boolean isRecurring = false;
+
+	@Column(nullable = true,
+			unique = false,
+			length = 250
+	)
+	@Builder.Default
+	private Boolean isExcluToRapport = false;
+
+	@Column(nullable = true,
+			unique = false,
+			length = 250
+	)
+
+	private String status;
+	@ManyToOne
+	@JoinColumn(name = "balance_id", nullable = true)
+	private com.groupe2cs.bizyhub.balances.infrastructure.entity.Balance balance;
+	@ManyToOne
+	@JoinColumn(name = "category_id", nullable = true)
+	private com.groupe2cs.bizyhub.categories.infrastructure.entity.Category category;
+
+	@Column(nullable = true,
+			unique = false,
+			length = 250
+	)
+
+	private java.time.Instant updatedAt;
+
+	@Column(nullable = true,
+			unique = false,
+			length = 250
+	)
+
+	private java.time.Instant createdAt;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private CustomUser createdBy;
@@ -43,8 +104,17 @@ public class Transaction extends AbstractAuditableEntity {
 	public String toString() {
 		return "Transaction{" +
 				"id='" + id + '\'' +
-				", reference=" + reference +
 				", amount=" + amount +
+				", dateOperation=" + dateOperation +
+				", description=" + description +
+				", reference=" + reference +
+				", isRecurring=" + isRecurring +
+				", isExcluToRapport=" + isExcluToRapport +
+				", status=" + status +
+				", balance=" + balance +
+				", category=" + category +
+				", updatedAt=" + updatedAt +
+				", createdAt=" + createdAt +
 				", createdBy=" + createdBy +
 				", tenant=" + tenant +
 				'}';

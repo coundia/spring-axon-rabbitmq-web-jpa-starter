@@ -56,6 +56,7 @@ public class AuthMe {
 						"username", username,
 						"roles", userPrincipal.getRoles(),
 						"tenantId", userPrincipal.getTenantId(),
+						"id", userPrincipal.getId(),
 						"authorities", userPrincipal.getAuthorities()
 				)
 		));

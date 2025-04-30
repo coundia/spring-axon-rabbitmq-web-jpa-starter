@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.command.CreateApiKeyCommand;
 import com.groupe2cs.bizyhub.security.application.dto.ApiKeyPagedResponse;
 import com.groupe2cs.bizyhub.security.application.dto.ApiKeyResponse;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKeyFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.ApiKeyRepository;
 import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import org.axonframework.commandhandling.gateway.CommandGateway;

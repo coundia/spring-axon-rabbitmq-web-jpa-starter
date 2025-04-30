@@ -30,8 +30,19 @@ public class TransactionProjection {
 		try {
 			Transaction entity = Transaction.builder()
 					.id(event.getId().value())
-					.reference(event.getReference().value())
 					.amount(event.getAmount().value())
+					.dateOperation(event.getDateOperation().value())
+					.description(event.getDescription().value())
+					.reference(event.getReference().value())
+					.isRecurring(event.getIsRecurring().value())
+					.isExcluToRapport(event.getIsExcluToRapport().value())
+					.status(event.getStatus().value())
+					.balance(new com.groupe2cs.bizyhub.balances.infrastructure.entity.Balance(event.getBalance()
+							.value()))
+					.category(new com.groupe2cs.bizyhub.categories.infrastructure.entity.Category(event.getCategory()
+							.value()))
+					.updatedAt(event.getUpdatedAt().value())
+					.createdAt(event.getCreatedAt().value())
 					.build();
 
 			if (event.getCreatedBy() != null) {
@@ -57,8 +68,19 @@ public class TransactionProjection {
 					.orElseThrow(() -> new RuntimeException("Transaction not found"));
 
 			entity.setId(event.getId().value());
-			entity.setReference(event.getReference().value());
 			entity.setAmount(event.getAmount().value());
+			entity.setDateOperation(event.getDateOperation().value());
+			entity.setDescription(event.getDescription().value());
+			entity.setReference(event.getReference().value());
+			entity.setIsRecurring(event.getIsRecurring().value());
+			entity.setIsExcluToRapport(event.getIsExcluToRapport().value());
+			entity.setStatus(event.getStatus().value());
+			entity.setBalance(new com.groupe2cs.bizyhub.balances.infrastructure.entity.Balance(event.getBalance()
+					.value()));
+			entity.setCategory(new com.groupe2cs.bizyhub.categories.infrastructure.entity.Category(event.getCategory()
+					.value()));
+			entity.setUpdatedAt(event.getUpdatedAt().value());
+			entity.setCreatedAt(event.getCreatedAt().value());
 
 			if (event.getCreatedBy() != null) {
 				entity.setCreatedBy(new CustomUser(event.getCreatedBy().value()));

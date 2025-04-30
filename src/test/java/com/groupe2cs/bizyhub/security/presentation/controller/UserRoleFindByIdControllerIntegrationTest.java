@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRoleFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRoleRepository;
 import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import org.axonframework.commandhandling.gateway.CommandGateway;

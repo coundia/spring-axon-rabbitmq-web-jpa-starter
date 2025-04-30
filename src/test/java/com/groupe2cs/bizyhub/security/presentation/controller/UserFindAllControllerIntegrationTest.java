@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 import com.groupe2cs.bizyhub.security.application.command.CreateUserCommand;
 import com.groupe2cs.bizyhub.security.application.dto.UserPagedResponse;
 import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import org.axonframework.commandhandling.gateway.CommandGateway;

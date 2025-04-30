@@ -16,8 +16,26 @@ public class TransactionResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String id;
 	@Schema(description = "", example = "")
+	private Double amount;
+	@Schema(description = "", example = "")
+	private java.time.Instant dateOperation;
+	@Schema(description = "", example = "")
+	private String description;
+	@Schema(description = "", example = "")
 	private String reference;
 	@Schema(description = "", example = "")
-	private Double amount;
+	private Boolean isRecurring;
+	@Schema(description = "", example = "")
+	private Boolean isExcluToRapport;
+	@Schema(description = "", example = "")
+	private String status;
+	@Schema(description = "", example = "")
+	private String balance;
+	@Schema(description = "", example = "")
+	private String category;
+	@Schema(description = "", example = "")
+	private java.time.Instant updatedAt;
+	@Schema(description = "", example = "")
+	private java.time.Instant createdAt;
 
 }

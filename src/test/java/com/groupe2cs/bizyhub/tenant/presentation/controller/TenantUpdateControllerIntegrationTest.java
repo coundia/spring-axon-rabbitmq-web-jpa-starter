@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.tenant.presentation.controller;
 import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import com.groupe2cs.bizyhub.tenant.application.command.CreateTenantCommand;
 import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ public class TenantUpdateControllerIntegrationTest extends BaseIntegrationTests 
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setDomain(UUID.randomUUID().toString());
 		requestDTO.setLanguage(UUID.randomUUID().toString());
-		requestDTO.setActive(true);
+		requestDTO.setActive(false);
 
 		String uri = "/v1/admin/commands/tenant/" + existingId;
 		ResponseEntity<String> response = this.put(uri, requestDTO);

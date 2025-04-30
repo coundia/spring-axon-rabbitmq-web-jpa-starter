@@ -4,6 +4,7 @@ import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionDeltaDto;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionSyncRequest;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,21 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 		TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
 				.deltas(List.of(
 						TransactionDeltaDto.builder()
+								.amount(4623.94)
+								.dateOperation(java.time.Instant.now().plusSeconds(3600))
+								.description(UUID.randomUUID().toString())
 								.reference(UUID.randomUUID().toString())
-								.amount(7451.45)
+								.isRecurring(true)
+								.isExcluToRapport(true)
+								.status(UUID.randomUUID().toString())
+								.balance(com.groupe2cs.bizyhub.balances.infrastructure.entity.BalanceFixtures.randomOneViaCommand(
+										commandGateway,
+										user).getId().value())
+								.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(
+										commandGateway,
+										user).getId().value())
+								.updatedAt(java.time.Instant.now().plusSeconds(3600))
+								.createdAt(java.time.Instant.now().plusSeconds(3600))
 								.type("CREATE")
 								.build()
 				))
@@ -52,8 +66,21 @@ public class TransactionSyncControllerTests extends BaseIntegrationTests {
 				.deltas(List.of(
 						TransactionDeltaDto.builder()
 								.id(existingId)
+								.amount(4623.94)
+								.dateOperation(java.time.Instant.now().plusSeconds(3600))
+								.description(UUID.randomUUID().toString())
 								.reference(UUID.randomUUID().toString())
-								.amount(7451.45)
+								.isRecurring(true)
+								.isExcluToRapport(true)
+								.status(UUID.randomUUID().toString())
+								.balance(com.groupe2cs.bizyhub.balances.infrastructure.entity.BalanceFixtures.randomOneViaCommand(
+										commandGateway,
+										user).getId().value())
+								.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(
+										commandGateway,
+										user).getId().value())
+								.updatedAt(java.time.Instant.now().plusSeconds(3600))
+								.createdAt(java.time.Instant.now().plusSeconds(3600))
 								.type("UPDATE")
 								.build()
 				))

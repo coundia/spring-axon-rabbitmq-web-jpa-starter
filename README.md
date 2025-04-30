@@ -135,6 +135,12 @@ http://localhost:15672/#/queues
 
 ![rabbitMq.png](docs/rabbitMq.png)
 
+
+## Grafana & Prometheus
+
+![grafana_dash.png](docs/grafana_dash.png)
+![grafana.png](docs/grafana.png)
+
 ## 📁 Project Structure
 
 ```

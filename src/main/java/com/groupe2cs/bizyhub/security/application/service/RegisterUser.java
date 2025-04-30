@@ -59,6 +59,7 @@ public class RegisterUser {
 		return AuthResponseDto.builder()
 				.token(token)
 				.username(user.getUsername())
+				.id(user.getId())
 				.code(1)
 				.expirationAt(jwtService.extractExpiration(token))
 				.message("Registration successful")

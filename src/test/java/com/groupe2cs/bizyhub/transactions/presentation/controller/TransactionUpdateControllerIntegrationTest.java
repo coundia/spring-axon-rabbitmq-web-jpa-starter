@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.transactions.presentation.controller;
 import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
@@ -38,8 +39,17 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
 		TransactionFixtures.byIdWaitExist(transactionRepository, updated.getId().value());
 
 		TransactionRequest requestDTO = new TransactionRequest();
+		requestDTO.setAmount(1779.62);
+		requestDTO.setDateOperation(java.time.Instant.now().plusSeconds(3600));
+		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setReference(UUID.randomUUID().toString());
-		requestDTO.setAmount(8009.3);
+		requestDTO.setIsRecurring(true);
+		requestDTO.setIsExcluToRapport(true);
+		requestDTO.setStatus(UUID.randomUUID().toString());
+		requestDTO.setBalance(updated.getBalance().value());
+		requestDTO.setCategory(updated.getCategory().value());
+		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
+		requestDTO.setCreatedAt(java.time.Instant.now().plusSeconds(3600));
 
 		String uri = "/v1/commands/transaction/" + existingId;
 		ResponseEntity<String> response = this.put(uri, requestDTO);

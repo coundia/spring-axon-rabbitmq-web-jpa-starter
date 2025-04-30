@@ -52,6 +52,7 @@ public class AuthService {
 				.code(1)
 				.message("Login successful")
 				.token(token)
+				.id(principal.getId())
 				.tenant(tenantId)
 				.username(authentication.getName())
 				.expirationAt(jwtService.extractExpiration(token))

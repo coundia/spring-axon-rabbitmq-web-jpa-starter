@@ -16,7 +16,7 @@ import java.util.Set;
 @Builder
 @Entity
 @EntityListeners(AuditListener.class)
-@Table(name = "")
+@Table(name = "roles")
 public class Role extends AbstractAuditableEntity {
 
 	@Id
@@ -24,7 +24,9 @@ public class Role extends AbstractAuditableEntity {
 
 
 	@Column(nullable = false,
-			unique = false)
+			unique = false
+	)
+
 	private String name;
 	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<RolePermission> rolePermissions = new HashSet<>();

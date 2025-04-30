@@ -24,11 +24,15 @@ public class CustomUser extends AbstractAuditableEntity {
 
 
 	@Column(nullable = false,
-			unique = false)
+			unique = false
+	)
+
 	private String username;
 
 	@Column(nullable = false,
-			unique = false)
+			unique = false
+	)
+
 	private String password;
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<UserRole> userRoles = new HashSet<>();

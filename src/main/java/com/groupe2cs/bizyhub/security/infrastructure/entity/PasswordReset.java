@@ -21,16 +21,21 @@ public class PasswordReset extends AbstractAuditableEntity {
 
 
 	@Column(nullable = false, columnDefinition = "TEXT",
+			unique = false
+	)
 
-			unique = false)
 	private String token;
 
 	@Column(nullable = false,
-			unique = false)
+			unique = false
+	)
+
 	private String username;
 
 	@Column(nullable = false,
-			unique = false)
+			unique = false
+	)
+
 	private java.time.Instant expiration;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)

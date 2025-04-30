@@ -13,16 +13,16 @@ import java.io.Serializable;
 @Schema(name = "TenantRequest", description = "Request payload for Tenant operations")
 public class TenantRequest implements Serializable {
 
-	@Schema(description = "", example = "506d8459-7320-4db1-aa22-f1d0275cf758")
+	@Schema(description = "", example = "96075d2d-57cb-40ab-b41a-877a809762da")
 	private String name;
 
-	@Schema(description = "", example = "693ed7c4-2b60-4cdf-aab0-fc50ea9e5226")
+	@Schema(description = "", example = "7d22ecd1-b64a-4993-a4ac-d4c3aecdb464")
 	private String description;
 
-	@Schema(description = "", example = "6bbf7677-926a-4b26-80af-806cb0115514")
+	@Schema(description = "", example = "aa623f15-5389-4a39-a3fa-fa6413659f35")
 	private String domain;
 
-	@Schema(description = "", example = "d830c501-0238-4187-af74-b17c709f3ddf")
+	@Schema(description = "", example = "4748638f-3269-454a-a01c-61b55231371c")
 	private String language;
 
 	@Schema(description = "", example = "true")

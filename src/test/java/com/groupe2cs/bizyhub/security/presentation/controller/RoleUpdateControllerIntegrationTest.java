@@ -2,6 +2,7 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.command.CreateRoleCommand;
 import com.groupe2cs.bizyhub.security.application.dto.RoleRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.RoleFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.RoleRepository;
 import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import org.axonframework.commandhandling.gateway.CommandGateway;

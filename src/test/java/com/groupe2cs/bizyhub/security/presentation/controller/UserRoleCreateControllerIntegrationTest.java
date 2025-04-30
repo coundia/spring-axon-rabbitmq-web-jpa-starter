@@ -2,6 +2,8 @@ package com.groupe2cs.bizyhub.security.presentation.controller;
 
 import com.groupe2cs.bizyhub.security.application.dto.UserRoleRequest;
 import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.RoleFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;

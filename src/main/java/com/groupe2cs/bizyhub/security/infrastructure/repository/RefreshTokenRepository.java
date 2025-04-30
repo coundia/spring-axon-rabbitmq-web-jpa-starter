@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, String> {
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByIdAndCreatedById(String id, String createdById);
 
 	Page<RefreshToken> findByCreatedById(String createdById, Pageable pageable);
@@ -23,46 +23,46 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
 	@Query("SELECT e FROM RefreshToken e WHERE e.token = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<RefreshToken> findByTokenAndCreatedById(String token, String createdById);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.token = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.token = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByTokenAndTenantName(String token, String tenantName);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.token = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.token = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByTokenAndTenantId(String token, String tenantId);
 
 	@Query("SELECT e FROM RefreshToken e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<RefreshToken> findByUsernameAndCreatedById(String username, String createdById);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.username = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.username = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByUsernameAndTenantName(String username, String tenantName);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.username = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.username = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByUsernameAndTenantId(String username, String tenantId);
 
 	@Query("SELECT e FROM RefreshToken e WHERE e.expiration = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<RefreshToken> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.expiration = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.expiration = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByExpirationAndTenantName(java.time.Instant expiration, String tenantName);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.expiration = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.expiration = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByExpirationAndTenantId(java.time.Instant expiration, String tenantId);
 
 	@Query("SELECT e FROM RefreshToken e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<RefreshToken> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.createdBy.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.createdBy.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.createdBy.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.createdBy.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
 
 	@Query("SELECT e FROM RefreshToken e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<RefreshToken> findByTenantIdAndCreatedById(String tenant, String createdById);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.tenant.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.tenant.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByTenantIdAndTenantName(String tenant, String tenantName);
 
-	@Query("SELECT e FROM RefreshToken e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RefreshToken e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<RefreshToken> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 

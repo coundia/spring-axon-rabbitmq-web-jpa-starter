@@ -5,9 +5,7 @@ import com.groupe2cs.bizyhub.transactions.application.command.DeleteTransactionC
 import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionAmount;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction;
 
 public class TransactionMapper {
@@ -15,24 +13,51 @@ public class TransactionMapper {
 	public static TransactionResponse toResponse(Transaction entity) {
 		return TransactionResponse.builder()
 				.id(entity.getId())
-				.reference(entity.getReference())
 				.amount(entity.getAmount())
+				.dateOperation(entity.getDateOperation())
+				.description(entity.getDescription())
+				.reference(entity.getReference())
+				.isRecurring(entity.getIsRecurring())
+				.isExcluToRapport(entity.getIsExcluToRapport())
+				.status(entity.getStatus())
+				.balance(entity.getBalance().getId())
+				.category(entity.getCategory().getId())
+				.updatedAt(entity.getUpdatedAt())
+				.createdAt(entity.getCreatedAt())
 				.build();
 	}
 
 	public static TransactionResponse toResponse(CreateTransactionCommand command) {
 		return TransactionResponse.builder()
 				.id(command.getId().value())
-				.reference(command.getReference().value())
 				.amount(command.getAmount().value())
+				.dateOperation(command.getDateOperation().value())
+				.description(command.getDescription().value())
+				.reference(command.getReference().value())
+				.isRecurring(command.getIsRecurring().value())
+				.isExcluToRapport(command.getIsExcluToRapport().value())
+				.status(command.getStatus().value())
+				.balance(command.getBalance().value())
+				.category(command.getCategory().value())
+				.updatedAt(command.getUpdatedAt().value())
+				.createdAt(command.getCreatedAt().value())
 				.build();
 	}
 
 	public static TransactionResponse toResponse(UpdateTransactionCommand command) {
 		return TransactionResponse.builder()
 				.id(command.getId().value())
-				.reference(command.getReference().value())
 				.amount(command.getAmount().value())
+				.dateOperation(command.getDateOperation().value())
+				.description(command.getDescription().value())
+				.reference(command.getReference().value())
+				.isRecurring(command.getIsRecurring().value())
+				.isExcluToRapport(command.getIsExcluToRapport().value())
+				.status(command.getStatus().value())
+				.balance(command.getBalance().value())
+				.category(command.getCategory().value())
+				.updatedAt(command.getUpdatedAt().value())
+				.createdAt(command.getCreatedAt().value())
 				.build();
 	}
 
@@ -40,16 +65,34 @@ public class TransactionMapper {
 			TransactionRequest request
 	) {
 		return CreateTransactionCommand.builder()
-				.reference(TransactionReference.create(request.getReference()))
 				.amount(TransactionAmount.create(request.getAmount()))
+				.dateOperation(TransactionDateOperation.create(request.getDateOperation()))
+				.description(TransactionDescription.create(request.getDescription()))
+				.reference(TransactionReference.create(request.getReference()))
+				.isRecurring(TransactionIsRecurring.create(request.getIsRecurring()))
+				.isExcluToRapport(TransactionIsExcluToRapport.create(request.getIsExcluToRapport()))
+				.status(TransactionStatus.create(request.getStatus()))
+				.balance(TransactionBalance.create(request.getBalance()))
+				.category(TransactionCategory.create(request.getCategory()))
+				.updatedAt(TransactionUpdatedAt.create(request.getUpdatedAt()))
+				.createdAt(TransactionCreatedAt.create(request.getCreatedAt()))
 				.build();
 	}
 
 	public static UpdateTransactionCommand toUpdateCommand(TransactionId id, TransactionRequest request) {
 		return UpdateTransactionCommand.builder()
 				.id(id)
-				.reference(TransactionReference.create(request.getReference()))
 				.amount(TransactionAmount.create(request.getAmount()))
+				.dateOperation(TransactionDateOperation.create(request.getDateOperation()))
+				.description(TransactionDescription.create(request.getDescription()))
+				.reference(TransactionReference.create(request.getReference()))
+				.isRecurring(TransactionIsRecurring.create(request.getIsRecurring()))
+				.isExcluToRapport(TransactionIsExcluToRapport.create(request.getIsExcluToRapport()))
+				.status(TransactionStatus.create(request.getStatus()))
+				.balance(TransactionBalance.create(request.getBalance()))
+				.category(TransactionCategory.create(request.getCategory()))
+				.updatedAt(TransactionUpdatedAt.create(request.getUpdatedAt()))
+				.createdAt(TransactionCreatedAt.create(request.getCreatedAt()))
 				.build();
 	}
 

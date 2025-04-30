@@ -73,8 +73,11 @@ public class SecurityConfig {
 								"/v3/api-docs/**",
 								"/v3/api-docs.yaml",
 								"/swagger-resources/**",
-								"/webjars/**"
+								"/webjars/**",
+								"/actuator/**"
+
 						).permitAll()
+						.requestMatchers("/actuator/prometheus").permitAll()
 						.requestMatchers("/api/v1/admin/**").hasAuthority(IS_ADMIN)
 						.anyRequest().authenticated()
 				)

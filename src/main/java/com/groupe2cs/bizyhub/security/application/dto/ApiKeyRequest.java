@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Schema(name = "ApiKeyRequest", description = "Request payload for ApiKey operations")
 public class ApiKeyRequest implements Serializable {
 
-	@Schema(description = "", example = "d480c2a9-6287-4866-9986-8597eddc6c01")
+	@Schema(description = "", example = "a063bc16-abba-4406-a1d1-1e02c78a6356")
 	private String appKey;
 
-	@Schema(description = "", example = "dc6c095d-8d3d-420b-9e47-6ba836f79ca9")
+	@Schema(description = "", example = "90e29329-e355-4c71-a630-3adecfe6ca99")
 	private String username;
 
 	@Schema(description = "", example = "false")
