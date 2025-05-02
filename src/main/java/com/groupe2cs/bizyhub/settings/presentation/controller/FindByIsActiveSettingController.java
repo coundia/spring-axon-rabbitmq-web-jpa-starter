@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@PreAuthorize("@settingGate.canRead(authentication, #id)")
+@PreAuthorize("@settingGate.canList(authentication)")
 @RestController
 @RequestMapping("/api/v1/queries/setting")
 @Tag(name = "Setting Queries", description = "Endpoints for querying settings by isActive")
@@ -57,10 +57,12 @@ public class FindByIsActiveSettingController {
 		try {
 
 			MetaRequest metaRequest = MetaRequest.builder()
-					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.userId(RequestContext.getUserId(jwt))
+					.tenantId(RequestContext.getTenantId(jwt))
 					.build();
 
-			var future = applicationService.findBySettingIsActive(SettingIsActive
+			var future = applicationService.findBySettingIsActive(
+					SettingIsActive
 					.create(isActive), metaRequest);
 
 			return ResponseEntity.ok(future);

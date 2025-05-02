@@ -1,40 +1,42 @@
 package com.groupe2cs.bizyhub.tenant.application.usecase;
 
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
+import com.groupe2cs.bizyhub.tenant.application.query.*;
+import com.groupe2cs.bizyhub.tenant.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.application.mapper.*;
+import com.groupe2cs.bizyhub.tenant.application.command.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
-import com.groupe2cs.bizyhub.tenant.application.command.UpdateTenantCommand;
-import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
-import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
-import com.groupe2cs.bizyhub.tenant.application.mapper.TenantMapper;
-import com.groupe2cs.bizyhub.tenant.domain.valueObject.TenantId;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class TenantUpdateApplicationService {
 
-	private final FileStorageService fileStorageService;
-	private final CommandGateway commandGateway;
+private final FileStorageService fileStorageService;
+private final CommandGateway commandGateway;
 
 
-	public TenantResponse updateTenant(TenantId id, TenantRequest request,
-									   MetaRequest metaRequest
-	) {
+public TenantResponse updateTenant(TenantId id,TenantRequest request,
+MetaRequest metaRequest
+){
 
-		UpdateTenantCommand command = TenantMapper.toUpdateCommand(
-				id,
-				request
-		);
+UpdateTenantCommand command = TenantMapper.toUpdateCommand(
+id,
+request
+);
 
-		if (metaRequest.getTenantId() != null) {
-			//command.setTenant(TenantTenant.create(metaRequest.getTenantId()));
-		}
+if(metaRequest.getTenantId() != null) {
+	//command.setTenant(TenantTenant.create(metaRequest.getTenantId()));
+}
 
-		commandGateway.sendAndWait(command);
+commandGateway.sendAndWait(command);
 
-		return TenantMapper.toResponse(command);
-	}
+return TenantMapper.toResponse(command);
+}
 
 }

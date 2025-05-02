@@ -22,7 +22,7 @@ public class MetaRequest implements Serializable {
 	private String platform;
 	private Boolean isAdmin;
 
-	public Boolean isAdmin() {
+	public Boolean isAdmin(){
 		return this.isAdmin != null && this.isAdmin;
 	}
 

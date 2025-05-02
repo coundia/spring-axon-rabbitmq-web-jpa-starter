@@ -1,12 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.domain.event;
 
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+	import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
+import java.time.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -28,6 +31,7 @@ public class TransactionUpdatedEvent implements Serializable {
 	private TransactionCreatedAt createdAt;
 	private TransactionCreatedBy createdBy;
 	private TransactionTenant tenant;
+
 
 
 }

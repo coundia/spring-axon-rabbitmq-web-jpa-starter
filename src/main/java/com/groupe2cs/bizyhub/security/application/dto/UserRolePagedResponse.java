@@ -1,12 +1,16 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import org.springframework.data.domain.Page;
-
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 import java.io.Serializable;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.domain.Page;
 
 @Getter
 @Setter
@@ -16,8 +20,8 @@ import java.util.List;
 @Schema(name = "UserRolePagedResponse", description = "Paginated response for UserRole results")
 public class UserRolePagedResponse implements Serializable {
 
-	@Schema(description = "List of paginated UserRole items")
-	private List<UserRoleResponse> content;
+@Schema(description = "List of paginated UserRole items")
+private List<UserRoleResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -33,11 +37,11 @@ public class UserRolePagedResponse implements Serializable {
 
 	public static UserRolePagedResponse from(Page<UserRole> page, List<UserRoleResponse> content) {
 		return UserRolePagedResponse.builder()
-				.content(content)
-				.page(page.getNumber())
-				.size(page.getSize())
-				.totalElements(page.getTotalElements())
-				.totalPages(page.getTotalPages())
-				.build();
-	}
+		.content(content)
+		.page(page.getNumber())
+		.size(page.getSize())
+		.totalElements(page.getTotalElements())
+		.totalPages(page.getTotalPages())
+		.build();
+		}
 }

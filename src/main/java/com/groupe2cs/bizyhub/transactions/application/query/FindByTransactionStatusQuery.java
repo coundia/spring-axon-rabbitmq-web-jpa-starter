@@ -1,11 +1,8 @@
 package com.groupe2cs.bizyhub.transactions.application.query;
 
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionStatus;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import lombok.*;
 
 @RequiredArgsConstructor
 @Getter
@@ -13,7 +10,7 @@ import lombok.Setter;
 @Builder
 public class FindByTransactionStatusQuery {
 
-	private final TransactionStatus status;
+	private final TransactionStatus  status;
 	private final MetaRequest metaRequest;
 
 }

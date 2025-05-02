@@ -1,11 +1,15 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
+	import com.groupe2cs.bizyhub.security.infrastructure.entity.CustomUser;
+	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.time.*;
+import java.util.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +19,7 @@ public interface UserRepository extends JpaRepository<CustomUser, String> {
 
 	@Query("SELECT e FROM CustomUser e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<CustomUser> findByIdAndCreatedById(String id, String createdById);
-
 	Page<CustomUser> findByCreatedById(String createdById, Pageable pageable);
-
 	Page<CustomUser> findAllByTenantId(String tenantId, Pageable pageable);
 
 	@Query("SELECT e FROM CustomUser e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
@@ -28,7 +30,6 @@ public interface UserRepository extends JpaRepository<CustomUser, String> {
 
 	@Query("SELECT e FROM CustomUser e WHERE e.username = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<CustomUser> findByUsernameAndTenantId(String username, String tenantId);
-
 	@Query("SELECT e FROM CustomUser e WHERE e.password = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<CustomUser> findByPasswordAndCreatedById(String password, String createdById);
 
@@ -37,7 +38,6 @@ public interface UserRepository extends JpaRepository<CustomUser, String> {
 
 	@Query("SELECT e FROM CustomUser e WHERE e.password = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<CustomUser> findByPasswordAndTenantId(String password, String tenantId);
-
 	@Query("SELECT e FROM CustomUser e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<CustomUser> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
@@ -46,7 +46,6 @@ public interface UserRepository extends JpaRepository<CustomUser, String> {
 
 	@Query("SELECT e FROM CustomUser e WHERE e.createdBy.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<CustomUser> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
-
 	@Query("SELECT e FROM CustomUser e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<CustomUser> findByTenantIdAndCreatedById(String tenant, String createdById);
 

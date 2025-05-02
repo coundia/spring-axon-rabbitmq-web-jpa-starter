@@ -1,14 +1,13 @@
 package com.groupe2cs.bizyhub.categories.application.usecase;
-
-import com.groupe2cs.bizyhub.categories.application.command.CreateCategoryCommand;
-import com.groupe2cs.bizyhub.categories.application.command.DeleteCategoryCommand;
-import com.groupe2cs.bizyhub.categories.application.command.UpdateCategoryCommand;
-import com.groupe2cs.bizyhub.categories.application.dto.CategorySyncRequest;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.categories.application.dto.*;
 import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.categories.application.command.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -17,71 +16,75 @@ public class CategorySyncApplicationService {
 	private final CommandGateway commandGateway;
 
 	public void syncCategory(CategorySyncRequest request,
-							 MetaRequest metaRequest
+MetaRequest metaRequest
 
-	) {
+) {
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
 				case "CREATE" -> {
 
-					CreateCategoryCommand command = CreateCategoryCommand.builder()
-							.name(CategoryName.create(d.getName()))
-							.typeCategory(CategoryTypeCategory.create(d.getTypeCategory()))
-							.parentId(CategoryParentId.create(d.getParentId()))
-							.isDefault(CategoryIsDefault.create(d.getIsDefault()))
-							.icon(CategoryIcon.create(d.getIcon()))
-							.colorHex(CategoryColorHex.create(d.getColorHex()))
-							.build();
-					if (metaRequest.getTenantId() != null) {
-						command.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
-					}
-					if (metaRequest.getUserId() != null) {
-						command.setCreatedBy(CategoryCreatedBy.create(metaRequest.getUserId()));
-					}
+CreateCategoryCommand command = CreateCategoryCommand.builder()
+		.reference(CategoryReference.create(d.getReference()))
+		.name(CategoryName.create(d.getName()))
+		.updatedAt(CategoryUpdatedAt.create(d.getUpdatedAt()))
+		.typeCategory(CategoryTypeCategory.create(d.getTypeCategory()))
+		.parentId(CategoryParentId.create(d.getParentId()))
+		.isDefault(CategoryIsDefault.create(d.getIsDefault()))
+		.icon(CategoryIcon.create(d.getIcon()))
+		.colorHex(CategoryColorHex.create(d.getColorHex()))
+.build();
+		if(metaRequest.getTenantId() != null) {
+			command.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
+		}
+		if(metaRequest.getUserId() != null) {
+			command.setCreatedBy( CategoryCreatedBy.create(metaRequest.getUserId()));
+		}
 
-					commandGateway.sendAndWait(
+		commandGateway.sendAndWait(
 							command
-					);
+				);
 
-				}
+		}
 				case "UPDATE" -> {
-					UpdateCategoryCommand update = UpdateCategoryCommand.builder()
-							.id(CategoryId.create(d.getId()))
-							.name(CategoryName.create(d.getName()))
-							.typeCategory(CategoryTypeCategory.create(d.getTypeCategory()))
-							.parentId(CategoryParentId.create(d.getParentId()))
-							.isDefault(CategoryIsDefault.create(d.getIsDefault()))
-							.icon(CategoryIcon.create(d.getIcon()))
-							.colorHex(CategoryColorHex.create(d.getColorHex()))
-							.build();
+		UpdateCategoryCommand update = UpdateCategoryCommand.builder()
+			.id(CategoryId.create(d.getId()))
+			.reference(CategoryReference.create(d.getReference()))
+			.name(CategoryName.create(d.getName()))
+			.updatedAt(CategoryUpdatedAt.create(d.getUpdatedAt()))
+			.typeCategory(CategoryTypeCategory.create(d.getTypeCategory()))
+			.parentId(CategoryParentId.create(d.getParentId()))
+			.isDefault(CategoryIsDefault.create(d.getIsDefault()))
+			.icon(CategoryIcon.create(d.getIcon()))
+			.colorHex(CategoryColorHex.create(d.getColorHex()))
+		.build();
 
-					if (metaRequest.getTenantId() != null) {
-						//command.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
-					}
-					if (metaRequest.getUserId() != null) {
-						//command.setCreatedBy( CategoryCreatedBy.create(metaRequest.getUserId()));
-					}
+		if(metaRequest.getTenantId() != null) {
+			//command.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
+		}
+		if(metaRequest.getUserId() != null) {
+			//command.setCreatedBy( CategoryCreatedBy.create(metaRequest.getUserId()));
+		}
 
-					commandGateway.sendAndWait(
-							update
-					);
+		commandGateway.sendAndWait(
+		update
+				);
 
+		}
+		case "DELETE" -> {
+				DeleteCategoryCommand delete = DeleteCategoryCommand.builder()
+					.id(CategoryId.create(d.getId()) )
+					.build();
+
+				if(metaRequest.getTenantId() != null) {
+					//delete.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
 				}
-				case "DELETE" -> {
-					DeleteCategoryCommand delete = DeleteCategoryCommand.builder()
-							.id(CategoryId.create(d.getId()))
-							.build();
 
-					if (metaRequest.getTenantId() != null) {
-						//delete.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
-					}
-
-					if (metaRequest.getUserId() != null) {
-						//delete.setCreatedBy( CategoryCreatedBy.create(metaRequest.getUserId()));
-					}
-					commandGateway.sendAndWait(
-							delete
-					);
+				if(metaRequest.getUserId() != null) {
+					//delete.setCreatedBy( CategoryCreatedBy.create(metaRequest.getUserId()));
+				}
+				commandGateway.sendAndWait(
+				delete
+				 );
 				}
 			}
 		}

@@ -1,40 +1,42 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
 
-import com.groupe2cs.bizyhub.security.application.command.UpdateUserRoleCommand;
-import com.groupe2cs.bizyhub.security.application.dto.UserRoleRequest;
-import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.UserRoleMapper;
-import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleId;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class UserRoleUpdateApplicationService {
 
-	private final FileStorageService fileStorageService;
-	private final CommandGateway commandGateway;
+private final FileStorageService fileStorageService;
+private final CommandGateway commandGateway;
 
 
-	public UserRoleResponse updateUserRole(UserRoleId id, UserRoleRequest request,
-										   MetaRequest metaRequest
-	) {
+public UserRoleResponse updateUserRole(UserRoleId id,UserRoleRequest request,
+MetaRequest metaRequest
+){
 
-		UpdateUserRoleCommand command = UserRoleMapper.toUpdateCommand(
-				id,
-				request
-		);
+UpdateUserRoleCommand command = UserRoleMapper.toUpdateCommand(
+id,
+request
+);
 
-		if (metaRequest.getTenantId() != null) {
-			//command.setTenant(UserRoleTenant.create(metaRequest.getTenantId()));
-		}
+if(metaRequest.getTenantId() != null) {
+	//command.setTenant(UserRoleTenant.create(metaRequest.getTenantId()));
+}
 
-		commandGateway.sendAndWait(command);
+commandGateway.sendAndWait(command);
 
-		return UserRoleMapper.toResponse(command);
-	}
+return UserRoleMapper.toResponse(command);
+}
 
 }

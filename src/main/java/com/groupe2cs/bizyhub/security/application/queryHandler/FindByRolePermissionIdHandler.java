@@ -1,30 +1,32 @@
 package com.groupe2cs.bizyhub.security.application.queryHandler;
 
-import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.RolePermissionMapper;
-import com.groupe2cs.bizyhub.security.application.query.FindByRolePermissionIdQuery;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
+import java.util.List;
+import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
 public class FindByRolePermissionIdHandler {
 
-	private final RolePermissionRepository repository;
+private final RolePermissionRepository repository;
+@QueryHandler
 
-	@QueryHandler
-
-	public RolePermissionResponse handle(FindByRolePermissionIdQuery query) {
+ public RolePermissionResponse handle(FindByRolePermissionIdQuery query) {
 
 		MetaRequest metaRequest = query.getMetaRequest();
 
-		String value = query.getId().value();
-		RolePermission entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
-				.orElse(null);
+	String value = query.getId().value();
+	RolePermission entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
+		.orElse(null);
 
 		if (entity == null) {
 			return null;

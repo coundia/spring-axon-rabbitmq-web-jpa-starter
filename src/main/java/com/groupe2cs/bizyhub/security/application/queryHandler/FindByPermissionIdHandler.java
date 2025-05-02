@@ -1,30 +1,32 @@
 package com.groupe2cs.bizyhub.security.application.queryHandler;
 
-import com.groupe2cs.bizyhub.security.application.dto.PermissionResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.PermissionMapper;
-import com.groupe2cs.bizyhub.security.application.query.FindByPermissionIdQuery;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.PermissionRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
+import java.util.List;
+import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
 public class FindByPermissionIdHandler {
 
-	private final PermissionRepository repository;
+private final PermissionRepository repository;
+@QueryHandler
 
-	@QueryHandler
-
-	public PermissionResponse handle(FindByPermissionIdQuery query) {
+ public PermissionResponse handle(FindByPermissionIdQuery query) {
 
 		MetaRequest metaRequest = query.getMetaRequest();
 
-		String value = query.getId().value();
-		Permission entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
-				.orElse(null);
+	String value = query.getId().value();
+	Permission entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
+		.orElse(null);
 
 		if (entity == null) {
 			return null;

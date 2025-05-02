@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AxonNotificationErrorHandler implements ListenerInvocationErrorHandler {
 
-	@Override
-	public void onError(Exception exception,
-						EventMessage<?> event,
-						EventMessageHandler eventHandler) throws Exception {
+@Override
+public void onError(Exception exception,
+EventMessage<?> event,
+EventMessageHandler eventHandler) throws Exception {
 
-		String evtType = event.getPayloadType().getSimpleName();
-		System.out.println("Fail - " + evtType + ": " + exception.getMessage());
-	}
+String evtType = event.getPayloadType().getSimpleName();
+System.out.println("Fail - " + evtType + ": " + exception.getMessage());
+}
 }

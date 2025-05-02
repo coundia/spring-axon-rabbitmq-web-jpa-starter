@@ -1,33 +1,33 @@
 package com.groupe2cs.bizyhub.security.application.queryHandler;
 
-import com.groupe2cs.bizyhub.security.application.dto.RoleResponse;
-import com.groupe2cs.bizyhub.security.application.mapper.RoleMapper;
-import com.groupe2cs.bizyhub.security.application.query.FindByRoleCreatedByQuery;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.RoleRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
+import com.groupe2cs.bizyhub.security.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
+import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
 public class FindByRoleCreatedByHandler {
 
-	private final RoleRepository repository;
+private final RoleRepository repository;
+@QueryHandler
+public List<RoleResponse> handle(FindByRoleCreatedByQuery query) {
 
-	@QueryHandler
-	public List<RoleResponse> handle(FindByRoleCreatedByQuery query) {
+	 MetaRequest metaRequest = query.getMetaRequest();
 
-		MetaRequest metaRequest = query.getMetaRequest();
-
-		String value = query.getCreatedBy().value();
-		List<Role> entities = repository.findByCreatedByIdAndCreatedById(value, metaRequest.getUserId());
-		return entities.stream()
-				.map(RoleMapper::toResponse)
-				.toList();
+String value = query.getCreatedBy().value();
+	List<Role> entities = repository.findByCreatedByIdAndCreatedById(value, metaRequest.getUserId());
+	return entities.stream()
+	.map(RoleMapper::toResponse)
+	.toList();
 	}
 
 
