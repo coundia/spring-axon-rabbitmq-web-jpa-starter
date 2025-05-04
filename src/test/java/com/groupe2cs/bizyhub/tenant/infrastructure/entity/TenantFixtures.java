@@ -29,7 +29,7 @@ Tenant entity = Tenant.builder()
 			.description(UUID.randomUUID().toString())
 			.domain(UUID.randomUUID().toString())
 			.language(UUID.randomUUID().toString())
-			.active(false)
+			.active(true)
 .build();
 return repository.save(entity);
 }
@@ -81,7 +81,7 @@ public static List<CreateTenantCommand> randomManyViaCommand(CommandGateway comm
 				.description(TenantDescription.create(UUID.randomUUID().toString()))
 				.domain(TenantDomain.create(UUID.randomUUID().toString()))
 				.language(TenantLanguage.create(UUID.randomUUID().toString()))
-				.active(TenantActive.create(false))
+				.active(TenantActive.create(true))
 			.build();
 
 			command.setCreatedBy(TenantCreatedBy.create(user.getId()));

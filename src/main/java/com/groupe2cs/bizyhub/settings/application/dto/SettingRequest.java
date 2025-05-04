@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.settings.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,16 +19,22 @@ import java.io.Serializable;
 @Schema(name = "SettingRequest", description = "Request payload for Setting operations")
 public class SettingRequest implements Serializable {
 
-	@Schema(description = "", example = "bca7b20b-9a33-4732-994d-5d20a644ab2a")
+	@Schema(description = "", example = "2b9f6fee-8aa6-48e5-8564-f956edbfe315")
 	private String name;
 
-	@Schema(description = "", example = "06918e35-2274-4279-99ed-6598dab157d8")
+	@Schema(description = "", example = "ff223521-104f-4381-8876-9a32d83ef48f")
+	private String reference;
+
+	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+	private java.time.Instant updatedAt;
+
+	@Schema(description = "", example = "644ccece-8285-41b8-942c-150806f029a3")
 	private String stringValue;
 
-	@Schema(description = "", example = "f0de58be-c607-4ab5-a30b-4a208528327e")
-	private String description;
+	@Schema(description = "", example = "6808888c-2ce7-40b9-8f20-f0d6c36832c2")
+	private String descriptions;
 
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean isActive;
 
 

@@ -1,12 +1,21 @@
 package com.groupe2cs.bizyhub.settings.domain.valueObject;
 
+import java.util.Objects;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingIdNotValid;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingNameNotValid;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingReferenceNotValid;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingUpdatedAtNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingStringValueNotValid;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+import java.time.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -14,37 +23,38 @@ import java.io.Serializable;
 @Builder
 public class SettingStringValue implements Serializable {
 
-	private String stringValue;
+private String stringValue;
 
-	public SettingStringValue(String stringValue) {
-		this.stringValue = stringValue;
-	}
+public SettingStringValue(String stringValue) {
+this.stringValue = stringValue;
+}
 
-	public static SettingStringValue create(String stringValue) {
-		if (stringValue == null || stringValue.isBlank()) {
-			throw new SettingStringValueNotValid("StringValue is invalid");
-		}
-		return new SettingStringValue(stringValue);
-	}
+public static SettingStringValue create(String stringValue) {
 
-	public String value() {
-		return this.stringValue;
-	}
+if (stringValue == null || stringValue.isBlank()) {
+throw new SettingStringValueNotValid("StringValue is invalid");
+}
+return new SettingStringValue(stringValue);
+}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof SettingStringValue that)) return false;
-		return this.stringValue.equals(that.stringValue);
-	}
+public String value() {
+return this.stringValue;
+}
 
-	@Override
-	public int hashCode() {
-		return java.util.Objects.hash(stringValue);
-	}
+@Override
+public boolean equals(Object o) {
+if (this == o) return true;
+if (!(o instanceof SettingStringValue that)) return false;
+return this.stringValue.equals(that.stringValue);
+}
 
-	@Override
-	public String toString() {
-		return String.valueOf(stringValue);
-	}
+@Override
+public int hashCode() {
+return java.util.Objects.hash(stringValue);
+}
+
+@Override
+public String toString() {
+return String.valueOf(stringValue);
+}
 }
