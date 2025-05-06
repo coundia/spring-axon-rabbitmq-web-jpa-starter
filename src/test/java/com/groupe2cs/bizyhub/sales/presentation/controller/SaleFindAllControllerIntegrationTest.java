@@ -31,7 +31,6 @@ class SaleFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
 		List<CreateSaleCommand> userCommands =
 				SaleFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
-
 		userCommands.forEach(cmd ->
 				SaleFixtures.byIdWaitExist(saleRepository, cmd.getId().value())
 		);
