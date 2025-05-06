@@ -15,10 +15,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(name = "SaleUserSyncRequest", description = "Request payload for synchronizing saleusers")
+@Schema(name = "SaleUserSyncRequest", description = "Request payload for synchronizing saleUsers")
 public class SaleUserSyncRequest implements Serializable {
 
-@Schema(description = "Batch of saleuser deltas")
+@Schema(description = "Batch of saleUser deltas")
 private List<SaleUserDeltaDto> deltas;
 	}
 

@@ -42,6 +42,8 @@ void it_should_be_able_to_add_saleuser() {
 
 		requestDTO.setSales(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,salesDataRepository, user).getId().value());
 		requestDTO.setUsers(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,usersDataRepository, user).getId().value());
+		requestDTO.setUsername(UUID.randomUUID().toString());
+		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(false);
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
@@ -54,6 +56,8 @@ void it_should_be_able_to_add_saleuser() {
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getSales()).isEqualTo(requestDTO.getSales());
 		assertThat(response.getBody().getUsers()).isEqualTo(requestDTO.getUsers());
+		assertThat(response.getBody().getUsername()).isEqualTo(requestDTO.getUsername());
+		assertThat(response.getBody().getEmail()).isEqualTo(requestDTO.getEmail());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
 		assertThat(response.getBody().getUpdatedAt()).isEqualTo(requestDTO.getUpdatedAt());

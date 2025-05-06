@@ -43,6 +43,20 @@ public class SaleUser   extends AbstractAuditableEntity  {
 		length = 250
 	)
 
+	private String username ;
+
+	@Column(nullable = true, 
+		unique = false  ,
+		length = 250
+	)
+
+	private String email ;
+
+	@Column(nullable = true, 
+		unique = false  ,
+		length = 250
+	)
+
 	private String details ;
 
 	@Column(nullable = false, 
@@ -79,6 +93,8 @@ public class SaleUser   extends AbstractAuditableEntity  {
 		"id='" + id + '\'' +
 			", sales=" + sales +
 			", users=" + users +
+			", username=" + username +
+			", email=" + email +
 			", details=" + details +
 			", isActive=" + isActive +
 			", updatedAt=" + updatedAt +

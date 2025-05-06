@@ -4,6 +4,8 @@ import java.util.Objects;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserIdNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserSalesNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserUsersNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserUsernameNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserEmailNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserDetailsNotValid;
 
 import java.io.Serializable;

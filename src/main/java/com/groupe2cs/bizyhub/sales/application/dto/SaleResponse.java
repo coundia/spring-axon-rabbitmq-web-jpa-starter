@@ -30,8 +30,6 @@ public class SaleResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private Boolean isActive;
 	@Schema(description = "", example = "")
-	private String product;
-	@Schema(description = "", example = "")
 	private java.time.Instant updatedAt;
 	@Schema(description = "", example = "")
 	private String reference;

@@ -27,8 +27,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -39,10 +37,9 @@ void it_should_be_able_to_add_sale() {
 		SaleRequest requestDTO = new SaleRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(6873.76);
+		requestDTO.setAmount(127.4);
 		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(false);
-		requestDTO.setProduct(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value());
+		requestDTO.setIsActive(true);
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setReference(UUID.randomUUID().toString());
 
@@ -55,7 +52,6 @@ void it_should_be_able_to_add_sale() {
 		assertThat(response.getBody().getAmount()).isEqualTo(requestDTO.getAmount());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
-		assertThat(response.getBody().getProduct()).isEqualTo(requestDTO.getProduct());
 		assertThat(response.getBody().getUpdatedAt()).isEqualTo(requestDTO.getUpdatedAt());
 		assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
 	}

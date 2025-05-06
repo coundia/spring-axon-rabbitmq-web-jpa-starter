@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateSaleCommand command = new CreateSaleCommand(
- SaleId.create(UUID.randomUUID().toString()) ,  SaleName.create(UUID.randomUUID().toString()) ,  SaleAmount.create(8128.41) ,  SaleDetails.create(UUID.randomUUID().toString()) ,  SaleIsActive.create(true) ,  SaleProduct.create(UUID.randomUUID().toString()) ,  SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SaleReference.create(UUID.randomUUID().toString()) ,  SaleCreatedBy.create(UUID.randomUUID().toString()) ,  SaleTenant.create(UUID.randomUUID().toString()) 
+ SaleId.create(UUID.randomUUID().toString()) ,  SaleName.create(UUID.randomUUID().toString()) ,  SaleAmount.create(6441.4) ,  SaleDetails.create(UUID.randomUUID().toString()) ,  SaleIsActive.create(false) ,  SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SaleReference.create(UUID.randomUUID().toString()) ,  SaleCreatedBy.create(UUID.randomUUID().toString()) ,  SaleTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -44,8 +44,6 @@ assertThat(sentCommand.getDetails().value()).isEqualTo(
 command.getDetails().value());
 assertThat(sentCommand.getIsActive().value()).isEqualTo(
 command.getIsActive().value());
-assertThat(sentCommand.getProduct().value()).isEqualTo(
-command.getProduct().value());
 assertThat(sentCommand.getUpdatedAt().value()).isEqualTo(
 command.getUpdatedAt().value());
 assertThat(sentCommand.getReference().value()).isEqualTo(

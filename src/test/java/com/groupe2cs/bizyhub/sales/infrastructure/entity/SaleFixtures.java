@@ -41,7 +41,6 @@ public class SaleFixtures {
 	public static List<CreateSaleCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		SaleRepository repository,
-        com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -52,7 +51,6 @@ public class SaleFixtures {
 			CreateSaleCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            productDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -68,17 +66,15 @@ public class SaleFixtures {
 		public static CreateSaleCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		SaleRepository  repository,
-        com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
 
 			CreateSaleCommand command = CreateSaleCommand.builder()
 				.name(SaleName.create(UUID.randomUUID().toString()))
-				.amount(SaleAmount.create(3600.28))
+				.amount(SaleAmount.create(840.18))
 				.details(SaleDetails.create(UUID.randomUUID().toString()))
-				.isActive(SaleIsActive.create(true))
-				.product(SaleProduct.create(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value()))
+				.isActive(SaleIsActive.create(false))
 				.updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SaleReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -99,9 +95,9 @@ public class SaleFixtures {
 
         CreateSaleCommand command = CreateSaleCommand.builder()
         .name(SaleName.create(UUID.randomUUID().toString()))
-        .amount(SaleAmount.create(3600.28))
+        .amount(SaleAmount.create(840.18))
         .details(SaleDetails.create(UUID.randomUUID().toString()))
-        .isActive(SaleIsActive.create(true))
+        .isActive(SaleIsActive.create(false))
         .updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(SaleReference.create(UUID.randomUUID().toString()))
         .build();

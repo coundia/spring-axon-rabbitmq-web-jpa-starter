@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -38,14 +38,16 @@ private SaleUserRepository Repository;
     private TenantRepository tenantDataRepository ;
 
 	@Test
-	void it_should_initiate_sync_of_saleusers() {
+	void it_should_initiate_sync_of_saleUsers() {
 		SaleUserSyncRequest requestDTO = SaleUserSyncRequest.builder()
 		.deltas(List.of(
 		SaleUserDeltaDto.builder()
 .sales(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,salesDataRepository, user).getId().value())
 .users(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,usersDataRepository, user).getId().value())
+.username(UUID.randomUUID().toString())
+.email(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 		.type("CREATE")
@@ -53,7 +55,7 @@ private SaleUserRepository Repository;
 		))
 		.build();
 
-	String uri = "/api/v1/commands/saleuser/sync";
+	String uri = "/api/v1/commands/saleUser/sync";
 	HttpEntity<SaleUserSyncRequest> request = new HttpEntity<>(requestDTO, headers);
 		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
@@ -64,7 +66,7 @@ private SaleUserRepository Repository;
 			}
 
 			@Test
-			void it_should_initiate_update_of_saleusers() {
+			void it_should_initiate_update_of_saleUsers() {
 
 			String existingId = SaleUserFixtures.randomOneViaCommand(commandGateway,Repository, getCurrentUser()).getId().value();
 
@@ -74,8 +76,10 @@ private SaleUserRepository Repository;
 			.id(existingId)
 .sales(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,salesDataRepository, user).getId().value())
 .users(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,usersDataRepository, user).getId().value())
+.username(UUID.randomUUID().toString())
+.email(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 			.type("UPDATE")
@@ -83,7 +87,7 @@ private SaleUserRepository Repository;
 			))
 			.build();
 
-			String uri = "/api/v1/commands/saleuser/sync";
+			String uri = "/api/v1/commands/saleUser/sync";
 			HttpEntity<SaleUserSyncRequest> request = new HttpEntity<>(requestDTO, headers);
 				ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
@@ -93,7 +97,7 @@ private SaleUserRepository Repository;
 					}
 
 					@Test
-					void it_should_initiate_delete_of_saleusers() {
+					void it_should_initiate_delete_of_saleUsers() {
 					String existingId = SaleUserFixtures.randomOneViaCommand(commandGateway,Repository, getCurrentUser()).getId().value();
 					SaleUserSyncRequest requestDTO = SaleUserSyncRequest.builder()
 					.deltas(List.of(
@@ -104,7 +108,7 @@ private SaleUserRepository Repository;
 					))
 					.build();
 
-					String uri = "/api/v1/commands/saleuser/sync";
+					String uri = "/api/v1/commands/saleUser/sync";
 					HttpEntity<SaleUserSyncRequest> request = new HttpEntity<>(requestDTO, headers);
 						ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
@@ -120,7 +124,7 @@ private SaleUserRepository Repository;
 							.deltas(List.of())
 							.build();
 
-							String uri = "/api/v1/commands/saleuser/sync";
+							String uri = "/api/v1/commands/saleUser/sync";
 							HttpEntity<SaleUserSyncRequest> request = new HttpEntity<>(requestDTO, headers);
 								ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 

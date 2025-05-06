@@ -26,6 +26,8 @@ public class SaleUserDeletedEvent implements Serializable {
 	
 	
 	
+	
+	
 
 private SaleUserId id;
 

@@ -26,6 +26,8 @@ public class SaleUserAggregate {
 private SaleUserId id;
 private SaleUserSales sales;
 private SaleUserUsers users;
+private SaleUserUsername username;
+private SaleUserEmail email;
 private SaleUserDetails details;
 private SaleUserIsActive isActive;
 private SaleUserUpdatedAt updatedAt;
@@ -40,6 +42,8 @@ apply(new SaleUserCreatedEvent(
 		command.getId(),
 		command.getSales(),
 		command.getUsers(),
+		command.getUsername(),
+		command.getEmail(),
 		command.getDetails(),
 		command.getIsActive(),
 		command.getUpdatedAt(),
@@ -62,6 +66,8 @@ apply(new SaleUserUpdatedEvent(
 		command.getId(),
 		command.getSales(),
 		command.getUsers(),
+		command.getUsername(),
+		command.getEmail(),
 		command.getDetails(),
 		command.getIsActive(),
 		command.getUpdatedAt(),
@@ -76,6 +82,8 @@ public void on(SaleUserCreatedEvent event) {
 	this.id = event.getId();
 	this.sales = event.getSales();
 	this.users = event.getUsers();
+	this.username = event.getUsername();
+	this.email = event.getEmail();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.updatedAt = event.getUpdatedAt();
@@ -94,6 +102,8 @@ public void on(SaleUserUpdatedEvent event) {
 this.id = event.getId();
 	this.sales = event.getSales();
 	this.users = event.getUsers();
+	this.username = event.getUsername();
+	this.email = event.getEmail();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.updatedAt = event.getUpdatedAt();

@@ -27,6 +27,8 @@ public class CreateSaleUserCommand implements Serializable {
 	private SaleUserId id = SaleUserId.create(UUID.randomUUID().toString());
  	private SaleUserSales sales;
  	private SaleUserUsers users;
+ 	private SaleUserUsername username;
+ 	private SaleUserEmail email;
  	private SaleUserDetails details;
  	private SaleUserIsActive isActive;
  	private SaleUserUpdatedAt updatedAt;
@@ -37,6 +39,8 @@ public class CreateSaleUserCommand implements Serializable {
  
    SaleUserSales sales , 
    SaleUserUsers users , 
+   SaleUserUsername username , 
+   SaleUserEmail email , 
    SaleUserDetails details , 
    SaleUserIsActive isActive , 
    SaleUserUpdatedAt updatedAt , 
@@ -48,6 +52,8 @@ public class CreateSaleUserCommand implements Serializable {
  
   this.sales = sales ; 
   this.users = users ; 
+  this.username = username ; 
+  this.email = email ; 
   this.details = details ; 
   this.isActive = isActive ; 
   this.updatedAt = updatedAt ; 

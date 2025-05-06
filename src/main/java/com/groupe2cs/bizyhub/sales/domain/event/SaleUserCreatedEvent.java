@@ -20,6 +20,8 @@ public class SaleUserCreatedEvent implements Serializable {
 	private SaleUserId id;
 	private SaleUserSales sales;
 	private SaleUserUsers users;
+	private SaleUserUsername username;
+	private SaleUserEmail email;
 	private SaleUserDetails details;
 	private SaleUserIsActive isActive;
 	private SaleUserUpdatedAt updatedAt;

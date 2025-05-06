@@ -58,7 +58,7 @@ void it_should_be_able_to_update_tenant() {
 	 requestDTO.setDescription(UUID.randomUUID().toString());
 	 requestDTO.setDomain(UUID.randomUUID().toString());
 	 requestDTO.setLanguage(UUID.randomUUID().toString());
-	 requestDTO.setActive(true);
+	 requestDTO.setActive(false);
 
 	String uri = "/v1/admin/commands/tenant/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);

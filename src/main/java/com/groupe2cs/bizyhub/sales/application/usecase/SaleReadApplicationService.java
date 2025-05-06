@@ -1,11 +1,12 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.sales.application.mapper.*;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sales.application.query.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.mapper.*;
+import com.groupe2cs.bizyhub.security.application.usecase.UserReadApplicationService;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.query.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -74,16 +75,6 @@ public List<SaleResponse> findBySaleIsActive(
 	) {
 
 	FindBySaleIsActiveQuery query = new FindBySaleIsActiveQuery(value,metaRequest);
-	CompletableFuture<List<SaleResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(SaleResponse.class));
-	return future.join();
-}
-public List<SaleResponse> findBySaleProduct(
-	SaleProduct value,
-	MetaRequest metaRequest
-	) {
-
-	FindBySaleProductQuery query = new FindBySaleProductQuery(value,metaRequest);
 	CompletableFuture<List<SaleResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(SaleResponse.class));
 	return future.join();

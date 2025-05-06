@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sales.domain;
 
-import com.groupe2cs.bizyhub.sales.domain.exception.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.sales.domain.exception.*;
 import java.util.UUID;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class SaleAggregateTests extends BaseUnitTests {
@@ -15,22 +15,20 @@ public class SaleAggregateTests extends BaseUnitTests {
 void it_should_create_sale_with_valid_values() {
 	SaleId id = SaleId.create(UUID.randomUUID().toString());
 	SaleName name = SaleName.create(UUID.randomUUID().toString());
-	SaleAmount amount = SaleAmount.create(33.07);
+	SaleAmount amount = SaleAmount.create(572.83);
 	SaleDetails details = SaleDetails.create(UUID.randomUUID().toString());
 	SaleIsActive isActive = SaleIsActive.create(true);
-	SaleProduct product = SaleProduct.create(UUID.randomUUID().toString());
 	SaleUpdatedAt updatedAt = SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	SaleReference reference = SaleReference.create(UUID.randomUUID().toString());
 	SaleCreatedBy createdBy = SaleCreatedBy.create(UUID.randomUUID().toString());
 	SaleTenant tenant = SaleTenant.create(UUID.randomUUID().toString());
-	SaleAggregate aggregateSaleAggregate = new SaleAggregate(id, name, amount, details, isActive, product, updatedAt, reference, createdBy, tenant);
+	SaleAggregate aggregateSaleAggregate = new SaleAggregate(id, name, amount, details, isActive, updatedAt, reference, createdBy, tenant);
 	assertThat(aggregateSaleAggregate.getId()).isNotNull();
 	assertThat(aggregateSaleAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateSaleAggregate.getName()).isEqualTo(name);
 	assertThat(aggregateSaleAggregate.getAmount()).isEqualTo(amount);
 	assertThat(aggregateSaleAggregate.getDetails()).isEqualTo(details);
 	assertThat(aggregateSaleAggregate.getIsActive()).isEqualTo(isActive);
-	assertThat(aggregateSaleAggregate.getProduct()).isEqualTo(product);
 	assertThat(aggregateSaleAggregate.getUpdatedAt()).isEqualTo(updatedAt);
 	assertThat(aggregateSaleAggregate.getReference()).isEqualTo(reference);
 	assertThat(aggregateSaleAggregate.getCreatedBy()).isEqualTo(createdBy);
@@ -61,11 +59,6 @@ void it_should_create_sale_with_valid_values() {
 		void it_should_throw_when_isActive_is_invalid() {
 		SaleIsActiveNotValid error = assertThrows(SaleIsActiveNotValid.class, () -> SaleIsActive.create(null));
 		assertThat(error.getMessage()).isEqualTo("IsActive is invalid");
-		}
-		@Test
-		void it_should_throw_when_product_is_invalid() {
-		SaleProductNotValid error = assertThrows(SaleProductNotValid.class, () -> SaleProduct.create(""));
-		assertThat(error.getMessage()).isEqualTo("Product is invalid");
 		}
 		@Test
 		void it_should_throw_when_updatedAt_is_invalid() {

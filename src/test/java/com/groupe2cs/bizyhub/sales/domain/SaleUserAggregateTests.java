@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sales.domain;
 
-import com.groupe2cs.bizyhub.sales.domain.exception.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.*;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.sales.domain.exception.*;
 import java.util.UUID;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 
 
 public class SaleUserAggregateTests extends BaseUnitTests {
@@ -16,17 +16,21 @@ void it_should_create_saleUser_with_valid_values() {
 	SaleUserId id = SaleUserId.create(UUID.randomUUID().toString());
 	SaleUserSales sales = SaleUserSales.create(UUID.randomUUID().toString());
 	SaleUserUsers users = SaleUserUsers.create(UUID.randomUUID().toString());
+	SaleUserUsername username = SaleUserUsername.create(UUID.randomUUID().toString());
+	SaleUserEmail email = SaleUserEmail.create(UUID.randomUUID().toString());
 	SaleUserDetails details = SaleUserDetails.create(UUID.randomUUID().toString());
 	SaleUserIsActive isActive = SaleUserIsActive.create(false);
 	SaleUserUpdatedAt updatedAt = SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	SaleUserReference reference = SaleUserReference.create(UUID.randomUUID().toString());
 	SaleUserCreatedBy createdBy = SaleUserCreatedBy.create(UUID.randomUUID().toString());
 	SaleUserTenant tenant = SaleUserTenant.create(UUID.randomUUID().toString());
-	SaleUserAggregate aggregateSaleUserAggregate = new SaleUserAggregate(id, sales, users, details, isActive, updatedAt, reference, createdBy, tenant);
+	SaleUserAggregate aggregateSaleUserAggregate = new SaleUserAggregate(id, sales, users, username, email, details, isActive, updatedAt, reference, createdBy, tenant);
 	assertThat(aggregateSaleUserAggregate.getId()).isNotNull();
 	assertThat(aggregateSaleUserAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateSaleUserAggregate.getSales()).isEqualTo(sales);
 	assertThat(aggregateSaleUserAggregate.getUsers()).isEqualTo(users);
+	assertThat(aggregateSaleUserAggregate.getUsername()).isEqualTo(username);
+	assertThat(aggregateSaleUserAggregate.getEmail()).isEqualTo(email);
 	assertThat(aggregateSaleUserAggregate.getDetails()).isEqualTo(details);
 	assertThat(aggregateSaleUserAggregate.getIsActive()).isEqualTo(isActive);
 	assertThat(aggregateSaleUserAggregate.getUpdatedAt()).isEqualTo(updatedAt);
@@ -49,6 +53,16 @@ void it_should_create_saleUser_with_valid_values() {
 		void it_should_throw_when_users_is_invalid() {
 		SaleUserUsersNotValid error = assertThrows(SaleUserUsersNotValid.class, () -> SaleUserUsers.create(""));
 		assertThat(error.getMessage()).isEqualTo("Users is invalid");
+		}
+		@Test
+		void it_should_throw_when_username_is_invalid() {
+		SaleUserUsernameNotValid error = assertThrows(SaleUserUsernameNotValid.class, () -> SaleUserUsername.create(""));
+		assertThat(error.getMessage()).isEqualTo("Username is invalid");
+		}
+		@Test
+		void it_should_throw_when_email_is_invalid() {
+		SaleUserEmailNotValid error = assertThrows(SaleUserEmailNotValid.class, () -> SaleUserEmail.create(""));
+		assertThat(error.getMessage()).isEqualTo("Email is invalid");
 		}
 		@Test
 		void it_should_throw_when_details_is_invalid() {

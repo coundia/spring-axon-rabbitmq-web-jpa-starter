@@ -32,6 +32,8 @@ public class DeleteSaleUserCommand implements Serializable {
  	
  	
  	
+ 	
+ 	
 
 
 }
