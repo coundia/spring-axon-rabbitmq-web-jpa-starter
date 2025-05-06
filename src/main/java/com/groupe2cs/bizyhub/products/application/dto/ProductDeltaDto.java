@@ -24,17 +24,17 @@ public class ProductDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "1cbc3456-282d-482a-a46d-9c63176c5e17")
+		@Schema(description = "", example = "749f683d-c46a-4e5a-a038-1f9f6666935a")
 		private String name;
-		@Schema(description = "", example = "8137.67")
+		@Schema(description = "", example = "8288.52")
 		private Double price;
-		@Schema(description = "", example = "64785412-8fd5-4ab0-87e5-d31da714de55")
+		@Schema(description = "", example = "c97d737d-431b-46e3-a0ab-779fef983378")
 		private String details;
 		@Schema(description = "", example = "true")
 		private Boolean isActive;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "185e9b4a-4aae-439d-8219-87d4b2780d69")
+		@Schema(description = "", example = "a59ae1e1-e84f-44c9-a7c0-0b8b652d31b5")
 		private String reference;
 
 }

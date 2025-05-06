@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.sales.application.command.*;
 import java.util.UUID;
 
@@ -36,11 +38,26 @@ private CommandGateway commandGateway;
 @Autowired
 private SaleUserRepository saleUserRepository;
 
+@Autowired
+private com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository salesDataRepository ;
+@Autowired
+private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository usersDataRepository ;
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
+
 @Test
 void it_should_return_only_user_saleUsers_for_normal_user() throws Exception {
 
 List<CreateSaleUserCommand> userCommands =
-SaleUserFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
+SaleUserFixtures.randomManyViaCommand(
+commandGateway,saleUserRepository,
+salesDataRepository,
+usersDataRepository,
+createdByDataRepository,
+tenantDataRepository,
+ 3, login("user", "user"));
 userCommands.forEach(cmd ->
 SaleUserFixtures.byIdWaitExist(saleUserRepository, cmd.getId().value())
 );
@@ -69,15 +86,29 @@ assertThat(actualIds).containsAll(expectedIds);
 @Test
 void it_should_return_all_saleUsers_for_admin() throws Exception {
 
-List<CreateSaleUserCommand> userCommands =
-SaleUserFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
-userCommands.forEach(cmd ->
-SaleUserFixtures.byIdWaitExist(saleUserRepository, cmd.getId().value())
-);
+    List<CreateSaleUserCommand> userCommands =
+    SaleUserFixtures.randomManyViaCommand(
+        commandGateway,
+        saleUserRepository,
+         salesDataRepository,
+         usersDataRepository,
+         createdByDataRepository,
+         tenantDataRepository,
+         5, login("user", "user")
+      );
+    userCommands.forEach(cmd ->
+    SaleUserFixtures.byIdWaitExist(saleUserRepository, cmd.getId().value())
+    );
 
 
 List<CreateSaleUserCommand> adminCommands =
-SaleUserFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
+SaleUserFixtures.randomManyViaCommand(
+commandGateway,saleUserRepository,
+        salesDataRepository,
+        usersDataRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+ 5, login("admin", "admin"));
 adminCommands.forEach(cmd ->
 SaleUserFixtures.byIdWaitExist(saleUserRepository, cmd.getId().value())
 );

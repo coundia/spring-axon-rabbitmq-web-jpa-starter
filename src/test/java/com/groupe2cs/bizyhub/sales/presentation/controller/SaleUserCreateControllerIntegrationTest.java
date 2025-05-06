@@ -5,8 +5,10 @@ import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.sales.application.command.*;
 import java.util.UUID;
 
@@ -23,13 +25,23 @@ public class SaleUserCreateControllerIntegrationTest extends BaseIntegrationTest
 @Autowired
 private CommandGateway commandGateway;
 
+
+@Autowired
+private com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository salesDataRepository ;
+@Autowired
+private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository usersDataRepository ;
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
+
 @Test
 void it_should_be_able_to_add_saleuser() {
 
 		SaleUserRequest requestDTO = new SaleUserRequest();
 
-		requestDTO.setSales(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway, user).getId().value());
-		requestDTO.setUsers(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway, user).getId().value());
+		requestDTO.setSales(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,salesDataRepository, user).getId().value());
+		requestDTO.setUsers(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,usersDataRepository, user).getId().value());
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(false);
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));

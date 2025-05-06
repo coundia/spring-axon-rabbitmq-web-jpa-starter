@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.sales.application.command.*;
 import java.util.UUID;
 
@@ -28,21 +30,38 @@ private CommandGateway commandGateway;
 @Autowired
 private CommandGateway commandGatewayUpdate;
 
+@Autowired
+private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository ;
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
 
 @Test
 void it_should_be_able_to_update_sale() {
 
-	String existingId = SaleFixtures.randomOneViaCommand(commandGateway, getCurrentUser() ).getId().value();
-	CreateSaleCommand updated = SaleFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
+	String existingId = SaleFixtures.randomOneViaCommand(
+	commandGateway,saleRepository,
+        productDataRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+	 getCurrentUser() ).getId().value();
+
+	CreateSaleCommand updated = SaleFixtures.randomOneViaCommand(commandGatewayUpdate,
+    saleRepository,
+            productDataRepository,
+            createdByDataRepository,
+            tenantDataRepository,
+     getCurrentUser());
 
 	SaleFixtures.byIdWaitExist(saleRepository, existingId);
 	SaleFixtures.byIdWaitExist(saleRepository, updated.getId().value());
 
 	SaleRequest requestDTO = new SaleRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setAmount(8667.46);
+	 requestDTO.setAmount(8842.38);
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(false);
+	 requestDTO.setIsActive(true);
 	 requestDTO.setProduct( updated.getProduct().value());
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());

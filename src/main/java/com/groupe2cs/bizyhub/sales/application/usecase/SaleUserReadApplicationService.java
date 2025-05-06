@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
 
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sales.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
 import com.groupe2cs.bizyhub.sales.application.query.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.sales.application.mapper.*;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;

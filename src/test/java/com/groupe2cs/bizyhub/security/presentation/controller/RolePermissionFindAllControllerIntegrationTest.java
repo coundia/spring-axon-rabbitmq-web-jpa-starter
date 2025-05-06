@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
 import java.util.UUID;
 
@@ -36,11 +38,26 @@ private CommandGateway commandGateway;
 @Autowired
 private RolePermissionRepository rolePermissionRepository;
 
+@Autowired
+private RoleRepository roleDataRepository ;
+@Autowired
+private PermissionRepository permissionDataRepository ;
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
+
 @Test
 void it_should_return_only_user_rolePermissions_for_normal_user() throws Exception {
 
 List<CreateRolePermissionCommand> userCommands =
-RolePermissionFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
+RolePermissionFixtures.randomManyViaCommand(
+commandGateway,rolePermissionRepository,
+roleDataRepository,
+permissionDataRepository,
+createdByDataRepository,
+tenantDataRepository,
+ 3, login("user", "user"));
 userCommands.forEach(cmd ->
 RolePermissionFixtures.byIdWaitExist(rolePermissionRepository, cmd.getId().value())
 );
@@ -57,15 +74,29 @@ assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
 @Test
 void it_should_return_all_rolePermissions_for_admin() throws Exception {
 
-List<CreateRolePermissionCommand> userCommands =
-RolePermissionFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
-userCommands.forEach(cmd ->
-RolePermissionFixtures.byIdWaitExist(rolePermissionRepository, cmd.getId().value())
-);
+    List<CreateRolePermissionCommand> userCommands =
+    RolePermissionFixtures.randomManyViaCommand(
+        commandGateway,
+        rolePermissionRepository,
+         roleDataRepository,
+         permissionDataRepository,
+         createdByDataRepository,
+         tenantDataRepository,
+         5, login("user", "user")
+      );
+    userCommands.forEach(cmd ->
+    RolePermissionFixtures.byIdWaitExist(rolePermissionRepository, cmd.getId().value())
+    );
 
 
 List<CreateRolePermissionCommand> adminCommands =
-RolePermissionFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
+RolePermissionFixtures.randomManyViaCommand(
+commandGateway,rolePermissionRepository,
+        roleDataRepository,
+        permissionDataRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+ 5, login("admin", "admin"));
 adminCommands.forEach(cmd ->
 RolePermissionFixtures.byIdWaitExist(rolePermissionRepository, cmd.getId().value())
 );

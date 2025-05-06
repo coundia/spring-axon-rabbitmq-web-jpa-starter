@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import com.groupe2cs.bizyhub.products.application.command.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.products.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;

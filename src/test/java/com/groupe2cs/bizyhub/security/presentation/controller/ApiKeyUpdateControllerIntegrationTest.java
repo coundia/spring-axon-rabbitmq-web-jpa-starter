@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
 import java.util.UUID;
 
@@ -28,12 +30,25 @@ private CommandGateway commandGateway;
 @Autowired
 private CommandGateway commandGatewayUpdate;
 
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
 
 @Test
 void it_should_be_able_to_update_apikey() {
 
-	String existingId = ApiKeyFixtures.randomOneViaCommand(commandGateway, getCurrentUser() ).getId().value();
-	CreateApiKeyCommand updated = ApiKeyFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
+	String existingId = ApiKeyFixtures.randomOneViaCommand(
+	commandGateway,apikeyRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+	 getCurrentUser() ).getId().value();
+
+	CreateApiKeyCommand updated = ApiKeyFixtures.randomOneViaCommand(commandGatewayUpdate,
+    apikeyRepository,
+            createdByDataRepository,
+            tenantDataRepository,
+     getCurrentUser());
 
 	ApiKeyFixtures.byIdWaitExist(apikeyRepository, existingId);
 	ApiKeyFixtures.byIdWaitExist(apikeyRepository, updated.getId().value());
@@ -41,7 +56,7 @@ void it_should_be_able_to_update_apikey() {
 	ApiKeyRequest requestDTO = new ApiKeyRequest();
 	 requestDTO.setAppKey(UUID.randomUUID().toString());
 	 requestDTO.setUsername(UUID.randomUUID().toString());
-	 requestDTO.setActive(false);
+	 requestDTO.setActive(true);
 	 requestDTO.setCreatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setExpiration(java.time.Instant.now().plusSeconds(3600));
 

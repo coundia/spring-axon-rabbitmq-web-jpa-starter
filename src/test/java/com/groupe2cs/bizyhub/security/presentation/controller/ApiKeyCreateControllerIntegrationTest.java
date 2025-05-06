@@ -5,8 +5,10 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
 import java.util.UUID;
 
@@ -23,6 +25,12 @@ public class ApiKeyCreateControllerIntegrationTest extends BaseIntegrationTests 
 @Autowired
 private CommandGateway commandGateway;
 
+
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
+
 @Test
 void it_should_be_able_to_add_apikey() {
 
@@ -30,7 +38,7 @@ void it_should_be_able_to_add_apikey() {
 
 		requestDTO.setAppKey(UUID.randomUUID().toString());
 		requestDTO.setUsername(UUID.randomUUID().toString());
-		requestDTO.setActive(false);
+		requestDTO.setActive(true);
 		requestDTO.setCreatedAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setExpiration(java.time.Instant.now().plusSeconds(3600));
 

@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.tenant.application.command.*;
 import java.util.UUID;
 
@@ -36,11 +38,20 @@ private CommandGateway commandGateway;
 @Autowired
 private TenantRepository tenantRepository;
 
+@Autowired
+private TenantRepository tenantDataRepository ;
+@Autowired
+private UserRepository createdByDataRepository ;
+
 @Test
 void it_should_return_only_user_tenants_for_normal_user() throws Exception {
 
 List<CreateTenantCommand> userCommands =
-TenantFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
+TenantFixtures.randomManyViaCommand(
+commandGateway,tenantRepository,
+tenantDataRepository,
+createdByDataRepository,
+ 3, login("user", "user"));
 userCommands.forEach(cmd ->
 TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
 );
@@ -57,15 +68,25 @@ assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
 @Test
 void it_should_return_all_tenants_for_admin() throws Exception {
 
-List<CreateTenantCommand> userCommands =
-TenantFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
-userCommands.forEach(cmd ->
-TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
-);
+    List<CreateTenantCommand> userCommands =
+    TenantFixtures.randomManyViaCommand(
+        commandGateway,
+        tenantRepository,
+         tenantDataRepository,
+         createdByDataRepository,
+         5, login("user", "user")
+      );
+    userCommands.forEach(cmd ->
+    TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
+    );
 
 
 List<CreateTenantCommand> adminCommands =
-TenantFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
+TenantFixtures.randomManyViaCommand(
+commandGateway,tenantRepository,
+        tenantDataRepository,
+        createdByDataRepository,
+ 5, login("admin", "admin"));
 adminCommands.forEach(cmd ->
 TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
 );

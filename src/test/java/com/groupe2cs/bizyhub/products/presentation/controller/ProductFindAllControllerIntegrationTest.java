@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.products.application.command.*;
 import java.util.UUID;
 
@@ -36,11 +38,20 @@ private CommandGateway commandGateway;
 @Autowired
 private ProductRepository productRepository;
 
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
+
 @Test
 void it_should_return_only_user_products_for_normal_user() throws Exception {
 
 List<CreateProductCommand> userCommands =
-ProductFixtures.randomManyViaCommand(commandGateway, 3, login("user", "user"));
+ProductFixtures.randomManyViaCommand(
+commandGateway,productRepository,
+createdByDataRepository,
+tenantDataRepository,
+ 3, login("user", "user"));
 userCommands.forEach(cmd ->
 ProductFixtures.byIdWaitExist(productRepository, cmd.getId().value())
 );
@@ -69,15 +80,25 @@ assertThat(actualIds).containsAll(expectedIds);
 @Test
 void it_should_return_all_products_for_admin() throws Exception {
 
-List<CreateProductCommand> userCommands =
-ProductFixtures.randomManyViaCommand(commandGateway, 5, login("user", "user"));
-userCommands.forEach(cmd ->
-ProductFixtures.byIdWaitExist(productRepository, cmd.getId().value())
-);
+    List<CreateProductCommand> userCommands =
+    ProductFixtures.randomManyViaCommand(
+        commandGateway,
+        productRepository,
+         createdByDataRepository,
+         tenantDataRepository,
+         5, login("user", "user")
+      );
+    userCommands.forEach(cmd ->
+    ProductFixtures.byIdWaitExist(productRepository, cmd.getId().value())
+    );
 
 
 List<CreateProductCommand> adminCommands =
-ProductFixtures.randomManyViaCommand(commandGateway, 5, login("admin", "admin"));
+ProductFixtures.randomManyViaCommand(
+commandGateway,productRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+ 5, login("admin", "admin"));
 adminCommands.forEach(cmd ->
 ProductFixtures.byIdWaitExist(productRepository, cmd.getId().value())
 );

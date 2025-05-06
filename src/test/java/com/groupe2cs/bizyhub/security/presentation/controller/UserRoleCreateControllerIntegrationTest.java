@@ -5,8 +5,10 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
 import java.util.UUID;
 
@@ -23,13 +25,23 @@ public class UserRoleCreateControllerIntegrationTest extends BaseIntegrationTest
 @Autowired
 private CommandGateway commandGateway;
 
+
+@Autowired
+private UserRepository userDataRepository ;
+@Autowired
+private RoleRepository roleDataRepository ;
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
+
 @Test
 void it_should_be_able_to_add_userrole() {
 
 		UserRoleRequest requestDTO = new UserRoleRequest();
 
-		requestDTO.setUser(UserFixtures.randomOneViaCommand(commandGateway, user).getId().value());
-		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway, user).getId().value());
+		requestDTO.setUser(UserFixtures.randomOneViaCommand(commandGateway,userDataRepository,user).getId().value());
+		requestDTO.setRole(RoleFixtures.randomOneViaCommand(commandGateway,roleDataRepository, user).getId().value());
 
  		String uri = "/v1/admin/commands/userRole";
 		ResponseEntity<UserRoleResponse> response = this.postForEntity(uri, requestDTO, UserRoleResponse.class);

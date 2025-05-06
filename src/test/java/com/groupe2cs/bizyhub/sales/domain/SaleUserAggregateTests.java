@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sales.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import com.groupe2cs.bizyhub.sales.domain.exception.*;
-import java.util.UUID;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import java.util.UUID;
+import com.groupe2cs.bizyhub.sales.domain.exception.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
 
 
 public class SaleUserAggregateTests extends BaseUnitTests {

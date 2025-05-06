@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
 import java.util.UUID;
 
@@ -28,12 +30,25 @@ private CommandGateway commandGateway;
 @Autowired
 private CommandGateway commandGatewayUpdate;
 
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
 
 @Test
 void it_should_be_able_to_update_user() {
 
-	String existingId = UserFixtures.randomOneViaCommand(commandGateway, getCurrentUser() ).getId().value();
-	CreateUserCommand updated = UserFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
+	String existingId = UserFixtures.randomOneViaCommand(
+	commandGateway,userRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+	 getCurrentUser() ).getId().value();
+
+	CreateUserCommand updated = UserFixtures.randomOneViaCommand(commandGatewayUpdate,
+    userRepository,
+            createdByDataRepository,
+            tenantDataRepository,
+     getCurrentUser());
 
 	UserFixtures.byIdWaitExist(userRepository, existingId);
 	UserFixtures.byIdWaitExist(userRepository, updated.getId().value());

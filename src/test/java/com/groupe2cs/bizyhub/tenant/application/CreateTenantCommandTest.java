@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTenantCommand command = new CreateTenantCommand(
- TenantId.create(UUID.randomUUID().toString()) ,  TenantName.create(UUID.randomUUID().toString()) ,  TenantDescription.create(UUID.randomUUID().toString()) ,  TenantDomain.create(UUID.randomUUID().toString()) ,  TenantLanguage.create(UUID.randomUUID().toString()) ,  TenantActive.create(true) ,  TenantTenant.create(UUID.randomUUID().toString()) ,  TenantCreatedBy.create(UUID.randomUUID().toString()) 
+ TenantId.create(UUID.randomUUID().toString()) ,  TenantName.create(UUID.randomUUID().toString()) ,  TenantDescription.create(UUID.randomUUID().toString()) ,  TenantDomain.create(UUID.randomUUID().toString()) ,  TenantLanguage.create(UUID.randomUUID().toString()) ,  TenantActive.create(false) ,  TenantTenant.create(UUID.randomUUID().toString()) ,  TenantCreatedBy.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

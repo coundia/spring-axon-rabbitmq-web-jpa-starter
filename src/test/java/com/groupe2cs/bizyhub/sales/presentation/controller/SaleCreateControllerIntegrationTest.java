@@ -5,8 +5,10 @@ import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.sales.application.command.*;
 import java.util.UUID;
 
@@ -23,16 +25,24 @@ public class SaleCreateControllerIntegrationTest extends BaseIntegrationTests {
 @Autowired
 private CommandGateway commandGateway;
 
+
+@Autowired
+private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository ;
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
+
 @Test
 void it_should_be_able_to_add_sale() {
 
 		SaleRequest requestDTO = new SaleRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(7228.97);
+		requestDTO.setAmount(7174.42);
 		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(true);
-		requestDTO.setProduct(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway, user).getId().value());
+		requestDTO.setIsActive(false);
+		requestDTO.setProduct(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value());
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setReference(UUID.randomUUID().toString());
 

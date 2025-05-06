@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sales.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import java.util.UUID;
 import com.groupe2cs.bizyhub.sales.domain.exception.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
 
 
 public class SaleAggregateTests extends BaseUnitTests {
@@ -15,7 +15,7 @@ public class SaleAggregateTests extends BaseUnitTests {
 void it_should_create_sale_with_valid_values() {
 	SaleId id = SaleId.create(UUID.randomUUID().toString());
 	SaleName name = SaleName.create(UUID.randomUUID().toString());
-	SaleAmount amount = SaleAmount.create(5720.64);
+	SaleAmount amount = SaleAmount.create(4505.46);
 	SaleDetails details = SaleDetails.create(UUID.randomUUID().toString());
 	SaleIsActive isActive = SaleIsActive.create(true);
 	SaleProduct product = SaleProduct.create(UUID.randomUUID().toString());

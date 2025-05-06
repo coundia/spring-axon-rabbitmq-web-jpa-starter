@@ -1,12 +1,15 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -22,13 +25,21 @@ public class ProductSyncControllerTests extends BaseIntegrationTests {
 	@Autowired
 	private CommandGateway commandGateway;
 
+	@Autowired
+private ProductRepository Repository;
+
+    @Autowired
+    private UserRepository createdByDataRepository ;
+    @Autowired
+    private TenantRepository tenantDataRepository ;
+
 	@Test
 	void it_should_initiate_sync_of_products() {
 		ProductSyncRequest requestDTO = ProductSyncRequest.builder()
 		.deltas(List.of(
 		ProductDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.price(8759.86)
+.price(7350.87)
 .details(UUID.randomUUID().toString())
 .isActive(true)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
@@ -51,14 +62,14 @@ public class ProductSyncControllerTests extends BaseIntegrationTests {
 			@Test
 			void it_should_initiate_update_of_products() {
 
-			String existingId = ProductFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
+			String existingId = ProductFixtures.randomOneViaCommand(commandGateway,Repository, getCurrentUser()).getId().value();
 
 			ProductSyncRequest requestDTO = ProductSyncRequest.builder()
 			.deltas(List.of(
 			ProductDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.price(8759.86)
+.price(7350.87)
 .details(UUID.randomUUID().toString())
 .isActive(true)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
@@ -79,7 +90,7 @@ public class ProductSyncControllerTests extends BaseIntegrationTests {
 
 					@Test
 					void it_should_initiate_delete_of_products() {
-					String existingId = ProductFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
+					String existingId = ProductFixtures.randomOneViaCommand(commandGateway,Repository, getCurrentUser()).getId().value();
 					ProductSyncRequest requestDTO = ProductSyncRequest.builder()
 					.deltas(List.of(
 					ProductDeltaDto.builder()

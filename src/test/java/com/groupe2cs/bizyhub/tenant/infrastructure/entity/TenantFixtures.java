@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.tenant.application.command.*;
 import java.util.UUID;
 
@@ -15,79 +17,73 @@ import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.mock.web.MockMultipartFile;
-import java.util.concurrent.TimeUnit;
 import static org.awaitility.Awaitility.await;
 
 public class TenantFixtures {
 
-public static Tenant randomOne(TenantRepository repository) {
-Tenant entity = Tenant.builder()
-.id(UUID.randomUUID().toString())
-			.name(UUID.randomUUID().toString())
-			.description(UUID.randomUUID().toString())
-			.domain(UUID.randomUUID().toString())
-			.language(UUID.randomUUID().toString())
-			.active(false)
-.build();
-return repository.save(entity);
-}
+	public static Tenant byId(TenantRepository repository, String id) {
+		return repository.findById(id).orElse(null);
+	}
 
-public static Tenant existingOrRandom(TenantRepository repository) {
-return repository.findAll().stream().findFirst().orElseGet(() -> randomOne(repository));
-}
+	public static Tenant byIdWaitExist(TenantRepository repository, String id) {
+		await().atMost(10, TimeUnit.SECONDS).until(() -> repository.findById(id).isPresent());
+		return repository.findById(id).orElse(null);
+	}
 
-public static Tenant byId(TenantRepository repository, String id) {
-return repository.findById(id).orElse(null);
-}
+	public static Tenant byIdWaitNotExist(TenantRepository repository, String id) {
+		await().atMost(10, TimeUnit.SECONDS).until(() -> repository.findById(id).isEmpty());
+		return null;
+	}
 
-public static Tenant byIdWaitExist(TenantRepository repository, String id) {
-await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-return repository.findById(id).orElse(null);
-}
-
-public static Tenant byIdWaitNotExist(TenantRepository repository, String id) {
-await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-return repository.findById(id).orElse(null);
-}
-
-public static List<Tenant> randomMany(TenantRepository repository, int count) {
-List<Tenant> items = new ArrayList<>();
-for (int i = 0; i < count; i++) {
-items.add(randomOne(repository));
-}
-return items;
-}
-
-public static List<CreateTenantCommand> randomManyViaCommand(CommandGateway commandGateway, int count,User user) {
-	List<CreateTenantCommand> items = new ArrayList<>();
+	public static List<CreateTenantCommand> randomManyViaCommand(
+		CommandGateway commandGateway,
+		TenantRepository repository,
+        TenantRepository tenantDataRepository,
+        UserRepository createdByDataRepository,
+		int count,
+		User user
+	) {
+		List<CreateTenantCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-		items.add(randomOneViaCommand(commandGateway,user));
+			CreateTenantCommand command = randomOneViaCommand(
+			commandGateway,
+			 repository,
+            tenantDataRepository,
+            createdByDataRepository,
+			 user);
+			items.add(command);
 		}
 		return items;
-		}
+	}
 
-		public static void deleteAll(TenantRepository repository) {
+	public static void deleteAll(TenantRepository repository) {
 		repository.deleteAll();
-		}
+	}
 
-		public static CreateTenantCommand randomOneViaCommand(CommandGateway commandGateway, User user) {
-
-
+		public static CreateTenantCommand randomOneViaCommand(
+		CommandGateway commandGateway,
+		TenantRepository  repository,
+        TenantRepository tenantDataRepository,
+        UserRepository createdByDataRepository,
+		 User user) {
 
 			CreateTenantCommand command = CreateTenantCommand.builder()
 				.name(TenantName.create(UUID.randomUUID().toString()))
 				.description(TenantDescription.create(UUID.randomUUID().toString()))
 				.domain(TenantDomain.create(UUID.randomUUID().toString()))
 				.language(TenantLanguage.create(UUID.randomUUID().toString()))
-				.active(TenantActive.create(false))
+				.active(TenantActive.create(true))
 			.build();
 
-			command.setCreatedBy(TenantCreatedBy.create(user.getId()));
-			command.setTenant(TenantTenant.create(user.getTenant().getId()));
-
-			commandGateway.sendAndWait(command);
+		command.setCreatedBy(TenantCreatedBy.create(user.getId()));
+		command.setTenant(TenantTenant.create(user.getTenant().getId()));
+		commandGateway.sendAndWait(command);
+		await().atMost(10, TimeUnit.SECONDS).until(() -> repository.findById(command.getId().value()).isPresent());
 		return command;
 	}
+
+
 }

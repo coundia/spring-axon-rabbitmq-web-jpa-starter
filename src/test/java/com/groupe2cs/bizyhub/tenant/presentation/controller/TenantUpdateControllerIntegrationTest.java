@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.tenant.application.command.*;
 import java.util.UUID;
 
@@ -28,12 +30,25 @@ private CommandGateway commandGateway;
 @Autowired
 private CommandGateway commandGatewayUpdate;
 
+@Autowired
+private TenantRepository tenantDataRepository ;
+@Autowired
+private UserRepository createdByDataRepository ;
 
 @Test
 void it_should_be_able_to_update_tenant() {
 
-	String existingId = TenantFixtures.randomOneViaCommand(commandGateway, getCurrentUser() ).getId().value();
-	CreateTenantCommand updated = TenantFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
+	String existingId = TenantFixtures.randomOneViaCommand(
+	commandGateway,tenantRepository,
+        tenantDataRepository,
+        createdByDataRepository,
+	 getCurrentUser() ).getId().value();
+
+	CreateTenantCommand updated = TenantFixtures.randomOneViaCommand(commandGatewayUpdate,
+    tenantRepository,
+            tenantDataRepository,
+            createdByDataRepository,
+     getCurrentUser());
 
 	TenantFixtures.byIdWaitExist(tenantRepository, existingId);
 	TenantFixtures.byIdWaitExist(tenantRepository, updated.getId().value());
@@ -43,7 +58,7 @@ void it_should_be_able_to_update_tenant() {
 	 requestDTO.setDescription(UUID.randomUUID().toString());
 	 requestDTO.setDomain(UUID.randomUUID().toString());
 	 requestDTO.setLanguage(UUID.randomUUID().toString());
-	 requestDTO.setActive(true);
+	 requestDTO.setActive(false);
 
 	String uri = "/v1/admin/commands/tenant/" + existingId;
 	ResponseEntity<String> response = this.put(uri,requestDTO);

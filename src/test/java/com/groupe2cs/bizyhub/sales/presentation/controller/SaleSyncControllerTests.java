@@ -1,12 +1,15 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
+import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -22,16 +25,26 @@ public class SaleSyncControllerTests extends BaseIntegrationTests {
 	@Autowired
 	private CommandGateway commandGateway;
 
+	@Autowired
+private SaleRepository Repository;
+
+    @Autowired
+    private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository ;
+    @Autowired
+    private UserRepository createdByDataRepository ;
+    @Autowired
+    private TenantRepository tenantDataRepository ;
+
 	@Test
 	void it_should_initiate_sync_of_sales() {
 		SaleSyncRequest requestDTO = SaleSyncRequest.builder()
 		.deltas(List.of(
 		SaleDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.amount(1295.9)
+.amount(8948.51)
 .details(UUID.randomUUID().toString())
 .isActive(false)
-.product(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway, user).getId().value())
+.product(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value())
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 		.type("CREATE")
@@ -52,17 +65,17 @@ public class SaleSyncControllerTests extends BaseIntegrationTests {
 			@Test
 			void it_should_initiate_update_of_sales() {
 
-			String existingId = SaleFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
+			String existingId = SaleFixtures.randomOneViaCommand(commandGateway,Repository, getCurrentUser()).getId().value();
 
 			SaleSyncRequest requestDTO = SaleSyncRequest.builder()
 			.deltas(List.of(
 			SaleDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.amount(1295.9)
+.amount(8948.51)
 .details(UUID.randomUUID().toString())
 .isActive(false)
-.product(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway, user).getId().value())
+.product(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value())
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 			.type("UPDATE")
@@ -81,7 +94,7 @@ public class SaleSyncControllerTests extends BaseIntegrationTests {
 
 					@Test
 					void it_should_initiate_delete_of_sales() {
-					String existingId = SaleFixtures.randomOneViaCommand(commandGateway, getCurrentUser()).getId().value();
+					String existingId = SaleFixtures.randomOneViaCommand(commandGateway,Repository, getCurrentUser()).getId().value();
 					SaleSyncRequest requestDTO = SaleSyncRequest.builder()
 					.deltas(List.of(
 					SaleDeltaDto.builder()

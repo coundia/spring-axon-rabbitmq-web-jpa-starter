@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
 import java.util.UUID;
 
@@ -15,73 +17,87 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.mock.web.MockMultipartFile;
-import java.util.concurrent.TimeUnit;
 import static org.awaitility.Awaitility.await;
 
 public class UserFixtures {
 
-public static User randomOne(UserRepository repository) {
-User entity = User.builder()
-.id(UUID.randomUUID().toString())
-			.username(UUID.randomUUID().toString())
-			.password(UUID.randomUUID().toString())
-.build();
-return repository.save(entity);
-}
+	public static User byId(UserRepository repository, String id) {
+		return repository.findById(id).orElse(null);
+	}
 
-public static User existingOrRandom(UserRepository repository) {
-return repository.findAll().stream().findFirst().orElseGet(() -> randomOne(repository));
-}
+	public static User byIdWaitExist(UserRepository repository, String id) {
+		await().atMost(10, TimeUnit.SECONDS).until(() -> repository.findById(id).isPresent());
+		return repository.findById(id).orElse(null);
+	}
 
-public static User byId(UserRepository repository, String id) {
-return repository.findById(id).orElse(null);
-}
+	public static User byIdWaitNotExist(UserRepository repository, String id) {
+		await().atMost(10, TimeUnit.SECONDS).until(() -> repository.findById(id).isEmpty());
+		return null;
+	}
 
-public static User byIdWaitExist(UserRepository repository, String id) {
-await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) != null);
-return repository.findById(id).orElse(null);
-}
-
-public static User byIdWaitNotExist(UserRepository repository, String id) {
-await().atMost(5, TimeUnit.SECONDS).until(() -> byId(repository, id) == null);
-return repository.findById(id).orElse(null);
-}
-
-public static List<User> randomMany(UserRepository repository, int count) {
-List<User> items = new ArrayList<>();
-for (int i = 0; i < count; i++) {
-items.add(randomOne(repository));
-}
-return items;
-}
-
-public static List<CreateUserCommand> randomManyViaCommand(CommandGateway commandGateway, int count,User user) {
-	List<CreateUserCommand> items = new ArrayList<>();
+	public static List<CreateUserCommand> randomManyViaCommand(
+		CommandGateway commandGateway,
+		UserRepository repository,
+        UserRepository createdByDataRepository,
+        TenantRepository tenantDataRepository,
+		int count,
+		User user
+	) {
+		List<CreateUserCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-		items.add(randomOneViaCommand(commandGateway,user));
+			CreateUserCommand command = randomOneViaCommand(
+			commandGateway,
+			 repository,
+            createdByDataRepository,
+            tenantDataRepository,
+			 user);
+			items.add(command);
 		}
 		return items;
-		}
+	}
 
-		public static void deleteAll(UserRepository repository) {
+	public static void deleteAll(UserRepository repository) {
 		repository.deleteAll();
-		}
+	}
 
-		public static CreateUserCommand randomOneViaCommand(CommandGateway commandGateway, User user) {
-
-
+		public static CreateUserCommand randomOneViaCommand(
+		CommandGateway commandGateway,
+		UserRepository  repository,
+        UserRepository createdByDataRepository,
+        TenantRepository tenantDataRepository,
+		 User user) {
 
 			CreateUserCommand command = CreateUserCommand.builder()
 				.username(UserUsername.create(UUID.randomUUID().toString()))
 				.password(UserPassword.create(UUID.randomUUID().toString()))
 			.build();
 
-			command.setCreatedBy(UserCreatedBy.create(user.getId()));
-			command.setTenant(UserTenant.create(user.getTenant().getId()));
+		command.setCreatedBy(UserCreatedBy.create(user.getId()));
+		command.setTenant(UserTenant.create(user.getTenant().getId()));
+		commandGateway.sendAndWait(command);
+		await().atMost(10, TimeUnit.SECONDS).until(() -> repository.findById(command.getId().value()).isPresent());
+		return command;
+	}
 
-			commandGateway.sendAndWait(command);
+
+	public static CreateUserCommand randomOneViaCommand(
+        CommandGateway commandGateway,
+        UserRepository  repository,
+        User user
+        ) {
+
+        CreateUserCommand command = CreateUserCommand.builder()
+        .username(UserUsername.create(UUID.randomUUID().toString()))
+        .password(UserPassword.create(UUID.randomUUID().toString()))
+        .build();
+
+		command.setCreatedBy(UserCreatedBy.create(user.getId()));
+		command.setTenant(UserTenant.create(user.getTenant().getId()));
+		commandGateway.sendAndWait(command);
+		await().atMost(10, TimeUnit.SECONDS).until(() -> repository.findById(command.getId().value()).isPresent());
 		return command;
 	}
 }

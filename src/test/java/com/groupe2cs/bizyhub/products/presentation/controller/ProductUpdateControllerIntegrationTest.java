@@ -6,8 +6,10 @@ import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.products.application.command.*;
 import java.util.UUID;
 
@@ -28,21 +30,34 @@ private CommandGateway commandGateway;
 @Autowired
 private CommandGateway commandGatewayUpdate;
 
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
 
 @Test
 void it_should_be_able_to_update_product() {
 
-	String existingId = ProductFixtures.randomOneViaCommand(commandGateway, getCurrentUser() ).getId().value();
-	CreateProductCommand updated = ProductFixtures.randomOneViaCommand(commandGatewayUpdate, getCurrentUser());
+	String existingId = ProductFixtures.randomOneViaCommand(
+	commandGateway,productRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+	 getCurrentUser() ).getId().value();
+
+	CreateProductCommand updated = ProductFixtures.randomOneViaCommand(commandGatewayUpdate,
+    productRepository,
+            createdByDataRepository,
+            tenantDataRepository,
+     getCurrentUser());
 
 	ProductFixtures.byIdWaitExist(productRepository, existingId);
 	ProductFixtures.byIdWaitExist(productRepository, updated.getId().value());
 
 	ProductRequest requestDTO = new ProductRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setPrice(4238.03);
+	 requestDTO.setPrice(503.1);
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(true);
+	 requestDTO.setIsActive(false);
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());
 
