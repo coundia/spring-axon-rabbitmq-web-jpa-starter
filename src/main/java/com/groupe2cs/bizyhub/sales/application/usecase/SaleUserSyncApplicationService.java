@@ -8,6 +8,7 @@ import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.application.query.FindByUserUsernameQuery;
 import com.groupe2cs.bizyhub.security.application.usecase.UserReadApplicationService;
 import com.groupe2cs.bizyhub.security.domain.valueObject.UserUsername;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class SaleUserSyncApplicationService {
 
 	private final CommandGateway commandGateway;
-	private final UserReadApplicationService userReadApplicationService;
+	private final UserRepository userRepository ;
 
 	public void syncSaleUser(SaleUserSyncRequest request,
 							 MetaRequest metaRequest
@@ -28,16 +29,16 @@ public class SaleUserSyncApplicationService {
 			switch (d.getType()) {
 				case "CREATE" -> {
 
-					String userName = d.getUsername();
+				String userName = d.getUsername().toLowerCase();
+				String userId = d.getUsers();
 
-					String userId = userReadApplicationService.findByUserUsername(
-							UserUsername.create(userName),
-							 metaRequest
-					).getFirst().getId() ;
+				  userId = userRepository.findByUsernameAndTenantId(userName,metaRequest.getTenantId()).orElseThrow().getId();
 
 					CreateSaleUserCommand command = CreateSaleUserCommand.builder()
 							.sales(SaleUserSales.create(d.getSales()))
-							.users(SaleUserUsers.create(d.getUsers()))
+
+							.users(SaleUserUsers.create(userId))
+
 							.username(SaleUserUsername.create(d.getUsername()))
 							.email(SaleUserEmail.create(d.getEmail()))
 							.details(SaleUserDetails.create(d.getDetails()))
