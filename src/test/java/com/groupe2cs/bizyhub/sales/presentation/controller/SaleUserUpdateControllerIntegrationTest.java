@@ -67,7 +67,7 @@ void it_should_be_able_to_update_saleuser() {
 	 requestDTO.setUsername(UUID.randomUUID().toString());
 	 requestDTO.setEmail(UUID.randomUUID().toString());
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(true);
+	 requestDTO.setIsActive(false);
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());
 

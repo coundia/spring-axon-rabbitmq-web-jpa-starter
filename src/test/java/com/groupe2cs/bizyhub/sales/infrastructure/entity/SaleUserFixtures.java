@@ -82,7 +82,7 @@ public class SaleUserFixtures {
 				.username(SaleUserUsername.create(UUID.randomUUID().toString()))
 				.email(SaleUserEmail.create(UUID.randomUUID().toString()))
 				.details(SaleUserDetails.create(UUID.randomUUID().toString()))
-				.isActive(SaleUserIsActive.create(true))
+				.isActive(SaleUserIsActive.create(false))
 				.updatedAt(SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SaleUserReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -105,7 +105,7 @@ public class SaleUserFixtures {
         .username(SaleUserUsername.create(UUID.randomUUID().toString()))
         .email(SaleUserEmail.create(UUID.randomUUID().toString()))
         .details(SaleUserDetails.create(UUID.randomUUID().toString()))
-        .isActive(SaleUserIsActive.create(true))
+        .isActive(SaleUserIsActive.create(false))
         .updatedAt(SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(SaleUserReference.create(UUID.randomUUID().toString()))
         .build();

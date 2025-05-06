@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.data.repository.query.Param;
 import java.time.*;
 import java.util.*;
 
@@ -87,6 +87,14 @@ public interface SaleRepository extends JpaRepository<Sale, String> {
 
 	@Query("SELECT e FROM Sale e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<Sale> findByTenantIdAndTenantId(String tenant, String tenantId);
+
+    @Query("""
+    SELECT DISTINCT s FROM Sale s
+    LEFT JOIN SaleUser su ON su.sales = s
+    WHERE s.tenant.id = :tenantId AND (s.createdBy.id = :userId OR su.users.id = :userId)
+    """)
+	Page<Sale> findAllOwnedOrShared(@Param("userId") String userId, @Param("tenantId") String tenantId, Pageable pageable);
+
 
 
 }

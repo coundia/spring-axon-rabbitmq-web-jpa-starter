@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.data.repository.query.Param;
 import java.time.*;
 import java.util.*;
 
@@ -83,6 +83,8 @@ public interface TenantRepository extends JpaRepository<Tenant, String> {
 
 	@Query("SELECT e FROM Tenant e WHERE e.createdBy.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<Tenant> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
+
+
 
 
 }

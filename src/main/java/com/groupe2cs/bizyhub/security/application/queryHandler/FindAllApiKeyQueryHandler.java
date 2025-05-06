@@ -41,8 +41,8 @@ if(metaRequest.isAdmin()) {
  log.info("Admin user, fetching all ApiKeys");
 	pages = repository.findAllByTenantId( metaRequest.getTenantId(),pageable);
 }else{
- log.info("Non-admin user, fetching ApiKeys by userId");
-	pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
+ log.info("User, fetching own  ");
+  	pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
 }
 
 List<ApiKeyResponse> responses = pages.stream()

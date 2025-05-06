@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.data.repository.query.Param;
 import java.time.*;
 import java.util.*;
 
@@ -79,6 +79,8 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 
 	@Query("SELECT e FROM ApiKey e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<ApiKey> findByTenantIdAndTenantId(String tenant, String tenantId);
+
+
 
 
 }

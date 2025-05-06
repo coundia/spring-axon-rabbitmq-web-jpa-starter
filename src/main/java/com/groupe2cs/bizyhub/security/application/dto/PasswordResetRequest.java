@@ -19,10 +19,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "PasswordResetRequest", description = "Request payload for PasswordReset operations")
 public class PasswordResetRequest implements Serializable {
 
-	@Schema(description = "", example = "69948588-043f-48d9-af37-a8cb0b78b9aa")
+	@Schema(description = "", example = "60188831-3ffb-419c-8d7c-89b369563569")
 	private String token;
 
-	@Schema(description = "", example = "efc6d896-1d89-4a68-8906-184bd606af9b")
+	@Schema(description = "", example = "6cd846c9-c658-4b57-89a5-104be5e048ff")
 	private String username;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")

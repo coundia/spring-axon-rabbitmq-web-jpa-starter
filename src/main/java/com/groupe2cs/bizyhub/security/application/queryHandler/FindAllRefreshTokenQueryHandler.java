@@ -41,8 +41,8 @@ if(metaRequest.isAdmin()) {
  log.info("Admin user, fetching all RefreshTokens");
 	pages = repository.findAllByTenantId( metaRequest.getTenantId(),pageable);
 }else{
- log.info("Non-admin user, fetching RefreshTokens by userId");
-	pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
+ log.info("User, fetching own  ");
+  	pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
 }
 
 List<RefreshTokenResponse> responses = pages.stream()

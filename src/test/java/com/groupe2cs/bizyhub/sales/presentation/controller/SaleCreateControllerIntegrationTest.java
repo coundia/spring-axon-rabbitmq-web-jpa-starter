@@ -37,7 +37,7 @@ void it_should_be_able_to_add_sale() {
 		SaleRequest requestDTO = new SaleRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(127.4);
+		requestDTO.setAmount(3414.61);
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(true);
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));

@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.data.repository.query.Param;
 import java.time.*;
 import java.util.*;
 
@@ -47,6 +47,8 @@ public interface PermissionRepository extends JpaRepository<Permission, String> 
 
 	@Query("SELECT e FROM Permission e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<Permission> findByTenantIdAndTenantId(String tenant, String tenantId);
+
+
 
 
 }

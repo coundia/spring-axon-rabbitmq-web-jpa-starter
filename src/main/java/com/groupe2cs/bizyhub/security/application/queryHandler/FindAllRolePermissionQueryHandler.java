@@ -41,8 +41,8 @@ if(metaRequest.isAdmin()) {
  log.info("Admin user, fetching all RolePermissions");
 	pages = repository.findAllByTenantId( metaRequest.getTenantId(),pageable);
 }else{
- log.info("Non-admin user, fetching RolePermissions by userId");
-	pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
+ log.info("User, fetching own  ");
+  	pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
 }
 
 List<RolePermissionResponse> responses = pages.stream()

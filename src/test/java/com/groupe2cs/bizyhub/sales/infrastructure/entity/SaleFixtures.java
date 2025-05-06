@@ -72,7 +72,7 @@ public class SaleFixtures {
 
 			CreateSaleCommand command = CreateSaleCommand.builder()
 				.name(SaleName.create(UUID.randomUUID().toString()))
-				.amount(SaleAmount.create(840.18))
+				.amount(SaleAmount.create(544.37))
 				.details(SaleDetails.create(UUID.randomUUID().toString()))
 				.isActive(SaleIsActive.create(false))
 				.updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
@@ -95,7 +95,7 @@ public class SaleFixtures {
 
         CreateSaleCommand command = CreateSaleCommand.builder()
         .name(SaleName.create(UUID.randomUUID().toString()))
-        .amount(SaleAmount.create(840.18))
+        .amount(SaleAmount.create(544.37))
         .details(SaleDetails.create(UUID.randomUUID().toString()))
         .isActive(SaleIsActive.create(false))
         .updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))

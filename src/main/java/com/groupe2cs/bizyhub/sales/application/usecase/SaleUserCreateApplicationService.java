@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
 
-import com.groupe2cs.bizyhub.sales.application.command.*;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sales.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.sales.application.mapper.*;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sales.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sales.domain;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import com.groupe2cs.bizyhub.sales.domain.exception.*;
-import java.util.UUID;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import java.util.UUID;
+import com.groupe2cs.bizyhub.sales.domain.exception.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
 
 
 public class SaleUserAggregateTests extends BaseUnitTests {
@@ -19,7 +19,7 @@ void it_should_create_saleUser_with_valid_values() {
 	SaleUserUsername username = SaleUserUsername.create(UUID.randomUUID().toString());
 	SaleUserEmail email = SaleUserEmail.create(UUID.randomUUID().toString());
 	SaleUserDetails details = SaleUserDetails.create(UUID.randomUUID().toString());
-	SaleUserIsActive isActive = SaleUserIsActive.create(false);
+	SaleUserIsActive isActive = SaleUserIsActive.create(true);
 	SaleUserUpdatedAt updatedAt = SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	SaleUserReference reference = SaleUserReference.create(UUID.randomUUID().toString());
 	SaleUserCreatedBy createdBy = SaleUserCreatedBy.create(UUID.randomUUID().toString());
