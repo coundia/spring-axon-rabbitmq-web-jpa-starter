@@ -60,7 +60,7 @@ public class Sale   extends AbstractAuditableEntity  {
 	@Builder.Default
 	private Boolean isActive  = true ;
 	@ManyToOne
-	@JoinColumn(name = "product_id", nullable = false)
+	@JoinColumn(name = "product_id", nullable = true)
 	private com.groupe2cs.bizyhub.products.infrastructure.entity.Product product;
 
 	@Column(nullable = true, 

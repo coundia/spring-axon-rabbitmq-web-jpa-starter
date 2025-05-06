@@ -29,10 +29,10 @@ this.repository = repository;
 public void on(PasswordResetCreatedEvent event) {
 try {
 PasswordReset entity = PasswordReset.builder()
-		.id(event.getId().value())
- 		.token(event.getToken().value())
- 		.username(event.getUsername().value())
- 		.expiration(event.getExpiration().value())
+		.id(event.getId() == null ? null : event.getId().value())
+ 		.token(event.getToken() == null ? null : event.getToken().value())
+ 		.username(event.getUsername() == null ? null : event.getUsername().value())
+ 		.expiration(event.getExpiration() == null ? null : event.getExpiration().value())
  .build();
 
 if(event.getCreatedBy() !=null){

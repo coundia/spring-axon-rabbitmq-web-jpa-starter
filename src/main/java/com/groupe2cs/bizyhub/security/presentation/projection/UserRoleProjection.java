@@ -29,9 +29,9 @@ this.repository = repository;
 public void on(UserRoleCreatedEvent event) {
 try {
 UserRole entity = UserRole.builder()
-		.id(event.getId().value())
-  		.user(new User(event.getUser().value()))
- 		.role(new Role(event.getRole().value()))
+		.id(event.getId() == null ? null : event.getId().value())
+  		.user( event.getUser() == null ? null : new User(event.getUser().value()))
+ 		.role( event.getRole() == null ? null : new Role(event.getRole().value()))
 .build();
 
 if(event.getCreatedBy() !=null){

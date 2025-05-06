@@ -29,12 +29,12 @@ this.repository = repository;
 public void on(ApiKeyCreatedEvent event) {
 try {
 ApiKey entity = ApiKey.builder()
-		.id(event.getId().value())
- 		.appKey(event.getAppKey().value())
- 		.username(event.getUsername().value())
- 		.active(event.getActive().value())
- 		.createdAt(event.getCreatedAt().value())
- 		.expiration(event.getExpiration().value())
+		.id(event.getId() == null ? null : event.getId().value())
+ 		.appKey(event.getAppKey() == null ? null : event.getAppKey().value())
+ 		.username(event.getUsername() == null ? null : event.getUsername().value())
+ 		.active(event.getActive() == null ? null : event.getActive().value())
+ 		.createdAt(event.getCreatedAt() == null ? null : event.getCreatedAt().value())
+ 		.expiration(event.getExpiration() == null ? null : event.getExpiration().value())
  .build();
 
 if(event.getCreatedBy() !=null){

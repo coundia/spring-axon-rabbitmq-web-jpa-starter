@@ -28,10 +28,7 @@ this.sales = sales;
 
 public static SaleUserSales create(String sales) {
 
-if (sales == null || sales.isBlank()) {
-throw new SaleUserSalesNotValid("Sales is invalid");
-}
-return new SaleUserSales(sales);
+	return new SaleUserSales(sales);
 }
 
 public String value() {

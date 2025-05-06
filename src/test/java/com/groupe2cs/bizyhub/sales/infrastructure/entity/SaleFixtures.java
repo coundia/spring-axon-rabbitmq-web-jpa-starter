@@ -1,18 +1,25 @@
 package com.groupe2cs.bizyhub.sales.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.sales.application.command.CreateSaleCommand;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import com.groupe2cs.bizyhub.sales.application.command.*;
+import java.util.UUID;
 
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.mock.web.MockMultipartFile;
 import static org.awaitility.Awaitility.await;
 
 public class SaleFixtures {
@@ -32,23 +39,23 @@ public class SaleFixtures {
 	}
 
 	public static List<CreateSaleCommand> randomManyViaCommand(
-			CommandGateway commandGateway,
-			SaleRepository repository,
-			com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository,
-			UserRepository createdByDataRepository,
-			TenantRepository tenantDataRepository,
-			int count,
-			User user
+		CommandGateway commandGateway,
+		SaleRepository repository,
+        com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository,
+        UserRepository createdByDataRepository,
+        TenantRepository tenantDataRepository,
+		int count,
+		User user
 	) {
 		List<CreateSaleCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateSaleCommand command = randomOneViaCommand(
-					commandGateway,
-					repository,
-					productDataRepository,
-					createdByDataRepository,
-					tenantDataRepository,
-					user);
+			commandGateway,
+			 repository,
+            productDataRepository,
+            createdByDataRepository,
+            tenantDataRepository,
+			 user);
 			items.add(command);
 		}
 		return items;
@@ -58,26 +65,23 @@ public class SaleFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateSaleCommand randomOneViaCommand(
-			CommandGateway commandGateway,
-			SaleRepository repository,
-			com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository,
-			UserRepository createdByDataRepository,
-			TenantRepository tenantDataRepository,
-			User user) {
+		public static CreateSaleCommand randomOneViaCommand(
+		CommandGateway commandGateway,
+		SaleRepository  repository,
+        com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository,
+        UserRepository createdByDataRepository,
+        TenantRepository tenantDataRepository,
+		 User user) {
 
-		CreateSaleCommand command = CreateSaleCommand.builder()
+			CreateSaleCommand command = CreateSaleCommand.builder()
 				.name(SaleName.create(UUID.randomUUID().toString()))
-				.amount(SaleAmount.create(1839.94))
+				.amount(SaleAmount.create(3600.28))
 				.details(SaleDetails.create(UUID.randomUUID().toString()))
-				.isActive(SaleIsActive.create(false))
-				.product(SaleProduct.create(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(
-						commandGateway,
-						productDataRepository,
-						user).getId().value()))
+				.isActive(SaleIsActive.create(true))
+				.product(SaleProduct.create(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value()))
 				.updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SaleReference.create(UUID.randomUUID().toString()))
-				.build();
+			.build();
 
 		command.setCreatedBy(SaleCreatedBy.create(user.getId()));
 		command.setTenant(SaleTenant.create(user.getTenant().getId()));
@@ -88,19 +92,19 @@ public class SaleFixtures {
 
 
 	public static CreateSaleCommand randomOneViaCommand(
-			CommandGateway commandGateway,
-			SaleRepository repository,
-			User user
-	) {
+        CommandGateway commandGateway,
+        SaleRepository  repository,
+        User user
+        ) {
 
-		CreateSaleCommand command = CreateSaleCommand.builder()
-				.name(SaleName.create(UUID.randomUUID().toString()))
-				.amount(SaleAmount.create(1839.94))
-				.details(SaleDetails.create(UUID.randomUUID().toString()))
-				.isActive(SaleIsActive.create(false))
-				.updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.reference(SaleReference.create(UUID.randomUUID().toString()))
-				.build();
+        CreateSaleCommand command = CreateSaleCommand.builder()
+        .name(SaleName.create(UUID.randomUUID().toString()))
+        .amount(SaleAmount.create(3600.28))
+        .details(SaleDetails.create(UUID.randomUUID().toString()))
+        .isActive(SaleIsActive.create(true))
+        .updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
+        .reference(SaleReference.create(UUID.randomUUID().toString()))
+        .build();
 
 		command.setCreatedBy(SaleCreatedBy.create(user.getId()));
 		command.setTenant(SaleTenant.create(user.getTenant().getId()));

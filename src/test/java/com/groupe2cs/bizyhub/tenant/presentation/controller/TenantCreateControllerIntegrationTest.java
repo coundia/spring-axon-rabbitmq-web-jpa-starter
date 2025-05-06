@@ -40,7 +40,7 @@ void it_should_be_able_to_add_tenant() {
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setDomain(UUID.randomUUID().toString());
 		requestDTO.setLanguage(UUID.randomUUID().toString());
-		requestDTO.setActive(false);
+		requestDTO.setActive(true);
 
  		String uri = "/v1/admin/commands/tenant";
 		ResponseEntity<TenantResponse> response = this.postForEntity(uri, requestDTO, TenantResponse.class);

@@ -29,8 +29,8 @@ this.repository = repository;
 public void on(PermissionCreatedEvent event) {
 try {
 Permission entity = Permission.builder()
-		.id(event.getId().value())
- 		.name(event.getName().value())
+		.id(event.getId() == null ? null : event.getId().value())
+ 		.name(event.getName() == null ? null : event.getName().value())
  .build();
 
 if(event.getCreatedBy() !=null){

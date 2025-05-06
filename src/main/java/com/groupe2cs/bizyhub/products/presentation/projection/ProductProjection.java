@@ -29,13 +29,13 @@ this.repository = repository;
 public void on(ProductCreatedEvent event) {
 try {
 Product entity = Product.builder()
-		.id(event.getId().value())
- 		.name(event.getName().value())
- 		.price(event.getPrice().value())
- 		.details(event.getDetails().value())
- 		.isActive(event.getIsActive().value())
- 		.updatedAt(event.getUpdatedAt().value())
- 		.reference(event.getReference().value())
+		.id(event.getId() == null ? null : event.getId().value())
+ 		.name(event.getName() == null ? null : event.getName().value())
+ 		.price(event.getPrice() == null ? null : event.getPrice().value())
+ 		.details(event.getDetails() == null ? null : event.getDetails().value())
+ 		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
+ 		.updatedAt(event.getUpdatedAt() == null ? null : event.getUpdatedAt().value())
+ 		.reference(event.getReference() == null ? null : event.getReference().value())
  .build();
 
 if(event.getCreatedBy() !=null){

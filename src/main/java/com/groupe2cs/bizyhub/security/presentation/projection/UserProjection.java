@@ -29,9 +29,9 @@ this.repository = repository;
 public void on(UserCreatedEvent event) {
 try {
 User entity = User.builder()
-		.id(event.getId().value())
- 		.username(event.getUsername().value())
- 		.password(event.getPassword().value())
+		.id(event.getId() == null ? null : event.getId().value())
+ 		.username(event.getUsername() == null ? null : event.getUsername().value())
+ 		.password(event.getPassword() == null ? null : event.getPassword().value())
  .build();
 
 if(event.getCreatedBy() !=null){

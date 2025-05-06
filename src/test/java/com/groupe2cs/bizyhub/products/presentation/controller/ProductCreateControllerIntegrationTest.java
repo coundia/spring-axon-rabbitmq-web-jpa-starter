@@ -37,7 +37,7 @@ void it_should_be_able_to_add_product() {
 		ProductRequest requestDTO = new ProductRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setPrice(5919.88);
+		requestDTO.setPrice(4659.29);
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(true);
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));

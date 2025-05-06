@@ -39,7 +39,7 @@ void it_should_be_able_to_add_sale() {
 		SaleRequest requestDTO = new SaleRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(7174.42);
+		requestDTO.setAmount(6873.76);
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(false);
 		requestDTO.setProduct(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value());

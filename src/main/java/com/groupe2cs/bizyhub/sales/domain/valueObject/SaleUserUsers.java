@@ -29,10 +29,7 @@ this.users = users;
 
 public static SaleUserUsers create(String users) {
 
-if (users == null || users.isBlank()) {
-throw new SaleUserUsersNotValid("Users is invalid");
-}
-return new SaleUserUsers(users);
+	return new SaleUserUsers(users);
 }
 
 public String value() {

@@ -29,12 +29,12 @@ this.repository = repository;
 public void on(TenantCreatedEvent event) {
 try {
 Tenant entity = Tenant.builder()
-		.id(event.getId().value())
- 		.name(event.getName().value())
- 		.description(event.getDescription().value())
- 		.domain(event.getDomain().value())
- 		.language(event.getLanguage().value())
- 		.active(event.getActive().value())
+		.id(event.getId() == null ? null : event.getId().value())
+ 		.name(event.getName() == null ? null : event.getName().value())
+ 		.description(event.getDescription() == null ? null : event.getDescription().value())
+ 		.domain(event.getDomain() == null ? null : event.getDomain().value())
+ 		.language(event.getLanguage() == null ? null : event.getLanguage().value())
+ 		.active(event.getActive() == null ? null : event.getActive().value())
  .build();
 
 if(event.getCreatedBy() !=null){

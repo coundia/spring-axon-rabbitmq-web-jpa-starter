@@ -29,13 +29,13 @@ this.repository = repository;
 public void on(SaleUserCreatedEvent event) {
 try {
 SaleUser entity = SaleUser.builder()
-		.id(event.getId().value())
-  		.sales(new com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale(event.getSales().value()))
- 		.users(new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUsers().value()))
-		.details(event.getDetails().value())
- 		.isActive(event.getIsActive().value())
- 		.updatedAt(event.getUpdatedAt().value())
- 		.reference(event.getReference().value())
+		.id(event.getId() == null ? null : event.getId().value())
+  		.sales( event.getSales() == null ? null : new com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale(event.getSales().value()))
+ 		.users( event.getUsers() == null ? null : new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUsers().value()))
+		.details(event.getDetails() == null ? null : event.getDetails().value())
+ 		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
+ 		.updatedAt(event.getUpdatedAt() == null ? null : event.getUpdatedAt().value())
+ 		.reference(event.getReference() == null ? null : event.getReference().value())
  .build();
 
 if(event.getCreatedBy() !=null){

@@ -32,10 +32,7 @@ this.product = product;
 
 public static SaleProduct create(String product) {
 
-if (product == null || product.isBlank()) {
-throw new SaleProductNotValid("Product is invalid");
-}
-return new SaleProduct(product);
+	return new SaleProduct(product);
 }
 
 public String value() {
