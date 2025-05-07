@@ -62,10 +62,10 @@ void it_should_be_able_to_update_saleuser() {
 	SaleUserFixtures.byIdWaitExist(saleuserRepository, updated.getId().value());
 
 	SaleUserRequest requestDTO = new SaleUserRequest();
+	 requestDTO.setName(UUID.randomUUID().toString());
 	 requestDTO.setSales( updated.getSales().value());
 	 requestDTO.setUsers( updated.getUsers().value());
 	 requestDTO.setUsername(UUID.randomUUID().toString());
-	 requestDTO.setEmail(UUID.randomUUID().toString());
 	 requestDTO.setDetails(UUID.randomUUID().toString());
 	 requestDTO.setIsActive(false);
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));

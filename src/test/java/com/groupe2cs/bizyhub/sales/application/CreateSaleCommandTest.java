@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateSaleCommand command = new CreateSaleCommand(
- SaleId.create(UUID.randomUUID().toString()) ,  SaleName.create(UUID.randomUUID().toString()) ,  SaleAmount.create(2975.86) ,  SaleDetails.create(UUID.randomUUID().toString()) ,  SaleIsActive.create(true) ,  SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SaleReference.create(UUID.randomUUID().toString()) ,  SaleCreatedBy.create(UUID.randomUUID().toString()) ,  SaleTenant.create(UUID.randomUUID().toString()) 
+ SaleId.create(UUID.randomUUID().toString()) ,  SaleName.create(UUID.randomUUID().toString()) ,  SaleAmount.create(4355.79) ,  SaleDetails.create(UUID.randomUUID().toString()) ,  SaleIsActive.create(true) ,  SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SaleReference.create(UUID.randomUUID().toString()) ,  SaleCreatedBy.create(UUID.randomUUID().toString()) ,  SaleTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

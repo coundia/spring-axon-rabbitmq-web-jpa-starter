@@ -1,10 +1,10 @@
-package com.groupe2cs.bizyhub.sales.presentation.controller;
+package com.groupe2cs.bizyhub.products.presentation.controller;
 
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sales.application.query.*;
-import com.groupe2cs.bizyhub.sales.application.mapper.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.sales.application.usecase.*;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.products.application.query.*;
+import com.groupe2cs.bizyhub.products.application.mapper.*;
+import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.products.application.usecase.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 
@@ -33,35 +33,35 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 
 
-@PreAuthorize("@saleUserGate.canList(authentication)")
+@PreAuthorize("@productGate.canList(authentication)")
 @RestController
-@RequestMapping("/api/v1/queries/saleUser")
-@Tag(name = "SaleUser Queries", description = "Endpoints for querying saleUsers by email")
+@RequestMapping("/api/v1/queries/product")
+@Tag(name = "Product Queries", description = "Endpoints for querying products by updatedAt")
 @Slf4j
-public class FindByEmailSaleUserController {
+public class FindByUpdatedAtProductController {
 
-private final SaleUserReadApplicationService applicationService;
+private final ProductReadApplicationService applicationService;
 
-public FindByEmailSaleUserController(SaleUserReadApplicationService  applicationService) {
+public FindByUpdatedAtProductController(ProductReadApplicationService  applicationService) {
 	this.applicationService = applicationService;
 }
 
-@GetMapping("/email")
+@GetMapping("/updatedAt")
 @Operation(
-summary = "Find saleUser by email",
-description = "Returns a list of saleUsers that match the given email"
+summary = "Find product by updatedAt",
+description = "Returns a list of products that match the given updatedAt"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = SaleUserResponse.class))),
+content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductResponse.class))),
 @ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
 @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
 })
 
-public ResponseEntity<List<SaleUserResponse>> findByEmail(
+public ResponseEntity<List<ProductResponse>> findByUpdatedAt(
 	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the email to filter by", required = true)
-	@RequestParam String email
+	@Parameter(description = "Value of the updatedAt to filter by", required = true)
+	@RequestParam java.time.Instant updatedAt
 	) {
 	try {
 
@@ -69,12 +69,12 @@ public ResponseEntity<List<SaleUserResponse>> findByEmail(
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
-	var future = applicationService.findBySaleUserEmail(SaleUserEmail
-	.create(email) , metaRequest);
+	var future = applicationService.findByProductUpdatedAt(ProductUpdatedAt
+	.create(updatedAt) , metaRequest);
 
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find saleUser by email: {}", e.getMessage(), e);
+	log.error("Failed to find product by updatedAt: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

@@ -16,7 +16,7 @@ void it_should_create_apiKey_with_valid_values() {
 	ApiKeyId id = ApiKeyId.create(UUID.randomUUID().toString());
 	ApiKeyAppKey appKey = ApiKeyAppKey.create(UUID.randomUUID().toString());
 	ApiKeyUsername username = ApiKeyUsername.create(UUID.randomUUID().toString());
-	ApiKeyActive active = ApiKeyActive.create(false);
+	ApiKeyActive active = ApiKeyActive.create(true);
 	ApiKeyCreatedAt createdAt = ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	ApiKeyExpiration expiration = ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600));
 	ApiKeyCreatedBy createdBy = ApiKeyCreatedBy.create(UUID.randomUUID().toString());

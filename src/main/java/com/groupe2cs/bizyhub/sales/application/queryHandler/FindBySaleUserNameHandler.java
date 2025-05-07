@@ -15,16 +15,16 @@ import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
-public class FindBySaleUserEmailHandler {
+public class FindBySaleUserNameHandler {
 
 private final SaleUserRepository repository;
 @QueryHandler
-public List<SaleUserResponse> handle(FindBySaleUserEmailQuery query) {
+public List<SaleUserResponse> handle(FindBySaleUserNameQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
 
-String value = query.getEmail().value();
-	List<SaleUser> entities = repository.findByEmailAndCreatedById(value, metaRequest.getUserId());
+String value = query.getName().value();
+	List<SaleUser> entities = repository.findByNameAndCreatedById(value, metaRequest.getUserId());
 	return entities.stream()
 	.map(SaleUserMapper::toResponse)
 	.toList();

@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
-import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -42,12 +42,12 @@ private SaleUserRepository Repository;
 		SaleUserSyncRequest requestDTO = SaleUserSyncRequest.builder()
 		.deltas(List.of(
 		SaleUserDeltaDto.builder()
+.name(UUID.randomUUID().toString())
 .sales(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,salesDataRepository, user).getId().value())
 .users(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,usersDataRepository, user).getId().value())
 .username(UUID.randomUUID().toString())
-.email(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
-.isActive(true)
+.isActive(false)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 		.type("CREATE")
@@ -74,12 +74,12 @@ private SaleUserRepository Repository;
 			.deltas(List.of(
 			SaleUserDeltaDto.builder()
 			.id(existingId)
+.name(UUID.randomUUID().toString())
 .sales(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,salesDataRepository, user).getId().value())
 .users(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,usersDataRepository, user).getId().value())
 .username(UUID.randomUUID().toString())
-.email(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
-.isActive(true)
+.isActive(false)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 			.type("UPDATE")

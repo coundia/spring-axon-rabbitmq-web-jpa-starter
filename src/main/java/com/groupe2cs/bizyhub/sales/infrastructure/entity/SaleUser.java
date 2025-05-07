@@ -31,6 +31,13 @@ public class SaleUser   extends AbstractAuditableEntity  {
 	@Id
 	private String id;
 
+
+	@Column(nullable = false, 
+		unique = false  ,
+		length = 250
+	)
+
+	private String name ;
 	@ManyToOne
 	@JoinColumn(name = "sales_id", nullable = true)
 	private com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale sales;
@@ -44,13 +51,6 @@ public class SaleUser   extends AbstractAuditableEntity  {
 	)
 
 	private String username ;
-
-	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
-	)
-
-	private String email ;
 
 	@Column(nullable = true, 
 		unique = false  ,
@@ -91,10 +91,10 @@ public class SaleUser   extends AbstractAuditableEntity  {
  	public String toString() {
 		return "SaleUser{" +
 		"id='" + id + '\'' +
+			", name=" + name +
 			", sales=" + sales +
 			", users=" + users +
 			", username=" + username +
-			", email=" + email +
 			", details=" + details +
 			", isActive=" + isActive +
 			", updatedAt=" + updatedAt +

@@ -77,12 +77,12 @@ public class SaleUserFixtures {
 		 User user) {
 
 			CreateSaleUserCommand command = CreateSaleUserCommand.builder()
+				.name(SaleUserName.create(UUID.randomUUID().toString()))
 				.sales(SaleUserSales.create(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,salesDataRepository, user).getId().value()))
 				.users(SaleUserUsers.create(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,usersDataRepository, user).getId().value()))
 				.username(SaleUserUsername.create(UUID.randomUUID().toString()))
-				.email(SaleUserEmail.create(UUID.randomUUID().toString()))
 				.details(SaleUserDetails.create(UUID.randomUUID().toString()))
-				.isActive(SaleUserIsActive.create(false))
+				.isActive(SaleUserIsActive.create(true))
 				.updatedAt(SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SaleUserReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -102,10 +102,10 @@ public class SaleUserFixtures {
         ) {
 
         CreateSaleUserCommand command = CreateSaleUserCommand.builder()
+        .name(SaleUserName.create(UUID.randomUUID().toString()))
         .username(SaleUserUsername.create(UUID.randomUUID().toString()))
-        .email(SaleUserEmail.create(UUID.randomUUID().toString()))
         .details(SaleUserDetails.create(UUID.randomUUID().toString()))
-        .isActive(SaleUserIsActive.create(false))
+        .isActive(SaleUserIsActive.create(true))
         .updatedAt(SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(SaleUserReference.create(UUID.randomUUID().toString()))
         .build();

@@ -8,9 +8,9 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class FindBySaleUserEmailQuery {
+public class FindBySaleUserNameQuery {
 
-	private final SaleUserEmail  email;
+	private final SaleUserName  name;
 	private final MetaRequest metaRequest;
 
 }

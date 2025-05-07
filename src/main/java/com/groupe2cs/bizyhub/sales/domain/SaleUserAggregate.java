@@ -24,10 +24,10 @@ public class SaleUserAggregate {
 
 @AggregateIdentifier
 private SaleUserId id;
+private SaleUserName name;
 private SaleUserSales sales;
 private SaleUserUsers users;
 private SaleUserUsername username;
-private SaleUserEmail email;
 private SaleUserDetails details;
 private SaleUserIsActive isActive;
 private SaleUserUpdatedAt updatedAt;
@@ -40,10 +40,10 @@ private SaleUserTenant tenant;
 public SaleUserAggregate(CreateSaleUserCommand command) {
 apply(new SaleUserCreatedEvent(
 		command.getId(),
+		command.getName(),
 		command.getSales(),
 		command.getUsers(),
 		command.getUsername(),
-		command.getEmail(),
 		command.getDetails(),
 		command.getIsActive(),
 		command.getUpdatedAt(),
@@ -64,10 +64,10 @@ public void handle(DeleteSaleUserCommand command) {
 public void handle(UpdateSaleUserCommand command) {
 apply(new SaleUserUpdatedEvent(
 		command.getId(),
+		command.getName(),
 		command.getSales(),
 		command.getUsers(),
 		command.getUsername(),
-		command.getEmail(),
 		command.getDetails(),
 		command.getIsActive(),
 		command.getUpdatedAt(),
@@ -80,10 +80,10 @@ apply(new SaleUserUpdatedEvent(
 @EventSourcingHandler
 public void on(SaleUserCreatedEvent event) {
 	this.id = event.getId();
+	this.name = event.getName();
 	this.sales = event.getSales();
 	this.users = event.getUsers();
 	this.username = event.getUsername();
-	this.email = event.getEmail();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.updatedAt = event.getUpdatedAt();
@@ -100,10 +100,10 @@ this.id = event.getId();
 @EventSourcingHandler
 public void on(SaleUserUpdatedEvent event) {
 this.id = event.getId();
+	this.name = event.getName();
 	this.sales = event.getSales();
 	this.users = event.getUsers();
 	this.username = event.getUsername();
-	this.email = event.getEmail();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.updatedAt = event.getUpdatedAt();

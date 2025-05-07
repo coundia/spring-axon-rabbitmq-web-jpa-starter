@@ -15,7 +15,7 @@ public class SaleAggregateTests extends BaseUnitTests {
 void it_should_create_sale_with_valid_values() {
 	SaleId id = SaleId.create(UUID.randomUUID().toString());
 	SaleName name = SaleName.create(UUID.randomUUID().toString());
-	SaleAmount amount = SaleAmount.create(8867.34);
+	SaleAmount amount = SaleAmount.create(9957.23);
 	SaleDetails details = SaleDetails.create(UUID.randomUUID().toString());
 	SaleIsActive isActive = SaleIsActive.create(true);
 	SaleUpdatedAt updatedAt = SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));

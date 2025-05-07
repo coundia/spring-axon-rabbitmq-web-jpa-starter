@@ -2,6 +2,7 @@ package com.groupe2cs.bizyhub.sales.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserIdNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserNameNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserSalesNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserUsersNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUserUsernameNotValid;

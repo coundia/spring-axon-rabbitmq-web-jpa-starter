@@ -22,13 +22,13 @@ public class SaleUserResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String id;
 	@Schema(description = "", example = "")
+	private String name;
+	@Schema(description = "", example = "")
 	private String sales;
 	@Schema(description = "", example = "")
 	private String users;
 	@Schema(description = "", example = "")
 	private String username;
-	@Schema(description = "", example = "")
-	private String email;
 	@Schema(description = "", example = "")
 	private String details;
 	@Schema(description = "", example = "")

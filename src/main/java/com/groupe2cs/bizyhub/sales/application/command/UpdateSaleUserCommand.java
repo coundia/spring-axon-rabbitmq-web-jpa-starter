@@ -24,10 +24,10 @@ import java.util.*;
 public class UpdateSaleUserCommand implements Serializable {
 @TargetAggregateIdentifier
 	private SaleUserId id;
+ 	private SaleUserName name;
  	private SaleUserSales sales;
  	private SaleUserUsers users;
  	private SaleUserUsername username;
- 	private SaleUserEmail email;
  	private SaleUserDetails details;
  	private SaleUserIsActive isActive;
  	private SaleUserUpdatedAt updatedAt;

@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
+import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
@@ -9,7 +10,6 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.sales.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -39,7 +39,7 @@ private SaleRepository Repository;
 		.deltas(List.of(
 		SaleDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.amount(8684.65)
+.amount(6922.16)
 .details(UUID.randomUUID().toString())
 .isActive(false)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
@@ -69,7 +69,7 @@ private SaleRepository Repository;
 			SaleDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.amount(8684.65)
+.amount(6922.16)
 .details(UUID.randomUUID().toString())
 .isActive(false)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))

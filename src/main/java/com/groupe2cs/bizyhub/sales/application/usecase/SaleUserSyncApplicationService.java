@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
 import com.groupe2cs.bizyhub.sales.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -26,10 +26,10 @@ MetaRequest metaRequest
 				case "CREATE" -> {
 
 CreateSaleUserCommand command = CreateSaleUserCommand.builder()
+		.name(SaleUserName.create(d.getName()))
 		.sales(SaleUserSales.create(d.getSales()))
 		.users(SaleUserUsers.create(d.getUsers()))
 		.username(SaleUserUsername.create(d.getUsername()))
-		.email(SaleUserEmail.create(d.getEmail()))
 		.details(SaleUserDetails.create(d.getDetails()))
 		.isActive(SaleUserIsActive.create(d.getIsActive()))
 		.updatedAt(SaleUserUpdatedAt.create(d.getUpdatedAt()))
@@ -57,10 +57,10 @@ CreateSaleUserCommand command = CreateSaleUserCommand.builder()
 				case "UPDATE" -> {
 		UpdateSaleUserCommand update = UpdateSaleUserCommand.builder()
 			.id(SaleUserId.create(d.getId()))
+			.name(SaleUserName.create(d.getName()))
 			.sales(SaleUserSales.create(d.getSales()))
 			.users(SaleUserUsers.create(d.getUsers()))
 			.username(SaleUserUsername.create(d.getUsername()))
-			.email(SaleUserEmail.create(d.getEmail()))
 			.details(SaleUserDetails.create(d.getDetails()))
 			.isActive(SaleUserIsActive.create(d.getIsActive()))
 			.updatedAt(SaleUserUpdatedAt.create(d.getUpdatedAt()))

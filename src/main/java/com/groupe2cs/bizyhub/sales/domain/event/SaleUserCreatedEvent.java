@@ -18,10 +18,10 @@ import java.util.*;
 public class SaleUserCreatedEvent implements Serializable {
 
 	private SaleUserId id;
+	private SaleUserName name;
 	private SaleUserSales sales;
 	private SaleUserUsers users;
 	private SaleUserUsername username;
-	private SaleUserEmail email;
 	private SaleUserDetails details;
 	private SaleUserIsActive isActive;
 	private SaleUserUpdatedAt updatedAt;

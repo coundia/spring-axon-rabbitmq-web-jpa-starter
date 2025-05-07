@@ -8,9 +8,9 @@ package com.groupe2cs.bizyhub.security;
 	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.TENANT_HEADER;
 	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+	import com.groupe2cs.bizyhub.security.application.dto.*;
 	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
 	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
-	import com.groupe2cs.bizyhub.security.application.dto.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
