@@ -31,22 +31,22 @@ public interface SaleUserRepository extends JpaRepository<SaleUser, String> {
 
 	@Query("SELECT e FROM SaleUser e WHERE e.name = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<SaleUser> findByNameAndTenantId(String name, String tenantId);
-	@Query("SELECT e FROM SaleUser e WHERE e.sales.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
-	List<SaleUser> findBySalesIdAndCreatedById(String sales, String createdById);
+	@Query("SELECT e FROM SaleUser e WHERE e.sale.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+	List<SaleUser> findBySaleIdAndCreatedById(String sale, String createdById);
 
-	@Query("SELECT e FROM SaleUser e WHERE e.sales.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<SaleUser> findBySalesIdAndTenantName(String sales, String tenantName);
+	@Query("SELECT e FROM SaleUser e WHERE e.sale.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	Optional<SaleUser> findBySaleIdAndTenantName(String sale, String tenantName);
 
-	@Query("SELECT e FROM SaleUser e WHERE e.sales.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<SaleUser> findBySalesIdAndTenantId(String sales, String tenantId);
-	@Query("SELECT e FROM SaleUser e WHERE e.users.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
-	List<SaleUser> findByUsersIdAndCreatedById(String users, String createdById);
+	@Query("SELECT e FROM SaleUser e WHERE e.sale.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	Optional<SaleUser> findBySaleIdAndTenantId(String sale, String tenantId);
+	@Query("SELECT e FROM SaleUser e WHERE e.user.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+	List<SaleUser> findByUserIdAndCreatedById(String user, String createdById);
 
-	@Query("SELECT e FROM SaleUser e WHERE e.users.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<SaleUser> findByUsersIdAndTenantName(String users, String tenantName);
+	@Query("SELECT e FROM SaleUser e WHERE e.user.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	Optional<SaleUser> findByUserIdAndTenantName(String user, String tenantName);
 
-	@Query("SELECT e FROM SaleUser e WHERE e.users.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<SaleUser> findByUsersIdAndTenantId(String users, String tenantId);
+	@Query("SELECT e FROM SaleUser e WHERE e.user.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	Optional<SaleUser> findByUserIdAndTenantId(String user, String tenantId);
 	@Query("SELECT e FROM SaleUser e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<SaleUser> findByUsernameAndCreatedById(String username, String createdById);
 

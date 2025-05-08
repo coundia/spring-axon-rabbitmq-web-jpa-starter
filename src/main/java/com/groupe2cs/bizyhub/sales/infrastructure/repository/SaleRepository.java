@@ -55,6 +55,14 @@ public interface SaleRepository extends JpaRepository<Sale, String> {
 
 	@Query("SELECT e FROM Sale e WHERE e.isActive = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<Sale> findByIsActiveAndTenantId(Boolean isActive, String tenantId);
+	@Query("SELECT e FROM Sale e WHERE e.account.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+	List<Sale> findByAccountIdAndCreatedById(String account, String createdById);
+
+	@Query("SELECT e FROM Sale e WHERE e.account.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	Optional<Sale> findByAccountIdAndTenantName(String account, String tenantName);
+
+	@Query("SELECT e FROM Sale e WHERE e.account.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	Optional<Sale> findByAccountIdAndTenantId(String account, String tenantId);
 	@Query("SELECT e FROM Sale e WHERE e.updatedAt = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<Sale> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
 
@@ -90,8 +98,8 @@ public interface SaleRepository extends JpaRepository<Sale, String> {
 
     @Query("""
     SELECT DISTINCT s FROM Sale s
-    LEFT JOIN SaleUser su ON su.sales = s
-    WHERE s.tenant.id = :tenantId AND (s.createdBy.id = :userId OR su.users.id = :userId)
+    LEFT JOIN SaleUser su ON su.sale = s
+    WHERE s.tenant.id = :tenantId AND (s.createdBy.id = :userId OR su.user.id = :userId)
     """)
 	Page<Sale> findAllOwnedOrShared(@Param("userId") String userId, @Param("tenantId") String tenantId, Pageable pageable);
 

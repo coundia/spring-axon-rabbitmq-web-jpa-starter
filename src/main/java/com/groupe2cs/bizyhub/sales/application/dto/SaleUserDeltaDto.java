@@ -24,21 +24,21 @@ public class SaleUserDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "75a286ba-8ec5-4bc4-b517-0b932994653f")
+		@Schema(description = "", example = "96e9b814-980b-4f52-82bd-93ce96e3809f")
 		private String name;
-		@Schema(description = "", example = "aba1c618-b522-4cb3-8724-3ab9df5a52ad")
-		private String sales;
-		@Schema(description = "", example = "f6c1340d-37af-4c90-9480-205b86de73fe")
-		private String users;
-		@Schema(description = "", example = "cb041dcb-0e84-43a7-88df-0907b78f7eb4")
+		@Schema(description = "", example = "c427eff8-019b-46b1-9488-5b6d194be74f")
+		private String sale;
+		@Schema(description = "", example = "0ba735e9-5677-43e2-936e-4cb2b03cd669")
+		private String user;
+		@Schema(description = "", example = "911ac469-75ce-4189-92d8-2e658d2a063f")
 		private String username;
-		@Schema(description = "", example = "94237d7a-5b24-4f4f-aa1e-32f9025ec0c3")
+		@Schema(description = "", example = "3caecd78-9786-4ce0-9ba9-73bd22d995e7")
 		private String details;
-		@Schema(description = "", example = "true")
+		@Schema(description = "", example = "false")
 		private Boolean isActive;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "86074653-512b-4707-be8d-0c301a016c9e")
+		@Schema(description = "", example = "c0e01aaf-d64d-4ac7-af8e-254df1791eaf")
 		private String reference;
 
 }

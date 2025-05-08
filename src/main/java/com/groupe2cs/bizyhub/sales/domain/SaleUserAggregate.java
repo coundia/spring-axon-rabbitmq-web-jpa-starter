@@ -25,8 +25,8 @@ public class SaleUserAggregate {
 @AggregateIdentifier
 private SaleUserId id;
 private SaleUserName name;
-private SaleUserSales sales;
-private SaleUserUsers users;
+private SaleUserSale sale;
+private SaleUserUser user;
 private SaleUserUsername username;
 private SaleUserDetails details;
 private SaleUserIsActive isActive;
@@ -41,8 +41,8 @@ public SaleUserAggregate(CreateSaleUserCommand command) {
 apply(new SaleUserCreatedEvent(
 		command.getId(),
 		command.getName(),
-		command.getSales(),
-		command.getUsers(),
+		command.getSale(),
+		command.getUser(),
 		command.getUsername(),
 		command.getDetails(),
 		command.getIsActive(),
@@ -65,8 +65,8 @@ public void handle(UpdateSaleUserCommand command) {
 apply(new SaleUserUpdatedEvent(
 		command.getId(),
 		command.getName(),
-		command.getSales(),
-		command.getUsers(),
+		command.getSale(),
+		command.getUser(),
 		command.getUsername(),
 		command.getDetails(),
 		command.getIsActive(),
@@ -81,8 +81,8 @@ apply(new SaleUserUpdatedEvent(
 public void on(SaleUserCreatedEvent event) {
 	this.id = event.getId();
 	this.name = event.getName();
-	this.sales = event.getSales();
-	this.users = event.getUsers();
+	this.sale = event.getSale();
+	this.user = event.getUser();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
@@ -101,8 +101,8 @@ this.id = event.getId();
 public void on(SaleUserUpdatedEvent event) {
 this.id = event.getId();
 	this.name = event.getName();
-	this.sales = event.getSales();
-	this.users = event.getUsers();
+	this.sale = event.getSale();
+	this.user = event.getUser();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();

@@ -19,22 +19,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "SaleRequest", description = "Request payload for Sale operations")
 public class SaleRequest implements Serializable {
 
-	@Schema(description = "", example = "a15817dc-6d85-417c-8ae4-928f5c7bea1b")
+	@Schema(description = "", example = "ac0cdf81-0f79-479a-b142-9dc2d9e549bc")
 	private String name;
 
-	@Schema(description = "", example = "2988.94")
+	@Schema(description = "", example = "376.31")
 	private Double amount;
 
-	@Schema(description = "", example = "02d4c23f-b302-48b6-8291-4f78ac7386d9")
+	@Schema(description = "", example = "5d17c703-86e9-493b-be78-fe024b3c527d")
 	private String details;
 
 	@Schema(description = "", example = "true")
 	private Boolean isActive;
 
+	@Schema(description = "", example = "4cb3033b-9777-44b4-8141-c2837442b12c")
+	private String account;
+
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "495f731e-e647-42dc-b66e-78023f653b6e")
+	@Schema(description = "", example = "a9205215-6af7-45ac-aee7-d77368eacec1")
 	private String reference;
 
 

@@ -1,0 +1,78 @@
+package com.groupe2cs.bizyhub.accounts.presentation.controller;
+
+	import com.groupe2cs.bizyhub.accounts.application.mapper.*;
+	import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+	import com.groupe2cs.bizyhub.accounts.domain.exception.*;
+	import com.groupe2cs.bizyhub.accounts.application.dto.*;
+	import com.groupe2cs.bizyhub.accounts.application.usecase.*;
+	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+
+import com.groupe2cs.bizyhub.accounts.application.command.DeleteAccountUserCommand;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import lombok.extern.slf4j.Slf4j;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+
+
+@PreAuthorize("@accountUserGate.canDelete(authentication, #id)")
+@RestController
+@RequestMapping("/api/v1/commands/accountUser")
+@Tag(name = "AccountUser commands", description = "Endpoints for managing accountUsers")
+@Slf4j
+public class DeleteAccountUserController {
+
+private final AccountUserDeleteApplicationService applicationService;
+
+public DeleteAccountUserController(AccountUserDeleteApplicationService applicationService) {
+    this.applicationService = applicationService;
+}
+
+
+@DeleteMapping("/{id}")
+@Operation(
+summary = "Delete a accountUser",
+description = "Deletes a accountUser based on the provided identifier"
+)
+@ApiResponses(value = {
+@ApiResponse(responseCode = "200", description = "AccountUser deleted successfully"),
+@ApiResponse(responseCode = "400", description = "Invalid ID supplied", content = @Content),
+@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+})
+public ResponseEntity<String> deleteAccountUser(
+	@Parameter(description = "ID of the accountUser to delete", required = true)
+	@PathVariable String id,
+	@AuthenticationPrincipal Jwt jwt
+	) {
+	if (id == null || id.isEmpty()) {
+	return ResponseEntity.badRequest().body("Invalid ID");
+	}
+
+	try {
+	AccountUserId idVo = AccountUserId.create(id);
+
+	MetaRequest metaRequest = MetaRequest.builder()
+	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
+	.build();
+
+	applicationService.deleteAccountUser(idVo, metaRequest);
+
+	return ResponseEntity.ok("AccountUser deleted successfully");
+	} catch (Exception e) {
+	log.error("Error deleting accountUser with id {}: {}", id, e.getMessage());
+	return ResponseEntity.internalServerError().body("Error deleting accountUser");
+	}
+	}
+	}

@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.products.domain;
 
+import com.groupe2cs.bizyhub.shared.*;
+import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.UUID;
 import com.groupe2cs.bizyhub.products.domain.exception.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
 
 
 public class ProductAggregateTests extends BaseUnitTests {
@@ -15,9 +15,9 @@ public class ProductAggregateTests extends BaseUnitTests {
 void it_should_create_product_with_valid_values() {
 	ProductId id = ProductId.create(UUID.randomUUID().toString());
 	ProductName name = ProductName.create(UUID.randomUUID().toString());
-	ProductPrice price = ProductPrice.create(3323.46);
+	ProductPrice price = ProductPrice.create(4848.18);
 	ProductDetails details = ProductDetails.create(UUID.randomUUID().toString());
-	ProductIsActive isActive = ProductIsActive.create(false);
+	ProductIsActive isActive = ProductIsActive.create(true);
 	ProductUpdatedAt updatedAt = ProductUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	ProductReference reference = ProductReference.create(UUID.randomUUID().toString());
 	ProductCreatedBy createdBy = ProductCreatedBy.create(UUID.randomUUID().toString());

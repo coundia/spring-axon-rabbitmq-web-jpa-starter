@@ -41,6 +41,7 @@ public class SaleFixtures {
 	public static List<CreateSaleCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		SaleRepository repository,
+        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -51,6 +52,7 @@ public class SaleFixtures {
 			CreateSaleCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
+            accountDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -66,15 +68,17 @@ public class SaleFixtures {
 		public static CreateSaleCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		SaleRepository  repository,
+        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
 
 			CreateSaleCommand command = CreateSaleCommand.builder()
 				.name(SaleName.create(UUID.randomUUID().toString()))
-				.amount(SaleAmount.create(3710.22))
+				.amount(SaleAmount.create(4745.14))
 				.details(SaleDetails.create(UUID.randomUUID().toString()))
 				.isActive(SaleIsActive.create(false))
+				.account(SaleAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
 				.updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SaleReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -95,7 +99,7 @@ public class SaleFixtures {
 
         CreateSaleCommand command = CreateSaleCommand.builder()
         .name(SaleName.create(UUID.randomUUID().toString()))
-        .amount(SaleAmount.create(3710.22))
+        .amount(SaleAmount.create(4745.14))
         .details(SaleDetails.create(UUID.randomUUID().toString()))
         .isActive(SaleIsActive.create(false))
         .updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))

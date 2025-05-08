@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
-import com.groupe2cs.bizyhub.sales.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -29,6 +29,7 @@ CreateSaleCommand command = CreateSaleCommand.builder()
 		.amount(SaleAmount.create(d.getAmount()))
 		.details(SaleDetails.create(d.getDetails()))
 		.isActive(SaleIsActive.create(d.getIsActive()))
+		.account(SaleAccount.create(d.getAccount()))
 		.updatedAt(SaleUpdatedAt.create(d.getUpdatedAt()))
 		.reference(SaleReference.create(d.getReference()))
 .build();
@@ -51,6 +52,7 @@ CreateSaleCommand command = CreateSaleCommand.builder()
 			.amount(SaleAmount.create(d.getAmount()))
 			.details(SaleDetails.create(d.getDetails()))
 			.isActive(SaleIsActive.create(d.getIsActive()))
+			.account(SaleAccount.create(d.getAccount()))
 			.updatedAt(SaleUpdatedAt.create(d.getUpdatedAt()))
 			.reference(SaleReference.create(d.getReference()))
 		.build();

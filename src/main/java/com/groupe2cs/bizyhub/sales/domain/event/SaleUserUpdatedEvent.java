@@ -19,8 +19,8 @@ public class SaleUserUpdatedEvent implements Serializable {
 
 	private SaleUserId id;
 	private SaleUserName name;
-	private SaleUserSales sales;
-	private SaleUserUsers users;
+	private SaleUserSale sale;
+	private SaleUserUser user;
 	private SaleUserUsername username;
 	private SaleUserDetails details;
 	private SaleUserIsActive isActive;

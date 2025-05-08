@@ -39,11 +39,11 @@ public class SaleUser   extends AbstractAuditableEntity  {
 
 	private String name ;
 	@ManyToOne
-	@JoinColumn(name = "sales_id", nullable = true)
-	private com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale sales;
+	@JoinColumn(name = "sale_id", nullable = true)
+	private com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale sale;
 	@ManyToOne
-	@JoinColumn(name = "users_id", nullable = true)
-	private com.groupe2cs.bizyhub.security.infrastructure.entity.User users;
+	@JoinColumn(name = "user_id", nullable = true)
+	private com.groupe2cs.bizyhub.security.infrastructure.entity.User user;
 
 	@Column(nullable = true, 
 		unique = false  ,
@@ -92,8 +92,8 @@ public class SaleUser   extends AbstractAuditableEntity  {
 		return "SaleUser{" +
 		"id='" + id + '\'' +
 			", name=" + name +
-			", sales=" + sales +
-			", users=" + users +
+			", sale=" + sale +
+			", user=" + user +
 			", username=" + username +
 			", details=" + details +
 			", isActive=" + isActive +

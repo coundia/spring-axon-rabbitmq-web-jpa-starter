@@ -1,0 +1,63 @@
+package com.groupe2cs.bizyhub.accounts.domain.valueObject;
+
+import java.util.Objects;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIdNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountNameNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCurrencyNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCurrentBalanceNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountPreviousBalanceNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountDetailsNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIsActiveNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUpdatedAtNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountReferenceNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCreatedByNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountTenantNotValid;
+
+import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+import java.time.*;
+import java.util.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Builder
+public class AccountTenant implements Serializable {
+
+private String tenant;
+
+public AccountTenant(String tenant) {
+this.tenant = tenant;
+}
+
+public static AccountTenant create(String tenant) {
+
+	return new AccountTenant(tenant);
+}
+
+public String value() {
+return this.tenant;
+}
+
+@Override
+public boolean equals(Object o) {
+if (this == o) return true;
+if (!(o instanceof AccountTenant that)) return false;
+return this.tenant.equals(that.tenant);
+}
+
+@Override
+public int hashCode() {
+return java.util.Objects.hash(tenant);
+}
+
+@Override
+public String toString() {
+return String.valueOf(tenant);
+}
+}

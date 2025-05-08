@@ -28,6 +28,7 @@ public class UpdateSaleCommand implements Serializable {
  	private SaleAmount amount;
  	private SaleDetails details;
  	private SaleIsActive isActive;
+ 	private SaleAccount account;
  	private SaleUpdatedAt updatedAt;
  	private SaleReference reference;
  	private SaleCreatedBy createdBy;

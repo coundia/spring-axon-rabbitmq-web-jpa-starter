@@ -34,7 +34,8 @@ Sale entity = Sale.builder()
  		.amount(event.getAmount() == null ? null : event.getAmount().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
- 		.updatedAt(event.getUpdatedAt() == null ? null : event.getUpdatedAt().value())
+  		.account( event.getAccount() == null ? null : new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()))
+		.updatedAt(event.getUpdatedAt() == null ? null : event.getUpdatedAt().value())
  		.reference(event.getReference() == null ? null : event.getReference().value())
  .build();
 
@@ -65,6 +66,7 @@ Sale entity = repository.findById(event.getId().value())
 		entity.setAmount(event.getAmount().value());
 		entity.setDetails(event.getDetails().value());
 		entity.setIsActive(event.getIsActive().value());
+		entity.setAccount(new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()));
 		entity.setUpdatedAt(event.getUpdatedAt().value());
 		entity.setReference(event.getReference().value());
 

@@ -41,8 +41,8 @@ public class SaleUserFixtures {
 	public static List<CreateSaleUserCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		SaleUserRepository repository,
-        com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository salesDataRepository,
-        com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository usersDataRepository,
+        com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository saleDataRepository,
+        com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -53,8 +53,8 @@ public class SaleUserFixtures {
 			CreateSaleUserCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            salesDataRepository,
-            usersDataRepository,
+            saleDataRepository,
+            userDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -70,19 +70,19 @@ public class SaleUserFixtures {
 		public static CreateSaleUserCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		SaleUserRepository  repository,
-        com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository salesDataRepository,
-        com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository usersDataRepository,
+        com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository saleDataRepository,
+        com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
 
 			CreateSaleUserCommand command = CreateSaleUserCommand.builder()
 				.name(SaleUserName.create(UUID.randomUUID().toString()))
-				.sales(SaleUserSales.create(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,salesDataRepository, user).getId().value()))
-				.users(SaleUserUsers.create(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,usersDataRepository, user).getId().value()))
+				.sale(SaleUserSale.create(com.groupe2cs.bizyhub.sales.infrastructure.entity.SaleFixtures.randomOneViaCommand(commandGateway,saleDataRepository, user).getId().value()))
+				.user(SaleUserUser.create(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value()))
 				.username(SaleUserUsername.create(UUID.randomUUID().toString()))
 				.details(SaleUserDetails.create(UUID.randomUUID().toString()))
-				.isActive(SaleUserIsActive.create(true))
+				.isActive(SaleUserIsActive.create(false))
 				.updatedAt(SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SaleUserReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -105,7 +105,7 @@ public class SaleUserFixtures {
         .name(SaleUserName.create(UUID.randomUUID().toString()))
         .username(SaleUserUsername.create(UUID.randomUUID().toString()))
         .details(SaleUserDetails.create(UUID.randomUUID().toString()))
-        .isActive(SaleUserIsActive.create(true))
+        .isActive(SaleUserIsActive.create(false))
         .updatedAt(SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(SaleUserReference.create(UUID.randomUUID().toString()))
         .build();

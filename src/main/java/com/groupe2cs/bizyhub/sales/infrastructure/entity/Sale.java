@@ -59,6 +59,9 @@ public class Sale   extends AbstractAuditableEntity  {
 	)
 	@Builder.Default
 	private Boolean isActive  = true ;
+	@ManyToOne
+	@JoinColumn(name = "account_id", nullable = true)
+	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
 
 	@Column(nullable = true, 
 		unique = false  
@@ -89,6 +92,7 @@ public class Sale   extends AbstractAuditableEntity  {
 			", amount=" + amount +
 			", details=" + details +
 			", isActive=" + isActive +
+			", account=" + account +
 			", updatedAt=" + updatedAt +
 			", reference=" + reference +
 			", createdBy=" + createdBy +

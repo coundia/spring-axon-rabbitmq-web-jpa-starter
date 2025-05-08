@@ -24,9 +24,9 @@ public class SaleUserResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String name;
 	@Schema(description = "", example = "")
-	private String sales;
+	private String sale;
 	@Schema(description = "", example = "")
-	private String users;
+	private String user;
 	@Schema(description = "", example = "")
 	private String username;
 	@Schema(description = "", example = "")

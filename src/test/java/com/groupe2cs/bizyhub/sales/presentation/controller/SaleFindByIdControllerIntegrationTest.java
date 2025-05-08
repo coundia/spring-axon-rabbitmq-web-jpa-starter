@@ -29,6 +29,8 @@ private CommandGateway commandGateway;
 private SaleRepository repository;
 
 @Autowired
+private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
+@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -38,6 +40,7 @@ void it_should_be_able_to_get_sale_by_id() {
 
 	String existingId = SaleFixtures.randomOneViaCommand(
 	commandGateway,repository,
+        accountDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

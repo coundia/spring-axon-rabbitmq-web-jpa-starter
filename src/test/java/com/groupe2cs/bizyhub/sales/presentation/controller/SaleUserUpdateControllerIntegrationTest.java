@@ -31,9 +31,9 @@ private CommandGateway commandGateway;
 private CommandGateway commandGatewayUpdate;
 
 @Autowired
-private com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository salesDataRepository ;
+private com.groupe2cs.bizyhub.sales.infrastructure.repository.SaleRepository saleDataRepository ;
 @Autowired
-private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository usersDataRepository ;
+private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
 @Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
@@ -44,16 +44,16 @@ void it_should_be_able_to_update_saleuser() {
 
 	String existingId = SaleUserFixtures.randomOneViaCommand(
 	commandGateway,saleuserRepository,
-        salesDataRepository,
-        usersDataRepository,
+        saleDataRepository,
+        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser() ).getId().value();
 
 	CreateSaleUserCommand updated = SaleUserFixtures.randomOneViaCommand(commandGatewayUpdate,
     saleuserRepository,
-            salesDataRepository,
-            usersDataRepository,
+            saleDataRepository,
+            userDataRepository,
             createdByDataRepository,
             tenantDataRepository,
      getCurrentUser());
@@ -63,8 +63,8 @@ void it_should_be_able_to_update_saleuser() {
 
 	SaleUserRequest requestDTO = new SaleUserRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setSales( updated.getSales().value());
-	 requestDTO.setUsers( updated.getUsers().value());
+	 requestDTO.setSale( updated.getSale().value());
+	 requestDTO.setUser( updated.getUser().value());
 	 requestDTO.setUsername(UUID.randomUUID().toString());
 	 requestDTO.setDetails(UUID.randomUUID().toString());
 	 requestDTO.setIsActive(false);

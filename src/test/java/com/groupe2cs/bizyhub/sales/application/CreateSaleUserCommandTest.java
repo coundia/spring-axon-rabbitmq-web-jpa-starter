@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateSaleUserCommand command = new CreateSaleUserCommand(
- SaleUserId.create(UUID.randomUUID().toString()) ,  SaleUserName.create(UUID.randomUUID().toString()) ,  SaleUserSales.create(UUID.randomUUID().toString()) ,  SaleUserUsers.create(UUID.randomUUID().toString()) ,  SaleUserUsername.create(UUID.randomUUID().toString()) ,  SaleUserDetails.create(UUID.randomUUID().toString()) ,  SaleUserIsActive.create(true) ,  SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SaleUserReference.create(UUID.randomUUID().toString()) ,  SaleUserCreatedBy.create(UUID.randomUUID().toString()) ,  SaleUserTenant.create(UUID.randomUUID().toString()) 
+ SaleUserId.create(UUID.randomUUID().toString()) ,  SaleUserName.create(UUID.randomUUID().toString()) ,  SaleUserSale.create(UUID.randomUUID().toString()) ,  SaleUserUser.create(UUID.randomUUID().toString()) ,  SaleUserUsername.create(UUID.randomUUID().toString()) ,  SaleUserDetails.create(UUID.randomUUID().toString()) ,  SaleUserIsActive.create(true) ,  SaleUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SaleUserReference.create(UUID.randomUUID().toString()) ,  SaleUserCreatedBy.create(UUID.randomUUID().toString()) ,  SaleUserTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -38,10 +38,10 @@ assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
 assertThat(sentCommand.getName().value()).isEqualTo(
 command.getName().value());
-assertThat(sentCommand.getSales().value()).isEqualTo(
-command.getSales().value());
-assertThat(sentCommand.getUsers().value()).isEqualTo(
-command.getUsers().value());
+assertThat(sentCommand.getSale().value()).isEqualTo(
+command.getSale().value());
+assertThat(sentCommand.getUser().value()).isEqualTo(
+command.getUser().value());
 assertThat(sentCommand.getUsername().value()).isEqualTo(
 command.getUsername().value());
 assertThat(sentCommand.getDetails().value()).isEqualTo(

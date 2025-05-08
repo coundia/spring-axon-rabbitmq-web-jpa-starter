@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
-import com.groupe2cs.bizyhub.sales.application.command.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import com.groupe2cs.bizyhub.sales.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -27,8 +27,8 @@ MetaRequest metaRequest
 
 CreateSaleUserCommand command = CreateSaleUserCommand.builder()
 		.name(SaleUserName.create(d.getName()))
-		.sales(SaleUserSales.create(d.getSales()))
-		.users(SaleUserUsers.create(d.getUsers()))
+		.sale(SaleUserSale.create(d.getSale()))
+		.user(SaleUserUser.create(d.getUser()))
 		.username(SaleUserUsername.create(d.getUsername()))
 		.details(SaleUserDetails.create(d.getDetails()))
 		.isActive(SaleUserIsActive.create(d.getIsActive()))
@@ -39,7 +39,7 @@ CreateSaleUserCommand command = CreateSaleUserCommand.builder()
         if(userName != null){
             userName = userName.toLowerCase();
             String userId = userRepository.findByUsernameAndTenantId(userName,metaRequest.getTenantId()).orElseThrow().getId();
-            command.setUsers(SaleUserUsers.create(userId));
+            command.setUser(SaleUserUser.create(userId));
         }
 
 		if(metaRequest.getTenantId() != null) {
@@ -58,8 +58,8 @@ CreateSaleUserCommand command = CreateSaleUserCommand.builder()
 		UpdateSaleUserCommand update = UpdateSaleUserCommand.builder()
 			.id(SaleUserId.create(d.getId()))
 			.name(SaleUserName.create(d.getName()))
-			.sales(SaleUserSales.create(d.getSales()))
-			.users(SaleUserUsers.create(d.getUsers()))
+			.sale(SaleUserSale.create(d.getSale()))
+			.user(SaleUserUser.create(d.getUser()))
 			.username(SaleUserUsername.create(d.getUsername()))
 			.details(SaleUserDetails.create(d.getDetails()))
 			.isActive(SaleUserIsActive.create(d.getIsActive()))
@@ -70,7 +70,7 @@ CreateSaleUserCommand command = CreateSaleUserCommand.builder()
         if(userName != null){
             userName = userName.toLowerCase();
             String userId = userRepository.findByUsernameAndTenantId(userName,metaRequest.getTenantId()).orElseThrow().getId();
-            update.setUsers(SaleUserUsers.create(userId));
+            update.setUser(SaleUserUser.create(userId));
         }
 
 		if(metaRequest.getTenantId() != null) {

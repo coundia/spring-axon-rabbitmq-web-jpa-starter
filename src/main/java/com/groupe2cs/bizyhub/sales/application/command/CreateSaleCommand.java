@@ -29,6 +29,7 @@ public class CreateSaleCommand implements Serializable {
  	private SaleAmount amount;
  	private SaleDetails details;
  	private SaleIsActive isActive;
+ 	private SaleAccount account;
  	private SaleUpdatedAt updatedAt;
  	private SaleReference reference;
  	private SaleCreatedBy createdBy;
@@ -39,6 +40,7 @@ public class CreateSaleCommand implements Serializable {
    SaleAmount amount , 
    SaleDetails details , 
    SaleIsActive isActive , 
+   SaleAccount account , 
    SaleUpdatedAt updatedAt , 
    SaleReference reference , 
    SaleCreatedBy createdBy , 
@@ -50,6 +52,7 @@ public class CreateSaleCommand implements Serializable {
   this.amount = amount ; 
   this.details = details ; 
   this.isActive = isActive ; 
+  this.account = account ; 
   this.updatedAt = updatedAt ; 
   this.reference = reference ; 
   this.createdBy = createdBy ; 

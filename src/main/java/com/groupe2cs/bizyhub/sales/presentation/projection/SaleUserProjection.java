@@ -31,8 +31,8 @@ try {
 SaleUser entity = SaleUser.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.name(event.getName() == null ? null : event.getName().value())
-  		.sales( event.getSales() == null ? null : new com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale(event.getSales().value()))
- 		.users( event.getUsers() == null ? null : new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUsers().value()))
+  		.sale( event.getSale() == null ? null : new com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale(event.getSale().value()))
+ 		.user( event.getUser() == null ? null : new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUser().value()))
 		.username(event.getUsername() == null ? null : event.getUsername().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
@@ -64,8 +64,8 @@ SaleUser entity = repository.findById(event.getId().value())
 
 		entity.setId(event.getId().value());
 		entity.setName(event.getName().value());
-		entity.setSales(new com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale(event.getSales().value()));
-		entity.setUsers(new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUsers().value()));
+		entity.setSale(new com.groupe2cs.bizyhub.sales.infrastructure.entity.Sale(event.getSale().value()));
+		entity.setUser(new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUser().value()));
 		entity.setUsername(event.getUsername().value());
 		entity.setDetails(event.getDetails().value());
 		entity.setIsActive(event.getIsActive().value());

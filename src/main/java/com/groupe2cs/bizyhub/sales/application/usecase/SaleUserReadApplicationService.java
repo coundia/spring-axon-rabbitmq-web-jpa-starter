@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
 
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.sales.application.query.*;
 import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
 import com.groupe2cs.bizyhub.sales.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.query.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -48,22 +48,22 @@ public List<SaleUserResponse> findBySaleUserName(
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(SaleUserResponse.class));
 	return future.join();
 }
-public List<SaleUserResponse> findBySaleUserSales(
-	SaleUserSales value,
+public List<SaleUserResponse> findBySaleUserSale(
+	SaleUserSale value,
 	MetaRequest metaRequest
 	) {
 
-	FindBySaleUserSalesQuery query = new FindBySaleUserSalesQuery(value,metaRequest);
+	FindBySaleUserSaleQuery query = new FindBySaleUserSaleQuery(value,metaRequest);
 	CompletableFuture<List<SaleUserResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(SaleUserResponse.class));
 	return future.join();
 }
-public List<SaleUserResponse> findBySaleUserUsers(
-	SaleUserUsers value,
+public List<SaleUserResponse> findBySaleUserUser(
+	SaleUserUser value,
 	MetaRequest metaRequest
 	) {
 
-	FindBySaleUserUsersQuery query = new FindBySaleUserUsersQuery(value,metaRequest);
+	FindBySaleUserUserQuery query = new FindBySaleUserUserQuery(value,metaRequest);
 	CompletableFuture<List<SaleUserResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(SaleUserResponse.class));
 	return future.join();
