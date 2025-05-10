@@ -32,6 +32,8 @@ public class SaleResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String account;
 	@Schema(description = "", example = "")
+	private String category;
+	@Schema(description = "", example = "")
 	private java.time.Instant updatedAt;
 	@Schema(description = "", example = "")
 	private String reference;

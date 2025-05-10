@@ -33,6 +33,8 @@ private CommandGateway commandGatewayUpdate;
 @Autowired
 private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
 @Autowired
+private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
+@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -43,6 +45,7 @@ void it_should_be_able_to_update_sale() {
 	String existingId = SaleFixtures.randomOneViaCommand(
 	commandGateway,saleRepository,
         accountDataRepository,
+        categoryDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser() ).getId().value();
@@ -50,6 +53,7 @@ void it_should_be_able_to_update_sale() {
 	CreateSaleCommand updated = SaleFixtures.randomOneViaCommand(commandGatewayUpdate,
     saleRepository,
             accountDataRepository,
+            categoryDataRepository,
             createdByDataRepository,
             tenantDataRepository,
      getCurrentUser());
@@ -59,10 +63,11 @@ void it_should_be_able_to_update_sale() {
 
 	SaleRequest requestDTO = new SaleRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setAmount(2030.47);
+	 requestDTO.setAmount(2600.52);
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(false);
+	 requestDTO.setIsActive(true);
 	 requestDTO.setAccount( updated.getAccount().value());
+	 requestDTO.setCategory( updated.getCategory().value());
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());
 

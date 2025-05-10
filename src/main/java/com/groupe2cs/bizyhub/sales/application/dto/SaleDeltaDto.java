@@ -24,19 +24,21 @@ public class SaleDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "57100176-6319-47b7-aa56-08b669289d9d")
+		@Schema(description = "", example = "95129c5a-f9a5-4c58-aeda-9fdb88aaf474")
 		private String name;
-		@Schema(description = "", example = "229.47")
+		@Schema(description = "", example = "4396.1")
 		private Double amount;
-		@Schema(description = "", example = "f2c072e8-9e63-4b14-a337-aa1a22fa9c02")
+		@Schema(description = "", example = "a4e27d99-554a-46ba-94ff-792c3f5bf51e")
 		private String details;
 		@Schema(description = "", example = "true")
 		private Boolean isActive;
-		@Schema(description = "", example = "b82a9359-964e-47ea-97be-eeea7c027c21")
+		@Schema(description = "", example = "dc78c957-dcfa-4298-8e9b-cc8f2feeb89b")
 		private String account;
+		@Schema(description = "", example = "29a2cd9a-ce96-4dec-a19a-3c45c6ffa004")
+		private String category;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "fb493a81-b952-438f-90c8-50a3b2266e75")
+		@Schema(description = "", example = "66bbb0a4-f418-4880-ac0a-8fb8ca328aa2")
 		private String reference;
 
 }

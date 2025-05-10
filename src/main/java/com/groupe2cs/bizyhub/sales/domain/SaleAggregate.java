@@ -29,6 +29,7 @@ private SaleAmount amount;
 private SaleDetails details;
 private SaleIsActive isActive;
 private SaleAccount account;
+private SaleCategory category;
 private SaleUpdatedAt updatedAt;
 private SaleReference reference;
 private SaleCreatedBy createdBy;
@@ -44,6 +45,7 @@ apply(new SaleCreatedEvent(
 		command.getDetails(),
 		command.getIsActive(),
 		command.getAccount(),
+		command.getCategory(),
 		command.getUpdatedAt(),
 		command.getReference(),
 		command.getCreatedBy(),
@@ -67,6 +69,7 @@ apply(new SaleUpdatedEvent(
 		command.getDetails(),
 		command.getIsActive(),
 		command.getAccount(),
+		command.getCategory(),
 		command.getUpdatedAt(),
 		command.getReference(),
 		command.getCreatedBy(),
@@ -82,6 +85,7 @@ public void on(SaleCreatedEvent event) {
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.account = event.getAccount();
+	this.category = event.getCategory();
 	this.updatedAt = event.getUpdatedAt();
 	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
@@ -101,6 +105,7 @@ this.id = event.getId();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.account = event.getAccount();
+	this.category = event.getCategory();
 	this.updatedAt = event.getUpdatedAt();
 	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();

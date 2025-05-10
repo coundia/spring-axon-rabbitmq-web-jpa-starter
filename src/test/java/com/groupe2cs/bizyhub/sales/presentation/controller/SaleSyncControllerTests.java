@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
+import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.sales.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
@@ -9,7 +10,6 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.application.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -31,6 +31,8 @@ private SaleRepository Repository;
     @Autowired
     private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
     @Autowired
+    private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
+    @Autowired
     private UserRepository createdByDataRepository ;
     @Autowired
     private TenantRepository tenantDataRepository ;
@@ -41,10 +43,11 @@ private SaleRepository Repository;
 		.deltas(List.of(
 		SaleDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.amount(7347.36)
+.amount(8042.87)
 .details(UUID.randomUUID().toString())
-.isActive(true)
+.isActive(false)
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
+.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 		.type("CREATE")
@@ -72,10 +75,11 @@ private SaleRepository Repository;
 			SaleDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.amount(7347.36)
+.amount(8042.87)
 .details(UUID.randomUUID().toString())
-.isActive(true)
+.isActive(false)
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
+.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 			.type("UPDATE")

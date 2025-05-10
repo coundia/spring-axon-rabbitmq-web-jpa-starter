@@ -23,6 +23,7 @@ public class SaleCreatedEvent implements Serializable {
 	private SaleDetails details;
 	private SaleIsActive isActive;
 	private SaleAccount account;
+	private SaleCategory category;
 	private SaleUpdatedAt updatedAt;
 	private SaleReference reference;
 	private SaleCreatedBy createdBy;

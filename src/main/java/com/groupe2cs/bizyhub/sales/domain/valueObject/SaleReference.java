@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.sales.domain.exception.SaleAmountNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleDetailsNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleIsActiveNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleAccountNotValid;
+import com.groupe2cs.bizyhub.sales.domain.exception.SaleCategoryNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleUpdatedAtNotValid;
 import com.groupe2cs.bizyhub.sales.domain.exception.SaleReferenceNotValid;
 

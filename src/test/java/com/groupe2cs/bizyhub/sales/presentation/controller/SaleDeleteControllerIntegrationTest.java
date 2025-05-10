@@ -32,6 +32,8 @@ private CommandGateway commandGateway;
 @Autowired
 private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
 @Autowired
+private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
+@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -40,6 +42,7 @@ private TenantRepository tenantDataRepository ;
 void it_should_be_able_to_delete_sale() {
 	String existingId = SaleFixtures.randomOneViaCommand(commandGateway, saleRepository,
         accountDataRepository,
+        categoryDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	getCurrentUser()).getId().value();

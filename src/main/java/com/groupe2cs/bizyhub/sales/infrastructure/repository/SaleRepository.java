@@ -63,6 +63,14 @@ public interface SaleRepository extends JpaRepository<Sale, String> {
 
 	@Query("SELECT e FROM Sale e WHERE e.account.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
 	Optional<Sale> findByAccountIdAndTenantId(String account, String tenantId);
+	@Query("SELECT e FROM Sale e WHERE e.category.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+	List<Sale> findByCategoryIdAndCreatedById(String category, String createdById);
+
+	@Query("SELECT e FROM Sale e WHERE e.category.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	Optional<Sale> findByCategoryIdAndTenantName(String category, String tenantName);
+
+	@Query("SELECT e FROM Sale e WHERE e.category.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	Optional<Sale> findByCategoryIdAndTenantId(String category, String tenantId);
 	@Query("SELECT e FROM Sale e WHERE e.updatedAt = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
 	List<Sale> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
 

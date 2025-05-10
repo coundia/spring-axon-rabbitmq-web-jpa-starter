@@ -29,6 +29,8 @@ private CommandGateway commandGateway;
 @Autowired
 private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
 @Autowired
+private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
+@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -39,10 +41,11 @@ void it_should_be_able_to_add_sale() {
 		SaleRequest requestDTO = new SaleRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(6122.62);
+		requestDTO.setAmount(1099.19);
 		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(true);
+		requestDTO.setIsActive(false);
 		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
+		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value());
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setReference(UUID.randomUUID().toString());
 
@@ -56,6 +59,7 @@ void it_should_be_able_to_add_sale() {
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
 		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
+		assertThat(response.getBody().getCategory()).isEqualTo(requestDTO.getCategory());
 		assertThat(response.getBody().getUpdatedAt()).isEqualTo(requestDTO.getUpdatedAt());
 		assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
 	}

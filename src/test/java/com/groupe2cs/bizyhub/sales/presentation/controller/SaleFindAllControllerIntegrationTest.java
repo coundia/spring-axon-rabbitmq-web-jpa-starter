@@ -41,6 +41,8 @@ private SaleRepository saleRepository;
 @Autowired
 private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
 @Autowired
+private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
+@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -52,6 +54,7 @@ List<CreateSaleCommand> userCommands =
 SaleFixtures.randomManyViaCommand(
 commandGateway,saleRepository,
 accountDataRepository,
+categoryDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -88,6 +91,7 @@ void it_should_return_all_sales_for_admin() throws Exception {
         commandGateway,
         saleRepository,
          accountDataRepository,
+         categoryDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -101,6 +105,7 @@ List<CreateSaleCommand> adminCommands =
 SaleFixtures.randomManyViaCommand(
 commandGateway,saleRepository,
         accountDataRepository,
+        categoryDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));

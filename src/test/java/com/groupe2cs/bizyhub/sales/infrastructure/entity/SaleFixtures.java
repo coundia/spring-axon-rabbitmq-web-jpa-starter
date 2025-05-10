@@ -42,6 +42,7 @@ public class SaleFixtures {
 		CommandGateway commandGateway,
 		SaleRepository repository,
         com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
+        com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -53,6 +54,7 @@ public class SaleFixtures {
 			commandGateway,
 			 repository,
             accountDataRepository,
+            categoryDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -69,16 +71,18 @@ public class SaleFixtures {
 		CommandGateway commandGateway,
 		SaleRepository  repository,
         com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
+        com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
 
 			CreateSaleCommand command = CreateSaleCommand.builder()
 				.name(SaleName.create(UUID.randomUUID().toString()))
-				.amount(SaleAmount.create(4745.14))
+				.amount(SaleAmount.create(2926.91))
 				.details(SaleDetails.create(UUID.randomUUID().toString()))
-				.isActive(SaleIsActive.create(false))
+				.isActive(SaleIsActive.create(true))
 				.account(SaleAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
+				.category(SaleCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
 				.updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SaleReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -99,9 +103,9 @@ public class SaleFixtures {
 
         CreateSaleCommand command = CreateSaleCommand.builder()
         .name(SaleName.create(UUID.randomUUID().toString()))
-        .amount(SaleAmount.create(4745.14))
+        .amount(SaleAmount.create(2926.91))
         .details(SaleDetails.create(UUID.randomUUID().toString()))
-        .isActive(SaleIsActive.create(false))
+        .isActive(SaleIsActive.create(true))
         .updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(SaleReference.create(UUID.randomUUID().toString()))
         .build();
