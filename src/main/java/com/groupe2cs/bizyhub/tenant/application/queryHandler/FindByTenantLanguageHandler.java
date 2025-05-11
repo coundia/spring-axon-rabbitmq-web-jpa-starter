@@ -22,10 +22,16 @@ private final TenantRepository repository;
 public List<TenantResponse> handle(FindByTenantLanguageQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Tenant> entities = null;
+	 String value = query.getLanguage().value();
 
-String value = query.getLanguage().value();
-	List<Tenant> entities = repository.findByLanguageAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByLanguageAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByLanguageAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(TenantMapper::toResponse)
 	.toList();
 	}

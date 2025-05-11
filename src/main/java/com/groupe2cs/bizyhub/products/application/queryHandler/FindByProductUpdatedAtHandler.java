@@ -22,10 +22,16 @@ private final ProductRepository repository;
 public List<ProductResponse> handle(FindByProductUpdatedAtQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Product> entities = null;
+	 java.time.Instant value = query.getUpdatedAt().value();
 
-java.time.Instant value = query.getUpdatedAt().value();
-	List<Product> entities = repository.findByUpdatedAtAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByUpdatedAtAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByUpdatedAtAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(ProductMapper::toResponse)
 	.toList();
 	}

@@ -22,10 +22,16 @@ private final AccountRepository repository;
 public List<AccountResponse> handle(FindByAccountPreviousBalanceQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Account> entities = null;
+	 Double value = query.getPreviousBalance().value();
 
-Double value = query.getPreviousBalance().value();
-	List<Account> entities = repository.findByPreviousBalanceAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByPreviousBalanceAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByPreviousBalanceAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(AccountMapper::toResponse)
 	.toList();
 	}

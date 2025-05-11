@@ -78,7 +78,7 @@ public class TransactionFixtures {
 
 			CreateTransactionCommand command = CreateTransactionCommand.builder()
 				.name(TransactionName.create(UUID.randomUUID().toString()))
-				.amount(TransactionAmount.create(6203.5))
+				.amount(TransactionAmount.create(3611.4))
 				.details(TransactionDetails.create(UUID.randomUUID().toString()))
 				.isActive(TransactionIsActive.create(false))
 				.account(TransactionAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
@@ -105,7 +105,7 @@ public class TransactionFixtures {
 
         CreateTransactionCommand command = CreateTransactionCommand.builder()
         .name(TransactionName.create(UUID.randomUUID().toString()))
-        .amount(TransactionAmount.create(6203.5))
+        .amount(TransactionAmount.create(3611.4))
         .details(TransactionDetails.create(UUID.randomUUID().toString()))
         .isActive(TransactionIsActive.create(false))
         .typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))

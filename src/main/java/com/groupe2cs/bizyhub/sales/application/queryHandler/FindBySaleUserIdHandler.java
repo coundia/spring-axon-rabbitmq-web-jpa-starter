@@ -22,16 +22,26 @@ private final SaleUserRepository repository;
 
  public SaleUserResponse handle(FindBySaleUserIdQuery query) {
 
-		MetaRequest metaRequest = query.getMetaRequest();
+    MetaRequest metaRequest = query.getMetaRequest();
+    SaleUser entity = null;
 
 	String value = query.getId().value();
-	SaleUser entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
-		.orElse(null);
 
-		if (entity == null) {
-			return null;
-		}
+	if(metaRequest.isAdmin()) {
+	    entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
+	    .stream()
+        .findFirst()
+	    .orElse(null);
+	 }else{
+	    entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
+	    .stream()
+        .findFirst()
+	    .orElse(null);
+	 }
 
+    if (entity == null) {
+        return null;
+    }
 		return SaleUserMapper.toResponse(entity);
 	}
 

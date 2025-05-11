@@ -59,6 +59,7 @@ public ResponseEntity<RoleResponse> updateRole(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	RoleResponse response = applicationService.updateRole(RoleId.create(id),
 	request,

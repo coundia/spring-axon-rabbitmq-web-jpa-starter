@@ -63,7 +63,7 @@ void it_should_be_able_to_update_sale() {
 
 	SaleRequest requestDTO = new SaleRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setAmount(2600.52);
+	 requestDTO.setAmount(5138.59);
 	 requestDTO.setDetails(UUID.randomUUID().toString());
 	 requestDTO.setIsActive(true);
 	 requestDTO.setAccount( updated.getAccount().value());

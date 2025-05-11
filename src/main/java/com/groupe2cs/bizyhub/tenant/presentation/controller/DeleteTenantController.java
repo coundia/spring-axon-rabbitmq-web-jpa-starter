@@ -66,6 +66,8 @@ public ResponseEntity<String> deleteTenant(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	applicationService.deleteTenant(idVo, metaRequest);
 
 	return ResponseEntity.ok("Tenant deleted successfully");

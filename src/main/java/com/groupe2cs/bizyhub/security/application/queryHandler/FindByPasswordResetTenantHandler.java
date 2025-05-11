@@ -22,10 +22,16 @@ private final PasswordResetRepository repository;
 public List<PasswordResetResponse> handle(FindByPasswordResetTenantQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<PasswordReset> entities = null;
+	 String value = query.getTenant().value();
 
-String value = query.getTenant().value();
-	List<PasswordReset> entities = repository.findByTenantIdAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByTenantIdAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByTenantIdAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(PasswordResetMapper::toResponse)
 	.toList();
 	}

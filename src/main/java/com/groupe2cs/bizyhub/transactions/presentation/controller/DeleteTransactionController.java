@@ -67,6 +67,8 @@ public ResponseEntity<String> deleteTransaction(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	applicationService.deleteTransaction(idVo, metaRequest);
 
 	return ResponseEntity.ok("Transaction deleted successfully");

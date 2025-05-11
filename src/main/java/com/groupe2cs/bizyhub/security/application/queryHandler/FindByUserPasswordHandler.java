@@ -22,10 +22,16 @@ private final UserRepository repository;
 public List<UserResponse> handle(FindByUserPasswordQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<User> entities = null;
+	 String value = query.getPassword().value();
 
-String value = query.getPassword().value();
-	List<User> entities = repository.findByPasswordAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByPasswordAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByPasswordAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(UserMapper::toResponse)
 	.toList();
 	}

@@ -78,7 +78,7 @@ public class SaleFixtures {
 
 			CreateSaleCommand command = CreateSaleCommand.builder()
 				.name(SaleName.create(UUID.randomUUID().toString()))
-				.amount(SaleAmount.create(2926.91))
+				.amount(SaleAmount.create(2586.11))
 				.details(SaleDetails.create(UUID.randomUUID().toString()))
 				.isActive(SaleIsActive.create(true))
 				.account(SaleAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
@@ -103,7 +103,7 @@ public class SaleFixtures {
 
         CreateSaleCommand command = CreateSaleCommand.builder()
         .name(SaleName.create(UUID.randomUUID().toString()))
-        .amount(SaleAmount.create(2926.91))
+        .amount(SaleAmount.create(2586.11))
         .details(SaleDetails.create(UUID.randomUUID().toString()))
         .isActive(SaleIsActive.create(true))
         .updatedAt(SaleUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))

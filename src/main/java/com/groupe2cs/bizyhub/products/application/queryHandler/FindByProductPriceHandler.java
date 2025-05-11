@@ -22,10 +22,16 @@ private final ProductRepository repository;
 public List<ProductResponse> handle(FindByProductPriceQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Product> entities = null;
+	 Double value = query.getPrice().value();
 
-Double value = query.getPrice().value();
-	List<Product> entities = repository.findByPriceAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByPriceAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByPriceAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(ProductMapper::toResponse)
 	.toList();
 	}

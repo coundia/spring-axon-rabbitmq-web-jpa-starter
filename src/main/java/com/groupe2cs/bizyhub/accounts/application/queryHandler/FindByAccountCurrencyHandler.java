@@ -22,10 +22,16 @@ private final AccountRepository repository;
 public List<AccountResponse> handle(FindByAccountCurrencyQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Account> entities = null;
+	 String value = query.getCurrency().value();
 
-String value = query.getCurrency().value();
-	List<Account> entities = repository.findByCurrencyAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByCurrencyAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByCurrencyAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(AccountMapper::toResponse)
 	.toList();
 	}

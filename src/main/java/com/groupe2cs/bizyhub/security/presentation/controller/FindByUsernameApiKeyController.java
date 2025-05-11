@@ -68,6 +68,7 @@ public ResponseEntity<List<ApiKeyResponse>> findByUsername(
 	MetaRequest metaRequest = MetaRequest.builder()
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	var future = applicationService.findByApiKeyUsername(ApiKeyUsername
 	.create(username) , metaRequest);

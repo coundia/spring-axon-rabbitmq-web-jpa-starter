@@ -5,8 +5,8 @@ package com.groupe2cs.bizyhub.security;
 	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
 	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-	import com.groupe2cs.bizyhub.security.application.dto.*;
 	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
+	import com.groupe2cs.bizyhub.security.application.dto.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -121,7 +121,8 @@ mockMvc.perform(post("/api/auth/reset-password")
 .content(objectMapper.writeValueAsString(dto)))
 .andExpect(status().isOk());
 
-var user = userRepository.findByUsernameAndTenantName(username,DEFAULT_TENANT).orElseThrow();
+var user = userRepository.findByUsernameAndTenantName(username,DEFAULT_TENANT).stream()
+        .findFirst().orElseThrow();
 assertThat(encoder.matches("newpass", user.getPassword())).isTrue();
 }
 

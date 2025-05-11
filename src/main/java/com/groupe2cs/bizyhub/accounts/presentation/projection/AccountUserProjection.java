@@ -12,18 +12,19 @@ import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.config.ProcessingGroup;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @AllowReplay(value = false)
 @Slf4j
 @Component
+@Transactional
+@RequiredArgsConstructor
 @ProcessingGroup("AccountUser")
 public class AccountUserProjection {
 
 private final AccountUserRepository repository;
 
-public AccountUserProjection(AccountUserRepository repository) {
-this.repository = repository;
-}
 
 @EventHandler
 public void on(AccountUserCreatedEvent event) {
@@ -49,7 +50,10 @@ if(event.getCreatedBy() !=null){
 
 
 repository.save(entity);
+
+
 log.info("AccountUser inserted: {}", entity);
+
 } catch (Exception e) {
 log.error("Error saving AccountUser: {}", e.getMessage(), e);
 throw e;
@@ -61,6 +65,7 @@ public void on(AccountUserUpdatedEvent event) {
 try {
 AccountUser entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("AccountUser not found"));
+
 
 		entity.setId(event.getId().value());
 		entity.setName(event.getName().value());
@@ -82,6 +87,8 @@ if(entity.getTenant() == null && event.getTenant() != null) {
 }
 
 repository.save(entity);
+
+
 log.info("AccountUser updated successfully: {}", event.getId().value());
 } catch (Exception e) {
 log.error("Error updating AccountUser: {}", e.getMessage(), e);
@@ -92,6 +99,8 @@ throw e;
 @EventHandler
 public void on(AccountUserDeletedEvent event) {
 try {
+
+
 repository.deleteById(event.getId().value());
 log.info("AccountUser deleted successfully: {}", event.getId().value());
 } catch (Exception e) {

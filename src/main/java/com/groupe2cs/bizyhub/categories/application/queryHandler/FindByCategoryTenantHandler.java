@@ -22,10 +22,16 @@ private final CategoryRepository repository;
 public List<CategoryResponse> handle(FindByCategoryTenantQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Category> entities = null;
+	 String value = query.getTenant().value();
 
-String value = query.getTenant().value();
-	List<Category> entities = repository.findByTenantIdAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByTenantIdAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByTenantIdAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(CategoryMapper::toResponse)
 	.toList();
 	}

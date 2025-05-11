@@ -18,43 +18,62 @@ import java.util.Optional;
 @Repository
 public interface RolePermissionRepository extends JpaRepository<RolePermission, String> {
 
-	@Query("SELECT e FROM RolePermission e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
+	@Query("SELECT e FROM RolePermission e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC limit 1 ")
 	Optional<RolePermission> findByIdAndCreatedById(String id, String createdById);
+	@Query("SELECT e FROM RolePermission e WHERE e.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByIdAndTenantId(String id, String tenantId);
+
 	Page<RolePermission> findByCreatedById(String createdById, Pageable pageable);
 	Page<RolePermission> findAllByTenantId(String tenantId, Pageable pageable);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+
+	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RolePermission> findByRoleIdAndCreatedById(String role, String createdById);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<RolePermission> findByRoleIdAndTenantName(String role, String tenantName);
+	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1  ORDER BY e.updatedAtAudit DESC ")
+	Optional<RolePermission> findByRoleId(String role);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<RolePermission> findByRoleIdAndTenantId(String role, String tenantId);
-	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByRoleIdAndTenantName(String role, String tenantName);
+
+	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByRoleIdAndTenantId(String role, String tenantId);
+
+	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RolePermission> findByPermissionIdAndCreatedById(String permission, String createdById);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<RolePermission> findByPermissionIdAndTenantName(String permission, String tenantName);
+	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1  ORDER BY e.updatedAtAudit DESC ")
+	Optional<RolePermission> findByPermissionId(String permission);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<RolePermission> findByPermissionIdAndTenantId(String permission, String tenantId);
-	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByPermissionIdAndTenantName(String permission, String tenantName);
+
+	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByPermissionIdAndTenantId(String permission, String tenantId);
+
+	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RolePermission> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<RolePermission> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
+	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
+	Optional<RolePermission> findByCreatedById(String createdBy);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<RolePermission> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
-	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.createdAtAudit DESC")
+	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByCreatedByIdAndTenantName(String createdBy, String tenantName);
+
+	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByCreatedByIdAndTenantId(String createdBy, String tenantId);
+
+	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RolePermission> findByTenantIdAndCreatedById(String tenant, String createdById);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1 and e.tenant.name = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<RolePermission> findByTenantIdAndTenantName(String tenant, String tenantName);
+	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
+	Optional<RolePermission> findByTenantId(String tenant);
 
-	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.createdAtAudit DESC limit 1 ")
-	Optional<RolePermission> findByTenantIdAndTenantId(String tenant, String tenantId);
+	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByTenantIdAndTenantName(String tenant, String tenantName);
+
+	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<RolePermission> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
 

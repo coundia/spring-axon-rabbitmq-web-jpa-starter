@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.sales.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.sales.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.sales.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -38,7 +38,10 @@ CreateSaleUserCommand command = CreateSaleUserCommand.builder()
         String userName = d.getUsername();
         if(userName != null){
             userName = userName.toLowerCase();
-            String userId = userRepository.findByUsernameAndTenantId(userName,metaRequest.getTenantId()).orElseThrow().getId();
+            String userId = userRepository.findByUsernameAndTenantId(userName,metaRequest.getTenantId())
+            .stream()
+            .findFirst()
+            .orElseThrow().getId();
             command.setUser(SaleUserUser.create(userId));
         }
 
@@ -69,7 +72,11 @@ CreateSaleUserCommand command = CreateSaleUserCommand.builder()
 	   String userName = d.getUsername();
         if(userName != null){
             userName = userName.toLowerCase();
-            String userId = userRepository.findByUsernameAndTenantId(userName,metaRequest.getTenantId()).orElseThrow().getId();
+            String userId = userRepository.findByUsernameAndTenantId(userName,metaRequest.getTenantId())
+            .stream()
+            .findFirst()
+            .orElseThrow()
+            .getId();
             update.setUser(SaleUserUser.create(userId));
         }
 

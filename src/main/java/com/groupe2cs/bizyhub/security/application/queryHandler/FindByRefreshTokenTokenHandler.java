@@ -22,10 +22,16 @@ private final RefreshTokenRepository repository;
 public List<RefreshTokenResponse> handle(FindByRefreshTokenTokenQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<RefreshToken> entities = null;
+	 String value = query.getToken().value();
 
-String value = query.getToken().value();
-	List<RefreshToken> entities = repository.findByTokenAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByTokenAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByTokenAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(RefreshTokenMapper::toResponse)
 	.toList();
 	}

@@ -22,10 +22,16 @@ private final UserRoleRepository repository;
 public List<UserRoleResponse> handle(FindByUserRoleRoleQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<UserRole> entities = null;
+	 String value = query.getRole().value();
 
-String value = query.getRole().value();
-	List<UserRole> entities = repository.findByRoleIdAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByRoleIdAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByRoleIdAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(UserRoleMapper::toResponse)
 	.toList();
 	}

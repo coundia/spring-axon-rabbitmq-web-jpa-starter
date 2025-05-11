@@ -22,16 +22,26 @@ private final CategoryRepository repository;
 
  public CategoryResponse handle(FindByCategoryIdQuery query) {
 
-		MetaRequest metaRequest = query.getMetaRequest();
+    MetaRequest metaRequest = query.getMetaRequest();
+    Category entity = null;
 
 	String value = query.getId().value();
-	Category entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
-		.orElse(null);
 
-		if (entity == null) {
-			return null;
-		}
+	if(metaRequest.isAdmin()) {
+	    entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
+	    .stream()
+        .findFirst()
+	    .orElse(null);
+	 }else{
+	    entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
+	    .stream()
+        .findFirst()
+	    .orElse(null);
+	 }
 
+    if (entity == null) {
+        return null;
+    }
 		return CategoryMapper.toResponse(entity);
 	}
 

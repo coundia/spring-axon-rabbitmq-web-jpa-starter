@@ -67,6 +67,8 @@ public ResponseEntity<String> deleteUser(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	applicationService.deleteUser(idVo, metaRequest);
 
 	return ResponseEntity.ok("User deleted successfully");

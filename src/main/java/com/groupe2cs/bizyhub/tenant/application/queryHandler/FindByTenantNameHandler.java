@@ -22,16 +22,26 @@ private final TenantRepository repository;
 
  public TenantResponse handle(FindByTenantNameQuery query) {
 
-		MetaRequest metaRequest = query.getMetaRequest();
+    MetaRequest metaRequest = query.getMetaRequest();
+    Tenant entity = null;
 
 	String value = query.getName().value();
-	Tenant entity = repository.findByNameAndCreatedById(value, metaRequest.getUserId())
-		.orElse(null);
 
-		if (entity == null) {
-			return null;
-		}
+	if(metaRequest.isAdmin()) {
+	    entity = repository.findByNameAndTenantId(value, metaRequest.getTenantId())
+	    .stream()
+        .findFirst()
+	    .orElse(null);
+	 }else{
+	    entity = repository.findByNameAndCreatedById(value, metaRequest.getUserId())
+	    .stream()
+        .findFirst()
+	    .orElse(null);
+	 }
 
+    if (entity == null) {
+        return null;
+    }
 		return TenantMapper.toResponse(entity);
 	}
 

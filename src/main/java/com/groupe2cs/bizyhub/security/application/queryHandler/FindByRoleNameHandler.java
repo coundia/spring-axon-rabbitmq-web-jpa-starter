@@ -22,10 +22,16 @@ private final RoleRepository repository;
 public List<RoleResponse> handle(FindByRoleNameQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Role> entities = null;
+	 String value = query.getName().value();
 
-String value = query.getName().value();
-	List<Role> entities = repository.findByNameAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByNameAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByNameAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(RoleMapper::toResponse)
 	.toList();
 	}

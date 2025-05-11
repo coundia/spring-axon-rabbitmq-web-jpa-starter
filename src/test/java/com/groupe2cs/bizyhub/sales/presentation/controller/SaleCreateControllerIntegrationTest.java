@@ -41,9 +41,9 @@ void it_should_be_able_to_add_sale() {
 		SaleRequest requestDTO = new SaleRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(1099.19);
+		requestDTO.setAmount(2214.64);
 		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(false);
+		requestDTO.setIsActive(true);
 		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
 		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value());
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));

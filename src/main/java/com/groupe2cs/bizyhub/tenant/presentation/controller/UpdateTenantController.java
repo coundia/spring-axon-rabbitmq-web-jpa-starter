@@ -56,6 +56,7 @@ public ResponseEntity<TenantResponse> updateTenant(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	TenantResponse response = applicationService.updateTenant(TenantId.create(id),
 	request,

@@ -1,7 +1,7 @@
 package com.groupe2cs.bizyhub.security.application.service;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +29,8 @@ String tenantId = tenantIdentifierResolver.resolveCurrentTenantIdentifier();
 log.debug("Loading user '{}' for tenant '{}'", username, tenantId);
 
 User user = userRepository.findByUsernameAndTenantId(username,tenantId)
+.stream()
+.findFirst()
 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
 //load for lazy

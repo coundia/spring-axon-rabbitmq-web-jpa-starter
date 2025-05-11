@@ -1,7 +1,5 @@
 package com.groupe2cs.bizyhub.categories.presentation.controller;
 
-import com.groupe2cs.bizyhub.categories.application.dto.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
@@ -10,6 +8,8 @@ import com.groupe2cs.bizyhub.categories.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.categories.application.dto.*;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ private CategoryRepository Repository;
 .name(UUID.randomUUID().toString())
 .typeCategoryRaw(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 		.type("CREATE")
@@ -71,7 +71,7 @@ private CategoryRepository Repository;
 .name(UUID.randomUUID().toString())
 .typeCategoryRaw(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 			.type("UPDATE")

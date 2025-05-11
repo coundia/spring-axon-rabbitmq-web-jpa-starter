@@ -17,7 +17,7 @@ void it_should_create_category_with_valid_values() {
 	CategoryName name = CategoryName.create(UUID.randomUUID().toString());
 	CategoryTypeCategoryRaw typeCategoryRaw = CategoryTypeCategoryRaw.create(UUID.randomUUID().toString());
 	CategoryDetails details = CategoryDetails.create(UUID.randomUUID().toString());
-	CategoryIsActive isActive = CategoryIsActive.create(true);
+	CategoryIsActive isActive = CategoryIsActive.create(false);
 	CategoryUpdatedAt updatedAt = CategoryUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	CategoryReference reference = CategoryReference.create(UUID.randomUUID().toString());
 	CategoryCreatedBy createdBy = CategoryCreatedBy.create(UUID.randomUUID().toString());

@@ -22,10 +22,16 @@ private final AccountRepository repository;
 public List<AccountResponse> handle(FindByAccountCurrentBalanceQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Account> entities = null;
+	 Double value = query.getCurrentBalance().value();
 
-Double value = query.getCurrentBalance().value();
-	List<Account> entities = repository.findByCurrentBalanceAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByCurrentBalanceAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByCurrentBalanceAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(AccountMapper::toResponse)
 	.toList();
 	}

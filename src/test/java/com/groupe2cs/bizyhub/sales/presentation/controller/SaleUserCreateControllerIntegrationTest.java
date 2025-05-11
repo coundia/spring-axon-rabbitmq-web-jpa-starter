@@ -45,7 +45,7 @@ void it_should_be_able_to_add_saleuser() {
 		requestDTO.setUser(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value());
 		requestDTO.setUsername(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(true);
+		requestDTO.setIsActive(false);
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setReference(UUID.randomUUID().toString());
 

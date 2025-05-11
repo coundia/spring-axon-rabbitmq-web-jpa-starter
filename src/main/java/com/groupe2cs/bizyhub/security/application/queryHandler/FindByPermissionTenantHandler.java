@@ -22,10 +22,16 @@ private final PermissionRepository repository;
 public List<PermissionResponse> handle(FindByPermissionTenantQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Permission> entities = null;
+	 String value = query.getTenant().value();
 
-String value = query.getTenant().value();
-	List<Permission> entities = repository.findByTenantIdAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByTenantIdAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByTenantIdAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(PermissionMapper::toResponse)
 	.toList();
 	}

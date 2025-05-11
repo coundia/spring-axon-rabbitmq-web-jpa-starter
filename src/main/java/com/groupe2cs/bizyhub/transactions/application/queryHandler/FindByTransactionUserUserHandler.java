@@ -22,10 +22,16 @@ private final TransactionUserRepository repository;
 public List<TransactionUserResponse> handle(FindByTransactionUserUserQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<TransactionUser> entities = null;
+	 String value = query.getUser().value();
 
-String value = query.getUser().value();
-	List<TransactionUser> entities = repository.findByUserIdAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByUserIdAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByUserIdAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(TransactionUserMapper::toResponse)
 	.toList();
 	}

@@ -57,7 +57,7 @@ void it_should_be_able_to_update_category() {
 	 requestDTO.setName(UUID.randomUUID().toString());
 	 requestDTO.setTypeCategoryRaw(UUID.randomUUID().toString());
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(false);
+	 requestDTO.setIsActive(true);
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());
 

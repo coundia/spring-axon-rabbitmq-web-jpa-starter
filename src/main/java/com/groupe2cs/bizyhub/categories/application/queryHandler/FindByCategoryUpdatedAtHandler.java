@@ -22,10 +22,16 @@ private final CategoryRepository repository;
 public List<CategoryResponse> handle(FindByCategoryUpdatedAtQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Category> entities = null;
+	 java.time.Instant value = query.getUpdatedAt().value();
 
-java.time.Instant value = query.getUpdatedAt().value();
-	List<Category> entities = repository.findByUpdatedAtAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByUpdatedAtAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByUpdatedAtAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(CategoryMapper::toResponse)
 	.toList();
 	}

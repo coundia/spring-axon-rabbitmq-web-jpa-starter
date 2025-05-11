@@ -22,10 +22,16 @@ private final ApiKeyRepository repository;
 public List<ApiKeyResponse> handle(FindByApiKeyCreatedByQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<ApiKey> entities = null;
+	 String value = query.getCreatedBy().value();
 
-String value = query.getCreatedBy().value();
-	List<ApiKey> entities = repository.findByCreatedByIdAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByCreatedByIdAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByCreatedByIdAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(ApiKeyMapper::toResponse)
 	.toList();
 	}

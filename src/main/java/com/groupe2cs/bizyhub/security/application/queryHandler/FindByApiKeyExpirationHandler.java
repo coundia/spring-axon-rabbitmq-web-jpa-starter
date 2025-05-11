@@ -22,10 +22,16 @@ private final ApiKeyRepository repository;
 public List<ApiKeyResponse> handle(FindByApiKeyExpirationQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<ApiKey> entities = null;
+	 java.time.Instant value = query.getExpiration().value();
 
-java.time.Instant value = query.getExpiration().value();
-	List<ApiKey> entities = repository.findByExpirationAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByExpirationAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByExpirationAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(ApiKeyMapper::toResponse)
 	.toList();
 	}

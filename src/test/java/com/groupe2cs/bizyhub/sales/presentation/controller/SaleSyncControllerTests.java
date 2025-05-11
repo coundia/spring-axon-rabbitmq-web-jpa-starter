@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.sales.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.sales.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.sales.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.sales.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.sales.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ private SaleRepository Repository;
 		.deltas(List.of(
 		SaleDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.amount(8042.87)
+.amount(4803.37)
 .details(UUID.randomUUID().toString())
 .isActive(false)
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
@@ -75,7 +75,7 @@ private SaleRepository Repository;
 			SaleDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.amount(8042.87)
+.amount(4803.37)
 .details(UUID.randomUUID().toString())
 .isActive(false)
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())

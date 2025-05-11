@@ -72,9 +72,9 @@ public class ProductFixtures {
 
 			CreateProductCommand command = CreateProductCommand.builder()
 				.name(ProductName.create(UUID.randomUUID().toString()))
-				.price(ProductPrice.create(6173.74))
+				.price(ProductPrice.create(9175.93))
 				.details(ProductDetails.create(UUID.randomUUID().toString()))
-				.isActive(ProductIsActive.create(false))
+				.isActive(ProductIsActive.create(true))
 				.updatedAt(ProductUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(ProductReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -95,9 +95,9 @@ public class ProductFixtures {
 
         CreateProductCommand command = CreateProductCommand.builder()
         .name(ProductName.create(UUID.randomUUID().toString()))
-        .price(ProductPrice.create(6173.74))
+        .price(ProductPrice.create(9175.93))
         .details(ProductDetails.create(UUID.randomUUID().toString()))
-        .isActive(ProductIsActive.create(false))
+        .isActive(ProductIsActive.create(true))
         .updatedAt(ProductUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(ProductReference.create(UUID.randomUUID().toString()))
         .build();

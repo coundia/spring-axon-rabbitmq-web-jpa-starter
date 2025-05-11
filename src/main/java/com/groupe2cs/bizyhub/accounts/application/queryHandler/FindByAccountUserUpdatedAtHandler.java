@@ -22,10 +22,16 @@ private final AccountUserRepository repository;
 public List<AccountUserResponse> handle(FindByAccountUserUpdatedAtQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<AccountUser> entities = null;
+	 java.time.Instant value = query.getUpdatedAt().value();
 
-java.time.Instant value = query.getUpdatedAt().value();
-	List<AccountUser> entities = repository.findByUpdatedAtAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByUpdatedAtAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByUpdatedAtAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(AccountUserMapper::toResponse)
 	.toList();
 	}

@@ -22,10 +22,16 @@ private final SaleUserRepository repository;
 public List<SaleUserResponse> handle(FindBySaleUserDetailsQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<SaleUser> entities = null;
+	 String value = query.getDetails().value();
 
-String value = query.getDetails().value();
-	List<SaleUser> entities = repository.findByDetailsAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByDetailsAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByDetailsAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(SaleUserMapper::toResponse)
 	.toList();
 	}

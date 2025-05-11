@@ -1,5 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.service;
 
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.application.dto.*;
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
 import com.groupe2cs.bizyhub.security.application.command.*;
@@ -7,7 +8,6 @@ import com.groupe2cs.bizyhub.security.domain.event.PasswordResetCreatedEvent;
 import com.groupe2cs.bizyhub.security.application.query.*;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -74,7 +74,10 @@ if (tokenEntity.getExpiration().isBefore(Instant.now())) {
 //todo move to full CQRS , by using a query to get the user
 var user =
 userRepo.findByUsernameAndTenantId(tokenEntity.getUsername(), metaRequest.getTenantId())
-.orElse(null);
+.stream()
+.findFirst()
+.orElse(null)
+;
 if (user == null) {
 log.info("User not found for username: {}", tokenEntity.getUsername());
 return false;

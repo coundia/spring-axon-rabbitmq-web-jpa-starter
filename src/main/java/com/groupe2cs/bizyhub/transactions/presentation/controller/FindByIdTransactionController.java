@@ -68,6 +68,7 @@ public ResponseEntity<TransactionResponse> findById(
 	MetaRequest metaRequest = MetaRequest.builder()
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	var future = applicationService.findByTransactionId(TransactionId
 	.create(id) , metaRequest);

@@ -19,20 +19,22 @@ public class FindByProductNameHandler {
 
 private final ProductRepository repository;
 @QueryHandler
+public List<ProductResponse> handle(FindByProductNameQuery query) {
 
- public ProductResponse handle(FindByProductNameQuery query) {
+	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Product> entities = null;
+	 String value = query.getName().value();
 
-		MetaRequest metaRequest = query.getMetaRequest();
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByNameAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByNameAndCreatedById(value, metaRequest.getUserId());
+	 }
 
-	String value = query.getName().value();
-	Product entity = repository.findByNameAndCreatedById(value, metaRequest.getUserId())
-		.orElse(null);
-
-		if (entity == null) {
-			return null;
-		}
-
-		return ProductMapper.toResponse(entity);
+ 	return entities.stream()
+	.map(ProductMapper::toResponse)
+	.toList();
 	}
+
 
 }

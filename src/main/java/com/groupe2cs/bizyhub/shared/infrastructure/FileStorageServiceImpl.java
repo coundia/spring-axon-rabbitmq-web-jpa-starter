@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.shared.infrastructure;
 
+import java.util.UUID;
 import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.springframework.stereotype.Service;
-import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

@@ -22,10 +22,16 @@ private final RefreshTokenRepository repository;
 public List<RefreshTokenResponse> handle(FindByRefreshTokenExpirationQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<RefreshToken> entities = null;
+	 java.time.Instant value = query.getExpiration().value();
 
-java.time.Instant value = query.getExpiration().value();
-	List<RefreshToken> entities = repository.findByExpirationAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByExpirationAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByExpirationAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(RefreshTokenMapper::toResponse)
 	.toList();
 	}

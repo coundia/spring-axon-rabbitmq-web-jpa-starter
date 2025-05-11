@@ -33,7 +33,7 @@ public class Product   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 
-		unique = true  ,
+		unique = false  ,
 		length = 250
 	)
 

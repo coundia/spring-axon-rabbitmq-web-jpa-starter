@@ -67,6 +67,8 @@ public ResponseEntity<String> deleteApiKey(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	applicationService.deleteApiKey(idVo, metaRequest);
 
 	return ResponseEntity.ok("ApiKey deleted successfully");

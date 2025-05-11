@@ -19,28 +19,28 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "AccountRequest", description = "Request payload for Account operations")
 public class AccountRequest implements Serializable {
 
-	@Schema(description = "", example = "23b9f684-4b78-46d7-bb1d-df2f954a4c84")
+	@Schema(description = "", example = "143a2ffa-22ec-48c3-a415-967241a409b9")
 	private String name;
 
-	@Schema(description = "", example = "1eba9932-8eac-4539-b39a-04d544c5c5bf")
+	@Schema(description = "", example = "9740ef14-364d-4639-8117-7e265df6b753")
 	private String currency;
 
-	@Schema(description = "", example = "4739.73")
+	@Schema(description = "", example = "3016.75")
 	private Double currentBalance;
 
-	@Schema(description = "", example = "6242.68")
+	@Schema(description = "", example = "484.18")
 	private Double previousBalance;
 
-	@Schema(description = "", example = "cd2af48a-dd73-45e0-b2b9-2f78bcda402d")
+	@Schema(description = "", example = "4b1ffd3f-0c97-4e62-b485-d47891b90862")
 	private String details;
 
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean isActive;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "6855694b-4493-441a-a514-1dd52a871b6e")
+	@Schema(description = "", example = "a9705159-c154-48f9-aeb7-d961310de72e")
 	private String reference;
 
 

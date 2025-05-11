@@ -22,10 +22,16 @@ private final TenantRepository repository;
 public List<TenantResponse> handle(FindByTenantDomainQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Tenant> entities = null;
+	 String value = query.getDomain().value();
 
-String value = query.getDomain().value();
-	List<Tenant> entities = repository.findByDomainAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByDomainAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByDomainAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(TenantMapper::toResponse)
 	.toList();
 	}

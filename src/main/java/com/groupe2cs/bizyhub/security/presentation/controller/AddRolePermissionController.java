@@ -63,6 +63,8 @@ public ResponseEntity<RolePermissionResponse> addRolePermission(@Valid @RequestB
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 		.build();
 
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	RolePermissionResponse response =  applicationService.createRolePermission(
 			request,
 			metaRequest

@@ -12,18 +12,19 @@ import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.config.ProcessingGroup;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @AllowReplay(value = false)
 @Slf4j
 @Component
+@Transactional
+@RequiredArgsConstructor
 @ProcessingGroup("Category")
 public class CategoryProjection {
 
 private final CategoryRepository repository;
 
-public CategoryProjection(CategoryRepository repository) {
-this.repository = repository;
-}
 
 @EventHandler
 public void on(CategoryCreatedEvent event) {
@@ -47,7 +48,10 @@ if(event.getCreatedBy() !=null){
 
 
 repository.save(entity);
+
+
 log.info("Category inserted: {}", entity);
+
 } catch (Exception e) {
 log.error("Error saving Category: {}", e.getMessage(), e);
 throw e;
@@ -59,6 +63,7 @@ public void on(CategoryUpdatedEvent event) {
 try {
 Category entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Category not found"));
+
 
 		entity.setId(event.getId().value());
 		entity.setName(event.getName().value());
@@ -78,6 +83,8 @@ if(entity.getTenant() == null && event.getTenant() != null) {
 }
 
 repository.save(entity);
+
+
 log.info("Category updated successfully: {}", event.getId().value());
 } catch (Exception e) {
 log.error("Error updating Category: {}", e.getMessage(), e);
@@ -88,6 +95,8 @@ throw e;
 @EventHandler
 public void on(CategoryDeletedEvent event) {
 try {
+
+
 repository.deleteById(event.getId().value());
 log.info("Category deleted successfully: {}", event.getId().value());
 } catch (Exception e) {

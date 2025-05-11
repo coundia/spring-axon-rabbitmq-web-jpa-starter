@@ -59,6 +59,7 @@ public ResponseEntity<ApiKeyResponse> updateApiKey(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	ApiKeyResponse response = applicationService.updateApiKey(ApiKeyId.create(id),
 	request,

@@ -22,10 +22,16 @@ private final ProductRepository repository;
 public List<ProductResponse> handle(FindByProductReferenceQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Product> entities = null;
+	 String value = query.getReference().value();
 
-String value = query.getReference().value();
-	List<Product> entities = repository.findByReferenceAndCreatedById(value, metaRequest.getUserId());
-	return entities.stream()
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByReferenceAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByReferenceAndCreatedById(value, metaRequest.getUserId());
+	 }
+
+ 	return entities.stream()
 	.map(ProductMapper::toResponse)
 	.toList();
 	}

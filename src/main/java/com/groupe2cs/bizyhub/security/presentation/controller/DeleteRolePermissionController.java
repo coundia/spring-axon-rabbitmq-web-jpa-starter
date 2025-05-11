@@ -67,6 +67,8 @@ public ResponseEntity<String> deleteRolePermission(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	applicationService.deleteRolePermission(idVo, metaRequest);
 
 	return ResponseEntity.ok("RolePermission deleted successfully");

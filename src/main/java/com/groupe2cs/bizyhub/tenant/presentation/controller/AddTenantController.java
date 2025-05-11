@@ -60,6 +60,8 @@ public ResponseEntity<TenantResponse> addTenant(@Valid @RequestBody TenantReques
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 		.build();
 
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	TenantResponse response =  applicationService.createTenant(
 			request,
 			metaRequest
