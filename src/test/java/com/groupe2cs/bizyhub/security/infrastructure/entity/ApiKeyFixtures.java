@@ -73,7 +73,7 @@ public class ApiKeyFixtures {
 			CreateApiKeyCommand command = CreateApiKeyCommand.builder()
 				.appKey(ApiKeyAppKey.create(UUID.randomUUID().toString()))
 				.username(ApiKeyUsername.create(UUID.randomUUID().toString()))
-				.active(ApiKeyActive.create(false))
+				.active(ApiKeyActive.create(true))
 				.createdAt(ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.expiration(ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)))
 			.build();
@@ -95,7 +95,7 @@ public class ApiKeyFixtures {
         CreateApiKeyCommand command = CreateApiKeyCommand.builder()
         .appKey(ApiKeyAppKey.create(UUID.randomUUID().toString()))
         .username(ApiKeyUsername.create(UUID.randomUUID().toString()))
-        .active(ApiKeyActive.create(false))
+        .active(ApiKeyActive.create(true))
         .createdAt(ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .expiration(ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)))
         .build();
