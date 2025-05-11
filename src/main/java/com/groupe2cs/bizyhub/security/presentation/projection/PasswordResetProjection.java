@@ -12,18 +12,19 @@ import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.config.ProcessingGroup;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @AllowReplay(value = false)
 @Slf4j
 @Component
+@Transactional
+@RequiredArgsConstructor
 @ProcessingGroup("PasswordReset")
 public class PasswordResetProjection {
 
 private final PasswordResetRepository repository;
 
-public PasswordResetProjection(PasswordResetRepository repository) {
-this.repository = repository;
-}
 
 @EventHandler
 public void on(PasswordResetCreatedEvent event) {
@@ -44,7 +45,10 @@ if(event.getCreatedBy() !=null){
 
 
 repository.save(entity);
+
+
 log.info("PasswordReset inserted: {}", entity);
+
 } catch (Exception e) {
 log.error("Error saving PasswordReset: {}", e.getMessage(), e);
 throw e;
@@ -56,6 +60,7 @@ public void on(PasswordResetUpdatedEvent event) {
 try {
 PasswordReset entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("PasswordReset not found"));
+
 
 		entity.setId(event.getId().value());
 		entity.setToken(event.getToken().value());
@@ -72,6 +77,8 @@ if(entity.getTenant() == null && event.getTenant() != null) {
 }
 
 repository.save(entity);
+
+
 log.info("PasswordReset updated successfully: {}", event.getId().value());
 } catch (Exception e) {
 log.error("Error updating PasswordReset: {}", e.getMessage(), e);
@@ -82,6 +89,8 @@ throw e;
 @EventHandler
 public void on(PasswordResetDeletedEvent event) {
 try {
+
+
 repository.deleteById(event.getId().value());
 log.info("PasswordReset deleted successfully: {}", event.getId().value());
 } catch (Exception e) {

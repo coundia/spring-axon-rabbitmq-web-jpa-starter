@@ -12,18 +12,19 @@ import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.config.ProcessingGroup;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @AllowReplay(value = false)
 @Slf4j
 @Component
+@Transactional
+@RequiredArgsConstructor
 @ProcessingGroup("UserRole")
 public class UserRoleProjection {
 
 private final UserRoleRepository repository;
 
-public UserRoleProjection(UserRoleRepository repository) {
-this.repository = repository;
-}
 
 @EventHandler
 public void on(UserRoleCreatedEvent event) {
@@ -43,7 +44,10 @@ if(event.getCreatedBy() !=null){
 
 
 repository.save(entity);
+
+
 log.info("UserRole inserted: {}", entity);
+
 } catch (Exception e) {
 log.error("Error saving UserRole: {}", e.getMessage(), e);
 throw e;
@@ -55,6 +59,7 @@ public void on(UserRoleUpdatedEvent event) {
 try {
 UserRole entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("UserRole not found"));
+
 
 		entity.setId(event.getId().value());
 		entity.setUser(new User(event.getUser().value()));
@@ -70,6 +75,8 @@ if(entity.getTenant() == null && event.getTenant() != null) {
 }
 
 repository.save(entity);
+
+
 log.info("UserRole updated successfully: {}", event.getId().value());
 } catch (Exception e) {
 log.error("Error updating UserRole: {}", e.getMessage(), e);
@@ -80,6 +87,8 @@ throw e;
 @EventHandler
 public void on(UserRoleDeletedEvent event) {
 try {
+
+
 repository.deleteById(event.getId().value());
 log.info("UserRole deleted successfully: {}", event.getId().value());
 } catch (Exception e) {

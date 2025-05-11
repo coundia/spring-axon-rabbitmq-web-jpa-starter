@@ -41,7 +41,7 @@ void it_should_be_able_to_add_transaction() {
 		TransactionRequest requestDTO = new TransactionRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(8913.51);
+		requestDTO.setAmount(4556.75);
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(false);
 		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());

@@ -19,10 +19,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "UserRequest", description = "Request payload for User operations")
 public class UserRequest implements Serializable {
 
-	@Schema(description = "", example = "62143166-615f-446e-bd01-922af41c2b49")
+	@Schema(description = "", example = "f50a45cc-9659-420b-9369-615bb5740bed")
 	private String username;
 
-	@Schema(description = "", example = "6e6d96ad-01df-4130-b633-198f76162e78")
+	@Schema(description = "", example = "92c24eb0-8cb7-4a21-80b1-b4bfb2a6a34c")
 	private String password;
 
 
