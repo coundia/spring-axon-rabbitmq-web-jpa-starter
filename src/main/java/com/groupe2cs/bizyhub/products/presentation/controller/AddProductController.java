@@ -63,6 +63,8 @@ public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductReq
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 		.build();
 
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	ProductResponse response =  applicationService.createProduct(
 			request,
 			metaRequest

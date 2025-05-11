@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ private TransactionRepository Repository;
 		.deltas(List.of(
 		TransactionDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.amount(2778.5)
+.amount(8316.93)
 .details(UUID.randomUUID().toString())
 .isActive(false)
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
@@ -77,7 +77,7 @@ private TransactionRepository Repository;
 			TransactionDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.amount(2778.5)
+.amount(8316.93)
 .details(UUID.randomUUID().toString())
 .isActive(false)
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())

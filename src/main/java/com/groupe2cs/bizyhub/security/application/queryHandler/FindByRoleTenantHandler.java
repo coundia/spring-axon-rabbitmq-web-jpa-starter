@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByRoleTenantHandler {
 
 private final RoleRepository repository;
+
 @QueryHandler
 public List<RoleResponse> handle(FindByRoleTenantQuery query) {
 

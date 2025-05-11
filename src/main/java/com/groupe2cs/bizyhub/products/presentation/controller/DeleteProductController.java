@@ -67,6 +67,8 @@ public ResponseEntity<String> deleteProduct(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	applicationService.deleteProduct(idVo, metaRequest);
 
 	return ResponseEntity.ok("Product deleted successfully");

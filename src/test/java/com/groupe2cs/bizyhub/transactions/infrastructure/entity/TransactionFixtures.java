@@ -78,9 +78,9 @@ public class TransactionFixtures {
 
 			CreateTransactionCommand command = CreateTransactionCommand.builder()
 				.name(TransactionName.create(UUID.randomUUID().toString()))
-				.amount(TransactionAmount.create(3611.4))
+				.amount(TransactionAmount.create(2188.87))
 				.details(TransactionDetails.create(UUID.randomUUID().toString()))
-				.isActive(TransactionIsActive.create(false))
+				.isActive(TransactionIsActive.create(true))
 				.account(TransactionAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
 				.category(TransactionCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
 				.typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
@@ -105,9 +105,9 @@ public class TransactionFixtures {
 
         CreateTransactionCommand command = CreateTransactionCommand.builder()
         .name(TransactionName.create(UUID.randomUUID().toString()))
-        .amount(TransactionAmount.create(3611.4))
+        .amount(TransactionAmount.create(2188.87))
         .details(TransactionDetails.create(UUID.randomUUID().toString()))
-        .isActive(TransactionIsActive.create(false))
+        .isActive(TransactionIsActive.create(true))
         .typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
         .dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
         .updatedAt(TransactionUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))

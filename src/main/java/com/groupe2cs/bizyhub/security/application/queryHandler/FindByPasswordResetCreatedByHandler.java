@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByPasswordResetCreatedByHandler {
 
 private final PasswordResetRepository repository;
+
 @QueryHandler
 public List<PasswordResetResponse> handle(FindByPasswordResetCreatedByQuery query) {
 

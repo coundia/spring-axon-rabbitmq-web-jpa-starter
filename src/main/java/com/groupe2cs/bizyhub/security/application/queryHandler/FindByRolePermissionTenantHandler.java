@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByRolePermissionTenantHandler {
 
 private final RolePermissionRepository repository;
+
 @QueryHandler
 public List<RolePermissionResponse> handle(FindByRolePermissionTenantQuery query) {
 

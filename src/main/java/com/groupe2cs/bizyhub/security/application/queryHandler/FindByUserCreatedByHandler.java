@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByUserCreatedByHandler {
 
 private final UserRepository repository;
+
 @QueryHandler
 public List<UserResponse> handle(FindByUserCreatedByQuery query) {
 

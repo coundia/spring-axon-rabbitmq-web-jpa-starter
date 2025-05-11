@@ -59,6 +59,7 @@ public ResponseEntity<ProductResponse> updateProduct(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	ProductResponse response = applicationService.updateProduct(ProductId.create(id),
 	request,

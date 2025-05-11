@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByProductIsActiveHandler {
 
 private final ProductRepository repository;
+
 @QueryHandler
 public List<ProductResponse> handle(FindByProductIsActiveQuery query) {
 

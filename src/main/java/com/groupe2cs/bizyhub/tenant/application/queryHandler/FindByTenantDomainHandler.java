@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByTenantDomainHandler {
 
 private final TenantRepository repository;
+
 @QueryHandler
 public List<TenantResponse> handle(FindByTenantDomainQuery query) {
 

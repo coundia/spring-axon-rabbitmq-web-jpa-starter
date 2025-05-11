@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
 
-import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -39,9 +39,9 @@ private ProductRepository Repository;
 		.deltas(List.of(
 		ProductDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.price(5032.1)
+.price(7863.61)
 .details(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 		.type("CREATE")
@@ -69,9 +69,9 @@ private ProductRepository Repository;
 			ProductDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.price(5032.1)
+.price(7863.61)
 .details(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 			.type("UPDATE")

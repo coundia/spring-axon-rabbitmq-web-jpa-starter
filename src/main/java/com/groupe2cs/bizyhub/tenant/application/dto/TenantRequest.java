@@ -19,19 +19,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TenantRequest", description = "Request payload for Tenant operations")
 public class TenantRequest implements Serializable {
 
-	@Schema(description = "", example = "2f50d904-2107-4b1b-aa88-01a8ca4531a8")
+	@Schema(description = "", example = "5078878e-c216-4641-891a-76bba5877fa3")
 	private String name;
 
-	@Schema(description = "", example = "d13153ab-27f2-4b43-93d5-207bfa626f19")
+	@Schema(description = "", example = "821e2cfc-1796-4ca6-84b0-405edd1b86f9")
 	private String description;
 
-	@Schema(description = "", example = "ba56deaf-7000-42db-aba6-90ce2a77c8c0")
+	@Schema(description = "", example = "2fb744b5-b70d-40ed-b996-8e096258e1c3")
 	private String domain;
 
-	@Schema(description = "", example = "be994981-2c8a-4c3d-8061-50040f1c772d")
+	@Schema(description = "", example = "b57b562e-5f86-4c59-81fd-14c325bbe152")
 	private String language;
 
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean active;
 
 

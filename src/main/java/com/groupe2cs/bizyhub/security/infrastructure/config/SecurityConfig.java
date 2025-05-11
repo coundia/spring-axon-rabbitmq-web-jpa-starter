@@ -1,7 +1,7 @@
 package com.groupe2cs.bizyhub.security.infrastructure.config;
 
-import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
 import com.groupe2cs.bizyhub.security.application.service.CustomUserDetailsService;
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
 import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.TENANT_HEADER;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;

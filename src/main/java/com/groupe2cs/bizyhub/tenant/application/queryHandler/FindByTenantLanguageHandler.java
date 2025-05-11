@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByTenantLanguageHandler {
 
 private final TenantRepository repository;
+
 @QueryHandler
 public List<TenantResponse> handle(FindByTenantLanguageQuery query) {
 

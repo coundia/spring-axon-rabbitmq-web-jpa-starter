@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByApiKeyCreatedByHandler {
 
 private final ApiKeyRepository repository;
+
 @QueryHandler
 public List<ApiKeyResponse> handle(FindByApiKeyCreatedByQuery query) {
 

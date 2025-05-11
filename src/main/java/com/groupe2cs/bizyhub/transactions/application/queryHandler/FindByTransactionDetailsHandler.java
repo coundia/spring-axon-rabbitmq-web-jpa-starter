@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByTransactionDetailsHandler {
 
 private final TransactionRepository repository;
+
 @QueryHandler
 public List<TransactionResponse> handle(FindByTransactionDetailsQuery query) {
 

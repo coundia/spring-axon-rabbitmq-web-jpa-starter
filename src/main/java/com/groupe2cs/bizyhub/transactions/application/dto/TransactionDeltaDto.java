@@ -24,25 +24,25 @@ public class TransactionDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "56ac1023-9ca5-4224-bbce-8bf7a7e583be")
+		@Schema(description = "", example = "c58d422d-e29b-4521-95ed-bd01bbc3bccd")
 		private String name;
-		@Schema(description = "", example = "9271.62")
+		@Schema(description = "", example = "4547.76")
 		private Double amount;
-		@Schema(description = "", example = "2201afc9-69a4-4952-bf26-84724b8a1115")
+		@Schema(description = "", example = "4a5a0752-75cc-4333-8498-90603bf91072")
 		private String details;
 		@Schema(description = "", example = "false")
 		private Boolean isActive;
-		@Schema(description = "", example = "8cdb26b6-7c91-4489-8879-abda1992e3f3")
+		@Schema(description = "", example = "e3e6cb3f-b489-4d64-9106-b960819f945b")
 		private String account;
-		@Schema(description = "", example = "9ae2d49d-910e-4aa6-b451-86cd74442571")
+		@Schema(description = "", example = "9eb9683d-1842-4390-a839-57e793023ecc")
 		private String category;
-		@Schema(description = "", example = "0a70b89f-92a5-4bc6-9534-1a3b1169eb54")
+		@Schema(description = "", example = "756b411d-b0d0-460d-9b9b-1c2880791d67")
 		private String typeTransactionRaw;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant dateTransaction;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "989f60fd-f5e8-4051-a04a-1658542e6c56")
+		@Schema(description = "", example = "d5873b37-1c27-452c-81dd-cf77958a2621")
 		private String reference;
 
 }
