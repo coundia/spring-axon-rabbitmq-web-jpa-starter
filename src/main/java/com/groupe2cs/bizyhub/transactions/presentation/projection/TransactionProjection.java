@@ -1,5 +1,7 @@
 package com.groupe2cs.bizyhub.transactions.presentation.projection;
 
+import com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionCreatedEvent;
@@ -7,6 +9,7 @@ import com.groupe2cs.bizyhub.transactions.domain.event.TransactionDeletedEvent;
 import com.groupe2cs.bizyhub.transactions.domain.event.TransactionUpdatedEvent;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
@@ -17,13 +20,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @ProcessingGroup("Transaction")
+
+@RequiredArgsConstructor
 public class TransactionProjection {
 
 	private final TransactionRepository repository;
 
-	public TransactionProjection(TransactionRepository repository) {
-		this.repository = repository;
-	}
+	private final AccountRepository accountRepository;
 
 	@EventHandler
 	public void on(TransactionCreatedEvent event) {
@@ -56,9 +59,31 @@ public class TransactionProjection {
 			if (event.getTenant() != null) {
 				entity.setTenant(new Tenant(event.getTenant().value()));
 			}
+			var saved = repository.save(entity);
 
+			log.info("Transaction created successfully: {}", saved.getId());
 
-			repository.save(entity);
+			Account account = accountRepository.findById(event.getAccount().value())
+					.orElseThrow(() -> new RuntimeException("Account not found"));
+
+			boolean isCredit = "IN".equalsIgnoreCase(entity.getTypeTransactionRaw());
+			boolean isDebit = "OUT".equalsIgnoreCase(entity.getTypeTransactionRaw());
+
+			if (isCredit) {
+				account.setCurrentBalance(account.getCurrentBalance() + entity.getAmount());
+				account.setUpdatedAt(entity.getUpdatedAt());
+				log.info("Account updated with credit amount: {}, account:{}", entity.getAmount(), account.getId());
+
+			}
+
+			if (isDebit) {
+				account.setCurrentBalance(account.getCurrentBalance() - entity.getAmount());
+				account.setUpdatedAt(entity.getUpdatedAt());
+				log.info("Account updated with debit  amount: {}, account:{}", entity.getAmount(), account.getId());
+			}
+
+			accountRepository.save(account);
+
 			log.info("Transaction inserted: {}", entity);
 		} catch (Exception e) {
 			log.error("Error saving Transaction: {}", e.getMessage(), e);
