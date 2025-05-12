@@ -67,7 +67,7 @@ void it_should_be_able_to_update_transactionuser() {
 	 requestDTO.setUser( updated.getUser().value());
 	 requestDTO.setUsername(UUID.randomUUID().toString());
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(false);
+	 requestDTO.setIsActive(true);
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());
 

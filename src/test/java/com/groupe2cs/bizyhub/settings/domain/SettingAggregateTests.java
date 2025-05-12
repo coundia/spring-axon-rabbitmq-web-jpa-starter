@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.settings.domain;
 
-import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
 import com.groupe2cs.bizyhub.settings.domain.exception.*;
+import java.util.UUID;
 
 
 public class SettingAggregateTests extends BaseUnitTests {
@@ -15,19 +15,21 @@ public class SettingAggregateTests extends BaseUnitTests {
 void it_should_create_setting_with_valid_values() {
 	SettingId id = SettingId.create(UUID.randomUUID().toString());
 	SettingName name = SettingName.create(UUID.randomUUID().toString());
-	SettingStringValue stringValue = SettingStringValue.create(UUID.randomUUID().toString());
-	SettingDescription description = SettingDescription.create(UUID.randomUUID().toString());
-	SettingIsActive isActive = SettingIsActive.create(true);
+	SettingValue value = SettingValue.create(UUID.randomUUID().toString());
+	SettingLocale locale = SettingLocale.create(UUID.randomUUID().toString());
+	SettingDetails details = SettingDetails.create(UUID.randomUUID().toString());
+	SettingIsActive isActive = SettingIsActive.create(false);
 	SettingUpdatedAt updatedAt = SettingUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	SettingReference reference = SettingReference.create(UUID.randomUUID().toString());
 	SettingCreatedBy createdBy = SettingCreatedBy.create(UUID.randomUUID().toString());
 	SettingTenant tenant = SettingTenant.create(UUID.randomUUID().toString());
-	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, stringValue, description, isActive, updatedAt, reference, createdBy, tenant);
+	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, value, locale, details, isActive, updatedAt, reference, createdBy, tenant);
 	assertThat(aggregateSettingAggregate.getId()).isNotNull();
 	assertThat(aggregateSettingAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateSettingAggregate.getName()).isEqualTo(name);
-	assertThat(aggregateSettingAggregate.getStringValue()).isEqualTo(stringValue);
-	assertThat(aggregateSettingAggregate.getDescription()).isEqualTo(description);
+	assertThat(aggregateSettingAggregate.getValue()).isEqualTo(value);
+	assertThat(aggregateSettingAggregate.getLocale()).isEqualTo(locale);
+	assertThat(aggregateSettingAggregate.getDetails()).isEqualTo(details);
 	assertThat(aggregateSettingAggregate.getIsActive()).isEqualTo(isActive);
 	assertThat(aggregateSettingAggregate.getUpdatedAt()).isEqualTo(updatedAt);
 	assertThat(aggregateSettingAggregate.getReference()).isEqualTo(reference);
@@ -46,14 +48,19 @@ void it_should_create_setting_with_valid_values() {
 		assertThat(error.getMessage()).isEqualTo("Name is invalid");
 		}
 		@Test
-		void it_should_throw_when_stringValue_is_invalid() {
-		SettingStringValueNotValid error = assertThrows(SettingStringValueNotValid.class, () -> SettingStringValue.create(""));
-		assertThat(error.getMessage()).isEqualTo("StringValue is invalid");
+		void it_should_throw_when_value_is_invalid() {
+		SettingValueNotValid error = assertThrows(SettingValueNotValid.class, () -> SettingValue.create(""));
+		assertThat(error.getMessage()).isEqualTo("Value is invalid");
 		}
 		@Test
-		void it_should_throw_when_description_is_invalid() {
-		SettingDescriptionNotValid error = assertThrows(SettingDescriptionNotValid.class, () -> SettingDescription.create(""));
-		assertThat(error.getMessage()).isEqualTo("Description is invalid");
+		void it_should_throw_when_locale_is_invalid() {
+		SettingLocaleNotValid error = assertThrows(SettingLocaleNotValid.class, () -> SettingLocale.create(""));
+		assertThat(error.getMessage()).isEqualTo("Locale is invalid");
+		}
+		@Test
+		void it_should_throw_when_details_is_invalid() {
+		SettingDetailsNotValid error = assertThrows(SettingDetailsNotValid.class, () -> SettingDetails.create(""));
+		assertThat(error.getMessage()).isEqualTo("Details is invalid");
 		}
 		@Test
 		void it_should_throw_when_isActive_is_invalid() {

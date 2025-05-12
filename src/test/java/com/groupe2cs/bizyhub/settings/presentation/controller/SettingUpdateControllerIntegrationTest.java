@@ -55,8 +55,9 @@ void it_should_be_able_to_update_setting() {
 
 	SettingRequest requestDTO = new SettingRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setStringValue(UUID.randomUUID().toString());
-	 requestDTO.setDescription(UUID.randomUUID().toString());
+	 requestDTO.setValue(UUID.randomUUID().toString());
+	 requestDTO.setLocale(UUID.randomUUID().toString());
+	 requestDTO.setDetails(UUID.randomUUID().toString());
 	 requestDTO.setIsActive(true);
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());

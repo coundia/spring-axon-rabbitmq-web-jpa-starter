@@ -24,9 +24,11 @@ public class SettingResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String name;
 	@Schema(description = "", example = "")
-	private String stringValue;
+	private String value;
 	@Schema(description = "", example = "")
-	private String description;
+	private String locale;
+	@Schema(description = "", example = "")
+	private String details;
 	@Schema(description = "", example = "")
 	private Boolean isActive;
 	@Schema(description = "", example = "")

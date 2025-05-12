@@ -59,6 +59,7 @@ public ResponseEntity<CategoryResponse> updateCategory(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	CategoryResponse response = applicationService.updateCategory(CategoryId.create(id),
 	request,

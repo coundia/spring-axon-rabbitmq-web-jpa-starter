@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
+	import com.groupe2cs.bizyhub.shared.application.*;
+	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 	import com.groupe2cs.bizyhub.shared.application.dto.*;
 	import com.groupe2cs.bizyhub.accounts.application.dto.*;
 	import com.groupe2cs.bizyhub.accounts.application.usecase.*;
-	import com.groupe2cs.bizyhub.shared.application.*;
-	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -46,6 +46,9 @@ public class AccountSyncController {
 			MetaRequest metaRequest = MetaRequest.builder()
 				.userId(RequestContext.getUserId(jwt))				.tenantId(RequestContext.getTenantId(jwt))
 			.build();
+
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 			applicationService.syncAccount(
 					request,
 					metaRequest

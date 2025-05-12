@@ -59,6 +59,7 @@ public ResponseEntity<TransactionUserResponse> updateTransactionUser(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	TransactionUserResponse response = applicationService.updateTransactionUser(TransactionUserId.create(id),
 	request,

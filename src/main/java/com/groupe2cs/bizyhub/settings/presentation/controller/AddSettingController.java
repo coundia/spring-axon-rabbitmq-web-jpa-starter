@@ -63,6 +63,8 @@ public ResponseEntity<SettingResponse> addSetting(@Valid @RequestBody SettingReq
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 		.build();
 
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	SettingResponse response =  applicationService.createSetting(
 			request,
 			metaRequest

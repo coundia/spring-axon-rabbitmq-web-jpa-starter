@@ -24,17 +24,17 @@ public class CategoryDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "95e863ff-29ad-4edf-8330-0b95c4f06ba3")
+		@Schema(description = "", example = "746085db-0513-4319-bf65-206769a484fe")
 		private String name;
-		@Schema(description = "", example = "44f35673-f7c2-444d-a33a-ccd6207e4158")
+		@Schema(description = "", example = "57b04724-39aa-4aae-8aa5-fcd1aff38bbc")
 		private String typeCategoryRaw;
-		@Schema(description = "", example = "0cc8fce5-883d-4271-b3b3-1917c6bd6d29")
+		@Schema(description = "", example = "f5b7c3d0-58b1-408d-bdc2-85ccabf57d44")
 		private String details;
-		@Schema(description = "", example = "false")
+		@Schema(description = "", example = "true")
 		private Boolean isActive;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "7ee77830-9229-4a0c-8e60-159ff07fbc57")
+		@Schema(description = "", example = "a3754d83-683b-4026-84ab-56329d0ee59c")
 		private String reference;
 
 }

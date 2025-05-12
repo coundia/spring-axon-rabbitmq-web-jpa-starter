@@ -30,6 +30,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 	@Query("SELECT e FROM AccountUser e WHERE e.name = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByNameAndCreatedById(String name, String createdById);
 
+
 	@Query("SELECT e FROM AccountUser e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByName(String name);
 
@@ -41,6 +42,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 
 	@Query("SELECT e FROM AccountUser e WHERE e.account.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByAccountIdAndCreatedById(String account, String createdById);
+
 
 	@Query("SELECT e FROM AccountUser e WHERE e.account.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByAccountId(String account);
@@ -54,6 +56,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 	@Query("SELECT e FROM AccountUser e WHERE e.user.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByUserIdAndCreatedById(String user, String createdById);
 
+
 	@Query("SELECT e FROM AccountUser e WHERE e.user.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByUserId(String user);
 
@@ -65,6 +68,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 
 	@Query("SELECT e FROM AccountUser e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByUsernameAndCreatedById(String username, String createdById);
+
 
 	@Query("SELECT e FROM AccountUser e WHERE e.username = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByUsername(String username);
@@ -78,6 +82,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 	@Query("SELECT e FROM AccountUser e WHERE e.details = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByDetailsAndCreatedById(String details, String createdById);
 
+
 	@Query("SELECT e FROM AccountUser e WHERE e.details = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByDetails(String details);
 
@@ -89,6 +94,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 
 	@Query("SELECT e FROM AccountUser e WHERE e.isActive = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByIsActiveAndCreatedById(Boolean isActive, String createdById);
+
 
 	@Query("SELECT e FROM AccountUser e WHERE e.isActive = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByIsActive(Boolean isActive);
@@ -102,6 +108,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 	@Query("SELECT e FROM AccountUser e WHERE e.updatedAt = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
 
+
 	@Query("SELECT e FROM AccountUser e WHERE e.updatedAt = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByUpdatedAt(java.time.Instant updatedAt);
 
@@ -113,6 +120,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 
 	@Query("SELECT e FROM AccountUser e WHERE e.reference = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByReferenceAndCreatedById(String reference, String createdById);
+
 
 	@Query("SELECT e FROM AccountUser e WHERE e.reference = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByReference(String reference);
@@ -126,6 +134,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 	@Query("SELECT e FROM AccountUser e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM AccountUser e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByCreatedById(String createdBy);
 
@@ -138,6 +147,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 	@Query("SELECT e FROM AccountUser e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<AccountUser> findByTenantIdAndCreatedById(String tenant, String createdById);
 
+
 	@Query("SELECT e FROM AccountUser e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<AccountUser> findByTenantId(String tenant);
 
@@ -149,5 +159,5 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 
 
 
-	List<AccountUser> findByUserIdAndAccountId(String userId, String accountId);
+
 }

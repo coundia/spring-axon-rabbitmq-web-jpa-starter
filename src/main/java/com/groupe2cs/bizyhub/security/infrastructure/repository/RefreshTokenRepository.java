@@ -30,6 +30,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
 	@Query("SELECT e FROM RefreshToken e WHERE e.token = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RefreshToken> findByTokenAndCreatedById(String token, String createdById);
 
+
 	@Query("SELECT e FROM RefreshToken e WHERE e.token = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RefreshToken> findByToken(String token);
 
@@ -41,6 +42,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
 
 	@Query("SELECT e FROM RefreshToken e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RefreshToken> findByUsernameAndCreatedById(String username, String createdById);
+
 
 	@Query("SELECT e FROM RefreshToken e WHERE e.username = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RefreshToken> findByUsername(String username);
@@ -54,6 +56,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
 	@Query("SELECT e FROM RefreshToken e WHERE e.expiration = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RefreshToken> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
 
+
 	@Query("SELECT e FROM RefreshToken e WHERE e.expiration = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RefreshToken> findByExpiration(java.time.Instant expiration);
 
@@ -66,6 +69,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
 	@Query("SELECT e FROM RefreshToken e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RefreshToken> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM RefreshToken e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RefreshToken> findByCreatedById(String createdBy);
 
@@ -77,6 +81,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
 
 	@Query("SELECT e FROM RefreshToken e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RefreshToken> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM RefreshToken e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RefreshToken> findByTenantId(String tenant);

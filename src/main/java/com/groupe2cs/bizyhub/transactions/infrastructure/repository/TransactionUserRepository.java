@@ -30,6 +30,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 	@Query("SELECT e FROM TransactionUser e WHERE e.name = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByNameAndCreatedById(String name, String createdById);
 
+
 	@Query("SELECT e FROM TransactionUser e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByName(String name);
 
@@ -41,6 +42,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.transaction.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByTransactionIdAndCreatedById(String transaction, String createdById);
+
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.transaction.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByTransactionId(String transaction);
@@ -54,6 +56,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 	@Query("SELECT e FROM TransactionUser e WHERE e.user.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByUserIdAndCreatedById(String user, String createdById);
 
+
 	@Query("SELECT e FROM TransactionUser e WHERE e.user.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByUserId(String user);
 
@@ -65,6 +68,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByUsernameAndCreatedById(String username, String createdById);
+
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.username = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByUsername(String username);
@@ -78,6 +82,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 	@Query("SELECT e FROM TransactionUser e WHERE e.details = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByDetailsAndCreatedById(String details, String createdById);
 
+
 	@Query("SELECT e FROM TransactionUser e WHERE e.details = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByDetails(String details);
 
@@ -89,6 +94,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.isActive = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByIsActiveAndCreatedById(Boolean isActive, String createdById);
+
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.isActive = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByIsActive(Boolean isActive);
@@ -102,6 +108,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 	@Query("SELECT e FROM TransactionUser e WHERE e.updatedAt = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
 
+
 	@Query("SELECT e FROM TransactionUser e WHERE e.updatedAt = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByUpdatedAt(java.time.Instant updatedAt);
 
@@ -113,6 +120,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.reference = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByReferenceAndCreatedById(String reference, String createdById);
+
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.reference = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByReference(String reference);
@@ -126,6 +134,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 	@Query("SELECT e FROM TransactionUser e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM TransactionUser e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByCreatedById(String createdBy);
 
@@ -137,6 +146,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<TransactionUser> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM TransactionUser e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<TransactionUser> findByTenantId(String tenant);

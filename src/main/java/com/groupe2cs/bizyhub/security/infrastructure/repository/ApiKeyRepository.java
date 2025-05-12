@@ -30,6 +30,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 	@Query("SELECT e FROM ApiKey e WHERE e.appKey = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<ApiKey> findByAppKeyAndCreatedById(String appKey, String createdById);
 
+
 	@Query("SELECT e FROM ApiKey e WHERE e.appKey = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<ApiKey> findByAppKey(String appKey);
 
@@ -41,6 +42,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 
 	@Query("SELECT e FROM ApiKey e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<ApiKey> findByUsernameAndCreatedById(String username, String createdById);
+
 
 	@Query("SELECT e FROM ApiKey e WHERE e.username = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<ApiKey> findByUsername(String username);
@@ -54,6 +56,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 	@Query("SELECT e FROM ApiKey e WHERE e.active = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<ApiKey> findByActiveAndCreatedById(Boolean active, String createdById);
 
+
 	@Query("SELECT e FROM ApiKey e WHERE e.active = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<ApiKey> findByActive(Boolean active);
 
@@ -65,6 +68,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 
 	@Query("SELECT e FROM ApiKey e WHERE e.createdAt = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<ApiKey> findByCreatedAtAndCreatedById(java.time.Instant createdAt, String createdById);
+
 
 	@Query("SELECT e FROM ApiKey e WHERE e.createdAt = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<ApiKey> findByCreatedAt(java.time.Instant createdAt);
@@ -78,6 +82,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 	@Query("SELECT e FROM ApiKey e WHERE e.expiration = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<ApiKey> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
 
+
 	@Query("SELECT e FROM ApiKey e WHERE e.expiration = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<ApiKey> findByExpiration(java.time.Instant expiration);
 
@@ -90,6 +95,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 	@Query("SELECT e FROM ApiKey e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<ApiKey> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM ApiKey e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<ApiKey> findByCreatedById(String createdBy);
 
@@ -101,6 +107,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
 
 	@Query("SELECT e FROM ApiKey e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<ApiKey> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM ApiKey e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<ApiKey> findByTenantId(String tenant);

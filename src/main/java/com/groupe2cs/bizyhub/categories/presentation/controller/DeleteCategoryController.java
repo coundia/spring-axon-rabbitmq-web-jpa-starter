@@ -67,6 +67,8 @@ public ResponseEntity<String> deleteCategory(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	applicationService.deleteCategory(idVo, metaRequest);
 
 	return ResponseEntity.ok("Category deleted successfully");

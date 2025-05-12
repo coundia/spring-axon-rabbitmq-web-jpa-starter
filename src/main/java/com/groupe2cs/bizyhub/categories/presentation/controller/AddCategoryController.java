@@ -63,6 +63,8 @@ public ResponseEntity<CategoryResponse> addCategory(@Valid @RequestBody Category
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 		.build();
 
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	CategoryResponse response =  applicationService.createCategory(
 			request,
 			metaRequest

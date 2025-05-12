@@ -30,6 +30,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 	@Query("SELECT e FROM Category e WHERE e.name = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Category> findByNameAndCreatedById(String name, String createdById);
 
+
 	@Query("SELECT e FROM Category e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Category> findByName(String name);
 
@@ -41,6 +42,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
 	@Query("SELECT e FROM Category e WHERE e.typeCategoryRaw = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Category> findByTypeCategoryRawAndCreatedById(String typeCategoryRaw, String createdById);
+
 
 	@Query("SELECT e FROM Category e WHERE e.typeCategoryRaw = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Category> findByTypeCategoryRaw(String typeCategoryRaw);
@@ -54,6 +56,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 	@Query("SELECT e FROM Category e WHERE e.details = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Category> findByDetailsAndCreatedById(String details, String createdById);
 
+
 	@Query("SELECT e FROM Category e WHERE e.details = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Category> findByDetails(String details);
 
@@ -65,6 +68,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
 	@Query("SELECT e FROM Category e WHERE e.isActive = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Category> findByIsActiveAndCreatedById(Boolean isActive, String createdById);
+
 
 	@Query("SELECT e FROM Category e WHERE e.isActive = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Category> findByIsActive(Boolean isActive);
@@ -78,6 +82,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 	@Query("SELECT e FROM Category e WHERE e.updatedAt = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Category> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
 
+
 	@Query("SELECT e FROM Category e WHERE e.updatedAt = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Category> findByUpdatedAt(java.time.Instant updatedAt);
 
@@ -89,6 +94,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
 	@Query("SELECT e FROM Category e WHERE e.reference = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Category> findByReferenceAndCreatedById(String reference, String createdById);
+
 
 	@Query("SELECT e FROM Category e WHERE e.reference = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Category> findByReference(String reference);
@@ -102,6 +108,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 	@Query("SELECT e FROM Category e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Category> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM Category e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Category> findByCreatedById(String createdBy);
 
@@ -113,6 +120,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
 	@Query("SELECT e FROM Category e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Category> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM Category e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Category> findByTenantId(String tenant);

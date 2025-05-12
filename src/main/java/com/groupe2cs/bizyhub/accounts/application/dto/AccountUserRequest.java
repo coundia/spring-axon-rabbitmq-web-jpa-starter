@@ -19,19 +19,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "AccountUserRequest", description = "Request payload for AccountUser operations")
 public class AccountUserRequest implements Serializable {
 
-	@Schema(description = "", example = "7a05f991-f9ab-4992-a590-5168b5923b64")
+	@Schema(description = "", example = "955a9ef9-f86d-4cce-912d-6fe56d17a67a")
 	private String name;
 
-	@Schema(description = "", example = "0f5cf028-00c9-4ec9-9593-e48f8ad81f02")
+	@Schema(description = "", example = "81d1f106-f0b8-494e-8c18-1356e54e94b3")
 	private String account;
 
-	@Schema(description = "", example = "38742bb0-6b02-43b2-a4a3-ab92e9425823")
+	@Schema(description = "", example = "f13738af-16a9-40f2-b958-0f1f2e33cf34")
 	private String user;
 
-	@Schema(description = "", example = "78ba1458-162b-4d3d-85fb-9ac3134a8243")
+	@Schema(description = "", example = "26b747e6-76eb-4e65-a3d0-e0de971a7d1e")
 	private String username;
 
-	@Schema(description = "", example = "3e98834d-23af-48c2-94ea-90e733734059")
+	@Schema(description = "", example = "c9237d6b-8a11-4098-abf0-9564c8a71542")
 	private String details;
 
 	@Schema(description = "", example = "false")
@@ -40,7 +40,7 @@ public class AccountUserRequest implements Serializable {
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "cc1b5170-bced-4404-8088-5b377f506565")
+	@Schema(description = "", example = "cbb5929f-a5a3-4c6d-916d-8aeb36152696")
 	private String reference;
 
 

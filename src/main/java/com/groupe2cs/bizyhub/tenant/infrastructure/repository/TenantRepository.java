@@ -29,6 +29,7 @@ public interface TenantRepository extends JpaRepository<Tenant, String> {
 	@Query("SELECT e FROM Tenant e WHERE e.name = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Tenant> findByNameAndCreatedById(String name, String createdById);
 
+
 	@Query("SELECT e FROM Tenant e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Tenant> findByName(String name);
 
@@ -40,6 +41,7 @@ public interface TenantRepository extends JpaRepository<Tenant, String> {
 
 	@Query("SELECT e FROM Tenant e WHERE e.description = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Tenant> findByDescriptionAndCreatedById(String description, String createdById);
+
 
 	@Query("SELECT e FROM Tenant e WHERE e.description = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Tenant> findByDescription(String description);
@@ -53,6 +55,7 @@ public interface TenantRepository extends JpaRepository<Tenant, String> {
 	@Query("SELECT e FROM Tenant e WHERE e.domain = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Tenant> findByDomainAndCreatedById(String domain, String createdById);
 
+
 	@Query("SELECT e FROM Tenant e WHERE e.domain = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Tenant> findByDomain(String domain);
 
@@ -64,6 +67,7 @@ public interface TenantRepository extends JpaRepository<Tenant, String> {
 
 	@Query("SELECT e FROM Tenant e WHERE e.language = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Tenant> findByLanguageAndCreatedById(String language, String createdById);
+
 
 	@Query("SELECT e FROM Tenant e WHERE e.language = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Tenant> findByLanguage(String language);
@@ -77,6 +81,7 @@ public interface TenantRepository extends JpaRepository<Tenant, String> {
 	@Query("SELECT e FROM Tenant e WHERE e.active = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Tenant> findByActiveAndCreatedById(Boolean active, String createdById);
 
+
 	@Query("SELECT e FROM Tenant e WHERE e.active = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Tenant> findByActive(Boolean active);
 
@@ -89,6 +94,7 @@ public interface TenantRepository extends JpaRepository<Tenant, String> {
 	@Query("SELECT e FROM Tenant e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Tenant> findByTenantIdAndCreatedById(String tenant, String createdById);
 
+
 	@Query("SELECT e FROM Tenant e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Tenant> findByTenantId(String tenant);
 
@@ -100,6 +106,7 @@ public interface TenantRepository extends JpaRepository<Tenant, String> {
 
 	@Query("SELECT e FROM Tenant e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Tenant> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
+
 
 	@Query("SELECT e FROM Tenant e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Tenant> findByCreatedById(String createdBy);

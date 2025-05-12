@@ -30,6 +30,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 	@Query("SELECT e FROM Account e WHERE e.name = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByNameAndCreatedById(String name, String createdById);
 
+
 	@Query("SELECT e FROM Account e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByName(String name);
 
@@ -41,6 +42,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 	@Query("SELECT e FROM Account e WHERE e.currency = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByCurrencyAndCreatedById(String currency, String createdById);
+
 
 	@Query("SELECT e FROM Account e WHERE e.currency = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByCurrency(String currency);
@@ -54,6 +56,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 	@Query("SELECT e FROM Account e WHERE e.currentBalance = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByCurrentBalanceAndCreatedById(Double currentBalance, String createdById);
 
+
 	@Query("SELECT e FROM Account e WHERE e.currentBalance = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByCurrentBalance(Double currentBalance);
 
@@ -65,6 +68,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 	@Query("SELECT e FROM Account e WHERE e.previousBalance = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByPreviousBalanceAndCreatedById(Double previousBalance, String createdById);
+
 
 	@Query("SELECT e FROM Account e WHERE e.previousBalance = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByPreviousBalance(Double previousBalance);
@@ -78,6 +82,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 	@Query("SELECT e FROM Account e WHERE e.details = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByDetailsAndCreatedById(String details, String createdById);
 
+
 	@Query("SELECT e FROM Account e WHERE e.details = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByDetails(String details);
 
@@ -89,6 +94,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 	@Query("SELECT e FROM Account e WHERE e.isActive = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByIsActiveAndCreatedById(Boolean isActive, String createdById);
+
 
 	@Query("SELECT e FROM Account e WHERE e.isActive = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByIsActive(Boolean isActive);
@@ -102,6 +108,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 	@Query("SELECT e FROM Account e WHERE e.updatedAt = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
 
+
 	@Query("SELECT e FROM Account e WHERE e.updatedAt = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByUpdatedAt(java.time.Instant updatedAt);
 
@@ -113,6 +120,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 	@Query("SELECT e FROM Account e WHERE e.reference = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByReferenceAndCreatedById(String reference, String createdById);
+
 
 	@Query("SELECT e FROM Account e WHERE e.reference = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByReference(String reference);
@@ -126,6 +134,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 	@Query("SELECT e FROM Account e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM Account e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByCreatedById(String createdBy);
 
@@ -137,6 +146,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 	@Query("SELECT e FROM Account e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Account> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM Account e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Account> findByTenantId(String tenant);
@@ -153,6 +163,8 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     WHERE s.tenant.id = :tenantId AND (s.createdBy.id = :userId OR su.user.id = :userId)
     """)
 	Page<Account> findAllOwnedOrShared(@Param("userId") String userId, @Param("tenantId") String tenantId, Pageable pageable);
+
+
 
 
 

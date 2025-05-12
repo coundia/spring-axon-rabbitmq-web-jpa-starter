@@ -30,6 +30,7 @@ public interface RolePermissionRepository extends JpaRepository<RolePermission, 
 	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RolePermission> findByRoleIdAndCreatedById(String role, String createdById);
 
+
 	@Query("SELECT e FROM RolePermission e WHERE e.role.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RolePermission> findByRoleId(String role);
 
@@ -41,6 +42,7 @@ public interface RolePermissionRepository extends JpaRepository<RolePermission, 
 
 	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RolePermission> findByPermissionIdAndCreatedById(String permission, String createdById);
+
 
 	@Query("SELECT e FROM RolePermission e WHERE e.permission.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RolePermission> findByPermissionId(String permission);
@@ -54,6 +56,7 @@ public interface RolePermissionRepository extends JpaRepository<RolePermission, 
 	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RolePermission> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM RolePermission e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RolePermission> findByCreatedById(String createdBy);
 
@@ -65,6 +68,7 @@ public interface RolePermissionRepository extends JpaRepository<RolePermission, 
 
 	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<RolePermission> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM RolePermission e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<RolePermission> findByTenantId(String tenant);

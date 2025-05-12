@@ -29,6 +29,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 	@Query("SELECT e FROM User e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<User> findByUsernameAndCreatedById(String username, String createdById);
 
+
 	@Query("SELECT e FROM User e WHERE e.username = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<User> findByUsername(String username);
 
@@ -40,6 +41,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 	@Query("SELECT e FROM User e WHERE e.password = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<User> findByPasswordAndCreatedById(String password, String createdById);
+
 
 	@Query("SELECT e FROM User e WHERE e.password = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<User> findByPassword(String password);
@@ -53,6 +55,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 	@Query("SELECT e FROM User e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<User> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM User e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<User> findByCreatedById(String createdBy);
 
@@ -64,6 +67,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 	@Query("SELECT e FROM User e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<User> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM User e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<User> findByTenantId(String tenant);

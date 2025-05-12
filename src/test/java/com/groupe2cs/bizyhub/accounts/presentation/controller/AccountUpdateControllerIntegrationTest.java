@@ -56,10 +56,10 @@ void it_should_be_able_to_update_account() {
 	AccountRequest requestDTO = new AccountRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
 	 requestDTO.setCurrency(UUID.randomUUID().toString());
-	 requestDTO.setCurrentBalance(6448.17);
-	 requestDTO.setPreviousBalance(7658.91);
+	 requestDTO.setCurrentBalance(8062.54);
+	 requestDTO.setPreviousBalance(8189.66);
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(true);
+	 requestDTO.setIsActive(false);
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());
 

@@ -67,6 +67,8 @@ public ResponseEntity<String> deleteSetting(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	applicationService.deleteSetting(idVo, metaRequest);
 
 	return ResponseEntity.ok("Setting deleted successfully");

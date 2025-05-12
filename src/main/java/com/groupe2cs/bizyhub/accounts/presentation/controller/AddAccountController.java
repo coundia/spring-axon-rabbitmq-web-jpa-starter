@@ -63,6 +63,8 @@ public ResponseEntity<AccountResponse> addAccount(@Valid @RequestBody AccountReq
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 		.build();
 
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	AccountResponse response =  applicationService.createAccount(
 			request,
 			metaRequest

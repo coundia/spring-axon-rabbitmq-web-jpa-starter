@@ -72,8 +72,9 @@ public class SettingFixtures {
 
 			CreateSettingCommand command = CreateSettingCommand.builder()
 				.name(SettingName.create(UUID.randomUUID().toString()))
-				.stringValue(SettingStringValue.create(UUID.randomUUID().toString()))
-				.description(SettingDescription.create(UUID.randomUUID().toString()))
+				.value(SettingValue.create(UUID.randomUUID().toString()))
+				.locale(SettingLocale.create(UUID.randomUUID().toString()))
+				.details(SettingDetails.create(UUID.randomUUID().toString()))
 				.isActive(SettingIsActive.create(true))
 				.updatedAt(SettingUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SettingReference.create(UUID.randomUUID().toString()))
@@ -95,8 +96,9 @@ public class SettingFixtures {
 
         CreateSettingCommand command = CreateSettingCommand.builder()
         .name(SettingName.create(UUID.randomUUID().toString()))
-        .stringValue(SettingStringValue.create(UUID.randomUUID().toString()))
-        .description(SettingDescription.create(UUID.randomUUID().toString()))
+        .value(SettingValue.create(UUID.randomUUID().toString()))
+        .locale(SettingLocale.create(UUID.randomUUID().toString()))
+        .details(SettingDetails.create(UUID.randomUUID().toString()))
         .isActive(SettingIsActive.create(true))
         .updatedAt(SettingUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(SettingReference.create(UUID.randomUUID().toString()))

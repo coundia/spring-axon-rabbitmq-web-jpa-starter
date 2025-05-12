@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateAccountCommand command = new CreateAccountCommand(
- AccountId.create(UUID.randomUUID().toString()) ,  AccountName.create(UUID.randomUUID().toString()) ,  AccountCurrency.create(UUID.randomUUID().toString()) ,  AccountCurrentBalance.create(1686.11) ,  AccountPreviousBalance.create(3665.33) ,  AccountDetails.create(UUID.randomUUID().toString()) ,  AccountIsActive.create(true) ,  AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountReference.create(UUID.randomUUID().toString()) ,  AccountCreatedBy.create(UUID.randomUUID().toString()) ,  AccountTenant.create(UUID.randomUUID().toString()) 
+ AccountId.create(UUID.randomUUID().toString()) ,  AccountName.create(UUID.randomUUID().toString()) ,  AccountCurrency.create(UUID.randomUUID().toString()) ,  AccountCurrentBalance.create(5705.67) ,  AccountPreviousBalance.create(1014.64) ,  AccountDetails.create(UUID.randomUUID().toString()) ,  AccountIsActive.create(false) ,  AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountReference.create(UUID.randomUUID().toString()) ,  AccountCreatedBy.create(UUID.randomUUID().toString()) ,  AccountTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

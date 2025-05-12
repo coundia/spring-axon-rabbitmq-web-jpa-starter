@@ -44,14 +44,21 @@ public class Setting   extends AbstractAuditableEntity  {
 		length = 250
 	)
 
-	private String stringValue ;
+	private String value ;
+
+	@Column(nullable = false, 
+		unique = false  ,
+		length = 250
+	)
+
+	private String locale ;
 
 	@Column(nullable = true, 
 		unique = false  ,
 		length = 250
 	)
 
-	private String description ;
+	private String details ;
 
 	@Column(nullable = false, 
 		unique = false  ,
@@ -86,8 +93,9 @@ public class Setting   extends AbstractAuditableEntity  {
 		return "Setting{" +
 		"id='" + id + '\'' +
 			", name=" + name +
-			", stringValue=" + stringValue +
-			", description=" + description +
+			", value=" + value +
+			", locale=" + locale +
+			", details=" + details +
 			", isActive=" + isActive +
 			", updatedAt=" + updatedAt +
 			", reference=" + reference +

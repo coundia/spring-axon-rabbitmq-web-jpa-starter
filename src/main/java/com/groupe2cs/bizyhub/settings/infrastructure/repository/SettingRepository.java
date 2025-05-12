@@ -30,6 +30,7 @@ public interface SettingRepository extends JpaRepository<Setting, String> {
 	@Query("SELECT e FROM Setting e WHERE e.name = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Setting> findByNameAndCreatedById(String name, String createdById);
 
+
 	@Query("SELECT e FROM Setting e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Setting> findByName(String name);
 
@@ -39,32 +40,48 @@ public interface SettingRepository extends JpaRepository<Setting, String> {
 	@Query("SELECT e FROM Setting e WHERE e.name = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
 	List<Setting> findByNameAndTenantId(String name, String tenantId);
 
-	@Query("SELECT e FROM Setting e WHERE e.stringValue = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
-	List<Setting> findByStringValueAndCreatedById(String stringValue, String createdById);
+	@Query("SELECT e FROM Setting e WHERE e.value = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
+	List<Setting> findByValueAndCreatedById(String value, String createdById);
 
-	@Query("SELECT e FROM Setting e WHERE e.stringValue = ?1  ORDER BY e.updatedAtAudit DESC ")
-	Optional<Setting> findByStringValue(String stringValue);
 
-	@Query("SELECT e FROM Setting e WHERE e.stringValue = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
-	List<Setting> findByStringValueAndTenantName(String stringValue, String tenantName);
+	@Query("SELECT e FROM Setting e WHERE e.value = ?1  ORDER BY e.updatedAtAudit DESC ")
+	Optional<Setting> findByValue(String value);
 
-	@Query("SELECT e FROM Setting e WHERE e.stringValue = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
-	List<Setting> findByStringValueAndTenantId(String stringValue, String tenantId);
+	@Query("SELECT e FROM Setting e WHERE e.value = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<Setting> findByValueAndTenantName(String value, String tenantName);
 
-	@Query("SELECT e FROM Setting e WHERE e.description = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
-	List<Setting> findByDescriptionAndCreatedById(String description, String createdById);
+	@Query("SELECT e FROM Setting e WHERE e.value = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<Setting> findByValueAndTenantId(String value, String tenantId);
 
-	@Query("SELECT e FROM Setting e WHERE e.description = ?1  ORDER BY e.updatedAtAudit DESC ")
-	Optional<Setting> findByDescription(String description);
+	@Query("SELECT e FROM Setting e WHERE e.locale = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
+	List<Setting> findByLocaleAndCreatedById(String locale, String createdById);
 
-	@Query("SELECT e FROM Setting e WHERE e.description = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
-	List<Setting> findByDescriptionAndTenantName(String description, String tenantName);
 
-	@Query("SELECT e FROM Setting e WHERE e.description = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
-	List<Setting> findByDescriptionAndTenantId(String description, String tenantId);
+	@Query("SELECT e FROM Setting e WHERE e.locale = ?1  ORDER BY e.updatedAtAudit DESC ")
+	Optional<Setting> findByLocale(String locale);
+
+	@Query("SELECT e FROM Setting e WHERE e.locale = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<Setting> findByLocaleAndTenantName(String locale, String tenantName);
+
+	@Query("SELECT e FROM Setting e WHERE e.locale = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<Setting> findByLocaleAndTenantId(String locale, String tenantId);
+
+	@Query("SELECT e FROM Setting e WHERE e.details = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
+	List<Setting> findByDetailsAndCreatedById(String details, String createdById);
+
+
+	@Query("SELECT e FROM Setting e WHERE e.details = ?1  ORDER BY e.updatedAtAudit DESC ")
+	Optional<Setting> findByDetails(String details);
+
+	@Query("SELECT e FROM Setting e WHERE e.details = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<Setting> findByDetailsAndTenantName(String details, String tenantName);
+
+	@Query("SELECT e FROM Setting e WHERE e.details = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<Setting> findByDetailsAndTenantId(String details, String tenantId);
 
 	@Query("SELECT e FROM Setting e WHERE e.isActive = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Setting> findByIsActiveAndCreatedById(Boolean isActive, String createdById);
+
 
 	@Query("SELECT e FROM Setting e WHERE e.isActive = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Setting> findByIsActive(Boolean isActive);
@@ -78,6 +95,7 @@ public interface SettingRepository extends JpaRepository<Setting, String> {
 	@Query("SELECT e FROM Setting e WHERE e.updatedAt = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Setting> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
 
+
 	@Query("SELECT e FROM Setting e WHERE e.updatedAt = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Setting> findByUpdatedAt(java.time.Instant updatedAt);
 
@@ -89,6 +107,7 @@ public interface SettingRepository extends JpaRepository<Setting, String> {
 
 	@Query("SELECT e FROM Setting e WHERE e.reference = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Setting> findByReferenceAndCreatedById(String reference, String createdById);
+
 
 	@Query("SELECT e FROM Setting e WHERE e.reference = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Setting> findByReference(String reference);
@@ -102,6 +121,7 @@ public interface SettingRepository extends JpaRepository<Setting, String> {
 	@Query("SELECT e FROM Setting e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Setting> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM Setting e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Setting> findByCreatedById(String createdBy);
 
@@ -113,6 +133,7 @@ public interface SettingRepository extends JpaRepository<Setting, String> {
 
 	@Query("SELECT e FROM Setting e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Setting> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM Setting e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Setting> findByTenantId(String tenant);

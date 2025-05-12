@@ -59,6 +59,7 @@ public ResponseEntity<AccountResponse> updateAccount(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	AccountResponse response = applicationService.updateAccount(AccountId.create(id),
 	request,

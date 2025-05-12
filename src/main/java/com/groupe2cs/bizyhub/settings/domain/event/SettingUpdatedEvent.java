@@ -19,8 +19,9 @@ public class SettingUpdatedEvent implements Serializable {
 
 	private SettingId id;
 	private SettingName name;
-	private SettingStringValue stringValue;
-	private SettingDescription description;
+	private SettingValue value;
+	private SettingLocale locale;
+	private SettingDetails details;
 	private SettingIsActive isActive;
 	private SettingUpdatedAt updatedAt;
 	private SettingReference reference;

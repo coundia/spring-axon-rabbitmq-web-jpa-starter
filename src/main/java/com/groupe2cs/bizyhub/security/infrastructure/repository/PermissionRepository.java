@@ -30,6 +30,7 @@ public interface PermissionRepository extends JpaRepository<Permission, String> 
 	@Query("SELECT e FROM Permission e WHERE e.name = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Permission> findByNameAndCreatedById(String name, String createdById);
 
+
 	@Query("SELECT e FROM Permission e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Permission> findByName(String name);
 
@@ -42,6 +43,7 @@ public interface PermissionRepository extends JpaRepository<Permission, String> 
 	@Query("SELECT e FROM Permission e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Permission> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM Permission e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Permission> findByCreatedById(String createdBy);
 
@@ -53,6 +55,7 @@ public interface PermissionRepository extends JpaRepository<Permission, String> 
 
 	@Query("SELECT e FROM Permission e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Permission> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM Permission e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Permission> findByTenantId(String tenant);

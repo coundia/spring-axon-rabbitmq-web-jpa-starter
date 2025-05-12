@@ -3,8 +3,9 @@ package com.groupe2cs.bizyhub.settings.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingIdNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingNameNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingStringValueNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingDescriptionNotValid;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingValueNotValid;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingLocaleNotValid;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingDetailsNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingIsActiveNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingUpdatedAtNotValid;
 

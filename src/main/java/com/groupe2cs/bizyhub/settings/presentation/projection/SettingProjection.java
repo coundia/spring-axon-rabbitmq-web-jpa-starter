@@ -32,8 +32,9 @@ try {
 Setting entity = Setting.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.name(event.getName() == null ? null : event.getName().value())
- 		.stringValue(event.getStringValue() == null ? null : event.getStringValue().value())
- 		.description(event.getDescription() == null ? null : event.getDescription().value())
+ 		.value(event.getValue() == null ? null : event.getValue().value())
+ 		.locale(event.getLocale() == null ? null : event.getLocale().value())
+ 		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
  		.updatedAt(event.getUpdatedAt() == null ? null : event.getUpdatedAt().value())
  		.reference(event.getReference() == null ? null : event.getReference().value())
@@ -67,8 +68,9 @@ Setting entity = repository.findById(event.getId().value())
 
 		entity.setId(event.getId().value());
 		entity.setName(event.getName().value());
-		entity.setStringValue(event.getStringValue().value());
-		entity.setDescription(event.getDescription().value());
+		entity.setValue(event.getValue().value());
+		entity.setLocale(event.getLocale().value());
+		entity.setDetails(event.getDetails().value());
 		entity.setIsActive(event.getIsActive().value());
 		entity.setUpdatedAt(event.getUpdatedAt().value());
 		entity.setReference(event.getReference().value());

@@ -26,8 +26,9 @@ public class CreateSettingCommand implements Serializable {
 	@Builder.Default
 	private SettingId id = SettingId.create(UUID.randomUUID().toString());
  	private SettingName name;
- 	private SettingStringValue stringValue;
- 	private SettingDescription description;
+ 	private SettingValue value;
+ 	private SettingLocale locale;
+ 	private SettingDetails details;
  	private SettingIsActive isActive;
  	private SettingUpdatedAt updatedAt;
  	private SettingReference reference;
@@ -36,8 +37,9 @@ public class CreateSettingCommand implements Serializable {
 	public CreateSettingCommand(
  
    SettingName name , 
-   SettingStringValue stringValue , 
-   SettingDescription description , 
+   SettingValue value , 
+   SettingLocale locale , 
+   SettingDetails details , 
    SettingIsActive isActive , 
    SettingUpdatedAt updatedAt , 
    SettingReference reference , 
@@ -47,8 +49,9 @@ public class CreateSettingCommand implements Serializable {
 			this.id = SettingId.create(UUID.randomUUID().toString());
  
   this.name = name ; 
-  this.stringValue = stringValue ; 
-  this.description = description ; 
+  this.value = value ; 
+  this.locale = locale ; 
+  this.details = details ; 
   this.isActive = isActive ; 
   this.updatedAt = updatedAt ; 
   this.reference = reference ; 

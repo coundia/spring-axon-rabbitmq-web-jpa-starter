@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByAccountCurrentBalanceHandler {
 
 private final AccountRepository repository;
+
 @QueryHandler
 public List<AccountResponse> handle(FindByAccountCurrentBalanceQuery query) {
 

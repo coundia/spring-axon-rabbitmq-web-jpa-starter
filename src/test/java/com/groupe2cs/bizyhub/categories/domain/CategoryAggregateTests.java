@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.categories.domain;
 
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.categories.domain.exception.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class CategoryAggregateTests extends BaseUnitTests {
@@ -17,7 +17,7 @@ void it_should_create_category_with_valid_values() {
 	CategoryName name = CategoryName.create(UUID.randomUUID().toString());
 	CategoryTypeCategoryRaw typeCategoryRaw = CategoryTypeCategoryRaw.create(UUID.randomUUID().toString());
 	CategoryDetails details = CategoryDetails.create(UUID.randomUUID().toString());
-	CategoryIsActive isActive = CategoryIsActive.create(false);
+	CategoryIsActive isActive = CategoryIsActive.create(true);
 	CategoryUpdatedAt updatedAt = CategoryUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	CategoryReference reference = CategoryReference.create(UUID.randomUUID().toString());
 	CategoryCreatedBy createdBy = CategoryCreatedBy.create(UUID.randomUUID().toString());

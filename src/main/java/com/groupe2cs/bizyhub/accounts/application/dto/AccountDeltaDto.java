@@ -24,21 +24,21 @@ public class AccountDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "64db1cc1-56e7-4f58-95e1-14f6ea3e1c9e")
+		@Schema(description = "", example = "229dcb47-ebc2-4e8b-962a-4fee2c426b61")
 		private String name;
-		@Schema(description = "", example = "35df3df4-0fc8-47de-a5db-92f69f3292fd")
+		@Schema(description = "", example = "1234730c-469a-4ab8-b4e1-9fc26bb3a21a")
 		private String currency;
-		@Schema(description = "", example = "1022.88")
+		@Schema(description = "", example = "5746.37")
 		private Double currentBalance;
-		@Schema(description = "", example = "9703.27")
+		@Schema(description = "", example = "7249.71")
 		private Double previousBalance;
-		@Schema(description = "", example = "112a2d5d-77ec-4c50-85e0-96cb0b0b0c1b")
+		@Schema(description = "", example = "167d2e70-767f-4529-a263-187a5870d46d")
 		private String details;
-		@Schema(description = "", example = "false")
+		@Schema(description = "", example = "true")
 		private Boolean isActive;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "e3a6cb6d-a3e7-4783-b1d4-c50efbbf9eb6")
+		@Schema(description = "", example = "abdf63a3-cba8-4006-af8d-b605fbf1afe9")
 		private String reference;
 
 }

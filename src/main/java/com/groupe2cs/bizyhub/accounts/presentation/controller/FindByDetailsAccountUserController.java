@@ -68,6 +68,7 @@ public ResponseEntity<List<AccountUserResponse>> findByDetails(
 	MetaRequest metaRequest = MetaRequest.builder()
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	var future = applicationService.findByAccountUserDetails(AccountUserDetails
 	.create(details) , metaRequest);

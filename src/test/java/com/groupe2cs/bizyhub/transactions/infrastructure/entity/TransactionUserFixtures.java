@@ -82,7 +82,7 @@ public class TransactionUserFixtures {
 				.user(TransactionUserUser.create(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value()))
 				.username(TransactionUserUsername.create(UUID.randomUUID().toString()))
 				.details(TransactionUserDetails.create(UUID.randomUUID().toString()))
-				.isActive(TransactionUserIsActive.create(false))
+				.isActive(TransactionUserIsActive.create(true))
 				.updatedAt(TransactionUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(TransactionUserReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -105,7 +105,7 @@ public class TransactionUserFixtures {
         .name(TransactionUserName.create(UUID.randomUUID().toString()))
         .username(TransactionUserUsername.create(UUID.randomUUID().toString()))
         .details(TransactionUserDetails.create(UUID.randomUUID().toString()))
-        .isActive(TransactionUserIsActive.create(false))
+        .isActive(TransactionUserIsActive.create(true))
         .updatedAt(TransactionUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(TransactionUserReference.create(UUID.randomUUID().toString()))
         .build();

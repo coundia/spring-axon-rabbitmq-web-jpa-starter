@@ -30,6 +30,7 @@ public interface RoleRepository extends JpaRepository<Role, String> {
 	@Query("SELECT e FROM Role e WHERE e.name = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Role> findByNameAndCreatedById(String name, String createdById);
 
+
 	@Query("SELECT e FROM Role e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Role> findByName(String name);
 
@@ -42,6 +43,7 @@ public interface RoleRepository extends JpaRepository<Role, String> {
 	@Query("SELECT e FROM Role e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Role> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM Role e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Role> findByCreatedById(String createdBy);
 
@@ -53,6 +55,7 @@ public interface RoleRepository extends JpaRepository<Role, String> {
 
 	@Query("SELECT e FROM Role e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Role> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM Role e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Role> findByTenantId(String tenant);

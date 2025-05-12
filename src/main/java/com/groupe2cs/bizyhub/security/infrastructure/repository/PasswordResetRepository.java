@@ -30,6 +30,7 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
 	@Query("SELECT e FROM PasswordReset e WHERE e.token = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<PasswordReset> findByTokenAndCreatedById(String token, String createdById);
 
+
 	@Query("SELECT e FROM PasswordReset e WHERE e.token = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<PasswordReset> findByToken(String token);
 
@@ -41,6 +42,7 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
 
 	@Query("SELECT e FROM PasswordReset e WHERE e.username = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<PasswordReset> findByUsernameAndCreatedById(String username, String createdById);
+
 
 	@Query("SELECT e FROM PasswordReset e WHERE e.username = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<PasswordReset> findByUsername(String username);
@@ -54,6 +56,7 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
 	@Query("SELECT e FROM PasswordReset e WHERE e.expiration = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<PasswordReset> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
 
+
 	@Query("SELECT e FROM PasswordReset e WHERE e.expiration = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<PasswordReset> findByExpiration(java.time.Instant expiration);
 
@@ -66,6 +69,7 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
 	@Query("SELECT e FROM PasswordReset e WHERE e.createdBy.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<PasswordReset> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
 
+
 	@Query("SELECT e FROM PasswordReset e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<PasswordReset> findByCreatedById(String createdBy);
 
@@ -77,6 +81,7 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
 
 	@Query("SELECT e FROM PasswordReset e WHERE e.tenant.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<PasswordReset> findByTenantIdAndCreatedById(String tenant, String createdById);
+
 
 	@Query("SELECT e FROM PasswordReset e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<PasswordReset> findByTenantId(String tenant);

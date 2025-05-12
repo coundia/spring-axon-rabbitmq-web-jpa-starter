@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.settings.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.settings.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.settings.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.settings.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.settings.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -39,9 +39,10 @@ private SettingRepository Repository;
 		.deltas(List.of(
 		SettingDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.stringValue(UUID.randomUUID().toString())
-.description(UUID.randomUUID().toString())
-.isActive(true)
+.value(UUID.randomUUID().toString())
+.locale(UUID.randomUUID().toString())
+.details(UUID.randomUUID().toString())
+.isActive(false)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 		.type("CREATE")
@@ -69,9 +70,10 @@ private SettingRepository Repository;
 			SettingDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.stringValue(UUID.randomUUID().toString())
-.description(UUID.randomUUID().toString())
-.isActive(true)
+.value(UUID.randomUUID().toString())
+.locale(UUID.randomUUID().toString())
+.details(UUID.randomUUID().toString())
+.isActive(false)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 			.type("UPDATE")

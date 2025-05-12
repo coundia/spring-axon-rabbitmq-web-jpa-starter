@@ -59,6 +59,7 @@ public ResponseEntity<SettingResponse> updateSetting(
 	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
+    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	SettingResponse response = applicationService.updateSetting(SettingId.create(id),
 	request,

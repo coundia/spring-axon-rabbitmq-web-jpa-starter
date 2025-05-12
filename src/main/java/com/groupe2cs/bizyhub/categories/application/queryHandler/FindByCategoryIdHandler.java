@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
 
+
+
 @Component
 @RequiredArgsConstructor
 public class FindByCategoryIdHandler {
 
 private final CategoryRepository repository;
+
 @QueryHandler
 
  public CategoryResponse handle(FindByCategoryIdQuery query) {

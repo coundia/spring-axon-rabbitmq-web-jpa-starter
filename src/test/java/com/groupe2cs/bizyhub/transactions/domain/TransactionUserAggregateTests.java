@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.transactions.domain.exception.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class TransactionUserAggregateTests extends BaseUnitTests {
@@ -19,7 +19,7 @@ void it_should_create_transactionUser_with_valid_values() {
 	TransactionUserUser user = TransactionUserUser.create(UUID.randomUUID().toString());
 	TransactionUserUsername username = TransactionUserUsername.create(UUID.randomUUID().toString());
 	TransactionUserDetails details = TransactionUserDetails.create(UUID.randomUUID().toString());
-	TransactionUserIsActive isActive = TransactionUserIsActive.create(true);
+	TransactionUserIsActive isActive = TransactionUserIsActive.create(false);
 	TransactionUserUpdatedAt updatedAt = TransactionUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	TransactionUserReference reference = TransactionUserReference.create(UUID.randomUUID().toString());
 	TransactionUserCreatedBy createdBy = TransactionUserCreatedBy.create(UUID.randomUUID().toString());

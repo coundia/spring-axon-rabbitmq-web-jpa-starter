@@ -63,6 +63,8 @@ public ResponseEntity<TransactionUserResponse> addTransactionUser(@Valid @Reques
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 		.build();
 
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
 	TransactionUserResponse response =  applicationService.createTransactionUser(
 			request,
 			metaRequest

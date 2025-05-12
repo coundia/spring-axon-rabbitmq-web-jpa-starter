@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.transactions.domain.exception.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class TransactionAggregateTests extends BaseUnitTests {
@@ -15,9 +15,9 @@ public class TransactionAggregateTests extends BaseUnitTests {
 void it_should_create_transaction_with_valid_values() {
 	TransactionId id = TransactionId.create(UUID.randomUUID().toString());
 	TransactionName name = TransactionName.create(UUID.randomUUID().toString());
-	TransactionAmount amount = TransactionAmount.create(7327.61);
+	TransactionAmount amount = TransactionAmount.create(4101.14);
 	TransactionDetails details = TransactionDetails.create(UUID.randomUUID().toString());
-	TransactionIsActive isActive = TransactionIsActive.create(false);
+	TransactionIsActive isActive = TransactionIsActive.create(true);
 	TransactionAccount account = TransactionAccount.create(UUID.randomUUID().toString());
 	TransactionCategory category = TransactionCategory.create(UUID.randomUUID().toString());
 	TransactionTypeTransactionRaw typeTransactionRaw = TransactionTypeTransactionRaw.create(UUID.randomUUID().toString());

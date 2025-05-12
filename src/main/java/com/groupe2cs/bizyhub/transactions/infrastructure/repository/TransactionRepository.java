@@ -31,9 +31,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByNameAndCreatedById(String values, String userId);
+	List<Transaction> findByNameAndCreatedById(String valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.name = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByName(String name);
@@ -48,9 +48,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByAmountAndCreatedById(Double values, String userId);
+	List<Transaction> findByAmountAndCreatedById(Double valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.amount = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByAmount(Double amount);
@@ -65,9 +65,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByDetailsAndCreatedById(String values, String userId);
+	List<Transaction> findByDetailsAndCreatedById(String valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.details = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByDetails(String details);
@@ -82,9 +82,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByIsActiveAndCreatedById(Boolean values, String userId);
+	List<Transaction> findByIsActiveAndCreatedById(Boolean valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.isActive = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByIsActive(Boolean isActive);
@@ -99,9 +99,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByAccountIdAndCreatedById(String values, String userId);
+	List<Transaction> findByAccountIdAndCreatedById(String valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.account.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByAccountId(String account);
@@ -116,9 +116,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByCategoryIdAndCreatedById(String values, String userId);
+	List<Transaction> findByCategoryIdAndCreatedById(String valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.category.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByCategoryId(String category);
@@ -133,9 +133,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByTypeTransactionRawAndCreatedById(String values, String userId);
+	List<Transaction> findByTypeTransactionRawAndCreatedById(String valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.typeTransactionRaw = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByTypeTransactionRaw(String typeTransactionRaw);
@@ -150,9 +150,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByDateTransactionAndCreatedById(java.time.Instant values, String userId);
+	List<Transaction> findByDateTransactionAndCreatedById(java.time.Instant valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.dateTransaction = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByDateTransaction(java.time.Instant dateTransaction);
@@ -167,9 +167,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByUpdatedAtAndCreatedById(java.time.Instant values, String userId);
+	List<Transaction> findByUpdatedAtAndCreatedById(java.time.Instant valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.updatedAt = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByUpdatedAt(java.time.Instant updatedAt);
@@ -184,9 +184,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByReferenceAndCreatedById(String values, String userId);
+	List<Transaction> findByReferenceAndCreatedById(String valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.reference = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByReference(String reference);
@@ -201,9 +201,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByCreatedByIdAndCreatedById(String values, String userId);
+	List<Transaction> findByCreatedByIdAndCreatedById(String valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.createdBy.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByCreatedById(String createdBy);
@@ -218,9 +218,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
  	@Query("""
 	SELECT DISTINCT t FROM Transaction t
 	LEFT JOIN AccountUser au ON au.account.id = t.account.id
-	WHERE t.account.id = :values AND (t.createdBy.id = :userId OR au.user.id = :userId)
+	WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
 	""")
-	List<Transaction> findByTenantIdAndCreatedById(String values, String userId);
+	List<Transaction> findByTenantIdAndCreatedById(String valueId, String userId);
 
 	@Query("SELECT e FROM Transaction e WHERE e.tenant.id = ?1  ORDER BY e.updatedAtAudit DESC ")
 	Optional<Transaction> findByTenantId(String tenant);
@@ -238,7 +238,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
     """)
 	Page<Transaction> findAllOwnedOrShared(@Param("userId") String userId, @Param("tenantId") String tenantId, Pageable pageable);
 
- 
+
 
 
 

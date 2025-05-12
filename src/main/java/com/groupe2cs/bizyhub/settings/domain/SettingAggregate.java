@@ -25,8 +25,9 @@ public class SettingAggregate {
 @AggregateIdentifier
 private SettingId id;
 private SettingName name;
-private SettingStringValue stringValue;
-private SettingDescription description;
+private SettingValue value;
+private SettingLocale locale;
+private SettingDetails details;
 private SettingIsActive isActive;
 private SettingUpdatedAt updatedAt;
 private SettingReference reference;
@@ -39,8 +40,9 @@ public SettingAggregate(CreateSettingCommand command) {
 apply(new SettingCreatedEvent(
 		command.getId(),
 		command.getName(),
-		command.getStringValue(),
-		command.getDescription(),
+		command.getValue(),
+		command.getLocale(),
+		command.getDetails(),
 		command.getIsActive(),
 		command.getUpdatedAt(),
 		command.getReference(),
@@ -61,8 +63,9 @@ public void handle(UpdateSettingCommand command) {
 apply(new SettingUpdatedEvent(
 		command.getId(),
 		command.getName(),
-		command.getStringValue(),
-		command.getDescription(),
+		command.getValue(),
+		command.getLocale(),
+		command.getDetails(),
 		command.getIsActive(),
 		command.getUpdatedAt(),
 		command.getReference(),
@@ -75,8 +78,9 @@ apply(new SettingUpdatedEvent(
 public void on(SettingCreatedEvent event) {
 	this.id = event.getId();
 	this.name = event.getName();
-	this.stringValue = event.getStringValue();
-	this.description = event.getDescription();
+	this.value = event.getValue();
+	this.locale = event.getLocale();
+	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.updatedAt = event.getUpdatedAt();
 	this.reference = event.getReference();
@@ -93,8 +97,9 @@ this.id = event.getId();
 public void on(SettingUpdatedEvent event) {
 this.id = event.getId();
 	this.name = event.getName();
-	this.stringValue = event.getStringValue();
-	this.description = event.getDescription();
+	this.value = event.getValue();
+	this.locale = event.getLocale();
+	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.updatedAt = event.getUpdatedAt();
 	this.reference = event.getReference();

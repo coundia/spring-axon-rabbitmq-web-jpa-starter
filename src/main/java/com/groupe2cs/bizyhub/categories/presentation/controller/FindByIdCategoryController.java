@@ -68,6 +68,7 @@ public ResponseEntity<CategoryResponse> findById(
 	MetaRequest metaRequest = MetaRequest.builder()
 		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 	var future = applicationService.findByCategoryId(CategoryId
 	.create(id) , metaRequest);
