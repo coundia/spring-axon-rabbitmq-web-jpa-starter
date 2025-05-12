@@ -8,9 +8,9 @@ package com.groupe2cs.bizyhub.security;
 	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.TENANT_HEADER;
 	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
-	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
 	import com.groupe2cs.bizyhub.security.application.dto.*;
+	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
+	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

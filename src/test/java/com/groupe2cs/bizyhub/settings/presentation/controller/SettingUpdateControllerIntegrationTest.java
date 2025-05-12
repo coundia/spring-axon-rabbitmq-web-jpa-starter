@@ -58,7 +58,7 @@ void it_should_be_able_to_update_setting() {
 	 requestDTO.setValue(UUID.randomUUID().toString());
 	 requestDTO.setLocale(UUID.randomUUID().toString());
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(true);
+	 requestDTO.setIsActive(false);
 	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 	 requestDTO.setReference(UUID.randomUUID().toString());
 

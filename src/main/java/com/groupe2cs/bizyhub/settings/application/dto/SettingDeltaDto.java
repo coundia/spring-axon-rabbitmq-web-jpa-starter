@@ -24,19 +24,19 @@ public class SettingDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "001afe2b-35c9-4274-b709-04c10553927f")
+		@Schema(description = "", example = "96093abc-5123-4f40-9986-57d1eaea7987")
 		private String name;
-		@Schema(description = "", example = "5c726b23-2f7e-46c6-82b8-ee1e50a61d77")
+		@Schema(description = "", example = "bb533a3b-6884-41db-958f-dbedf85abeb7")
 		private String value;
-		@Schema(description = "", example = "c67a2d4c-6820-4c22-95ce-f663827a8f55")
+		@Schema(description = "", example = "08d79411-1ebc-441b-8644-581ea78dc748")
 		private String locale;
-		@Schema(description = "", example = "9f77b73a-89dc-4bc7-9dd9-44279108024d")
+		@Schema(description = "", example = "0ca0a3be-a370-47f0-9c08-6f737a8345d3")
 		private String details;
-		@Schema(description = "", example = "true")
+		@Schema(description = "", example = "false")
 		private Boolean isActive;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "5a867d96-177c-419f-a509-d44f5ffface9")
+		@Schema(description = "", example = "a25bd0e1-7573-4a28-b8c3-5f5095983c45")
 		private String reference;
 
 }

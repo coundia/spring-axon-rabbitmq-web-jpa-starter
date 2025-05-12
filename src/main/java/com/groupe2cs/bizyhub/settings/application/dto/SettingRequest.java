@@ -19,16 +19,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "SettingRequest", description = "Request payload for Setting operations")
 public class SettingRequest implements Serializable {
 
-	@Schema(description = "", example = "7f2bf81d-6400-4623-9a30-34b1f4838d17")
+	@Schema(description = "", example = "d59d2037-eb30-4a8c-975e-400ef65f0377")
 	private String name;
 
-	@Schema(description = "", example = "23507bca-abb7-4c26-ad50-1b96a5e1ef4f")
+	@Schema(description = "", example = "111b100f-5da0-433e-bb61-6926cf6c9aa7")
 	private String value;
 
-	@Schema(description = "", example = "0094e854-b48d-4bf3-ab6f-32c76b97dc6e")
+	@Schema(description = "", example = "ed7c00e8-b54e-4c49-9687-466e157694ff")
 	private String locale;
 
-	@Schema(description = "", example = "6f66bbbf-495d-4b76-99b1-62bec9034df8")
+	@Schema(description = "", example = "68bf299e-e7da-4847-a351-92b0005ee133")
 	private String details;
 
 	@Schema(description = "", example = "false")
@@ -37,7 +37,7 @@ public class SettingRequest implements Serializable {
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "bb251220-f131-479c-9aa5-9516edae3678")
+	@Schema(description = "", example = "54a9ae78-301c-402c-9052-fe2f17d26282")
 	private String reference;
 
 

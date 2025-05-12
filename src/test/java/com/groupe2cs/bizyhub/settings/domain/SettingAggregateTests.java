@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.settings.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
-import com.groupe2cs.bizyhub.settings.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.*;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 import java.util.UUID;
+import com.groupe2cs.bizyhub.settings.domain.exception.*;
+import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
 
 
 public class SettingAggregateTests extends BaseUnitTests {
@@ -18,7 +18,7 @@ void it_should_create_setting_with_valid_values() {
 	SettingValue value = SettingValue.create(UUID.randomUUID().toString());
 	SettingLocale locale = SettingLocale.create(UUID.randomUUID().toString());
 	SettingDetails details = SettingDetails.create(UUID.randomUUID().toString());
-	SettingIsActive isActive = SettingIsActive.create(true);
+	SettingIsActive isActive = SettingIsActive.create(false);
 	SettingUpdatedAt updatedAt = SettingUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	SettingReference reference = SettingReference.create(UUID.randomUUID().toString());
 	SettingCreatedBy createdBy = SettingCreatedBy.create(UUID.randomUUID().toString());
