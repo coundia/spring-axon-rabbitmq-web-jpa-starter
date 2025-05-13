@@ -46,6 +46,11 @@ Once the application is running, you can access the **Swagger UI** documentation
 
 🔗 http://127.0.0.1:8093/swagger-ui/index.html#/
 
+
+Déployé here :
+
+https://cloud.megastore.sn/swagger-ui/index.html
+
 ## USAGE
 
 # curl -X 'POST'

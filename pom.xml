@@ -12,9 +12,9 @@
 	</parent>
 
 	<groupId>com.groupe2cs</groupId>
-	<artifactId>spring-axon-rabbitmq-web-jpa-starter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-axon-rabbitmq-web-jpa-starter</name>
+	<artifactId>bizyhub</artifactId>
+	<version>1.0.0</version>
+	<name>bizyhub</name>
 	<description>Spring Boot project with Axon, RabbitMQ, Web, and JPA</description>
 
 	<properties>

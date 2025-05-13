@@ -10,80 +10,71 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import java.time.Instant;
 
-
 @Service
 @RequiredArgsConstructor
 public class SettingSyncApplicationService {
 
+	private final SettingGate gateService;
 	private final CommandGateway commandGateway;
-	public void syncSetting(SettingSyncRequest request,
-MetaRequest metaRequest
 
-) {
+	public void syncSetting(SettingSyncRequest request, MetaRequest metaRequest) {
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
 				case "CREATE" -> {
 
-CreateSettingCommand command = CreateSettingCommand.builder()
-		.name(SettingName.create(d.getName()))
-		.value(SettingValue.create(d.getValue()))
-		.locale(SettingLocale.create(d.getLocale()))
-		.details(SettingDetails.create(d.getDetails()))
-		.isActive(SettingIsActive.create(d.getIsActive()))
-		.updatedAt(SettingUpdatedAt.create(d.getUpdatedAt()))
-		.reference(SettingReference.create(d.getReference()))
-.build();
-		if(metaRequest.getTenantId() != null) {
-			command.setTenant(SettingTenant.create(metaRequest.getTenantId()));
-		}
-		if(metaRequest.getUserId() != null) {
-			command.setCreatedBy( SettingCreatedBy.create(metaRequest.getUserId()));
-		}
 
-		commandGateway.sendAndWait(
-							command
-				);
+					CreateSettingCommand command = CreateSettingCommand.builder()
+								.name(SettingName.create(d.getName()))
+								.value(SettingValue.create(d.getValue()))
+								.locale(SettingLocale.create(d.getLocale()))
+								.details(SettingDetails.create(d.getDetails()))
+								.isActive(SettingIsActive.create(d.getIsActive()))
+								.updatedAt(SettingUpdatedAt.create(d.getUpdatedAt()))
+								.reference(SettingReference.create(d.getReference()))
+						.build();
 
-		}
+
+					if (metaRequest.getTenantId() != null) {
+						command.setTenant(SettingTenant.create(metaRequest.getTenantId()));
+					}
+
+					if (metaRequest.getUserId() != null) {
+						command.setCreatedBy(SettingCreatedBy.create(metaRequest.getUserId()));
+					}
+
+					commandGateway.sendAndWait(command);
+				}
+
 				case "UPDATE" -> {
-		UpdateSettingCommand update = UpdateSettingCommand.builder()
-			.id(SettingId.create(d.getId()))
-			.name(SettingName.create(d.getName()))
-			.value(SettingValue.create(d.getValue()))
-			.locale(SettingLocale.create(d.getLocale()))
-			.details(SettingDetails.create(d.getDetails()))
-			.isActive(SettingIsActive.create(d.getIsActive()))
-			.updatedAt(SettingUpdatedAt.create(d.getUpdatedAt()))
-			.reference(SettingReference.create(d.getReference()))
-		.build();
+					if (!gateService.canDelete(metaRequest.getUserId(), d.getId()) && !metaRequest.getIsAdmin()) {
+						throw new RuntimeException("Unauthorized to update Setting with id " + d.getId());
+					}
 
-		if(metaRequest.getTenantId() != null) {
-			//update.setTenant(SettingTenant.create(metaRequest.getTenantId()));
-		}
-		if(metaRequest.getUserId() != null) {
-			//update.setCreatedBy( SettingCreatedBy.create(metaRequest.getUserId()));
-		}
+					UpdateSettingCommand update = UpdateSettingCommand.builder()
+							.id(SettingId.create(d.getId()))
+							.name(SettingName.create(d.getName()))
+							.value(SettingValue.create(d.getValue()))
+							.locale(SettingLocale.create(d.getLocale()))
+							.details(SettingDetails.create(d.getDetails()))
+							.isActive(SettingIsActive.create(d.getIsActive()))
+							.updatedAt(SettingUpdatedAt.create(d.getUpdatedAt()))
+							.reference(SettingReference.create(d.getReference()))
+						.build();
 
-		commandGateway.sendAndWait(
-		update
-				);
 
-		}
-		case "DELETE" -> {
-				DeleteSettingCommand delete = DeleteSettingCommand.builder()
-					.id(SettingId.create(d.getId()) )
-					.build();
-
-				if(metaRequest.getTenantId() != null) {
-					//delete.setTenant(SettingTenant.create(metaRequest.getTenantId()));
+					commandGateway.sendAndWait(update);
 				}
 
-				if(metaRequest.getUserId() != null) {
-					//delete.setCreatedBy( SettingCreatedBy.create(metaRequest.getUserId()));
-				}
-				commandGateway.sendAndWait(
-				delete
-				 );
+				case "DELETE" -> {
+					if (!gateService.canDelete(metaRequest.getUserId(), d.getId()) && !metaRequest.getIsAdmin()) {
+						throw new RuntimeException("Unauthorized to delete Setting with id " + d.getId());
+					}
+
+					DeleteSettingCommand delete = DeleteSettingCommand.builder()
+						.id(SettingId.create(d.getId()))
+						.build();
+
+					commandGateway.sendAndWait(delete);
 				}
 			}
 		}
