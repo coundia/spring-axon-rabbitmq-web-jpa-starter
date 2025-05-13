@@ -33,3 +33,5 @@ build/
 .vscode/
 uploads
 docs/HELP
+
+src/main/resources/application-prod.properties
