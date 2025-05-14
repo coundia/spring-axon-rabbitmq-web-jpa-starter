@@ -1,6 +1,7 @@
 # 🚀 Déploiement de l'application BizyHub
 
-Ce document décrit étape par étape le processus de déploiement de l'application **BizyHub** (Spring Boot + MySQL + RabbitMQ) sur un serveur Ubuntu.
+Ce document décrit étape par étape le processus de déploiement de l'application **BizyHub** (Spring Boot + MySQL +
+RabbitMQ) sur un serveur Ubuntu.
 
 ---
 
@@ -15,10 +16,9 @@ Ce document décrit étape par étape le processus de déploiement de l'applicat
 
 ---
 
-# build 
+# build
 
 ./mvnw clean package -DskipTests
- 
 
 ## 2. 🧱 Installation des dépendances
 

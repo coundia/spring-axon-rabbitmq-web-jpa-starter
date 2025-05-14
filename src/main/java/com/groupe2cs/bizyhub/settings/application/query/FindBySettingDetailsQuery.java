@@ -1,8 +1,11 @@
 package com.groupe2cs.bizyhub.settings.application.query;
 
-import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import lombok.*;
+import com.groupe2cs.bizyhub.settings.domain.valueObject.SettingDetails;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @RequiredArgsConstructor
 @Getter
@@ -10,7 +13,7 @@ import lombok.*;
 @Builder
 public class FindBySettingDetailsQuery {
 
-	private final SettingDetails  details;
+	private final SettingDetails details;
 	private final MetaRequest metaRequest;
 
 }

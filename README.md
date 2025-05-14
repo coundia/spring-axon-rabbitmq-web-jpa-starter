@@ -46,7 +46,6 @@ Once the application is running, you can access the **Swagger UI** documentation
 
 🔗 http://127.0.0.1:8093/swagger-ui/index.html#/
 
-
 Déployé here :
 
 https://cloud.megastore.sn/swagger-ui/index.html
@@ -131,7 +130,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0NTAwMDY5NywiZXhwIjoxNzQ1MDM
 
 ## Api documentation swagger
 
-![api1.png](docs/api1.png) 
+![api1.png](docs/api1.png)
 ![api2.png](docs/api2.png)
 
 ## RabbitMQ Management
@@ -139,7 +138,6 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0NTAwMDY5NywiZXhwIjoxNzQ1MDM
 http://localhost:15672/#/queues
 
 ![rabbitMq.png](docs/rabbitMq.png)
-
 
 ## Grafana & Prometheus
 
