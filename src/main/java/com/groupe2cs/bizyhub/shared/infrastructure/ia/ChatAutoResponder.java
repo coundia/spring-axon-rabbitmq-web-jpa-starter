@@ -12,6 +12,7 @@ import com.groupe2cs.bizyhub.chats.domain.event.ChatUpdatedEvent;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponses;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponsesJson;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatState;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatUpdatedAt;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionDeltaDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +53,8 @@ public class ChatAutoResponder {
 
 		String response = iaService.generateResponse(event.getMessages().value());
 
+		log.info("[ChatAutoResponder] Generated response: {}", response);
+
 		UpdateChatCommand updateChatCommand = UpdateChatCommand.builder()
 				.id(event.getId())
 				.messages(event.getMessages())
@@ -82,7 +85,15 @@ public class ChatAutoResponder {
 			String updatedResponseJson = mapper.writeValueAsString(Map.of("deltas", List.of(dto)));
 			updateChatCommand.setResponsesJson(new ChatResponsesJson(updatedResponseJson));
 			updateChatCommand.setState(new ChatState("REPLIED"));
-			updateChatCommand.setResponses(new ChatResponses("Transaction préparée."));
+			String confirmation = "Voulez-vous confirmer la création de cette transaction ?\n" +
+					"Description : " + dto.getName() + "\n" +
+					"Montant : " + dto.getAmount() + "\n" +
+					"Date : " + dto.getDateTransaction() + "\n" +
+					"Catégorie : " + dto.getTypeTransactionRaw() + "\n" ;
+			updateChatCommand.setResponses(new ChatResponses(confirmation));
+
+			log.info("Confirmation message: {}", confirmation);
+			log.info("Category: {}", dto.getCategory());
 
 		} catch (Exception e) {
 			log.error("❌ Parsing or category fallback failed", e);
@@ -90,6 +101,8 @@ public class ChatAutoResponder {
 			updateChatCommand.setResponses(new ChatResponses("Erreur lors de la génération."));
 			updateChatCommand.setResponsesJson(new ChatResponsesJson(response));
 		}
+
+		updateChatCommand.setUpdatedAt(new ChatUpdatedAt(Instant.now()));
 
 		commandGateway.send(updateChatCommand);
 	}
