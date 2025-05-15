@@ -1,5 +1,7 @@
 package com.groupe2cs.bizyhub.shared.infrastructure.ia;
 
+import com.groupe2cs.bizyhub.categories.infrastructure.entity.Category;
+import com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +27,8 @@ public class ChatGptService implements IAService {
 
 	@Value("${openai.api.url:https://api.openai.com/v1/chat/completions}")
 	private String urlOpenAi;
+
+	private final CategoryRepository categoryRepository;
 
 	public String generateResponse(String prompt) {
 
@@ -59,5 +63,17 @@ public class ChatGptService implements IAService {
 			log.error("❌ Failed to call ChatGPT: {}", e.getMessage(), e);
 			return "Je suis désolé, je n’ai pas pu générer de réponse.";
 		}
+	}
+
+	@Override
+	public String getCategory(String type, String userId) {
+		log.info("getCategory");
+		Category category = categoryRepository.findByTypeCategoryRawAndCreatedById(
+						type, userId)
+				.stream()
+				.findFirst()
+				.orElseThrow();
+
+		return category.getId();
 	}
 }
