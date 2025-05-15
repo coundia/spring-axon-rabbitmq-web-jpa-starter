@@ -19,6 +19,9 @@ public class ChatGptService implements  IAService{
 	@Value("${openai.api.key:bad}")
 	private String keyOpenAi;
 
+	@Value("${openai.api.systemPrompt:NA}")
+	private String systemPrompt;
+
 	public String generateResponse(String prompt) {
 		try {
 			String url = "https://api.openai.com/v1/chat/completions";
