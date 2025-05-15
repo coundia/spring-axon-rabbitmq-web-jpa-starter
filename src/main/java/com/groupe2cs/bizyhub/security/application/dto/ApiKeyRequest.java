@@ -19,13 +19,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "ApiKeyRequest", description = "Request payload for ApiKey operations")
 public class ApiKeyRequest implements Serializable {
 
-	@Schema(description = "", example = "19762f28-9988-41a8-a0f6-f833b968ebbe")
+	@Schema(description = "", example = "a01ff215-be2f-4891-911b-5702b6ed2596")
 	private String appKey;
 
-	@Schema(description = "", example = "120ccb9c-7955-4777-ab8f-a9f0454a33ee")
+	@Schema(description = "", example = "29cd072c-3d53-404e-9da0-8f980da51035")
 	private String username;
 
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean active;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")

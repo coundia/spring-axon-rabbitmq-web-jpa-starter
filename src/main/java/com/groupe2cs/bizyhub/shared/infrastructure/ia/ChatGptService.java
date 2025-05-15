@@ -13,7 +13,7 @@ import java.util.Map;
 import static com.groupe2cs.bizyhub.shared.infrastructure.ia.SystemPrompt.SYSTEM_PROMPT_V1;
 
 @Slf4j
-@Service
+//@Service
 @RequiredArgsConstructor
 public class ChatGptService implements IAService {
 

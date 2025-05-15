@@ -27,10 +27,6 @@ public class ChatAutoResponder {
 
 		String response = iaService.generateResponse(event.getMessages().value());
 
-		if (response == null || response.isBlank()) {
-			response = "Je suis désolé, je n’ai pas pu générer de réponse.";
-		}
-
 		UpdateChatCommand updateChatCommand = UpdateChatCommand.builder()
 				.id(event.getId())
 				.messages(event.getMessages())
@@ -42,6 +38,13 @@ public class ChatAutoResponder {
 				.createdBy(event.getCreatedBy())
 				.tenant(event.getTenant())
 				.build();
+
+		if (response == null || response.isBlank()) {
+			response = "Service momentanément indisponible. Veuillez réessayer plus tard.";
+			updateChatCommand.setResponses(new ChatResponses(response));
+		}else {
+			updateChatCommand.setResponses(new ChatResponses(response));
+		}
 
 		commandGateway.send(updateChatCommand);
 	}

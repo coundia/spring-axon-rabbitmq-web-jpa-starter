@@ -32,14 +32,14 @@ public class Chat   extends AbstractAuditableEntity  {
 	private String id;
 
 
-	@Column(nullable = false, 
+	@Column(nullable = false, 		columnDefinition = "Text",
 		unique = false  ,
 		length = 250
 	)
 
 	private String messages ;
 
-	@Column(nullable = true, 
+	@Column(nullable = true, 		columnDefinition = "Text",
 		unique = false  ,
 		length = 250
 	)
