@@ -25,6 +25,7 @@ public class UpdateChatCommand implements Serializable {
 @TargetAggregateIdentifier
 	private ChatId id;
  	private ChatMessages messages;
+ 	private ChatResponsesJson responsesJson;
  	private ChatResponses responses;
  	private ChatState state;
  	private ChatAccount account;

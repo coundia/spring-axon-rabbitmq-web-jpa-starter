@@ -44,6 +44,13 @@ public class Chat   extends AbstractAuditableEntity  {
 		length = 250
 	)
 
+	private String responsesJson ;
+
+	@Column(nullable = true, 		columnDefinition = "Text",
+		unique = false  ,
+		length = 250
+	)
+
 	private String responses ;
 
 	@Column(nullable = true, 
@@ -82,6 +89,7 @@ public class Chat   extends AbstractAuditableEntity  {
 		return "Chat{" +
 		"id='" + id + '\'' +
 			", messages=" + messages +
+			", responsesJson=" + responsesJson +
 			", responses=" + responses +
 			", state=" + state +
 			", account=" + account +

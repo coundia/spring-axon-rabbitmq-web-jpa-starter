@@ -26,6 +26,7 @@ public class CreateChatCommand implements Serializable {
 	@Builder.Default
 	private ChatId id = ChatId.create(UUID.randomUUID().toString());
  	private ChatMessages messages;
+ 	private ChatResponsesJson responsesJson;
  	private ChatResponses responses;
  	private ChatState state;
  	private ChatAccount account;
@@ -36,6 +37,7 @@ public class CreateChatCommand implements Serializable {
 	public CreateChatCommand(
  
    ChatMessages messages , 
+   ChatResponsesJson responsesJson , 
    ChatResponses responses , 
    ChatState state , 
    ChatAccount account , 
@@ -47,6 +49,7 @@ public class CreateChatCommand implements Serializable {
 			this.id = ChatId.create(UUID.randomUUID().toString());
  
   this.messages = messages ; 
+  this.responsesJson = responsesJson ; 
   this.responses = responses ; 
   this.state = state ; 
   this.account = account ; 

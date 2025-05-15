@@ -25,6 +25,7 @@ public class ChatAggregate {
 @AggregateIdentifier
 private ChatId id;
 private ChatMessages messages;
+private ChatResponsesJson responsesJson;
 private ChatResponses responses;
 private ChatState state;
 private ChatAccount account;
@@ -39,6 +40,7 @@ public ChatAggregate(CreateChatCommand command) {
 apply(new ChatCreatedEvent(
 		command.getId(),
 		command.getMessages(),
+		command.getResponsesJson(),
 		command.getResponses(),
 		command.getState(),
 		command.getAccount(),
@@ -61,6 +63,7 @@ public void handle(UpdateChatCommand command) {
 apply(new ChatUpdatedEvent(
 		command.getId(),
 		command.getMessages(),
+		command.getResponsesJson(),
 		command.getResponses(),
 		command.getState(),
 		command.getAccount(),
@@ -75,6 +78,7 @@ apply(new ChatUpdatedEvent(
 public void on(ChatCreatedEvent event) {
 	this.id = event.getId();
 	this.messages = event.getMessages();
+	this.responsesJson = event.getResponsesJson();
 	this.responses = event.getResponses();
 	this.state = event.getState();
 	this.account = event.getAccount();
@@ -93,6 +97,7 @@ this.id = event.getId();
 public void on(ChatUpdatedEvent event) {
 this.id = event.getId();
 	this.messages = event.getMessages();
+	this.responsesJson = event.getResponsesJson();
 	this.responses = event.getResponses();
 	this.state = event.getState();
 	this.account = event.getAccount();

@@ -4,7 +4,6 @@ import java.util.Objects;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatIdNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatMessagesNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatResponsesJsonNotValid;
-import com.groupe2cs.bizyhub.chats.domain.exception.ChatResponsesNotValid;
 
 import java.io.Serializable;
 import lombok.Getter;
@@ -20,37 +19,37 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Builder
-public class ChatResponses implements Serializable {
+public class ChatResponsesJson implements Serializable {
 
-private String responses;
+private String responsesJson;
 
-public ChatResponses(String responses) {
-this.responses = responses;
+public ChatResponsesJson(String responsesJson) {
+this.responsesJson = responsesJson;
 }
 
-public static ChatResponses create(String responses) {
+public static ChatResponsesJson create(String responsesJson) {
 
-	return new ChatResponses(responses);
+	return new ChatResponsesJson(responsesJson);
 }
 
 public String value() {
-return this.responses;
+return this.responsesJson;
 }
 
 @Override
 public boolean equals(Object o) {
 if (this == o) return true;
-if (!(o instanceof ChatResponses that)) return false;
-return this.responses.equals(that.responses);
+if (!(o instanceof ChatResponsesJson that)) return false;
+return this.responsesJson.equals(that.responsesJson);
 }
 
 @Override
 public int hashCode() {
-return java.util.Objects.hash(responses);
+return java.util.Objects.hash(responsesJson);
 }
 
 @Override
 public String toString() {
-return String.valueOf(responses);
+return String.valueOf(responsesJson);
 }
 }

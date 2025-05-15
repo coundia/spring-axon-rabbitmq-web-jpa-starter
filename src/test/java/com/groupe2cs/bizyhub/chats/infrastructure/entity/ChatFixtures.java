@@ -75,6 +75,7 @@ public class ChatFixtures {
 
 			CreateChatCommand command = CreateChatCommand.builder()
 				.messages(ChatMessages.create(UUID.randomUUID().toString()))
+				.responsesJson(ChatResponsesJson.create(UUID.randomUUID().toString()))
 				.responses(ChatResponses.create(UUID.randomUUID().toString()))
 				.state(ChatState.create(UUID.randomUUID().toString()))
 				.account(ChatAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
@@ -98,6 +99,7 @@ public class ChatFixtures {
 
         CreateChatCommand command = CreateChatCommand.builder()
         .messages(ChatMessages.create(UUID.randomUUID().toString()))
+        .responsesJson(ChatResponsesJson.create(UUID.randomUUID().toString()))
         .responses(ChatResponses.create(UUID.randomUUID().toString()))
         .state(ChatState.create(UUID.randomUUID().toString()))
         .updatedAt(ChatUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))

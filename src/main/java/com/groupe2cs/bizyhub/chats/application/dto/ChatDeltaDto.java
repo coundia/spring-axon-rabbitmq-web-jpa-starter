@@ -24,17 +24,19 @@ public class ChatDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "ff65be21-adf8-45c4-b79b-a94e177150c5")
+		@Schema(description = "", example = "32d2adbe-7eb1-4804-9a7e-fa3e3611ca39")
 		private String messages;
-		@Schema(description = "", example = "4bfb6414-991a-4ecf-8157-35849d289b27")
+		@Schema(description = "", example = "7a44b380-a33a-47b2-b89a-974582877763")
+		private String responsesJson;
+		@Schema(description = "", example = "f0d49388-6817-4554-9f12-561214e2efa0")
 		private String responses;
-		@Schema(description = "", example = "3f6f4eb3-ff31-48e9-b316-13be4fe3a8e5")
+		@Schema(description = "", example = "0f365661-9982-4dd9-bbb5-af43a245f83a")
 		private String state;
-		@Schema(description = "", example = "43fc4315-9f97-4680-8a7b-a62c44768388")
+		@Schema(description = "", example = "f43b4609-8763-4187-a492-0462420140b2")
 		private String account;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "1b7bc68b-a197-4139-86d3-58f02c5cbf24")
+		@Schema(description = "", example = "67c68c39-90b9-4f7c-8787-5cebd382e848")
 		private String reference;
 
 }

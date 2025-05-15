@@ -39,6 +39,7 @@ void it_should_be_able_to_add_chat() {
 		ChatRequest requestDTO = new ChatRequest();
 
 		requestDTO.setMessages(UUID.randomUUID().toString());
+		requestDTO.setResponsesJson(UUID.randomUUID().toString());
 		requestDTO.setResponses(UUID.randomUUID().toString());
 		requestDTO.setState(UUID.randomUUID().toString());
 		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
@@ -51,6 +52,7 @@ void it_should_be_able_to_add_chat() {
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getMessages()).isEqualTo(requestDTO.getMessages());
+		assertThat(response.getBody().getResponsesJson()).isEqualTo(requestDTO.getResponsesJson());
 		assertThat(response.getBody().getResponses()).isEqualTo(requestDTO.getResponses());
 		assertThat(response.getBody().getState()).isEqualTo(requestDTO.getState());
 		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());

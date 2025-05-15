@@ -19,6 +19,7 @@ public class ChatCreatedEvent implements Serializable {
 
 	private ChatId id;
 	private ChatMessages messages;
+	private ChatResponsesJson responsesJson;
 	private ChatResponses responses;
 	private ChatState state;
 	private ChatAccount account;

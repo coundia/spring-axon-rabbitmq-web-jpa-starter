@@ -40,6 +40,19 @@ public interface ChatRepository extends JpaRepository<Chat, String> {
 	@Query("SELECT e FROM Chat e WHERE e.messages = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
 	List<Chat> findByMessagesAndTenantId(String messages, String tenantId);
 
+	@Query("SELECT e FROM Chat e WHERE e.responsesJson = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
+	List<Chat> findByResponsesJsonAndCreatedById(String responsesJson, String createdById);
+
+
+	@Query("SELECT e FROM Chat e WHERE e.responsesJson = ?1  ORDER BY e.updatedAtAudit DESC ")
+	Optional<Chat> findByResponsesJson(String responsesJson);
+
+	@Query("SELECT e FROM Chat e WHERE e.responsesJson = ?1 and e.tenant.name = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<Chat> findByResponsesJsonAndTenantName(String responsesJson, String tenantName);
+
+	@Query("SELECT e FROM Chat e WHERE e.responsesJson = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
+	List<Chat> findByResponsesJsonAndTenantId(String responsesJson, String tenantId);
+
 	@Query("SELECT e FROM Chat e WHERE e.responses = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC")
 	List<Chat> findByResponsesAndCreatedById(String responses, String createdById);
 

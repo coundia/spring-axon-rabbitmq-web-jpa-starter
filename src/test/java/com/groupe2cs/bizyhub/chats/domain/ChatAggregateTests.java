@@ -15,6 +15,7 @@ public class ChatAggregateTests extends BaseUnitTests {
 void it_should_create_chat_with_valid_values() {
 	ChatId id = ChatId.create(UUID.randomUUID().toString());
 	ChatMessages messages = ChatMessages.create(UUID.randomUUID().toString());
+	ChatResponsesJson responsesJson = ChatResponsesJson.create(UUID.randomUUID().toString());
 	ChatResponses responses = ChatResponses.create(UUID.randomUUID().toString());
 	ChatState state = ChatState.create(UUID.randomUUID().toString());
 	ChatAccount account = ChatAccount.create(UUID.randomUUID().toString());
@@ -22,10 +23,11 @@ void it_should_create_chat_with_valid_values() {
 	ChatReference reference = ChatReference.create(UUID.randomUUID().toString());
 	ChatCreatedBy createdBy = ChatCreatedBy.create(UUID.randomUUID().toString());
 	ChatTenant tenant = ChatTenant.create(UUID.randomUUID().toString());
-	ChatAggregate aggregateChatAggregate = new ChatAggregate(id, messages, responses, state, account, updatedAt, reference, createdBy, tenant);
+	ChatAggregate aggregateChatAggregate = new ChatAggregate(id, messages, responsesJson, responses, state, account, updatedAt, reference, createdBy, tenant);
 	assertThat(aggregateChatAggregate.getId()).isNotNull();
 	assertThat(aggregateChatAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateChatAggregate.getMessages()).isEqualTo(messages);
+	assertThat(aggregateChatAggregate.getResponsesJson()).isEqualTo(responsesJson);
 	assertThat(aggregateChatAggregate.getResponses()).isEqualTo(responses);
 	assertThat(aggregateChatAggregate.getState()).isEqualTo(state);
 	assertThat(aggregateChatAggregate.getAccount()).isEqualTo(account);
@@ -44,6 +46,11 @@ void it_should_create_chat_with_valid_values() {
 		void it_should_throw_when_messages_is_invalid() {
 		ChatMessagesNotValid error = assertThrows(ChatMessagesNotValid.class, () -> ChatMessages.create(""));
 		assertThat(error.getMessage()).isEqualTo("Messages is invalid");
+		}
+		@Test
+		void it_should_throw_when_responsesJson_is_invalid() {
+		ChatResponsesJsonNotValid error = assertThrows(ChatResponsesJsonNotValid.class, () -> ChatResponsesJson.create(""));
+		assertThat(error.getMessage()).isEqualTo("ResponsesJson is invalid");
 		}
 		@Test
 		void it_should_throw_when_responses_is_invalid() {

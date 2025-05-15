@@ -24,6 +24,8 @@ public class ChatResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String messages;
 	@Schema(description = "", example = "")
+	private String responsesJson;
+	@Schema(description = "", example = "")
 	private String responses;
 	@Schema(description = "", example = "")
 	private String state;

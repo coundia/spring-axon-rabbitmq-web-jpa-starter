@@ -48,6 +48,16 @@ public List<ChatResponse> findByChatMessages(
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ChatResponse.class));
 	return future.join();
 }
+public List<ChatResponse> findByChatResponsesJson(
+	ChatResponsesJson value,
+	MetaRequest metaRequest
+	) {
+
+	FindByChatResponsesJsonQuery query = new FindByChatResponsesJsonQuery(value,metaRequest);
+	CompletableFuture<List<ChatResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ChatResponse.class));
+	return future.join();
+}
 public List<ChatResponse> findByChatResponses(
 	ChatResponses value,
 	MetaRequest metaRequest

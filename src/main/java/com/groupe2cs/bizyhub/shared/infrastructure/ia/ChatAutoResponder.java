@@ -4,6 +4,8 @@ import com.groupe2cs.bizyhub.chats.application.command.UpdateChatCommand;
 import com.groupe2cs.bizyhub.chats.domain.event.ChatCreatedEvent;
 import com.groupe2cs.bizyhub.chats.domain.event.ChatUpdatedEvent;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponses;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponsesJson;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatState;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -40,10 +42,14 @@ public class ChatAutoResponder {
 				.build();
 
 		if (response == null || response.isBlank()) {
+			updateChatCommand.setState(new ChatState("ERROR"));
 			response = "Service momentanément indisponible. Veuillez réessayer plus tard.";
 			updateChatCommand.setResponses(new ChatResponses(response));
+			updateChatCommand.setResponsesJson(new ChatResponsesJson(response));
 		}else {
-			updateChatCommand.setResponses(new ChatResponses(response));
+			updateChatCommand.setState(new ChatState("REPLIED"));
+			updateChatCommand.setResponses(new ChatResponses("Débiter 100 FCFA."));
+			updateChatCommand.setResponsesJson(new ChatResponsesJson(response));
 		}
 
 		commandGateway.send(updateChatCommand);

@@ -59,6 +59,7 @@ void it_should_be_able_to_update_chat() {
 
 	ChatRequest requestDTO = new ChatRequest();
 	 requestDTO.setMessages(UUID.randomUUID().toString());
+	 requestDTO.setResponsesJson(UUID.randomUUID().toString());
 	 requestDTO.setResponses(UUID.randomUUID().toString());
 	 requestDTO.setState(UUID.randomUUID().toString());
 	 requestDTO.setAccount( updated.getAccount().value());

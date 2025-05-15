@@ -41,6 +41,7 @@ private ChatRepository Repository;
 		.deltas(List.of(
 		ChatDeltaDto.builder()
 .messages(UUID.randomUUID().toString())
+.responsesJson(UUID.randomUUID().toString())
 .responses(UUID.randomUUID().toString())
 .state(UUID.randomUUID().toString())
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
@@ -71,6 +72,7 @@ private ChatRepository Repository;
 			ChatDeltaDto.builder()
 			.id(existingId)
 .messages(UUID.randomUUID().toString())
+.responsesJson(UUID.randomUUID().toString())
 .responses(UUID.randomUUID().toString())
 .state(UUID.randomUUID().toString())
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())

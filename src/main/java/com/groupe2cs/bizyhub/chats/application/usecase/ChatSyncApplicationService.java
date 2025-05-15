@@ -25,6 +25,7 @@ public class ChatSyncApplicationService {
 
 					CreateChatCommand command = CreateChatCommand.builder()
 								.messages(ChatMessages.create(d.getMessages()))
+								.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
 								.responses(ChatResponses.create(d.getResponses()))
 								.state(ChatState.create(d.getState()))
 								.account(ChatAccount.create(d.getAccount()))
@@ -52,6 +53,7 @@ public class ChatSyncApplicationService {
 					UpdateChatCommand update = UpdateChatCommand.builder()
 							.id(ChatId.create(d.getId()))
 							.messages(ChatMessages.create(d.getMessages()))
+							.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
 							.responses(ChatResponses.create(d.getResponses()))
 							.state(ChatState.create(d.getState()))
 							.account(ChatAccount.create(d.getAccount()))
