@@ -35,3 +35,4 @@ uploads
 docs/HELP
 
 src/main/resources/application-prod.properties
+src/main/resources/application-preprod.properties
