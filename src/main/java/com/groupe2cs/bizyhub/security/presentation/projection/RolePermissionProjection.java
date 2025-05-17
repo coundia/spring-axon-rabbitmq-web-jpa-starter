@@ -61,9 +61,17 @@ RolePermission entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("RolePermission not found"));
 
 
+	if(event.getId() != null) {
 		entity.setId(event.getId().value());
-		entity.setRole(new Role(event.getRole().value()));
-		entity.setPermission(new Permission(event.getPermission().value()));
+    }
+
+     if(event.getRole() != null) {
+		  entity.setRole(new Role(event.getRole().value()));
+	  }
+
+     if(event.getPermission() != null) {
+		  entity.setPermission(new Permission(event.getPermission().value()));
+	  }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

@@ -1,8 +1,10 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
-
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountUser;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountUserRepository;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -30,7 +32,7 @@ public class AccountUserGate {
 		}
 		Optional<AccountUser> opt = repository.findById(objectId);
 		if (opt.isEmpty()) {
-			log.warn("canRead denied: transaction {} not found", objectId);
+			log.warn("canRead denied: AccountUser {} not found", objectId);
 			return false;
 		}
 		AccountUser tx = opt.get();
@@ -42,14 +44,11 @@ public class AccountUserGate {
 				&& currentUserId.equals(tx.getCreatedBy().getId());
 		boolean sameTenant = tx.getTenant() != null
 				&& currentTenantId.equals(tx.getTenant().getId());
+
 		boolean result = owner || sameTenant;
 
 		log.info("canRead result for user {}: owner={}, sameTenant={}, final={} for AccountUser {}",
-				currentUserId,
-				owner,
-				sameTenant,
-				result,
-				objectId);
+				currentUserId, owner, sameTenant, result, objectId);
 		return result;
 	}
 
@@ -62,26 +61,33 @@ public class AccountUserGate {
 	public boolean canEdit(Authentication auth, String objectId) {
 		log.debug("canEdit called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canEdit result for user {} on AccountUser {}: {}",
-				auth != null ? auth.getName() : null,
-				objectId,
-				result);
+		log.info("canEdit result for user {} on AccountUser {}: {}", auth != null ? auth.getName() : null, objectId, result);
 		return result;
 	}
 
 	public boolean canDelete(Authentication auth, String objectId) {
 		log.debug("canDelete called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canDelete result for user {} on AccountUser {}: {}",
-				auth != null ? auth.getName() : null,
-				objectId,
-				result);
+		log.info("canDelete result for user {} on AccountUser {}: {}", auth != null ? auth.getName() : null, objectId, result);
 		return result;
 	}
 
 	public boolean canList(Authentication auth) {
 		boolean result = auth != null && auth.isAuthenticated();
 		log.info("canList for user {}: {}", auth != null ? auth.getName() : null, result);
+		return result;
+	}
+
+	public boolean canDelete(String userId, String objectId) {
+		log.debug("canDelete called with userId={} and objectId={}", userId, objectId);
+		Optional<AccountUser> opt = repository.findById(objectId);
+		if (opt.isEmpty()) {
+			log.warn("canDelete denied: AccountUser {} not found", objectId);
+			return false;
+		}
+		AccountUser entity = opt.get();
+		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
+		log.info("canDelete result for userId {} on AccountUser {}: {}", userId, objectId, result);
 		return result;
 	}
 
@@ -93,4 +99,3 @@ public class AccountUserGate {
 		return has;
 	}
 }
-

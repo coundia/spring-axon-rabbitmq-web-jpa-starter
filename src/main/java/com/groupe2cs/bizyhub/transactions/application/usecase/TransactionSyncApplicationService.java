@@ -1,55 +1,58 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
-import com.groupe2cs.bizyhub.transactions.application.command.DeleteTransactionCommand;
-import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionCommand;
-import com.groupe2cs.bizyhub.transactions.application.dto.TransactionSyncRequest;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.transactions.application.command.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-
+import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
 public class TransactionSyncApplicationService {
 
+	private final TransactionGate gateService;
 	private final CommandGateway commandGateway;
 
-	public void syncTransaction(TransactionSyncRequest request,
-								MetaRequest metaRequest
-
-	) {
+	public void syncTransaction(TransactionSyncRequest request, MetaRequest metaRequest) {
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
 				case "CREATE" -> {
 
+
 					CreateTransactionCommand command = CreateTransactionCommand.builder()
-							.name(TransactionName.create(d.getName()))
-							.amount(TransactionAmount.create(d.getAmount()))
-							.details(TransactionDetails.create(d.getDetails()))
-							.isActive(TransactionIsActive.create(d.getIsActive()))
-							.account(TransactionAccount.create(d.getAccount()))
-							.category(TransactionCategory.create(d.getCategory()))
-							.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
-							.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
-							.updatedAt(TransactionUpdatedAt.create(d.getUpdatedAt()))
-							.reference(TransactionReference.create(d.getReference()))
-							.build();
+								.name(TransactionName.create(d.getName()))
+								.amount(TransactionAmount.create(d.getAmount()))
+								.details(TransactionDetails.create(d.getDetails()))
+								.isActive(TransactionIsActive.create(d.getIsActive()))
+								.account(TransactionAccount.create(d.getAccount()))
+								.category(TransactionCategory.create(d.getCategory()))
+								.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
+								.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
+								.updatedAt(TransactionUpdatedAt.create(d.getUpdatedAt()))
+								.reference(TransactionReference.create(d.getReference()))
+						.build();
+
+
 					if (metaRequest.getTenantId() != null) {
 						command.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
 					}
+
 					if (metaRequest.getUserId() != null) {
 						command.setCreatedBy(TransactionCreatedBy.create(metaRequest.getUserId()));
 					}
 
-					commandGateway.sendAndWait(
-							command
-					);
-
+					commandGateway.sendAndWait(command);
 				}
+
 				case "UPDATE" -> {
+					if (!gateService.canDelete(metaRequest.getUserId(), d.getId()) && !metaRequest.getIsAdmin()) {
+						throw new RuntimeException("Unauthorized to update Transaction with id " + d.getId());
+					}
+
 					UpdateTransactionCommand update = UpdateTransactionCommand.builder()
 							.id(TransactionId.create(d.getId()))
 							.name(TransactionName.create(d.getName()))
@@ -62,35 +65,22 @@ public class TransactionSyncApplicationService {
 							.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
 							.updatedAt(TransactionUpdatedAt.create(d.getUpdatedAt()))
 							.reference(TransactionReference.create(d.getReference()))
-							.build();
+						.build();
 
-					if (metaRequest.getTenantId() != null) {
-						//update.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
-					}
-					if (metaRequest.getUserId() != null) {
-						//update.setCreatedBy( TransactionCreatedBy.create(metaRequest.getUserId()));
-					}
 
-					commandGateway.sendAndWait(
-							update
-					);
-
+					commandGateway.sendAndWait(update);
 				}
+
 				case "DELETE" -> {
+					if (!gateService.canDelete(metaRequest.getUserId(), d.getId()) && !metaRequest.getIsAdmin()) {
+						throw new RuntimeException("Unauthorized to delete Transaction with id " + d.getId());
+					}
+
 					DeleteTransactionCommand delete = DeleteTransactionCommand.builder()
-							.id(TransactionId.create(d.getId()))
-							.build();
+						.id(TransactionId.create(d.getId()))
+						.build();
 
-					if (metaRequest.getTenantId() != null) {
-						//delete.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
-					}
-
-					if (metaRequest.getUserId() != null) {
-						//delete.setCreatedBy( TransactionCreatedBy.create(metaRequest.getUserId()));
-					}
-					commandGateway.sendAndWait(
-							delete
-					);
+					commandGateway.sendAndWait(delete);
 				}
 			}
 		}

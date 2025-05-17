@@ -1,9 +1,13 @@
 package com.groupe2cs.bizyhub.accounts.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,28 +17,28 @@ import java.io.Serializable;
 @Schema(name = "AccountUserDeltaDto", description = "Delta DTO for accountUser changes")
 public class AccountUserDeltaDto implements Serializable {
 
-	@Schema(description = "Identifier of the accountUser", example = "uuid")
-	private String id;
+    @Schema(description = "Identifier of the accountUser", example = "uuid")
+    private String id;
 
-	@Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
+    @Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
 	@Builder.Default
-	private String type = "CREATE";
+    private String type = "CREATE";
 
-	@Schema(description = "", example = "dcca03a0-6d22-4768-aa23-3aba52e20323")
-	private String name;
-	@Schema(description = "", example = "6006bb2e-50b1-4664-b3ec-6f621ea17155")
-	private String account;
-	@Schema(description = "", example = "e939407d-d2ec-4813-a73e-96d16c826381")
-	private String user;
-	@Schema(description = "", example = "8f5cd189-ed0d-4315-9427-353e41a6db62")
-	private String username;
-	@Schema(description = "", example = "fa03debc-3463-4fba-bb40-1f00455c1d3f")
-	private String details;
-	@Schema(description = "", example = "true")
-	private Boolean isActive;
-	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
-	private java.time.Instant updatedAt;
-	@Schema(description = "", example = "3bd4c0c5-b399-44b3-ab33-53a7d0ab76aa")
-	private String reference;
+		@Schema(description = "", example = "352eacdb-73f2-4d9f-9e78-b9498b6303c0")
+		private String name;
+		@Schema(description = "", example = "ebd81e1c-de72-43e8-ba30-e7723c397bc9")
+		private String account;
+		@Schema(description = "", example = "96a4ed31-1e6e-4e90-88b7-4e42bec79064")
+		private String user;
+		@Schema(description = "", example = "23ab8524-de8a-48e9-861a-921e7476c638")
+		private String username;
+		@Schema(description = "", example = "e3042421-115d-4a68-bcac-4c308dedc3d3")
+		private String details;
+		@Schema(description = "", example = "false")
+		private Boolean isActive;
+		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+		private java.time.Instant updatedAt;
+		@Schema(description = "", example = "3e62d4b6-7a80-45df-b39a-376abbe6d62b")
+		private String reference;
 
 }

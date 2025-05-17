@@ -4,11 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.groupe2cs.bizyhub.categories.infrastructure.entity.Category;
-import com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository;
 import com.groupe2cs.bizyhub.chats.application.command.UpdateChatCommand;
 import com.groupe2cs.bizyhub.chats.domain.event.ChatCreatedEvent;
-import com.groupe2cs.bizyhub.chats.domain.event.ChatUpdatedEvent;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponses;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponsesJson;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatState;
@@ -20,19 +17,9 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.groupe2cs.bizyhub.transactions.application.dto.TransactionDeltaDto;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
 
 
 @Slf4j
@@ -42,7 +29,6 @@ public class ChatAutoResponder {
 
 	private final IAService iaService;
 	private final CommandGateway commandGateway;
-
 
 
 	@EventHandler
@@ -78,8 +64,8 @@ public class ChatAutoResponder {
 			TransactionDeltaDto dto = mapper.treeToValue(deltaNode, TransactionDeltaDto.class);
 
 			//if (dto.getCategory() == null) {
-				log.warn("❌ Category not found in response, falling back to default category");
-				dto.setCategory(iaService.getCategory(dto.getTypeTransactionRaw(), event.getCreatedBy().value()));
+			log.warn("❌ Category not found in response, falling back to default category");
+			dto.setCategory(iaService.getCategory(dto.getTypeTransactionRaw(), event.getCreatedBy().value()));
 			//}
 
 			String updatedResponseJson = mapper.writeValueAsString(Map.of("deltas", List.of(dto)));
@@ -89,7 +75,7 @@ public class ChatAutoResponder {
 					"Description : " + dto.getName() + "\n" +
 					"Montant : " + dto.getAmount() + "\n" +
 					"Date : " + dto.getDateTransaction() + "\n" +
-					"Catégorie : " + dto.getTypeTransactionRaw() + "\n" ;
+					"Catégorie : " + dto.getTypeTransactionRaw() + "\n";
 			updateChatCommand.setResponses(new ChatResponses(confirmation));
 
 			log.info("Confirmation message: {}", confirmation);

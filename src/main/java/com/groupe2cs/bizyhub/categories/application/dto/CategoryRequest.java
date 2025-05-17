@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.categories.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,13 +19,13 @@ import java.io.Serializable;
 @Schema(name = "CategoryRequest", description = "Request payload for Category operations")
 public class CategoryRequest implements Serializable {
 
-	@Schema(description = "", example = "7e30d0cb-7eef-4f2a-8a69-508dfcf29808")
+	@Schema(description = "", example = "478d3420-2bdd-4d8e-a216-547f863641e6")
 	private String name;
 
-	@Schema(description = "", example = "7a194b86-425d-4680-80aa-52ad9d3292eb")
+	@Schema(description = "", example = "886537d5-5339-43fc-a3e4-3346b57c107b")
 	private String typeCategoryRaw;
 
-	@Schema(description = "", example = "b30c1daf-bb66-4169-81a7-c05e22022295")
+	@Schema(description = "", example = "131836d6-da92-465e-b63c-546926b1a2c6")
 	private String details;
 
 	@Schema(description = "", example = "true")
@@ -28,7 +34,7 @@ public class CategoryRequest implements Serializable {
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "0336281c-58c1-4a89-aac3-bf93304eb22a")
+	@Schema(description = "", example = "ed963c19-4d91-4700-8559-62732d20b8a2")
 	private String reference;
 
 

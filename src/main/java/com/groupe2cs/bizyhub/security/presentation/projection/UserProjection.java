@@ -61,9 +61,15 @@ User entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("User not found"));
 
 
+	if(event.getId() != null) {
 		entity.setId(event.getId().value());
+    }
+	if(event.getUsername() != null) {
 		entity.setUsername(event.getUsername().value());
+    }
+	if(event.getPassword() != null) {
 		entity.setPassword(event.getPassword().value());
+    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

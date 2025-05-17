@@ -1,12 +1,15 @@
 package com.groupe2cs.bizyhub.categories.domain.event;
 
-import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+	import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
+import java.time.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -23,6 +26,7 @@ public class CategoryCreatedEvent implements Serializable {
 	private CategoryReference reference;
 	private CategoryCreatedBy createdBy;
 	private CategoryTenant tenant;
+
 
 
 }

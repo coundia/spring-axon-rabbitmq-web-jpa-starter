@@ -14,6 +14,8 @@ return PasswordResetResponse.builder()
 		.token(entity.getToken())
 		.username(entity.getUsername())
 		.expiration(entity.getExpiration())
+    .createdBy(entity.getCreatedBy().getUsername())
+    .tenant(entity.getTenant().getName())
 .build();
 }
 

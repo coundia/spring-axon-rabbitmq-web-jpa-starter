@@ -1,7 +1,7 @@
 package com.groupe2cs.bizyhub.security.infrastructure.config;
 
-	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
 	import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

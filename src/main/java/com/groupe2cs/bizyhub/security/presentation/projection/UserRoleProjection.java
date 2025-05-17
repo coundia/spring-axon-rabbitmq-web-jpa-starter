@@ -61,9 +61,17 @@ UserRole entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("UserRole not found"));
 
 
+	if(event.getId() != null) {
 		entity.setId(event.getId().value());
-		entity.setUser(new User(event.getUser().value()));
-		entity.setRole(new Role(event.getRole().value()));
+    }
+
+     if(event.getUser() != null) {
+		  entity.setUser(new User(event.getUser().value()));
+	  }
+
+     if(event.getRole() != null) {
+		  entity.setRole(new Role(event.getRole().value()));
+	  }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

@@ -13,6 +13,8 @@ return UserResponse.builder()
 		.id(entity.getId())
 		.username(entity.getUsername())
 		.password(entity.getPassword())
+    .createdBy(entity.getCreatedBy().getUsername())
+    .tenant(entity.getTenant().getName())
 .build();
 }
 

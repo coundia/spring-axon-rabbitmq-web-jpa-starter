@@ -35,5 +35,9 @@ public class ChatResponse implements Serializable {
 	private java.time.Instant updatedAt;
 	@Schema(description = "", example = "")
 	private String reference;
+	@Schema(description = "", example = "")
+	private String createdBy;
+	@Schema(description = "", example = "")
+	private String tenant;
 
 }

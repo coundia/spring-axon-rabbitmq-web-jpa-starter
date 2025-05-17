@@ -62,10 +62,18 @@ RefreshToken entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("RefreshToken not found"));
 
 
+	if(event.getId() != null) {
 		entity.setId(event.getId().value());
+    }
+	if(event.getToken() != null) {
 		entity.setToken(event.getToken().value());
+    }
+	if(event.getUsername() != null) {
 		entity.setUsername(event.getUsername().value());
+    }
+	if(event.getExpiration() != null) {
 		entity.setExpiration(event.getExpiration().value());
+    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

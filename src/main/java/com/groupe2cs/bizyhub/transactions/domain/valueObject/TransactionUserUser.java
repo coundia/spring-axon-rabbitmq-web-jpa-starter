@@ -1,11 +1,20 @@
 package com.groupe2cs.bizyhub.transactions.domain.valueObject;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Objects;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserIdNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserNameNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserTransactionNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUserNotValid;
 
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+import java.time.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -13,35 +22,35 @@ import java.io.Serializable;
 @Builder
 public class TransactionUserUser implements Serializable {
 
-	private String user;
+private String user;
 
-	public TransactionUserUser(String user) {
-		this.user = user;
-	}
+public TransactionUserUser(String user) {
+this.user = user;
+}
 
-	public static TransactionUserUser create(String user) {
+public static TransactionUserUser create(String user) {
 
-		return new TransactionUserUser(user);
-	}
+	return new TransactionUserUser(user);
+}
 
-	public String value() {
-		return this.user;
-	}
+public String value() {
+return this.user;
+}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof TransactionUserUser that)) return false;
-		return this.user.equals(that.user);
-	}
+@Override
+public boolean equals(Object o) {
+if (this == o) return true;
+if (!(o instanceof TransactionUserUser that)) return false;
+return this.user.equals(that.user);
+}
 
-	@Override
-	public int hashCode() {
-		return java.util.Objects.hash(user);
-	}
+@Override
+public int hashCode() {
+return java.util.Objects.hash(user);
+}
 
-	@Override
-	public String toString() {
-		return String.valueOf(user);
-	}
+@Override
+public String toString() {
+return String.valueOf(user);
+}
 }

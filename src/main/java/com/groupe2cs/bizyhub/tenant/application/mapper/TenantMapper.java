@@ -16,6 +16,8 @@ return TenantResponse.builder()
 		.domain(entity.getDomain())
 		.language(entity.getLanguage())
 		.active(entity.getActive())
+    .createdBy(entity.getCreatedBy().getUsername())
+    .tenant(entity.getTenant().getName())
 .build();
 }
 

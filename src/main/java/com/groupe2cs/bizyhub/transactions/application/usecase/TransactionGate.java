@@ -1,8 +1,10 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
+import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction;
-import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -30,7 +32,7 @@ public class TransactionGate {
 		}
 		Optional<Transaction> opt = repository.findById(objectId);
 		if (opt.isEmpty()) {
-			log.warn("canRead denied: transaction {} not found", objectId);
+			log.warn("canRead denied: Transaction {} not found", objectId);
 			return false;
 		}
 		Transaction tx = opt.get();
@@ -42,14 +44,11 @@ public class TransactionGate {
 				&& currentUserId.equals(tx.getCreatedBy().getId());
 		boolean sameTenant = tx.getTenant() != null
 				&& currentTenantId.equals(tx.getTenant().getId());
+
 		boolean result = owner || sameTenant;
 
 		log.info("canRead result for user {}: owner={}, sameTenant={}, final={} for Transaction {}",
-				currentUserId,
-				owner,
-				sameTenant,
-				result,
-				objectId);
+				currentUserId, owner, sameTenant, result, objectId);
 		return result;
 	}
 
@@ -62,26 +61,33 @@ public class TransactionGate {
 	public boolean canEdit(Authentication auth, String objectId) {
 		log.debug("canEdit called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canEdit result for user {} on Transaction {}: {}",
-				auth != null ? auth.getName() : null,
-				objectId,
-				result);
+		log.info("canEdit result for user {} on Transaction {}: {}", auth != null ? auth.getName() : null, objectId, result);
 		return result;
 	}
 
 	public boolean canDelete(Authentication auth, String objectId) {
 		log.debug("canDelete called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canDelete result for user {} on Transaction {}: {}",
-				auth != null ? auth.getName() : null,
-				objectId,
-				result);
+		log.info("canDelete result for user {} on Transaction {}: {}", auth != null ? auth.getName() : null, objectId, result);
 		return result;
 	}
 
 	public boolean canList(Authentication auth) {
 		boolean result = auth != null && auth.isAuthenticated();
 		log.info("canList for user {}: {}", auth != null ? auth.getName() : null, result);
+		return result;
+	}
+
+	public boolean canDelete(String userId, String objectId) {
+		log.debug("canDelete called with userId={} and objectId={}", userId, objectId);
+		Optional<Transaction> opt = repository.findById(objectId);
+		if (opt.isEmpty()) {
+			log.warn("canDelete denied: Transaction {} not found", objectId);
+			return false;
+		}
+		Transaction entity = opt.get();
+		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
+		log.info("canDelete result for userId {} on Transaction {}: {}", userId, objectId, result);
 		return result;
 	}
 
@@ -93,4 +99,3 @@ public class TransactionGate {
 		return has;
 	}
 }
-

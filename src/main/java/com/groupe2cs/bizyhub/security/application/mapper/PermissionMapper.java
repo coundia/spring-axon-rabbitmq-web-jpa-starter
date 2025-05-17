@@ -12,6 +12,8 @@ public static PermissionResponse toResponse(Permission entity) {
 return PermissionResponse.builder()
 		.id(entity.getId())
 		.name(entity.getName())
+    .createdBy(entity.getCreatedBy().getUsername())
+    .tenant(entity.getTenant().getName())
 .build();
 }
 

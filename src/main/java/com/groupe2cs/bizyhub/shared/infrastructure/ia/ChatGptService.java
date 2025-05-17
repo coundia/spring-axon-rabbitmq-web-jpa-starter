@@ -5,9 +5,10 @@ import com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryReposi
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.*;
-import org.springframework.stereotype.Service;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -22,15 +23,11 @@ import static com.groupe2cs.bizyhub.shared.infrastructure.ia.SystemPrompt.SYSTEM
 public class ChatGptService implements IAService {
 
 	private final RestTemplate restTemplate = new RestTemplate();
-
+	private final CategoryRepository categoryRepository;
 	@Value("${openai.api.key:bad}")
 	private String keyOpenAi;
-
-
 	@Value("${openai.api.url:https://api.openai.com/v1/chat/completions}")
 	private String urlOpenAi;
-
-	private final CategoryRepository categoryRepository;
 
 	public String generateResponse(String prompt) {
 

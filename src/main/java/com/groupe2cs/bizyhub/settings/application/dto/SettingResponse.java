@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.settings.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
+import com.groupe2cs.bizyhub.settings.infrastructure.entity.*;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -29,5 +35,9 @@ public class SettingResponse implements Serializable {
 	private java.time.Instant updatedAt;
 	@Schema(description = "", example = "")
 	private String reference;
+	@Schema(description = "", example = "")
+	private String createdBy;
+	@Schema(description = "", example = "")
+	private String tenant;
 
 }

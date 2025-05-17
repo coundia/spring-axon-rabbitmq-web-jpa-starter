@@ -60,8 +60,12 @@ Role entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Role not found"));
 
 
+	if(event.getId() != null) {
 		entity.setId(event.getId().value());
+    }
+	if(event.getName() != null) {
 		entity.setName(event.getName().value());
+    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

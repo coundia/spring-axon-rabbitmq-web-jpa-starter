@@ -20,6 +20,7 @@ import java.util.UUID;
 public class FakeIAService implements IAService {
 
 	private final CategoryRepository categoryRepository;
+	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Override
 	public String getCategory(String type, String userId) {
@@ -33,8 +34,6 @@ public class FakeIAService implements IAService {
 
 		return category.getId();
 	}
-
-	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	public String generateResponse(String prompt) {
 		log.info("[FakeIAService] Generating response for prompt: {}", prompt);

@@ -64,12 +64,24 @@ Tenant entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Tenant not found"));
 
 
+	if(event.getId() != null) {
 		entity.setId(event.getId().value());
+    }
+	if(event.getName() != null) {
 		entity.setName(event.getName().value());
+    }
+	if(event.getDescription() != null) {
 		entity.setDescription(event.getDescription().value());
+    }
+	if(event.getDomain() != null) {
 		entity.setDomain(event.getDomain().value());
+    }
+	if(event.getLanguage() != null) {
 		entity.setLanguage(event.getLanguage().value());
+    }
+	if(event.getActive() != null) {
 		entity.setActive(event.getActive().value());
+    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

@@ -64,12 +64,24 @@ ApiKey entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("ApiKey not found"));
 
 
+	if(event.getId() != null) {
 		entity.setId(event.getId().value());
+    }
+	if(event.getAppKey() != null) {
 		entity.setAppKey(event.getAppKey().value());
+    }
+	if(event.getUsername() != null) {
 		entity.setUsername(event.getUsername().value());
+    }
+	if(event.getActive() != null) {
 		entity.setActive(event.getActive().value());
+    }
+	if(event.getCreatedAt() != null) {
 		entity.setCreatedAt(event.getCreatedAt().value());
+    }
+	if(event.getExpiration() != null) {
 		entity.setExpiration(event.getExpiration().value());
+    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

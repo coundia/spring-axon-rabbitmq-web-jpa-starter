@@ -1,12 +1,16 @@
 package com.groupe2cs.bizyhub.accounts.application.dto;
 
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountUser;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import org.springframework.data.domain.Page;
-
+import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
 import java.io.Serializable;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.domain.Page;
 
 @Getter
 @Setter
@@ -16,8 +20,8 @@ import java.util.List;
 @Schema(name = "AccountUserPagedResponse", description = "Paginated response for AccountUser results")
 public class AccountUserPagedResponse implements Serializable {
 
-	@Schema(description = "List of paginated AccountUser items")
-	private List<AccountUserResponse> content;
+@Schema(description = "List of paginated AccountUser items")
+private List<AccountUserResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -33,11 +37,11 @@ public class AccountUserPagedResponse implements Serializable {
 
 	public static AccountUserPagedResponse from(Page<AccountUser> page, List<AccountUserResponse> content) {
 		return AccountUserPagedResponse.builder()
-				.content(content)
-				.page(page.getNumber())
-				.size(page.getSize())
-				.totalElements(page.getTotalElements())
-				.totalPages(page.getTotalPages())
-				.build();
-	}
+		.content(content)
+		.page(page.getNumber())
+		.size(page.getSize())
+		.totalElements(page.getTotalElements())
+		.totalPages(page.getTotalPages())
+		.build();
+		}
 }

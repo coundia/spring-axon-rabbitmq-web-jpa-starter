@@ -60,8 +60,12 @@ Permission entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Permission not found"));
 
 
+	if(event.getId() != null) {
 		entity.setId(event.getId().value());
+    }
+	if(event.getName() != null) {
 		entity.setName(event.getName().value());
+    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
