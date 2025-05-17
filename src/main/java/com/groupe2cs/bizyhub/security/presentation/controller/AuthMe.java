@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
+import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,38 +28,38 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthMe {
 
-private final UserDetailsService userDetailsService;
+	private final UserDetailsService userDetailsService;
 
-@GetMapping("/me")
-@Operation(summary = "Get current authenticated user", description = "Returns username from token")
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "User info", content = @Content(schema = @Schema(implementation = ApiResponseDto.class))),
-@ApiResponse(responseCode = "401", description = "Unauthorized")
-})
-public ResponseEntity<ApiResponseDto> me(@AuthenticationPrincipal Jwt jwt) {
+	@GetMapping("/me")
+	@Operation(summary = "Get current authenticated user", description = "Returns username from token")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "User info", content = @Content(schema = @Schema(implementation = ApiResponseDto.class))),
+			@ApiResponse(responseCode = "401", description = "Unauthorized")
+	})
+	public ResponseEntity<ApiResponseDto> me(@AuthenticationPrincipal Jwt jwt) {
 
-	if(jwt == null) {
-	log.warn("Auth/me JWT is null");
-	return ResponseEntity.status(401).body(ApiResponseDto.error("Unauthorized"));
+		if (jwt == null) {
+			log.warn("Auth/me JWT is null");
+			return ResponseEntity.status(401).body(ApiResponseDto.error("Unauthorized"));
+		}
+
+
+		log.info("Auth/me User claims: {}", jwt.getClaims());
+		String username = jwt.getSubject();
+
+		MetaRequest metaRequest = new MetaRequest();
+
+		UserPrincipal userPrincipal = (UserPrincipal) userDetailsService.loadUserByUsername(username);
+
+		return ResponseEntity.ok(ApiResponseDto.ok(
+				Map.of(
+						"username", username,
+						"roles", userPrincipal.getRoles(),
+						"tenantId", userPrincipal.getTenantId(),
+						"id", userPrincipal.getId(),
+						"authorities", userPrincipal.getAuthorities()
+				)
+		));
 	}
-
-
-	log.info("Auth/me User claims: {}", jwt.getClaims());
-	String username = jwt.getSubject();
-
-	 MetaRequest metaRequest = new MetaRequest();
-
-	UserPrincipal userPrincipal = (UserPrincipal) userDetailsService.loadUserByUsername(username);
-
-	return ResponseEntity.ok(ApiResponseDto.ok(
-		Map.of(
-			"username", username,
-			"roles", userPrincipal.getRoles(),
-			"tenantId", userPrincipal.getTenantId(),
-			"id", userPrincipal.getId(),
-			"authorities", userPrincipal.getAuthorities()
-		)
-	));
-	}
-	}
+}
 

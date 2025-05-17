@@ -1,16 +1,11 @@
 package com.groupe2cs.bizyhub.chats.infrastructure.repository;
 
-	import com.groupe2cs.bizyhub.chats.infrastructure.entity.Chat;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.chats.infrastructure.entity.Chat;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.repository.query.Param;
-import java.time.*;
-import java.util.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +15,12 @@ public interface ChatRepository extends JpaRepository<Chat, String> {
 
 	@Query("SELECT e FROM Chat e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC limit 1 ")
 	Optional<Chat> findByIdAndCreatedById(String id, String createdById);
+
 	@Query("SELECT e FROM Chat e WHERE e.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
 	List<Chat> findByIdAndTenantId(String id, String tenantId);
 
 	Page<Chat> findByCreatedById(String createdById, Pageable pageable);
+
 	Page<Chat> findAllByTenantId(String tenantId, Pageable pageable);
 
 
@@ -143,8 +140,6 @@ public interface ChatRepository extends JpaRepository<Chat, String> {
 
 	@Query("SELECT e FROM Chat e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
 	List<Chat> findByTenantIdAndTenantId(String tenant, String tenantId);
-
-
 
 
 }

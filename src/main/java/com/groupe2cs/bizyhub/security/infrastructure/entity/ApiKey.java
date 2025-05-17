@@ -1,22 +1,10 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-
-import java.time.*;
-import java.util.*;
-
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.AbstractAuditableEntity;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -26,62 +14,63 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Entity
 @EntityListeners(AuditListener.class)
 @Table(name = "api_keys")
-public class ApiKey   extends AbstractAuditableEntity  {
+public class ApiKey extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
 
-	@Column(nullable = false, 		columnDefinition = "TEXT",
-		unique = false  
+	@Column(nullable = false, columnDefinition = "TEXT",
+			unique = false
 	)
 
-	private String appKey ;
+	private String appKey;
 
-	@Column(nullable = false, 
-		unique = false  
+	@Column(nullable = false,
+			unique = false
 	)
 
-	private String username ;
+	private String username;
 
-	@Column(nullable = false, 
-		unique = false  
+	@Column(nullable = false,
+			unique = false
 	)
 
-	private Boolean active ;
+	private Boolean active;
 
-	@Column(nullable = false, 
-		unique = false  
+	@Column(nullable = false,
+			unique = false
 	)
 
-	private java.time.Instant createdAt ;
+	private java.time.Instant createdAt;
 
-	@Column(nullable = false, 
-		unique = false  
+	@Column(nullable = false,
+			unique = false
 	)
 
-	private java.time.Instant expiration ;
+	private java.time.Instant expiration;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
+
 	public ApiKey(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "ApiKey{" +
-		"id='" + id + '\'' +
-			", appKey=" + appKey +
-			", username=" + username +
-			", active=" + active +
-			", createdAt=" + createdAt +
-			", expiration=" + expiration +
-			", createdBy=" + createdBy +
-			", tenant=" + tenant +
-		'}';
+				"id='" + id + '\'' +
+				", appKey=" + appKey +
+				", username=" + username +
+				", active=" + active +
+				", createdAt=" + createdAt +
+				", expiration=" + expiration +
+				", createdBy=" + createdBy +
+				", tenant=" + tenant +
+				'}';
 	}
 }

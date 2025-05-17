@@ -1,25 +1,18 @@
 package com.groupe2cs.bizyhub.accounts.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.accounts.application.dto.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.accounts.application.command.CreateAccountCommand;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.accounts.application.command.*;
-import java.util.UUID;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 
-import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.mock.web.MockMultipartFile;
+
 import static org.awaitility.Awaitility.await;
 
 public class AccountFixtures {
@@ -39,21 +32,21 @@ public class AccountFixtures {
 	}
 
 	public static List<CreateAccountCommand> randomManyViaCommand(
-		CommandGateway commandGateway,
-		AccountRepository repository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		int count,
-		User user
+			CommandGateway commandGateway,
+			AccountRepository repository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			int count,
+			User user
 	) {
 		List<CreateAccountCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateAccountCommand command = randomOneViaCommand(
-			commandGateway,
-			 repository,
-            createdByDataRepository,
-            tenantDataRepository,
-			 user);
+					commandGateway,
+					repository,
+					createdByDataRepository,
+					tenantDataRepository,
+					user);
 			items.add(command);
 		}
 		return items;
@@ -63,14 +56,14 @@ public class AccountFixtures {
 		repository.deleteAll();
 	}
 
-		public static CreateAccountCommand randomOneViaCommand(
-		CommandGateway commandGateway,
-		AccountRepository  repository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		 User user) {
+	public static CreateAccountCommand randomOneViaCommand(
+			CommandGateway commandGateway,
+			AccountRepository repository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			User user) {
 
-			CreateAccountCommand command = CreateAccountCommand.builder()
+		CreateAccountCommand command = CreateAccountCommand.builder()
 				.name(AccountName.create(UUID.randomUUID().toString()))
 				.currency(AccountCurrency.create(UUID.randomUUID().toString()))
 				.currentBalance(AccountCurrentBalance.create(3784.76))
@@ -79,7 +72,7 @@ public class AccountFixtures {
 				.isActive(AccountIsActive.create(false))
 				.updatedAt(AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(AccountReference.create(UUID.randomUUID().toString()))
-			.build();
+				.build();
 
 		command.setCreatedBy(AccountCreatedBy.create(user.getId()));
 		command.setTenant(AccountTenant.create(user.getTenant().getId()));
@@ -90,21 +83,21 @@ public class AccountFixtures {
 
 
 	public static CreateAccountCommand randomOneViaCommand(
-        CommandGateway commandGateway,
-        AccountRepository  repository,
-        User user
-        ) {
+			CommandGateway commandGateway,
+			AccountRepository repository,
+			User user
+	) {
 
-        CreateAccountCommand command = CreateAccountCommand.builder()
-        .name(AccountName.create(UUID.randomUUID().toString()))
-        .currency(AccountCurrency.create(UUID.randomUUID().toString()))
-        .currentBalance(AccountCurrentBalance.create(3784.76))
-        .previousBalance(AccountPreviousBalance.create(433.11))
-        .details(AccountDetails.create(UUID.randomUUID().toString()))
-        .isActive(AccountIsActive.create(false))
-        .updatedAt(AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .reference(AccountReference.create(UUID.randomUUID().toString()))
-        .build();
+		CreateAccountCommand command = CreateAccountCommand.builder()
+				.name(AccountName.create(UUID.randomUUID().toString()))
+				.currency(AccountCurrency.create(UUID.randomUUID().toString()))
+				.currentBalance(AccountCurrentBalance.create(3784.76))
+				.previousBalance(AccountPreviousBalance.create(433.11))
+				.details(AccountDetails.create(UUID.randomUUID().toString()))
+				.isActive(AccountIsActive.create(false))
+				.updatedAt(AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
+				.reference(AccountReference.create(UUID.randomUUID().toString()))
+				.build();
 
 		command.setCreatedBy(AccountCreatedBy.create(user.getId()));
 		command.setTenant(AccountTenant.create(user.getTenant().getId()));

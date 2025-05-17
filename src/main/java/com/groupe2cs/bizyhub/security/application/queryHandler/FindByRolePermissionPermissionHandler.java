@@ -1,42 +1,40 @@
 package com.groupe2cs.bizyhub.security.application.queryHandler;
 
-import com.groupe2cs.bizyhub.security.application.mapper.*;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.application.query.*;
-import com.groupe2cs.bizyhub.security.domain.exception.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.security.application.dto.RolePermissionResponse;
+import com.groupe2cs.bizyhub.security.application.mapper.RolePermissionMapper;
+import com.groupe2cs.bizyhub.security.application.query.FindByRolePermissionPermissionQuery;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByRolePermissionPermissionHandler {
 
-private final RolePermissionRepository repository;
+	private final RolePermissionRepository repository;
 
-@QueryHandler
-public List<RolePermissionResponse> handle(FindByRolePermissionPermissionQuery query) {
+	@QueryHandler
+	public List<RolePermissionResponse> handle(FindByRolePermissionPermissionQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<RolePermission> entities = null;
-	 String value = query.getPermission().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<RolePermission> entities = null;
+		String value = query.getPermission().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByPermissionIdAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByPermissionIdAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByPermissionIdAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByPermissionIdAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(RolePermissionMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(RolePermissionMapper::toResponse)
+				.toList();
 	}
 
 

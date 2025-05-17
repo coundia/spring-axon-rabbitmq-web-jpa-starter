@@ -1,10 +1,8 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
+
 import com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -61,14 +59,20 @@ public class AccountGate {
 	public boolean canEdit(Authentication auth, String objectId) {
 		log.debug("canEdit called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canEdit result for user {} on Account {}: {}", auth != null ? auth.getName() : null, objectId, result);
+		log.info("canEdit result for user {} on Account {}: {}",
+				auth != null ? auth.getName() : null,
+				objectId,
+				result);
 		return result;
 	}
 
 	public boolean canDelete(Authentication auth, String objectId) {
 		log.debug("canDelete called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canDelete result for user {} on Account {}: {}", auth != null ? auth.getName() : null, objectId, result);
+		log.info("canDelete result for user {} on Account {}: {}",
+				auth != null ? auth.getName() : null,
+				objectId,
+				result);
 		return result;
 	}
 

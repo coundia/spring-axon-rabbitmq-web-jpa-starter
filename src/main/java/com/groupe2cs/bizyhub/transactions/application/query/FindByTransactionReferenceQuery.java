@@ -1,8 +1,11 @@
 package com.groupe2cs.bizyhub.transactions.application.query;
 
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import lombok.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionReference;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @RequiredArgsConstructor
 @Getter
@@ -10,7 +13,7 @@ import lombok.*;
 @Builder
 public class FindByTransactionReferenceQuery {
 
-	private final TransactionReference  reference;
+	private final TransactionReference reference;
 	private final MetaRequest metaRequest;
 
 }

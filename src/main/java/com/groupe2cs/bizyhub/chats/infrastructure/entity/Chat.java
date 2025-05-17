@@ -1,22 +1,11 @@
 package com.groupe2cs.bizyhub.chats.infrastructure.entity;
 
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-
-import java.time.*;
-import java.util.*;
-
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.AbstractAuditableEntity;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -26,77 +15,78 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Entity
 @EntityListeners(AuditListener.class)
 @Table(name = "chat")
-public class Chat   extends AbstractAuditableEntity  {
+public class Chat extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
 
-	@Column(nullable = false, 		columnDefinition = "Text",
-		unique = false  ,
-		length = 250
+	@Column(nullable = false, columnDefinition = "Text",
+			unique = false,
+			length = 250
 	)
 
-	private String messages ;
+	private String messages;
 
-	@Column(nullable = true, 		columnDefinition = "Text",
-		unique = false  ,
-		length = 250
+	@Column(nullable = true, columnDefinition = "Text",
+			unique = false,
+			length = 250
 	)
 
-	private String responsesJson ;
+	private String responsesJson;
 
-	@Column(nullable = true, 		columnDefinition = "Text",
-		unique = false  ,
-		length = 250
+	@Column(nullable = true, columnDefinition = "Text",
+			unique = false,
+			length = 250
 	)
 
-	private String responses ;
+	private String responses;
 
-	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+	@Column(nullable = true,
+			unique = false,
+			length = 250
 	)
 
-	private String state ;
+	private String state;
 	@ManyToOne
 	@JoinColumn(name = "account_id", nullable = true)
 	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
 
-	@Column(nullable = true, 
-		unique = false  
+	@Column(nullable = true,
+			unique = false
 	)
 	@Builder.Default
-	private java.time.Instant updatedAt  = java.time.Instant.now() ;
+	private java.time.Instant updatedAt = java.time.Instant.now();
 
-	@Column(nullable = true, 
-		unique = false  
+	@Column(nullable = true,
+			unique = false
 	)
 
-	private String reference ;
+	private String reference;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
+
 	public Chat(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "Chat{" +
-		"id='" + id + '\'' +
-			", messages=" + messages +
-			", responsesJson=" + responsesJson +
-			", responses=" + responses +
-			", state=" + state +
-			", account=" + account +
-			", updatedAt=" + updatedAt +
-			", reference=" + reference +
-			", createdBy=" + createdBy +
-			", tenant=" + tenant +
-		'}';
+				"id='" + id + '\'' +
+				", messages=" + messages +
+				", responsesJson=" + responsesJson +
+				", responses=" + responses +
+				", state=" + state +
+				", account=" + account +
+				", updatedAt=" + updatedAt +
+				", reference=" + reference +
+				", createdBy=" + createdBy +
+				", tenant=" + tenant +
+				'}';
 	}
 }

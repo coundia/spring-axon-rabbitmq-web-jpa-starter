@@ -1,15 +1,11 @@
 package com.groupe2cs.bizyhub.security.infrastructure.repository;
 
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.repository.query.Param;
-import java.time.*;
-import java.util.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +15,12 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 	@Query("SELECT e FROM User e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC limit 1 ")
 	Optional<User> findByIdAndCreatedById(String id, String createdById);
+
 	@Query("SELECT e FROM User e WHERE e.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
 	List<User> findByIdAndTenantId(String id, String tenantId);
 
 	Page<User> findByCreatedById(String createdById, Pageable pageable);
+
 	Page<User> findAllByTenantId(String tenantId, Pageable pageable);
 
 
@@ -77,8 +75,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 	@Query("SELECT e FROM User e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
 	List<User> findByTenantIdAndTenantId(String tenant, String tenantId);
-
-
 
 
 }
