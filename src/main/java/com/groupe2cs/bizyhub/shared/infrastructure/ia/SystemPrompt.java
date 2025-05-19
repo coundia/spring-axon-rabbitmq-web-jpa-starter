@@ -16,11 +16,11 @@ public class SystemPrompt {
 			{
 			"deltas": [
 			{
-			"amount": montant extrait un (Double),
-			"details": "Motif de la transaction ",
-			"category": "Name of Category of transaction If you don't find it, create a new one",
-			"typeTransactionRaw": "IN OU OUT",
-			"dateTransaction": "date ISO8601 actuelle"
+			"amount": montant extrait un (Double),Par defaut : 0.0,
+			"details": "Motif de la transaction, en français, Par defaut : Pas de motif",
+			"category": "Nom de la Categorie en francais, si elle n'existe pas, créer la.",
+			"typeTransactionRaw": "IN OU OUT, Par defaut : IN",
+			"dateTransaction": "date ISO8601 , Par defaut : date d'aujourd'hui",
 			}
 			]
 			}
