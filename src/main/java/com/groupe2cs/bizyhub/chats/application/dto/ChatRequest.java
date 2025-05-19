@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.chats.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,25 +19,25 @@ import java.io.Serializable;
 @Schema(name = "ChatRequest", description = "Request payload for Chat operations")
 public class ChatRequest implements Serializable {
 
-	@Schema(description = "", example = "c0d2a4b3-7a0d-49bc-9550-d8fd66840baa")
+	@Schema(description = "", example = "e801a4bb-f956-48af-9cb4-925d704dd578")
 	private String messages;
 
-	@Schema(description = "", example = "7801b2b7-0114-4bb7-bdc4-ed2e3e31ad38")
+	@Schema(description = "", example = "daf28391-46bd-4a59-94ba-591378336a6f")
 	private String responsesJson;
 
-	@Schema(description = "", example = "3831c813-5ef4-4120-b54a-10391ba766bb")
+	@Schema(description = "", example = "f643afbf-6413-4a5e-b311-e00f12933bf1")
 	private String responses;
 
-	@Schema(description = "", example = "9ab302a3-d8a9-43ab-b4ab-4c1b1958f0c9")
+	@Schema(description = "", example = "da52378e-7198-4397-bd49-7d4721c3b825")
 	private String state;
 
-	@Schema(description = "", example = "a52d90a9-0719-41ec-9de1-52c8a5745524")
+	@Schema(description = "", example = "d214a9d0-d77e-49e7-9030-4a45167673bb")
 	private String account;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "6552e3c1-8970-4432-a5b9-72dbe1bfe80f")
+	@Schema(description = "", example = "deddb021-b3ee-4132-9655-dc28bcf933be")
 	private String reference;
 
 

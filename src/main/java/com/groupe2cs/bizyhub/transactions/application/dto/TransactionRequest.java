@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,25 +19,25 @@ import java.io.Serializable;
 @Schema(name = "TransactionRequest", description = "Request payload for Transaction operations")
 public class TransactionRequest implements Serializable {
 
-	@Schema(description = "", example = "29ba32ff-0ea5-494a-ad47-6057b3bc715a")
+	@Schema(description = "", example = "8e7deae3-134e-4969-8d29-387b0810c798")
 	private String name;
 
-	@Schema(description = "", example = "2464.04")
+	@Schema(description = "", example = "672.0")
 	private Double amount;
 
-	@Schema(description = "", example = "fe851934-a5aa-4ff1-a444-7af0f6fdf1bd")
+	@Schema(description = "", example = "71b236ca-82d1-40ef-8028-78bd432ab31d")
 	private String details;
 
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean isActive;
 
-	@Schema(description = "", example = "06d63c01-6849-46f2-b676-da66d20830e1")
+	@Schema(description = "", example = "d4b331c9-84f2-4c8e-9fa7-610436bb3b28")
 	private String account;
 
-	@Schema(description = "", example = "19a554ae-6b01-46ee-9ce8-3aa32e8fec58")
+	@Schema(description = "", example = "2c483ef4-73f4-44bc-ace6-d1aa2c6b5af8")
 	private String category;
 
-	@Schema(description = "", example = "ae0a2177-93b3-40c0-92dc-9027a64e1b19")
+	@Schema(description = "", example = "209e1445-36b9-4ced-9b00-f59cb76cb1e3")
 	private String typeTransactionRaw;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
@@ -40,7 +46,7 @@ public class TransactionRequest implements Serializable {
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "7c842c95-6f98-4661-bcf2-5f0e046865ba")
+	@Schema(description = "", example = "daf447c4-e125-4394-a499-476610e8d940")
 	private String reference;
 
 

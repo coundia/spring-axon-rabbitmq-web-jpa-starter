@@ -17,36 +17,36 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MailSenderImpl implements MailSender {
 
-	private final JavaMailSender mailSender;
+private final JavaMailSender mailSender;
 
 
-	@Override
-	public void send(String from, String to, String subject, String content) {
-		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-			helper.setTo(to);
-			helper.setSubject(subject);
-			helper.setText(content, true);
-			helper.setFrom(from);
-			mailSender.send(message);
-		} catch (Exception e) {
-			throw new RuntimeException("Mail sending failed", e);
-		}
-	}
+@Override
+public void send(String from, String to, String subject, String content) {
+try {
+MimeMessage message = mailSender.createMimeMessage();
+MimeMessageHelper helper = new MimeMessageHelper(message, true);
+helper.setTo(to);
+helper.setSubject(subject);
+helper.setText(content, true);
+helper.setFrom(from);
+mailSender.send(message);
+} catch (Exception e) {
+throw new RuntimeException("Mail sending failed", e);
+}
+}
 
-	public boolean isValidEmail(String email) {
-		log.info("Validating email: {}", email);
-		if (email == null || email.isBlank()) {
-			return false;
-		}
-		try {
-			var addr = new InternetAddress(email);
-			addr.validate();
-			return true;
-		} catch (AddressException e) {
-			log.error("Invalid email address: {}", email, e);
-			return false;
-		}
-	}
+public boolean isValidEmail(String email) {
+log.info("Validating email: {}", email);
+if (email == null || email.isBlank()) {
+return false;
+}
+try {
+var addr = new InternetAddress(email);
+addr.validate();
+return true;
+} catch (AddressException e) {
+log.error("Invalid email address: {}", email, e);
+return false;
+}
+}
 }

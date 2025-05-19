@@ -1,8 +1,10 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-
-import com.groupe2cs.bizyhub.security.application.service.JwtService;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionUser;
-import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionUserRepository;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
+import com.groupe2cs.bizyhub.security.application.service.JwtService;
+import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -59,20 +61,14 @@ public class TransactionUserGate {
 	public boolean canEdit(Authentication auth, String objectId) {
 		log.debug("canEdit called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canEdit result for user {} on TransactionUser {}: {}",
-				auth != null ? auth.getName() : null,
-				objectId,
-				result);
+		log.info("canEdit result for user {} on TransactionUser {}: {}", auth != null ? auth.getName() : null, objectId, result);
 		return result;
 	}
 
 	public boolean canDelete(Authentication auth, String objectId) {
 		log.debug("canDelete called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canDelete result for user {} on TransactionUser {}: {}",
-				auth != null ? auth.getName() : null,
-				objectId,
-				result);
+		log.info("canDelete result for user {} on TransactionUser {}: {}", auth != null ? auth.getName() : null, objectId, result);
 		return result;
 	}
 

@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,19 +19,19 @@ import java.io.Serializable;
 @Schema(name = "TransactionUserRequest", description = "Request payload for TransactionUser operations")
 public class TransactionUserRequest implements Serializable {
 
-	@Schema(description = "", example = "966f0a69-8937-4da1-ace6-694349d6cac8")
+	@Schema(description = "", example = "40431673-7b7b-4c7e-8881-93dc815541d7")
 	private String name;
 
-	@Schema(description = "", example = "4cffb5a1-37ac-4d88-97f6-c2ceb695fef4")
+	@Schema(description = "", example = "de134e88-7ed6-4b32-b0d7-8174824b0c90")
 	private String transaction;
 
-	@Schema(description = "", example = "4cd5024e-85dd-42ca-a9f3-cf2dfdf3a8f7")
+	@Schema(description = "", example = "3a903529-c46d-4283-813d-1db9e9d3ac7c")
 	private String user;
 
-	@Schema(description = "", example = "a58f8abe-4499-4451-83b8-37407a0a902e")
+	@Schema(description = "", example = "bec01e55-dad8-44c7-981f-0574a0d9e4d5")
 	private String username;
 
-	@Schema(description = "", example = "7148a59d-5ce0-4baa-99c1-2f6bb78f355f")
+	@Schema(description = "", example = "c72109dd-3951-4880-92cf-9292badc956d")
 	private String details;
 
 	@Schema(description = "", example = "false")
@@ -34,7 +40,7 @@ public class TransactionUserRequest implements Serializable {
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "efdfc052-e1cd-42db-bf10-d300f279c3d2")
+	@Schema(description = "", example = "14a6590e-a74d-4072-b6f9-fda5dcf58edb")
 	private String reference;
 
 

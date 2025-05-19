@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.tenant.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,16 +19,16 @@ import java.io.Serializable;
 @Schema(name = "TenantRequest", description = "Request payload for Tenant operations")
 public class TenantRequest implements Serializable {
 
-	@Schema(description = "", example = "46cac62a-f8ef-4b36-a523-a81b1f5238f6")
+	@Schema(description = "", example = "b384a158-886b-46a6-ad19-bab0f3627f6e")
 	private String name;
 
-	@Schema(description = "", example = "667cbec2-7ae1-49db-b2cd-727055a9e990")
+	@Schema(description = "", example = "cf8d8f89-3882-45e9-a048-553fbf5608d5")
 	private String description;
 
-	@Schema(description = "", example = "778c6e96-c7a8-4e52-aade-656d20a70a82")
+	@Schema(description = "", example = "51a85a83-15de-4f81-87af-14715153ba70")
 	private String domain;
 
-	@Schema(description = "", example = "7b330ebd-a05b-457a-bea6-50c8850ccc09")
+	@Schema(description = "", example = "fea0518b-742e-45df-9195-99aa2575ed70")
 	private String language;
 
 	@Schema(description = "", example = "true")

@@ -1,12 +1,16 @@
 package com.groupe2cs.bizyhub.accounts.infrastructure.repository;
 
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account;
+	import com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account;
+	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+	import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
+import java.time.*;
+import java.util.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +20,10 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 	@Query("SELECT e FROM Account e WHERE e.id = ?1 and e.createdBy.id = ?2 ORDER BY e.updatedAtAudit DESC limit 1 ")
 	Optional<Account> findByIdAndCreatedById(String id, String createdById);
-
 	@Query("SELECT e FROM Account e WHERE e.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
 	List<Account> findByIdAndTenantId(String id, String tenantId);
 
 	Page<Account> findByCreatedById(String createdById, Pageable pageable);
-
 	Page<Account> findAllByTenantId(String tenantId, Pageable pageable);
 
 
@@ -155,12 +157,15 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 	@Query("SELECT e FROM Account e WHERE e.tenant.id = ?1 and e.tenant.id = ?2 ORDER BY e.updatedAtAudit DESC ")
 	List<Account> findByTenantIdAndTenantId(String tenant, String tenantId);
 
-	@Query("""
-			SELECT DISTINCT s FROM Account s
-			LEFT JOIN AccountUser su ON su.account = s
-			WHERE s.tenant.id = :tenantId AND (s.createdBy.id = :userId OR su.user.id = :userId)
-			""")
+    @Query("""
+    SELECT DISTINCT s FROM Account s
+    LEFT JOIN AccountUser su ON su.account = s
+    WHERE s.tenant.id = :tenantId AND (s.createdBy.id = :userId OR su.user.id = :userId)
+    """)
 	Page<Account> findAllOwnedOrShared(@Param("userId") String userId, @Param("tenantId") String tenantId, Pageable pageable);
+
+
+
 
 
 }

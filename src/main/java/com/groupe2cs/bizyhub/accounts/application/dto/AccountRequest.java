@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.accounts.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,28 +19,28 @@ import java.io.Serializable;
 @Schema(name = "AccountRequest", description = "Request payload for Account operations")
 public class AccountRequest implements Serializable {
 
-	@Schema(description = "", example = "659bf0f3-087d-4b75-b1ba-42e25f84ddcb")
+	@Schema(description = "", example = "5b7e0825-8892-4bfc-8adc-52776ec66f9f")
 	private String name;
 
-	@Schema(description = "", example = "0b4db9c0-0c60-4bb8-add7-942cde596dd3")
+	@Schema(description = "", example = "9c7c5c7d-992f-40fd-9671-c8cb78a761d4")
 	private String currency;
 
-	@Schema(description = "", example = "9395.16")
+	@Schema(description = "", example = "1355.58")
 	private Double currentBalance;
 
-	@Schema(description = "", example = "6538.37")
+	@Schema(description = "", example = "3210.99")
 	private Double previousBalance;
 
-	@Schema(description = "", example = "d965ebb6-d324-41fa-92c4-3ad31f967673")
+	@Schema(description = "", example = "4119e4fb-8d12-438e-95f8-268a0f308b44")
 	private String details;
 
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isActive;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "367f96c8-c501-4c7b-afd7-5ea6b2cb2b0b")
+	@Schema(description = "", example = "3173d7c2-5b88-4983-9ca2-5f0077564230")
 	private String reference;
 
 

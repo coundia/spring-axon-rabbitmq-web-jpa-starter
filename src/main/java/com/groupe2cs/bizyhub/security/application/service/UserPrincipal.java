@@ -66,7 +66,13 @@ public class UserPrincipal implements UserDetails, IdentifiableUser {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		if (user == null)
+			return false;
+
+		if (user.getEnabled() == null)
+			return false;
+
+		return user.getEnabled();
 	}
 
 	@Override
@@ -90,11 +96,75 @@ public class UserPrincipal implements UserDetails, IdentifiableUser {
 		return user.getTenant().getId();
 	}
 
-	public String getCreatedBy() {
-		if (user == null)
-			return null;
 
+	public String getCreatedBy() {
+		if (user == null || user.getCreatedBy() == null) return null;
 		return user.getCreatedBy().getId();
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public Integer getLimitPerDay() {
+		if (user == null || user.getLimitPerDay() == null) return 0;
+		return user.getLimitPerDay();
+	}
+
+	public Boolean isPremium() {
+		if (user == null || user.getIsPremium() == null) return false;
+		return user.getIsPremium();
+	}
+
+	public String getFirstName() {
+		return user != null ? user.getFirstName() : null;
+	}
+
+	public String getLastName() {
+		return user != null ? user.getLastName() : null;
+	}
+
+	public String getEmail() {
+		return user != null ? user.getEmail() : null;
+	}
+
+	public String getTelephone() {
+		return user != null ? user.getTelephone() : null;
+	}
+
+	public Object getTenant() {
+		return user != null ? user.getTenant() : null;
+	}
+
+	public Object getUserRoles() {
+		return user != null ? user.getUserRoles() : null;
+	}
+
+
+	public Boolean isBan() {
+		if (user == null || user.getIsBan() == null) return false;
+		return user.getIsBan();
+	}
+
+	@Override
+	public String toString() {
+		if (user == null) return "UserPrincipal{user=null}";
+
+		return "UserPrincipal{" +
+				"id=" + getId() +
+				", username=" + getUsername() +
+				", password=" + getPassword() +
+				", firstName=" + getFirstName() +
+				", lastName=" + getLastName() +
+				", email=" + getEmail() +
+				", telephone=" + getTelephone() +
+				", limitPerDay=" + getLimitPerDay() +
+				", isPremium=" + isPremium() +
+				", userRoles=" + getRoles() +
+				", createdBy=" + getCreatedBy() +
+				", tenant=" + getTenantId() +
+				'}';
+	}
+
 }
 

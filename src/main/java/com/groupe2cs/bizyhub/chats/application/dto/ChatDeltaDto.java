@@ -1,9 +1,13 @@
 package com.groupe2cs.bizyhub.chats.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,26 +17,26 @@ import java.io.Serializable;
 @Schema(name = "ChatDeltaDto", description = "Delta DTO for chat changes")
 public class ChatDeltaDto implements Serializable {
 
-	@Schema(description = "Identifier of the chat", example = "uuid")
-	private String id;
+    @Schema(description = "Identifier of the chat", example = "uuid")
+    private String id;
 
-	@Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
+    @Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
 	@Builder.Default
-	private String type = "CREATE";
+    private String type = "CREATE";
 
-	@Schema(description = "", example = "ae732e7a-acd1-4254-97fe-c2d3029ca232")
-	private String messages;
-	@Schema(description = "", example = "2ac80eb4-7c6f-45a9-a3df-c9f657f9b8a6")
-	private String responsesJson;
-	@Schema(description = "", example = "fc5c6d1e-87a3-47cc-bfc4-7c5ff944da42")
-	private String responses;
-	@Schema(description = "", example = "73b7fb94-b296-489d-9b57-f5e42057aa64")
-	private String state;
-	@Schema(description = "", example = "9921b942-b94d-49e2-a76f-31c9777b25db")
-	private String account;
-	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
-	private java.time.Instant updatedAt;
-	@Schema(description = "", example = "cf95bc4a-e2ad-43ef-b2e7-593d1aca74c7")
-	private String reference;
+		@Schema(description = "", example = "bc5418a0-6aec-433d-9385-728be8973966")
+		private String messages;
+		@Schema(description = "", example = "0c81d1b0-6193-4c23-ba9c-dac1c12bef2b")
+		private String responsesJson;
+		@Schema(description = "", example = "4b0e5772-6608-4cb6-9613-7018fc07ad14")
+		private String responses;
+		@Schema(description = "", example = "f4ab9a34-7608-4167-b613-15eb5bebad02")
+		private String state;
+		@Schema(description = "", example = "cf20b6c8-aae7-460a-bdda-1cf1d9cbd0be")
+		private String account;
+		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+		private java.time.Instant updatedAt;
+		@Schema(description = "", example = "904e09b0-5c6f-484d-b03f-eac4d60b21c4")
+		private String reference;
 
 }

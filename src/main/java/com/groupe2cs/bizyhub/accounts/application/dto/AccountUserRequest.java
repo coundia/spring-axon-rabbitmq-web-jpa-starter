@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.accounts.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,19 +19,19 @@ import java.io.Serializable;
 @Schema(name = "AccountUserRequest", description = "Request payload for AccountUser operations")
 public class AccountUserRequest implements Serializable {
 
-	@Schema(description = "", example = "b7b0c55b-7d6d-4e83-b5e9-0376ee957e9d")
+	@Schema(description = "", example = "98567fb6-4734-4e6d-8acb-9ecc8b2ca0c0")
 	private String name;
 
-	@Schema(description = "", example = "4baf7316-feb1-454f-a9ad-34d84631a352")
+	@Schema(description = "", example = "577f18b4-903e-4c2e-953c-41bd729210cc")
 	private String account;
 
-	@Schema(description = "", example = "006ccaa7-7de5-41d6-b6bc-f10e37e9d68b")
+	@Schema(description = "", example = "e7dd7ea0-0a9c-46e7-8ad4-fbad60de023f")
 	private String user;
 
-	@Schema(description = "", example = "50e06d8f-83cb-4c77-a763-dec996d4aac3")
+	@Schema(description = "", example = "2351e168-ce88-4499-a474-575d178871a5")
 	private String username;
 
-	@Schema(description = "", example = "01dfad08-85f6-4527-9100-df5fefe5f0ac")
+	@Schema(description = "", example = "c6da07fc-9d5e-4dc1-896e-05084eca6f6c")
 	private String details;
 
 	@Schema(description = "", example = "false")
@@ -34,7 +40,7 @@ public class AccountUserRequest implements Serializable {
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "690ca7d0-6ec1-44cf-ad25-92a9802bb3b8")
+	@Schema(description = "", example = "1be91091-34dc-4d0e-a549-605e93091380")
 	private String reference;
 
 
