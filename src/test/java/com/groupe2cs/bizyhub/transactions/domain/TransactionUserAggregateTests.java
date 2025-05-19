@@ -19,7 +19,7 @@ void it_should_create_transactionUser_with_valid_values() {
 	TransactionUserUser user = TransactionUserUser.create(UUID.randomUUID().toString());
 	TransactionUserUsername username = TransactionUserUsername.create(UUID.randomUUID().toString());
 	TransactionUserDetails details = TransactionUserDetails.create(UUID.randomUUID().toString());
-	TransactionUserIsActive isActive = TransactionUserIsActive.create(false);
+	TransactionUserIsActive isActive = TransactionUserIsActive.create(true);
 	TransactionUserUpdatedAt updatedAt = TransactionUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	TransactionUserReference reference = TransactionUserReference.create(UUID.randomUUID().toString());
 	TransactionUserCreatedBy createdBy = TransactionUserCreatedBy.create(UUID.randomUUID().toString());

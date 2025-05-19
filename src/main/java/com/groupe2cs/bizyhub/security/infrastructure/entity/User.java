@@ -71,11 +71,11 @@ public class User   extends AbstractAuditableEntity  {
 
 	private String telephone ;
 
-	@Column(nullable = true, 
+	@Column(nullable = true, 		columnDefinition = "INT DEFAULT 10",
 		unique = false  
 	)
-
-	private Integer limitPerDay ;
+	@Builder.Default
+	private Integer limitPerDay  = 10 ;
 
 	@Column(nullable = true, 
 		unique = false  
@@ -94,6 +94,12 @@ public class User   extends AbstractAuditableEntity  {
 	)
 
 	private Boolean isBan ;
+
+	@Column(nullable = true, 		columnDefinition = "Text",
+		unique = false  
+	)
+
+	private String message ;
 	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<UserRole> userRoles = new HashSet<>();
 	@ManyToOne
@@ -120,6 +126,7 @@ public class User   extends AbstractAuditableEntity  {
 			", isPremium=" + isPremium +
 			", enabled=" + enabled +
 			", isBan=" + isBan +
+			", message=" + message +
 			", userRoles=" + userRoles +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +

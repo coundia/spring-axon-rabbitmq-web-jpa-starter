@@ -12,8 +12,8 @@ public static RoleResponse toResponse(Role entity) {
 return RoleResponse.builder()
 		.id(entity.getId())
 		.name(entity.getName())
-    .createdBy(entity.getCreatedBy().getUsername())
-    .tenant(entity.getTenant().getName())
+    .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
+    .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
 }
 

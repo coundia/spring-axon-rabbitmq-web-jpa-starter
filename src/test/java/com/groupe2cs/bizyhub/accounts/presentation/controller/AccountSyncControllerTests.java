@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -40,10 +40,10 @@ private AccountRepository Repository;
 		AccountDeltaDto.builder()
 .name(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
-.currentBalance(6958.75)
-.previousBalance(317.09)
+.currentBalance(5401.39)
+.previousBalance(3671.95)
 .details(UUID.randomUUID().toString())
-.isActive(true)
+.isActive(false)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 		.type("CREATE")
@@ -72,10 +72,10 @@ private AccountRepository Repository;
 			.id(existingId)
 .name(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
-.currentBalance(6958.75)
-.previousBalance(317.09)
+.currentBalance(5401.39)
+.previousBalance(3671.95)
 .details(UUID.randomUUID().toString())
-.isActive(true)
+.isActive(false)
 .updatedAt(java.time.Instant.now().plusSeconds(3600))
 .reference(UUID.randomUUID().toString())
 			.type("UPDATE")

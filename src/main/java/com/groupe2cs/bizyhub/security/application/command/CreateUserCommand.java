@@ -35,6 +35,7 @@ public class CreateUserCommand implements Serializable {
  	private UserIsPremium isPremium;
  	private UserEnabled enabled;
  	private UserIsBan isBan;
+ 	private UserMessage message;
  	private UserCreatedBy createdBy;
  	private UserTenant tenant;
 	public CreateUserCommand(
@@ -49,6 +50,7 @@ public class CreateUserCommand implements Serializable {
    UserIsPremium isPremium , 
    UserEnabled enabled , 
    UserIsBan isBan , 
+   UserMessage message , 
    UserCreatedBy createdBy , 
    UserTenant tenant  
 		){
@@ -64,6 +66,7 @@ public class CreateUserCommand implements Serializable {
   this.isPremium = isPremium ; 
   this.enabled = enabled ; 
   this.isBan = isBan ; 
+  this.message = message ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

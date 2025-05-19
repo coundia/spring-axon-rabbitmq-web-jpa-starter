@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.accounts.domain;
 
-import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.accounts.domain.exception.*;
 import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.UUID;
 
 
 public class AccountAggregateTests extends BaseUnitTests {
@@ -16,10 +16,10 @@ void it_should_create_account_with_valid_values() {
 	AccountId id = AccountId.create(UUID.randomUUID().toString());
 	AccountName name = AccountName.create(UUID.randomUUID().toString());
 	AccountCurrency currency = AccountCurrency.create(UUID.randomUUID().toString());
-	AccountCurrentBalance currentBalance = AccountCurrentBalance.create(5424.04);
-	AccountPreviousBalance previousBalance = AccountPreviousBalance.create(8454.55);
+	AccountCurrentBalance currentBalance = AccountCurrentBalance.create(6812.77);
+	AccountPreviousBalance previousBalance = AccountPreviousBalance.create(4990.02);
 	AccountDetails details = AccountDetails.create(UUID.randomUUID().toString());
-	AccountIsActive isActive = AccountIsActive.create(false);
+	AccountIsActive isActive = AccountIsActive.create(true);
 	AccountUpdatedAt updatedAt = AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	AccountReference reference = AccountReference.create(UUID.randomUUID().toString());
 	AccountCreatedBy createdBy = AccountCreatedBy.create(UUID.randomUUID().toString());

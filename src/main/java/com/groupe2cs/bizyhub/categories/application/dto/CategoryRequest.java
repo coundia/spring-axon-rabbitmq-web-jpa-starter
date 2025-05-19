@@ -19,13 +19,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "CategoryRequest", description = "Request payload for Category operations")
 public class CategoryRequest implements Serializable {
 
-	@Schema(description = "", example = "6af73422-f39e-4820-a509-f2826b686e0e")
+	@Schema(description = "", example = "bb2718d0-ccbe-494c-8d77-ab41c479240f")
 	private String name;
 
-	@Schema(description = "", example = "57d8a2d7-95f8-4b96-8fec-f833c8980386")
+	@Schema(description = "", example = "e61d1fec-9b79-4f12-8648-0d4302b264d5")
 	private String typeCategoryRaw;
 
-	@Schema(description = "", example = "cef13e66-9e8b-44e5-b1d8-511a3a194070")
+	@Schema(description = "", example = "ae43e111-ff78-43d8-ba9a-5c8d58c469b8")
 	private String details;
 
 	@Schema(description = "", example = "false")
@@ -34,7 +34,7 @@ public class CategoryRequest implements Serializable {
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "66693863-d4d5-4748-83f0-1afc8c99b2d9")
+	@Schema(description = "", example = "dbbebf16-1bfc-4ea9-8dbf-00d3077fd4d0")
 	private String reference;
 
 

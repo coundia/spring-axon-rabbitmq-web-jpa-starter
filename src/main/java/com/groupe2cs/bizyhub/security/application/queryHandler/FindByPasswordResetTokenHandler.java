@@ -24,7 +24,11 @@ public class FindByPasswordResetTokenHandler {
 		MetaRequest metaRequest = query.getMetaRequest();
 
 		String value = query.getToken().value();
-		List<PasswordReset> entities = repository.findByTokenAndCreatedById(value, metaRequest.getUserId());
+		List<PasswordReset> entities = repository.findByTokenAndTenantId(value, metaRequest.getTenantId());
+
+		if(entities.isEmpty()) {
+			throw new RuntimeException("No PasswordReset found for token: " + value);
+		}
 		return entities.stream()
 				.map(PasswordResetMapper::toResponse)
 				.toList();

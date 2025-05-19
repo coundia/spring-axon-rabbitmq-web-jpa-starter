@@ -19,8 +19,8 @@ return AccountResponse.builder()
 		.isActive(entity.getIsActive())
 		.updatedAt(entity.getUpdatedAt())
 		.reference(entity.getReference())
-    .createdBy(entity.getCreatedBy().getUsername())
-    .tenant(entity.getTenant().getName())
+    .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
+    .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
 }
 

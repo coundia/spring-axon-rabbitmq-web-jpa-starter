@@ -19,28 +19,28 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TransactionUserRequest", description = "Request payload for TransactionUser operations")
 public class TransactionUserRequest implements Serializable {
 
-	@Schema(description = "", example = "40431673-7b7b-4c7e-8881-93dc815541d7")
+	@Schema(description = "", example = "cad20903-b626-40e8-8262-6a2d673dbc7e")
 	private String name;
 
-	@Schema(description = "", example = "de134e88-7ed6-4b32-b0d7-8174824b0c90")
+	@Schema(description = "", example = "10cfe33f-ebf4-4981-aa97-2000711a34f5")
 	private String transaction;
 
-	@Schema(description = "", example = "3a903529-c46d-4283-813d-1db9e9d3ac7c")
+	@Schema(description = "", example = "d07a13e9-0223-4b5e-8fba-08e941fd280c")
 	private String user;
 
-	@Schema(description = "", example = "bec01e55-dad8-44c7-981f-0574a0d9e4d5")
+	@Schema(description = "", example = "0f318158-fd2c-4ed9-87c8-57d9a5c6b4d5")
 	private String username;
 
-	@Schema(description = "", example = "c72109dd-3951-4880-92cf-9292badc956d")
+	@Schema(description = "", example = "10e42ebb-3211-4e4d-aede-610910875906")
 	private String details;
 
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean isActive;
 
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant updatedAt;
 
-	@Schema(description = "", example = "14a6590e-a74d-4072-b6f9-fda5dcf58edb")
+	@Schema(description = "", example = "9ab10820-2a91-4aed-9003-ddb11769e47b")
 	private String reference;
 
 

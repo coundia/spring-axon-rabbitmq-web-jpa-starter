@@ -90,7 +90,7 @@ public class FakeIAService implements IAService {
 					.category(getCategory(
 							"IN",
 							"06b14751-26f6-47d8-a56a-157aa0605301",
-							"VENTE_CATEGORY",
+							"CATEGORY"+UUID.randomUUID().toString(),
 							"fab97fa4-c796-4921-b1d2-db8d671d3a4e"
 					))
 					.typeTransactionRaw("IN")

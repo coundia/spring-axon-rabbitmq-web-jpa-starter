@@ -12,6 +12,7 @@ import com.groupe2cs.bizyhub.security.domain.exception.UserLimitPerDayNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserIsPremiumNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserEnabledNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserIsBanNotValid;
+import com.groupe2cs.bizyhub.security.domain.exception.UserMessageNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserCreatedByNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserTenantNotValid;
 

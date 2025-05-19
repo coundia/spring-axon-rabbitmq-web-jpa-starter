@@ -7,6 +7,7 @@ package com.groupe2cs.bizyhub.settings.presentation.controller;
 	import com.groupe2cs.bizyhub.settings.application.usecase.*;
 	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+	import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 
 import com.groupe2cs.bizyhub.settings.application.command.DeleteSettingCommand;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,14 +51,21 @@ description = "Deletes a setting based on the provided identifier"
 @ApiResponse(responseCode = "200", description = "Setting deleted successfully"),
 @ApiResponse(responseCode = "400", description = "Invalid ID supplied", content = @Content),
 @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-public ResponseEntity<String> deleteSetting(
+}
+)
+public ResponseEntity<ApiResponseDto> deleteSetting(
 	@Parameter(description = "ID of the setting to delete", required = true)
 	@PathVariable String id,
 	@AuthenticationPrincipal Jwt jwt
 	) {
 	if (id == null || id.isEmpty()) {
-	return ResponseEntity.badRequest().body("Invalid ID");
+
+	return ResponseEntity.badRequest().body(
+	ApiResponseDto.builder()
+			.code(0)
+			.message("Invalid ID supplied")
+			.build()
+			);
 	}
 
 	try {
@@ -71,10 +79,20 @@ public ResponseEntity<String> deleteSetting(
 
 	applicationService.deleteSetting(idVo, metaRequest);
 
-	return ResponseEntity.ok("Setting deleted successfully");
+	return ResponseEntity.ok(
+	ApiResponseDto.builder()
+			.code(1)
+			.message("setting with id " + id + " deleted successfully")
+			.build()
+			);
 	} catch (Exception e) {
 	log.error("Error deleting setting with id {}: {}", id, e.getMessage());
-	return ResponseEntity.internalServerError().body("Error deleting setting");
+	return ResponseEntity.internalServerError().body(
+	        ApiResponseDto.builder()
+                .code(0)
+                .message(e.getMessage())
+                .build()
+			);
 	}
 	}
 	}

@@ -21,8 +21,9 @@ return UserResponse.builder()
 		.isPremium(entity.getIsPremium())
 		.enabled(entity.getEnabled())
 		.isBan(entity.getIsBan())
-    .createdBy(entity.getCreatedBy().getUsername())
-    .tenant(entity.getTenant().getName())
+		.message(entity.getMessage())
+    .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
+    .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
 }
 
@@ -39,6 +40,7 @@ return UserResponse.builder()
 	.isPremium(command.getIsPremium().value())
 	.enabled(command.getEnabled().value())
 	.isBan(command.getIsBan().value())
+	.message(command.getMessage().value())
 .build();
 }
 
@@ -55,6 +57,7 @@ return UserResponse.builder()
 	.isPremium(command.getIsPremium().value())
 	.enabled(command.getEnabled().value())
 	.isBan(command.getIsBan().value())
+	.message(command.getMessage().value())
 .build();
 }
 
@@ -72,6 +75,7 @@ return CreateUserCommand.builder()
 	.isPremium(UserIsPremium.create(request.getIsPremium()))
 	.enabled(UserEnabled.create(request.getEnabled()))
 	.isBan(UserIsBan.create(request.getIsBan()))
+	.message(UserMessage.create(request.getMessage()))
 .build();
 }
 
@@ -88,6 +92,7 @@ return CreateUserCommand.builder()
 		.isPremium(UserIsPremium.create(request.getIsPremium()))
 		.enabled(UserEnabled.create(request.getEnabled()))
 		.isBan(UserIsBan.create(request.getIsBan()))
+		.message(UserMessage.create(request.getMessage()))
 	.build();
 	}
 

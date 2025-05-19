@@ -16,8 +16,8 @@ return ApiKeyResponse.builder()
 		.active(entity.getActive())
 		.createdAt(entity.getCreatedAt())
 		.expiration(entity.getExpiration())
-    .createdBy(entity.getCreatedBy().getUsername())
-    .tenant(entity.getTenant().getName())
+    .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
+    .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
 }
 

@@ -63,9 +63,9 @@ void it_should_be_able_to_update_transaction() {
 
 	TransactionRequest requestDTO = new TransactionRequest();
 	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setAmount(1295.54);
+	 requestDTO.setAmount(9201.27);
 	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(true);
+	 requestDTO.setIsActive(false);
 	 requestDTO.setAccount( updated.getAccount().value());
 	 requestDTO.setCategory( updated.getCategory().value());
 	 requestDTO.setTypeTransactionRaw(UUID.randomUUID().toString());

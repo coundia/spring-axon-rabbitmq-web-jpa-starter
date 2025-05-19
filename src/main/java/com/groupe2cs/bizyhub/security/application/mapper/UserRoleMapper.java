@@ -13,8 +13,8 @@ return UserRoleResponse.builder()
 		.id(entity.getId())
 		.user(entity.getUser() != null ? entity.getUser().getId() : null)
 		.role(entity.getRole() != null ? entity.getRole().getId() : null)
-    .createdBy(entity.getCreatedBy().getUsername())
-    .tenant(entity.getTenant().getName())
+    .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
+    .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
 }
 

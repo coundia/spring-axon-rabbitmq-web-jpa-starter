@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -75,6 +75,7 @@ public ResponseEntity<ApiResponseDto> me(@AuthenticationPrincipal Jwt jwt) {
 
 	data.put("isEnabled", userPrincipal.isEnabled());
 	data.put("isBan", userPrincipal.isBan());
+	data.put("message", userPrincipal.getMessage());
 
 	data.put("authorities", userPrincipal.getAuthorities());
 	data.put("roles", userPrincipal.getRoles());

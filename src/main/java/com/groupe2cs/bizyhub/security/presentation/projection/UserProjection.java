@@ -41,6 +41,7 @@ User entity = User.builder()
  		.isPremium(event.getIsPremium() == null ? null : event.getIsPremium().value())
  		.enabled(event.getEnabled() == null ? null : event.getEnabled().value())
  		.isBan(event.getIsBan() == null ? null : event.getIsBan().value())
+ 		.message(event.getMessage() == null ? null : event.getMessage().value())
  .build();
 
 if(event.getCreatedBy() !=null){
@@ -101,6 +102,9 @@ User entity = repository.findById(event.getId().value())
     }
 	if(event.getIsBan() != null) {
 		entity.setIsBan(event.getIsBan().value());
+    }
+	if(event.getMessage() != null) {
+		entity.setMessage(event.getMessage().value());
     }
 
 if(event.getCreatedBy() !=null){

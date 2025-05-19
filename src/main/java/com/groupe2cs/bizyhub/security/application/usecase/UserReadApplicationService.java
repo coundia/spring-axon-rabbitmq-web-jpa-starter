@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.security.application.query.*;
 import com.groupe2cs.bizyhub.security.application.mapper.*;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -134,6 +134,16 @@ public List<UserResponse> findByUserIsBan(
 	) {
 
 	FindByUserIsBanQuery query = new FindByUserIsBanQuery(value,metaRequest);
+	CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
+	return future.join();
+}
+public List<UserResponse> findByUserMessage(
+	UserMessage value,
+	MetaRequest metaRequest
+	) {
+
+	FindByUserMessageQuery query = new FindByUserMessageQuery(value,metaRequest);
 	CompletableFuture<List<UserResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(UserResponse.class));
 	return future.join();

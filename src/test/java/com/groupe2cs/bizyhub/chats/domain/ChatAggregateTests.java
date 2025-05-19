@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.chats.domain;
 
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.chats.domain.exception.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
 
 
 public class ChatAggregateTests extends BaseUnitTests {

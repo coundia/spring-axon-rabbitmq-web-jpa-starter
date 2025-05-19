@@ -38,10 +38,10 @@ void it_should_be_able_to_add_account() {
 
 		requestDTO.setName(UUID.randomUUID().toString());
 		requestDTO.setCurrency(UUID.randomUUID().toString());
-		requestDTO.setCurrentBalance(4118.32);
-		requestDTO.setPreviousBalance(5815.5);
+		requestDTO.setCurrentBalance(3379.05);
+		requestDTO.setPreviousBalance(8138.78);
 		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(false);
+		requestDTO.setIsActive(true);
 		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setReference(UUID.randomUUID().toString());
 

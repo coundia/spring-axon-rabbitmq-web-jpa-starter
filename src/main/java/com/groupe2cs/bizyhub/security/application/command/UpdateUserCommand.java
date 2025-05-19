@@ -34,6 +34,7 @@ public class UpdateUserCommand implements Serializable {
  	private UserIsPremium isPremium;
  	private UserEnabled enabled;
  	private UserIsBan isBan;
+ 	private UserMessage message;
  	private UserCreatedBy createdBy;
  	private UserTenant tenant;
 

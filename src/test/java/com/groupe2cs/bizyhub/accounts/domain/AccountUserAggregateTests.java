@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.accounts.domain;
 
-import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.accounts.domain.exception.*;
 import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.UUID;
 
 
 public class AccountUserAggregateTests extends BaseUnitTests {
@@ -19,7 +19,7 @@ void it_should_create_accountUser_with_valid_values() {
 	AccountUserUser user = AccountUserUser.create(UUID.randomUUID().toString());
 	AccountUserUsername username = AccountUserUsername.create(UUID.randomUUID().toString());
 	AccountUserDetails details = AccountUserDetails.create(UUID.randomUUID().toString());
-	AccountUserIsActive isActive = AccountUserIsActive.create(false);
+	AccountUserIsActive isActive = AccountUserIsActive.create(true);
 	AccountUserUpdatedAt updatedAt = AccountUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	AccountUserReference reference = AccountUserReference.create(UUID.randomUUID().toString());
 	AccountUserCreatedBy createdBy = AccountUserCreatedBy.create(UUID.randomUUID().toString());

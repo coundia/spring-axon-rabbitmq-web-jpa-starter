@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "RoleRequest", description = "Request payload for Role operations")
 public class RoleRequest implements Serializable {
 
-	@Schema(description = "", example = "2d128fca-ff89-4f85-be91-f52ec8102d58")
+	@Schema(description = "", example = "eb8f279c-fbc6-4292-a555-b009e7fa6e73")
 	private String name;
 
 

@@ -34,6 +34,7 @@ private UserLimitPerDay limitPerDay;
 private UserIsPremium isPremium;
 private UserEnabled enabled;
 private UserIsBan isBan;
+private UserMessage message;
 private UserCreatedBy createdBy;
 private UserTenant tenant;
 
@@ -52,6 +53,7 @@ apply(new UserCreatedEvent(
 		command.getIsPremium(),
 		command.getEnabled(),
 		command.getIsBan(),
+		command.getMessage(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -78,6 +80,7 @@ apply(new UserUpdatedEvent(
 		command.getIsPremium(),
 		command.getEnabled(),
 		command.getIsBan(),
+		command.getMessage(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -96,6 +99,7 @@ public void on(UserCreatedEvent event) {
 	this.isPremium = event.getIsPremium();
 	this.enabled = event.getEnabled();
 	this.isBan = event.getIsBan();
+	this.message = event.getMessage();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -118,6 +122,7 @@ this.id = event.getId();
 	this.isPremium = event.getIsPremium();
 	this.enabled = event.getEnabled();
 	this.isBan = event.getIsBan();
+	this.message = event.getMessage();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

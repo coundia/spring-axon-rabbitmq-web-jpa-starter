@@ -15,9 +15,9 @@ public class TransactionAggregateTests extends BaseUnitTests {
 void it_should_create_transaction_with_valid_values() {
 	TransactionId id = TransactionId.create(UUID.randomUUID().toString());
 	TransactionName name = TransactionName.create(UUID.randomUUID().toString());
-	TransactionAmount amount = TransactionAmount.create(3019.01);
+	TransactionAmount amount = TransactionAmount.create(1780.28);
 	TransactionDetails details = TransactionDetails.create(UUID.randomUUID().toString());
-	TransactionIsActive isActive = TransactionIsActive.create(true);
+	TransactionIsActive isActive = TransactionIsActive.create(false);
 	TransactionAccount account = TransactionAccount.create(UUID.randomUUID().toString());
 	TransactionCategory category = TransactionCategory.create(UUID.randomUUID().toString());
 	TransactionTypeTransactionRaw typeTransactionRaw = TransactionTypeTransactionRaw.create(UUID.randomUUID().toString());

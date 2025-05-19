@@ -42,6 +42,8 @@ public class UserResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private Boolean isBan;
 	@Schema(description = "", example = "")
+	private String message;
+	@Schema(description = "", example = "")
 	private String createdBy;
 	@Schema(description = "", example = "")
 	private String tenant;

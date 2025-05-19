@@ -13,8 +13,8 @@ return RolePermissionResponse.builder()
 		.id(entity.getId())
 		.role(entity.getRole() != null ? entity.getRole().getId() : null)
 		.permission(entity.getPermission() != null ? entity.getPermission().getId() : null)
-    .createdBy(entity.getCreatedBy().getUsername())
-    .tenant(entity.getTenant().getName())
+    .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
+    .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
 }
 

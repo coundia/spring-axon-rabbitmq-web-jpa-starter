@@ -75,7 +75,7 @@ public class SettingFixtures {
 				.value(SettingValue.create(UUID.randomUUID().toString()))
 				.locale(SettingLocale.create(UUID.randomUUID().toString()))
 				.details(SettingDetails.create(UUID.randomUUID().toString()))
-				.isActive(SettingIsActive.create(true))
+				.isActive(SettingIsActive.create(false))
 				.updatedAt(SettingUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.reference(SettingReference.create(UUID.randomUUID().toString()))
 			.build();
@@ -99,7 +99,7 @@ public class SettingFixtures {
         .value(SettingValue.create(UUID.randomUUID().toString()))
         .locale(SettingLocale.create(UUID.randomUUID().toString()))
         .details(SettingDetails.create(UUID.randomUUID().toString()))
-        .isActive(SettingIsActive.create(true))
+        .isActive(SettingIsActive.create(false))
         .updatedAt(SettingUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
         .reference(SettingReference.create(UUID.randomUUID().toString()))
         .build();
