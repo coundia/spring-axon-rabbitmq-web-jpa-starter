@@ -17,55 +17,66 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SettingUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private SettingRepository settingRepository;
+    @Autowired
+    private SettingRepository settingRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+    @Autowired
+    private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+    @Autowired
+    private CommandGateway commandGatewayUpdate;
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+    @Autowired
+    private UserRepository createdByDataRepository;
+    @Autowired
+    private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_update_setting() {
+    @Test
+    void it_should_be_able_to_update_setting() {
 
-	String existingId = SettingFixtures.randomOneViaCommand(
-	commandGateway,settingRepository,
+        String existingId = SettingFixtures.randomOneViaCommand(
+            commandGateway, settingRepository,
         createdByDataRepository,
         tenantDataRepository,
-	 getCurrentUser() ).getId().value();
+            getCurrentUser()
+        ).getId().value();
 
-	CreateSettingCommand updated = SettingFixtures.randomOneViaCommand(commandGatewayUpdate,
-    settingRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-     getCurrentUser());
+        CreateSettingCommand updated = SettingFixtures.randomOneViaCommand(
+            commandGatewayUpdate, settingRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+            getCurrentUser()
+        );
 
-	SettingFixtures.byIdWaitExist(settingRepository, existingId);
-	SettingFixtures.byIdWaitExist(settingRepository, updated.getId().value());
+        SettingFixtures.byIdWaitExist(settingRepository, existingId);
+        SettingFixtures.byIdWaitExist(settingRepository, updated.getId().value());
 
-	SettingRequest requestDTO = new SettingRequest();
-	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setValue(UUID.randomUUID().toString());
-	 requestDTO.setLocale(UUID.randomUUID().toString());
-	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(false);
-	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-	 requestDTO.setReference(UUID.randomUUID().toString());
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("name", UUID.randomUUID().toString());
+        body.add("value", UUID.randomUUID().toString());
+        body.add("locale", UUID.randomUUID().toString());
+        body.add("details", UUID.randomUUID().toString());
+        body.add("isActive", false);
 
-	String uri = "/v1/commands/setting/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+        HttpHeaders multipartHeaders = new HttpHeaders();
+        multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
 
-	}
+        String uri = "/api/v1/commands/setting/" + existingId;
+        ResponseEntity<String> response = testRestTemplate.exchange(
+            uri,
+            HttpMethod.PUT,
+            requestEntity,
+            String.class
+        );
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 }

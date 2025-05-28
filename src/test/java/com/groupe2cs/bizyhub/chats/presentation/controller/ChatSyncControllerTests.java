@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.chats.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.chats.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.chats.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.chats.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.chats.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -31,6 +31,8 @@ private ChatRepository Repository;
     @Autowired
     private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
     @Autowired
+    private FileManagerRepository filesDataRepository ;
+    @Autowired
     private UserRepository createdByDataRepository ;
     @Autowired
     private TenantRepository tenantDataRepository ;
@@ -45,8 +47,6 @@ private ChatRepository Repository;
 .responses(UUID.randomUUID().toString())
 .state(UUID.randomUUID().toString())
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
-.updatedAt(java.time.Instant.now().plusSeconds(3600))
-.reference(UUID.randomUUID().toString())
 		.type("CREATE")
 		.build()
 		))
@@ -76,8 +76,6 @@ private ChatRepository Repository;
 .responses(UUID.randomUUID().toString())
 .state(UUID.randomUUID().toString())
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
-.updatedAt(java.time.Instant.now().plusSeconds(3600))
-.reference(UUID.randomUUID().toString())
 			.type("UPDATE")
 			.build()
 			))

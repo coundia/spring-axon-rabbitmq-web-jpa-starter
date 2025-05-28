@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateChatCommand command = new CreateChatCommand(
- ChatId.create(UUID.randomUUID().toString()) ,  ChatMessages.create(UUID.randomUUID().toString()) ,  ChatResponsesJson.create(UUID.randomUUID().toString()) ,  ChatResponses.create(UUID.randomUUID().toString()) ,  ChatState.create(UUID.randomUUID().toString()) ,  ChatAccount.create(UUID.randomUUID().toString()) ,  ChatUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ChatReference.create(UUID.randomUUID().toString()) ,  ChatCreatedBy.create(UUID.randomUUID().toString()) ,  ChatTenant.create(UUID.randomUUID().toString()) 
+ ChatId.create(UUID.randomUUID().toString()) ,  ChatMessages.create(UUID.randomUUID().toString()) ,  ChatResponsesJson.create(UUID.randomUUID().toString()) ,  ChatResponses.create(UUID.randomUUID().toString()) ,  ChatState.create(UUID.randomUUID().toString()) ,  ChatAccount.create(UUID.randomUUID().toString()) ,  ChatFiles.create(UUID.randomUUID().toString()) ,  ChatCreatedBy.create(UUID.randomUUID().toString()) ,  ChatTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -46,10 +46,8 @@ assertThat(sentCommand.getState().value()).isEqualTo(
 command.getState().value());
 assertThat(sentCommand.getAccount().value()).isEqualTo(
 command.getAccount().value());
-assertThat(sentCommand.getUpdatedAt().value()).isEqualTo(
-command.getUpdatedAt().value());
-assertThat(sentCommand.getReference().value()).isEqualTo(
-command.getReference().value());
+assertThat(sentCommand.getFiles().value()).isEqualTo(
+command.getFiles().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
 command.getCreatedBy().value());
 assertThat(sentCommand.getTenant().value()).isEqualTo(

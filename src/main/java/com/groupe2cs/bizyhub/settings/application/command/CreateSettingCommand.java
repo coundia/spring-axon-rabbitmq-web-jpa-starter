@@ -30,8 +30,6 @@ public class CreateSettingCommand implements Serializable {
  	private SettingLocale locale;
  	private SettingDetails details;
  	private SettingIsActive isActive;
- 	private SettingUpdatedAt updatedAt;
- 	private SettingReference reference;
  	private SettingCreatedBy createdBy;
  	private SettingTenant tenant;
 	public CreateSettingCommand(
@@ -41,8 +39,6 @@ public class CreateSettingCommand implements Serializable {
    SettingLocale locale , 
    SettingDetails details , 
    SettingIsActive isActive , 
-   SettingUpdatedAt updatedAt , 
-   SettingReference reference , 
    SettingCreatedBy createdBy , 
    SettingTenant tenant  
 		){
@@ -53,8 +49,6 @@ public class CreateSettingCommand implements Serializable {
   this.locale = locale ; 
   this.details = details ; 
   this.isActive = isActive ; 
-  this.updatedAt = updatedAt ; 
-  this.reference = reference ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

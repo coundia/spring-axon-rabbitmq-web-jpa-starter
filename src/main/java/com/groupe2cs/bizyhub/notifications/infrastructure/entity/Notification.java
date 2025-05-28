@@ -33,58 +33,46 @@ public class Notification   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String deviceToken ;
 
 	@Column(nullable = false, 		columnDefinition = "Text",
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String title ;
 
 	@Column(nullable = true, 		columnDefinition = "Text",
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String message ;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String status ;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String reserved ;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String errorMessage ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-	@Builder.Default
-	private java.time.Instant updatedAt  = java.time.Instant.now() ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-
-	private String reference ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -105,8 +93,6 @@ public class Notification   extends AbstractAuditableEntity  {
 			", status=" + status +
 			", reserved=" + reserved +
 			", errorMessage=" + errorMessage +
-			", updatedAt=" + updatedAt +
-			", reference=" + reference +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +
 		'}';

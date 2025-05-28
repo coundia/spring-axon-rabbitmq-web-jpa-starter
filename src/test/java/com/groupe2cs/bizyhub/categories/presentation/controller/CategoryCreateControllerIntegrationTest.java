@@ -40,8 +40,6 @@ void it_should_be_able_to_add_category() {
 		requestDTO.setTypeCategoryRaw(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(false);
-		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setReference(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/category";
 		ResponseEntity<CategoryResponse> response = this.postForEntity(uri, requestDTO, CategoryResponse.class);
@@ -52,7 +50,5 @@ void it_should_be_able_to_add_category() {
 		assertThat(response.getBody().getTypeCategoryRaw()).isEqualTo(requestDTO.getTypeCategoryRaw());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
-		assertThat(response.getBody().getUpdatedAt()).isEqualTo(requestDTO.getUpdatedAt());
-		assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
 	}
 }

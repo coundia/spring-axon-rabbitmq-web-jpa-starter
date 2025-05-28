@@ -93,10 +93,10 @@ public class ChatGptService implements IAService {
 				.builder()
 				.name(categoryName)
 				.typeCategoryRaw(type)
-				.updatedAt(Instant.now())
+				//.updatedAt(Instant.now())
 				.isActive(true)
 				.details("")
-				.reference("")
+				//.reference("")
 				.build();
 
 		MetaRequest metaRequest = MetaRequest

@@ -17,66 +17,77 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private TransactionRepository transactionRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+    @Autowired
+    private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+    @Autowired
+    private CommandGateway commandGatewayUpdate;
 
-@Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+    @Autowired
+    private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository;
+    @Autowired
+    private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository;
+    @Autowired
+    private UserRepository createdByDataRepository;
+    @Autowired
+    private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_update_transaction() {
+    @Test
+    void it_should_be_able_to_update_transaction() {
 
-	String existingId = TransactionFixtures.randomOneViaCommand(
-	commandGateway,transactionRepository,
+        String existingId = TransactionFixtures.randomOneViaCommand(
+            commandGateway, transactionRepository,
         accountDataRepository,
         categoryDataRepository,
         createdByDataRepository,
         tenantDataRepository,
-	 getCurrentUser() ).getId().value();
+            getCurrentUser()
+        ).getId().value();
 
-	CreateTransactionCommand updated = TransactionFixtures.randomOneViaCommand(commandGatewayUpdate,
-    transactionRepository,
-            accountDataRepository,
-            categoryDataRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-     getCurrentUser());
+        CreateTransactionCommand updated = TransactionFixtures.randomOneViaCommand(
+            commandGatewayUpdate, transactionRepository,
+        accountDataRepository,
+        categoryDataRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+            getCurrentUser()
+        );
 
-	TransactionFixtures.byIdWaitExist(transactionRepository, existingId);
-	TransactionFixtures.byIdWaitExist(transactionRepository, updated.getId().value());
+        TransactionFixtures.byIdWaitExist(transactionRepository, existingId);
+        TransactionFixtures.byIdWaitExist(transactionRepository, updated.getId().value());
 
-	TransactionRequest requestDTO = new TransactionRequest();
-	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setAmount(9201.27);
-	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(false);
-	 requestDTO.setAccount( updated.getAccount().value());
-	 requestDTO.setCategory( updated.getCategory().value());
-	 requestDTO.setTypeTransactionRaw(UUID.randomUUID().toString());
-	 requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
-	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-	 requestDTO.setReference(UUID.randomUUID().toString());
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("name", UUID.randomUUID().toString());
+        body.add("amount", 9720.04);
+        body.add("details", UUID.randomUUID().toString());
+        body.add("isActive", true);
+        body.add("account", updated.getAccount().value());
+        body.add("category", updated.getCategory().value());
+        body.add("typeTransactionRaw", UUID.randomUUID().toString());
+        body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
 
-	String uri = "/v1/commands/transaction/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+        HttpHeaders multipartHeaders = new HttpHeaders();
+        multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
 
-	}
+        String uri = "/api/v1/commands/transaction/" + existingId;
+        ResponseEntity<String> response = testRestTemplate.exchange(
+            uri,
+            HttpMethod.PUT,
+            requestEntity,
+            String.class
+        );
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 }

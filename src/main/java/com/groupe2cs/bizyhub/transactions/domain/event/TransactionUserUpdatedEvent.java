@@ -24,8 +24,6 @@ public class TransactionUserUpdatedEvent implements Serializable {
 	private TransactionUserUsername username;
 	private TransactionUserDetails details;
 	private TransactionUserIsActive isActive;
-	private TransactionUserUpdatedAt updatedAt;
-	private TransactionUserReference reference;
 	private TransactionUserCreatedBy createdBy;
 	private TransactionUserTenant tenant;
 

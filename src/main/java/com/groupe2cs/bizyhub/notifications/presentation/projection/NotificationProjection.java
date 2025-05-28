@@ -37,9 +37,9 @@ Notification entity = Notification.builder()
  		.status(event.getStatus() == null ? null : event.getStatus().value())
  		.reserved(event.getReserved() == null ? null : event.getReserved().value())
  		.errorMessage(event.getErrorMessage() == null ? null : event.getErrorMessage().value())
- 		.updatedAt(event.getUpdatedAt() == null ? null : event.getUpdatedAt().value())
- 		.reference(event.getReference() == null ? null : event.getReference().value())
  .build();
+
+entity.setId(event.getId().value());
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
@@ -87,12 +87,6 @@ Notification entity = repository.findById(event.getId().value())
     }
 	if(event.getErrorMessage() != null) {
 		entity.setErrorMessage(event.getErrorMessage().value());
-    }
-	if(event.getUpdatedAt() != null) {
-		entity.setUpdatedAt(event.getUpdatedAt().value());
-    }
-	if(event.getReference() != null) {
-		entity.setReference(event.getReference().value());
     }
 
 if(event.getCreatedBy() !=null){

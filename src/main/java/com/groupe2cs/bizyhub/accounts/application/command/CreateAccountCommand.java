@@ -31,8 +31,6 @@ public class CreateAccountCommand implements Serializable {
  	private AccountPreviousBalance previousBalance;
  	private AccountDetails details;
  	private AccountIsActive isActive;
- 	private AccountUpdatedAt updatedAt;
- 	private AccountReference reference;
  	private AccountCreatedBy createdBy;
  	private AccountTenant tenant;
 	public CreateAccountCommand(
@@ -43,8 +41,6 @@ public class CreateAccountCommand implements Serializable {
    AccountPreviousBalance previousBalance , 
    AccountDetails details , 
    AccountIsActive isActive , 
-   AccountUpdatedAt updatedAt , 
-   AccountReference reference , 
    AccountCreatedBy createdBy , 
    AccountTenant tenant  
 		){
@@ -56,8 +52,6 @@ public class CreateAccountCommand implements Serializable {
   this.previousBalance = previousBalance ; 
   this.details = details ; 
   this.isActive = isActive ; 
-  this.updatedAt = updatedAt ; 
-  this.reference = reference ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

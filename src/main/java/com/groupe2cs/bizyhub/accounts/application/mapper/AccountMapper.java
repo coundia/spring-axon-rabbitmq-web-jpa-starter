@@ -17,8 +17,6 @@ return AccountResponse.builder()
 		.previousBalance(entity.getPreviousBalance())
 		.details(entity.getDetails())
 		.isActive(entity.getIsActive())
-		.updatedAt(entity.getUpdatedAt())
-		.reference(entity.getReference())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
@@ -33,8 +31,6 @@ return AccountResponse.builder()
 	.previousBalance(command.getPreviousBalance().value())
 	.details(command.getDetails().value())
 	.isActive(command.getIsActive().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -47,8 +43,6 @@ return AccountResponse.builder()
 	.previousBalance(command.getPreviousBalance().value())
 	.details(command.getDetails().value())
 	.isActive(command.getIsActive().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -62,8 +56,6 @@ return CreateAccountCommand.builder()
 	.previousBalance(AccountPreviousBalance.create(request.getPreviousBalance()))
 	.details(AccountDetails.create(request.getDetails()))
 	.isActive(AccountIsActive.create(request.getIsActive()))
-	.updatedAt(AccountUpdatedAt.create(request.getUpdatedAt()))
-	.reference(AccountReference.create(request.getReference()))
 .build();
 }
 
@@ -76,8 +68,6 @@ return CreateAccountCommand.builder()
 		.previousBalance(AccountPreviousBalance.create(request.getPreviousBalance()))
 		.details(AccountDetails.create(request.getDetails()))
 		.isActive(AccountIsActive.create(request.getIsActive()))
-		.updatedAt(AccountUpdatedAt.create(request.getUpdatedAt()))
-		.reference(AccountReference.create(request.getReference()))
 	.build();
 	}
 

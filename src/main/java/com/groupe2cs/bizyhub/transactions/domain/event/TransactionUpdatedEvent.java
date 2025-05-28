@@ -26,8 +26,6 @@ public class TransactionUpdatedEvent implements Serializable {
 	private TransactionCategory category;
 	private TransactionTypeTransactionRaw typeTransactionRaw;
 	private TransactionDateTransaction dateTransaction;
-	private TransactionUpdatedAt updatedAt;
-	private TransactionReference reference;
 	private TransactionCreatedBy createdBy;
 	private TransactionTenant tenant;
 

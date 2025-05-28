@@ -33,7 +33,8 @@ public class Permission   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String name ;

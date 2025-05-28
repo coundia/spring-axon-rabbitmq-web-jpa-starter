@@ -17,64 +17,75 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private AccountUserRepository accountuserRepository;
+    @Autowired
+    private AccountUserRepository accountuserRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+    @Autowired
+    private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+    @Autowired
+    private CommandGateway commandGatewayUpdate;
 
-@Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+    @Autowired
+    private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository;
+    @Autowired
+    private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository;
+    @Autowired
+    private UserRepository createdByDataRepository;
+    @Autowired
+    private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_update_accountuser() {
+    @Test
+    void it_should_be_able_to_update_accountuser() {
 
-	String existingId = AccountUserFixtures.randomOneViaCommand(
-	commandGateway,accountuserRepository,
+        String existingId = AccountUserFixtures.randomOneViaCommand(
+            commandGateway, accountuserRepository,
         accountDataRepository,
         userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
-	 getCurrentUser() ).getId().value();
+            getCurrentUser()
+        ).getId().value();
 
-	CreateAccountUserCommand updated = AccountUserFixtures.randomOneViaCommand(commandGatewayUpdate,
-    accountuserRepository,
-            accountDataRepository,
-            userDataRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-     getCurrentUser());
+        CreateAccountUserCommand updated = AccountUserFixtures.randomOneViaCommand(
+            commandGatewayUpdate, accountuserRepository,
+        accountDataRepository,
+        userDataRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+            getCurrentUser()
+        );
 
-	AccountUserFixtures.byIdWaitExist(accountuserRepository, existingId);
-	AccountUserFixtures.byIdWaitExist(accountuserRepository, updated.getId().value());
+        AccountUserFixtures.byIdWaitExist(accountuserRepository, existingId);
+        AccountUserFixtures.byIdWaitExist(accountuserRepository, updated.getId().value());
 
-	AccountUserRequest requestDTO = new AccountUserRequest();
-	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setAccount( updated.getAccount().value());
-	 requestDTO.setUser( updated.getUser().value());
-	 requestDTO.setUsername(UUID.randomUUID().toString());
-	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(false);
-	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-	 requestDTO.setReference(UUID.randomUUID().toString());
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("name", UUID.randomUUID().toString());
+        body.add("account", updated.getAccount().value());
+        body.add("user", updated.getUser().value());
+        body.add("username", UUID.randomUUID().toString());
+        body.add("details", UUID.randomUUID().toString());
+        body.add("isActive", false);
 
-	String uri = "/v1/commands/accountUser/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+        HttpHeaders multipartHeaders = new HttpHeaders();
+        multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
 
-	}
+        String uri = "/api/v1/commands/accountUser/" + existingId;
+        ResponseEntity<String> response = testRestTemplate.exchange(
+            uri,
+            HttpMethod.PUT,
+            requestEntity,
+            String.class
+        );
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 }

@@ -7,8 +7,7 @@ import com.groupe2cs.bizyhub.chats.domain.exception.ChatResponsesJsonNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatResponsesNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatStateNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatAccountNotValid;
-import com.groupe2cs.bizyhub.chats.domain.exception.ChatUpdatedAtNotValid;
-import com.groupe2cs.bizyhub.chats.domain.exception.ChatReferenceNotValid;
+import com.groupe2cs.bizyhub.chats.domain.exception.ChatFilesNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatCreatedByNotValid;
 
 import java.io.Serializable;

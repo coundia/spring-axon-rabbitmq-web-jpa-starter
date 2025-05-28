@@ -14,7 +14,6 @@ return ApiKeyResponse.builder()
 		.appKey(entity.getAppKey())
 		.username(entity.getUsername())
 		.active(entity.getActive())
-		.createdAt(entity.getCreatedAt())
 		.expiration(entity.getExpiration())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
@@ -27,7 +26,6 @@ return ApiKeyResponse.builder()
 	.appKey(command.getAppKey().value())
 	.username(command.getUsername().value())
 	.active(command.getActive().value())
-	.createdAt(command.getCreatedAt().value())
 	.expiration(command.getExpiration().value())
 .build();
 }
@@ -38,7 +36,6 @@ return ApiKeyResponse.builder()
 	.appKey(command.getAppKey().value())
 	.username(command.getUsername().value())
 	.active(command.getActive().value())
-	.createdAt(command.getCreatedAt().value())
 	.expiration(command.getExpiration().value())
 .build();
 }
@@ -50,7 +47,6 @@ return CreateApiKeyCommand.builder()
 	.appKey(ApiKeyAppKey.create(request.getAppKey()))
 	.username(ApiKeyUsername.create(request.getUsername()))
 	.active(ApiKeyActive.create(request.getActive()))
-	.createdAt(ApiKeyCreatedAt.create(request.getCreatedAt()))
 	.expiration(ApiKeyExpiration.create(request.getExpiration()))
 .build();
 }
@@ -61,7 +57,6 @@ return CreateApiKeyCommand.builder()
 		.appKey(ApiKeyAppKey.create(request.getAppKey()))
 		.username(ApiKeyUsername.create(request.getUsername()))
 		.active(ApiKeyActive.create(request.getActive()))
-		.createdAt(ApiKeyCreatedAt.create(request.getCreatedAt()))
 		.expiration(ApiKeyExpiration.create(request.getExpiration()))
 	.build();
 	}

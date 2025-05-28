@@ -34,8 +34,6 @@ public class DeleteTransactionCommand implements Serializable {
  	
  	
  	
- 	
- 	
 
 
 }

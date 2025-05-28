@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.accounts.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -30,8 +30,6 @@ public class AccountSyncApplicationService {
 								.previousBalance(AccountPreviousBalance.create(d.getPreviousBalance()))
 								.details(AccountDetails.create(d.getDetails()))
 								.isActive(AccountIsActive.create(d.getIsActive()))
-								.updatedAt(AccountUpdatedAt.create(d.getUpdatedAt()))
-								.reference(AccountReference.create(d.getReference()))
 						.build();
 
 
@@ -59,8 +57,6 @@ public class AccountSyncApplicationService {
 							.previousBalance(AccountPreviousBalance.create(d.getPreviousBalance()))
 							.details(AccountDetails.create(d.getDetails()))
 							.isActive(AccountIsActive.create(d.getIsActive()))
-							.updatedAt(AccountUpdatedAt.create(d.getUpdatedAt()))
-							.reference(AccountReference.create(d.getReference()))
 						.build();
 
 

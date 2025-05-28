@@ -19,8 +19,6 @@ return TransactionResponse.builder()
 		.category(entity.getCategory() != null ? entity.getCategory().getId() : null)
 		.typeTransactionRaw(entity.getTypeTransactionRaw())
 		.dateTransaction(entity.getDateTransaction())
-		.updatedAt(entity.getUpdatedAt())
-		.reference(entity.getReference())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
@@ -37,8 +35,6 @@ return TransactionResponse.builder()
 	.category(command.getCategory().value())
 	.typeTransactionRaw(command.getTypeTransactionRaw().value())
 	.dateTransaction(command.getDateTransaction().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -53,8 +49,6 @@ return TransactionResponse.builder()
 	.category(command.getCategory().value())
 	.typeTransactionRaw(command.getTypeTransactionRaw().value())
 	.dateTransaction(command.getDateTransaction().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -70,8 +64,6 @@ return CreateTransactionCommand.builder()
 	.category(TransactionCategory.create(request.getCategory()))
 	.typeTransactionRaw(TransactionTypeTransactionRaw.create(request.getTypeTransactionRaw()))
 	.dateTransaction(TransactionDateTransaction.create(request.getDateTransaction()))
-	.updatedAt(TransactionUpdatedAt.create(request.getUpdatedAt()))
-	.reference(TransactionReference.create(request.getReference()))
 .build();
 }
 
@@ -86,8 +78,6 @@ return CreateTransactionCommand.builder()
 		.category(TransactionCategory.create(request.getCategory()))
 		.typeTransactionRaw(TransactionTypeTransactionRaw.create(request.getTypeTransactionRaw()))
 		.dateTransaction(TransactionDateTransaction.create(request.getDateTransaction()))
-		.updatedAt(TransactionUpdatedAt.create(request.getUpdatedAt()))
-		.reference(TransactionReference.create(request.getReference()))
 	.build();
 	}
 

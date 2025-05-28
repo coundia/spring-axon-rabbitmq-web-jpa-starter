@@ -15,8 +15,6 @@ return CategoryResponse.builder()
 		.typeCategoryRaw(entity.getTypeCategoryRaw())
 		.details(entity.getDetails())
 		.isActive(entity.getIsActive())
-		.updatedAt(entity.getUpdatedAt())
-		.reference(entity.getReference())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
@@ -29,8 +27,6 @@ return CategoryResponse.builder()
 	.typeCategoryRaw(command.getTypeCategoryRaw().value())
 	.details(command.getDetails().value())
 	.isActive(command.getIsActive().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -41,8 +37,6 @@ return CategoryResponse.builder()
 	.typeCategoryRaw(command.getTypeCategoryRaw().value())
 	.details(command.getDetails().value())
 	.isActive(command.getIsActive().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -54,8 +48,6 @@ return CreateCategoryCommand.builder()
 	.typeCategoryRaw(CategoryTypeCategoryRaw.create(request.getTypeCategoryRaw()))
 	.details(CategoryDetails.create(request.getDetails()))
 	.isActive(CategoryIsActive.create(request.getIsActive()))
-	.updatedAt(CategoryUpdatedAt.create(request.getUpdatedAt()))
-	.reference(CategoryReference.create(request.getReference()))
 .build();
 }
 
@@ -66,8 +58,6 @@ return CreateCategoryCommand.builder()
 		.typeCategoryRaw(CategoryTypeCategoryRaw.create(request.getTypeCategoryRaw()))
 		.details(CategoryDetails.create(request.getDetails()))
 		.isActive(CategoryIsActive.create(request.getIsActive()))
-		.updatedAt(CategoryUpdatedAt.create(request.getUpdatedAt()))
-		.reference(CategoryReference.create(request.getReference()))
 	.build();
 	}
 

@@ -24,21 +24,17 @@ public class TransactionUserDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "d38b7b9e-1a36-465b-9344-96d975132b01")
+		@Schema(description = "", example = "cde587a1-2468-4cd3-9ad6-29c855999453")
 		private String name;
-		@Schema(description = "", example = "759d161b-3086-4b57-80ad-2a2f3e960340")
+		@Schema(description = "", example = "66a2e0ae-4623-44a1-a142-a09f00d82c98")
 		private String transaction;
-		@Schema(description = "", example = "4fba786b-63aa-4b94-a3b6-7c6e5f7e97f3")
+		@Schema(description = "", example = "270450b1-0c40-4aef-98e7-887aebb15db5")
 		private String user;
-		@Schema(description = "", example = "76bf068d-db1d-408b-be09-6461444bdfed")
+		@Schema(description = "", example = "24ac0c20-e110-491a-8006-ed6c99985969")
 		private String username;
-		@Schema(description = "", example = "322f3b43-186b-49e2-a0d5-68d2ac519ba0")
+		@Schema(description = "", example = "136445eb-32b0-470c-ac0d-c349b6ee3317")
 		private String details;
-		@Schema(description = "", example = "true")
+		@Schema(description = "", example = "false")
 		private Boolean isActive;
-		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
-		private java.time.Instant updatedAt;
-		@Schema(description = "", example = "78e7f636-3471-45cb-8934-54bc5c26c822")
-		private String reference;
 
 }

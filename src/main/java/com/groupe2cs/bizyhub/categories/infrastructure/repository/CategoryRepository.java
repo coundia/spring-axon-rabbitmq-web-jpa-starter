@@ -57,32 +57,6 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
         @Query("SELECT e FROM Category e WHERE e.isActive = :isActive AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Category> findByIsActiveAndTenantId(Boolean isActive, String tenantId);
-        @Query("""
-        SELECT e FROM Category e
-        WHERE e.updatedAt >= :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.updatedAt < :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Category> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
-
-         @Query("""
-        SELECT e FROM Category e
-        WHERE e.updatedAt >= :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.updatedAt < :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.tenant.id = :tenantId
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Category> findByUpdatedAtAndTenantId(java.time.Instant updatedAt, String tenantId);
-
-
-        @Query("SELECT e FROM Category e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Category> findByReferenceAndCreatedById(String reference, String createdById);
-        @Query("SELECT e FROM Category e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Category> findByReferenceAndTenantName(String reference, String tenantName);
-
-        @Query("SELECT e FROM Category e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Category> findByReferenceAndTenantId(String reference, String tenantId);
         @Query("SELECT e FROM Category e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Category> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
         @Query("SELECT e FROM Category e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

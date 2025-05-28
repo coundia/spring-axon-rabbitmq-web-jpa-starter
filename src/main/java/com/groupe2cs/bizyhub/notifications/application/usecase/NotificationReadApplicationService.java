@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.notifications.application.usecase;
 
+import com.groupe2cs.bizyhub.notifications.application.mapper.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.notifications.application.query.*;
 import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
 import com.groupe2cs.bizyhub.notifications.application.dto.*;
-import com.groupe2cs.bizyhub.notifications.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -94,26 +94,6 @@ public List<NotificationResponse> findByNotificationErrorMessage(
 	) {
 
 	FindByNotificationErrorMessageQuery query = new FindByNotificationErrorMessageQuery(value,metaRequest);
-	CompletableFuture<List<NotificationResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(NotificationResponse.class));
-	return future.join();
-}
-public List<NotificationResponse> findByNotificationUpdatedAt(
-	NotificationUpdatedAt value,
-	MetaRequest metaRequest
-	) {
-
-	FindByNotificationUpdatedAtQuery query = new FindByNotificationUpdatedAtQuery(value,metaRequest);
-	CompletableFuture<List<NotificationResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(NotificationResponse.class));
-	return future.join();
-}
-public List<NotificationResponse> findByNotificationReference(
-	NotificationReference value,
-	MetaRequest metaRequest
-	) {
-
-	FindByNotificationReferenceQuery query = new FindByNotificationReferenceQuery(value,metaRequest);
 	CompletableFuture<List<NotificationResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(NotificationResponse.class));
 	return future.join();

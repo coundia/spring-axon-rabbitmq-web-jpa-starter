@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateAccountCommand command = new CreateAccountCommand(
- AccountId.create(UUID.randomUUID().toString()) ,  AccountName.create(UUID.randomUUID().toString()) ,  AccountCurrency.create(UUID.randomUUID().toString()) ,  AccountCurrentBalance.create(6999.99) ,  AccountPreviousBalance.create(8506.97) ,  AccountDetails.create(UUID.randomUUID().toString()) ,  AccountIsActive.create(false) ,  AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountReference.create(UUID.randomUUID().toString()) ,  AccountCreatedBy.create(UUID.randomUUID().toString()) ,  AccountTenant.create(UUID.randomUUID().toString()) 
+ AccountId.create(UUID.randomUUID().toString()) ,  AccountName.create(UUID.randomUUID().toString()) ,  AccountCurrency.create(UUID.randomUUID().toString()) ,  AccountCurrentBalance.create(4189.24) ,  AccountPreviousBalance.create(6299.51) ,  AccountDetails.create(UUID.randomUUID().toString()) ,  AccountIsActive.create(false) ,  AccountCreatedBy.create(UUID.randomUUID().toString()) ,  AccountTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -48,10 +48,6 @@ assertThat(sentCommand.getDetails().value()).isEqualTo(
 command.getDetails().value());
 assertThat(sentCommand.getIsActive().value()).isEqualTo(
 command.getIsActive().value());
-assertThat(sentCommand.getUpdatedAt().value()).isEqualTo(
-command.getUpdatedAt().value());
-assertThat(sentCommand.getReference().value()).isEqualTo(
-command.getReference().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
 command.getCreatedBy().value());
 assertThat(sentCommand.getTenant().value()).isEqualTo(

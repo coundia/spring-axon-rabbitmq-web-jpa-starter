@@ -78,15 +78,13 @@ public class TransactionFixtures {
 
 			CreateTransactionCommand command = CreateTransactionCommand.builder()
 				.name(TransactionName.create(UUID.randomUUID().toString()))
-				.amount(TransactionAmount.create(5868.45))
+				.amount(TransactionAmount.create(41.5))
 				.details(TransactionDetails.create(UUID.randomUUID().toString()))
 				.isActive(TransactionIsActive.create(false))
 				.account(TransactionAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
 				.category(TransactionCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
 				.typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
 				.dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
-				.updatedAt(TransactionUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.reference(TransactionReference.create(UUID.randomUUID().toString()))
 			.build();
 
 		command.setCreatedBy(TransactionCreatedBy.create(user.getId()));
@@ -105,13 +103,11 @@ public class TransactionFixtures {
 
         CreateTransactionCommand command = CreateTransactionCommand.builder()
         .name(TransactionName.create(UUID.randomUUID().toString()))
-        .amount(TransactionAmount.create(5868.45))
+        .amount(TransactionAmount.create(41.5))
         .details(TransactionDetails.create(UUID.randomUUID().toString()))
         .isActive(TransactionIsActive.create(false))
         .typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
         .dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
-        .updatedAt(TransactionUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .reference(TransactionReference.create(UUID.randomUUID().toString()))
         .build();
 
 		command.setCreatedBy(TransactionCreatedBy.create(user.getId()));

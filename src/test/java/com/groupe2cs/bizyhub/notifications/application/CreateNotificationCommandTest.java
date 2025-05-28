@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateNotificationCommand command = new CreateNotificationCommand(
- NotificationId.create(UUID.randomUUID().toString()) ,  NotificationDeviceToken.create(UUID.randomUUID().toString()) ,  NotificationTitle.create(UUID.randomUUID().toString()) ,  NotificationMessage.create(UUID.randomUUID().toString()) ,  NotificationStatus.create(UUID.randomUUID().toString()) ,  NotificationReserved.create(UUID.randomUUID().toString()) ,  NotificationErrorMessage.create(UUID.randomUUID().toString()) ,  NotificationUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  NotificationReference.create(UUID.randomUUID().toString()) ,  NotificationCreatedBy.create(UUID.randomUUID().toString()) ,  NotificationTenant.create(UUID.randomUUID().toString()) 
+ NotificationId.create(UUID.randomUUID().toString()) ,  NotificationDeviceToken.create(UUID.randomUUID().toString()) ,  NotificationTitle.create(UUID.randomUUID().toString()) ,  NotificationMessage.create(UUID.randomUUID().toString()) ,  NotificationStatus.create(UUID.randomUUID().toString()) ,  NotificationReserved.create(UUID.randomUUID().toString()) ,  NotificationErrorMessage.create(UUID.randomUUID().toString()) ,  NotificationCreatedBy.create(UUID.randomUUID().toString()) ,  NotificationTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -48,10 +48,6 @@ assertThat(sentCommand.getReserved().value()).isEqualTo(
 command.getReserved().value());
 assertThat(sentCommand.getErrorMessage().value()).isEqualTo(
 command.getErrorMessage().value());
-assertThat(sentCommand.getUpdatedAt().value()).isEqualTo(
-command.getUpdatedAt().value());
-assertThat(sentCommand.getReference().value()).isEqualTo(
-command.getReference().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
 command.getCreatedBy().value());
 assertThat(sentCommand.getTenant().value()).isEqualTo(

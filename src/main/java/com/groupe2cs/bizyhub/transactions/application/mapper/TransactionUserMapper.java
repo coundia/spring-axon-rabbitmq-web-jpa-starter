@@ -17,8 +17,6 @@ return TransactionUserResponse.builder()
 		.username(entity.getUsername())
 		.details(entity.getDetails())
 		.isActive(entity.getIsActive())
-		.updatedAt(entity.getUpdatedAt())
-		.reference(entity.getReference())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
@@ -33,8 +31,6 @@ return TransactionUserResponse.builder()
 	.username(command.getUsername().value())
 	.details(command.getDetails().value())
 	.isActive(command.getIsActive().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -47,8 +43,6 @@ return TransactionUserResponse.builder()
 	.username(command.getUsername().value())
 	.details(command.getDetails().value())
 	.isActive(command.getIsActive().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -62,8 +56,6 @@ return CreateTransactionUserCommand.builder()
 	.username(TransactionUserUsername.create(request.getUsername()))
 	.details(TransactionUserDetails.create(request.getDetails()))
 	.isActive(TransactionUserIsActive.create(request.getIsActive()))
-	.updatedAt(TransactionUserUpdatedAt.create(request.getUpdatedAt()))
-	.reference(TransactionUserReference.create(request.getReference()))
 .build();
 }
 
@@ -76,8 +68,6 @@ return CreateTransactionUserCommand.builder()
 		.username(TransactionUserUsername.create(request.getUsername()))
 		.details(TransactionUserDetails.create(request.getDetails()))
 		.isActive(TransactionUserIsActive.create(request.getIsActive()))
-		.updatedAt(TransactionUserUpdatedAt.create(request.getUpdatedAt()))
-		.reference(TransactionUserReference.create(request.getReference()))
 	.build();
 	}
 

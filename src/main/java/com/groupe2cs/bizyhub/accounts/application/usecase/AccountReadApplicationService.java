@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
 
-import com.groupe2cs.bizyhub.accounts.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.application.query.*;
 import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.accounts.application.mapper.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -94,26 +94,6 @@ public List<AccountResponse> findByAccountIsActive(
 	) {
 
 	FindByAccountIsActiveQuery query = new FindByAccountIsActiveQuery(value,metaRequest);
-	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
-	return future.join();
-}
-public List<AccountResponse> findByAccountUpdatedAt(
-	AccountUpdatedAt value,
-	MetaRequest metaRequest
-	) {
-
-	FindByAccountUpdatedAtQuery query = new FindByAccountUpdatedAtQuery(value,metaRequest);
-	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
-	return future.join();
-}
-public List<AccountResponse> findByAccountReference(
-	AccountReference value,
-	MetaRequest metaRequest
-	) {
-
-	FindByAccountReferenceQuery query = new FindByAccountReferenceQuery(value,metaRequest);
 	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
 	return future.join();

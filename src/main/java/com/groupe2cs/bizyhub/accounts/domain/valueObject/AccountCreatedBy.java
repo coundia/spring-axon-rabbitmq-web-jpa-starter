@@ -8,8 +8,6 @@ import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCurrentBalanceNotV
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountPreviousBalanceNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountDetailsNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIsActiveNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUpdatedAtNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountReferenceNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCreatedByNotValid;
 
 import java.io.Serializable;

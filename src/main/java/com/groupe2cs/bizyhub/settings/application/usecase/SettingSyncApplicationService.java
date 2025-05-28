@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.settings.application.usecase;
-import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.settings.application.dto.*;
 import com.groupe2cs.bizyhub.settings.application.command.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -29,8 +29,6 @@ public class SettingSyncApplicationService {
 								.locale(SettingLocale.create(d.getLocale()))
 								.details(SettingDetails.create(d.getDetails()))
 								.isActive(SettingIsActive.create(d.getIsActive()))
-								.updatedAt(SettingUpdatedAt.create(d.getUpdatedAt()))
-								.reference(SettingReference.create(d.getReference()))
 						.build();
 
 
@@ -57,8 +55,6 @@ public class SettingSyncApplicationService {
 							.locale(SettingLocale.create(d.getLocale()))
 							.details(SettingDetails.create(d.getDetails()))
 							.isActive(SettingIsActive.create(d.getIsActive()))
-							.updatedAt(SettingUpdatedAt.create(d.getUpdatedAt()))
-							.reference(SettingReference.create(d.getReference()))
 						.build();
 
 

@@ -33,29 +33,29 @@ public class Transaction   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String name ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private Double amount ;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String details ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 	@Builder.Default
 	private Boolean isActive  = true ;
@@ -67,30 +67,18 @@ public class Transaction   extends AbstractAuditableEntity  {
 	private com.groupe2cs.bizyhub.categories.infrastructure.entity.Category category;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String typeTransactionRaw ;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 	@Builder.Default
 	private java.time.Instant dateTransaction  = java.time.Instant.now() ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-	@Builder.Default
-	private java.time.Instant updatedAt  = java.time.Instant.now() ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-
-	private String reference ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -113,8 +101,6 @@ public class Transaction   extends AbstractAuditableEntity  {
 			", category=" + category +
 			", typeTransactionRaw=" + typeTransactionRaw +
 			", dateTransaction=" + dateTransaction +
-			", updatedAt=" + updatedAt +
-			", reference=" + reference +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +
 		'}';

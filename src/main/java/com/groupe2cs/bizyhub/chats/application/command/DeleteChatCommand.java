@@ -32,7 +32,6 @@ public class DeleteChatCommand implements Serializable {
  	
  	
  	
- 	
 
 
 }

@@ -73,12 +73,10 @@ public class AccountFixtures {
 			CreateAccountCommand command = CreateAccountCommand.builder()
 				.name(AccountName.create(UUID.randomUUID().toString()))
 				.currency(AccountCurrency.create(UUID.randomUUID().toString()))
-				.currentBalance(AccountCurrentBalance.create(5062.78))
-				.previousBalance(AccountPreviousBalance.create(9154.96))
+				.currentBalance(AccountCurrentBalance.create(9513.94))
+				.previousBalance(AccountPreviousBalance.create(5121.93))
 				.details(AccountDetails.create(UUID.randomUUID().toString()))
 				.isActive(AccountIsActive.create(false))
-				.updatedAt(AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.reference(AccountReference.create(UUID.randomUUID().toString()))
 			.build();
 
 		command.setCreatedBy(AccountCreatedBy.create(user.getId()));
@@ -98,12 +96,10 @@ public class AccountFixtures {
         CreateAccountCommand command = CreateAccountCommand.builder()
         .name(AccountName.create(UUID.randomUUID().toString()))
         .currency(AccountCurrency.create(UUID.randomUUID().toString()))
-        .currentBalance(AccountCurrentBalance.create(5062.78))
-        .previousBalance(AccountPreviousBalance.create(9154.96))
+        .currentBalance(AccountCurrentBalance.create(9513.94))
+        .previousBalance(AccountPreviousBalance.create(5121.93))
         .details(AccountDetails.create(UUID.randomUUID().toString()))
         .isActive(AccountIsActive.create(false))
-        .updatedAt(AccountUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .reference(AccountReference.create(UUID.randomUUID().toString()))
         .build();
 
 		command.setCreatedBy(AccountCreatedBy.create(user.getId()));

@@ -30,8 +30,6 @@ public class UpdateAccountUserCommand implements Serializable {
  	private AccountUserUsername username;
  	private AccountUserDetails details;
  	private AccountUserIsActive isActive;
- 	private AccountUserUpdatedAt updatedAt;
- 	private AccountUserReference reference;
  	private AccountUserCreatedBy createdBy;
  	private AccountUserTenant tenant;
 

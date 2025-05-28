@@ -6,8 +6,6 @@ import com.groupe2cs.bizyhub.categories.domain.exception.CategoryNameNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryTypeCategoryRawNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryDetailsNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryIsActiveNotValid;
-import com.groupe2cs.bizyhub.categories.domain.exception.CategoryUpdatedAtNotValid;
-import com.groupe2cs.bizyhub.categories.domain.exception.CategoryReferenceNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryCreatedByNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryTenantNotValid;
 

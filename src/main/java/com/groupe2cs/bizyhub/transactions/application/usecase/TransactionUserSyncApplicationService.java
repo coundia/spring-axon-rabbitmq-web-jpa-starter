@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.command.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -31,8 +31,6 @@ public class TransactionUserSyncApplicationService {
 								.username(TransactionUserUsername.create(d.getUsername()))
 								.details(TransactionUserDetails.create(d.getDetails()))
 								.isActive(TransactionUserIsActive.create(d.getIsActive()))
-								.updatedAt(TransactionUserUpdatedAt.create(d.getUpdatedAt()))
-								.reference(TransactionUserReference.create(d.getReference()))
 						.build();
 
 					String userName = d.getUsername();
@@ -70,8 +68,6 @@ public class TransactionUserSyncApplicationService {
 							.username(TransactionUserUsername.create(d.getUsername()))
 							.details(TransactionUserDetails.create(d.getDetails()))
 							.isActive(TransactionUserIsActive.create(d.getIsActive()))
-							.updatedAt(TransactionUserUpdatedAt.create(d.getUpdatedAt()))
-							.reference(TransactionUserReference.create(d.getReference()))
 						.build();
 
 					String userName = d.getUsername();

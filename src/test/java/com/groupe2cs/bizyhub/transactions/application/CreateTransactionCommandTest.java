@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTransactionCommand command = new CreateTransactionCommand(
- TransactionId.create(UUID.randomUUID().toString()) ,  TransactionName.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(7128.96) ,  TransactionDetails.create(UUID.randomUUID().toString()) ,  TransactionIsActive.create(true) ,  TransactionAccount.create(UUID.randomUUID().toString()) ,  TransactionCategory.create(UUID.randomUUID().toString()) ,  TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()) ,  TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionReference.create(UUID.randomUUID().toString()) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
+ TransactionId.create(UUID.randomUUID().toString()) ,  TransactionName.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(1641.64) ,  TransactionDetails.create(UUID.randomUUID().toString()) ,  TransactionIsActive.create(true) ,  TransactionAccount.create(UUID.randomUUID().toString()) ,  TransactionCategory.create(UUID.randomUUID().toString()) ,  TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()) ,  TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -52,10 +52,6 @@ assertThat(sentCommand.getTypeTransactionRaw().value()).isEqualTo(
 command.getTypeTransactionRaw().value());
 assertThat(sentCommand.getDateTransaction().value()).isEqualTo(
 command.getDateTransaction().value());
-assertThat(sentCommand.getUpdatedAt().value()).isEqualTo(
-command.getUpdatedAt().value());
-assertThat(sentCommand.getReference().value()).isEqualTo(
-command.getReference().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
 command.getCreatedBy().value());
 assertThat(sentCommand.getTenant().value()).isEqualTo(

@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.categories.application.usecase;
-import com.groupe2cs.bizyhub.categories.application.command.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.categories.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import com.groupe2cs.bizyhub.categories.application.command.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -28,8 +28,6 @@ public class CategorySyncApplicationService {
 								.typeCategoryRaw(CategoryTypeCategoryRaw.create(d.getTypeCategoryRaw()))
 								.details(CategoryDetails.create(d.getDetails()))
 								.isActive(CategoryIsActive.create(d.getIsActive()))
-								.updatedAt(CategoryUpdatedAt.create(d.getUpdatedAt()))
-								.reference(CategoryReference.create(d.getReference()))
 						.build();
 
 
@@ -55,8 +53,6 @@ public class CategorySyncApplicationService {
 							.typeCategoryRaw(CategoryTypeCategoryRaw.create(d.getTypeCategoryRaw()))
 							.details(CategoryDetails.create(d.getDetails()))
 							.isActive(CategoryIsActive.create(d.getIsActive()))
-							.updatedAt(CategoryUpdatedAt.create(d.getUpdatedAt()))
-							.reference(CategoryReference.create(d.getReference()))
 						.build();
 
 

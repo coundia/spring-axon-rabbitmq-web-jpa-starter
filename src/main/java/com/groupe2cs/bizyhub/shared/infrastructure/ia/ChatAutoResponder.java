@@ -9,8 +9,6 @@ import com.groupe2cs.bizyhub.chats.domain.event.ChatCreatedEvent;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponses;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponsesJson;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatState;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatUpdatedAt;
-import com.groupe2cs.bizyhub.shared.application.DateUtils;
 import com.groupe2cs.bizyhub.transactions.application.dto.TransactionDeltaDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +17,6 @@ import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -52,8 +47,6 @@ public class ChatAutoResponder {
 				.responses(new ChatResponses(response))
 				.state(event.getState())
 				.account(event.getAccount())
-				.updatedAt(event.getUpdatedAt())
-				.reference(event.getReference())
 				.createdBy(event.getCreatedBy())
 				.tenant(event.getTenant())
 				.build();
@@ -86,9 +79,9 @@ public class ChatAutoResponder {
 					"Catégorie : " + categoryName + "\n";
 
 			dto.setId(UUID.randomUUID().toString());
-			dto.setReference(UUID.randomUUID().toString());
+			//dto.setReference(UUID.randomUUID().toString());
 			dto.setName(dto.getDetails());
-			dto.setUpdatedAt(Instant.now());
+			//dto.setUpdatedAt(Instant.now());
 			dto.setIsActive(true);
 
 			String updatedResponseJson = mapper.writeValueAsString(Map.of("deltas", List.of(dto)));
@@ -107,7 +100,6 @@ public class ChatAutoResponder {
 			updateChatCommand.setResponsesJson(new ChatResponsesJson(response));
 		}
 
-		updateChatCommand.setUpdatedAt(new ChatUpdatedAt(Instant.now()));
 
 		commandGateway.send(updateChatCommand);
 	}

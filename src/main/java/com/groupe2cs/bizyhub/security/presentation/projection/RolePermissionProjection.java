@@ -35,6 +35,8 @@ RolePermission entity = RolePermission.builder()
  		.permission( event.getPermission() == null ? null : new Permission(event.getPermission().value()))
 .build();
 
+entity.setId(event.getId().value());
+
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
 }

@@ -42,6 +42,7 @@ public class ChatFixtures {
 		CommandGateway commandGateway,
 		ChatRepository repository,
         com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
+        FileManagerRepository filesDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -53,6 +54,7 @@ public class ChatFixtures {
 			commandGateway,
 			 repository,
             accountDataRepository,
+            filesDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -69,9 +71,12 @@ public class ChatFixtures {
 		CommandGateway commandGateway,
 		ChatRepository  repository,
         com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
+        FileManagerRepository filesDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
+				MockMultipartFile files = new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
+				String fileName = files.getName();
 
 			CreateChatCommand command = CreateChatCommand.builder()
 				.messages(ChatMessages.create(UUID.randomUUID().toString()))
@@ -79,8 +84,7 @@ public class ChatFixtures {
 				.responses(ChatResponses.create(UUID.randomUUID().toString()))
 				.state(ChatState.create(UUID.randomUUID().toString()))
 				.account(ChatAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
-				.updatedAt(ChatUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.reference(ChatReference.create(UUID.randomUUID().toString()))
+					.files(ChatFiles.create(fileName))
 			.build();
 
 		command.setCreatedBy(ChatCreatedBy.create(user.getId()));
@@ -96,14 +100,15 @@ public class ChatFixtures {
         ChatRepository  repository,
         User user
         ) {
+        MockMultipartFile files = new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
+        String fileName = files.getName();
 
         CreateChatCommand command = CreateChatCommand.builder()
         .messages(ChatMessages.create(UUID.randomUUID().toString()))
         .responsesJson(ChatResponsesJson.create(UUID.randomUUID().toString()))
         .responses(ChatResponses.create(UUID.randomUUID().toString()))
         .state(ChatState.create(UUID.randomUUID().toString()))
-        .updatedAt(ChatUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .reference(ChatReference.create(UUID.randomUUID().toString()))
+        .files(ChatFiles.create(fileName))
         .build();
 
 		command.setCreatedBy(ChatCreatedBy.create(user.getId()));

@@ -83,8 +83,6 @@ public class TransactionUserFixtures {
 				.username(TransactionUserUsername.create(UUID.randomUUID().toString()))
 				.details(TransactionUserDetails.create(UUID.randomUUID().toString()))
 				.isActive(TransactionUserIsActive.create(true))
-				.updatedAt(TransactionUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.reference(TransactionUserReference.create(UUID.randomUUID().toString()))
 			.build();
 
 		command.setCreatedBy(TransactionUserCreatedBy.create(user.getId()));
@@ -106,8 +104,6 @@ public class TransactionUserFixtures {
         .username(TransactionUserUsername.create(UUID.randomUUID().toString()))
         .details(TransactionUserDetails.create(UUID.randomUUID().toString()))
         .isActive(TransactionUserIsActive.create(true))
-        .updatedAt(TransactionUserUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .reference(TransactionUserReference.create(UUID.randomUUID().toString()))
         .build();
 
 		command.setCreatedBy(TransactionUserCreatedBy.create(user.getId()));

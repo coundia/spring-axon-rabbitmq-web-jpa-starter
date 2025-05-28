@@ -38,6 +38,8 @@ Tenant entity = Tenant.builder()
  		.active(event.getActive() == null ? null : event.getActive().value())
  .build();
 
+entity.setId(event.getId().value());
+
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
 }

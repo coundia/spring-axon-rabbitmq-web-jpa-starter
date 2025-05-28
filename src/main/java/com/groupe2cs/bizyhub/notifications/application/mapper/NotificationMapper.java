@@ -17,8 +17,6 @@ return NotificationResponse.builder()
 		.status(entity.getStatus())
 		.reserved(entity.getReserved())
 		.errorMessage(entity.getErrorMessage())
-		.updatedAt(entity.getUpdatedAt())
-		.reference(entity.getReference())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
@@ -33,8 +31,6 @@ return NotificationResponse.builder()
 	.status(command.getStatus().value())
 	.reserved(command.getReserved().value())
 	.errorMessage(command.getErrorMessage().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -47,8 +43,6 @@ return NotificationResponse.builder()
 	.status(command.getStatus().value())
 	.reserved(command.getReserved().value())
 	.errorMessage(command.getErrorMessage().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -62,8 +56,6 @@ return CreateNotificationCommand.builder()
 	.status(NotificationStatus.create(request.getStatus()))
 	.reserved(NotificationReserved.create(request.getReserved()))
 	.errorMessage(NotificationErrorMessage.create(request.getErrorMessage()))
-	.updatedAt(NotificationUpdatedAt.create(request.getUpdatedAt()))
-	.reference(NotificationReference.create(request.getReference()))
 .build();
 }
 
@@ -76,8 +68,6 @@ return CreateNotificationCommand.builder()
 		.status(NotificationStatus.create(request.getStatus()))
 		.reserved(NotificationReserved.create(request.getReserved()))
 		.errorMessage(NotificationErrorMessage.create(request.getErrorMessage()))
-		.updatedAt(NotificationUpdatedAt.create(request.getUpdatedAt()))
-		.reference(NotificationReference.create(request.getReference()))
 	.build();
 	}
 

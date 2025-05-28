@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Date;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -29,8 +30,7 @@ private ChatResponsesJson responsesJson;
 private ChatResponses responses;
 private ChatState state;
 private ChatAccount account;
-private ChatUpdatedAt updatedAt;
-private ChatReference reference;
+private ChatFiles files;
 private ChatCreatedBy createdBy;
 private ChatTenant tenant;
 
@@ -44,8 +44,7 @@ apply(new ChatCreatedEvent(
 		command.getResponses(),
 		command.getState(),
 		command.getAccount(),
-		command.getUpdatedAt(),
-		command.getReference(),
+		command.getFiles(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -67,8 +66,7 @@ apply(new ChatUpdatedEvent(
 		command.getResponses(),
 		command.getState(),
 		command.getAccount(),
-		command.getUpdatedAt(),
-		command.getReference(),
+		command.getFiles(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -82,8 +80,7 @@ public void on(ChatCreatedEvent event) {
 	this.responses = event.getResponses();
 	this.state = event.getState();
 	this.account = event.getAccount();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
+	this.files = event.getFiles();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -101,8 +98,7 @@ this.id = event.getId();
 	this.responses = event.getResponses();
 	this.state = event.getState();
 	this.account = event.getAccount();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
+	this.files = event.getFiles();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

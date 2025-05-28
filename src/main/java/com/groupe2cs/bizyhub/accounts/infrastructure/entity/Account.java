@@ -33,58 +33,46 @@ public class Account   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String name ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 	@Builder.Default
 	private String currency  = "XOF" ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 	@Builder.Default
 	private Double currentBalance  = 0.0 ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 	@Builder.Default
 	private Double previousBalance  = 0.0 ;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String details ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 	@Builder.Default
 	private Boolean isActive  = true ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-	@Builder.Default
-	private java.time.Instant updatedAt  = java.time.Instant.now() ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-
-	private String reference ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -105,8 +93,6 @@ public class Account   extends AbstractAuditableEntity  {
 			", previousBalance=" + previousBalance +
 			", details=" + details +
 			", isActive=" + isActive +
-			", updatedAt=" + updatedAt +
-			", reference=" + reference +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +
 		'}';

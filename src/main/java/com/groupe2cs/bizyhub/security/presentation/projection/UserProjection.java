@@ -44,6 +44,8 @@ User entity = User.builder()
  		.message(event.getMessage() == null ? null : event.getMessage().value())
  .build();
 
+entity.setId(event.getId().value());
+
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
 }

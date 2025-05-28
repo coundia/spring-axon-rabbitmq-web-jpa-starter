@@ -34,6 +34,8 @@ Permission entity = Permission.builder()
  		.name(event.getName() == null ? null : event.getName().value())
  .build();
 
+entity.setId(event.getId().value());
+
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
 }

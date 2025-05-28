@@ -38,12 +38,10 @@ void it_should_be_able_to_add_account() {
 
 		requestDTO.setName(UUID.randomUUID().toString());
 		requestDTO.setCurrency(UUID.randomUUID().toString());
-		requestDTO.setCurrentBalance(3379.05);
-		requestDTO.setPreviousBalance(8138.78);
+		requestDTO.setCurrentBalance(5946.63);
+		requestDTO.setPreviousBalance(6798.16);
 		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(true);
-		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setReference(UUID.randomUUID().toString());
+		requestDTO.setIsActive(false);
 
  		String uri = "/v1/commands/account";
 		ResponseEntity<AccountResponse> response = this.postForEntity(uri, requestDTO, AccountResponse.class);
@@ -56,7 +54,5 @@ void it_should_be_able_to_add_account() {
 		assertThat(response.getBody().getPreviousBalance()).isEqualTo(requestDTO.getPreviousBalance());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
-		assertThat(response.getBody().getUpdatedAt()).isEqualTo(requestDTO.getUpdatedAt());
-		assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
 	}
 }

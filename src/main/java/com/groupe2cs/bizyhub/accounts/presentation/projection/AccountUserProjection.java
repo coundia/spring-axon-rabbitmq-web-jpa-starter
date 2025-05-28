@@ -37,9 +37,9 @@ AccountUser entity = AccountUser.builder()
 		.username(event.getUsername() == null ? null : event.getUsername().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
- 		.updatedAt(event.getUpdatedAt() == null ? null : event.getUpdatedAt().value())
- 		.reference(event.getReference() == null ? null : event.getReference().value())
  .build();
+
+entity.setId(event.getId().value());
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
@@ -89,12 +89,6 @@ AccountUser entity = repository.findById(event.getId().value())
     }
 	if(event.getIsActive() != null) {
 		entity.setIsActive(event.getIsActive().value());
-    }
-	if(event.getUpdatedAt() != null) {
-		entity.setUpdatedAt(event.getUpdatedAt().value());
-    }
-	if(event.getReference() != null) {
-		entity.setReference(event.getReference().value());
     }
 
 if(event.getCreatedBy() !=null){

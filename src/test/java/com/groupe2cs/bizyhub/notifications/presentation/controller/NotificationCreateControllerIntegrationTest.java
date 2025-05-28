@@ -42,8 +42,6 @@ void it_should_be_able_to_add_notification() {
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setReserved(UUID.randomUUID().toString());
 		requestDTO.setErrorMessage(UUID.randomUUID().toString());
-		requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setReference(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/notification";
 		ResponseEntity<NotificationResponse> response = this.postForEntity(uri, requestDTO, NotificationResponse.class);
@@ -56,7 +54,5 @@ void it_should_be_able_to_add_notification() {
 		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());
 		assertThat(response.getBody().getReserved()).isEqualTo(requestDTO.getReserved());
 		assertThat(response.getBody().getErrorMessage()).isEqualTo(requestDTO.getErrorMessage());
-		assertThat(response.getBody().getUpdatedAt()).isEqualTo(requestDTO.getUpdatedAt());
-		assertThat(response.getBody().getReference()).isEqualTo(requestDTO.getReference());
 	}
 }

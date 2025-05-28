@@ -34,9 +34,10 @@ ApiKey entity = ApiKey.builder()
  		.appKey(event.getAppKey() == null ? null : event.getAppKey().value())
  		.username(event.getUsername() == null ? null : event.getUsername().value())
  		.active(event.getActive() == null ? null : event.getActive().value())
- 		.createdAt(event.getCreatedAt() == null ? null : event.getCreatedAt().value())
  		.expiration(event.getExpiration() == null ? null : event.getExpiration().value())
  .build();
+
+entity.setId(event.getId().value());
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
@@ -75,9 +76,6 @@ ApiKey entity = repository.findById(event.getId().value())
     }
 	if(event.getActive() != null) {
 		entity.setActive(event.getActive().value());
-    }
-	if(event.getCreatedAt() != null) {
-		entity.setCreatedAt(event.getCreatedAt().value());
     }
 	if(event.getExpiration() != null) {
 		entity.setExpiration(event.getExpiration().value());

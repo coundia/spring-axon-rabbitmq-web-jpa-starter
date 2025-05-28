@@ -32,8 +32,6 @@ public class DeleteAccountCommand implements Serializable {
  	
  	
  	
- 	
- 	
 
 
 }

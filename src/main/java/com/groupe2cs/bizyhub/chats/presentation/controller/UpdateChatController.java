@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.chats.presentation.controller;
 
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import com.groupe2cs.bizyhub.chats.application.usecase.*;
-import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+	import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+	import com.groupe2cs.bizyhub.chats.application.usecase.*;
+	import com.groupe2cs.bizyhub.chats.application.dto.*;
+	import com.groupe2cs.bizyhub.chats.application.mapper.*;
+	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,9 +14,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,32 +48,36 @@ schema = @Schema(implementation = ChatResponse.class))),
 @ApiResponse(responseCode = "500", description = "Internal server error",
 content = @Content)
 })
-@PutMapping(value="{id}",  consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<ChatResponse> updateChat(
-	@Valid @PathVariable String id,
-	@RequestBody ChatRequest request,
-	@AuthenticationPrincipal Jwt jwt
-	) { {
+@PutMapping(value="{id}",  consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<ChatResponse> addChat(
+	@AuthenticationPrincipal Jwt jwt,
+	@PathVariable String id,
+			@RequestPart(value ="files", required = false) List<MultipartFile> files,
+			@RequestPart(value ="messages", required = false) String messages,
+			@RequestPart(value ="responsesJson", required = false) String responsesJson,
+			@RequestPart(value ="responses", required = false) String responses,
+			@RequestPart(value ="state", required = false) String state,
+			@RequestPart(value ="account", required = false) String account
+	) {
 	try {
 
 	MetaRequest metaRequest = MetaRequest.builder()
-	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
+		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
 	.build();
 
-    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
-	ChatResponse response = applicationService.updateChat(ChatId.create(id),
-	request,
+	ChatResponse response = applicationService.updateChat(
+	ChatId.create(id),
+	files,		messages,		responsesJson,		responses,		state,		account,
 	metaRequest
 	);
 
 	return ResponseEntity.ok(response);
 
 	} catch (Exception ex) {
-	//e.printStackTrace();
 	log.error("Failed to Update chat: {}", ex.getMessage(), ex);
 	return ResponseEntity.internalServerError().build();
 	}
 	}
-}
 }

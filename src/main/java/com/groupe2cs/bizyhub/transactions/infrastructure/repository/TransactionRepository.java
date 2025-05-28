@@ -126,36 +126,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
 
 
         @Query("""
-        SELECT e FROM Transaction e
-        WHERE e.updatedAt >= :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.updatedAt < :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Transaction> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
-
-         @Query("""
-        SELECT e FROM Transaction e
-        WHERE e.updatedAt >= :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.updatedAt < :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.tenant.id = :tenantId
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Transaction> findByUpdatedAtAndTenantId(java.time.Instant updatedAt, String tenantId);
-
-
-        @Query("""
-        SELECT DISTINCT t FROM Transaction t
-        LEFT JOIN AccountUser au ON au.account.id = t.account.id
-        WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
-        """)
-        List<Transaction> findByReferenceAndCreatedById(String valueId, String userId);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByReferenceAndTenantName(String reference, String tenantName);
-
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Transaction> findByReferenceAndTenantId(String reference, String tenantId);
-        @Query("""
         SELECT DISTINCT t FROM Transaction t
         LEFT JOIN AccountUser au ON au.account.id = t.account.id
         WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)

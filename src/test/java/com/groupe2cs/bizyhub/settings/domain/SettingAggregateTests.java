@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.settings.domain;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
+import com.groupe2cs.bizyhub.settings.domain.exception.*;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
-import com.groupe2cs.bizyhub.settings.domain.exception.*;
 
 
 public class SettingAggregateTests extends BaseUnitTests {
@@ -19,11 +19,9 @@ void it_should_create_setting_with_valid_values() {
 	SettingLocale locale = SettingLocale.create(UUID.randomUUID().toString());
 	SettingDetails details = SettingDetails.create(UUID.randomUUID().toString());
 	SettingIsActive isActive = SettingIsActive.create(false);
-	SettingUpdatedAt updatedAt = SettingUpdatedAt.create(java.time.Instant.now().plusSeconds(3600));
-	SettingReference reference = SettingReference.create(UUID.randomUUID().toString());
 	SettingCreatedBy createdBy = SettingCreatedBy.create(UUID.randomUUID().toString());
 	SettingTenant tenant = SettingTenant.create(UUID.randomUUID().toString());
-	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, value, locale, details, isActive, updatedAt, reference, createdBy, tenant);
+	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, value, locale, details, isActive, createdBy, tenant);
 	assertThat(aggregateSettingAggregate.getId()).isNotNull();
 	assertThat(aggregateSettingAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateSettingAggregate.getName()).isEqualTo(name);
@@ -31,8 +29,6 @@ void it_should_create_setting_with_valid_values() {
 	assertThat(aggregateSettingAggregate.getLocale()).isEqualTo(locale);
 	assertThat(aggregateSettingAggregate.getDetails()).isEqualTo(details);
 	assertThat(aggregateSettingAggregate.getIsActive()).isEqualTo(isActive);
-	assertThat(aggregateSettingAggregate.getUpdatedAt()).isEqualTo(updatedAt);
-	assertThat(aggregateSettingAggregate.getReference()).isEqualTo(reference);
 	assertThat(aggregateSettingAggregate.getCreatedBy()).isEqualTo(createdBy);
 	assertThat(aggregateSettingAggregate.getTenant()).isEqualTo(tenant);
 }
@@ -58,34 +54,9 @@ void it_should_create_setting_with_valid_values() {
 		assertThat(error.getMessage()).isEqualTo("Locale is invalid");
 		}
 		@Test
-		void it_should_throw_when_details_is_invalid() {
-		SettingDetailsNotValid error = assertThrows(SettingDetailsNotValid.class, () -> SettingDetails.create(""));
-		assertThat(error.getMessage()).isEqualTo("Details is invalid");
-		}
-		@Test
 		void it_should_throw_when_isActive_is_invalid() {
 		SettingIsActiveNotValid error = assertThrows(SettingIsActiveNotValid.class, () -> SettingIsActive.create(null));
 		assertThat(error.getMessage()).isEqualTo("IsActive is invalid");
-		}
-		@Test
-		void it_should_throw_when_updatedAt_is_invalid() {
-		SettingUpdatedAtNotValid error = assertThrows(SettingUpdatedAtNotValid.class, () -> SettingUpdatedAt.create(null));
-		assertThat(error.getMessage()).isEqualTo("UpdatedAt is invalid");
-		}
-		@Test
-		void it_should_throw_when_reference_is_invalid() {
-		SettingReferenceNotValid error = assertThrows(SettingReferenceNotValid.class, () -> SettingReference.create(""));
-		assertThat(error.getMessage()).isEqualTo("Reference is invalid");
-		}
-		@Test
-		void it_should_throw_when_createdBy_is_invalid() {
-		SettingCreatedByNotValid error = assertThrows(SettingCreatedByNotValid.class, () -> SettingCreatedBy.create(""));
-		assertThat(error.getMessage()).isEqualTo("CreatedBy is invalid");
-		}
-		@Test
-		void it_should_throw_when_tenant_is_invalid() {
-		SettingTenantNotValid error = assertThrows(SettingTenantNotValid.class, () -> SettingTenant.create(""));
-		assertThat(error.getMessage()).isEqualTo("Tenant is invalid");
 		}
 
 }

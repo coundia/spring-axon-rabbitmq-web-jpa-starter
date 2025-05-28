@@ -29,8 +29,6 @@ public class UpdateSettingCommand implements Serializable {
  	private SettingLocale locale;
  	private SettingDetails details;
  	private SettingIsActive isActive;
- 	private SettingUpdatedAt updatedAt;
- 	private SettingReference reference;
  	private SettingCreatedBy createdBy;
  	private SettingTenant tenant;
 

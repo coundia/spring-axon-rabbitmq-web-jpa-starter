@@ -30,8 +30,6 @@ private AccountUserUser user;
 private AccountUserUsername username;
 private AccountUserDetails details;
 private AccountUserIsActive isActive;
-private AccountUserUpdatedAt updatedAt;
-private AccountUserReference reference;
 private AccountUserCreatedBy createdBy;
 private AccountUserTenant tenant;
 
@@ -46,8 +44,6 @@ apply(new AccountUserCreatedEvent(
 		command.getUsername(),
 		command.getDetails(),
 		command.getIsActive(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -70,8 +66,6 @@ apply(new AccountUserUpdatedEvent(
 		command.getUsername(),
 		command.getDetails(),
 		command.getIsActive(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -86,8 +80,6 @@ public void on(AccountUserCreatedEvent event) {
 	this.username = event.getUsername();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -106,8 +98,6 @@ this.id = event.getId();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

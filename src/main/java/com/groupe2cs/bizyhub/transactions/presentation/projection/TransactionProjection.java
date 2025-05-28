@@ -42,9 +42,9 @@ Transaction entity = Transaction.builder()
  		.category( event.getCategory() == null ? null : new com.groupe2cs.bizyhub.categories.infrastructure.entity.Category(event.getCategory().value()))
 		.typeTransactionRaw(event.getTypeTransactionRaw() == null ? null : event.getTypeTransactionRaw().value())
  		.dateTransaction(event.getDateTransaction() == null ? null : event.getDateTransaction().value())
- 		.updatedAt(event.getUpdatedAt() == null ? null : event.getUpdatedAt().value())
- 		.reference(event.getReference() == null ? null : event.getReference().value())
  .build();
+
+entity.setId(event.getId().value());
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
@@ -103,12 +103,6 @@ Transaction entity = repository.findById(event.getId().value())
 	if(event.getDateTransaction() != null) {
 		entity.setDateTransaction(event.getDateTransaction().value());
     }
-	if(event.getUpdatedAt() != null) {
-		entity.setUpdatedAt(event.getUpdatedAt().value());
-    }
-	if(event.getReference() != null) {
-		entity.setReference(event.getReference().value());
-    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
@@ -166,7 +160,7 @@ public void applyTransactionToAccount(String accountId, Double amount, String ty
 			log.info("Account updated with debit amount: {}, account:{}", amount, account.getId());
 		}
 
-		account.setUpdatedAt(java.time.Instant.now());
+		//account.setUpdatedAt(java.time.Instant.now());
 		accountRepository.save(account);
 	}
 

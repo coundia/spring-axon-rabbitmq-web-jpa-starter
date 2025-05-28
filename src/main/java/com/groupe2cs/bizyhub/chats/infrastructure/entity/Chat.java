@@ -33,47 +33,35 @@ public class Chat   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 		columnDefinition = "Text",
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String messages ;
 
 	@Column(nullable = true, 		columnDefinition = "Text",
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String responsesJson ;
 
 	@Column(nullable = true, 		columnDefinition = "Text",
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String responses ;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String state ;
 	@ManyToOne
 	@JoinColumn(name = "account_id", nullable = true)
 	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-	@Builder.Default
-	private java.time.Instant updatedAt  = java.time.Instant.now() ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-
-	private String reference ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -93,8 +81,6 @@ public class Chat   extends AbstractAuditableEntity  {
 			", responses=" + responses +
 			", state=" + state +
 			", account=" + account +
-			", updatedAt=" + updatedAt +
-			", reference=" + reference +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +
 		'}';

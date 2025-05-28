@@ -30,8 +30,7 @@ public class CreateChatCommand implements Serializable {
  	private ChatResponses responses;
  	private ChatState state;
  	private ChatAccount account;
- 	private ChatUpdatedAt updatedAt;
- 	private ChatReference reference;
+ 	private ChatFiles files;
  	private ChatCreatedBy createdBy;
  	private ChatTenant tenant;
 	public CreateChatCommand(
@@ -41,8 +40,7 @@ public class CreateChatCommand implements Serializable {
    ChatResponses responses , 
    ChatState state , 
    ChatAccount account , 
-   ChatUpdatedAt updatedAt , 
-   ChatReference reference , 
+   ChatFiles files , 
    ChatCreatedBy createdBy , 
    ChatTenant tenant  
 		){
@@ -53,8 +51,7 @@ public class CreateChatCommand implements Serializable {
   this.responses = responses ; 
   this.state = state ; 
   this.account = account ; 
-  this.updatedAt = updatedAt ; 
-  this.reference = reference ; 
+  this.files = files ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

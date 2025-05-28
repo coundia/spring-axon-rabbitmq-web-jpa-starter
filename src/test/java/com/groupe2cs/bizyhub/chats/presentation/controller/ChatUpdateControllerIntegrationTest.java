@@ -17,59 +17,74 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private ChatRepository chatRepository;
+    @Autowired
+    private ChatRepository chatRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+    @Autowired
+    private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+    @Autowired
+    private CommandGateway commandGatewayUpdate;
 
-@Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+    @Autowired
+    private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository;
+    @Autowired
+    private FileManagerRepository filesDataRepository;
+    @Autowired
+    private UserRepository createdByDataRepository;
+    @Autowired
+    private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_update_chat() {
+    @Test
+    void it_should_be_able_to_update_chat() {
 
-	String existingId = ChatFixtures.randomOneViaCommand(
-	commandGateway,chatRepository,
+        String existingId = ChatFixtures.randomOneViaCommand(
+            commandGateway, chatRepository,
         accountDataRepository,
+        filesDataRepository,
         createdByDataRepository,
         tenantDataRepository,
-	 getCurrentUser() ).getId().value();
+            getCurrentUser()
+        ).getId().value();
 
-	CreateChatCommand updated = ChatFixtures.randomOneViaCommand(commandGatewayUpdate,
-    chatRepository,
-            accountDataRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-     getCurrentUser());
+        CreateChatCommand updated = ChatFixtures.randomOneViaCommand(
+            commandGatewayUpdate, chatRepository,
+        accountDataRepository,
+        filesDataRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+            getCurrentUser()
+        );
 
-	ChatFixtures.byIdWaitExist(chatRepository, existingId);
-	ChatFixtures.byIdWaitExist(chatRepository, updated.getId().value());
+        ChatFixtures.byIdWaitExist(chatRepository, existingId);
+        ChatFixtures.byIdWaitExist(chatRepository, updated.getId().value());
 
-	ChatRequest requestDTO = new ChatRequest();
-	 requestDTO.setMessages(UUID.randomUUID().toString());
-	 requestDTO.setResponsesJson(UUID.randomUUID().toString());
-	 requestDTO.setResponses(UUID.randomUUID().toString());
-	 requestDTO.setState(UUID.randomUUID().toString());
-	 requestDTO.setAccount( updated.getAccount().value());
-	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-	 requestDTO.setReference(UUID.randomUUID().toString());
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("messages", UUID.randomUUID().toString());
+        body.add("responsesJson", UUID.randomUUID().toString());
+        body.add("responses", UUID.randomUUID().toString());
+        body.add("state", UUID.randomUUID().toString());
+        body.add("account", updated.getAccount().value());
 
-	String uri = "/v1/commands/chat/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+        HttpHeaders multipartHeaders = new HttpHeaders();
+        multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
 
-	}
+        String uri = "/api/v1/commands/chat/" + existingId;
+        ResponseEntity<String> response = testRestTemplate.exchange(
+            uri,
+            HttpMethod.PUT,
+            requestEntity,
+            String.class
+        );
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 }

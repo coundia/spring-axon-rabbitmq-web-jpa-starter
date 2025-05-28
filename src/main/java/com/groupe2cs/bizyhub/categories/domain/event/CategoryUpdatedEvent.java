@@ -22,8 +22,6 @@ public class CategoryUpdatedEvent implements Serializable {
 	private CategoryTypeCategoryRaw typeCategoryRaw;
 	private CategoryDetails details;
 	private CategoryIsActive isActive;
-	private CategoryUpdatedAt updatedAt;
-	private CategoryReference reference;
 	private CategoryCreatedBy createdBy;
 	private CategoryTenant tenant;
 

@@ -19,26 +19,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "ChatRequest", description = "Request payload for Chat operations")
 public class ChatRequest implements Serializable {
 
-	@Schema(description = "", example = "b3c1f67a-b5ea-459c-bae6-3fee6227c042")
+	@Schema(description = "", example = "6ba6f9d7-b5bc-4f22-bf88-f38dcc2c0f94")
 	private String messages;
-
-	@Schema(description = "", example = "3ea7ee69-2242-49e4-b845-bbee07e2f3ed")
+	@Schema(description = "", example = "5c796e95-084c-42a5-bc17-c55c466b6198")
 	private String responsesJson;
-
-	@Schema(description = "", example = "6572457b-359b-47ed-ae9d-eabec419a648")
+	@Schema(description = "", example = "e44be172-86ce-4540-8540-2c7d3c690920")
 	private String responses;
-
-	@Schema(description = "", example = "ce4a819d-f125-4432-be50-b5a709cc1f00")
+	@Schema(description = "", example = "45136662-0f19-411c-bc3f-c2b104ad67fd")
 	private String state;
-
-	@Schema(description = "", example = "c147f2b7-5695-49c9-a01e-66eb09776351")
+	@Schema(description = "", example = "1eea9c20-f294-4878-8acc-3cfe7d098d10")
 	private String account;
-
-	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
-	private java.time.Instant updatedAt;
-
-	@Schema(description = "", example = "01e1f0e4-9ec8-4835-8509-75d58e44a0e7")
-	private String reference;
-
 
 }

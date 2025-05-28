@@ -30,8 +30,6 @@ public class UpdateAccountCommand implements Serializable {
  	private AccountPreviousBalance previousBalance;
  	private AccountDetails details;
  	private AccountIsActive isActive;
- 	private AccountUpdatedAt updatedAt;
- 	private AccountReference reference;
  	private AccountCreatedBy createdBy;
  	private AccountTenant tenant;
 

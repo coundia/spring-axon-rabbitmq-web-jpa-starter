@@ -32,8 +32,6 @@ private TransactionAccount account;
 private TransactionCategory category;
 private TransactionTypeTransactionRaw typeTransactionRaw;
 private TransactionDateTransaction dateTransaction;
-private TransactionUpdatedAt updatedAt;
-private TransactionReference reference;
 private TransactionCreatedBy createdBy;
 private TransactionTenant tenant;
 
@@ -50,8 +48,6 @@ apply(new TransactionCreatedEvent(
 		command.getCategory(),
 		command.getTypeTransactionRaw(),
 		command.getDateTransaction(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -76,8 +72,6 @@ apply(new TransactionUpdatedEvent(
 		command.getCategory(),
 		command.getTypeTransactionRaw(),
 		command.getDateTransaction(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -94,8 +88,6 @@ public void on(TransactionCreatedEvent event) {
 	this.category = event.getCategory();
 	this.typeTransactionRaw = event.getTypeTransactionRaw();
 	this.dateTransaction = event.getDateTransaction();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -116,8 +108,6 @@ this.id = event.getId();
 	this.category = event.getCategory();
 	this.typeTransactionRaw = event.getTypeTransactionRaw();
 	this.dateTransaction = event.getDateTransaction();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

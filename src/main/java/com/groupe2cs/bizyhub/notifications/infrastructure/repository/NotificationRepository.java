@@ -71,32 +71,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Stri
 
         @Query("SELECT e FROM Notification e WHERE LOWER(e.errorMessage) LIKE LOWER(CONCAT('%', :errorMessage, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Notification> findByErrorMessageAndTenantId(String errorMessage, String tenantId);
-        @Query("""
-        SELECT e FROM Notification e
-        WHERE e.updatedAt >= :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.updatedAt < :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Notification> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
-
-         @Query("""
-        SELECT e FROM Notification e
-        WHERE e.updatedAt >= :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.updatedAt < :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.tenant.id = :tenantId
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Notification> findByUpdatedAtAndTenantId(java.time.Instant updatedAt, String tenantId);
-
-
-        @Query("SELECT e FROM Notification e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Notification> findByReferenceAndCreatedById(String reference, String createdById);
-        @Query("SELECT e FROM Notification e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Notification> findByReferenceAndTenantName(String reference, String tenantName);
-
-        @Query("SELECT e FROM Notification e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Notification> findByReferenceAndTenantId(String reference, String tenantId);
         @Query("SELECT e FROM Notification e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Notification> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
         @Query("SELECT e FROM Notification e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

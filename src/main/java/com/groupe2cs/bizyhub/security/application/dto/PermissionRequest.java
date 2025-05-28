@@ -19,8 +19,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "PermissionRequest", description = "Request payload for Permission operations")
 public class PermissionRequest implements Serializable {
 
-	@Schema(description = "", example = "a9f36a83-3e0d-4335-b170-e810b0c55161")
+	@Schema(description = "", example = "aba694a7-2073-4d8b-8cb2-fa7fbba10388")
 	private String name;
-
 
 }

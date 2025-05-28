@@ -17,56 +17,67 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NotificationUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private NotificationRepository notificationRepository;
+    @Autowired
+    private NotificationRepository notificationRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+    @Autowired
+    private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+    @Autowired
+    private CommandGateway commandGatewayUpdate;
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+    @Autowired
+    private UserRepository createdByDataRepository;
+    @Autowired
+    private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_update_notification() {
+    @Test
+    void it_should_be_able_to_update_notification() {
 
-	String existingId = NotificationFixtures.randomOneViaCommand(
-	commandGateway,notificationRepository,
+        String existingId = NotificationFixtures.randomOneViaCommand(
+            commandGateway, notificationRepository,
         createdByDataRepository,
         tenantDataRepository,
-	 getCurrentUser() ).getId().value();
+            getCurrentUser()
+        ).getId().value();
 
-	CreateNotificationCommand updated = NotificationFixtures.randomOneViaCommand(commandGatewayUpdate,
-    notificationRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-     getCurrentUser());
+        CreateNotificationCommand updated = NotificationFixtures.randomOneViaCommand(
+            commandGatewayUpdate, notificationRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+            getCurrentUser()
+        );
 
-	NotificationFixtures.byIdWaitExist(notificationRepository, existingId);
-	NotificationFixtures.byIdWaitExist(notificationRepository, updated.getId().value());
+        NotificationFixtures.byIdWaitExist(notificationRepository, existingId);
+        NotificationFixtures.byIdWaitExist(notificationRepository, updated.getId().value());
 
-	NotificationRequest requestDTO = new NotificationRequest();
-	 requestDTO.setDeviceToken(UUID.randomUUID().toString());
-	 requestDTO.setTitle(UUID.randomUUID().toString());
-	 requestDTO.setMessage(UUID.randomUUID().toString());
-	 requestDTO.setStatus(UUID.randomUUID().toString());
-	 requestDTO.setReserved(UUID.randomUUID().toString());
-	 requestDTO.setErrorMessage(UUID.randomUUID().toString());
-	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-	 requestDTO.setReference(UUID.randomUUID().toString());
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("deviceToken", UUID.randomUUID().toString());
+        body.add("title", UUID.randomUUID().toString());
+        body.add("message", UUID.randomUUID().toString());
+        body.add("status", UUID.randomUUID().toString());
+        body.add("reserved", UUID.randomUUID().toString());
+        body.add("errorMessage", UUID.randomUUID().toString());
 
-	String uri = "/v1/commands/notification/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+        HttpHeaders multipartHeaders = new HttpHeaders();
+        multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
 
-	}
+        String uri = "/api/v1/commands/notification/" + existingId;
+        ResponseEntity<String> response = testRestTemplate.exchange(
+            uri,
+            HttpMethod.PUT,
+            requestEntity,
+            String.class
+        );
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 }

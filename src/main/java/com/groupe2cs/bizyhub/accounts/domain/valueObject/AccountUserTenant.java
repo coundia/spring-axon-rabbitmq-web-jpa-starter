@@ -8,8 +8,6 @@ import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUserNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUsernameNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserDetailsNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserIsActiveNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUpdatedAtNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserReferenceNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserCreatedByNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserTenantNotValid;
 

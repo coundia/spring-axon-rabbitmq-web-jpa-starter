@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateCategoryCommand command = new CreateCategoryCommand(
- CategoryId.create(UUID.randomUUID().toString()) ,  CategoryName.create(UUID.randomUUID().toString()) ,  CategoryTypeCategoryRaw.create(UUID.randomUUID().toString()) ,  CategoryDetails.create(UUID.randomUUID().toString()) ,  CategoryIsActive.create(true) ,  CategoryUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  CategoryReference.create(UUID.randomUUID().toString()) ,  CategoryCreatedBy.create(UUID.randomUUID().toString()) ,  CategoryTenant.create(UUID.randomUUID().toString()) 
+ CategoryId.create(UUID.randomUUID().toString()) ,  CategoryName.create(UUID.randomUUID().toString()) ,  CategoryTypeCategoryRaw.create(UUID.randomUUID().toString()) ,  CategoryDetails.create(UUID.randomUUID().toString()) ,  CategoryIsActive.create(true) ,  CategoryCreatedBy.create(UUID.randomUUID().toString()) ,  CategoryTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -44,10 +44,6 @@ assertThat(sentCommand.getDetails().value()).isEqualTo(
 command.getDetails().value());
 assertThat(sentCommand.getIsActive().value()).isEqualTo(
 command.getIsActive().value());
-assertThat(sentCommand.getUpdatedAt().value()).isEqualTo(
-command.getUpdatedAt().value());
-assertThat(sentCommand.getReference().value()).isEqualTo(
-command.getReference().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
 command.getCreatedBy().value());
 assertThat(sentCommand.getTenant().value()).isEqualTo(

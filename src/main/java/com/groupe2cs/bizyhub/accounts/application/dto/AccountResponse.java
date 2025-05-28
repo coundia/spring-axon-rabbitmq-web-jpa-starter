@@ -34,10 +34,6 @@ public class AccountResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private Boolean isActive;
 	@Schema(description = "", example = "")
-	private java.time.Instant updatedAt;
-	@Schema(description = "", example = "")
-	private String reference;
-	@Schema(description = "", example = "")
 	private String createdBy;
 	@Schema(description = "", example = "")
 	private String tenant;

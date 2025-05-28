@@ -30,8 +30,6 @@ private AccountCurrentBalance currentBalance;
 private AccountPreviousBalance previousBalance;
 private AccountDetails details;
 private AccountIsActive isActive;
-private AccountUpdatedAt updatedAt;
-private AccountReference reference;
 private AccountCreatedBy createdBy;
 private AccountTenant tenant;
 
@@ -46,8 +44,6 @@ apply(new AccountCreatedEvent(
 		command.getPreviousBalance(),
 		command.getDetails(),
 		command.getIsActive(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -70,8 +66,6 @@ apply(new AccountUpdatedEvent(
 		command.getPreviousBalance(),
 		command.getDetails(),
 		command.getIsActive(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -86,8 +80,6 @@ public void on(AccountCreatedEvent event) {
 	this.previousBalance = event.getPreviousBalance();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -106,8 +98,6 @@ this.id = event.getId();
 	this.previousBalance = event.getPreviousBalance();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

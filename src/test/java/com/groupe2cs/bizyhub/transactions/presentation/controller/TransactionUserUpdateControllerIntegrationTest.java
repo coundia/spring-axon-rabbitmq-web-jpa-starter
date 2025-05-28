@@ -17,64 +17,75 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionUserUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private TransactionUserRepository transactionuserRepository;
+    @Autowired
+    private TransactionUserRepository transactionuserRepository;
 
-@Autowired
-private CommandGateway commandGateway;
+    @Autowired
+    private CommandGateway commandGateway;
 
-@Autowired
-private CommandGateway commandGatewayUpdate;
+    @Autowired
+    private CommandGateway commandGatewayUpdate;
 
-@Autowired
-private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+    @Autowired
+    private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository;
+    @Autowired
+    private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository;
+    @Autowired
+    private UserRepository createdByDataRepository;
+    @Autowired
+    private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_update_transactionuser() {
+    @Test
+    void it_should_be_able_to_update_transactionuser() {
 
-	String existingId = TransactionUserFixtures.randomOneViaCommand(
-	commandGateway,transactionuserRepository,
+        String existingId = TransactionUserFixtures.randomOneViaCommand(
+            commandGateway, transactionuserRepository,
         transactionDataRepository,
         userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
-	 getCurrentUser() ).getId().value();
+            getCurrentUser()
+        ).getId().value();
 
-	CreateTransactionUserCommand updated = TransactionUserFixtures.randomOneViaCommand(commandGatewayUpdate,
-    transactionuserRepository,
-            transactionDataRepository,
-            userDataRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-     getCurrentUser());
+        CreateTransactionUserCommand updated = TransactionUserFixtures.randomOneViaCommand(
+            commandGatewayUpdate, transactionuserRepository,
+        transactionDataRepository,
+        userDataRepository,
+        createdByDataRepository,
+        tenantDataRepository,
+            getCurrentUser()
+        );
 
-	TransactionUserFixtures.byIdWaitExist(transactionuserRepository, existingId);
-	TransactionUserFixtures.byIdWaitExist(transactionuserRepository, updated.getId().value());
+        TransactionUserFixtures.byIdWaitExist(transactionuserRepository, existingId);
+        TransactionUserFixtures.byIdWaitExist(transactionuserRepository, updated.getId().value());
 
-	TransactionUserRequest requestDTO = new TransactionUserRequest();
-	 requestDTO.setName(UUID.randomUUID().toString());
-	 requestDTO.setTransaction( updated.getTransaction().value());
-	 requestDTO.setUser( updated.getUser().value());
-	 requestDTO.setUsername(UUID.randomUUID().toString());
-	 requestDTO.setDetails(UUID.randomUUID().toString());
-	 requestDTO.setIsActive(true);
-	 requestDTO.setUpdatedAt(java.time.Instant.now().plusSeconds(3600));
-	 requestDTO.setReference(UUID.randomUUID().toString());
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("name", UUID.randomUUID().toString());
+        body.add("transaction", updated.getTransaction().value());
+        body.add("user", updated.getUser().value());
+        body.add("username", UUID.randomUUID().toString());
+        body.add("details", UUID.randomUUID().toString());
+        body.add("isActive", false);
 
-	String uri = "/v1/commands/transactionUser/" + existingId;
-	ResponseEntity<String> response = this.put(uri,requestDTO);
+        HttpHeaders multipartHeaders = new HttpHeaders();
+        multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
 
-	}
+        String uri = "/api/v1/commands/transactionUser/" + existingId;
+        ResponseEntity<String> response = testRestTemplate.exchange(
+            uri,
+            HttpMethod.PUT,
+            requestEntity,
+            String.class
+        );
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 }

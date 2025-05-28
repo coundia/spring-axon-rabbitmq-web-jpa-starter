@@ -50,10 +50,10 @@ public class FakeIAService implements IAService {
 				.builder()
 				.name(categoryName)
 				.typeCategoryRaw(type)
-				.updatedAt(Instant.now())
+			//	.updatedAt(Instant.now())
 				.isActive(true)
 				.details("")
-				.reference("")
+				//.reference("")
 				.build();
 
 		MetaRequest metaRequest = MetaRequest
@@ -94,7 +94,7 @@ public class FakeIAService implements IAService {
 							"fab97fa4-c796-4921-b1d2-db8d671d3a4e"
 					))
 					.typeTransactionRaw("IN")
-					.reference(UUID.randomUUID().toString())
+					//.reference(UUID.randomUUID().toString())
 					.build();
 
 

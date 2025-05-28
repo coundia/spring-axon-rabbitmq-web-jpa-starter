@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.command.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -32,8 +32,6 @@ public class TransactionSyncApplicationService {
 								.category(TransactionCategory.create(d.getCategory()))
 								.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
 								.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
-								.updatedAt(TransactionUpdatedAt.create(d.getUpdatedAt()))
-								.reference(TransactionReference.create(d.getReference()))
 						.build();
 
 
@@ -63,8 +61,6 @@ public class TransactionSyncApplicationService {
 							.category(TransactionCategory.create(d.getCategory()))
 							.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
 							.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
-							.updatedAt(TransactionUpdatedAt.create(d.getUpdatedAt()))
-							.reference(TransactionReference.create(d.getReference()))
 						.build();
 
 

@@ -26,7 +26,6 @@ public class ChatDeletedEvent implements Serializable {
 	
 	
 	
-	
 
 private ChatId id;
 

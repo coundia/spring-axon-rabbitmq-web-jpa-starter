@@ -29,8 +29,6 @@ public class CreateCategoryCommand implements Serializable {
  	private CategoryTypeCategoryRaw typeCategoryRaw;
  	private CategoryDetails details;
  	private CategoryIsActive isActive;
- 	private CategoryUpdatedAt updatedAt;
- 	private CategoryReference reference;
  	private CategoryCreatedBy createdBy;
  	private CategoryTenant tenant;
 	public CreateCategoryCommand(
@@ -39,8 +37,6 @@ public class CreateCategoryCommand implements Serializable {
    CategoryTypeCategoryRaw typeCategoryRaw , 
    CategoryDetails details , 
    CategoryIsActive isActive , 
-   CategoryUpdatedAt updatedAt , 
-   CategoryReference reference , 
    CategoryCreatedBy createdBy , 
    CategoryTenant tenant  
 		){
@@ -50,8 +46,6 @@ public class CreateCategoryCommand implements Serializable {
   this.typeCategoryRaw = typeCategoryRaw ; 
   this.details = details ; 
   this.isActive = isActive ; 
-  this.updatedAt = updatedAt ; 
-  this.reference = reference ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

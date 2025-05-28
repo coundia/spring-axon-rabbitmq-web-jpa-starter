@@ -31,8 +31,6 @@ public class CreateTransactionUserCommand implements Serializable {
  	private TransactionUserUsername username;
  	private TransactionUserDetails details;
  	private TransactionUserIsActive isActive;
- 	private TransactionUserUpdatedAt updatedAt;
- 	private TransactionUserReference reference;
  	private TransactionUserCreatedBy createdBy;
  	private TransactionUserTenant tenant;
 	public CreateTransactionUserCommand(
@@ -43,8 +41,6 @@ public class CreateTransactionUserCommand implements Serializable {
    TransactionUserUsername username , 
    TransactionUserDetails details , 
    TransactionUserIsActive isActive , 
-   TransactionUserUpdatedAt updatedAt , 
-   TransactionUserReference reference , 
    TransactionUserCreatedBy createdBy , 
    TransactionUserTenant tenant  
 		){
@@ -56,8 +52,6 @@ public class CreateTransactionUserCommand implements Serializable {
   this.username = username ; 
   this.details = details ; 
   this.isActive = isActive ; 
-  this.updatedAt = updatedAt ; 
-  this.reference = reference ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

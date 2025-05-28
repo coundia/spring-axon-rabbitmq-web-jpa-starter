@@ -31,8 +31,6 @@ public class CreateNotificationCommand implements Serializable {
  	private NotificationStatus status;
  	private NotificationReserved reserved;
  	private NotificationErrorMessage errorMessage;
- 	private NotificationUpdatedAt updatedAt;
- 	private NotificationReference reference;
  	private NotificationCreatedBy createdBy;
  	private NotificationTenant tenant;
 	public CreateNotificationCommand(
@@ -43,8 +41,6 @@ public class CreateNotificationCommand implements Serializable {
    NotificationStatus status , 
    NotificationReserved reserved , 
    NotificationErrorMessage errorMessage , 
-   NotificationUpdatedAt updatedAt , 
-   NotificationReference reference , 
    NotificationCreatedBy createdBy , 
    NotificationTenant tenant  
 		){
@@ -56,8 +52,6 @@ public class CreateNotificationCommand implements Serializable {
   this.status = status ; 
   this.reserved = reserved ; 
   this.errorMessage = errorMessage ; 
-  this.updatedAt = updatedAt ; 
-  this.reference = reference ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

@@ -23,8 +23,7 @@ public class ChatCreatedEvent implements Serializable {
 	private ChatResponses responses;
 	private ChatState state;
 	private ChatAccount account;
-	private ChatUpdatedAt updatedAt;
-	private ChatReference reference;
+	private ChatFiles files;
 	private ChatCreatedBy createdBy;
 	private ChatTenant tenant;
 

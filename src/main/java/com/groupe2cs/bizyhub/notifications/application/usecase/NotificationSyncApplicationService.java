@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.notifications.application.usecase;
-import com.groupe2cs.bizyhub.notifications.application.command.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.notifications.application.dto.*;
 import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.notifications.application.command.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -30,8 +30,6 @@ public class NotificationSyncApplicationService {
 								.status(NotificationStatus.create(d.getStatus()))
 								.reserved(NotificationReserved.create(d.getReserved()))
 								.errorMessage(NotificationErrorMessage.create(d.getErrorMessage()))
-								.updatedAt(NotificationUpdatedAt.create(d.getUpdatedAt()))
-								.reference(NotificationReference.create(d.getReference()))
 						.build();
 
 
@@ -59,8 +57,6 @@ public class NotificationSyncApplicationService {
 							.status(NotificationStatus.create(d.getStatus()))
 							.reserved(NotificationReserved.create(d.getReserved()))
 							.errorMessage(NotificationErrorMessage.create(d.getErrorMessage()))
-							.updatedAt(NotificationUpdatedAt.create(d.getUpdatedAt()))
-							.reference(NotificationReference.create(d.getReference()))
 						.build();
 
 

@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import com.groupe2cs.bizyhub.transactions.application.query.*;
 import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.transactions.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.application.query.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -94,26 +94,6 @@ public List<TransactionUserResponse> findByTransactionUserIsActive(
 	) {
 
 	FindByTransactionUserIsActiveQuery query = new FindByTransactionUserIsActiveQuery(value,metaRequest);
-	CompletableFuture<List<TransactionUserResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionUserResponse.class));
-	return future.join();
-}
-public List<TransactionUserResponse> findByTransactionUserUpdatedAt(
-	TransactionUserUpdatedAt value,
-	MetaRequest metaRequest
-	) {
-
-	FindByTransactionUserUpdatedAtQuery query = new FindByTransactionUserUpdatedAtQuery(value,metaRequest);
-	CompletableFuture<List<TransactionUserResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionUserResponse.class));
-	return future.join();
-}
-public List<TransactionUserResponse> findByTransactionUserReference(
-	TransactionUserReference value,
-	MetaRequest metaRequest
-	) {
-
-	FindByTransactionUserReferenceQuery query = new FindByTransactionUserReferenceQuery(value,metaRequest);
 	CompletableFuture<List<TransactionUserResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionUserResponse.class));
 	return future.join();

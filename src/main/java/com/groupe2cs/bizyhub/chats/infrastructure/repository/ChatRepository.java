@@ -64,32 +64,6 @@ public interface ChatRepository extends JpaRepository<Chat, String> {
 
         @Query("SELECT e FROM Chat e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Chat> findByAccountIdAndTenantId(String account, String tenantId);
-        @Query("""
-        SELECT e FROM Chat e
-        WHERE e.updatedAt >= :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.updatedAt < :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Chat> findByUpdatedAtAndCreatedById(java.time.Instant updatedAt, String createdById);
-
-         @Query("""
-        SELECT e FROM Chat e
-        WHERE e.updatedAt >= :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.updatedAt < :#{#updatedAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.tenant.id = :tenantId
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Chat> findByUpdatedAtAndTenantId(java.time.Instant updatedAt, String tenantId);
-
-
-        @Query("SELECT e FROM Chat e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Chat> findByReferenceAndCreatedById(String reference, String createdById);
-        @Query("SELECT e FROM Chat e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Chat> findByReferenceAndTenantName(String reference, String tenantName);
-
-        @Query("SELECT e FROM Chat e WHERE LOWER(e.reference) LIKE LOWER(CONCAT('%', :reference, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Chat> findByReferenceAndTenantId(String reference, String tenantId);
         @Query("SELECT e FROM Chat e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Chat> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
         @Query("SELECT e FROM Chat e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

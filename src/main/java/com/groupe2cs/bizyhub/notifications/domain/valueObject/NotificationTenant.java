@@ -8,8 +8,6 @@ import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationMessageN
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationStatusNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationReservedNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationErrorMessageNotValid;
-import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationUpdatedAtNotValid;
-import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationReferenceNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationCreatedByNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationTenantNotValid;
 

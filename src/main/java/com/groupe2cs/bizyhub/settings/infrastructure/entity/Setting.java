@@ -33,51 +33,39 @@ public class Setting   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String name ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String value ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String locale ;
 
 	@Column(nullable = true, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 
 	private String details ;
 
 	@Column(nullable = false, 
-		unique = false  ,
-		length = 250
+		unique = false
+
 	)
 	@Builder.Default
 	private Boolean isActive  = true ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-	@Builder.Default
-	private java.time.Instant updatedAt  = java.time.Instant.now() ;
-
-	@Column(nullable = true, 
-		unique = false  
-	)
-
-	private String reference ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -97,8 +85,6 @@ public class Setting   extends AbstractAuditableEntity  {
 			", locale=" + locale +
 			", details=" + details +
 			", isActive=" + isActive +
-			", updatedAt=" + updatedAt +
-			", reference=" + reference +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +
 		'}';

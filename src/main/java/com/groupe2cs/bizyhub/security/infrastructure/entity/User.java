@@ -36,67 +36,78 @@ public class User   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String username ;
 
 	@Column(nullable = false, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String password ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String firstName ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String lastName ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String email ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String telephone ;
 
 	@Column(nullable = true, 		columnDefinition = "INT DEFAULT 10",
-		unique = false  
+		unique = false
+
 	)
 	@Builder.Default
 	private Integer limitPerDay  = 10 ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private Boolean isPremium ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private Boolean enabled ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private Boolean isBan ;
 
 	@Column(nullable = true, 		columnDefinition = "Text",
-		unique = false  
+		unique = false
+
 	)
 
 	private String message ;

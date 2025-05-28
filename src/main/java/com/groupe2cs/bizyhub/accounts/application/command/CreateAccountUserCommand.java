@@ -31,8 +31,6 @@ public class CreateAccountUserCommand implements Serializable {
  	private AccountUserUsername username;
  	private AccountUserDetails details;
  	private AccountUserIsActive isActive;
- 	private AccountUserUpdatedAt updatedAt;
- 	private AccountUserReference reference;
  	private AccountUserCreatedBy createdBy;
  	private AccountUserTenant tenant;
 	public CreateAccountUserCommand(
@@ -43,8 +41,6 @@ public class CreateAccountUserCommand implements Serializable {
    AccountUserUsername username , 
    AccountUserDetails details , 
    AccountUserIsActive isActive , 
-   AccountUserUpdatedAt updatedAt , 
-   AccountUserReference reference , 
    AccountUserCreatedBy createdBy , 
    AccountUserTenant tenant  
 		){
@@ -56,8 +52,6 @@ public class CreateAccountUserCommand implements Serializable {
   this.username = username ; 
   this.details = details ; 
   this.isActive = isActive ; 
-  this.updatedAt = updatedAt ; 
-  this.reference = reference ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

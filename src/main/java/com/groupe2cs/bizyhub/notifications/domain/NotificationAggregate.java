@@ -30,8 +30,6 @@ private NotificationMessage message;
 private NotificationStatus status;
 private NotificationReserved reserved;
 private NotificationErrorMessage errorMessage;
-private NotificationUpdatedAt updatedAt;
-private NotificationReference reference;
 private NotificationCreatedBy createdBy;
 private NotificationTenant tenant;
 
@@ -46,8 +44,6 @@ apply(new NotificationCreatedEvent(
 		command.getStatus(),
 		command.getReserved(),
 		command.getErrorMessage(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -70,8 +66,6 @@ apply(new NotificationUpdatedEvent(
 		command.getStatus(),
 		command.getReserved(),
 		command.getErrorMessage(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -86,8 +80,6 @@ public void on(NotificationCreatedEvent event) {
 	this.status = event.getStatus();
 	this.reserved = event.getReserved();
 	this.errorMessage = event.getErrorMessage();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -106,8 +98,6 @@ this.id = event.getId();
 	this.status = event.getStatus();
 	this.reserved = event.getReserved();
 	this.errorMessage = event.getErrorMessage();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

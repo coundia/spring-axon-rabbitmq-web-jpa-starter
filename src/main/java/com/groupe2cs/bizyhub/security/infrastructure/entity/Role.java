@@ -36,7 +36,8 @@ public class Role   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String name ;

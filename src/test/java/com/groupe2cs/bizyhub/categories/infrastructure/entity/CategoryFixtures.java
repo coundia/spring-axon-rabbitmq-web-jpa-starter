@@ -74,9 +74,7 @@ public class CategoryFixtures {
 				.name(CategoryName.create(UUID.randomUUID().toString()))
 				.typeCategoryRaw(CategoryTypeCategoryRaw.create(UUID.randomUUID().toString()))
 				.details(CategoryDetails.create(UUID.randomUUID().toString()))
-				.isActive(CategoryIsActive.create(true))
-				.updatedAt(CategoryUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.reference(CategoryReference.create(UUID.randomUUID().toString()))
+				.isActive(CategoryIsActive.create(false))
 			.build();
 
 		command.setCreatedBy(CategoryCreatedBy.create(user.getId()));
@@ -97,9 +95,7 @@ public class CategoryFixtures {
         .name(CategoryName.create(UUID.randomUUID().toString()))
         .typeCategoryRaw(CategoryTypeCategoryRaw.create(UUID.randomUUID().toString()))
         .details(CategoryDetails.create(UUID.randomUUID().toString()))
-        .isActive(CategoryIsActive.create(true))
-        .updatedAt(CategoryUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .reference(CategoryReference.create(UUID.randomUUID().toString()))
+        .isActive(CategoryIsActive.create(false))
         .build();
 
 		command.setCreatedBy(CategoryCreatedBy.create(user.getId()));

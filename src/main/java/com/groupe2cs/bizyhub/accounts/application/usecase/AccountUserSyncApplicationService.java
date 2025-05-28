@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.accounts.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -31,8 +31,6 @@ public class AccountUserSyncApplicationService {
 								.username(AccountUserUsername.create(d.getUsername()))
 								.details(AccountUserDetails.create(d.getDetails()))
 								.isActive(AccountUserIsActive.create(d.getIsActive()))
-								.updatedAt(AccountUserUpdatedAt.create(d.getUpdatedAt()))
-								.reference(AccountUserReference.create(d.getReference()))
 						.build();
 
 					String userName = d.getUsername();
@@ -70,8 +68,6 @@ public class AccountUserSyncApplicationService {
 							.username(AccountUserUsername.create(d.getUsername()))
 							.details(AccountUserDetails.create(d.getDetails()))
 							.isActive(AccountUserIsActive.create(d.getIsActive()))
-							.updatedAt(AccountUserUpdatedAt.create(d.getUpdatedAt()))
-							.reference(AccountUserReference.create(d.getReference()))
 						.build();
 
 					String userName = d.getUsername();

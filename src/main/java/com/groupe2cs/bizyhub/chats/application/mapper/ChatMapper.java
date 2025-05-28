@@ -16,8 +16,6 @@ return ChatResponse.builder()
 		.responses(entity.getResponses())
 		.state(entity.getState())
 		.account(entity.getAccount() != null ? entity.getAccount().getId() : null)
-		.updatedAt(entity.getUpdatedAt())
-		.reference(entity.getReference())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
@@ -31,8 +29,6 @@ return ChatResponse.builder()
 	.responses(command.getResponses().value())
 	.state(command.getState().value())
 	.account(command.getAccount().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -44,8 +40,6 @@ return ChatResponse.builder()
 	.responses(command.getResponses().value())
 	.state(command.getState().value())
 	.account(command.getAccount().value())
-	.updatedAt(command.getUpdatedAt().value())
-	.reference(command.getReference().value())
 .build();
 }
 
@@ -58,24 +52,22 @@ return CreateChatCommand.builder()
 	.responses(ChatResponses.create(request.getResponses()))
 	.state(ChatState.create(request.getState()))
 	.account(ChatAccount.create(request.getAccount()))
-	.updatedAt(ChatUpdatedAt.create(request.getUpdatedAt()))
-	.reference(ChatReference.create(request.getReference()))
 .build();
 }
 
-	public static UpdateChatCommand toUpdateCommand(ChatId id, ChatRequest request) {
+
+	public static UpdateChatCommand toUpdateCommand(
+	ChatId id, ChatMessages messages, ChatResponsesJson responsesJson, ChatResponses responses, ChatState state, ChatAccount account
+	) {
 	return UpdateChatCommand.builder()
-	.id(id)
-		.messages(ChatMessages.create(request.getMessages()))
-		.responsesJson(ChatResponsesJson.create(request.getResponsesJson()))
-		.responses(ChatResponses.create(request.getResponses()))
-		.state(ChatState.create(request.getState()))
-		.account(ChatAccount.create(request.getAccount()))
-		.updatedAt(ChatUpdatedAt.create(request.getUpdatedAt()))
-		.reference(ChatReference.create(request.getReference()))
+		.id(id)
+		.messages(messages)
+		.responsesJson(responsesJson)
+		.responses(responses)
+		.state(state)
+		.account(account)
 	.build();
 	}
-
 
 public static DeleteChatCommand toDeleteCommand(ChatId id) {
 return DeleteChatCommand.builder()

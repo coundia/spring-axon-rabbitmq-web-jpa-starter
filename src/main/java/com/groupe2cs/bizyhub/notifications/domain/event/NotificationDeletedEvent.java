@@ -26,8 +26,6 @@ public class NotificationDeletedEvent implements Serializable {
 	
 	
 	
-	
-	
 
 private NotificationId id;
 

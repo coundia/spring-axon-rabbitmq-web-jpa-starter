@@ -29,8 +29,6 @@ private SettingValue value;
 private SettingLocale locale;
 private SettingDetails details;
 private SettingIsActive isActive;
-private SettingUpdatedAt updatedAt;
-private SettingReference reference;
 private SettingCreatedBy createdBy;
 private SettingTenant tenant;
 
@@ -44,8 +42,6 @@ apply(new SettingCreatedEvent(
 		command.getLocale(),
 		command.getDetails(),
 		command.getIsActive(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -67,8 +63,6 @@ apply(new SettingUpdatedEvent(
 		command.getLocale(),
 		command.getDetails(),
 		command.getIsActive(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -82,8 +76,6 @@ public void on(SettingCreatedEvent event) {
 	this.locale = event.getLocale();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -101,8 +93,6 @@ this.id = event.getId();
 	this.locale = event.getLocale();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

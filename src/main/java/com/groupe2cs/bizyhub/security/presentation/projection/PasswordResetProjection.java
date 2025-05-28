@@ -36,6 +36,8 @@ PasswordReset entity = PasswordReset.builder()
  		.expiration(event.getExpiration() == null ? null : event.getExpiration().value())
  .build();
 
+entity.setId(event.getId().value());
+
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));
 }

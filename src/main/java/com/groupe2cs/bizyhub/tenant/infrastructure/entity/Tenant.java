@@ -33,31 +33,36 @@ public class Tenant   extends AbstractAuditableEntity  {
 
 
 	@Column(nullable = false, 
-		unique = true  
+		unique = true
+
 	)
 
 	private String name ;
 
 	@Column(nullable = true, 		columnDefinition = "TEXT",
-		unique = false  
+		unique = false
+
 	)
 
 	private String description ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String domain ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private String language ;
 
 	@Column(nullable = true, 
-		unique = false  
+		unique = false
+
 	)
 
 	private Boolean active ;

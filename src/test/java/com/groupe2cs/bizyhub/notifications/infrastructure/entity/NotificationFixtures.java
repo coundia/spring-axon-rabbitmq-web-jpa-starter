@@ -77,8 +77,6 @@ public class NotificationFixtures {
 				.status(NotificationStatus.create(UUID.randomUUID().toString()))
 				.reserved(NotificationReserved.create(UUID.randomUUID().toString()))
 				.errorMessage(NotificationErrorMessage.create(UUID.randomUUID().toString()))
-				.updatedAt(NotificationUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.reference(NotificationReference.create(UUID.randomUUID().toString()))
 			.build();
 
 		command.setCreatedBy(NotificationCreatedBy.create(user.getId()));
@@ -102,8 +100,6 @@ public class NotificationFixtures {
         .status(NotificationStatus.create(UUID.randomUUID().toString()))
         .reserved(NotificationReserved.create(UUID.randomUUID().toString()))
         .errorMessage(NotificationErrorMessage.create(UUID.randomUUID().toString()))
-        .updatedAt(NotificationUpdatedAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .reference(NotificationReference.create(UUID.randomUUID().toString()))
         .build();
 
 		command.setCreatedBy(NotificationCreatedBy.create(user.getId()));

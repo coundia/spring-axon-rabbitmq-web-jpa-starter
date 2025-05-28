@@ -7,8 +7,6 @@ import com.groupe2cs.bizyhub.settings.domain.exception.SettingValueNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingLocaleNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingDetailsNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingIsActiveNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingUpdatedAtNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingReferenceNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingCreatedByNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingTenantNotValid;
 

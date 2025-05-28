@@ -8,8 +8,6 @@ import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUserNo
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUsernameNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserDetailsNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserIsActiveNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUpdatedAtNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserReferenceNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserCreatedByNotValid;
 
 import java.io.Serializable;

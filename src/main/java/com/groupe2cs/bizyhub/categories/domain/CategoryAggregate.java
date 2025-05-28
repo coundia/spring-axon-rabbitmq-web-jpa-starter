@@ -28,8 +28,6 @@ private CategoryName name;
 private CategoryTypeCategoryRaw typeCategoryRaw;
 private CategoryDetails details;
 private CategoryIsActive isActive;
-private CategoryUpdatedAt updatedAt;
-private CategoryReference reference;
 private CategoryCreatedBy createdBy;
 private CategoryTenant tenant;
 
@@ -42,8 +40,6 @@ apply(new CategoryCreatedEvent(
 		command.getTypeCategoryRaw(),
 		command.getDetails(),
 		command.getIsActive(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -64,8 +60,6 @@ apply(new CategoryUpdatedEvent(
 		command.getTypeCategoryRaw(),
 		command.getDetails(),
 		command.getIsActive(),
-		command.getUpdatedAt(),
-		command.getReference(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -78,8 +72,6 @@ public void on(CategoryCreatedEvent event) {
 	this.typeCategoryRaw = event.getTypeCategoryRaw();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -96,8 +88,6 @@ this.id = event.getId();
 	this.typeCategoryRaw = event.getTypeCategoryRaw();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
-	this.updatedAt = event.getUpdatedAt();
-	this.reference = event.getReference();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

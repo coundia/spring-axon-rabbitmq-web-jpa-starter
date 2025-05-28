@@ -10,8 +10,6 @@ import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAccountNot
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionCategoryNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionTypeTransactionRawNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionDateTransactionNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUpdatedAtNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionReferenceNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionCreatedByNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionTenantNotValid;
 
