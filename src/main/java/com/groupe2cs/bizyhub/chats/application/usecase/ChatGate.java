@@ -1,10 +1,8 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
-import com.groupe2cs.bizyhub.chats.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+
 import com.groupe2cs.bizyhub.chats.infrastructure.entity.Chat;
-import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
+import com.groupe2cs.bizyhub.chats.infrastructure.repository.ChatRepository;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

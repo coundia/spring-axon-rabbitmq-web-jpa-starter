@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
-import com.groupe2cs.bizyhub.accounts.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.accounts.application.command.*;
 
+import com.groupe2cs.bizyhub.accounts.application.command.CreateAccountCommand;
+import com.groupe2cs.bizyhub.accounts.application.command.DeleteAccountCommand;
+import com.groupe2cs.bizyhub.accounts.application.command.UpdateAccountCommand;
+import com.groupe2cs.bizyhub.accounts.application.dto.AccountSyncRequest;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,13 +24,13 @@ public class AccountSyncApplicationService {
 
 
 					CreateAccountCommand command = CreateAccountCommand.builder()
-								.name(AccountName.create(d.getName()))
-								.currency(AccountCurrency.create(d.getCurrency()))
-								.currentBalance(AccountCurrentBalance.create(d.getCurrentBalance()))
-								.previousBalance(AccountPreviousBalance.create(d.getPreviousBalance()))
-								.details(AccountDetails.create(d.getDetails()))
-								.isActive(AccountIsActive.create(d.getIsActive()))
-						.build();
+							.name(AccountName.create(d.getName()))
+							.currency(AccountCurrency.create(d.getCurrency()))
+							.currentBalance(AccountCurrentBalance.create(d.getCurrentBalance()))
+							.previousBalance(AccountPreviousBalance.create(d.getPreviousBalance()))
+							.details(AccountDetails.create(d.getDetails()))
+							.isActive(AccountIsActive.create(d.getIsActive()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -57,7 +57,7 @@ public class AccountSyncApplicationService {
 							.previousBalance(AccountPreviousBalance.create(d.getPreviousBalance()))
 							.details(AccountDetails.create(d.getDetails()))
 							.isActive(AccountIsActive.create(d.getIsActive()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -69,8 +69,8 @@ public class AccountSyncApplicationService {
 					}
 
 					DeleteAccountCommand delete = DeleteAccountCommand.builder()
-						.id(AccountId.create(d.getId()))
-						.build();
+							.id(AccountId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

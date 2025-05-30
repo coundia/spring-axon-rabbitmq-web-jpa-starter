@@ -1,25 +1,19 @@
 package com.groupe2cs.bizyhub.chats.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.chats.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.chats.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.chats.application.command.CreateChatCommand;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.chats.infrastructure.repository.ChatRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.chats.application.command.*;
-import java.util.UUID;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.mock.web.MockMultipartFile;
 
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.mock.web.MockMultipartFile;
+
 import static org.awaitility.Awaitility.await;
 
 public class ChatFixtures {
@@ -39,25 +33,25 @@ public class ChatFixtures {
 	}
 
 	public static List<CreateChatCommand> randomManyViaCommand(
-		CommandGateway commandGateway,
-		ChatRepository repository,
-        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
-        FileManagerRepository filesDataRepository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		int count,
-		User user
+			CommandGateway commandGateway,
+			ChatRepository repository,
+			com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
+			FileManagerRepository filesDataRepository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			int count,
+			User user
 	) {
 		List<CreateChatCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateChatCommand command = randomOneViaCommand(
-			commandGateway,
-			 repository,
-            accountDataRepository,
-            filesDataRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-			 user);
+					commandGateway,
+					repository,
+					accountDataRepository,
+					filesDataRepository,
+					createdByDataRepository,
+					tenantDataRepository,
+					user);
 			items.add(command);
 		}
 		return items;
@@ -67,25 +61,28 @@ public class ChatFixtures {
 		repository.deleteAll();
 	}
 
-		public static CreateChatCommand randomOneViaCommand(
-		CommandGateway commandGateway,
-		ChatRepository  repository,
-        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
-        FileManagerRepository filesDataRepository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		 User user) {
-				MockMultipartFile files = new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
-				String fileName = files.getName();
+	public static CreateChatCommand randomOneViaCommand(
+			CommandGateway commandGateway,
+			ChatRepository repository,
+			com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
+			FileManagerRepository filesDataRepository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			User user) {
+		MockMultipartFile files = new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
+		String fileName = files.getName();
 
-			CreateChatCommand command = CreateChatCommand.builder()
+		CreateChatCommand command = CreateChatCommand.builder()
 				.messages(ChatMessages.create(UUID.randomUUID().toString()))
 				.responsesJson(ChatResponsesJson.create(UUID.randomUUID().toString()))
 				.responses(ChatResponses.create(UUID.randomUUID().toString()))
 				.state(ChatState.create(UUID.randomUUID().toString()))
-				.account(ChatAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
-					.files(ChatFiles.create(fileName))
-			.build();
+				.account(ChatAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(
+						commandGateway,
+						accountDataRepository,
+						user).getId().value()))
+				.files(ChatFiles.create(fileName))
+				.build();
 
 		command.setCreatedBy(ChatCreatedBy.create(user.getId()));
 		command.setTenant(ChatTenant.create(user.getTenant().getId()));
@@ -96,20 +93,20 @@ public class ChatFixtures {
 
 
 	public static CreateChatCommand randomOneViaCommand(
-        CommandGateway commandGateway,
-        ChatRepository  repository,
-        User user
-        ) {
-        MockMultipartFile files = new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
-        String fileName = files.getName();
+			CommandGateway commandGateway,
+			ChatRepository repository,
+			User user
+	) {
+		MockMultipartFile files = new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
+		String fileName = files.getName();
 
-        CreateChatCommand command = CreateChatCommand.builder()
-        .messages(ChatMessages.create(UUID.randomUUID().toString()))
-        .responsesJson(ChatResponsesJson.create(UUID.randomUUID().toString()))
-        .responses(ChatResponses.create(UUID.randomUUID().toString()))
-        .state(ChatState.create(UUID.randomUUID().toString()))
-        .files(ChatFiles.create(fileName))
-        .build();
+		CreateChatCommand command = CreateChatCommand.builder()
+				.messages(ChatMessages.create(UUID.randomUUID().toString()))
+				.responsesJson(ChatResponsesJson.create(UUID.randomUUID().toString()))
+				.responses(ChatResponses.create(UUID.randomUUID().toString()))
+				.state(ChatState.create(UUID.randomUUID().toString()))
+				.files(ChatFiles.create(fileName))
+				.build();
 
 		command.setCreatedBy(ChatCreatedBy.create(user.getId()));
 		command.setTenant(ChatTenant.create(user.getTenant().getId()));

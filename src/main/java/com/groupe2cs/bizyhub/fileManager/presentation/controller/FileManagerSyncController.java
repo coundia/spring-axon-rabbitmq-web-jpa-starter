@@ -1,23 +1,27 @@
 package com.groupe2cs.bizyhub.fileManager.presentation.controller;
 
-	import com.groupe2cs.bizyhub.shared.application.dto.*;
-	import com.groupe2cs.bizyhub.shared.application.*;
-	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
-	import com.groupe2cs.bizyhub.fileManager.application.usecase.*;
-	import com.groupe2cs.bizyhub.fileManager.application.dto.*;
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerSyncRequest;
+import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerSyncApplicationService;
+import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("/api/v1/commands/fileManager/sync")
 @Tag(name = "FileManager commands", description = "Endpoint to synchronize fileManagers")
@@ -25,49 +29,49 @@ import jakarta.validation.Valid;
 @RequiredArgsConstructor
 public class FileManagerSyncController {
 
-		private final FileManagerSyncApplicationService applicationService;
+	private final FileManagerSyncApplicationService applicationService;
 
-		@PostMapping
-		@Operation(
-		summary = "Sync fileManagers",
-		description = "Initiates synchronization of fileManager deltas without blocking the client"
-		)
-		@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Sync initiated",
-		content = @Content(schema = @Schema(implementation = ApiResponseDto.class))),
-		@ApiResponse(responseCode = "500", description = "Internal server error",
-		content = @Content(schema = @Schema()))
-		})
-		public ResponseEntity<ApiResponseDto> syncFileManager(
-	@AuthenticationPrincipal Jwt jwt,
-	@Valid @RequestBody FileManagerSyncRequest request) {
-			try {
+	@PostMapping
+	@Operation(
+			summary = "Sync fileManagers",
+			description = "Initiates synchronization of fileManager deltas without blocking the client"
+	)
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", description = "Sync initiated",
+					content = @Content(schema = @Schema(implementation = ApiResponseDto.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<ApiResponseDto> syncFileManager(
+			@AuthenticationPrincipal Jwt jwt,
+			@Valid @RequestBody FileManagerSyncRequest request) {
+		try {
 
 			MetaRequest metaRequest = MetaRequest.builder()
-				.userId(RequestContext.getUserId(jwt))				.tenantId(RequestContext.getTenantId(jwt))
-			.build();
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
 
 			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 			applicationService.syncFileManager(
 					request,
 					metaRequest
-				);
-			return ResponseEntity.ok(ApiResponseDto.builder()
-				.code(1)
-				.message("Sync in progress")
-				.build()
 			);
-			} catch (Exception ex) {
+			return ResponseEntity.ok(ApiResponseDto.builder()
+					.code(1)
+					.message("Sync in progress")
+					.build()
+			);
+		} catch (Exception ex) {
 
 			log.error("Failed to initiate sync of fileManagers: {}", ex.getMessage());
 
 			return ResponseEntity.status(500)
-				.body(ApiResponseDto.builder()
-				.code(0)
-				.message(ex.getMessage())
-				.build()
-			);
+					.body(ApiResponseDto.builder()
+							.code(0)
+							.message(ex.getMessage())
+							.build()
+					);
 		}
 	}
 }

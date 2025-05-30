@@ -1,19 +1,11 @@
 package com.groupe2cs.bizyhub.tenant.domain.valueObject;
 
-import java.util.Objects;
-import com.groupe2cs.bizyhub.tenant.domain.exception.TenantIdNotValid;
-import com.groupe2cs.bizyhub.tenant.domain.exception.TenantNameNotValid;
-import com.groupe2cs.bizyhub.tenant.domain.exception.TenantDescriptionNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -21,35 +13,35 @@ import java.util.*;
 @Builder
 public class TenantDescription implements Serializable {
 
-private String description;
+	private String description;
 
-public TenantDescription(String description) {
-this.description = description;
-}
+	public TenantDescription(String description) {
+		this.description = description;
+	}
 
-public static TenantDescription create(String description) {
+	public static TenantDescription create(String description) {
 
-	return new TenantDescription(description);
-}
+		return new TenantDescription(description);
+	}
 
-public String value() {
-return this.description;
-}
+	public String value() {
+		return this.description;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof TenantDescription that)) return false;
-return this.description.equals(that.description);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TenantDescription that)) return false;
+		return this.description.equals(that.description);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(description);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(description);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(description);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(description);
+	}
 }

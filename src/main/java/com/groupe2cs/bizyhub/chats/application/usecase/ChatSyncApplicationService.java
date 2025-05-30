@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
-import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 
+import com.groupe2cs.bizyhub.chats.application.command.CreateChatCommand;
+import com.groupe2cs.bizyhub.chats.application.command.DeleteChatCommand;
+import com.groupe2cs.bizyhub.chats.application.command.UpdateChatCommand;
+import com.groupe2cs.bizyhub.chats.application.dto.ChatSyncRequest;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,12 +24,12 @@ public class ChatSyncApplicationService {
 
 
 					CreateChatCommand command = CreateChatCommand.builder()
-								.messages(ChatMessages.create(d.getMessages()))
-								.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
-								.responses(ChatResponses.create(d.getResponses()))
-								.state(ChatState.create(d.getState()))
-								.account(ChatAccount.create(d.getAccount()))
-						.build();
+							.messages(ChatMessages.create(d.getMessages()))
+							.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
+							.responses(ChatResponses.create(d.getResponses()))
+							.state(ChatState.create(d.getState()))
+							.account(ChatAccount.create(d.getAccount()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -55,7 +55,7 @@ public class ChatSyncApplicationService {
 							.responses(ChatResponses.create(d.getResponses()))
 							.state(ChatState.create(d.getState()))
 							.account(ChatAccount.create(d.getAccount()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -67,8 +67,8 @@ public class ChatSyncApplicationService {
 					}
 
 					DeleteChatCommand delete = DeleteChatCommand.builder()
-						.id(ChatId.create(d.getId()))
-						.build();
+							.id(ChatId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

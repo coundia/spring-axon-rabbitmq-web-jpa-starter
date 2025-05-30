@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -36,8 +35,7 @@ public class FakeIAService implements IAService {
 		Category category = categoryRepository.findByNameAndCreatedById(categoryName, userId)
 				.stream()
 				.findFirst()
-				.orElse(null)
-				 ;
+				.orElse(null);
 
 		if (category != null) {
 			log.info("Category found: {}", category);
@@ -50,7 +48,7 @@ public class FakeIAService implements IAService {
 				.builder()
 				.name(categoryName)
 				.typeCategoryRaw(type)
-			//	.updatedAt(Instant.now())
+				//	.updatedAt(Instant.now())
 				.isActive(true)
 				.details("")
 				//.reference("")
@@ -90,7 +88,7 @@ public class FakeIAService implements IAService {
 					.category(getCategory(
 							"IN",
 							"06b14751-26f6-47d8-a56a-157aa0605301",
-							"CATEGORY"+UUID.randomUUID().toString(),
+							"CATEGORY" + UUID.randomUUID(),
 							"fab97fa4-c796-4921-b1d2-db8d671d3a4e"
 					))
 					.typeTransactionRaw("IN")

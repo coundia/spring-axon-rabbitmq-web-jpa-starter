@@ -10,7 +10,7 @@ public class SystemPrompt {
 			Ta réponse doit être strictement au format suivant, sans explication ,
 			typeTransactionRaw doit etre IN ou OUT selon le type de la transaction
 			la dateTransaction doit etre exactement à ce format en string "dateTransaction": "2025-05-18T17:30:00Z",
-			La date d'aujourd'hui est """+ Instant.now().toString() + """
+			La date d'aujourd'hui est """ + Instant.now().toString() + """
 			:
 			
 			{

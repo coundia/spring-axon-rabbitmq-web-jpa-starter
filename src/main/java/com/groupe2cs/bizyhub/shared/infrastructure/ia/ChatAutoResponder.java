@@ -16,7 +16,6 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -65,10 +64,10 @@ public class ChatAutoResponder {
 			log.warn("❌ Category not found in response, falling back to default category");
 			dto.setCategory(
 					iaService.getCategory(
-					dto.getTypeTransactionRaw(),
-					event.getCreatedBy().value(),
+							dto.getTypeTransactionRaw(),
+							event.getCreatedBy().value(),
 							categoryName,
-					event.getTenant().value()
+							event.getTenant().value()
 					)
 			);
 

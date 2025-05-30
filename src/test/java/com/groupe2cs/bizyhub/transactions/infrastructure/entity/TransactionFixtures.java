@@ -1,25 +1,18 @@
 package com.groupe2cs.bizyhub.transactions.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
-import java.util.UUID;
-
+import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.mock.web.MockMultipartFile;
+
 import static org.awaitility.Awaitility.await;
 
 public class TransactionFixtures {
@@ -39,25 +32,25 @@ public class TransactionFixtures {
 	}
 
 	public static List<CreateTransactionCommand> randomManyViaCommand(
-		CommandGateway commandGateway,
-		TransactionRepository repository,
-        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
-        com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		int count,
-		User user
+			CommandGateway commandGateway,
+			TransactionRepository repository,
+			com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
+			com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			int count,
+			User user
 	) {
 		List<CreateTransactionCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateTransactionCommand command = randomOneViaCommand(
-			commandGateway,
-			 repository,
-            accountDataRepository,
-            categoryDataRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-			 user);
+					commandGateway,
+					repository,
+					accountDataRepository,
+					categoryDataRepository,
+					createdByDataRepository,
+					tenantDataRepository,
+					user);
 			items.add(command);
 		}
 		return items;
@@ -67,25 +60,31 @@ public class TransactionFixtures {
 		repository.deleteAll();
 	}
 
-		public static CreateTransactionCommand randomOneViaCommand(
-		CommandGateway commandGateway,
-		TransactionRepository  repository,
-        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
-        com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		 User user) {
+	public static CreateTransactionCommand randomOneViaCommand(
+			CommandGateway commandGateway,
+			TransactionRepository repository,
+			com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
+			com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			User user) {
 
-			CreateTransactionCommand command = CreateTransactionCommand.builder()
+		CreateTransactionCommand command = CreateTransactionCommand.builder()
 				.name(TransactionName.create(UUID.randomUUID().toString()))
 				.amount(TransactionAmount.create(41.5))
 				.details(TransactionDetails.create(UUID.randomUUID().toString()))
 				.isActive(TransactionIsActive.create(false))
-				.account(TransactionAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
-				.category(TransactionCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
+				.account(TransactionAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(
+						commandGateway,
+						accountDataRepository,
+						user).getId().value()))
+				.category(TransactionCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(
+						commandGateway,
+						categoryDataRepository,
+						user).getId().value()))
 				.typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
 				.dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
-			.build();
+				.build();
 
 		command.setCreatedBy(TransactionCreatedBy.create(user.getId()));
 		command.setTenant(TransactionTenant.create(user.getTenant().getId()));
@@ -96,19 +95,19 @@ public class TransactionFixtures {
 
 
 	public static CreateTransactionCommand randomOneViaCommand(
-        CommandGateway commandGateway,
-        TransactionRepository  repository,
-        User user
-        ) {
+			CommandGateway commandGateway,
+			TransactionRepository repository,
+			User user
+	) {
 
-        CreateTransactionCommand command = CreateTransactionCommand.builder()
-        .name(TransactionName.create(UUID.randomUUID().toString()))
-        .amount(TransactionAmount.create(41.5))
-        .details(TransactionDetails.create(UUID.randomUUID().toString()))
-        .isActive(TransactionIsActive.create(false))
-        .typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
-        .dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
-        .build();
+		CreateTransactionCommand command = CreateTransactionCommand.builder()
+				.name(TransactionName.create(UUID.randomUUID().toString()))
+				.amount(TransactionAmount.create(41.5))
+				.details(TransactionDetails.create(UUID.randomUUID().toString()))
+				.isActive(TransactionIsActive.create(false))
+				.typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
+				.dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
+				.build();
 
 		command.setCreatedBy(TransactionCreatedBy.create(user.getId()));
 		command.setTenant(TransactionTenant.create(user.getTenant().getId()));
