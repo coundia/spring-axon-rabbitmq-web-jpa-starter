@@ -1,11 +1,8 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyTenant;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import lombok.*;
 
 @RequiredArgsConstructor
 @Getter
@@ -13,7 +10,7 @@ import lombok.Setter;
 @Builder
 public class FindByApiKeyTenantQuery {
 
-	private final ApiKeyTenant tenant;
+	private final ApiKeyTenant  tenant;
 	private final MetaRequest metaRequest;
 
 }

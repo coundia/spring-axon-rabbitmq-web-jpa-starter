@@ -1,12 +1,15 @@
 package com.groupe2cs.bizyhub.notifications.domain.event;
 
-import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
+	import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
+
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
+import java.time.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -23,6 +26,7 @@ public class NotificationUpdatedEvent implements Serializable {
 	private NotificationErrorMessage errorMessage;
 	private NotificationCreatedBy createdBy;
 	private NotificationTenant tenant;
+
 
 
 }

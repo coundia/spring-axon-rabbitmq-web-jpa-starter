@@ -1,10 +1,20 @@
 package com.groupe2cs.bizyhub.fileManager.application.command;
 
-import com.groupe2cs.bizyhub.fileManager.domain.valueObject.FileManagerId;
-import lombok.*;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
+import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import java.util.Date;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+import java.util.UUID;
+
+
+import java.time.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -12,8 +22,20 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class DeleteFileManagerCommand implements Serializable {
-	@TargetAggregateIdentifier
+@TargetAggregateIdentifier
 	private FileManagerId id;
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
 
 
 }

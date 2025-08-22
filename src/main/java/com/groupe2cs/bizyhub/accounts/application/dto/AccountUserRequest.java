@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.accounts.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,17 +19,17 @@ import java.io.Serializable;
 @Schema(name = "AccountUserRequest", description = "Request payload for AccountUser operations")
 public class AccountUserRequest implements Serializable {
 
-	@Schema(description = "", example = "1c5b6b62-83ab-4483-b808-bdc1be4deb32")
+	@Schema(description = "", example = "fbb110df-24b1-4b4f-ad1c-a3a046baf1ba")
 	private String name;
-	@Schema(description = "", example = "7ae60f66-7179-473d-b1f3-fc864480b82c")
+	@Schema(description = "", example = "847ae0e9-e5a2-4171-b714-34268e826eaf")
 	private String account;
-	@Schema(description = "", example = "539a205a-9082-416b-9641-7d7a45a1b867")
+	@Schema(description = "", example = "fc16b2fa-9c80-4c84-902f-745e03ef20a0")
 	private String user;
-	@Schema(description = "", example = "8984ede6-4cf1-4b27-b3c4-f5eec336769a")
+	@Schema(description = "", example = "a4bb1d58-2f57-49cd-9cc0-eeeaba5e8a46")
 	private String username;
-	@Schema(description = "", example = "d10894d3-ed40-418f-bd96-de6688c1f2ba")
+	@Schema(description = "", example = "887ed3a3-ff2a-4a7f-8f32-f6544b5eacf5")
 	private String details;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isActive;
 
 }

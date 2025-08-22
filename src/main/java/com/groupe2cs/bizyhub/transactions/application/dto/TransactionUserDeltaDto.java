@@ -1,9 +1,13 @@
 package com.groupe2cs.bizyhub.transactions.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,24 +17,24 @@ import java.io.Serializable;
 @Schema(name = "TransactionUserDeltaDto", description = "Delta DTO for transactionUser changes")
 public class TransactionUserDeltaDto implements Serializable {
 
-	@Schema(description = "Identifier of the transactionUser", example = "uuid")
-	private String id;
+    @Schema(description = "Identifier of the transactionUser", example = "uuid")
+    private String id;
 
-	@Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
+    @Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
 	@Builder.Default
-	private String type = "CREATE";
+    private String type = "CREATE";
 
-	@Schema(description = "", example = "cde587a1-2468-4cd3-9ad6-29c855999453")
-	private String name;
-	@Schema(description = "", example = "66a2e0ae-4623-44a1-a142-a09f00d82c98")
-	private String transaction;
-	@Schema(description = "", example = "270450b1-0c40-4aef-98e7-887aebb15db5")
-	private String user;
-	@Schema(description = "", example = "24ac0c20-e110-491a-8006-ed6c99985969")
-	private String username;
-	@Schema(description = "", example = "136445eb-32b0-470c-ac0d-c349b6ee3317")
-	private String details;
-	@Schema(description = "", example = "false")
-	private Boolean isActive;
+		@Schema(description = "", example = "8532a8db-2ed8-4699-880b-b18fde3944db")
+		private String name;
+		@Schema(description = "", example = "9bdc38e0-a165-4842-b146-c012071ffa3f")
+		private String transaction;
+		@Schema(description = "", example = "9bcb56e2-4887-4a60-a5c3-b01fc3a1db1c")
+		private String user;
+		@Schema(description = "", example = "05d5dffd-ecf7-4079-a660-35340bd0e66d")
+		private String username;
+		@Schema(description = "", example = "13a2127f-ea53-431e-bcdd-b62fadb1bcb5")
+		private String details;
+		@Schema(description = "", example = "true")
+		private Boolean isActive;
 
 }

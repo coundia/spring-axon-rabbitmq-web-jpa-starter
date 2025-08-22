@@ -1,11 +1,8 @@
 package com.groupe2cs.bizyhub.security.application.query;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.UserCreatedBy;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import lombok.*;
 
 @RequiredArgsConstructor
 @Getter
@@ -13,7 +10,7 @@ import lombok.Setter;
 @Builder
 public class FindByUserCreatedByQuery {
 
-	private final UserCreatedBy createdBy;
+	private final UserCreatedBy  createdBy;
 	private final MetaRequest metaRequest;
 
 }

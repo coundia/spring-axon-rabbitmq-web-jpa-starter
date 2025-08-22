@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.categories.application.usecase;
-
-import com.groupe2cs.bizyhub.categories.application.command.CreateCategoryCommand;
-import com.groupe2cs.bizyhub.categories.application.command.DeleteCategoryCommand;
-import com.groupe2cs.bizyhub.categories.application.command.UpdateCategoryCommand;
-import com.groupe2cs.bizyhub.categories.application.dto.CategorySyncRequest;
 import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.categories.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.categories.application.command.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,11 +24,11 @@ public class CategorySyncApplicationService {
 
 
 					CreateCategoryCommand command = CreateCategoryCommand.builder()
-							.name(CategoryName.create(d.getName()))
-							.typeCategoryRaw(CategoryTypeCategoryRaw.create(d.getTypeCategoryRaw()))
-							.details(CategoryDetails.create(d.getDetails()))
-							.isActive(CategoryIsActive.create(d.getIsActive()))
-							.build();
+								.name(CategoryName.create(d.getName()))
+								.typeCategoryRaw(CategoryTypeCategoryRaw.create(d.getTypeCategoryRaw()))
+								.details(CategoryDetails.create(d.getDetails()))
+								.isActive(CategoryIsActive.create(d.getIsActive()))
+						.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -53,7 +53,7 @@ public class CategorySyncApplicationService {
 							.typeCategoryRaw(CategoryTypeCategoryRaw.create(d.getTypeCategoryRaw()))
 							.details(CategoryDetails.create(d.getDetails()))
 							.isActive(CategoryIsActive.create(d.getIsActive()))
-							.build();
+						.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -65,8 +65,8 @@ public class CategorySyncApplicationService {
 					}
 
 					DeleteCategoryCommand delete = DeleteCategoryCommand.builder()
-							.id(CategoryId.create(d.getId()))
-							.build();
+						.id(CategoryId.create(d.getId()))
+						.build();
 
 					commandGateway.sendAndWait(delete);
 				}

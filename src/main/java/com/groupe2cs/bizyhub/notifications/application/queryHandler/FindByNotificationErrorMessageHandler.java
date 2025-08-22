@@ -1,40 +1,42 @@
 package com.groupe2cs.bizyhub.notifications.application.queryHandler;
 
-import com.groupe2cs.bizyhub.notifications.application.dto.NotificationResponse;
-import com.groupe2cs.bizyhub.notifications.application.mapper.NotificationMapper;
-import com.groupe2cs.bizyhub.notifications.application.query.FindByNotificationErrorMessageQuery;
-import com.groupe2cs.bizyhub.notifications.infrastructure.entity.Notification;
-import com.groupe2cs.bizyhub.notifications.infrastructure.repository.NotificationRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.notifications.application.mapper.*;
+import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
+import com.groupe2cs.bizyhub.notifications.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.notifications.application.dto.*;
+import com.groupe2cs.bizyhub.notifications.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.notifications.application.query.*;
+import com.groupe2cs.bizyhub.notifications.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
+import org.axonframework.queryhandling.QueryHandler;
+
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByNotificationErrorMessageHandler {
 
-	private final NotificationRepository repository;
+private final NotificationRepository repository;
 
-	@QueryHandler
-	public List<NotificationResponse> handle(FindByNotificationErrorMessageQuery query) {
+@QueryHandler
+public List<NotificationResponse> handle(FindByNotificationErrorMessageQuery query) {
 
-		MetaRequest metaRequest = query.getMetaRequest();
-		List<Notification> entities = null;
-		String value = query.getErrorMessage().value();
+	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<Notification> entities = null;
+	 String value = query.getErrorMessage().value();
 
-		if (metaRequest.isAdmin()) {
-			entities = repository.findByErrorMessageAndTenantId(value, metaRequest.getTenantId());
-		} else {
-			entities = repository.findByErrorMessageAndCreatedById(value, metaRequest.getUserId());
-		}
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByErrorMessageAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByErrorMessageAndCreatedById(value, metaRequest.getUserId());
+	 }
 
-		return entities.stream()
-				.map(NotificationMapper::toResponse)
-				.toList();
+ 	return entities.stream()
+	.map(NotificationMapper::toResponse)
+	.toList();
 	}
 
 

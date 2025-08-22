@@ -1,15 +1,14 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionUserCommand;
-import com.groupe2cs.bizyhub.transactions.application.command.DeleteTransactionUserCommand;
-import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionUserCommand;
-import com.groupe2cs.bizyhub.transactions.application.dto.TransactionUserSyncRequest;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import lombok.RequiredArgsConstructor;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.transactions.application.command.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -26,22 +25,22 @@ public class TransactionUserSyncApplicationService {
 
 
 					CreateTransactionUserCommand command = CreateTransactionUserCommand.builder()
-							.name(TransactionUserName.create(d.getName()))
-							.transaction(TransactionUserTransaction.create(d.getTransaction()))
-							.user(TransactionUserUser.create(d.getUser()))
-							.username(TransactionUserUsername.create(d.getUsername()))
-							.details(TransactionUserDetails.create(d.getDetails()))
-							.isActive(TransactionUserIsActive.create(d.getIsActive()))
-							.build();
+								.name(TransactionUserName.create(d.getName()))
+								.transaction(TransactionUserTransaction.create(d.getTransaction()))
+								.user(TransactionUserUser.create(d.getUser()))
+								.username(TransactionUserUsername.create(d.getUsername()))
+								.details(TransactionUserDetails.create(d.getDetails()))
+								.isActive(TransactionUserIsActive.create(d.getIsActive()))
+						.build();
 
 					String userName = d.getUsername();
 					if (userName != null) {
 						userName = userName.toLowerCase();
 						String userId = userRepository.findByUsernameAndTenantId(userName, metaRequest.getTenantId())
-								.stream()
-								.findFirst()
-								.orElseThrow()
-								.getId();
+							.stream()
+							.findFirst()
+							.orElseThrow()
+							.getId();
 						command.setUser(TransactionUserUser.create(userId));
 					}
 
@@ -69,16 +68,16 @@ public class TransactionUserSyncApplicationService {
 							.username(TransactionUserUsername.create(d.getUsername()))
 							.details(TransactionUserDetails.create(d.getDetails()))
 							.isActive(TransactionUserIsActive.create(d.getIsActive()))
-							.build();
+						.build();
 
 					String userName = d.getUsername();
 					if (userName != null) {
 						userName = userName.toLowerCase();
 						String userId = userRepository.findByUsernameAndTenantId(userName, metaRequest.getTenantId())
-								.stream()
-								.findFirst()
-								.orElseThrow()
-								.getId();
+							.stream()
+							.findFirst()
+							.orElseThrow()
+							.getId();
 						update.setUser(TransactionUserUser.create(userId));
 					}
 
@@ -91,8 +90,8 @@ public class TransactionUserSyncApplicationService {
 					}
 
 					DeleteTransactionUserCommand delete = DeleteTransactionUserCommand.builder()
-							.id(TransactionUserId.create(d.getId()))
-							.build();
+						.id(TransactionUserId.create(d.getId()))
+						.build();
 
 					commandGateway.sendAndWait(delete);
 				}

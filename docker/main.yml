@@ -1,39 +1,41 @@
 name: pcoundia
 services:
   app:
-    image: pcoundia
+    build:
+      context: ..
+      dockerfile: docker/app.Dockerfile
+    image: pcoundia/spring-axon-starter:local
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/pcoundia
-  #    ports:
-  #      - 127.0.0.1:8080:8080
-
+      - SPRING_DATASOURCE_USERNAME=pcoundia
+      - SPRING_DATASOURCE_PASSWORD=pcoundia
+    depends_on:
+      - postgresql
+      - rabbitmq
+      - maildev
+      - prometheus
   postgresql:
     extends:
       file: ./postgresql.yml
       service: postgresql
-
   rabbitmq:
     extends:
       file: ./rabbitmq.yml
       service: rabbitmq
-
   maildev:
     extends:
       file: ./maildev.yml
       service: maildev
-
   mysql:
     extends:
       file: ./mysql.yml
       service: mysql
-
   prometheus:
     extends:
       file: ./prometheus-grafana.yml
       service: prometheus
-
   grafana:
     extends:
       file: ./prometheus-grafana.yml

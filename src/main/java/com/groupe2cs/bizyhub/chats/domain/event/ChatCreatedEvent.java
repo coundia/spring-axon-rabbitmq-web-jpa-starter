@@ -1,12 +1,15 @@
 package com.groupe2cs.bizyhub.chats.domain.event;
 
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+	import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
+import java.time.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -23,6 +26,7 @@ public class ChatCreatedEvent implements Serializable {
 	private ChatFiles files;
 	private ChatCreatedBy createdBy;
 	private ChatTenant tenant;
+
 
 
 }

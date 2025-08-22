@@ -1,28 +1,36 @@
 package com.groupe2cs.bizyhub.fileManager.presentation.controller;
 
-import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerResponse;
-import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerReadApplicationService;
-import com.groupe2cs.bizyhub.fileManager.domain.valueObject.FileManagerSize;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+import com.groupe2cs.bizyhub.fileManager.application.query.*;
+import com.groupe2cs.bizyhub.fileManager.application.mapper.*;
+import com.groupe2cs.bizyhub.fileManager.application.dto.*;
+import com.groupe2cs.bizyhub.fileManager.application.usecase.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.axonframework.queryhandling.QueryGateway;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+import static org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf;
+import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 
 
 @PreAuthorize("@fileManagerGate.canList(authentication)")
@@ -32,43 +40,43 @@ import java.util.List;
 @Slf4j
 public class FindBySizeFileManagerController {
 
-	private final FileManagerReadApplicationService applicationService;
+private final FileManagerReadApplicationService applicationService;
 
-	public FindBySizeFileManagerController(FileManagerReadApplicationService applicationService) {
-		this.applicationService = applicationService;
-	}
+public FindBySizeFileManagerController(FileManagerReadApplicationService  applicationService) {
+	this.applicationService = applicationService;
+}
 
-	@GetMapping("/size")
-	@Operation(
-			summary = "Find fileManager by size",
-			description = "Returns a list of fileManagers that match the given size"
-	)
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Query successful",
-					content = @Content(mediaType = "application/json", schema = @Schema(implementation = FileManagerResponse.class))),
-			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-	})
+@GetMapping("/size")
+@Operation(
+summary = "Find fileManager by size",
+description = "Returns a list of fileManagers that match the given size"
+)
+@ApiResponses(value = {
+@ApiResponse(responseCode = "200", description = "Query successful",
+content = @Content(mediaType = "application/json", schema = @Schema(implementation = FileManagerResponse.class))),
+@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+})
 
-	public ResponseEntity<List<FileManagerResponse>> findBySize(
-			@AuthenticationPrincipal Jwt jwt,
-			@Parameter(description = "Value of the size to filter by", required = true)
-			@RequestParam Long size
+public ResponseEntity<List<FileManagerResponse>> findBySize(
+	@AuthenticationPrincipal Jwt jwt,
+	@Parameter(description = "Value of the size to filter by", required = true)
+	@RequestParam Long size
 	) {
-		try {
+	try {
 
-			MetaRequest metaRequest = MetaRequest.builder()
-					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
-					.build();
-			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+	MetaRequest metaRequest = MetaRequest.builder()
+		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
+	.build();
+	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
-			var future = applicationService.findByFileManagerSize(FileManagerSize
-					.create(size), metaRequest);
+	var future = applicationService.findByFileManagerSize(FileManagerSize
+	.create(size) , metaRequest);
 
-			return ResponseEntity.ok(future);
-		} catch (Exception e) {
-			log.error("Failed to find fileManager by size: {}", e.getMessage(), e);
-			return ResponseEntity.internalServerError().build();
-		}
+	return ResponseEntity.ok(future);
+	} catch (Exception e) {
+	log.error("Failed to find fileManager by size: {}", e.getMessage(), e);
+	return ResponseEntity.internalServerError().build();
+	}
 	}
 }

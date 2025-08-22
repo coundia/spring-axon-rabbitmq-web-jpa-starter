@@ -1,12 +1,16 @@
 package com.groupe2cs.bizyhub.chats.application.dto;
 
-import com.groupe2cs.bizyhub.chats.infrastructure.entity.Chat;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import org.springframework.data.domain.Page;
-
+import com.groupe2cs.bizyhub.chats.infrastructure.entity.*;
 import java.io.Serializable;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.domain.Page;
 
 @Getter
 @Setter
@@ -16,8 +20,8 @@ import java.util.List;
 @Schema(name = "ChatPagedResponse", description = "Paginated response for Chat results")
 public class ChatPagedResponse implements Serializable {
 
-	@Schema(description = "List of paginated Chat items")
-	private List<ChatResponse> content;
+@Schema(description = "List of paginated Chat items")
+private List<ChatResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -33,11 +37,11 @@ public class ChatPagedResponse implements Serializable {
 
 	public static ChatPagedResponse from(Page<Chat> page, List<ChatResponse> content) {
 		return ChatPagedResponse.builder()
-				.content(content)
-				.page(page.getNumber())
-				.size(page.getSize())
-				.totalElements(page.getTotalElements())
-				.totalPages(page.getTotalPages())
-				.build();
-	}
+		.content(content)
+		.page(page.getNumber())
+		.size(page.getSize())
+		.totalElements(page.getTotalElements())
+		.totalPages(page.getTotalPages())
+		.build();
+		}
 }

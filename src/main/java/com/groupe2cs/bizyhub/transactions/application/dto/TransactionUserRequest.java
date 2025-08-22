@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,17 +19,17 @@ import java.io.Serializable;
 @Schema(name = "TransactionUserRequest", description = "Request payload for TransactionUser operations")
 public class TransactionUserRequest implements Serializable {
 
-	@Schema(description = "", example = "dc5f7bbf-2d06-4764-988a-5ebe767fe319")
+	@Schema(description = "", example = "0f85dca2-932c-465a-96ef-cb06b8fac26e")
 	private String name;
-	@Schema(description = "", example = "5053de62-8af0-4b6e-a78f-2925ce9d1f0d")
+	@Schema(description = "", example = "aee45a31-7c06-4922-a31b-bf8c2cd85daa")
 	private String transaction;
-	@Schema(description = "", example = "98859261-d7b2-4c5a-acf1-b0bbf0f02007")
+	@Schema(description = "", example = "b6410481-fc17-4b69-a0b7-b1b234488679")
 	private String user;
-	@Schema(description = "", example = "f38478ba-44e6-4fbe-bb08-f3f57af9856b")
+	@Schema(description = "", example = "424c90a7-4ddb-4084-b54f-fa07c647cb8a")
 	private String username;
-	@Schema(description = "", example = "6cc688ee-dcd1-42a0-a5d5-9aced06026d8")
+	@Schema(description = "", example = "d28484ad-1878-4ed5-9527-d2167695435b")
 	private String details;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isActive;
 
 }

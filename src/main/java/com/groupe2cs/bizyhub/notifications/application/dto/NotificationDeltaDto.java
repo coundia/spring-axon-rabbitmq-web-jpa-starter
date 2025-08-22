@@ -1,9 +1,13 @@
 package com.groupe2cs.bizyhub.notifications.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,24 +17,24 @@ import java.io.Serializable;
 @Schema(name = "NotificationDeltaDto", description = "Delta DTO for notification changes")
 public class NotificationDeltaDto implements Serializable {
 
-	@Schema(description = "Identifier of the notification", example = "uuid")
-	private String id;
+    @Schema(description = "Identifier of the notification", example = "uuid")
+    private String id;
 
-	@Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
+    @Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
 	@Builder.Default
-	private String type = "CREATE";
+    private String type = "CREATE";
 
-	@Schema(description = "", example = "dd4ee35a-ef48-4a65-b142-14d04a3508de")
-	private String deviceToken;
-	@Schema(description = "", example = "e4da0221-7c9e-45e4-bc8e-a36878a1a0ee")
-	private String title;
-	@Schema(description = "", example = "c511da7e-6685-4b7e-83a7-6545190455f1")
-	private String message;
-	@Schema(description = "", example = "caf5dfed-fda9-42bf-960f-f8c434657e97")
-	private String status;
-	@Schema(description = "", example = "98f25313-52af-410b-86f7-ed5d85d91e5c")
-	private String reserved;
-	@Schema(description = "", example = "e1fb119a-2e7a-42d9-b565-435da94e77f4")
-	private String errorMessage;
+		@Schema(description = "", example = "9377c09c-a6a9-4bac-a8e1-2d43f8568191")
+		private String deviceToken;
+		@Schema(description = "", example = "361f0d67-9a7b-4798-b61a-30d52cf520a9")
+		private String title;
+		@Schema(description = "", example = "ffbaa790-74c2-4f46-9e9e-11ebf7619fe7")
+		private String message;
+		@Schema(description = "", example = "6b89350a-020e-4f5e-8b91-9dbd0876e1ea")
+		private String status;
+		@Schema(description = "", example = "c5159b27-b37e-4cbd-88b6-41344db0fc87")
+		private String reserved;
+		@Schema(description = "", example = "8d4ec4d1-6ca9-43d9-8c10-49a2446c8227")
+		private String errorMessage;
 
 }
