@@ -1,0 +1,63 @@
+package com.groupe2cs.bizyhub.security.application.command;
+
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import java.util.Date;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+import java.util.UUID;
+
+
+import java.time.*;
+import java.util.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class CreateVerificationCodeCommand implements Serializable {
+@TargetAggregateIdentifier
+	@Builder.Default
+	private VerificationCodeId id = VerificationCodeId.create(UUID.randomUUID().toString());
+ 	private VerificationCodeToken token;
+ 	private VerificationCodeUsername username;
+ 	private VerificationCodeEmail email;
+ 	private VerificationCodeCode code;
+ 	private VerificationCodeStatus status;
+ 	private VerificationCodeSource source;
+ 	private VerificationCodeExpiration expiration;
+ 	private VerificationCodeCreatedBy createdBy;
+ 	private VerificationCodeTenant tenant;
+	public CreateVerificationCodeCommand(
+ 
+   VerificationCodeToken token , 
+   VerificationCodeUsername username , 
+   VerificationCodeEmail email , 
+   VerificationCodeCode code , 
+   VerificationCodeStatus status , 
+   VerificationCodeSource source , 
+   VerificationCodeExpiration expiration , 
+   VerificationCodeCreatedBy createdBy , 
+   VerificationCodeTenant tenant  
+		){
+			this.id = VerificationCodeId.create(UUID.randomUUID().toString());
+ 
+  this.token = token ; 
+  this.username = username ; 
+  this.email = email ; 
+  this.code = code ; 
+  this.status = status ; 
+  this.source = source ; 
+  this.expiration = expiration ; 
+  this.createdBy = createdBy ; 
+  this.tenant = tenant ; 
+	}
+
+
+}
