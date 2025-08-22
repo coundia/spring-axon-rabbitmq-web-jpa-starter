@@ -106,6 +106,7 @@ public interface VerificationCodeRepository extends JpaRepository<VerificationCo
        List<VerificationCode> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
+    VerificationCode findFirstByCodeAndEmail(String code, String email);
 
-
+    VerificationCode findFirstByCodeAndUsername(String code, String username);
 }
