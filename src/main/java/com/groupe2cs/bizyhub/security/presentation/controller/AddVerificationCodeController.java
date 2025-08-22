@@ -53,8 +53,7 @@ public class AddVerificationCodeController {
 			@ApiResponse(responseCode = "500", description = "Internal server error",
 					content = @Content(schema = @Schema()))
 	})
-	public ResponseEntity<VerificationCodeResponse> addVerificationCode(@Valid @RequestBody VerificationCodeRequest request,
-																		@AuthenticationPrincipal Jwt jwt) {
+	public ResponseEntity<VerificationCodeResponse> addVerificationCode(@Valid @RequestBody VerificationCodeRequest request) {
 		try {
 
 			MetaRequest metaRequest = MetaRequest.builder()
