@@ -43,6 +43,9 @@ public class CategorySyncController {
 	@Valid @RequestBody CategorySyncRequest request) {
 			try {
 
+				log.info("payload *****");
+				log.info(request.getDeltas().toString());
+
 			MetaRequest metaRequest = MetaRequest.builder()
 				.userId(RequestContext.getUserId(jwt))				.tenantId(RequestContext.getTenantId(jwt))
 			.build();

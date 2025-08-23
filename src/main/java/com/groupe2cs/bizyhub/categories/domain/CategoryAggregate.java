@@ -24,10 +24,13 @@ public class CategoryAggregate {
 
 @AggregateIdentifier
 private CategoryId id;
+private CategoryCode code;
 private CategoryName name;
-private CategoryTypeCategoryRaw typeCategoryRaw;
-private CategoryDetails details;
-private CategoryIsActive isActive;
+private CategoryRemoteId remoteId;
+private CategoryDescription description;
+private CategoryTypeEntry typeEntry;
+private CategoryVersion version;
+private CategorySyncAt syncAt;
 private CategoryCreatedBy createdBy;
 private CategoryTenant tenant;
 
@@ -36,10 +39,13 @@ private CategoryTenant tenant;
 public CategoryAggregate(CreateCategoryCommand command) {
 apply(new CategoryCreatedEvent(
 		command.getId(),
+		command.getCode(),
 		command.getName(),
-		command.getTypeCategoryRaw(),
-		command.getDetails(),
-		command.getIsActive(),
+		command.getRemoteId(),
+		command.getDescription(),
+		command.getTypeEntry(),
+		command.getVersion(),
+		command.getSyncAt(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -56,10 +62,13 @@ public void handle(DeleteCategoryCommand command) {
 public void handle(UpdateCategoryCommand command) {
 apply(new CategoryUpdatedEvent(
 		command.getId(),
+		command.getCode(),
 		command.getName(),
-		command.getTypeCategoryRaw(),
-		command.getDetails(),
-		command.getIsActive(),
+		command.getRemoteId(),
+		command.getDescription(),
+		command.getTypeEntry(),
+		command.getVersion(),
+		command.getSyncAt(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -68,10 +77,13 @@ apply(new CategoryUpdatedEvent(
 @EventSourcingHandler
 public void on(CategoryCreatedEvent event) {
 	this.id = event.getId();
+	this.code = event.getCode();
 	this.name = event.getName();
-	this.typeCategoryRaw = event.getTypeCategoryRaw();
-	this.details = event.getDetails();
-	this.isActive = event.getIsActive();
+	this.remoteId = event.getRemoteId();
+	this.description = event.getDescription();
+	this.typeEntry = event.getTypeEntry();
+	this.version = event.getVersion();
+	this.syncAt = event.getSyncAt();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -84,10 +96,13 @@ this.id = event.getId();
 @EventSourcingHandler
 public void on(CategoryUpdatedEvent event) {
 this.id = event.getId();
+	this.code = event.getCode();
 	this.name = event.getName();
-	this.typeCategoryRaw = event.getTypeCategoryRaw();
-	this.details = event.getDetails();
-	this.isActive = event.getIsActive();
+	this.remoteId = event.getRemoteId();
+	this.description = event.getDescription();
+	this.typeEntry = event.getTypeEntry();
+	this.version = event.getVersion();
+	this.syncAt = event.getSyncAt();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

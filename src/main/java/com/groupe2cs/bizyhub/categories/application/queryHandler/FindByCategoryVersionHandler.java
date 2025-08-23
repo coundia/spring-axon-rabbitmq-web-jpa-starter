@@ -17,21 +17,21 @@ import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
-public class FindByCategoryIsActiveHandler {
+public class FindByCategoryVersionHandler {
 
 private final CategoryRepository repository;
 
 @QueryHandler
-public List<CategoryResponse> handle(FindByCategoryIsActiveQuery query) {
+public List<CategoryResponse> handle(FindByCategoryVersionQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
 	 List<Category> entities = null;
-	 Boolean value = query.getIsActive().value();
+	 Integer value = query.getVersion().value();
 
 	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByIsActiveAndTenantId(value, metaRequest.getTenantId());
+	    entities = repository.findByVersionAndTenantId(value, metaRequest.getTenantId());
 	 }else{
-	    entities = repository.findByIsActiveAndCreatedById(value, metaRequest.getUserId());
+	    entities = repository.findByVersionAndCreatedById(value, metaRequest.getUserId());
 	 }
 
  	return entities.stream()

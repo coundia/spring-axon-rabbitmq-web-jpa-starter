@@ -8,9 +8,9 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class FindByCategoryTypeCategoryRawQuery {
+public class FindByCategoryRemoteIdQuery {
 
-	private final CategoryTypeCategoryRaw  typeCategoryRaw;
+	private final CategoryRemoteId  remoteId;
 	private final MetaRequest metaRequest;
 
 }

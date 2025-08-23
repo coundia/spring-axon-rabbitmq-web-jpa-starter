@@ -8,9 +8,9 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class FindByCategoryDetailsQuery {
+public class FindByCategoryVersionQuery {
 
-	private final CategoryDetails  details;
+	private final CategoryVersion  version;
 	private final MetaRequest metaRequest;
 
 }

@@ -25,27 +25,36 @@ public class CreateCategoryCommand implements Serializable {
 @TargetAggregateIdentifier
 	@Builder.Default
 	private CategoryId id = CategoryId.create(UUID.randomUUID().toString());
+ 	private CategoryCode code;
  	private CategoryName name;
- 	private CategoryTypeCategoryRaw typeCategoryRaw;
- 	private CategoryDetails details;
- 	private CategoryIsActive isActive;
+ 	private CategoryRemoteId remoteId;
+ 	private CategoryDescription description;
+ 	private CategoryTypeEntry typeEntry;
+ 	private CategoryVersion version;
+ 	private CategorySyncAt syncAt;
  	private CategoryCreatedBy createdBy;
  	private CategoryTenant tenant;
 	public CreateCategoryCommand(
  
+   CategoryCode code , 
    CategoryName name , 
-   CategoryTypeCategoryRaw typeCategoryRaw , 
-   CategoryDetails details , 
-   CategoryIsActive isActive , 
+   CategoryRemoteId remoteId , 
+   CategoryDescription description , 
+   CategoryTypeEntry typeEntry , 
+   CategoryVersion version , 
+   CategorySyncAt syncAt , 
    CategoryCreatedBy createdBy , 
    CategoryTenant tenant  
 		){
 			this.id = CategoryId.create(UUID.randomUUID().toString());
  
+  this.code = code ; 
   this.name = name ; 
-  this.typeCategoryRaw = typeCategoryRaw ; 
-  this.details = details ; 
-  this.isActive = isActive ; 
+  this.remoteId = remoteId ; 
+  this.description = description ; 
+  this.typeEntry = typeEntry ; 
+  this.version = version ; 
+  this.syncAt = syncAt ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

@@ -31,10 +31,13 @@ public void on(CategoryCreatedEvent event) {
 try {
 Category entity = Category.builder()
 		.id(event.getId() == null ? null : event.getId().value())
+ 		.code(event.getCode() == null ? null : event.getCode().value())
  		.name(event.getName() == null ? null : event.getName().value())
- 		.typeCategoryRaw(event.getTypeCategoryRaw() == null ? null : event.getTypeCategoryRaw().value())
- 		.details(event.getDetails() == null ? null : event.getDetails().value())
- 		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.description(event.getDescription() == null ? null : event.getDescription().value())
+ 		.typeEntry(event.getTypeEntry() == null ? null : event.getTypeEntry().value())
+ 		.version(event.getVersion() == null ? null : event.getVersion().value())
+ 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
  .build();
 
 entity.setId(event.getId().value());
@@ -68,17 +71,26 @@ Category entity = repository.findById(event.getId().value())
 	if(event.getId() != null) {
 		entity.setId(event.getId().value());
     }
+	if(event.getCode() != null) {
+		entity.setCode(event.getCode().value());
+    }
 	if(event.getName() != null) {
 		entity.setName(event.getName().value());
     }
-	if(event.getTypeCategoryRaw() != null) {
-		entity.setTypeCategoryRaw(event.getTypeCategoryRaw().value());
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getDetails() != null) {
-		entity.setDetails(event.getDetails().value());
+	if(event.getDescription() != null) {
+		entity.setDescription(event.getDescription().value());
     }
-	if(event.getIsActive() != null) {
-		entity.setIsActive(event.getIsActive().value());
+	if(event.getTypeEntry() != null) {
+		entity.setTypeEntry(event.getTypeEntry().value());
+    }
+	if(event.getVersion() != null) {
+		entity.setVersion(event.getVersion().value());
+    }
+	if(event.getSyncAt() != null) {
+		entity.setSyncAt(event.getSyncAt().value());
     }
 
 if(event.getCreatedBy() !=null){

@@ -37,6 +37,13 @@ public class Category   extends AbstractAuditableEntity  {
 
 	)
 
+	private String code ;
+
+	@Column(nullable = false, 
+		unique = false
+
+	)
+
 	private String name ;
 
 	@Column(nullable = true, 
@@ -44,21 +51,35 @@ public class Category   extends AbstractAuditableEntity  {
 
 	)
 
-	private String typeCategoryRaw ;
+	private String remoteId ;
 
 	@Column(nullable = true, 
 		unique = false
 
 	)
 
-	private String details ;
+	private String description ;
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String typeEntry ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private Integer version ;
+
+	@Column(nullable = true, 
 		unique = false
 
 	)
 	@Builder.Default
-	private Boolean isActive  = true ;
+	private java.time.Instant syncAt  = java.time.Instant.now() ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -73,10 +94,13 @@ public class Category   extends AbstractAuditableEntity  {
  	public String toString() {
 		return "Category{" +
 		"id='" + id + '\'' +
+			", code=" + code +
 			", name=" + name +
-			", typeCategoryRaw=" + typeCategoryRaw +
-			", details=" + details +
-			", isActive=" + isActive +
+			", remoteId=" + remoteId +
+			", description=" + description +
+			", typeEntry=" + typeEntry +
+			", version=" + version +
+			", syncAt=" + syncAt +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +
 		'}';

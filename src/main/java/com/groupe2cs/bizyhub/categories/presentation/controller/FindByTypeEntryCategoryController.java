@@ -36,20 +36,20 @@ import org.springframework.security.core.Authentication;
 @PreAuthorize("@categoryGate.canList(authentication)")
 @RestController
 @RequestMapping("/api/v1/queries/category")
-@Tag(name = "Category Queries", description = "Endpoints for querying categorys by typeCategoryRaw")
+@Tag(name = "Category Queries", description = "Endpoints for querying categorys by typeEntry")
 @Slf4j
-public class FindByTypeCategoryRawCategoryController {
+public class FindByTypeEntryCategoryController {
 
 private final CategoryReadApplicationService applicationService;
 
-public FindByTypeCategoryRawCategoryController(CategoryReadApplicationService  applicationService) {
+public FindByTypeEntryCategoryController(CategoryReadApplicationService  applicationService) {
 	this.applicationService = applicationService;
 }
 
-@GetMapping("/typeCategoryRaw")
+@GetMapping("/typeEntry")
 @Operation(
-summary = "Find category by typeCategoryRaw",
-description = "Returns a list of categorys that match the given typeCategoryRaw"
+summary = "Find category by typeEntry",
+description = "Returns a list of categorys that match the given typeEntry"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -58,10 +58,10 @@ content = @Content(mediaType = "application/json", schema = @Schema(implementati
 @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
 })
 
-public ResponseEntity<List<CategoryResponse>> findByTypeCategoryRaw(
+public ResponseEntity<List<CategoryResponse>> findByTypeEntry(
 	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the typeCategoryRaw to filter by", required = true)
-	@RequestParam String typeCategoryRaw
+	@Parameter(description = "Value of the typeEntry to filter by", required = true)
+	@RequestParam String typeEntry
 	) {
 	try {
 
@@ -70,12 +70,12 @@ public ResponseEntity<List<CategoryResponse>> findByTypeCategoryRaw(
 	.build();
 	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
-	var future = applicationService.findByCategoryTypeCategoryRaw(CategoryTypeCategoryRaw
-	.create(typeCategoryRaw) , metaRequest);
+	var future = applicationService.findByCategoryTypeEntry(CategoryTypeEntry
+	.create(typeEntry) , metaRequest);
 
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find category by typeCategoryRaw: {}", e.getMessage(), e);
+	log.error("Failed to find category by typeEntry: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

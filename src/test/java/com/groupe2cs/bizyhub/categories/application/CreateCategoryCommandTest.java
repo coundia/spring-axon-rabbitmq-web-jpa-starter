@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateCategoryCommand command = new CreateCategoryCommand(
- CategoryId.create(UUID.randomUUID().toString()) ,  CategoryName.create(UUID.randomUUID().toString()) ,  CategoryTypeCategoryRaw.create(UUID.randomUUID().toString()) ,  CategoryDetails.create(UUID.randomUUID().toString()) ,  CategoryIsActive.create(false) ,  CategoryCreatedBy.create(UUID.randomUUID().toString()) ,  CategoryTenant.create(UUID.randomUUID().toString()) 
+ CategoryId.create(UUID.randomUUID().toString()) ,  CategoryCode.create(UUID.randomUUID().toString()) ,  CategoryName.create(UUID.randomUUID().toString()) ,  CategoryRemoteId.create(UUID.randomUUID().toString()) ,  CategoryDescription.create(UUID.randomUUID().toString()) ,  CategoryTypeEntry.create(UUID.randomUUID().toString()) ,  CategoryVersion.create(15) ,  CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  CategoryCreatedBy.create(UUID.randomUUID().toString()) ,  CategoryTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -36,14 +36,20 @@ verify(commandGateway, times(1)).send(commandCaptor.capture());
 CreateCategoryCommand sentCommand = commandCaptor.getValue();
 assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
+assertThat(sentCommand.getCode().value()).isEqualTo(
+command.getCode().value());
 assertThat(sentCommand.getName().value()).isEqualTo(
 command.getName().value());
-assertThat(sentCommand.getTypeCategoryRaw().value()).isEqualTo(
-command.getTypeCategoryRaw().value());
-assertThat(sentCommand.getDetails().value()).isEqualTo(
-command.getDetails().value());
-assertThat(sentCommand.getIsActive().value()).isEqualTo(
-command.getIsActive().value());
+assertThat(sentCommand.getRemoteId().value()).isEqualTo(
+command.getRemoteId().value());
+assertThat(sentCommand.getDescription().value()).isEqualTo(
+command.getDescription().value());
+assertThat(sentCommand.getTypeEntry().value()).isEqualTo(
+command.getTypeEntry().value());
+assertThat(sentCommand.getVersion().value()).isEqualTo(
+command.getVersion().value());
+assertThat(sentCommand.getSyncAt().value()).isEqualTo(
+command.getSyncAt().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
 command.getCreatedBy().value());
 assertThat(sentCommand.getTenant().value()).isEqualTo(

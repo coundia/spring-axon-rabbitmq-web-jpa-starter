@@ -2,6 +2,7 @@ package com.groupe2cs.bizyhub.categories.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryIdNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryCodeNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryNameNotValid;
 
 import java.io.Serializable;

@@ -11,10 +11,13 @@ public class CategoryMapper {
 public static CategoryResponse toResponse(Category entity) {
 return CategoryResponse.builder()
 		.id(entity.getId())
+		.code(entity.getCode())
 		.name(entity.getName())
-		.typeCategoryRaw(entity.getTypeCategoryRaw())
-		.details(entity.getDetails())
-		.isActive(entity.getIsActive())
+		.remoteId(entity.getRemoteId())
+		.description(entity.getDescription())
+		.typeEntry(entity.getTypeEntry())
+		.version(entity.getVersion())
+		.syncAt(entity.getSyncAt())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
@@ -23,20 +26,26 @@ return CategoryResponse.builder()
 public static CategoryResponse toResponse(CreateCategoryCommand command) {
 return CategoryResponse.builder()
 	.id(command.getId().value())
+	.code(command.getCode().value())
 	.name(command.getName().value())
-	.typeCategoryRaw(command.getTypeCategoryRaw().value())
-	.details(command.getDetails().value())
-	.isActive(command.getIsActive().value())
+	.remoteId(command.getRemoteId().value())
+	.description(command.getDescription().value())
+	.typeEntry(command.getTypeEntry().value())
+	.version(command.getVersion().value())
+	.syncAt(command.getSyncAt().value())
 .build();
 }
 
 public static CategoryResponse toResponse(UpdateCategoryCommand command) {
 return CategoryResponse.builder()
 	.id(command.getId().value())
+	.code(command.getCode().value())
 	.name(command.getName().value())
-	.typeCategoryRaw(command.getTypeCategoryRaw().value())
-	.details(command.getDetails().value())
-	.isActive(command.getIsActive().value())
+	.remoteId(command.getRemoteId().value())
+	.description(command.getDescription().value())
+	.typeEntry(command.getTypeEntry().value())
+	.version(command.getVersion().value())
+	.syncAt(command.getSyncAt().value())
 .build();
 }
 
@@ -44,20 +53,26 @@ public static CreateCategoryCommand toCommand(
 CategoryRequest request
 ) {
 return CreateCategoryCommand.builder()
+	.code(CategoryCode.create(request.getCode()))
 	.name(CategoryName.create(request.getName()))
-	.typeCategoryRaw(CategoryTypeCategoryRaw.create(request.getTypeCategoryRaw()))
-	.details(CategoryDetails.create(request.getDetails()))
-	.isActive(CategoryIsActive.create(request.getIsActive()))
+	.remoteId(CategoryRemoteId.create(request.getRemoteId()))
+	.description(CategoryDescription.create(request.getDescription()))
+	.typeEntry(CategoryTypeEntry.create(request.getTypeEntry()))
+	.version(CategoryVersion.create(request.getVersion()))
+	.syncAt(CategorySyncAt.create(request.getSyncAt()))
 .build();
 }
 
 	public static UpdateCategoryCommand toUpdateCommand(CategoryId id, CategoryRequest request) {
 	return UpdateCategoryCommand.builder()
 	.id(id)
+		.code(CategoryCode.create(request.getCode()))
 		.name(CategoryName.create(request.getName()))
-		.typeCategoryRaw(CategoryTypeCategoryRaw.create(request.getTypeCategoryRaw()))
-		.details(CategoryDetails.create(request.getDetails()))
-		.isActive(CategoryIsActive.create(request.getIsActive()))
+		.remoteId(CategoryRemoteId.create(request.getRemoteId()))
+		.description(CategoryDescription.create(request.getDescription()))
+		.typeEntry(CategoryTypeEntry.create(request.getTypeEntry()))
+		.version(CategoryVersion.create(request.getVersion()))
+		.syncAt(CategorySyncAt.create(request.getSyncAt()))
 	.build();
 	}
 

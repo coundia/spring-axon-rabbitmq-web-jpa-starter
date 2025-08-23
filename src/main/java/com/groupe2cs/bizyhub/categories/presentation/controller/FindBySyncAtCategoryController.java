@@ -36,20 +36,20 @@ import org.springframework.security.core.Authentication;
 @PreAuthorize("@categoryGate.canList(authentication)")
 @RestController
 @RequestMapping("/api/v1/queries/category")
-@Tag(name = "Category Queries", description = "Endpoints for querying categorys by isActive")
+@Tag(name = "Category Queries", description = "Endpoints for querying categorys by syncAt")
 @Slf4j
-public class FindByIsActiveCategoryController {
+public class FindBySyncAtCategoryController {
 
 private final CategoryReadApplicationService applicationService;
 
-public FindByIsActiveCategoryController(CategoryReadApplicationService  applicationService) {
+public FindBySyncAtCategoryController(CategoryReadApplicationService  applicationService) {
 	this.applicationService = applicationService;
 }
 
-@GetMapping("/isActive")
+@GetMapping("/syncAt")
 @Operation(
-summary = "Find category by isActive",
-description = "Returns a list of categorys that match the given isActive"
+summary = "Find category by syncAt",
+description = "Returns a list of categorys that match the given syncAt"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -58,10 +58,10 @@ content = @Content(mediaType = "application/json", schema = @Schema(implementati
 @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
 })
 
-public ResponseEntity<List<CategoryResponse>> findByIsActive(
+public ResponseEntity<List<CategoryResponse>> findBySyncAt(
 	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the isActive to filter by", required = true)
-	@RequestParam Boolean isActive
+	@Parameter(description = "Value of the syncAt to filter by", required = true)
+	@RequestParam java.time.Instant syncAt
 	) {
 	try {
 
@@ -70,12 +70,12 @@ public ResponseEntity<List<CategoryResponse>> findByIsActive(
 	.build();
 	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
-	var future = applicationService.findByCategoryIsActive(CategoryIsActive
-	.create(isActive) , metaRequest);
+	var future = applicationService.findByCategorySyncAt(CategorySyncAt
+	.create(syncAt) , metaRequest);
 
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find category by isActive: {}", e.getMessage(), e);
+	log.error("Failed to find category by syncAt: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

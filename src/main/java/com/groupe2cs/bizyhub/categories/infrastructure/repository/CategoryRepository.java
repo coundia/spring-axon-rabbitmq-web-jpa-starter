@@ -29,6 +29,13 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 	@Query("SELECT e FROM Category e WHERE e.tenant.id = ?1 ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC ")
 	Page<Category> findAllByTenantId(String tenantId, Pageable pageable);
 
+        @Query("SELECT e FROM Category e WHERE LOWER(e.code) LIKE LOWER(CONCAT('%', :code, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByCodeAndCreatedById(String code, String createdById);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.code) LIKE LOWER(CONCAT('%', :code, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByCodeAndTenantName(String code, String tenantName);
+
+        @Query("SELECT e FROM Category e WHERE LOWER(e.code) LIKE LOWER(CONCAT('%', :code, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Category> findByCodeAndTenantId(String code, String tenantId);
         @Query("SELECT e FROM Category e WHERE LOWER(e.name) LIKE LOWER(CONCAT('%', :name, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Category> findByNameAndCreatedById(String name, String createdById);
         @Query("SELECT e FROM Category e WHERE LOWER(e.name) LIKE LOWER(CONCAT('%', :name, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -36,27 +43,53 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
         @Query("SELECT e FROM Category e WHERE LOWER(e.name) LIKE LOWER(CONCAT('%', :name, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Category> findByNameAndTenantId(String name, String tenantId);
-        @Query("SELECT e FROM Category e WHERE LOWER(e.typeCategoryRaw) LIKE LOWER(CONCAT('%', :typeCategoryRaw, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Category> findByTypeCategoryRawAndCreatedById(String typeCategoryRaw, String createdById);
-        @Query("SELECT e FROM Category e WHERE LOWER(e.typeCategoryRaw) LIKE LOWER(CONCAT('%', :typeCategoryRaw, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Category> findByTypeCategoryRawAndTenantName(String typeCategoryRaw, String tenantName);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByRemoteIdAndCreatedById(String remoteId, String createdById);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByRemoteIdAndTenantName(String remoteId, String tenantName);
 
-        @Query("SELECT e FROM Category e WHERE LOWER(e.typeCategoryRaw) LIKE LOWER(CONCAT('%', :typeCategoryRaw, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Category> findByTypeCategoryRawAndTenantId(String typeCategoryRaw, String tenantId);
-        @Query("SELECT e FROM Category e WHERE LOWER(e.details) LIKE LOWER(CONCAT('%', :details, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Category> findByDetailsAndCreatedById(String details, String createdById);
-        @Query("SELECT e FROM Category e WHERE LOWER(e.details) LIKE LOWER(CONCAT('%', :details, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Category> findByDetailsAndTenantName(String details, String tenantName);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Category> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.description) LIKE LOWER(CONCAT('%', :description, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByDescriptionAndCreatedById(String description, String createdById);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.description) LIKE LOWER(CONCAT('%', :description, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByDescriptionAndTenantName(String description, String tenantName);
 
-        @Query("SELECT e FROM Category e WHERE LOWER(e.details) LIKE LOWER(CONCAT('%', :details, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Category> findByDetailsAndTenantId(String details, String tenantId);
-        @Query("SELECT e FROM Category e WHERE e.isActive = :isActive AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Category> findByIsActiveAndCreatedById(Boolean isActive, String createdById);
-        @Query("SELECT e FROM Category e WHERE e.isActive = :isActive AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Category> findByIsActiveAndTenantName(Boolean isActive, String tenantName);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.description) LIKE LOWER(CONCAT('%', :description, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Category> findByDescriptionAndTenantId(String description, String tenantId);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.typeEntry) LIKE LOWER(CONCAT('%', :typeEntry, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByTypeEntryAndCreatedById(String typeEntry, String createdById);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.typeEntry) LIKE LOWER(CONCAT('%', :typeEntry, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByTypeEntryAndTenantName(String typeEntry, String tenantName);
 
-        @Query("SELECT e FROM Category e WHERE e.isActive = :isActive AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Category> findByIsActiveAndTenantId(Boolean isActive, String tenantId);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.typeEntry) LIKE LOWER(CONCAT('%', :typeEntry, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Category> findByTypeEntryAndTenantId(String typeEntry, String tenantId);
+        @Query("SELECT e FROM Category e WHERE e.version = :version AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByVersionAndCreatedById(Integer version, String createdById);
+        @Query("SELECT e FROM Category e WHERE e.version = :version AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByVersionAndTenantName(Integer version, String tenantName);
+
+        @Query("SELECT e FROM Category e WHERE e.version = :version AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Category> findByVersionAndTenantId(Integer version, String tenantId);
+        @Query("""
+        SELECT e FROM Category e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.createdBy.id = :createdById
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Category> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+        SELECT e FROM Category e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.tenant.id = :tenantId
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Category> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
+
         @Query("SELECT e FROM Category e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Category> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
         @Query("SELECT e FROM Category e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

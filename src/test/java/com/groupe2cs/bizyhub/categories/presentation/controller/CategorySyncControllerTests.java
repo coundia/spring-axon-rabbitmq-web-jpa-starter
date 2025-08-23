@@ -1,5 +1,8 @@
 package com.groupe2cs.bizyhub.categories.presentation.controller;
 
+import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.categories.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
@@ -7,9 +10,6 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.categories.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.categories.infrastructure.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -38,10 +38,13 @@ private CategoryRepository Repository;
 		CategorySyncRequest requestDTO = CategorySyncRequest.builder()
 		.deltas(List.of(
 		CategoryDeltaDto.builder()
+.code(UUID.randomUUID().toString())
 .name(UUID.randomUUID().toString())
-.typeCategoryRaw(UUID.randomUUID().toString())
-.details(UUID.randomUUID().toString())
-.isActive(true)
+.remoteId(UUID.randomUUID().toString())
+.description(UUID.randomUUID().toString())
+.typeEntry(UUID.randomUUID().toString())
+.version(1)
+.syncAt(java.time.Instant.now().plusSeconds(3600))
 		.type("CREATE")
 		.build()
 		))
@@ -66,10 +69,13 @@ private CategoryRepository Repository;
 			.deltas(List.of(
 			CategoryDeltaDto.builder()
 			.id(existingId)
+.code(UUID.randomUUID().toString())
 .name(UUID.randomUUID().toString())
-.typeCategoryRaw(UUID.randomUUID().toString())
-.details(UUID.randomUUID().toString())
-.isActive(true)
+.remoteId(UUID.randomUUID().toString())
+.description(UUID.randomUUID().toString())
+.typeEntry(UUID.randomUUID().toString())
+.version(1)
+.syncAt(java.time.Instant.now().plusSeconds(3600))
 			.type("UPDATE")
 			.build()
 			))

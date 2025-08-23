@@ -17,21 +17,21 @@ import org.axonframework.queryhandling.QueryHandler;
 
 @Component
 @RequiredArgsConstructor
-public class FindByCategoryTypeCategoryRawHandler {
+public class FindByCategorySyncAtHandler {
 
 private final CategoryRepository repository;
 
 @QueryHandler
-public List<CategoryResponse> handle(FindByCategoryTypeCategoryRawQuery query) {
+public List<CategoryResponse> handle(FindByCategorySyncAtQuery query) {
 
 	 MetaRequest metaRequest = query.getMetaRequest();
 	 List<Category> entities = null;
-	 String value = query.getTypeCategoryRaw().value();
+	 java.time.Instant value = query.getSyncAt().value();
 
 	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByTypeCategoryRawAndTenantId(value, metaRequest.getTenantId());
+	    entities = repository.findBySyncAtAndTenantId(value, metaRequest.getTenantId());
 	 }else{
-	    entities = repository.findByTypeCategoryRawAndCreatedById(value, metaRequest.getUserId());
+	    entities = repository.findBySyncAtAndCreatedById(value, metaRequest.getUserId());
 	 }
 
  	return entities.stream()

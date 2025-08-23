@@ -38,7 +38,7 @@ void it_should_be_able_to_add_apikey() {
 
 		requestDTO.setAppKey(UUID.randomUUID().toString());
 		requestDTO.setUsername(UUID.randomUUID().toString());
-		requestDTO.setActive(false);
+		requestDTO.setActive(true);
 		requestDTO.setExpiration(java.time.Instant.now().plusSeconds(3600));
 
  		String uri = "/v1/admin/commands/apiKey";

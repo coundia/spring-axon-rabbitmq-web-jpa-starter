@@ -71,10 +71,13 @@ public class CategoryFixtures {
 		 User user) {
 
 			CreateCategoryCommand command = CreateCategoryCommand.builder()
+				.code(CategoryCode.create(UUID.randomUUID().toString()))
 				.name(CategoryName.create(UUID.randomUUID().toString()))
-				.typeCategoryRaw(CategoryTypeCategoryRaw.create(UUID.randomUUID().toString()))
-				.details(CategoryDetails.create(UUID.randomUUID().toString()))
-				.isActive(CategoryIsActive.create(false))
+				.remoteId(CategoryRemoteId.create(UUID.randomUUID().toString()))
+				.description(CategoryDescription.create(UUID.randomUUID().toString()))
+				.typeEntry(CategoryTypeEntry.create(UUID.randomUUID().toString()))
+				.version(CategoryVersion.create(58))
+				.syncAt(CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 			.build();
 
 		command.setCreatedBy(CategoryCreatedBy.create(user.getId()));
@@ -92,10 +95,13 @@ public class CategoryFixtures {
         ) {
 
         CreateCategoryCommand command = CreateCategoryCommand.builder()
+        .code(CategoryCode.create(UUID.randomUUID().toString()))
         .name(CategoryName.create(UUID.randomUUID().toString()))
-        .typeCategoryRaw(CategoryTypeCategoryRaw.create(UUID.randomUUID().toString()))
-        .details(CategoryDetails.create(UUID.randomUUID().toString()))
-        .isActive(CategoryIsActive.create(false))
+        .remoteId(CategoryRemoteId.create(UUID.randomUUID().toString()))
+        .description(CategoryDescription.create(UUID.randomUUID().toString()))
+        .typeEntry(CategoryTypeEntry.create(UUID.randomUUID().toString()))
+        .version(CategoryVersion.create(58))
+        .syncAt(CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .build();
 
 		command.setCreatedBy(CategoryCreatedBy.create(user.getId()));

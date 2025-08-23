@@ -36,20 +36,20 @@ import org.springframework.security.core.Authentication;
 @PreAuthorize("@categoryGate.canList(authentication)")
 @RestController
 @RequestMapping("/api/v1/queries/category")
-@Tag(name = "Category Queries", description = "Endpoints for querying categorys by details")
+@Tag(name = "Category Queries", description = "Endpoints for querying categorys by code")
 @Slf4j
-public class FindByDetailsCategoryController {
+public class FindByCodeCategoryController {
 
 private final CategoryReadApplicationService applicationService;
 
-public FindByDetailsCategoryController(CategoryReadApplicationService  applicationService) {
+public FindByCodeCategoryController(CategoryReadApplicationService  applicationService) {
 	this.applicationService = applicationService;
 }
 
-@GetMapping("/details")
+@GetMapping("/code")
 @Operation(
-summary = "Find category by details",
-description = "Returns a list of categorys that match the given details"
+summary = "Find category by code",
+description = "Returns a list of categorys that match the given code"
 )
 @ApiResponses(value = {
 @ApiResponse(responseCode = "200", description = "Query successful",
@@ -58,10 +58,10 @@ content = @Content(mediaType = "application/json", schema = @Schema(implementati
 @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
 })
 
-public ResponseEntity<List<CategoryResponse>> findByDetails(
+public ResponseEntity<List<CategoryResponse>> findByCode(
 	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the details to filter by", required = true)
-	@RequestParam String details
+	@Parameter(description = "Value of the code to filter by", required = true)
+	@RequestParam String code
 	) {
 	try {
 
@@ -70,12 +70,12 @@ public ResponseEntity<List<CategoryResponse>> findByDetails(
 	.build();
 	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
-	var future = applicationService.findByCategoryDetails(CategoryDetails
-	.create(details) , metaRequest);
+	var future = applicationService.findByCategoryCode(CategoryCode
+	.create(code) , metaRequest);
 
 	return ResponseEntity.ok(future);
 	} catch (Exception e) {
-	log.error("Failed to find category by details: {}", e.getMessage(), e);
+	log.error("Failed to find category by code: {}", e.getMessage(), e);
 	return ResponseEntity.internalServerError().build();
 	}
 	}

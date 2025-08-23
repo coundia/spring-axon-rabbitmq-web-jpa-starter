@@ -22,13 +22,19 @@ public class CategoryResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String id;
 	@Schema(description = "", example = "")
+	private String code;
+	@Schema(description = "", example = "")
 	private String name;
 	@Schema(description = "", example = "")
-	private String typeCategoryRaw;
+	private String remoteId;
 	@Schema(description = "", example = "")
-	private String details;
+	private String description;
 	@Schema(description = "", example = "")
-	private Boolean isActive;
+	private String typeEntry;
+	@Schema(description = "", example = "")
+	private Integer version;
+	@Schema(description = "", example = "")
+	private java.time.Instant syncAt;
 	@Schema(description = "", example = "")
 	private String createdBy;
 	@Schema(description = "", example = "")

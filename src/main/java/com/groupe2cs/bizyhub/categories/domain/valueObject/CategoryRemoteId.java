@@ -2,8 +2,9 @@ package com.groupe2cs.bizyhub.categories.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryIdNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryCodeNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryNameNotValid;
-import com.groupe2cs.bizyhub.categories.domain.exception.CategoryTypeCategoryRawNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryRemoteIdNotValid;
 
 import java.io.Serializable;
 import lombok.Getter;
@@ -19,37 +20,37 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Builder
-public class CategoryTypeCategoryRaw implements Serializable {
+public class CategoryRemoteId implements Serializable {
 
-private String typeCategoryRaw;
+private String remoteId;
 
-public CategoryTypeCategoryRaw(String typeCategoryRaw) {
-this.typeCategoryRaw = typeCategoryRaw;
+public CategoryRemoteId(String remoteId) {
+this.remoteId = remoteId;
 }
 
-public static CategoryTypeCategoryRaw create(String typeCategoryRaw) {
+public static CategoryRemoteId create(String remoteId) {
 
-	return new CategoryTypeCategoryRaw(typeCategoryRaw);
+	return new CategoryRemoteId(remoteId);
 }
 
 public String value() {
-return this.typeCategoryRaw;
+return this.remoteId;
 }
 
 @Override
 public boolean equals(Object o) {
 if (this == o) return true;
-if (!(o instanceof CategoryTypeCategoryRaw that)) return false;
-return this.typeCategoryRaw.equals(that.typeCategoryRaw);
+if (!(o instanceof CategoryRemoteId that)) return false;
+return this.remoteId.equals(that.remoteId);
 }
 
 @Override
 public int hashCode() {
-return java.util.Objects.hash(typeCategoryRaw);
+return java.util.Objects.hash(remoteId);
 }
 
 @Override
 public String toString() {
-return String.valueOf(typeCategoryRaw);
+return String.valueOf(remoteId);
 }
 }

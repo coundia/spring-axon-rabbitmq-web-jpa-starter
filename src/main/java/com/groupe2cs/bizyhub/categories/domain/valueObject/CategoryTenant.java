@@ -2,10 +2,13 @@ package com.groupe2cs.bizyhub.categories.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryIdNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryCodeNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryNameNotValid;
-import com.groupe2cs.bizyhub.categories.domain.exception.CategoryTypeCategoryRawNotValid;
-import com.groupe2cs.bizyhub.categories.domain.exception.CategoryDetailsNotValid;
-import com.groupe2cs.bizyhub.categories.domain.exception.CategoryIsActiveNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryRemoteIdNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryDescriptionNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryTypeEntryNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryVersionNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategorySyncAtNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryCreatedByNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryTenantNotValid;
 

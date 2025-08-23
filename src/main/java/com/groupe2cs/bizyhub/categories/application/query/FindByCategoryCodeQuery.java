@@ -8,9 +8,9 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class FindByCategoryIsActiveQuery {
+public class FindByCategoryCodeQuery {
 
-	private final CategoryIsActive  isActive;
+	private final CategoryCode  code;
 	private final MetaRequest metaRequest;
 
 }

@@ -64,9 +64,9 @@ public class UserUpdateControllerIntegrationTest extends BaseIntegrationTests {
         body.add("lastName", UUID.randomUUID().toString());
         body.add("email", UUID.randomUUID().toString());
         body.add("telephone", UUID.randomUUID().toString());
-        body.add("limitPerDay", 74);
+        body.add("limitPerDay", 24);
         body.add("isPremium", false);
-        body.add("enabled", true);
+        body.add("enabled", false);
         body.add("isBan", false);
         body.add("message", UUID.randomUUID().toString());
 

@@ -47,10 +47,10 @@ public class FakeIAService implements IAService {
 		CategoryRequest categoryRequest = CategoryRequest
 				.builder()
 				.name(categoryName)
-				.typeCategoryRaw(type)
+				//.typeCategoryRaw(type)
 				//	.updatedAt(Instant.now())
-				.isActive(true)
-				.details("")
+				//.isActive(true)
+			//	.details("")
 				//.reference("")
 				.build();
 

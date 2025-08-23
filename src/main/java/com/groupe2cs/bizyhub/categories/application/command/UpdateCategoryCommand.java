@@ -24,10 +24,13 @@ import java.util.*;
 public class UpdateCategoryCommand implements Serializable {
 @TargetAggregateIdentifier
 	private CategoryId id;
+ 	private CategoryCode code;
  	private CategoryName name;
- 	private CategoryTypeCategoryRaw typeCategoryRaw;
- 	private CategoryDetails details;
- 	private CategoryIsActive isActive;
+ 	private CategoryRemoteId remoteId;
+ 	private CategoryDescription description;
+ 	private CategoryTypeEntry typeEntry;
+ 	private CategoryVersion version;
+ 	private CategorySyncAt syncAt;
  	private CategoryCreatedBy createdBy;
  	private CategoryTenant tenant;
 

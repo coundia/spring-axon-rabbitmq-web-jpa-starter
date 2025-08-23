@@ -58,10 +58,13 @@ public class CategoryUpdateControllerIntegrationTest extends BaseIntegrationTest
         CategoryFixtures.byIdWaitExist(categoryRepository, updated.getId().value());
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("code", UUID.randomUUID().toString());
         body.add("name", UUID.randomUUID().toString());
-        body.add("typeCategoryRaw", UUID.randomUUID().toString());
-        body.add("details", UUID.randomUUID().toString());
-        body.add("isActive", true);
+        body.add("remoteId", UUID.randomUUID().toString());
+        body.add("description", UUID.randomUUID().toString());
+        body.add("typeEntry", UUID.randomUUID().toString());
+        body.add("version", 36);
+        body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

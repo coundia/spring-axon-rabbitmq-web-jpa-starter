@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.categories.application.usecase;
 
-import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
-import com.groupe2cs.bizyhub.categories.application.query.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.categories.application.dto.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.categories.application.mapper.*;
+import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import com.groupe2cs.bizyhub.categories.application.query.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +38,16 @@ public CategoryResponse findByCategoryId(CategoryId value, MetaRequest metaReque
 }
 
 
+public List<CategoryResponse> findByCategoryCode(
+	CategoryCode value,
+	MetaRequest metaRequest
+	) {
+
+	FindByCategoryCodeQuery query = new FindByCategoryCodeQuery(value,metaRequest);
+	CompletableFuture<List<CategoryResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
+	return future.join();
+}
 public List<CategoryResponse> findByCategoryName(
 	CategoryName value,
 	MetaRequest metaRequest
@@ -48,32 +58,52 @@ public List<CategoryResponse> findByCategoryName(
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
 	return future.join();
 }
-public List<CategoryResponse> findByCategoryTypeCategoryRaw(
-	CategoryTypeCategoryRaw value,
+public List<CategoryResponse> findByCategoryRemoteId(
+	CategoryRemoteId value,
 	MetaRequest metaRequest
 	) {
 
-	FindByCategoryTypeCategoryRawQuery query = new FindByCategoryTypeCategoryRawQuery(value,metaRequest);
+	FindByCategoryRemoteIdQuery query = new FindByCategoryRemoteIdQuery(value,metaRequest);
 	CompletableFuture<List<CategoryResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
 	return future.join();
 }
-public List<CategoryResponse> findByCategoryDetails(
-	CategoryDetails value,
+public List<CategoryResponse> findByCategoryDescription(
+	CategoryDescription value,
 	MetaRequest metaRequest
 	) {
 
-	FindByCategoryDetailsQuery query = new FindByCategoryDetailsQuery(value,metaRequest);
+	FindByCategoryDescriptionQuery query = new FindByCategoryDescriptionQuery(value,metaRequest);
 	CompletableFuture<List<CategoryResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
 	return future.join();
 }
-public List<CategoryResponse> findByCategoryIsActive(
-	CategoryIsActive value,
+public List<CategoryResponse> findByCategoryTypeEntry(
+	CategoryTypeEntry value,
 	MetaRequest metaRequest
 	) {
 
-	FindByCategoryIsActiveQuery query = new FindByCategoryIsActiveQuery(value,metaRequest);
+	FindByCategoryTypeEntryQuery query = new FindByCategoryTypeEntryQuery(value,metaRequest);
+	CompletableFuture<List<CategoryResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
+	return future.join();
+}
+public List<CategoryResponse> findByCategoryVersion(
+	CategoryVersion value,
+	MetaRequest metaRequest
+	) {
+
+	FindByCategoryVersionQuery query = new FindByCategoryVersionQuery(value,metaRequest);
+	CompletableFuture<List<CategoryResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
+	return future.join();
+}
+public List<CategoryResponse> findByCategorySyncAt(
+	CategorySyncAt value,
+	MetaRequest metaRequest
+	) {
+
+	FindByCategorySyncAtQuery query = new FindByCategorySyncAtQuery(value,metaRequest);
 	CompletableFuture<List<CategoryResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
 	return future.join();
