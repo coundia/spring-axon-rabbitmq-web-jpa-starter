@@ -27,6 +27,7 @@ public class VerificationCodeDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private VerificationCodeId id;
 

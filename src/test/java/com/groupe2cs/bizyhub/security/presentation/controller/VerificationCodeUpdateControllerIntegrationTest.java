@@ -60,6 +60,7 @@ public class VerificationCodeUpdateControllerIntegrationTest extends BaseIntegra
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("token", UUID.randomUUID().toString());
         body.add("username", UUID.randomUUID().toString());
+        body.add("phone", UUID.randomUUID().toString());
         body.add("email", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("status", UUID.randomUUID().toString());

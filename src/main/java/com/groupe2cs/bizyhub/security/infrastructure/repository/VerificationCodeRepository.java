@@ -43,6 +43,13 @@ public interface VerificationCodeRepository extends JpaRepository<VerificationCo
 
         @Query("SELECT e FROM VerificationCode e WHERE LOWER(e.username) LIKE LOWER(CONCAT('%', :username, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<VerificationCode> findByUsernameAndTenantId(String username, String tenantId);
+        @Query("SELECT e FROM VerificationCode e WHERE LOWER(e.phone) LIKE LOWER(CONCAT('%', :phone, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<VerificationCode> findByPhoneAndCreatedById(String phone, String createdById);
+        @Query("SELECT e FROM VerificationCode e WHERE LOWER(e.phone) LIKE LOWER(CONCAT('%', :phone, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<VerificationCode> findByPhoneAndTenantName(String phone, String tenantName);
+
+        @Query("SELECT e FROM VerificationCode e WHERE LOWER(e.phone) LIKE LOWER(CONCAT('%', :phone, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<VerificationCode> findByPhoneAndTenantId(String phone, String tenantId);
         @Query("SELECT e FROM VerificationCode e WHERE LOWER(e.email) LIKE LOWER(CONCAT('%', :email, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<VerificationCode> findByEmailAndCreatedById(String email, String createdById);
         @Query("SELECT e FROM VerificationCode e WHERE LOWER(e.email) LIKE LOWER(CONCAT('%', :email, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -106,7 +113,5 @@ public interface VerificationCodeRepository extends JpaRepository<VerificationCo
        List<VerificationCode> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
-    VerificationCode findFirstByCodeAndEmail(String code, String email);
-
-    VerificationCode findFirstByCodeAndUsername(String code, String username);
+	VerificationCode findFirstByCodeAndUsername(String code, String username);
 }

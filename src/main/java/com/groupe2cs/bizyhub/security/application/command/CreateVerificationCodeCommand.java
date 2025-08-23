@@ -27,6 +27,7 @@ public class CreateVerificationCodeCommand implements Serializable {
 	private VerificationCodeId id = VerificationCodeId.create(UUID.randomUUID().toString());
  	private VerificationCodeToken token;
  	private VerificationCodeUsername username;
+ 	private VerificationCodePhone phone;
  	private VerificationCodeEmail email;
  	private VerificationCodeCode code;
  	private VerificationCodeStatus status;
@@ -38,6 +39,7 @@ public class CreateVerificationCodeCommand implements Serializable {
  
    VerificationCodeToken token , 
    VerificationCodeUsername username , 
+   VerificationCodePhone phone , 
    VerificationCodeEmail email , 
    VerificationCodeCode code , 
    VerificationCodeStatus status , 
@@ -50,6 +52,7 @@ public class CreateVerificationCodeCommand implements Serializable {
  
   this.token = token ; 
   this.username = username ; 
+  this.phone = phone ; 
   this.email = email ; 
   this.code = code ; 
   this.status = status ; 

@@ -4,6 +4,7 @@ import java.util.Objects;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeIdNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeTokenNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeUsernameNotValid;
+import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodePhoneNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeEmailNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeCodeNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeStatusNotValid;

@@ -26,6 +26,7 @@ public class UpdateVerificationCodeCommand implements Serializable {
 	private VerificationCodeId id;
  	private VerificationCodeToken token;
  	private VerificationCodeUsername username;
+ 	private VerificationCodePhone phone;
  	private VerificationCodeEmail email;
  	private VerificationCodeCode code;
  	private VerificationCodeStatus status;

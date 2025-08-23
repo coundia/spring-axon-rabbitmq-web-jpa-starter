@@ -51,6 +51,13 @@ public class VerificationCode   extends AbstractAuditableEntity  {
 
 	)
 
+	private String phone ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String email ;
 
 	@Column(nullable = true, 
@@ -96,6 +103,7 @@ public class VerificationCode   extends AbstractAuditableEntity  {
 		"id='" + id + '\'' +
 			", token=" + token +
 			", username=" + username +
+			", phone=" + phone +
 			", email=" + email +
 			", code=" + code +
 			", status=" + status +

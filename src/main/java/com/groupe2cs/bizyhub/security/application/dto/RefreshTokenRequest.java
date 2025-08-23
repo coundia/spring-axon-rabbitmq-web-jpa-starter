@@ -19,9 +19,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "RefreshTokenRequest", description = "Request payload for RefreshToken operations")
 public class RefreshTokenRequest implements Serializable {
 
-	@Schema(description = "", example = "862753b5-c541-4257-9186-ef05262ccc69")
+	@Schema(description = "", example = "e1620bce-8fc2-48fa-8d7f-b90ce49ac2ca")
 	private String token;
-	@Schema(description = "", example = "c01ca7b6-11bd-4d6c-8bb9-4a3acb4b3fc5")
+	@Schema(description = "", example = "333d6565-c6fe-4b34-98b2-eb1145a8aeab")
 	private String username;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant expiration;

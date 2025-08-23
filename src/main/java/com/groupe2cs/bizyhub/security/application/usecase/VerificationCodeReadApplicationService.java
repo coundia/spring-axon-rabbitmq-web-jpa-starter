@@ -58,6 +58,16 @@ public List<VerificationCodeResponse> findByVerificationCodeUsername(
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(VerificationCodeResponse.class));
 	return future.join();
 }
+public List<VerificationCodeResponse> findByVerificationCodePhone(
+	VerificationCodePhone value,
+	MetaRequest metaRequest
+	) {
+
+	FindByVerificationCodePhoneQuery query = new FindByVerificationCodePhoneQuery(value,metaRequest);
+	CompletableFuture<List<VerificationCodeResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(VerificationCodeResponse.class));
+	return future.join();
+}
 public List<VerificationCodeResponse> findByVerificationCodeEmail(
 	VerificationCodeEmail value,
 	MetaRequest metaRequest

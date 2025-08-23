@@ -19,19 +19,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "UserRequest", description = "Request payload for User operations")
 public class UserRequest implements Serializable {
 
-	@Schema(description = "", example = "e7c79025-3f48-4779-abb1-5e74d4fedd3a")
+	@Schema(description = "", example = "69efd62b-3b62-48a8-bbc4-95af4dde68cd")
 	private String username;
-	@Schema(description = "", example = "c8daa6a5-c7c7-4133-b4db-3feb26a77064")
+	@Schema(description = "", example = "c9243279-bb3e-4f88-8797-8faf6ca82d6d")
 	private String password;
-	@Schema(description = "", example = "1c15e189-6c65-4fce-a8ed-686f86076fba")
+	@Schema(description = "", example = "b34b7877-1d95-41f8-b8f2-fbd54e3aeaa2")
 	private String firstName;
-	@Schema(description = "", example = "310d1392-0d1c-434e-87d0-aa02158ef16f")
+	@Schema(description = "", example = "0a72f29c-bed6-45a5-93a1-3c0b9883a0e1")
 	private String lastName;
-	@Schema(description = "", example = "db899dfc-92e1-43d3-acce-b15634276d77")
+	@Schema(description = "", example = "4d1a27e0-ea7c-41f7-8f33-c1160723dea2")
 	private String email;
-	@Schema(description = "", example = "b7211f35-6b7a-4ab5-aa7c-575680911a1a")
+	@Schema(description = "", example = "688d7bd8-5993-4dc9-a618-5f96a1cba251")
 	private String telephone;
-	@Schema(description = "", example = "56")
+	@Schema(description = "", example = "44")
 	private Integer limitPerDay;
 	@Schema(description = "", example = "true")
 	private Boolean isPremium;
@@ -39,7 +39,7 @@ public class UserRequest implements Serializable {
 	private Boolean enabled;
 	@Schema(description = "", example = "true")
 	private Boolean isBan;
-	@Schema(description = "", example = "661a17c4-4c60-4ae8-b29b-a661c3612f25")
+	@Schema(description = "", example = "89ddc196-899e-4bb6-8a26-0deaae0721e8")
 	private String message;
 
 }

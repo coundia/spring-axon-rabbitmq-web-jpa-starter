@@ -49,7 +49,7 @@ public class AuthVerificationCodeController {
 		try {
 			String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
 			String username = request.getUsername();
-			String code = codeGenerator.numeric(6);
+			String code = codeGenerator.numeric(4);
 			request.setCode(code);
 			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
 			User user = userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
@@ -59,7 +59,7 @@ public class AuthVerificationCodeController {
 			metaRequest.setUserId(user.getId());
 			VerificationCodeResponse response = applicationService.createVerificationCode(request, metaRequest);
 			response.setCode(" ***** ");
-			log.info("Generated verification code for user {}: {}", username, tenantId);
+			log.info("Generated verification code for user, code {}: {}, code {}", username, tenantId, code);
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		} catch (Exception ex) {
 			log.error("Failed to create verificationCode: {}", ex.getMessage());
