@@ -1,0 +1,94 @@
+package com.groupe2cs.bizyhub.security.presentation.controller;
+
+import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
+import com.groupe2cs.bizyhub.security.application.dto.VerificationCodeRequest;
+import com.groupe2cs.bizyhub.security.application.dto.VerificationCodeResponse;
+import com.groupe2cs.bizyhub.security.application.service.JwtService;
+import com.groupe2cs.bizyhub.security.application.service.RegisterUser;
+import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
+import com.groupe2cs.bizyhub.security.application.usecase.VerificationCodeCreateApplicationService;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.VerificationCode;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.VerificationCodeRepository;
+import com.groupe2cs.bizyhub.shared.application.CodeGenerator;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/api/auth")
+@Slf4j
+@RequiredArgsConstructor
+public class AuthVerificationCodeController {
+	private final VerificationCodeCreateApplicationService applicationService;
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
+	private final RegisterUser registerUser;
+	private final CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
+	private final VerificationCodeRepository verificationCodeRepository;
+	private final CodeGenerator codeGenerator = new CodeGenerator();
+
+	@PostMapping("/request-code")
+	public ResponseEntity<VerificationCodeResponse> requestCode(@Valid @RequestBody VerificationCodeRequest request) {
+		try {
+			String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
+			String username = request.getUsername();
+			String code = codeGenerator.numeric(6);
+			request.setCode(code);
+			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
+			User user = userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
+				User u = User.builder().id(UUID.randomUUID().toString()).username(username).password(passwordEncoder.encode(code)).tenant(new Tenant(tenantId)).build();
+				return userRepository.save(u);
+			});
+			metaRequest.setUserId(user.getId());
+			VerificationCodeResponse response = applicationService.createVerificationCode(request, metaRequest);
+			response.setCode(" ***** ");
+			log.info("Generated verification code for user {}: {}", username, tenantId);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception ex) {
+			log.error("Failed to create verificationCode: {}", ex.getMessage());
+			ex.printStackTrace();
+			return ResponseEntity.status(500).build();
+		}
+	}
+
+	@PostMapping("/check-code")
+	public ResponseEntity<AuthResponseDto> checkCode(@Valid @RequestBody VerificationCodeRequest request) {
+		try {
+			String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
+			String username = request.getUsername();
+			String code = request.getCode();
+			VerificationCode verificationCode = verificationCodeRepository.findFirstByCodeAndUsername(code, username);
+			if (verificationCode == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
+			User user = userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
+				User u = User.builder().id(UUID.randomUUID().toString()).username(username).password(passwordEncoder.encode(code)).tenant(new Tenant(tenantId)).build();
+				return userRepository.save(u);
+			});
+			UserPrincipal userPrincipal = new UserPrincipal(user);
+			Authentication authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
+			String token = jwtService.generateToken(authentication, metaRequest);
+			return ResponseEntity.status(HttpStatus.CREATED).body(AuthResponseDto.builder().code(1).token(token).tenant(tenantId).username(username).message("Login successful").build());
+		} catch (Exception ex) {
+			log.error("Failed to verify code: {}", ex.getMessage());
+			ex.printStackTrace();
+			return ResponseEntity.status(500).build();
+		}
+	}
+}

@@ -143,4 +143,5 @@ public interface UserRepository extends JpaRepository<User, String> {
 	List<User> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
+	Optional<User> findFirstByUsernameAndTenantId(String username, String tenantId);
 }
