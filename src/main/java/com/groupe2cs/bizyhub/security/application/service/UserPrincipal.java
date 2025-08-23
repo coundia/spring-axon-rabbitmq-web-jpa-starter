@@ -1,6 +1,6 @@
 package com.groupe2cs.bizyhub.security.application.service;
-import com.groupe2cs.bizyhub.shared.infrastructure.audit.IdentifiableUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.IdentifiableUser;
 
 
 import lombok.AllArgsConstructor;

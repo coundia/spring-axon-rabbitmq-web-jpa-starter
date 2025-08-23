@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.security.domain;
 
 import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.security.domain.exception.*;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class VerificationCodeAggregateTests extends BaseUnitTests {
@@ -14,6 +14,7 @@ public class VerificationCodeAggregateTests extends BaseUnitTests {
 @Test
 void it_should_create_verificationCode_with_valid_values() {
 	VerificationCodeId id = VerificationCodeId.create(UUID.randomUUID().toString());
+	VerificationCodeNotes notes = VerificationCodeNotes.create(UUID.randomUUID().toString());
 	VerificationCodeToken token = VerificationCodeToken.create(UUID.randomUUID().toString());
 	VerificationCodeUsername username = VerificationCodeUsername.create(UUID.randomUUID().toString());
 	VerificationCodePhone phone = VerificationCodePhone.create(UUID.randomUUID().toString());
@@ -24,9 +25,10 @@ void it_should_create_verificationCode_with_valid_values() {
 	VerificationCodeExpiration expiration = VerificationCodeExpiration.create(java.time.Instant.now().plusSeconds(3600));
 	VerificationCodeCreatedBy createdBy = VerificationCodeCreatedBy.create(UUID.randomUUID().toString());
 	VerificationCodeTenant tenant = VerificationCodeTenant.create(UUID.randomUUID().toString());
-	VerificationCodeAggregate aggregateVerificationCodeAggregate = new VerificationCodeAggregate(id, token, username, phone, email, code, status, source, expiration, createdBy, tenant);
+	VerificationCodeAggregate aggregateVerificationCodeAggregate = new VerificationCodeAggregate(id, notes, token, username, phone, email, code, status, source, expiration, createdBy, tenant);
 	assertThat(aggregateVerificationCodeAggregate.getId()).isNotNull();
 	assertThat(aggregateVerificationCodeAggregate.getId()).isEqualTo(id);
+	assertThat(aggregateVerificationCodeAggregate.getNotes()).isEqualTo(notes);
 	assertThat(aggregateVerificationCodeAggregate.getToken()).isEqualTo(token);
 	assertThat(aggregateVerificationCodeAggregate.getUsername()).isEqualTo(username);
 	assertThat(aggregateVerificationCodeAggregate.getPhone()).isEqualTo(phone);

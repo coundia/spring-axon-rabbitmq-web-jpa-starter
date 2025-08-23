@@ -18,6 +18,7 @@ import java.util.*;
 public class VerificationCodeCreatedEvent implements Serializable {
 
 	private VerificationCodeId id;
+	private VerificationCodeNotes notes;
 	private VerificationCodeToken token;
 	private VerificationCodeUsername username;
 	private VerificationCodePhone phone;

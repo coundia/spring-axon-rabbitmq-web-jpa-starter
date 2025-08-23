@@ -2,6 +2,7 @@ package com.groupe2cs.bizyhub.security.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeIdNotValid;
+import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeNotesNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeTokenNotValid;
 
 import java.io.Serializable;

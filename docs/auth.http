@@ -1,0 +1,23 @@
+###
+
+POST http://127.0.0.1:8095/api/auth/request-code
+accept: */*
+Content-Type: application/json
+
+{
+  "username": "papacoundia@gmail.com",
+  "email": "papacoundia@gmail.com"
+}
+
+###
+POST http://127.0.0.1:8095/api/auth/check-code
+accept: */*
+Content-Type: application/json
+
+{
+  "username": "papacoundia@gmail.com",
+  "email": "papacoundia@gmail.com",
+  "code": "4953"
+}
+
+###

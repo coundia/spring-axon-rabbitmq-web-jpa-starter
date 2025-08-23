@@ -24,6 +24,7 @@ import java.util.*;
 public class UpdateVerificationCodeCommand implements Serializable {
 @TargetAggregateIdentifier
 	private VerificationCodeId id;
+ 	private VerificationCodeNotes notes;
  	private VerificationCodeToken token;
  	private VerificationCodeUsername username;
  	private VerificationCodePhone phone;

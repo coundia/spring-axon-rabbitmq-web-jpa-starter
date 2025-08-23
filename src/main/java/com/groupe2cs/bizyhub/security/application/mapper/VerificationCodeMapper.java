@@ -11,6 +11,7 @@ public class VerificationCodeMapper {
 public static VerificationCodeResponse toResponse(VerificationCode entity) {
 return VerificationCodeResponse.builder()
 		.id(entity.getId())
+		.notes(entity.getNotes())
 		.token(entity.getToken())
 		.username(entity.getUsername())
 		.phone(entity.getPhone())
@@ -27,6 +28,7 @@ return VerificationCodeResponse.builder()
 public static VerificationCodeResponse toResponse(CreateVerificationCodeCommand command) {
 return VerificationCodeResponse.builder()
 	.id(command.getId().value())
+	.notes(command.getNotes().value())
 	.token(command.getToken().value())
 	.username(command.getUsername().value())
 	.phone(command.getPhone().value())
@@ -41,6 +43,7 @@ return VerificationCodeResponse.builder()
 public static VerificationCodeResponse toResponse(UpdateVerificationCodeCommand command) {
 return VerificationCodeResponse.builder()
 	.id(command.getId().value())
+	.notes(command.getNotes().value())
 	.token(command.getToken().value())
 	.username(command.getUsername().value())
 	.phone(command.getPhone().value())
@@ -56,6 +59,7 @@ public static CreateVerificationCodeCommand toCommand(
 VerificationCodeRequest request
 ) {
 return CreateVerificationCodeCommand.builder()
+	.notes(VerificationCodeNotes.create(request.getNotes()))
 	.token(VerificationCodeToken.create(request.getToken()))
 	.username(VerificationCodeUsername.create(request.getUsername()))
 	.phone(VerificationCodePhone.create(request.getPhone()))
@@ -70,6 +74,7 @@ return CreateVerificationCodeCommand.builder()
 	public static UpdateVerificationCodeCommand toUpdateCommand(VerificationCodeId id, VerificationCodeRequest request) {
 	return UpdateVerificationCodeCommand.builder()
 	.id(id)
+		.notes(VerificationCodeNotes.create(request.getNotes()))
 		.token(VerificationCodeToken.create(request.getToken()))
 		.username(VerificationCodeUsername.create(request.getUsername()))
 		.phone(VerificationCodePhone.create(request.getPhone()))

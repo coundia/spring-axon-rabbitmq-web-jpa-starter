@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateVerificationCodeCommand command = new CreateVerificationCodeCommand(
- VerificationCodeId.create(UUID.randomUUID().toString()) ,  VerificationCodeToken.create(UUID.randomUUID().toString()) ,  VerificationCodeUsername.create(UUID.randomUUID().toString()) ,  VerificationCodePhone.create(UUID.randomUUID().toString()) ,  VerificationCodeEmail.create(UUID.randomUUID().toString()) ,  VerificationCodeCode.create(UUID.randomUUID().toString()) ,  VerificationCodeStatus.create(UUID.randomUUID().toString()) ,  VerificationCodeSource.create(UUID.randomUUID().toString()) ,  VerificationCodeExpiration.create(java.time.Instant.now().plusSeconds(3600)) ,  VerificationCodeCreatedBy.create(UUID.randomUUID().toString()) ,  VerificationCodeTenant.create(UUID.randomUUID().toString()) 
+ VerificationCodeId.create(UUID.randomUUID().toString()) ,  VerificationCodeNotes.create(UUID.randomUUID().toString()) ,  VerificationCodeToken.create(UUID.randomUUID().toString()) ,  VerificationCodeUsername.create(UUID.randomUUID().toString()) ,  VerificationCodePhone.create(UUID.randomUUID().toString()) ,  VerificationCodeEmail.create(UUID.randomUUID().toString()) ,  VerificationCodeCode.create(UUID.randomUUID().toString()) ,  VerificationCodeStatus.create(UUID.randomUUID().toString()) ,  VerificationCodeSource.create(UUID.randomUUID().toString()) ,  VerificationCodeExpiration.create(java.time.Instant.now().plusSeconds(3600)) ,  VerificationCodeCreatedBy.create(UUID.randomUUID().toString()) ,  VerificationCodeTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -36,6 +36,8 @@ verify(commandGateway, times(1)).send(commandCaptor.capture());
 CreateVerificationCodeCommand sentCommand = commandCaptor.getValue();
 assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
+assertThat(sentCommand.getNotes().value()).isEqualTo(
+command.getNotes().value());
 assertThat(sentCommand.getToken().value()).isEqualTo(
 command.getToken().value());
 assertThat(sentCommand.getUsername().value()).isEqualTo(

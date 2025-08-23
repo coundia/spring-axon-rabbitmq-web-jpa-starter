@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
 
-import com.groupe2cs.bizyhub.security.application.query.*;
-import com.groupe2cs.bizyhub.security.application.mapper.*;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.application.mapper.*;
+import com.groupe2cs.bizyhub.security.application.query.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +38,16 @@ public VerificationCodeResponse findByVerificationCodeId(VerificationCodeId valu
 }
 
 
+public List<VerificationCodeResponse> findByVerificationCodeNotes(
+	VerificationCodeNotes value,
+	MetaRequest metaRequest
+	) {
+
+	FindByVerificationCodeNotesQuery query = new FindByVerificationCodeNotesQuery(value,metaRequest);
+	CompletableFuture<List<VerificationCodeResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(VerificationCodeResponse.class));
+	return future.join();
+}
 public List<VerificationCodeResponse> findByVerificationCodeToken(
 	VerificationCodeToken value,
 	MetaRequest metaRequest

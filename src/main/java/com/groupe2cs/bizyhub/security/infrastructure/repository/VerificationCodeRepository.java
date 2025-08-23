@@ -118,4 +118,8 @@ public interface VerificationCodeRepository extends JpaRepository<VerificationCo
     List<VerificationCode> findByTenantIdAndUsernameAndStatus(String tenantId, String username, String status);
 
     Optional<VerificationCode> findTopByTenantIdAndUsernameAndCodeAndStatusAndExpirationAfter(String tenantId, String username, String code, String status, Instant now);
+
+    List<VerificationCode> findByNotesAndTenantId(String notes, String tenantId);
+
+    List<VerificationCode> findByNotesAndCreatedById(String notes, String createdById);
 }

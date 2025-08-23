@@ -22,6 +22,8 @@ public class VerificationCodeResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String id;
 	@Schema(description = "", example = "")
+	private String notes;
+	@Schema(description = "", example = "")
 	private String token;
 	@Schema(description = "", example = "")
 	private String username;

@@ -36,6 +36,7 @@ void it_should_be_able_to_add_verificationcode() {
 
 		VerificationCodeRequest requestDTO = new VerificationCodeRequest();
 
+		requestDTO.setNotes(UUID.randomUUID().toString());
 		requestDTO.setToken(UUID.randomUUID().toString());
 		requestDTO.setUsername(UUID.randomUUID().toString());
 		requestDTO.setPhone(UUID.randomUUID().toString());
@@ -50,6 +51,7 @@ void it_should_be_able_to_add_verificationcode() {
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
+		assertThat(response.getBody().getNotes()).isEqualTo(requestDTO.getNotes());
 		assertThat(response.getBody().getToken()).isEqualTo(requestDTO.getToken());
 		assertThat(response.getBody().getUsername()).isEqualTo(requestDTO.getUsername());
 		assertThat(response.getBody().getPhone()).isEqualTo(requestDTO.getPhone());

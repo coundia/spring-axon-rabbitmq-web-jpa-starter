@@ -25,6 +25,7 @@ public class CreateVerificationCodeCommand implements Serializable {
 @TargetAggregateIdentifier
 	@Builder.Default
 	private VerificationCodeId id = VerificationCodeId.create(UUID.randomUUID().toString());
+ 	private VerificationCodeNotes notes;
  	private VerificationCodeToken token;
  	private VerificationCodeUsername username;
  	private VerificationCodePhone phone;
@@ -37,6 +38,7 @@ public class CreateVerificationCodeCommand implements Serializable {
  	private VerificationCodeTenant tenant;
 	public CreateVerificationCodeCommand(
  
+   VerificationCodeNotes notes , 
    VerificationCodeToken token , 
    VerificationCodeUsername username , 
    VerificationCodePhone phone , 
@@ -50,6 +52,7 @@ public class CreateVerificationCodeCommand implements Serializable {
 		){
 			this.id = VerificationCodeId.create(UUID.randomUUID().toString());
  
+  this.notes = notes ; 
   this.token = token ; 
   this.username = username ; 
   this.phone = phone ; 

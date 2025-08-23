@@ -71,12 +71,13 @@ public class VerificationCodeFixtures {
 		 User user) {
 
 			CreateVerificationCodeCommand command = CreateVerificationCodeCommand.builder()
+				.notes(VerificationCodeNotes.create(UUID.randomUUID().toString()))
 				.token(VerificationCodeToken.create(UUID.randomUUID().toString()))
 				.username(VerificationCodeUsername.create(UUID.randomUUID().toString()))
 				.phone(VerificationCodePhone.create(UUID.randomUUID().toString()))
 				.email(VerificationCodeEmail.create(UUID.randomUUID().toString()))
 				.code(VerificationCodeCode.create(UUID.randomUUID().toString()))
-				.status(VerificationCodeStatus.create("NEW"))
+				.status(VerificationCodeStatus.create(UUID.randomUUID().toString()))
 				.source(VerificationCodeSource.create(UUID.randomUUID().toString()))
 				.expiration(VerificationCodeExpiration.create(java.time.Instant.now().plusSeconds(3600)))
 			.build();
@@ -96,6 +97,7 @@ public class VerificationCodeFixtures {
         ) {
 
         CreateVerificationCodeCommand command = CreateVerificationCodeCommand.builder()
+        .notes(VerificationCodeNotes.create(UUID.randomUUID().toString()))
         .token(VerificationCodeToken.create(UUID.randomUUID().toString()))
         .username(VerificationCodeUsername.create(UUID.randomUUID().toString()))
         .phone(VerificationCodePhone.create(UUID.randomUUID().toString()))

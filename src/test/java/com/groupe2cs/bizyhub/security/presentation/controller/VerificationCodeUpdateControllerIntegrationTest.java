@@ -58,6 +58,7 @@ public class VerificationCodeUpdateControllerIntegrationTest extends BaseIntegra
         VerificationCodeFixtures.byIdWaitExist(verificationcodeRepository, updated.getId().value());
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("notes", UUID.randomUUID().toString());
         body.add("token", UUID.randomUUID().toString());
         body.add("username", UUID.randomUUID().toString());
         body.add("phone", UUID.randomUUID().toString());

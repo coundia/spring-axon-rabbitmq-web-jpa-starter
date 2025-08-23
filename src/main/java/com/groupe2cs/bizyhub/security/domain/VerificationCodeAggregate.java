@@ -24,6 +24,7 @@ public class VerificationCodeAggregate {
 
 @AggregateIdentifier
 private VerificationCodeId id;
+private VerificationCodeNotes notes;
 private VerificationCodeToken token;
 private VerificationCodeUsername username;
 private VerificationCodePhone phone;
@@ -40,6 +41,7 @@ private VerificationCodeTenant tenant;
 public VerificationCodeAggregate(CreateVerificationCodeCommand command) {
 apply(new VerificationCodeCreatedEvent(
 		command.getId(),
+		command.getNotes(),
 		command.getToken(),
 		command.getUsername(),
 		command.getPhone(),
@@ -64,6 +66,7 @@ public void handle(DeleteVerificationCodeCommand command) {
 public void handle(UpdateVerificationCodeCommand command) {
 apply(new VerificationCodeUpdatedEvent(
 		command.getId(),
+		command.getNotes(),
 		command.getToken(),
 		command.getUsername(),
 		command.getPhone(),
@@ -80,6 +83,7 @@ apply(new VerificationCodeUpdatedEvent(
 @EventSourcingHandler
 public void on(VerificationCodeCreatedEvent event) {
 	this.id = event.getId();
+	this.notes = event.getNotes();
 	this.token = event.getToken();
 	this.username = event.getUsername();
 	this.phone = event.getPhone();
@@ -100,6 +104,7 @@ this.id = event.getId();
 @EventSourcingHandler
 public void on(VerificationCodeUpdatedEvent event) {
 this.id = event.getId();
+	this.notes = event.getNotes();
 	this.token = event.getToken();
 	this.username = event.getUsername();
 	this.phone = event.getPhone();

@@ -60,7 +60,7 @@ public class ApiKeyUpdateControllerIntegrationTest extends BaseIntegrationTests 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("appKey", UUID.randomUUID().toString());
         body.add("username", UUID.randomUUID().toString());
-        body.add("active", false);
+        body.add("active", true);
         body.add("expiration", java.time.Instant.now().plusSeconds(3600));
 
         HttpHeaders multipartHeaders = new HttpHeaders();

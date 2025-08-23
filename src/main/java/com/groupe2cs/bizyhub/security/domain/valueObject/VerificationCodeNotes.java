@@ -3,8 +3,6 @@ package com.groupe2cs.bizyhub.security.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeIdNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeNotesNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeTokenNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeUsernameNotValid;
 
 import java.io.Serializable;
 import lombok.Getter;
@@ -20,37 +18,37 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Builder
-public class VerificationCodeUsername implements Serializable {
+public class VerificationCodeNotes implements Serializable {
 
-private String username;
+private String notes;
 
-public VerificationCodeUsername(String username) {
-this.username = username;
+public VerificationCodeNotes(String notes) {
+this.notes = notes;
 }
 
-public static VerificationCodeUsername create(String username) {
+public static VerificationCodeNotes create(String notes) {
 
-	return new VerificationCodeUsername(username);
+	return new VerificationCodeNotes(notes);
 }
 
 public String value() {
-return this.username;
+return this.notes;
 }
 
 @Override
 public boolean equals(Object o) {
 if (this == o) return true;
-if (!(o instanceof VerificationCodeUsername that)) return false;
-return this.username.equals(that.username);
+if (!(o instanceof VerificationCodeNotes that)) return false;
+return this.notes.equals(that.notes);
 }
 
 @Override
 public int hashCode() {
-return java.util.Objects.hash(username);
+return java.util.Objects.hash(notes);
 }
 
 @Override
 public String toString() {
-return String.valueOf(username);
+return String.valueOf(notes);
 }
 }
