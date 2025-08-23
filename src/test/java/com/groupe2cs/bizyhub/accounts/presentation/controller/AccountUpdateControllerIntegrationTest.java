@@ -58,12 +58,21 @@ public class AccountUpdateControllerIntegrationTest extends BaseIntegrationTests
         AccountFixtures.byIdWaitExist(accountRepository, updated.getId().value());
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("code", UUID.randomUUID().toString());
         body.add("name", UUID.randomUUID().toString());
+        body.add("status", UUID.randomUUID().toString());
         body.add("currency", UUID.randomUUID().toString());
-        body.add("currentBalance", 2801.02);
-        body.add("previousBalance", 233.35);
-        body.add("details", UUID.randomUUID().toString());
+        body.add("typeAccount", UUID.randomUUID().toString());
+        body.add("balance", 9613.46);
+        body.add("balancePrev", 2671.36);
+        body.add("balanceBlocked", 33.37);
+        body.add("balanceInit", 3698.14);
+        body.add("balanceGoal", 3558.45);
+        body.add("balanceLimit", 2901.81);
+        body.add("description", UUID.randomUUID().toString());
         body.add("isActive", false);
+        body.add("isDefault", true);
+        body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

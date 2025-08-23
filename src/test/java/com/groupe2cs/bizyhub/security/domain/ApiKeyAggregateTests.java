@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.security.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.security.domain.exception.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import java.util.UUID;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class ApiKeyAggregateTests extends BaseUnitTests {
@@ -16,7 +16,7 @@ void it_should_create_apiKey_with_valid_values() {
 	ApiKeyId id = ApiKeyId.create(UUID.randomUUID().toString());
 	ApiKeyAppKey appKey = ApiKeyAppKey.create(UUID.randomUUID().toString());
 	ApiKeyUsername username = ApiKeyUsername.create(UUID.randomUUID().toString());
-	ApiKeyActive active = ApiKeyActive.create(false);
+	ApiKeyActive active = ApiKeyActive.create(true);
 	ApiKeyCreatedAt createdAt = ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600));
 	ApiKeyExpiration expiration = ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600));
 	ApiKeyCreatedBy createdBy = ApiKeyCreatedBy.create(UUID.randomUUID().toString());

@@ -27,6 +27,7 @@ private TransactionUserId id;
 private TransactionUserName name;
 private TransactionUserTransaction transaction;
 private TransactionUserUser user;
+private TransactionUserSyncAt syncAt;
 private TransactionUserUsername username;
 private TransactionUserDetails details;
 private TransactionUserIsActive isActive;
@@ -41,6 +42,7 @@ apply(new TransactionUserCreatedEvent(
 		command.getName(),
 		command.getTransaction(),
 		command.getUser(),
+		command.getSyncAt(),
 		command.getUsername(),
 		command.getDetails(),
 		command.getIsActive(),
@@ -63,6 +65,7 @@ apply(new TransactionUserUpdatedEvent(
 		command.getName(),
 		command.getTransaction(),
 		command.getUser(),
+		command.getSyncAt(),
 		command.getUsername(),
 		command.getDetails(),
 		command.getIsActive(),
@@ -77,6 +80,7 @@ public void on(TransactionUserCreatedEvent event) {
 	this.name = event.getName();
 	this.transaction = event.getTransaction();
 	this.user = event.getUser();
+	this.syncAt = event.getSyncAt();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
@@ -95,6 +99,7 @@ this.id = event.getId();
 	this.name = event.getName();
 	this.transaction = event.getTransaction();
 	this.user = event.getUser();
+	this.syncAt = event.getSyncAt();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();

@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import java.util.UUID;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.transactions.domain.exception.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class TransactionAggregateTests extends BaseUnitTests {
@@ -15,22 +15,24 @@ public class TransactionAggregateTests extends BaseUnitTests {
 void it_should_create_transaction_with_valid_values() {
 	TransactionId id = TransactionId.create(UUID.randomUUID().toString());
 	TransactionName name = TransactionName.create(UUID.randomUUID().toString());
-	TransactionAmount amount = TransactionAmount.create(5539.99);
+	TransactionAmount amount = TransactionAmount.create(4740.95);
 	TransactionDetails details = TransactionDetails.create(UUID.randomUUID().toString());
 	TransactionIsActive isActive = TransactionIsActive.create(true);
+	TransactionSyncAt syncAt = TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	TransactionAccount account = TransactionAccount.create(UUID.randomUUID().toString());
 	TransactionCategory category = TransactionCategory.create(UUID.randomUUID().toString());
 	TransactionTypeTransactionRaw typeTransactionRaw = TransactionTypeTransactionRaw.create(UUID.randomUUID().toString());
 	TransactionDateTransaction dateTransaction = TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600));
 	TransactionCreatedBy createdBy = TransactionCreatedBy.create(UUID.randomUUID().toString());
 	TransactionTenant tenant = TransactionTenant.create(UUID.randomUUID().toString());
-	TransactionAggregate aggregateTransactionAggregate = new TransactionAggregate(id, name, amount, details, isActive, account, category, typeTransactionRaw, dateTransaction, createdBy, tenant);
+	TransactionAggregate aggregateTransactionAggregate = new TransactionAggregate(id, name, amount, details, isActive, syncAt, account, category, typeTransactionRaw, dateTransaction, createdBy, tenant);
 	assertThat(aggregateTransactionAggregate.getId()).isNotNull();
 	assertThat(aggregateTransactionAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateTransactionAggregate.getName()).isEqualTo(name);
 	assertThat(aggregateTransactionAggregate.getAmount()).isEqualTo(amount);
 	assertThat(aggregateTransactionAggregate.getDetails()).isEqualTo(details);
 	assertThat(aggregateTransactionAggregate.getIsActive()).isEqualTo(isActive);
+	assertThat(aggregateTransactionAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateTransactionAggregate.getAccount()).isEqualTo(account);
 	assertThat(aggregateTransactionAggregate.getCategory()).isEqualTo(category);
 	assertThat(aggregateTransactionAggregate.getTypeTransactionRaw()).isEqualTo(typeTransactionRaw);
@@ -53,11 +55,6 @@ void it_should_create_transaction_with_valid_values() {
 		void it_should_throw_when_amount_is_invalid() {
 		TransactionAmountNotValid error = assertThrows(TransactionAmountNotValid.class, () -> TransactionAmount.create(null));
 		assertThat(error.getMessage()).isEqualTo("Amount is invalid");
-		}
-		@Test
-		void it_should_throw_when_isActive_is_invalid() {
-		TransactionIsActiveNotValid error = assertThrows(TransactionIsActiveNotValid.class, () -> TransactionIsActive.create(null));
-		assertThat(error.getMessage()).isEqualTo("IsActive is invalid");
 		}
 
 }

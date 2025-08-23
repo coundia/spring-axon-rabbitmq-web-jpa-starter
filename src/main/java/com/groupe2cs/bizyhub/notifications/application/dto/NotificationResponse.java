@@ -30,6 +30,8 @@ public class NotificationResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String status;
 	@Schema(description = "", example = "")
+	private java.time.Instant syncAt;
+	@Schema(description = "", example = "")
 	private String reserved;
 	@Schema(description = "", example = "")
 	private String errorMessage;

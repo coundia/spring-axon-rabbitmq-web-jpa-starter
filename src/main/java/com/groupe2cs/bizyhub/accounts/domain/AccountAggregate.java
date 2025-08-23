@@ -24,12 +24,21 @@ public class AccountAggregate {
 
 @AggregateIdentifier
 private AccountId id;
+private AccountCode code;
 private AccountName name;
+private AccountStatus status;
 private AccountCurrency currency;
-private AccountCurrentBalance currentBalance;
-private AccountPreviousBalance previousBalance;
-private AccountDetails details;
+private AccountTypeAccount typeAccount;
+private AccountBalance balance;
+private AccountBalancePrev balancePrev;
+private AccountBalanceBlocked balanceBlocked;
+private AccountBalanceInit balanceInit;
+private AccountBalanceGoal balanceGoal;
+private AccountBalanceLimit balanceLimit;
+private AccountDescription description;
 private AccountIsActive isActive;
+private AccountIsDefault isDefault;
+private AccountSyncAt syncAt;
 private AccountCreatedBy createdBy;
 private AccountTenant tenant;
 
@@ -38,12 +47,21 @@ private AccountTenant tenant;
 public AccountAggregate(CreateAccountCommand command) {
 apply(new AccountCreatedEvent(
 		command.getId(),
+		command.getCode(),
 		command.getName(),
+		command.getStatus(),
 		command.getCurrency(),
-		command.getCurrentBalance(),
-		command.getPreviousBalance(),
-		command.getDetails(),
+		command.getTypeAccount(),
+		command.getBalance(),
+		command.getBalancePrev(),
+		command.getBalanceBlocked(),
+		command.getBalanceInit(),
+		command.getBalanceGoal(),
+		command.getBalanceLimit(),
+		command.getDescription(),
 		command.getIsActive(),
+		command.getIsDefault(),
+		command.getSyncAt(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -60,12 +78,21 @@ public void handle(DeleteAccountCommand command) {
 public void handle(UpdateAccountCommand command) {
 apply(new AccountUpdatedEvent(
 		command.getId(),
+		command.getCode(),
 		command.getName(),
+		command.getStatus(),
 		command.getCurrency(),
-		command.getCurrentBalance(),
-		command.getPreviousBalance(),
-		command.getDetails(),
+		command.getTypeAccount(),
+		command.getBalance(),
+		command.getBalancePrev(),
+		command.getBalanceBlocked(),
+		command.getBalanceInit(),
+		command.getBalanceGoal(),
+		command.getBalanceLimit(),
+		command.getDescription(),
 		command.getIsActive(),
+		command.getIsDefault(),
+		command.getSyncAt(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -74,12 +101,21 @@ apply(new AccountUpdatedEvent(
 @EventSourcingHandler
 public void on(AccountCreatedEvent event) {
 	this.id = event.getId();
+	this.code = event.getCode();
 	this.name = event.getName();
+	this.status = event.getStatus();
 	this.currency = event.getCurrency();
-	this.currentBalance = event.getCurrentBalance();
-	this.previousBalance = event.getPreviousBalance();
-	this.details = event.getDetails();
+	this.typeAccount = event.getTypeAccount();
+	this.balance = event.getBalance();
+	this.balancePrev = event.getBalancePrev();
+	this.balanceBlocked = event.getBalanceBlocked();
+	this.balanceInit = event.getBalanceInit();
+	this.balanceGoal = event.getBalanceGoal();
+	this.balanceLimit = event.getBalanceLimit();
+	this.description = event.getDescription();
 	this.isActive = event.getIsActive();
+	this.isDefault = event.getIsDefault();
+	this.syncAt = event.getSyncAt();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -92,12 +128,21 @@ this.id = event.getId();
 @EventSourcingHandler
 public void on(AccountUpdatedEvent event) {
 this.id = event.getId();
+	this.code = event.getCode();
 	this.name = event.getName();
+	this.status = event.getStatus();
 	this.currency = event.getCurrency();
-	this.currentBalance = event.getCurrentBalance();
-	this.previousBalance = event.getPreviousBalance();
-	this.details = event.getDetails();
+	this.typeAccount = event.getTypeAccount();
+	this.balance = event.getBalance();
+	this.balancePrev = event.getBalancePrev();
+	this.balanceBlocked = event.getBalanceBlocked();
+	this.balanceInit = event.getBalanceInit();
+	this.balanceGoal = event.getBalanceGoal();
+	this.balanceLimit = event.getBalanceLimit();
+	this.description = event.getDescription();
 	this.isActive = event.getIsActive();
+	this.isDefault = event.getIsDefault();
+	this.syncAt = event.getSyncAt();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 @Schema(name = "AccountSyncRequest", description = "Request payload for synchronizing accounts")
 public class AccountSyncRequest implements Serializable {
 

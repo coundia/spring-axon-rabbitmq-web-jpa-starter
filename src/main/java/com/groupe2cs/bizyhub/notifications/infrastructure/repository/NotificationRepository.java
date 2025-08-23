@@ -57,6 +57,25 @@ public interface NotificationRepository extends JpaRepository<Notification, Stri
 
         @Query("SELECT e FROM Notification e WHERE LOWER(e.status) LIKE LOWER(CONCAT('%', :status, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Notification> findByStatusAndTenantId(String status, String tenantId);
+        @Query("""
+        SELECT e FROM Notification e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.createdBy.id = :createdById
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Notification> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+        SELECT e FROM Notification e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.tenant.id = :tenantId
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Notification> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
+
         @Query("SELECT e FROM Notification e WHERE LOWER(e.reserved) LIKE LOWER(CONCAT('%', :reserved, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Notification> findByReservedAndCreatedById(String reserved, String createdById);
         @Query("SELECT e FROM Notification e WHERE LOWER(e.reserved) LIKE LOWER(CONCAT('%', :reserved, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

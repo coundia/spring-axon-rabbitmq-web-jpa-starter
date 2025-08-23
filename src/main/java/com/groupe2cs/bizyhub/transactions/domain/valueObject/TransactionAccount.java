@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionNameNotVal
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAmountNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionDetailsNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionIsActiveNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionSyncAtNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAccountNotValid;
 
 import java.io.Serializable;

@@ -15,7 +15,9 @@ return ChatResponse.builder()
 		.responsesJson(entity.getResponsesJson())
 		.responses(entity.getResponses())
 		.state(entity.getState())
+		.syncAt(entity.getSyncAt())
 		.account(entity.getAccount() != null ? entity.getAccount().getId() : null)
+		.dateTransaction(entity.getDateTransaction())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
 .build();
@@ -28,7 +30,9 @@ return ChatResponse.builder()
 	.responsesJson(command.getResponsesJson().value())
 	.responses(command.getResponses().value())
 	.state(command.getState().value())
+	.syncAt(command.getSyncAt().value())
 	.account(command.getAccount().value())
+	.dateTransaction(command.getDateTransaction().value())
 .build();
 }
 
@@ -39,7 +43,9 @@ return ChatResponse.builder()
 	.responsesJson(command.getResponsesJson().value())
 	.responses(command.getResponses().value())
 	.state(command.getState().value())
+	.syncAt(command.getSyncAt().value())
 	.account(command.getAccount().value())
+	.dateTransaction(command.getDateTransaction().value())
 .build();
 }
 
@@ -51,13 +57,15 @@ return CreateChatCommand.builder()
 	.responsesJson(ChatResponsesJson.create(request.getResponsesJson()))
 	.responses(ChatResponses.create(request.getResponses()))
 	.state(ChatState.create(request.getState()))
+	.syncAt(ChatSyncAt.create(request.getSyncAt()))
 	.account(ChatAccount.create(request.getAccount()))
+	.dateTransaction(ChatDateTransaction.create(request.getDateTransaction()))
 .build();
 }
 
 
 	public static UpdateChatCommand toUpdateCommand(
-	ChatId id, ChatMessages messages, ChatResponsesJson responsesJson, ChatResponses responses, ChatState state, ChatAccount account
+	ChatId id, ChatMessages messages, ChatResponsesJson responsesJson, ChatResponses responses, ChatState state, ChatSyncAt syncAt, ChatAccount account, ChatDateTransaction dateTransaction
 	) {
 	return UpdateChatCommand.builder()
 		.id(id)
@@ -65,7 +73,9 @@ return CreateChatCommand.builder()
 		.responsesJson(responsesJson)
 		.responses(responses)
 		.state(state)
+		.syncAt(syncAt)
 		.account(account)
+		.dateTransaction(dateTransaction)
 	.build();
 	}
 

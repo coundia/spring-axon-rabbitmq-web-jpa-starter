@@ -42,7 +42,7 @@ void it_should_be_able_to_add_filemanager() {
 		requestDTO.setObjectName(UUID.randomUUID().toString());
 		requestDTO.setOriginalName(UUID.randomUUID().toString());
 		requestDTO.setMimeType(UUID.randomUUID().toString());
-		requestDTO.setSize(77489L);
+		requestDTO.setSize(59271L);
 		requestDTO.setPath(UUID.randomUUID().toString());
 		requestDTO.setUri(UUID.randomUUID().toString());
 		requestDTO.setIsPublic(false);

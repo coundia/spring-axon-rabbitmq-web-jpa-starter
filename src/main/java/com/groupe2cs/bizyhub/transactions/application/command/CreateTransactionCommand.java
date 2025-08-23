@@ -29,6 +29,7 @@ public class CreateTransactionCommand implements Serializable {
  	private TransactionAmount amount;
  	private TransactionDetails details;
  	private TransactionIsActive isActive;
+ 	private TransactionSyncAt syncAt;
  	private TransactionAccount account;
  	private TransactionCategory category;
  	private TransactionTypeTransactionRaw typeTransactionRaw;
@@ -41,6 +42,7 @@ public class CreateTransactionCommand implements Serializable {
    TransactionAmount amount , 
    TransactionDetails details , 
    TransactionIsActive isActive , 
+   TransactionSyncAt syncAt , 
    TransactionAccount account , 
    TransactionCategory category , 
    TransactionTypeTransactionRaw typeTransactionRaw , 
@@ -54,6 +56,7 @@ public class CreateTransactionCommand implements Serializable {
   this.amount = amount ; 
   this.details = details ; 
   this.isActive = isActive ; 
+  this.syncAt = syncAt ; 
   this.account = account ; 
   this.category = category ; 
   this.typeTransactionRaw = typeTransactionRaw ; 

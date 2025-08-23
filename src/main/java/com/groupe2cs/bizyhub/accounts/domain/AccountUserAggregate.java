@@ -27,6 +27,7 @@ private AccountUserId id;
 private AccountUserName name;
 private AccountUserAccount account;
 private AccountUserUser user;
+private AccountUserSyncAt syncAt;
 private AccountUserUsername username;
 private AccountUserDetails details;
 private AccountUserIsActive isActive;
@@ -41,6 +42,7 @@ apply(new AccountUserCreatedEvent(
 		command.getName(),
 		command.getAccount(),
 		command.getUser(),
+		command.getSyncAt(),
 		command.getUsername(),
 		command.getDetails(),
 		command.getIsActive(),
@@ -63,6 +65,7 @@ apply(new AccountUserUpdatedEvent(
 		command.getName(),
 		command.getAccount(),
 		command.getUser(),
+		command.getSyncAt(),
 		command.getUsername(),
 		command.getDetails(),
 		command.getIsActive(),
@@ -77,6 +80,7 @@ public void on(AccountUserCreatedEvent event) {
 	this.name = event.getName();
 	this.account = event.getAccount();
 	this.user = event.getUser();
+	this.syncAt = event.getSyncAt();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
@@ -95,6 +99,7 @@ this.id = event.getId();
 	this.name = event.getName();
 	this.account = event.getAccount();
 	this.user = event.getUser();
+	this.syncAt = event.getSyncAt();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();

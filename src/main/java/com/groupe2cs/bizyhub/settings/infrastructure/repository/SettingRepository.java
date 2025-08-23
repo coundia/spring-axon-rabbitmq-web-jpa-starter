@@ -57,6 +57,25 @@ public interface SettingRepository extends JpaRepository<Setting, String> {
 
         @Query("SELECT e FROM Setting e WHERE LOWER(e.details) LIKE LOWER(CONCAT('%', :details, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Setting> findByDetailsAndTenantId(String details, String tenantId);
+        @Query("""
+        SELECT e FROM Setting e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.createdBy.id = :createdById
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Setting> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+        SELECT e FROM Setting e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.tenant.id = :tenantId
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Setting> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
+
         @Query("SELECT e FROM Setting e WHERE e.isActive = :isActive AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Setting> findByIsActiveAndCreatedById(Boolean isActive, String createdById);
         @Query("SELECT e FROM Setting e WHERE e.isActive = :isActive AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

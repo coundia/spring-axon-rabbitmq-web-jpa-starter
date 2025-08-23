@@ -19,25 +19,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "FileManagerRequest", description = "Request payload for FileManager operations")
 public class FileManagerRequest implements Serializable {
 
-	@Schema(description = "", example = "a3c9ae26-e4d0-463d-854b-d161f6a3954b")
+	@Schema(description = "", example = "111e33d8-c3c0-442e-bca5-2b1fc39c14e7")
 	private String name;
-	@Schema(description = "", example = "b2c367d5-baa0-4104-9267-dedb4232b676")
+	@Schema(description = "", example = "0cce1acb-8a20-46c3-b9d1-f16447d950c2")
 	private String details;
-	@Schema(description = "", example = "b39f64ea-4a52-46b0-acd3-c11e87523911")
+	@Schema(description = "", example = "0b040c5e-c2f1-4f67-ba78-f0fbf396af2c")
 	private String objectId;
-	@Schema(description = "", example = "9c314a82-9af7-4bd0-a033-7d5a148d9465")
+	@Schema(description = "", example = "ced47c18-d955-4789-8879-c6a8feec9ab5")
 	private String objectName;
-	@Schema(description = "", example = "5723e93e-8215-432f-924a-79a801552c46")
+	@Schema(description = "", example = "3b8d0af8-c63e-4371-896f-0ff81e5f602a")
 	private String originalName;
-	@Schema(description = "", example = "10535479-3b24-4d6e-a03d-d4725513547d")
+	@Schema(description = "", example = "70e0d57e-f4db-486e-8cc6-58f5547f7ddd")
 	private String mimeType;
-	@Schema(description = "", example = "71863L")
+	@Schema(description = "", example = "65097L")
 	private Long size;
-	@Schema(description = "", example = "06ba61cb-95c3-4941-affd-ff522f2497a8")
+	@Schema(description = "", example = "f1d35684-3357-4640-96bf-046225a9e12f")
 	private String path;
-	@Schema(description = "", example = "f71f42d6-f8cb-4721-ba7a-539f40945b19")
+	@Schema(description = "", example = "2a293bb5-9abf-4bc3-8a71-5f0978cb2836")
 	private String uri;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isPublic;
 
 }

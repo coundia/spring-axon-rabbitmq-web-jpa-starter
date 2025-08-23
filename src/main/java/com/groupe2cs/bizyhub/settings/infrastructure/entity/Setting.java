@@ -60,12 +60,19 @@ public class Setting   extends AbstractAuditableEntity  {
 
 	private String details ;
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
 		unique = false
 
 	)
 	@Builder.Default
-	private Boolean isActive  = true ;
+	private java.time.Instant syncAt  = java.time.Instant.now() ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private Boolean isActive ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -84,6 +91,7 @@ public class Setting   extends AbstractAuditableEntity  {
 			", value=" + value +
 			", locale=" + locale +
 			", details=" + details +
+			", syncAt=" + syncAt +
 			", isActive=" + isActive +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +

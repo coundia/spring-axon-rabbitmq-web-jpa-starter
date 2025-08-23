@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTransactionCommand command = new CreateTransactionCommand(
- TransactionId.create(UUID.randomUUID().toString()) ,  TransactionName.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(4216.08) ,  TransactionDetails.create(UUID.randomUUID().toString()) ,  TransactionIsActive.create(false) ,  TransactionAccount.create(UUID.randomUUID().toString()) ,  TransactionCategory.create(UUID.randomUUID().toString()) ,  TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()) ,  TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
+ TransactionId.create(UUID.randomUUID().toString()) ,  TransactionName.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(4069.62) ,  TransactionDetails.create(UUID.randomUUID().toString()) ,  TransactionIsActive.create(true) ,  TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionAccount.create(UUID.randomUUID().toString()) ,  TransactionCategory.create(UUID.randomUUID().toString()) ,  TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()) ,  TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -44,6 +44,8 @@ assertThat(sentCommand.getDetails().value()).isEqualTo(
 command.getDetails().value());
 assertThat(sentCommand.getIsActive().value()).isEqualTo(
 command.getIsActive().value());
+assertThat(sentCommand.getSyncAt().value()).isEqualTo(
+command.getSyncAt().value());
 assertThat(sentCommand.getAccount().value()).isEqualTo(
 command.getAccount().value());
 assertThat(sentCommand.getCategory().value()).isEqualTo(

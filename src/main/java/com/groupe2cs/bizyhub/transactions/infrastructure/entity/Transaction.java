@@ -53,12 +53,19 @@ public class Transaction   extends AbstractAuditableEntity  {
 
 	private String details ;
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private Boolean isActive ;
+
+	@Column(nullable = true, 
 		unique = false
 
 	)
 	@Builder.Default
-	private Boolean isActive  = true ;
+	private java.time.Instant syncAt  = java.time.Instant.now() ;
 	@ManyToOne
 	@JoinColumn(name = "account_id", nullable = true)
 	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
@@ -97,6 +104,7 @@ public class Transaction   extends AbstractAuditableEntity  {
 			", amount=" + amount +
 			", details=" + details +
 			", isActive=" + isActive +
+			", syncAt=" + syncAt +
 			", account=" + account +
 			", category=" + category +
 			", typeTransactionRaw=" + typeTransactionRaw +

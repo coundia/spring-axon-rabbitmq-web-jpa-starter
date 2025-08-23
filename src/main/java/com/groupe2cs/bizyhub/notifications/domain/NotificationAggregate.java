@@ -28,6 +28,7 @@ private NotificationDeviceToken deviceToken;
 private NotificationTitle title;
 private NotificationMessage message;
 private NotificationStatus status;
+private NotificationSyncAt syncAt;
 private NotificationReserved reserved;
 private NotificationErrorMessage errorMessage;
 private NotificationCreatedBy createdBy;
@@ -42,6 +43,7 @@ apply(new NotificationCreatedEvent(
 		command.getTitle(),
 		command.getMessage(),
 		command.getStatus(),
+		command.getSyncAt(),
 		command.getReserved(),
 		command.getErrorMessage(),
 		command.getCreatedBy(),
@@ -64,6 +66,7 @@ apply(new NotificationUpdatedEvent(
 		command.getTitle(),
 		command.getMessage(),
 		command.getStatus(),
+		command.getSyncAt(),
 		command.getReserved(),
 		command.getErrorMessage(),
 		command.getCreatedBy(),
@@ -78,6 +81,7 @@ public void on(NotificationCreatedEvent event) {
 	this.title = event.getTitle();
 	this.message = event.getMessage();
 	this.status = event.getStatus();
+	this.syncAt = event.getSyncAt();
 	this.reserved = event.getReserved();
 	this.errorMessage = event.getErrorMessage();
 	this.createdBy = event.getCreatedBy();
@@ -96,6 +100,7 @@ this.id = event.getId();
 	this.title = event.getTitle();
 	this.message = event.getMessage();
 	this.status = event.getStatus();
+	this.syncAt = event.getSyncAt();
 	this.reserved = event.getReserved();
 	this.errorMessage = event.getErrorMessage();
 	this.createdBy = event.getCreatedBy();

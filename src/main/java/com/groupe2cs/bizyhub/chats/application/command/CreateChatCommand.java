@@ -29,8 +29,10 @@ public class CreateChatCommand implements Serializable {
  	private ChatResponsesJson responsesJson;
  	private ChatResponses responses;
  	private ChatState state;
+ 	private ChatSyncAt syncAt;
  	private ChatAccount account;
  	private ChatFiles files;
+ 	private ChatDateTransaction dateTransaction;
  	private ChatCreatedBy createdBy;
  	private ChatTenant tenant;
 	public CreateChatCommand(
@@ -39,8 +41,10 @@ public class CreateChatCommand implements Serializable {
    ChatResponsesJson responsesJson , 
    ChatResponses responses , 
    ChatState state , 
+   ChatSyncAt syncAt , 
    ChatAccount account , 
    ChatFiles files , 
+   ChatDateTransaction dateTransaction , 
    ChatCreatedBy createdBy , 
    ChatTenant tenant  
 		){
@@ -50,8 +54,10 @@ public class CreateChatCommand implements Serializable {
   this.responsesJson = responsesJson ; 
   this.responses = responses ; 
   this.state = state ; 
+  this.syncAt = syncAt ; 
   this.account = account ; 
   this.files = files ; 
+  this.dateTransaction = dateTransaction ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

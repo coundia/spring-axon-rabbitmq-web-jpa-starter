@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.settings.domain;
 
-import java.util.UUID;
-import com.groupe2cs.bizyhub.settings.domain.exception.*;
-import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
+import com.groupe2cs.bizyhub.settings.domain.exception.*;
+import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class SettingAggregateTests extends BaseUnitTests {
@@ -18,16 +18,18 @@ void it_should_create_setting_with_valid_values() {
 	SettingValue value = SettingValue.create(UUID.randomUUID().toString());
 	SettingLocale locale = SettingLocale.create(UUID.randomUUID().toString());
 	SettingDetails details = SettingDetails.create(UUID.randomUUID().toString());
-	SettingIsActive isActive = SettingIsActive.create(false);
+	SettingSyncAt syncAt = SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600));
+	SettingIsActive isActive = SettingIsActive.create(true);
 	SettingCreatedBy createdBy = SettingCreatedBy.create(UUID.randomUUID().toString());
 	SettingTenant tenant = SettingTenant.create(UUID.randomUUID().toString());
-	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, value, locale, details, isActive, createdBy, tenant);
+	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, value, locale, details, syncAt, isActive, createdBy, tenant);
 	assertThat(aggregateSettingAggregate.getId()).isNotNull();
 	assertThat(aggregateSettingAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateSettingAggregate.getName()).isEqualTo(name);
 	assertThat(aggregateSettingAggregate.getValue()).isEqualTo(value);
 	assertThat(aggregateSettingAggregate.getLocale()).isEqualTo(locale);
 	assertThat(aggregateSettingAggregate.getDetails()).isEqualTo(details);
+	assertThat(aggregateSettingAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateSettingAggregate.getIsActive()).isEqualTo(isActive);
 	assertThat(aggregateSettingAggregate.getCreatedBy()).isEqualTo(createdBy);
 	assertThat(aggregateSettingAggregate.getTenant()).isEqualTo(tenant);
@@ -52,11 +54,6 @@ void it_should_create_setting_with_valid_values() {
 		void it_should_throw_when_locale_is_invalid() {
 		SettingLocaleNotValid error = assertThrows(SettingLocaleNotValid.class, () -> SettingLocale.create(""));
 		assertThat(error.getMessage()).isEqualTo("Locale is invalid");
-		}
-		@Test
-		void it_should_throw_when_isActive_is_invalid() {
-		SettingIsActiveNotValid error = assertThrows(SettingIsActiveNotValid.class, () -> SettingIsActive.create(null));
-		assertThat(error.getMessage()).isEqualTo("IsActive is invalid");
 		}
 
 }

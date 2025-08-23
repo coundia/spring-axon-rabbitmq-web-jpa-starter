@@ -19,15 +19,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TransactionUserRequest", description = "Request payload for TransactionUser operations")
 public class TransactionUserRequest implements Serializable {
 
-	@Schema(description = "", example = "0f85dca2-932c-465a-96ef-cb06b8fac26e")
+	@Schema(description = "", example = "535c8d25-e0e0-4993-aa35-888bf0222ad5")
 	private String name;
-	@Schema(description = "", example = "aee45a31-7c06-4922-a31b-bf8c2cd85daa")
+	@Schema(description = "", example = "e46ecea5-52e0-4b5a-8e31-ecb4ad0be6ca")
 	private String transaction;
-	@Schema(description = "", example = "b6410481-fc17-4b69-a0b7-b1b234488679")
+	@Schema(description = "", example = "f767e528-3750-44bf-8832-425986307bca")
 	private String user;
-	@Schema(description = "", example = "424c90a7-4ddb-4084-b54f-fa07c647cb8a")
+	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+	private java.time.Instant syncAt;
+	@Schema(description = "", example = "45df1cd7-abbd-4302-8c06-74b4c516d287")
 	private String username;
-	@Schema(description = "", example = "d28484ad-1878-4ed5-9527-d2167695435b")
+	@Schema(description = "", example = "8ef9638b-9457-4390-bc43-faaf5d383122")
 	private String details;
 	@Schema(description = "", example = "false")
 	private Boolean isActive;

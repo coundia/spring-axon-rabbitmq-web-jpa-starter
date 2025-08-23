@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.accounts.application.command.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.accounts.application.dto.*;
+import com.groupe2cs.bizyhub.accounts.application.command.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.accounts.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -28,6 +28,7 @@ public class AccountUserSyncApplicationService {
 								.name(AccountUserName.create(d.getName()))
 								.account(AccountUserAccount.create(d.getAccount()))
 								.user(AccountUserUser.create(d.getUser()))
+								.syncAt(AccountUserSyncAt.create(d.getSyncAt()))
 								.username(AccountUserUsername.create(d.getUsername()))
 								.details(AccountUserDetails.create(d.getDetails()))
 								.isActive(AccountUserIsActive.create(d.getIsActive()))
@@ -65,6 +66,7 @@ public class AccountUserSyncApplicationService {
 							.name(AccountUserName.create(d.getName()))
 							.account(AccountUserAccount.create(d.getAccount()))
 							.user(AccountUserUser.create(d.getUser()))
+							.syncAt(AccountUserSyncAt.create(d.getSyncAt()))
 							.username(AccountUserUsername.create(d.getUsername()))
 							.details(AccountUserDetails.create(d.getDetails()))
 							.isActive(AccountUserIsActive.create(d.getIsActive()))

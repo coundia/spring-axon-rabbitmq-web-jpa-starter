@@ -28,6 +28,7 @@ private TransactionName name;
 private TransactionAmount amount;
 private TransactionDetails details;
 private TransactionIsActive isActive;
+private TransactionSyncAt syncAt;
 private TransactionAccount account;
 private TransactionCategory category;
 private TransactionTypeTransactionRaw typeTransactionRaw;
@@ -44,6 +45,7 @@ apply(new TransactionCreatedEvent(
 		command.getAmount(),
 		command.getDetails(),
 		command.getIsActive(),
+		command.getSyncAt(),
 		command.getAccount(),
 		command.getCategory(),
 		command.getTypeTransactionRaw(),
@@ -68,6 +70,7 @@ apply(new TransactionUpdatedEvent(
 		command.getAmount(),
 		command.getDetails(),
 		command.getIsActive(),
+		command.getSyncAt(),
 		command.getAccount(),
 		command.getCategory(),
 		command.getTypeTransactionRaw(),
@@ -84,6 +87,7 @@ public void on(TransactionCreatedEvent event) {
 	this.amount = event.getAmount();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
+	this.syncAt = event.getSyncAt();
 	this.account = event.getAccount();
 	this.category = event.getCategory();
 	this.typeTransactionRaw = event.getTypeTransactionRaw();
@@ -104,6 +108,7 @@ this.id = event.getId();
 	this.amount = event.getAmount();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
+	this.syncAt = event.getSyncAt();
 	this.account = event.getAccount();
 	this.category = event.getCategory();
 	this.typeTransactionRaw = event.getTypeTransactionRaw();

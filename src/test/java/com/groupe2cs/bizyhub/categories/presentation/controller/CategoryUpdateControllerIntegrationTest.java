@@ -63,7 +63,7 @@ public class CategoryUpdateControllerIntegrationTest extends BaseIntegrationTest
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("description", UUID.randomUUID().toString());
         body.add("typeEntry", UUID.randomUUID().toString());
-        body.add("version", 36);
+        body.add("version", 80);
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
 
         HttpHeaders multipartHeaders = new HttpHeaders();

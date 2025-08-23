@@ -67,9 +67,10 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("name", UUID.randomUUID().toString());
-        body.add("amount", 9299.76);
+        body.add("amount", 4107.55);
         body.add("details", UUID.randomUUID().toString());
-        body.add("isActive", false);
+        body.add("isActive", true);
+        body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("account", updated.getAccount().value());
         body.add("category", updated.getCategory().value());
         body.add("typeTransactionRaw", UUID.randomUUID().toString());

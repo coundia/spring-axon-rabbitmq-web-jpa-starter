@@ -2,12 +2,21 @@ package com.groupe2cs.bizyhub.accounts.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIdNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCodeNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountNameNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountStatusNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCurrencyNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCurrentBalanceNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountPreviousBalanceNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountDetailsNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountTypeAccountNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalancePrevNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceBlockedNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceInitNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceGoalNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceLimitNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountDescriptionNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIsActiveNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIsDefaultNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountSyncAtNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCreatedByNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountTenantNotValid;
 

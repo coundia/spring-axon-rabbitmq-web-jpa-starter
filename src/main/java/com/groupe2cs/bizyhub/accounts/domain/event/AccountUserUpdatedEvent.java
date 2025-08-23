@@ -21,6 +21,7 @@ public class AccountUserUpdatedEvent implements Serializable {
 	private AccountUserName name;
 	private AccountUserAccount account;
 	private AccountUserUser user;
+	private AccountUserSyncAt syncAt;
 	private AccountUserUsername username;
 	private AccountUserDetails details;
 	private AccountUserIsActive isActive;

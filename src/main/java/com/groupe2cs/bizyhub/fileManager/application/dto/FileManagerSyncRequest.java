@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 @Schema(name = "FileManagerSyncRequest", description = "Request payload for synchronizing fileManagers")
 public class FileManagerSyncRequest implements Serializable {
 

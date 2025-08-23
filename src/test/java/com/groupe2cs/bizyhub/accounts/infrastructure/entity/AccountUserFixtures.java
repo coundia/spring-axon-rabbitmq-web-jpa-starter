@@ -80,9 +80,10 @@ public class AccountUserFixtures {
 				.name(AccountUserName.create(UUID.randomUUID().toString()))
 				.account(AccountUserAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
 				.user(AccountUserUser.create(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value()))
+				.syncAt(AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.username(AccountUserUsername.create(UUID.randomUUID().toString()))
 				.details(AccountUserDetails.create(UUID.randomUUID().toString()))
-				.isActive(AccountUserIsActive.create(false))
+				.isActive(AccountUserIsActive.create(true))
 			.build();
 
 		command.setCreatedBy(AccountUserCreatedBy.create(user.getId()));
@@ -101,9 +102,10 @@ public class AccountUserFixtures {
 
         CreateAccountUserCommand command = CreateAccountUserCommand.builder()
         .name(AccountUserName.create(UUID.randomUUID().toString()))
+        .syncAt(AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .username(AccountUserUsername.create(UUID.randomUUID().toString()))
         .details(AccountUserDetails.create(UUID.randomUUID().toString()))
-        .isActive(AccountUserIsActive.create(false))
+        .isActive(AccountUserIsActive.create(true))
         .build();
 
 		command.setCreatedBy(AccountUserCreatedBy.create(user.getId()));

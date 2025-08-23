@@ -38,6 +38,7 @@ Transaction entity = Transaction.builder()
  		.amount(event.getAmount() == null ? null : event.getAmount().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
+ 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
   		.account( event.getAccount() == null ? null : new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()))
  		.category( event.getCategory() == null ? null : new com.groupe2cs.bizyhub.categories.infrastructure.entity.Category(event.getCategory().value()))
 		.typeTransactionRaw(event.getTypeTransactionRaw() == null ? null : event.getTypeTransactionRaw().value())
@@ -88,6 +89,9 @@ Transaction entity = repository.findById(event.getId().value())
     }
 	if(event.getIsActive() != null) {
 		entity.setIsActive(event.getIsActive().value());
+    }
+	if(event.getSyncAt() != null) {
+		entity.setSyncAt(event.getSyncAt().value());
     }
 
      if(event.getAccount() != null) {
@@ -151,12 +155,12 @@ public void applyTransactionToAccount(String accountId, Double amount, String ty
 		}
 
 		if ("IN".equalsIgnoreCase(type)) {
-			account.setCurrentBalance(account.getCurrentBalance() + amount);
+			account.setBalance(account.getBalance() + amount);
 			log.info("Account updated with credit amount: {}, account:{}", amount, account.getId());
 		}
 
 		if ("OUT".equalsIgnoreCase(type)) {
-			account.setCurrentBalance(account.getCurrentBalance() - amount);
+			account.setBalance(account.getBalance() - amount);
 			log.info("Account updated with debit amount: {}, account:{}", amount, account.getId());
 		}
 

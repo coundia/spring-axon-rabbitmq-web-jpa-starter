@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.transactions.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -28,6 +28,7 @@ public class TransactionSyncApplicationService {
 								.amount(TransactionAmount.create(d.getAmount()))
 								.details(TransactionDetails.create(d.getDetails()))
 								.isActive(TransactionIsActive.create(d.getIsActive()))
+								.syncAt(TransactionSyncAt.create(d.getSyncAt()))
 								.account(TransactionAccount.create(d.getAccount()))
 								.category(TransactionCategory.create(d.getCategory()))
 								.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
@@ -57,6 +58,7 @@ public class TransactionSyncApplicationService {
 							.amount(TransactionAmount.create(d.getAmount()))
 							.details(TransactionDetails.create(d.getDetails()))
 							.isActive(TransactionIsActive.create(d.getIsActive()))
+							.syncAt(TransactionSyncAt.create(d.getSyncAt()))
 							.account(TransactionAccount.create(d.getAccount()))
 							.category(TransactionCategory.create(d.getCategory()))
 							.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))

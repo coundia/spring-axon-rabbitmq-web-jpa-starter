@@ -32,12 +32,26 @@ public class Account   extends AbstractAuditableEntity  {
 	private String id;
 
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String code ;
+
+	@Column(nullable = true, 
 		unique = false
 
 	)
 
 	private String name ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String status ;
 
 	@Column(nullable = false, 
 		unique = false
@@ -46,33 +60,82 @@ public class Account   extends AbstractAuditableEntity  {
 	@Builder.Default
 	private String currency  = "XOF" ;
 
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String typeAccount ;
+
 	@Column(nullable = false, 
 		unique = false
 
 	)
 	@Builder.Default
-	private Double currentBalance  = 0.0 ;
+	private Double balance  = 0.0 ;
 
 	@Column(nullable = false, 
 		unique = false
 
 	)
 	@Builder.Default
-	private Double previousBalance  = 0.0 ;
+	private Double balancePrev  = 0.0 ;
+
+	@Column(nullable = false, 
+		unique = false
+
+	)
+	@Builder.Default
+	private Double balanceBlocked  = 0.0 ;
+
+	@Column(nullable = false, 
+		unique = false
+
+	)
+	@Builder.Default
+	private Double balanceInit  = 0.0 ;
+
+	@Column(nullable = false, 
+		unique = false
+
+	)
+	@Builder.Default
+	private Double balanceGoal  = 0.0 ;
+
+	@Column(nullable = false, 
+		unique = false
+
+	)
+	@Builder.Default
+	private Double balanceLimit  = 0.0 ;
 
 	@Column(nullable = true, 
 		unique = false
 
 	)
 
-	private String details ;
+	private String description ;
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private Boolean isActive ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private Boolean isDefault ;
+
+	@Column(nullable = true, 
 		unique = false
 
 	)
 	@Builder.Default
-	private Boolean isActive  = true ;
+	private java.time.Instant syncAt  = java.time.Instant.now() ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -87,12 +150,21 @@ public class Account   extends AbstractAuditableEntity  {
  	public String toString() {
 		return "Account{" +
 		"id='" + id + '\'' +
+			", code=" + code +
 			", name=" + name +
+			", status=" + status +
 			", currency=" + currency +
-			", currentBalance=" + currentBalance +
-			", previousBalance=" + previousBalance +
-			", details=" + details +
+			", typeAccount=" + typeAccount +
+			", balance=" + balance +
+			", balancePrev=" + balancePrev +
+			", balanceBlocked=" + balanceBlocked +
+			", balanceInit=" + balanceInit +
+			", balanceGoal=" + balanceGoal +
+			", balanceLimit=" + balanceLimit +
+			", description=" + description +
 			", isActive=" + isActive +
+			", isDefault=" + isDefault +
+			", syncAt=" + syncAt +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +
 		'}';

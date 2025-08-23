@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
-	import com.groupe2cs.bizyhub.shared.application.dto.*;
-	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 	import com.groupe2cs.bizyhub.shared.application.*;
-	import com.groupe2cs.bizyhub.accounts.application.usecase.*;
+	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+	import com.groupe2cs.bizyhub.shared.application.dto.*;
 	import com.groupe2cs.bizyhub.accounts.application.dto.*;
+	import com.groupe2cs.bizyhub.accounts.application.usecase.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -42,6 +42,9 @@ public class AccountUserSyncController {
 	@AuthenticationPrincipal Jwt jwt,
 	@Valid @RequestBody AccountUserSyncRequest request) {
 			try {
+
+			log.info("d ***** payload *****");
+				log.info(request.getDeltas().toString());
 
 			MetaRequest metaRequest = MetaRequest.builder()
 				.userId(RequestContext.getUserId(jwt))				.tenantId(RequestContext.getTenantId(jwt))

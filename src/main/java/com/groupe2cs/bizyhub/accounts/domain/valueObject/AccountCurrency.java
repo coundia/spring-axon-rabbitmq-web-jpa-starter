@@ -2,7 +2,9 @@ package com.groupe2cs.bizyhub.accounts.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIdNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCodeNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountNameNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountStatusNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCurrencyNotValid;
 
 import java.io.Serializable;

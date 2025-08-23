@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.fileManager.presentation.controller;
 
-	import com.groupe2cs.bizyhub.fileManager.application.usecase.*;
-	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
-	import com.groupe2cs.bizyhub.shared.application.*;
-	import com.groupe2cs.bizyhub.shared.application.dto.*;
 	import com.groupe2cs.bizyhub.fileManager.application.dto.*;
+	import com.groupe2cs.bizyhub.shared.application.dto.*;
+	import com.groupe2cs.bizyhub.shared.application.*;
+	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+	import com.groupe2cs.bizyhub.fileManager.application.usecase.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -42,6 +42,9 @@ public class FileManagerSyncController {
 	@AuthenticationPrincipal Jwt jwt,
 	@Valid @RequestBody FileManagerSyncRequest request) {
 			try {
+
+			log.info("d ***** payload *****");
+				log.info(request.getDeltas().toString());
 
 			MetaRequest metaRequest = MetaRequest.builder()
 				.userId(RequestContext.getUserId(jwt))				.tenantId(RequestContext.getTenantId(jwt))

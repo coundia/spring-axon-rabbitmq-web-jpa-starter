@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 @Schema(name = "ChatSyncRequest", description = "Request payload for synchronizing chats")
 public class ChatSyncRequest implements Serializable {
 

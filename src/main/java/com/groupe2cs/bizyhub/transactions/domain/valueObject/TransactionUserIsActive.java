@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserIdNotV
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserNameNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserTransactionNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUserNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserSyncAtNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUsernameNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserDetailsNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserIsActiveNotValid;
@@ -33,10 +34,7 @@ this.isActive = isActive;
 
 public static TransactionUserIsActive create(Boolean isActive) {
 
-if (isActive == null) {
-throw new TransactionUserIsActiveNotValid("IsActive is invalid");
-}
-return new TransactionUserIsActive(isActive);
+	return new TransactionUserIsActive(isActive);
 }
 
 public Boolean value() {

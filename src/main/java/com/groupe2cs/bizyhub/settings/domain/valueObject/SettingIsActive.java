@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.settings.domain.exception.SettingNameNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingValueNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingLocaleNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingDetailsNotValid;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingSyncAtNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingIsActiveNotValid;
 
 import java.io.Serializable;
@@ -32,10 +33,7 @@ this.isActive = isActive;
 
 public static SettingIsActive create(Boolean isActive) {
 
-if (isActive == null) {
-throw new SettingIsActiveNotValid("IsActive is invalid");
-}
-return new SettingIsActive(isActive);
+	return new SettingIsActive(isActive);
 }
 
 public Boolean value() {

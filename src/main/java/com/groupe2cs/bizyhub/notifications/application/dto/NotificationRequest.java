@@ -19,17 +19,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "NotificationRequest", description = "Request payload for Notification operations")
 public class NotificationRequest implements Serializable {
 
-	@Schema(description = "", example = "b7bcdd7b-74d9-477e-bbfa-c3e5a3ee70c1")
+	@Schema(description = "", example = "cecb7c1c-b58a-4ad6-ad21-03b6facd8334")
 	private String deviceToken;
-	@Schema(description = "", example = "63035e5e-2d63-4732-a2cb-f06a0cf4e8e3")
+	@Schema(description = "", example = "bd305c32-216f-465a-91e9-b46105d29691")
 	private String title;
-	@Schema(description = "", example = "32a772ce-8fee-4190-8426-4b47c18f5e21")
+	@Schema(description = "", example = "86292607-ac3c-4e31-b9d8-7a4c0c7934b5")
 	private String message;
-	@Schema(description = "", example = "1b8525d2-4b9d-4a49-aa42-33e88ca6add6")
+	@Schema(description = "", example = "d01b7ddf-8659-45d8-96d4-cb60bdc0b051")
 	private String status;
-	@Schema(description = "", example = "d005082a-d6c5-4197-9a1d-fae1ec21d017")
+	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+	private java.time.Instant syncAt;
+	@Schema(description = "", example = "6feb5001-bdeb-4cdb-97c4-818631cfe859")
 	private String reserved;
-	@Schema(description = "", example = "4254e968-7bce-462b-995d-af8cf8dd6472")
+	@Schema(description = "", example = "02827e80-673b-446e-994f-e51effaa52da")
 	private String errorMessage;
 
 }

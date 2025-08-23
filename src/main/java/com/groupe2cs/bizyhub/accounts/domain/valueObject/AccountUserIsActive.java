@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserIdNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserNameNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserAccountNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUserNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserSyncAtNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUsernameNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserDetailsNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserIsActiveNotValid;
@@ -33,10 +34,7 @@ this.isActive = isActive;
 
 public static AccountUserIsActive create(Boolean isActive) {
 
-if (isActive == null) {
-throw new AccountUserIsActiveNotValid("IsActive is invalid");
-}
-return new AccountUserIsActive(isActive);
+	return new AccountUserIsActive(isActive);
 }
 
 public Boolean value() {

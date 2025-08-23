@@ -22,6 +22,7 @@ public class NotificationCreatedEvent implements Serializable {
 	private NotificationTitle title;
 	private NotificationMessage message;
 	private NotificationStatus status;
+	private NotificationSyncAt syncAt;
 	private NotificationReserved reserved;
 	private NotificationErrorMessage errorMessage;
 	private NotificationCreatedBy createdBy;

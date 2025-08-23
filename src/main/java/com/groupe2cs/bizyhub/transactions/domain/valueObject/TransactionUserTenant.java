@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserIdNotV
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserNameNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserTransactionNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUserNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserSyncAtNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUsernameNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserDetailsNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserIsActiveNotValid;

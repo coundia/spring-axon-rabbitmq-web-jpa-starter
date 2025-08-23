@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserIdNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserNameNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserAccountNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUserNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserSyncAtNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUsernameNotValid;
 
 import java.io.Serializable;

@@ -1,0 +1,26 @@
+package com.groupe2cs.bizyhub.transactions.application.usecase;
+
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.query.*;
+import com.groupe2cs.bizyhub.transactions.application.command.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.transactions.application.mapper.*;
+
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class TransactionEntryDeleteApplicationService {
+
+private final CommandGateway commandGateway;
+
+public void deleteTransactionEntry(TransactionEntryId idVo, MetaRequest metaRequest) {
+
+DeleteTransactionEntryCommand command = new DeleteTransactionEntryCommand(idVo);
+commandGateway.sendAndWait(command);
+}
+}

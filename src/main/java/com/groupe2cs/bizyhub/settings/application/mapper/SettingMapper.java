@@ -15,6 +15,7 @@ return SettingResponse.builder()
 		.value(entity.getValue())
 		.locale(entity.getLocale())
 		.details(entity.getDetails())
+		.syncAt(entity.getSyncAt())
 		.isActive(entity.getIsActive())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
     .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
@@ -28,6 +29,7 @@ return SettingResponse.builder()
 	.value(command.getValue().value())
 	.locale(command.getLocale().value())
 	.details(command.getDetails().value())
+	.syncAt(command.getSyncAt().value())
 	.isActive(command.getIsActive().value())
 .build();
 }
@@ -39,6 +41,7 @@ return SettingResponse.builder()
 	.value(command.getValue().value())
 	.locale(command.getLocale().value())
 	.details(command.getDetails().value())
+	.syncAt(command.getSyncAt().value())
 	.isActive(command.getIsActive().value())
 .build();
 }
@@ -51,6 +54,7 @@ return CreateSettingCommand.builder()
 	.value(SettingValue.create(request.getValue()))
 	.locale(SettingLocale.create(request.getLocale()))
 	.details(SettingDetails.create(request.getDetails()))
+	.syncAt(SettingSyncAt.create(request.getSyncAt()))
 	.isActive(SettingIsActive.create(request.getIsActive()))
 .build();
 }
@@ -62,6 +66,7 @@ return CreateSettingCommand.builder()
 		.value(SettingValue.create(request.getValue()))
 		.locale(SettingLocale.create(request.getLocale()))
 		.details(SettingDetails.create(request.getDetails()))
+		.syncAt(SettingSyncAt.create(request.getSyncAt()))
 		.isActive(SettingIsActive.create(request.getIsActive()))
 	.build();
 	}

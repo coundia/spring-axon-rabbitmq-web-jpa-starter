@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Builder;
+import lombok.ToString;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Schema(name = "TransactionDeltaDto", description = "Delta DTO for transaction changes")
 public class TransactionDeltaDto implements Serializable {
 
@@ -24,19 +26,21 @@ public class TransactionDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "e33786bb-ff30-4d3e-9d81-b96f9b4c3a5b")
+		@Schema(description = "", example = "f0a4735f-481b-48f5-92d5-fb71a1adf48a")
 		private String name;
-		@Schema(description = "", example = "1305.21")
+		@Schema(description = "", example = "277.91")
 		private Double amount;
-		@Schema(description = "", example = "96f19dfd-e339-49c2-95e2-4a07118f1171")
+		@Schema(description = "", example = "e65f9ff8-a8a0-4141-9530-76a21ce86e9f")
 		private String details;
 		@Schema(description = "", example = "false")
 		private Boolean isActive;
-		@Schema(description = "", example = "a5d040ec-e08e-4781-9347-0d8bf0255300")
+		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+		private java.time.Instant syncAt;
+		@Schema(description = "", example = "da1ba4d5-5aff-4f45-ae9d-c676383596d1")
 		private String account;
-		@Schema(description = "", example = "2a038a05-a346-43db-b386-c91ab199ed58")
+		@Schema(description = "", example = "1bf64ee4-9017-48a0-aa7b-fde998e2585c")
 		private String category;
-		@Schema(description = "", example = "ddbb4575-5333-4318-bdba-70f7ea7ba937")
+		@Schema(description = "", example = "0db7a5e4-9ea3-4b87-8a04-011a6fa5ca04")
 		private String typeTransactionRaw;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant dateTransaction;

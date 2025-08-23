@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
 
-import com.groupe2cs.bizyhub.accounts.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
-import com.groupe2cs.bizyhub.accounts.application.query.*;
-import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.accounts.application.dto.*;
+import com.groupe2cs.bizyhub.accounts.application.query.*;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.accounts.application.mapper.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -38,12 +38,32 @@ public AccountResponse findByAccountId(AccountId value, MetaRequest metaRequest)
 }
 
 
+public List<AccountResponse> findByAccountCode(
+	AccountCode value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountCodeQuery query = new FindByAccountCodeQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
 public List<AccountResponse> findByAccountName(
 	AccountName value,
 	MetaRequest metaRequest
 	) {
 
 	FindByAccountNameQuery query = new FindByAccountNameQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
+public List<AccountResponse> findByAccountStatus(
+	AccountStatus value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountStatusQuery query = new FindByAccountStatusQuery(value,metaRequest);
 	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
 	return future.join();
@@ -58,32 +78,82 @@ public List<AccountResponse> findByAccountCurrency(
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
 	return future.join();
 }
-public List<AccountResponse> findByAccountCurrentBalance(
-	AccountCurrentBalance value,
+public List<AccountResponse> findByAccountTypeAccount(
+	AccountTypeAccount value,
 	MetaRequest metaRequest
 	) {
 
-	FindByAccountCurrentBalanceQuery query = new FindByAccountCurrentBalanceQuery(value,metaRequest);
+	FindByAccountTypeAccountQuery query = new FindByAccountTypeAccountQuery(value,metaRequest);
 	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
 	return future.join();
 }
-public List<AccountResponse> findByAccountPreviousBalance(
-	AccountPreviousBalance value,
+public List<AccountResponse> findByAccountBalance(
+	AccountBalance value,
 	MetaRequest metaRequest
 	) {
 
-	FindByAccountPreviousBalanceQuery query = new FindByAccountPreviousBalanceQuery(value,metaRequest);
+	FindByAccountBalanceQuery query = new FindByAccountBalanceQuery(value,metaRequest);
 	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
 	return future.join();
 }
-public List<AccountResponse> findByAccountDetails(
-	AccountDetails value,
+public List<AccountResponse> findByAccountBalancePrev(
+	AccountBalancePrev value,
 	MetaRequest metaRequest
 	) {
 
-	FindByAccountDetailsQuery query = new FindByAccountDetailsQuery(value,metaRequest);
+	FindByAccountBalancePrevQuery query = new FindByAccountBalancePrevQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
+public List<AccountResponse> findByAccountBalanceBlocked(
+	AccountBalanceBlocked value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountBalanceBlockedQuery query = new FindByAccountBalanceBlockedQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
+public List<AccountResponse> findByAccountBalanceInit(
+	AccountBalanceInit value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountBalanceInitQuery query = new FindByAccountBalanceInitQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
+public List<AccountResponse> findByAccountBalanceGoal(
+	AccountBalanceGoal value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountBalanceGoalQuery query = new FindByAccountBalanceGoalQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
+public List<AccountResponse> findByAccountBalanceLimit(
+	AccountBalanceLimit value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountBalanceLimitQuery query = new FindByAccountBalanceLimitQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
+public List<AccountResponse> findByAccountDescription(
+	AccountDescription value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountDescriptionQuery query = new FindByAccountDescriptionQuery(value,metaRequest);
 	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
 	return future.join();
@@ -94,6 +164,26 @@ public List<AccountResponse> findByAccountIsActive(
 	) {
 
 	FindByAccountIsActiveQuery query = new FindByAccountIsActiveQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
+public List<AccountResponse> findByAccountIsDefault(
+	AccountIsDefault value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountIsDefaultQuery query = new FindByAccountIsDefaultQuery(value,metaRequest);
+	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
+	return future.join();
+}
+public List<AccountResponse> findByAccountSyncAt(
+	AccountSyncAt value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountSyncAtQuery query = new FindByAccountSyncAtQuery(value,metaRequest);
 	CompletableFuture<List<AccountResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountResponse.class));
 	return future.join();

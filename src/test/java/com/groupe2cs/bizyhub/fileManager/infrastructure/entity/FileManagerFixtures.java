@@ -77,10 +77,10 @@ public class FileManagerFixtures {
 				.objectName(FileManagerObjectName.create(UUID.randomUUID().toString()))
 				.originalName(FileManagerOriginalName.create(UUID.randomUUID().toString()))
 				.mimeType(FileManagerMimeType.create(UUID.randomUUID().toString()))
-				.size(FileManagerSize.create(55784L))
+				.size(FileManagerSize.create(17033L))
 				.path(FileManagerPath.create(UUID.randomUUID().toString()))
 				.uri(FileManagerUri.create(UUID.randomUUID().toString()))
-				.isPublic(FileManagerIsPublic.create(false))
+				.isPublic(FileManagerIsPublic.create(true))
 			.build();
 
 		command.setCreatedBy(FileManagerCreatedBy.create(user.getId()));
@@ -104,10 +104,10 @@ public class FileManagerFixtures {
         .objectName(FileManagerObjectName.create(UUID.randomUUID().toString()))
         .originalName(FileManagerOriginalName.create(UUID.randomUUID().toString()))
         .mimeType(FileManagerMimeType.create(UUID.randomUUID().toString()))
-        .size(FileManagerSize.create(55784L))
+        .size(FileManagerSize.create(17033L))
         .path(FileManagerPath.create(UUID.randomUUID().toString()))
         .uri(FileManagerUri.create(UUID.randomUUID().toString()))
-        .isPublic(FileManagerIsPublic.create(false))
+        .isPublic(FileManagerIsPublic.create(true))
         .build();
 
 		command.setCreatedBy(FileManagerCreatedBy.create(user.getId()));

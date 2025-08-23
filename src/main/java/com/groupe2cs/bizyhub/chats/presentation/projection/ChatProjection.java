@@ -35,8 +35,10 @@ Chat entity = Chat.builder()
  		.responsesJson(event.getResponsesJson() == null ? null : event.getResponsesJson().value())
  		.responses(event.getResponses() == null ? null : event.getResponses().value())
  		.state(event.getState() == null ? null : event.getState().value())
+ 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
   		.account( event.getAccount() == null ? null : new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()))
-.build();
+		.dateTransaction(event.getDateTransaction() == null ? null : event.getDateTransaction().value())
+ .build();
 
 entity.setId(event.getId().value());
 
@@ -81,10 +83,16 @@ Chat entity = repository.findById(event.getId().value())
 	if(event.getState() != null) {
 		entity.setState(event.getState().value());
     }
+	if(event.getSyncAt() != null) {
+		entity.setSyncAt(event.getSyncAt().value());
+    }
 
      if(event.getAccount() != null) {
 		  entity.setAccount(new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()));
 	  }
+	if(event.getDateTransaction() != null) {
+		entity.setDateTransaction(event.getDateTransaction().value());
+    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

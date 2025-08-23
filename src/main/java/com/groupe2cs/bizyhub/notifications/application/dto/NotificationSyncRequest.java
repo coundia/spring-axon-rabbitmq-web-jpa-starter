@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 @Schema(name = "NotificationSyncRequest", description = "Request payload for synchronizing notifications")
 public class NotificationSyncRequest implements Serializable {
 

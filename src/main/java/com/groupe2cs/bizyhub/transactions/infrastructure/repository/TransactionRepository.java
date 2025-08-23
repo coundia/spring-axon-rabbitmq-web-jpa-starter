@@ -74,6 +74,25 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
         @Query("SELECT e FROM Transaction e WHERE e.isActive = :isActive AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Transaction> findByIsActiveAndTenantId(Boolean isActive, String tenantId);
         @Query("""
+        SELECT e FROM Transaction e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.createdBy.id = :createdById
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Transaction> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+        SELECT e FROM Transaction e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.tenant.id = :tenantId
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Transaction> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
+
+        @Query("""
         SELECT DISTINCT t FROM Transaction t
         LEFT JOIN AccountUser au ON au.account.id = t.account.id
         WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)

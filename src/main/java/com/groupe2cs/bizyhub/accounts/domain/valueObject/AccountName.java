@@ -2,6 +2,7 @@ package com.groupe2cs.bizyhub.accounts.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIdNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCodeNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountNameNotValid;
 
 import java.io.Serializable;
@@ -28,10 +29,7 @@ this.name = name;
 
 public static AccountName create(String name) {
 
-if (name == null || name.isBlank()) {
-throw new AccountNameNotValid("Name is invalid");
-}
-return new AccountName(name);
+	return new AccountName(name);
 }
 
 public String value() {

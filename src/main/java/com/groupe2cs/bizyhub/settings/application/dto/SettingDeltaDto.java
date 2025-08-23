@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Builder;
+import lombok.ToString;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Schema(name = "SettingDeltaDto", description = "Delta DTO for setting changes")
 public class SettingDeltaDto implements Serializable {
 
@@ -24,15 +26,17 @@ public class SettingDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "c8b7e68d-90d2-4ced-bf2c-1b5f826a736c")
+		@Schema(description = "", example = "c19d0f65-438f-41ea-9a0a-c667e443e66a")
 		private String name;
-		@Schema(description = "", example = "4059661e-4866-417f-af10-205928e2036f")
+		@Schema(description = "", example = "353699f6-7aa9-4c07-b598-9ddbb52b6947")
 		private String value;
-		@Schema(description = "", example = "3f1f0c3d-b716-45a5-95e6-a32f04b0721b")
+		@Schema(description = "", example = "57886b45-b610-4e9b-93d1-0237481db3ec")
 		private String locale;
-		@Schema(description = "", example = "d971b831-d66b-46f2-93af-80ce5c6f7239")
+		@Schema(description = "", example = "9a70c2a1-5989-4e66-bb32-7864d25c8ba1")
 		private String details;
-		@Schema(description = "", example = "false")
+		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+		private java.time.Instant syncAt;
+		@Schema(description = "", example = "true")
 		private Boolean isActive;
 
 }

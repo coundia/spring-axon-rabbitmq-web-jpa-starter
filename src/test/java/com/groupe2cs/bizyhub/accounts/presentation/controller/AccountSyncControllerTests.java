@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
@@ -38,12 +38,21 @@ private AccountRepository Repository;
 		AccountSyncRequest requestDTO = AccountSyncRequest.builder()
 		.deltas(List.of(
 		AccountDeltaDto.builder()
+.code(UUID.randomUUID().toString())
 .name(UUID.randomUUID().toString())
+.status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
-.currentBalance(8994.5)
-.previousBalance(5550.17)
-.details(UUID.randomUUID().toString())
+.typeAccount(UUID.randomUUID().toString())
+.balance(9534.12)
+.balancePrev(9691.26)
+.balanceBlocked(6775.16)
+.balanceInit(9140.42)
+.balanceGoal(7995.12)
+.balanceLimit(9080.04)
+.description(UUID.randomUUID().toString())
 .isActive(false)
+.isDefault(false)
+.syncAt(java.time.Instant.now().plusSeconds(3600))
 		.type("CREATE")
 		.build()
 		))
@@ -68,12 +77,21 @@ private AccountRepository Repository;
 			.deltas(List.of(
 			AccountDeltaDto.builder()
 			.id(existingId)
+.code(UUID.randomUUID().toString())
 .name(UUID.randomUUID().toString())
+.status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
-.currentBalance(8994.5)
-.previousBalance(5550.17)
-.details(UUID.randomUUID().toString())
+.typeAccount(UUID.randomUUID().toString())
+.balance(9534.12)
+.balancePrev(9691.26)
+.balanceBlocked(6775.16)
+.balanceInit(9140.42)
+.balanceGoal(7995.12)
+.balanceLimit(9080.04)
+.description(UUID.randomUUID().toString())
 .isActive(false)
+.isDefault(false)
+.syncAt(java.time.Instant.now().plusSeconds(3600))
 			.type("UPDATE")
 			.build()
 			))

@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
 
-import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.query.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.chats.application.command.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.chats.application.query.*;
+import com.groupe2cs.bizyhub.chats.application.dto.*;
 import com.groupe2cs.bizyhub.chats.application.mapper.*;
 import java.util.List;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -26,7 +26,9 @@ ChatId id, List<MultipartFile> filesMultipartFile,
 		String responsesJson,
 		String responses,
 		String state,
-		String account
+		java.time.Instant syncAt,
+		String account,
+		java.time.Instant dateTransaction
 ,
 MetaRequest metaRequest
 ) {
@@ -37,7 +39,9 @@ UpdateChatCommand command = ChatMapper.toUpdateCommand(
      new ChatResponsesJson(responsesJson),
      new ChatResponses(responses),
      new ChatState(state),
-     new ChatAccount(account)  
+     new ChatSyncAt(syncAt),
+     new ChatAccount(account),
+     new ChatDateTransaction(dateTransaction)  
 );
 
     command.setCreatedBy(ChatCreatedBy.create(metaRequest.getUserId()));

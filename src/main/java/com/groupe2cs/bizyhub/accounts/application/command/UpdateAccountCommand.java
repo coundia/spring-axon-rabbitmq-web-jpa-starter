@@ -24,12 +24,21 @@ import java.util.*;
 public class UpdateAccountCommand implements Serializable {
 @TargetAggregateIdentifier
 	private AccountId id;
+ 	private AccountCode code;
  	private AccountName name;
+ 	private AccountStatus status;
  	private AccountCurrency currency;
- 	private AccountCurrentBalance currentBalance;
- 	private AccountPreviousBalance previousBalance;
- 	private AccountDetails details;
+ 	private AccountTypeAccount typeAccount;
+ 	private AccountBalance balance;
+ 	private AccountBalancePrev balancePrev;
+ 	private AccountBalanceBlocked balanceBlocked;
+ 	private AccountBalanceInit balanceInit;
+ 	private AccountBalanceGoal balanceGoal;
+ 	private AccountBalanceLimit balanceLimit;
+ 	private AccountDescription description;
  	private AccountIsActive isActive;
+ 	private AccountIsDefault isDefault;
+ 	private AccountSyncAt syncAt;
  	private AccountCreatedBy createdBy;
  	private AccountTenant tenant;
 

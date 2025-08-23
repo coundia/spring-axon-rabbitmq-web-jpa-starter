@@ -29,6 +29,7 @@ public class CreateNotificationCommand implements Serializable {
  	private NotificationTitle title;
  	private NotificationMessage message;
  	private NotificationStatus status;
+ 	private NotificationSyncAt syncAt;
  	private NotificationReserved reserved;
  	private NotificationErrorMessage errorMessage;
  	private NotificationCreatedBy createdBy;
@@ -39,6 +40,7 @@ public class CreateNotificationCommand implements Serializable {
    NotificationTitle title , 
    NotificationMessage message , 
    NotificationStatus status , 
+   NotificationSyncAt syncAt , 
    NotificationReserved reserved , 
    NotificationErrorMessage errorMessage , 
    NotificationCreatedBy createdBy , 
@@ -50,6 +52,7 @@ public class CreateNotificationCommand implements Serializable {
   this.title = title ; 
   this.message = message ; 
   this.status = status ; 
+  this.syncAt = syncAt ; 
   this.reserved = reserved ; 
   this.errorMessage = errorMessage ; 
   this.createdBy = createdBy ; 

@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.command.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.chats.application.command.*;
+import com.groupe2cs.bizyhub.chats.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.chats.application.mapper.*;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
 import java.util.List;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,9 @@ List<MultipartFile> files,
 		String responsesJson,
 		String responses,
 		String state,
-		String account
+		java.time.Instant syncAt,
+		String account,
+		java.time.Instant dateTransaction
 ,
 MetaRequest metaRequest
 ) {
@@ -34,7 +36,9 @@ MetaRequest metaRequest
         responsesJson,
         responses,
         state,
-        account
+        syncAt,
+        account,
+        dateTransaction
     );
 
 CreateChatCommand command = ChatMapper.toCommand(

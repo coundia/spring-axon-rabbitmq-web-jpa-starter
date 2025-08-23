@@ -2,8 +2,12 @@ package com.groupe2cs.bizyhub.categories.application.dto;
 
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.ToString;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
@@ -22,21 +26,19 @@ public class CategoryDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "0fd014c6-5ec4-4b4f-a76b-ae73af5bb3b9")
+		@Schema(description = "", example = "a8bae2a6-92fe-4a3e-8632-cc5bb64acfe4")
 		private String code;
-		@Schema(description = "", example = "886463a5-6b8b-4fd9-9447-8e9fec4aca01")
+		@Schema(description = "", example = "b0aee1c5-fb8a-4ad6-930c-847fd429d575")
 		private String name;
-		@Schema(description = "", example = "66a3ded2-d89d-4bb8-87ab-ae553170fd66")
+		@Schema(description = "", example = "400cb319-ac92-46ba-b38c-3638281abeda")
 		private String remoteId;
-		@Schema(description = "", example = "378642a1-8a43-47cb-bf91-7cfb8f552eff")
+		@Schema(description = "", example = "8b2a351b-0d6f-4b6a-b1e0-d8061cceeed4")
 		private String description;
-		@Schema(description = "", example = "f8ed4830-eebb-4aa9-bd64-e9722db8f28c")
+		@Schema(description = "", example = "6c59d354-280a-4014-9979-79b8aaa1c295")
 		private String typeEntry;
-		@Schema(description = "", example = "34")
+		@Schema(description = "", example = "47")
 		private Integer version;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-
-
 
 }

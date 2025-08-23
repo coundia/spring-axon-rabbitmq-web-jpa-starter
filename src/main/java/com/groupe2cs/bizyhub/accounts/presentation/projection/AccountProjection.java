@@ -31,12 +31,21 @@ public void on(AccountCreatedEvent event) {
 try {
 Account entity = Account.builder()
 		.id(event.getId() == null ? null : event.getId().value())
+ 		.code(event.getCode() == null ? null : event.getCode().value())
  		.name(event.getName() == null ? null : event.getName().value())
+ 		.status(event.getStatus() == null ? null : event.getStatus().value())
  		.currency(event.getCurrency() == null ? null : event.getCurrency().value())
- 		.currentBalance(event.getCurrentBalance() == null ? null : event.getCurrentBalance().value())
- 		.previousBalance(event.getPreviousBalance() == null ? null : event.getPreviousBalance().value())
- 		.details(event.getDetails() == null ? null : event.getDetails().value())
+ 		.typeAccount(event.getTypeAccount() == null ? null : event.getTypeAccount().value())
+ 		.balance(event.getBalance() == null ? null : event.getBalance().value())
+ 		.balancePrev(event.getBalancePrev() == null ? null : event.getBalancePrev().value())
+ 		.balanceBlocked(event.getBalanceBlocked() == null ? null : event.getBalanceBlocked().value())
+ 		.balanceInit(event.getBalanceInit() == null ? null : event.getBalanceInit().value())
+ 		.balanceGoal(event.getBalanceGoal() == null ? null : event.getBalanceGoal().value())
+ 		.balanceLimit(event.getBalanceLimit() == null ? null : event.getBalanceLimit().value())
+ 		.description(event.getDescription() == null ? null : event.getDescription().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
+ 		.isDefault(event.getIsDefault() == null ? null : event.getIsDefault().value())
+ 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
  .build();
 
 entity.setId(event.getId().value());
@@ -70,23 +79,50 @@ Account entity = repository.findById(event.getId().value())
 	if(event.getId() != null) {
 		entity.setId(event.getId().value());
     }
+	if(event.getCode() != null) {
+		entity.setCode(event.getCode().value());
+    }
 	if(event.getName() != null) {
 		entity.setName(event.getName().value());
+    }
+	if(event.getStatus() != null) {
+		entity.setStatus(event.getStatus().value());
     }
 	if(event.getCurrency() != null) {
 		entity.setCurrency(event.getCurrency().value());
     }
-	if(event.getCurrentBalance() != null) {
-		entity.setCurrentBalance(event.getCurrentBalance().value());
+	if(event.getTypeAccount() != null) {
+		entity.setTypeAccount(event.getTypeAccount().value());
     }
-	if(event.getPreviousBalance() != null) {
-		entity.setPreviousBalance(event.getPreviousBalance().value());
+	if(event.getBalance() != null) {
+		entity.setBalance(event.getBalance().value());
     }
-	if(event.getDetails() != null) {
-		entity.setDetails(event.getDetails().value());
+	if(event.getBalancePrev() != null) {
+		entity.setBalancePrev(event.getBalancePrev().value());
+    }
+	if(event.getBalanceBlocked() != null) {
+		entity.setBalanceBlocked(event.getBalanceBlocked().value());
+    }
+	if(event.getBalanceInit() != null) {
+		entity.setBalanceInit(event.getBalanceInit().value());
+    }
+	if(event.getBalanceGoal() != null) {
+		entity.setBalanceGoal(event.getBalanceGoal().value());
+    }
+	if(event.getBalanceLimit() != null) {
+		entity.setBalanceLimit(event.getBalanceLimit().value());
+    }
+	if(event.getDescription() != null) {
+		entity.setDescription(event.getDescription().value());
     }
 	if(event.getIsActive() != null) {
 		entity.setIsActive(event.getIsActive().value());
+    }
+	if(event.getIsDefault() != null) {
+		entity.setIsDefault(event.getIsDefault().value());
+    }
+	if(event.getSyncAt() != null) {
+		entity.setSyncAt(event.getSyncAt().value());
     }
 
 if(event.getCreatedBy() !=null){

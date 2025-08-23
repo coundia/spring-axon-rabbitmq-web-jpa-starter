@@ -54,7 +54,9 @@ public ResponseEntity<ChatResponse> addChat(
         @RequestPart(value ="responsesJson", required = false) String responsesJson,
         @RequestPart(value ="responses", required = false) String responses,
         @RequestPart(value ="state", required = false) String state,
-        @RequestPart(value ="account", required = false) String account
+        @RequestPart(value ="syncAt", required = false) java.time.Instant syncAt,
+        @RequestPart(value ="account", required = false) String account,
+        @RequestPart(value ="dateTransaction", required = false) java.time.Instant dateTransaction
 	) {
 	try {
 
@@ -70,7 +72,9 @@ public ResponseEntity<ChatResponse> addChat(
 		responsesJson,
 		responses,
 		state,
+		syncAt,
 		account,
+		dateTransaction,
 	metaRequest
 	);
 

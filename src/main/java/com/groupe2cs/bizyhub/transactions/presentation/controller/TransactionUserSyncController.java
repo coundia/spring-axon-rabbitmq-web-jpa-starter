@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
-	import com.groupe2cs.bizyhub.shared.application.dto.*;
-	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
-	import com.groupe2cs.bizyhub.shared.application.*;
 	import com.groupe2cs.bizyhub.transactions.application.dto.*;
+	import com.groupe2cs.bizyhub.shared.application.*;
+	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+	import com.groupe2cs.bizyhub.shared.application.dto.*;
 	import com.groupe2cs.bizyhub.transactions.application.usecase.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,6 +42,9 @@ public class TransactionUserSyncController {
 	@AuthenticationPrincipal Jwt jwt,
 	@Valid @RequestBody TransactionUserSyncRequest request) {
 			try {
+
+			log.info("d ***** payload *****");
+				log.info(request.getDeltas().toString());
 
 			MetaRequest metaRequest = MetaRequest.builder()
 				.userId(RequestContext.getUserId(jwt))				.tenantId(RequestContext.getTenantId(jwt))

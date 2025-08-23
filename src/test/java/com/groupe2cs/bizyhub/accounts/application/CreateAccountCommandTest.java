@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateAccountCommand command = new CreateAccountCommand(
- AccountId.create(UUID.randomUUID().toString()) ,  AccountName.create(UUID.randomUUID().toString()) ,  AccountCurrency.create(UUID.randomUUID().toString()) ,  AccountCurrentBalance.create(2822.07) ,  AccountPreviousBalance.create(7650.8) ,  AccountDetails.create(UUID.randomUUID().toString()) ,  AccountIsActive.create(true) ,  AccountCreatedBy.create(UUID.randomUUID().toString()) ,  AccountTenant.create(UUID.randomUUID().toString()) 
+ AccountId.create(UUID.randomUUID().toString()) ,  AccountCode.create(UUID.randomUUID().toString()) ,  AccountName.create(UUID.randomUUID().toString()) ,  AccountStatus.create(UUID.randomUUID().toString()) ,  AccountCurrency.create(UUID.randomUUID().toString()) ,  AccountTypeAccount.create(UUID.randomUUID().toString()) ,  AccountBalance.create(1828.5) ,  AccountBalancePrev.create(9506.57) ,  AccountBalanceBlocked.create(7615.65) ,  AccountBalanceInit.create(7499.17) ,  AccountBalanceGoal.create(8881.8) ,  AccountBalanceLimit.create(5649.62) ,  AccountDescription.create(UUID.randomUUID().toString()) ,  AccountIsActive.create(false) ,  AccountIsDefault.create(true) ,  AccountSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountCreatedBy.create(UUID.randomUUID().toString()) ,  AccountTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -36,18 +36,36 @@ verify(commandGateway, times(1)).send(commandCaptor.capture());
 CreateAccountCommand sentCommand = commandCaptor.getValue();
 assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
+assertThat(sentCommand.getCode().value()).isEqualTo(
+command.getCode().value());
 assertThat(sentCommand.getName().value()).isEqualTo(
 command.getName().value());
+assertThat(sentCommand.getStatus().value()).isEqualTo(
+command.getStatus().value());
 assertThat(sentCommand.getCurrency().value()).isEqualTo(
 command.getCurrency().value());
-assertThat(sentCommand.getCurrentBalance().value()).isEqualTo(
-command.getCurrentBalance().value());
-assertThat(sentCommand.getPreviousBalance().value()).isEqualTo(
-command.getPreviousBalance().value());
-assertThat(sentCommand.getDetails().value()).isEqualTo(
-command.getDetails().value());
+assertThat(sentCommand.getTypeAccount().value()).isEqualTo(
+command.getTypeAccount().value());
+assertThat(sentCommand.getBalance().value()).isEqualTo(
+command.getBalance().value());
+assertThat(sentCommand.getBalancePrev().value()).isEqualTo(
+command.getBalancePrev().value());
+assertThat(sentCommand.getBalanceBlocked().value()).isEqualTo(
+command.getBalanceBlocked().value());
+assertThat(sentCommand.getBalanceInit().value()).isEqualTo(
+command.getBalanceInit().value());
+assertThat(sentCommand.getBalanceGoal().value()).isEqualTo(
+command.getBalanceGoal().value());
+assertThat(sentCommand.getBalanceLimit().value()).isEqualTo(
+command.getBalanceLimit().value());
+assertThat(sentCommand.getDescription().value()).isEqualTo(
+command.getDescription().value());
 assertThat(sentCommand.getIsActive().value()).isEqualTo(
 command.getIsActive().value());
+assertThat(sentCommand.getIsDefault().value()).isEqualTo(
+command.getIsDefault().value());
+assertThat(sentCommand.getSyncAt().value()).isEqualTo(
+command.getSyncAt().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
 command.getCreatedBy().value());
 assertThat(sentCommand.getTenant().value()).isEqualTo(

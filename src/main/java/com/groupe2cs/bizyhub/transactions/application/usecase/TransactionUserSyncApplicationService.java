@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.transactions.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -28,6 +28,7 @@ public class TransactionUserSyncApplicationService {
 								.name(TransactionUserName.create(d.getName()))
 								.transaction(TransactionUserTransaction.create(d.getTransaction()))
 								.user(TransactionUserUser.create(d.getUser()))
+								.syncAt(TransactionUserSyncAt.create(d.getSyncAt()))
 								.username(TransactionUserUsername.create(d.getUsername()))
 								.details(TransactionUserDetails.create(d.getDetails()))
 								.isActive(TransactionUserIsActive.create(d.getIsActive()))
@@ -65,6 +66,7 @@ public class TransactionUserSyncApplicationService {
 							.name(TransactionUserName.create(d.getName()))
 							.transaction(TransactionUserTransaction.create(d.getTransaction()))
 							.user(TransactionUserUser.create(d.getUser()))
+							.syncAt(TransactionUserSyncAt.create(d.getSyncAt()))
 							.username(TransactionUserUsername.create(d.getUsername()))
 							.details(TransactionUserDetails.create(d.getDetails()))
 							.isActive(TransactionUserIsActive.create(d.getIsActive()))

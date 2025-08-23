@@ -19,17 +19,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "AccountUserRequest", description = "Request payload for AccountUser operations")
 public class AccountUserRequest implements Serializable {
 
-	@Schema(description = "", example = "fbb110df-24b1-4b4f-ad1c-a3a046baf1ba")
+	@Schema(description = "", example = "676af233-2c5c-4957-ab9a-c3e0797dc602")
 	private String name;
-	@Schema(description = "", example = "847ae0e9-e5a2-4171-b714-34268e826eaf")
+	@Schema(description = "", example = "ba75a6f6-c587-4766-b5de-60ac21736d20")
 	private String account;
-	@Schema(description = "", example = "fc16b2fa-9c80-4c84-902f-745e03ef20a0")
+	@Schema(description = "", example = "6fc9bcab-28b4-474d-b570-ab6663709dfe")
 	private String user;
-	@Schema(description = "", example = "a4bb1d58-2f57-49cd-9cc0-eeeaba5e8a46")
+	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+	private java.time.Instant syncAt;
+	@Schema(description = "", example = "4c55b1a0-3738-44fd-9b33-c418974acccd")
 	private String username;
-	@Schema(description = "", example = "887ed3a3-ff2a-4a7f-8f32-f6544b5eacf5")
+	@Schema(description = "", example = "91fc8b71-b0f4-469c-b6dc-48f625a2646c")
 	private String details;
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean isActive;
 
 }

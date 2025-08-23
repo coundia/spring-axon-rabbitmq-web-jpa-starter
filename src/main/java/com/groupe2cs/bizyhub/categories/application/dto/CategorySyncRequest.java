@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 @Schema(name = "CategorySyncRequest", description = "Request payload for synchronizing categorys")
 public class CategorySyncRequest implements Serializable {
 

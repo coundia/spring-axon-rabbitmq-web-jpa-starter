@@ -43,6 +43,7 @@ void it_should_be_able_to_add_accountuser() {
 		requestDTO.setName(UUID.randomUUID().toString());
 		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
 		requestDTO.setUser(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value());
+		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setUsername(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(false);
@@ -55,6 +56,7 @@ void it_should_be_able_to_add_accountuser() {
 		assertThat(response.getBody().getName()).isEqualTo(requestDTO.getName());
 		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getUser()).isEqualTo(requestDTO.getUser());
+		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getUsername()).isEqualTo(requestDTO.getUsername());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());

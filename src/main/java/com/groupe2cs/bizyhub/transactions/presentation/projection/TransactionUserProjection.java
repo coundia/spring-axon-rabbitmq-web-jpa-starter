@@ -34,7 +34,8 @@ TransactionUser entity = TransactionUser.builder()
  		.name(event.getName() == null ? null : event.getName().value())
   		.transaction( event.getTransaction() == null ? null : new com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction(event.getTransaction().value()))
  		.user( event.getUser() == null ? null : new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUser().value()))
-		.username(event.getUsername() == null ? null : event.getUsername().value())
+		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
+ 		.username(event.getUsername() == null ? null : event.getUsername().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
  .build();
@@ -81,6 +82,9 @@ TransactionUser entity = repository.findById(event.getId().value())
      if(event.getUser() != null) {
 		  entity.setUser(new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUser().value()));
 	  }
+	if(event.getSyncAt() != null) {
+		entity.setSyncAt(event.getSyncAt().value());
+    }
 	if(event.getUsername() != null) {
 		entity.setUsername(event.getUsername().value());
     }

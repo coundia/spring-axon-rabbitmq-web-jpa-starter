@@ -22,17 +22,35 @@ public class AccountResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String id;
 	@Schema(description = "", example = "")
+	private String code;
+	@Schema(description = "", example = "")
 	private String name;
+	@Schema(description = "", example = "")
+	private String status;
 	@Schema(description = "", example = "")
 	private String currency;
 	@Schema(description = "", example = "")
-	private Double currentBalance;
+	private String typeAccount;
 	@Schema(description = "", example = "")
-	private Double previousBalance;
+	private Double balance;
 	@Schema(description = "", example = "")
-	private String details;
+	private Double balancePrev;
+	@Schema(description = "", example = "")
+	private Double balanceBlocked;
+	@Schema(description = "", example = "")
+	private Double balanceInit;
+	@Schema(description = "", example = "")
+	private Double balanceGoal;
+	@Schema(description = "", example = "")
+	private Double balanceLimit;
+	@Schema(description = "", example = "")
+	private String description;
 	@Schema(description = "", example = "")
 	private Boolean isActive;
+	@Schema(description = "", example = "")
+	private Boolean isDefault;
+	@Schema(description = "", example = "")
+	private java.time.Instant syncAt;
 	@Schema(description = "", example = "")
 	private String createdBy;
 	@Schema(description = "", example = "")

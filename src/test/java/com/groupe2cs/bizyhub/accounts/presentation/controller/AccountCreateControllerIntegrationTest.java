@@ -36,23 +36,41 @@ void it_should_be_able_to_add_account() {
 
 		AccountRequest requestDTO = new AccountRequest();
 
+		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setName(UUID.randomUUID().toString());
+		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setCurrency(UUID.randomUUID().toString());
-		requestDTO.setCurrentBalance(4190.78);
-		requestDTO.setPreviousBalance(1758.11);
-		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(false);
+		requestDTO.setTypeAccount(UUID.randomUUID().toString());
+		requestDTO.setBalance(8836.15);
+		requestDTO.setBalancePrev(6130.26);
+		requestDTO.setBalanceBlocked(3871.45);
+		requestDTO.setBalanceInit(3681.44);
+		requestDTO.setBalanceGoal(7237.87);
+		requestDTO.setBalanceLimit(3080.6);
+		requestDTO.setDescription(UUID.randomUUID().toString());
+		requestDTO.setIsActive(true);
+		requestDTO.setIsDefault(false);
+		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 
  		String uri = "/v1/commands/account";
 		ResponseEntity<AccountResponse> response = this.postForEntity(uri, requestDTO, AccountResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
+		assertThat(response.getBody().getCode()).isEqualTo(requestDTO.getCode());
 		assertThat(response.getBody().getName()).isEqualTo(requestDTO.getName());
+		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());
 		assertThat(response.getBody().getCurrency()).isEqualTo(requestDTO.getCurrency());
-		assertThat(response.getBody().getCurrentBalance()).isEqualTo(requestDTO.getCurrentBalance());
-		assertThat(response.getBody().getPreviousBalance()).isEqualTo(requestDTO.getPreviousBalance());
-		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
+		assertThat(response.getBody().getTypeAccount()).isEqualTo(requestDTO.getTypeAccount());
+		assertThat(response.getBody().getBalance()).isEqualTo(requestDTO.getBalance());
+		assertThat(response.getBody().getBalancePrev()).isEqualTo(requestDTO.getBalancePrev());
+		assertThat(response.getBody().getBalanceBlocked()).isEqualTo(requestDTO.getBalanceBlocked());
+		assertThat(response.getBody().getBalanceInit()).isEqualTo(requestDTO.getBalanceInit());
+		assertThat(response.getBody().getBalanceGoal()).isEqualTo(requestDTO.getBalanceGoal());
+		assertThat(response.getBody().getBalanceLimit()).isEqualTo(requestDTO.getBalanceLimit());
+		assertThat(response.getBody().getDescription()).isEqualTo(requestDTO.getDescription());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
+		assertThat(response.getBody().getIsDefault()).isEqualTo(requestDTO.getIsDefault());
+		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 	}
 }

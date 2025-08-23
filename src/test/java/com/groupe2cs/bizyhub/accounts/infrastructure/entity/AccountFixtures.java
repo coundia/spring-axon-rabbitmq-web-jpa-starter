@@ -71,12 +71,21 @@ public class AccountFixtures {
 		 User user) {
 
 			CreateAccountCommand command = CreateAccountCommand.builder()
+				.code(AccountCode.create(UUID.randomUUID().toString()))
 				.name(AccountName.create(UUID.randomUUID().toString()))
+				.status(AccountStatus.create(UUID.randomUUID().toString()))
 				.currency(AccountCurrency.create(UUID.randomUUID().toString()))
-				.currentBalance(AccountCurrentBalance.create(4520.12))
-				.previousBalance(AccountPreviousBalance.create(6490.65))
-				.details(AccountDetails.create(UUID.randomUUID().toString()))
+				.typeAccount(AccountTypeAccount.create(UUID.randomUUID().toString()))
+				.balance(AccountBalance.create(2026.36))
+				.balancePrev(AccountBalancePrev.create(8105.51))
+				.balanceBlocked(AccountBalanceBlocked.create(2557.5))
+				.balanceInit(AccountBalanceInit.create(3826.96))
+				.balanceGoal(AccountBalanceGoal.create(8905.6))
+				.balanceLimit(AccountBalanceLimit.create(9923.9))
+				.description(AccountDescription.create(UUID.randomUUID().toString()))
 				.isActive(AccountIsActive.create(false))
+				.isDefault(AccountIsDefault.create(true))
+				.syncAt(AccountSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 			.build();
 
 		command.setCreatedBy(AccountCreatedBy.create(user.getId()));
@@ -94,12 +103,21 @@ public class AccountFixtures {
         ) {
 
         CreateAccountCommand command = CreateAccountCommand.builder()
+        .code(AccountCode.create(UUID.randomUUID().toString()))
         .name(AccountName.create(UUID.randomUUID().toString()))
+        .status(AccountStatus.create(UUID.randomUUID().toString()))
         .currency(AccountCurrency.create(UUID.randomUUID().toString()))
-        .currentBalance(AccountCurrentBalance.create(4520.12))
-        .previousBalance(AccountPreviousBalance.create(6490.65))
-        .details(AccountDetails.create(UUID.randomUUID().toString()))
+        .typeAccount(AccountTypeAccount.create(UUID.randomUUID().toString()))
+        .balance(AccountBalance.create(2026.36))
+        .balancePrev(AccountBalancePrev.create(8105.51))
+        .balanceBlocked(AccountBalanceBlocked.create(2557.5))
+        .balanceInit(AccountBalanceInit.create(3826.96))
+        .balanceGoal(AccountBalanceGoal.create(8905.6))
+        .balanceLimit(AccountBalanceLimit.create(9923.9))
+        .description(AccountDescription.create(UUID.randomUUID().toString()))
         .isActive(AccountIsActive.create(false))
+        .isDefault(AccountIsDefault.create(true))
+        .syncAt(AccountSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .build();
 
 		command.setCreatedBy(AccountCreatedBy.create(user.getId()));

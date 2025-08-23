@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateAccountUserCommand command = new CreateAccountUserCommand(
- AccountUserId.create(UUID.randomUUID().toString()) ,  AccountUserName.create(UUID.randomUUID().toString()) ,  AccountUserAccount.create(UUID.randomUUID().toString()) ,  AccountUserUser.create(UUID.randomUUID().toString()) ,  AccountUserUsername.create(UUID.randomUUID().toString()) ,  AccountUserDetails.create(UUID.randomUUID().toString()) ,  AccountUserIsActive.create(false) ,  AccountUserCreatedBy.create(UUID.randomUUID().toString()) ,  AccountUserTenant.create(UUID.randomUUID().toString()) 
+ AccountUserId.create(UUID.randomUUID().toString()) ,  AccountUserName.create(UUID.randomUUID().toString()) ,  AccountUserAccount.create(UUID.randomUUID().toString()) ,  AccountUserUser.create(UUID.randomUUID().toString()) ,  AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountUserUsername.create(UUID.randomUUID().toString()) ,  AccountUserDetails.create(UUID.randomUUID().toString()) ,  AccountUserIsActive.create(true) ,  AccountUserCreatedBy.create(UUID.randomUUID().toString()) ,  AccountUserTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -42,6 +42,8 @@ assertThat(sentCommand.getAccount().value()).isEqualTo(
 command.getAccount().value());
 assertThat(sentCommand.getUser().value()).isEqualTo(
 command.getUser().value());
+assertThat(sentCommand.getSyncAt().value()).isEqualTo(
+command.getSyncAt().value());
 assertThat(sentCommand.getUsername().value()).isEqualTo(
 command.getUsername().value());
 assertThat(sentCommand.getDetails().value()).isEqualTo(

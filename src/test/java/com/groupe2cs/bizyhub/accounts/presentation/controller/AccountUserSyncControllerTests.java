@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
@@ -45,9 +45,10 @@ private AccountUserRepository Repository;
 .name(UUID.randomUUID().toString())
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
 .user(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value())
+.syncAt(java.time.Instant.now().plusSeconds(3600))
 .username(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
-.isActive(true)
+.isActive(false)
 		.type("CREATE")
 		.build()
 		))
@@ -75,9 +76,10 @@ private AccountUserRepository Repository;
 .name(UUID.randomUUID().toString())
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
 .user(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value())
+.syncAt(java.time.Instant.now().plusSeconds(3600))
 .username(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
-.isActive(true)
+.isActive(false)
 			.type("UPDATE")
 			.build()
 			))

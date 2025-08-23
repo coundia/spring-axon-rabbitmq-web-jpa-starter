@@ -30,6 +30,8 @@ public class SettingResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String details;
 	@Schema(description = "", example = "")
+	private java.time.Instant syncAt;
+	@Schema(description = "", example = "")
 	private Boolean isActive;
 	@Schema(description = "", example = "")
 	private String createdBy;

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Builder;
+import lombok.ToString;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Schema(name = "NotificationDeltaDto", description = "Delta DTO for notification changes")
 public class NotificationDeltaDto implements Serializable {
 
@@ -24,17 +26,19 @@ public class NotificationDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "9377c09c-a6a9-4bac-a8e1-2d43f8568191")
+		@Schema(description = "", example = "d460d354-8327-43a8-affc-590bf01e9b0a")
 		private String deviceToken;
-		@Schema(description = "", example = "361f0d67-9a7b-4798-b61a-30d52cf520a9")
+		@Schema(description = "", example = "3b28ee93-cbc2-4958-8c0d-ba22a3a3610c")
 		private String title;
-		@Schema(description = "", example = "ffbaa790-74c2-4f46-9e9e-11ebf7619fe7")
+		@Schema(description = "", example = "2a668021-8367-4fac-a98b-d66af233636e")
 		private String message;
-		@Schema(description = "", example = "6b89350a-020e-4f5e-8b91-9dbd0876e1ea")
+		@Schema(description = "", example = "46bfaf99-9bf9-4fca-bc66-f605946202f1")
 		private String status;
-		@Schema(description = "", example = "c5159b27-b37e-4cbd-88b6-41344db0fc87")
+		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+		private java.time.Instant syncAt;
+		@Schema(description = "", example = "de639376-e859-45f8-8255-7e47b2f1ad31")
 		private String reserved;
-		@Schema(description = "", example = "8d4ec4d1-6ca9-43d9-8c10-49a2446c8227")
+		@Schema(description = "", example = "07dfcd4d-1cfe-43d2-ab8b-d8db754b8a3d")
 		private String errorMessage;
 
 }

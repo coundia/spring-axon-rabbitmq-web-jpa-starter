@@ -29,8 +29,10 @@ private ChatMessages messages;
 private ChatResponsesJson responsesJson;
 private ChatResponses responses;
 private ChatState state;
+private ChatSyncAt syncAt;
 private ChatAccount account;
 private ChatFiles files;
+private ChatDateTransaction dateTransaction;
 private ChatCreatedBy createdBy;
 private ChatTenant tenant;
 
@@ -43,8 +45,10 @@ apply(new ChatCreatedEvent(
 		command.getResponsesJson(),
 		command.getResponses(),
 		command.getState(),
+		command.getSyncAt(),
 		command.getAccount(),
 		command.getFiles(),
+		command.getDateTransaction(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -65,8 +69,10 @@ apply(new ChatUpdatedEvent(
 		command.getResponsesJson(),
 		command.getResponses(),
 		command.getState(),
+		command.getSyncAt(),
 		command.getAccount(),
 		command.getFiles(),
+		command.getDateTransaction(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -79,8 +85,10 @@ public void on(ChatCreatedEvent event) {
 	this.responsesJson = event.getResponsesJson();
 	this.responses = event.getResponses();
 	this.state = event.getState();
+	this.syncAt = event.getSyncAt();
 	this.account = event.getAccount();
 	this.files = event.getFiles();
+	this.dateTransaction = event.getDateTransaction();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -97,8 +105,10 @@ this.id = event.getId();
 	this.responsesJson = event.getResponsesJson();
 	this.responses = event.getResponses();
 	this.state = event.getState();
+	this.syncAt = event.getSyncAt();
 	this.account = event.getAccount();
 	this.files = event.getFiles();
+	this.dateTransaction = event.getDateTransaction();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

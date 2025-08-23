@@ -28,8 +28,10 @@ public class UpdateChatCommand implements Serializable {
  	private ChatResponsesJson responsesJson;
  	private ChatResponses responses;
  	private ChatState state;
+ 	private ChatSyncAt syncAt;
  	private ChatAccount account;
  	private ChatFiles files;
+ 	private ChatDateTransaction dateTransaction;
  	private ChatCreatedBy createdBy;
  	private ChatTenant tenant;
 

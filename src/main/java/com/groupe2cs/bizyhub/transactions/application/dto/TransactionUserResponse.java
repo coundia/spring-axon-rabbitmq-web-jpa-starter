@@ -28,6 +28,8 @@ public class TransactionUserResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String user;
 	@Schema(description = "", example = "")
+	private java.time.Instant syncAt;
+	@Schema(description = "", example = "")
 	private String username;
 	@Schema(description = "", example = "")
 	private String details;

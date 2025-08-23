@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 @Schema(name = "SettingSyncRequest", description = "Request payload for synchronizing settings")
 public class SettingSyncRequest implements Serializable {
 

@@ -49,6 +49,13 @@ public class TransactionUser   extends AbstractAuditableEntity  {
 		unique = false
 
 	)
+	@Builder.Default
+	private java.time.Instant syncAt  = java.time.Instant.now() ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
 
 	private String username ;
 
@@ -59,12 +66,12 @@ public class TransactionUser   extends AbstractAuditableEntity  {
 
 	private String details ;
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
 		unique = false
 
 	)
-	@Builder.Default
-	private Boolean isActive  = true ;
+
+	private Boolean isActive ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
@@ -82,6 +89,7 @@ public class TransactionUser   extends AbstractAuditableEntity  {
 			", name=" + name +
 			", transaction=" + transaction +
 			", user=" + user +
+			", syncAt=" + syncAt +
 			", username=" + username +
 			", details=" + details +
 			", isActive=" + isActive +

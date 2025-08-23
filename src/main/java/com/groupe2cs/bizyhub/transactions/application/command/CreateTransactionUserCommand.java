@@ -28,6 +28,7 @@ public class CreateTransactionUserCommand implements Serializable {
  	private TransactionUserName name;
  	private TransactionUserTransaction transaction;
  	private TransactionUserUser user;
+ 	private TransactionUserSyncAt syncAt;
  	private TransactionUserUsername username;
  	private TransactionUserDetails details;
  	private TransactionUserIsActive isActive;
@@ -38,6 +39,7 @@ public class CreateTransactionUserCommand implements Serializable {
    TransactionUserName name , 
    TransactionUserTransaction transaction , 
    TransactionUserUser user , 
+   TransactionUserSyncAt syncAt , 
    TransactionUserUsername username , 
    TransactionUserDetails details , 
    TransactionUserIsActive isActive , 
@@ -49,6 +51,7 @@ public class CreateTransactionUserCommand implements Serializable {
   this.name = name ; 
   this.transaction = transaction ; 
   this.user = user ; 
+  this.syncAt = syncAt ; 
   this.username = username ; 
   this.details = details ; 
   this.isActive = isActive ; 

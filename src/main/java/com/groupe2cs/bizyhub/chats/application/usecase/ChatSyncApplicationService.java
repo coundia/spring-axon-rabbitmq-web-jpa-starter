@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.command.*;
-import com.groupe2cs.bizyhub.chats.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.chats.application.dto.*;
+import com.groupe2cs.bizyhub.chats.application.command.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -28,7 +28,9 @@ public class ChatSyncApplicationService {
 								.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
 								.responses(ChatResponses.create(d.getResponses()))
 								.state(ChatState.create(d.getState()))
+								.syncAt(ChatSyncAt.create(d.getSyncAt()))
 								.account(ChatAccount.create(d.getAccount()))
+								.dateTransaction(ChatDateTransaction.create(d.getDateTransaction()))
 						.build();
 
 
@@ -54,7 +56,9 @@ public class ChatSyncApplicationService {
 							.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
 							.responses(ChatResponses.create(d.getResponses()))
 							.state(ChatState.create(d.getState()))
+							.syncAt(ChatSyncAt.create(d.getSyncAt()))
 							.account(ChatAccount.create(d.getAccount()))
+							.dateTransaction(ChatDateTransaction.create(d.getDateTransaction()))
 						.build();
 
 

@@ -31,10 +31,7 @@ this.isActive = isActive;
 
 public static TransactionIsActive create(Boolean isActive) {
 
-if (isActive == null) {
-throw new TransactionIsActiveNotValid("IsActive is invalid");
-}
-return new TransactionIsActive(isActive);
+	return new TransactionIsActive(isActive);
 }
 
 public Boolean value() {

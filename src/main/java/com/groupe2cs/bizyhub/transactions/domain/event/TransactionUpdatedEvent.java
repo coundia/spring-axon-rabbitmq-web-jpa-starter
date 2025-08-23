@@ -22,6 +22,7 @@ public class TransactionUpdatedEvent implements Serializable {
 	private TransactionAmount amount;
 	private TransactionDetails details;
 	private TransactionIsActive isActive;
+	private TransactionSyncAt syncAt;
 	private TransactionAccount account;
 	private TransactionCategory category;
 	private TransactionTypeTransactionRaw typeTransactionRaw;

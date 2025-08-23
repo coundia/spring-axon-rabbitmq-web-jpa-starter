@@ -64,6 +64,13 @@ public class Notification   extends AbstractAuditableEntity  {
 		unique = false
 
 	)
+	@Builder.Default
+	private java.time.Instant syncAt  = java.time.Instant.now() ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
 
 	private String reserved ;
 
@@ -91,6 +98,7 @@ public class Notification   extends AbstractAuditableEntity  {
 			", title=" + title +
 			", message=" + message +
 			", status=" + status +
+			", syncAt=" + syncAt +
 			", reserved=" + reserved +
 			", errorMessage=" + errorMessage +
 			", createdBy=" + createdBy +
