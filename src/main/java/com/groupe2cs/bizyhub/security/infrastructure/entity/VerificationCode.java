@@ -26,91 +26,92 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Entity
 @EntityListeners(AuditListener.class)
 @Table(name = "verification_codes")
-public class VerificationCode   extends AbstractAuditableEntity  {
+public class VerificationCode extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
 
-	@Column(nullable = true, 		columnDefinition = "TEXT",
-		unique = false
+	@Column(nullable = true, columnDefinition = "TEXT",
+			unique = false
 
 	)
 
-	private String token ;
+	private String token;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String username ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String phone ;
+	private String username;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String email ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String code ;
+	private String phone;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String status ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String source ;
+	private String email;
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private java.time.Instant expiration ;
+	private String code;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String status;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String source;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private java.time.Instant expiration;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
+
 	public VerificationCode(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "VerificationCode{" +
-		"id='" + id + '\'' +
-			", token=" + token +
-			", username=" + username +
-			", phone=" + phone +
-			", email=" + email +
-			", code=" + code +
-			", status=" + status +
-			", source=" + source +
-			", expiration=" + expiration +
-			", createdBy=" + createdBy +
-			", tenant=" + tenant +
-		'}';
+				"id='" + id + '\'' +
+				", token=" + token +
+				", username=" + username +
+				", phone=" + phone +
+				", email=" + email +
+				", code=" + code +
+				", status=" + status +
+				", source=" + source +
+				", expiration=" + expiration +
+				", createdBy=" + createdBy +
+				", tenant=" + tenant +
+				'}';
 	}
 }

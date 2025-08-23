@@ -76,7 +76,7 @@ public class VerificationCodeFixtures {
 				.phone(VerificationCodePhone.create(UUID.randomUUID().toString()))
 				.email(VerificationCodeEmail.create(UUID.randomUUID().toString()))
 				.code(VerificationCodeCode.create(UUID.randomUUID().toString()))
-				.status(VerificationCodeStatus.create(UUID.randomUUID().toString()))
+				.status(VerificationCodeStatus.create("NEW"))
 				.source(VerificationCodeSource.create(UUID.randomUUID().toString()))
 				.expiration(VerificationCodeExpiration.create(java.time.Instant.now().plusSeconds(3600)))
 			.build();

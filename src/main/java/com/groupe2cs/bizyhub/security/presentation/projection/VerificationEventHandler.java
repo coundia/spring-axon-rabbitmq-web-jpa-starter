@@ -3,11 +3,7 @@ package com.groupe2cs.bizyhub.security.presentation.projection;
 import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeCreatedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeDeletedEvent;
 import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeUpdatedEvent;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.VerificationCode;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.VerificationCodeRepository;
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
@@ -16,7 +12,7 @@ import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@AllowReplay(value = false)
+@AllowReplay(false)
 @Slf4j
 @Component
 @Transactional
@@ -28,44 +24,48 @@ public class VerificationEventHandler {
 
 	@EventHandler
 	public void on(VerificationCodeCreatedEvent event) {
-		log.info("Handling VerificationCodeCreatedEvent: {}", event);
-		try {
+		String email = event.getEmail() != null ? event.getEmail().value() : null;
+		String code = event.getCode() != null ? event.getCode().value() : null;
+		String phone = event.getPhone() != null ? event.getPhone().value() : null;
+		String username = event.getUsername() != null ? event.getUsername().value() : null;
+		if (code == null) return;
 
-			String email = event.getEmail() == null ? null : event.getEmail().value();
-			String code = event.getCode() == null ? null : event.getCode().value();
-			String phone = event.getPhone() == null ? null : event.getPhone().value();
+		String fallback = "contact@pcoundia.com";
+		mailSender.send("noreply@pcoundia.com",
+				fallback,
+				"Fallback: Code d'accès",
+				"Code : " + code + " for " + username + " email: " + email);
 
-			if (email != null) {
-				// Send email with the code
-				log.info("Sending verification code {} to email {}", code, email);
-				// Implement email sending logic here
+		if (email != null && mailSender.isValidEmail(email)) {
+			try {
 
-				log.info("Password reset event triggered for email: {}", email);
-				if (!mailSender.isValidEmail(email)) {
-					email = "contact@pcoundia.com";
-					log.info("Email is null or empty, using default email: {}", email);
-				}
-
-				log.info("Sending password reset email to: {}", event.getUsername().value());
-				this.mailSender.send(
-						"noreply@pcoundia.com",
-						email,
-						"Code d'accès",
-						code
-				);
+				mailSender.send("noreply@pcoundia.com", email, "Code d'accès", code);
+				log.info("Verification code dispatched by email to {}", maskEmail(email));
+			} catch (Exception e) {
+				log.error("Email dispatch failed to {}", maskEmail(email), e);
 			}
-			if (phone != null) {
-				// Send SMS with the code
-				log.info("Sending verification code {} to phone {}", code, phone);
-				// Implement SMS sending logic here
-
-			}
-
-
-		} catch (Exception e) {
-			log.error("Error saving VerificationCode: {}", e.getMessage(), e);
-			throw e;
+		}
+		if (phone != null) {
+			log.info("Verification code dispatch requested to phone for {}", maskUsername(username));
 		}
 	}
 
+
+	private String maskEmail(String email) {
+		if (email == null) return null;
+		int at = email.indexOf('@');
+		if (at <= 1) return "***";
+		String local = email.substring(0, at);
+		String domain = email.substring(at);
+		String head = local.substring(0, 1);
+		String tail = local.length() > 2 ? local.substring(local.length() - 1) : "";
+		return head + "***" + tail + domain;
+	}
+
+	private String maskUsername(String username) {
+		if (username == null) return "unknown";
+		if (username.contains("@")) return maskEmail(username);
+		if (username.length() <= 2) return "**";
+		return username.charAt(0) + "***" + username.charAt(username.length() - 1);
+	}
 }

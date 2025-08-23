@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @RestController
@@ -35,6 +36,10 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 public class AuthVerificationCodeController {
+	private static final String STATUS_NEW = "NEW";
+	private static final String STATUS_USED = "USED";
+	private static final String STATUS_REVOKED = "REVOKED";
+
 	private final VerificationCodeCreateApplicationService applicationService;
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
@@ -49,6 +54,10 @@ public class AuthVerificationCodeController {
 		try {
 			String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
 			String username = request.getUsername();
+			verificationCodeRepository.findByTenantIdAndUsernameAndStatus(tenantId, username, STATUS_NEW).forEach(v -> {
+				v.setStatus(STATUS_REVOKED);
+				verificationCodeRepository.save(v);
+			});
 			String code = codeGenerator.numeric(4);
 			request.setCode(code);
 			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
@@ -57,13 +66,15 @@ public class AuthVerificationCodeController {
 				return userRepository.save(u);
 			});
 			metaRequest.setUserId(user.getId());
+			request.setStatus(STATUS_NEW);
+			request.setExpiration(Instant.now().plusSeconds(8600));
+
 			VerificationCodeResponse response = applicationService.createVerificationCode(request, metaRequest);
 			response.setCode(" ***** ");
-			log.info("Generated verification code for user, code {}: {}, code {}", username, tenantId, code);
+			log.info("Verification code issued for {}", username);
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		} catch (Exception ex) {
-			log.error("Failed to create verificationCode: {}", ex.getMessage());
-			ex.printStackTrace();
+			log.error("request-code failed: {}", ex.getMessage());
 			return ResponseEntity.status(500).build();
 		}
 	}
@@ -74,8 +85,12 @@ public class AuthVerificationCodeController {
 			String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
 			String username = request.getUsername();
 			String code = request.getCode();
-			VerificationCode verificationCode = verificationCodeRepository.findFirstByCodeAndUsername(code, username);
-			if (verificationCode == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			VerificationCode v = verificationCodeRepository.findTopByTenantIdAndUsernameAndCodeAndStatusAndExpirationAfter(
+					tenantId, username, code, STATUS_NEW, Instant.now()
+			).orElse(null);
+			if (v == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			v.setStatus(STATUS_USED);
+			verificationCodeRepository.save(v);
 			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
 			User user = userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
 				User u = User.builder().id(UUID.randomUUID().toString()).username(username).password(passwordEncoder.encode(code)).tenant(new Tenant(tenantId)).build();
@@ -84,10 +99,11 @@ public class AuthVerificationCodeController {
 			UserPrincipal userPrincipal = new UserPrincipal(user);
 			Authentication authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
 			String token = jwtService.generateToken(authentication, metaRequest);
-			return ResponseEntity.status(HttpStatus.CREATED).body(AuthResponseDto.builder().code(1).token(token).tenant(tenantId).username(username).message("Login successful").build());
+			return ResponseEntity.status(HttpStatus.CREATED).body(
+					AuthResponseDto.builder().code(1).token(token).tenant(tenantId).username(username).message("Login successful").build()
+			);
 		} catch (Exception ex) {
-			log.error("Failed to verify code: {}", ex.getMessage());
-			ex.printStackTrace();
+			log.error("check-code failed: {}", ex.getMessage());
 			return ResponseEntity.status(500).build();
 		}
 	}
