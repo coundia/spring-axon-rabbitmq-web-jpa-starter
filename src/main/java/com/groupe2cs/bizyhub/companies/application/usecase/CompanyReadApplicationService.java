@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.companies.application.usecase;
 
-import com.groupe2cs.bizyhub.companies.application.mapper.*;
-import com.groupe2cs.bizyhub.companies.application.dto.*;
-import com.groupe2cs.bizyhub.companies.application.query.*;
-import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
+import com.groupe2cs.bizyhub.companies.application.query.*;
+import com.groupe2cs.bizyhub.companies.application.dto.*;
+import com.groupe2cs.bizyhub.companies.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -44,6 +44,16 @@ public List<CompanyResponse> findByCompanyRemoteId(
 	) {
 
 	FindByCompanyRemoteIdQuery query = new FindByCompanyRemoteIdQuery(value,metaRequest);
+	CompletableFuture<List<CompanyResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CompanyResponse.class));
+	return future.join();
+}
+public List<CompanyResponse> findByCompanyLocalId(
+	CompanyLocalId value,
+	MetaRequest metaRequest
+	) {
+
+	FindByCompanyLocalIdQuery query = new FindByCompanyLocalIdQuery(value,metaRequest);
 	CompletableFuture<List<CompanyResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CompanyResponse.class));
 	return future.join();

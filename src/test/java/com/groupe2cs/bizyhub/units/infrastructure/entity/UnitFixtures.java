@@ -72,6 +72,7 @@ public class UnitFixtures {
 
 			CreateUnitCommand command = CreateUnitCommand.builder()
 				.remoteId(UnitRemoteId.create(UUID.randomUUID().toString()))
+				.localId(UnitLocalId.create(UUID.randomUUID().toString()))
 				.code(UnitCode.create(UUID.randomUUID().toString()))
 				.name(UnitName.create(UUID.randomUUID().toString()))
 				.syncAt(UnitSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
@@ -94,6 +95,7 @@ public class UnitFixtures {
 
         CreateUnitCommand command = CreateUnitCommand.builder()
         .remoteId(UnitRemoteId.create(UUID.randomUUID().toString()))
+        .localId(UnitLocalId.create(UUID.randomUUID().toString()))
         .code(UnitCode.create(UUID.randomUUID().toString()))
         .name(UnitName.create(UUID.randomUUID().toString()))
         .syncAt(UnitSyncAt.create(java.time.Instant.now().plusSeconds(3600)))

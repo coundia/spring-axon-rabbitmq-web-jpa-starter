@@ -19,6 +19,7 @@ public class DebtCreatedEvent implements Serializable {
 
 	private DebtId id;
 	private DebtRemoteId remoteId;
+	private DebtLocalId localId;
 	private DebtCode code;
 	private DebtNotes notes;
 	private DebtBalance balance;

@@ -31,6 +31,8 @@ public class CreateAccountUserCommand implements Serializable {
  	private AccountUserSyncAt syncAt;
  	private AccountUserUsername username;
  	private AccountUserDetails details;
+ 	private AccountUserRemoteId remoteId;
+ 	private AccountUserLocalId localId;
  	private AccountUserIsActive isActive;
  	private AccountUserCreatedBy createdBy;
  	private AccountUserTenant tenant;
@@ -42,6 +44,8 @@ public class CreateAccountUserCommand implements Serializable {
    AccountUserSyncAt syncAt , 
    AccountUserUsername username , 
    AccountUserDetails details , 
+   AccountUserRemoteId remoteId , 
+   AccountUserLocalId localId , 
    AccountUserIsActive isActive , 
    AccountUserCreatedBy createdBy , 
    AccountUserTenant tenant  
@@ -54,6 +58,8 @@ public class CreateAccountUserCommand implements Serializable {
   this.syncAt = syncAt ; 
   this.username = username ; 
   this.details = details ; 
+  this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.isActive = isActive ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 

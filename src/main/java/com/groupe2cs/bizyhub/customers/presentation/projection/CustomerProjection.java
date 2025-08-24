@@ -32,6 +32,7 @@ try {
 Customer entity = Customer.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
  		.code(event.getCode() == null ? null : event.getCode().value())
  		.firstName(event.getFirstName() == null ? null : event.getFirstName().value())
  		.lastName(event.getLastName() == null ? null : event.getLastName().value())
@@ -86,6 +87,9 @@ Customer entity = repository.findById(event.getId().value())
     }
 	if(event.getRemoteId() != null) {
 		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getLocalId() != null) {
+		entity.setLocalId(event.getLocalId().value());
     }
 	if(event.getCode() != null) {
 		entity.setCode(event.getCode().value());

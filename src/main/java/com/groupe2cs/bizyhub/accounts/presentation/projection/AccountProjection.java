@@ -45,6 +45,8 @@ Account entity = Account.builder()
  		.description(event.getDescription() == null ? null : event.getDescription().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
  		.isDefault(event.getIsDefault() == null ? null : event.getIsDefault().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
  		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
  .build();
 
@@ -120,6 +122,12 @@ Account entity = repository.findById(event.getId().value())
     }
 	if(event.getIsDefault() != null) {
 		entity.setIsDefault(event.getIsDefault().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getLocalId() != null) {
+		entity.setLocalId(event.getLocalId().value());
     }
 	if(event.getSyncAt() != null) {
 		entity.setSyncAt(event.getSyncAt().value());

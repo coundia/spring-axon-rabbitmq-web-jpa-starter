@@ -36,6 +36,13 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
         @Query("SELECT e FROM Product e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Product> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("SELECT e FROM Product e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Product> findByLocalIdAndCreatedById(String localId, String createdById);
+        @Query("SELECT e FROM Product e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Product> findByLocalIdAndTenantName(String localId, String tenantName);
+
+        @Query("SELECT e FROM Product e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Product> findByLocalIdAndTenantId(String localId, String tenantId);
         @Query("SELECT e FROM Product e WHERE LOWER(e.code) LIKE LOWER(CONCAT('%', :code, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Product> findByCodeAndCreatedById(String code, String createdById);
         @Query("SELECT e FROM Product e WHERE LOWER(e.code) LIKE LOWER(CONCAT('%', :code, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

@@ -25,6 +25,7 @@ public class DebtAggregate {
 @AggregateIdentifier
 private DebtId id;
 private DebtRemoteId remoteId;
+private DebtLocalId localId;
 private DebtCode code;
 private DebtNotes notes;
 private DebtBalance balance;
@@ -43,6 +44,7 @@ public DebtAggregate(CreateDebtCommand command) {
 apply(new DebtCreatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getNotes(),
 		command.getBalance(),
@@ -69,6 +71,7 @@ public void handle(UpdateDebtCommand command) {
 apply(new DebtUpdatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getNotes(),
 		command.getBalance(),
@@ -87,6 +90,7 @@ apply(new DebtUpdatedEvent(
 public void on(DebtCreatedEvent event) {
 	this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.notes = event.getNotes();
 	this.balance = event.getBalance();
@@ -109,6 +113,7 @@ this.id = event.getId();
 public void on(DebtUpdatedEvent event) {
 this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.notes = event.getNotes();
 	this.balance = event.getBalance();

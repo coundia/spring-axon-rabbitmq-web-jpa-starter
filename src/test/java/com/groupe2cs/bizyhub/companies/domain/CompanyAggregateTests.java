@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.companies.domain;
 
-import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-import com.groupe2cs.bizyhub.companies.domain.exception.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.companies.domain.exception.*;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class CompanyAggregateTests extends BaseUnitTests {
@@ -15,6 +15,7 @@ public class CompanyAggregateTests extends BaseUnitTests {
 void it_should_create_company_with_valid_values() {
 	CompanyId id = CompanyId.create(UUID.randomUUID().toString());
 	CompanyRemoteId remoteId = CompanyRemoteId.create(UUID.randomUUID().toString());
+	CompanyLocalId localId = CompanyLocalId.create(UUID.randomUUID().toString());
 	CompanyCode code = CompanyCode.create(UUID.randomUUID().toString());
 	CompanyName name = CompanyName.create(UUID.randomUUID().toString());
 	CompanyDescription description = CompanyDescription.create(UUID.randomUUID().toString());
@@ -34,10 +35,11 @@ void it_should_create_company_with_valid_values() {
 	CompanyIsDefault isDefault = CompanyIsDefault.create(true);
 	CompanyCreatedBy createdBy = CompanyCreatedBy.create(UUID.randomUUID().toString());
 	CompanyTenant tenant = CompanyTenant.create(UUID.randomUUID().toString());
-	CompanyAggregate aggregateCompanyAggregate = new CompanyAggregate(id, remoteId, code, name, description, phone, email, website, taxId, currency, addressLine1, addressLine2, city, region, country, postalCode, isActive, syncAt, isDefault, createdBy, tenant);
+	CompanyAggregate aggregateCompanyAggregate = new CompanyAggregate(id, remoteId, localId, code, name, description, phone, email, website, taxId, currency, addressLine1, addressLine2, city, region, country, postalCode, isActive, syncAt, isDefault, createdBy, tenant);
 	assertThat(aggregateCompanyAggregate.getId()).isNotNull();
 	assertThat(aggregateCompanyAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateCompanyAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateCompanyAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateCompanyAggregate.getCode()).isEqualTo(code);
 	assertThat(aggregateCompanyAggregate.getName()).isEqualTo(name);
 	assertThat(aggregateCompanyAggregate.getDescription()).isEqualTo(description);

@@ -26,21 +26,23 @@ public class NotificationDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "ff695ac8-84b8-4b9b-8b74-6ae1c4aab578")
+		@Schema(description = "", example = "de3359b6-c2df-443f-8adb-f80734249d85")
 		private String deviceToken;
-		@Schema(description = "", example = "44160eb2-3490-45d6-8a7e-4ae421748550")
+		@Schema(description = "", example = "6347f258-56fe-43a0-b604-19943d45d427")
 		private String title;
-		@Schema(description = "", example = "3697146f-0504-4b8b-8a25-2bbea47e9936")
+		@Schema(description = "", example = "f59a5dc3-d999-4276-8519-c875b40fb2fb")
 		private String message;
-		@Schema(description = "", example = "a516e886-6181-4630-aa0b-f54334167eda")
+		@Schema(description = "", example = "4dfaca7d-acd5-459c-be39-e06ef476e520")
 		private String status;
-		@Schema(description = "", example = "4278340d-272b-4eef-b2c9-182f62deed74")
+		@Schema(description = "", example = "33f4b126-ca97-4906-a6cd-7030d99b750c")
 		private String remoteId;
+		@Schema(description = "", example = "f52d2dde-e188-4a6c-bb37-b3c5e72183a1")
+		private String localId;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "f815336f-6302-4729-872c-acb760fa98f6")
+		@Schema(description = "", example = "1eb18641-d2f4-4290-a370-6f9702cff5d6")
 		private String reserved;
-		@Schema(description = "", example = "faf47495-4477-4946-ba94-af0b3f4890e2")
+		@Schema(description = "", example = "1668aebe-9016-4380-92d1-d25cb6a64eeb")
 		private String errorMessage;
 
 }

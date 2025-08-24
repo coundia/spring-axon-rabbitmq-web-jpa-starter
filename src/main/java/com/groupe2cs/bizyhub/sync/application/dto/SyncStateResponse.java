@@ -26,6 +26,8 @@ public class SyncStateResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String remoteId;
 	@Schema(description = "", example = "")
+	private String localId;
+	@Schema(description = "", example = "")
 	private java.time.Instant syncAt;
 	@Schema(description = "", example = "")
 	private java.time.Instant lastSyncAt;

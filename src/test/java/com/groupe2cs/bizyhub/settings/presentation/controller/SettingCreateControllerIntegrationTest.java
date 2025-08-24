@@ -40,9 +40,10 @@ void it_should_be_able_to_add_setting() {
 		requestDTO.setValue(UUID.randomUUID().toString());
 		requestDTO.setLocale(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setIsActive(true);
+		requestDTO.setIsActive(false);
 
  		String uri = "/v1/commands/setting";
 		ResponseEntity<SettingResponse> response = this.postForEntity(uri, requestDTO, SettingResponse.class);
@@ -53,6 +54,7 @@ void it_should_be_able_to_add_setting() {
 		assertThat(response.getBody().getValue()).isEqualTo(requestDTO.getValue());
 		assertThat(response.getBody().getLocale()).isEqualTo(requestDTO.getLocale());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());

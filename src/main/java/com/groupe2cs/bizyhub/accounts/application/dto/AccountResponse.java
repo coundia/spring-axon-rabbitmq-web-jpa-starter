@@ -50,6 +50,10 @@ public class AccountResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private Boolean isDefault;
 	@Schema(description = "", example = "")
+	private String remoteId;
+	@Schema(description = "", example = "")
+	private String localId;
+	@Schema(description = "", example = "")
 	private java.time.Instant syncAt;
 	@Schema(description = "", example = "")
 	private String createdBy;

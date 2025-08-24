@@ -40,6 +40,7 @@ public class CustomerDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private CustomerId id;
 

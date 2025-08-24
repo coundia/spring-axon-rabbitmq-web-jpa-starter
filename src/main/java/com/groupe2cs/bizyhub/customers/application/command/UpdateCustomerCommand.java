@@ -25,6 +25,7 @@ public class UpdateCustomerCommand implements Serializable {
 @TargetAggregateIdentifier
 	private CustomerId id;
  	private CustomerRemoteId remoteId;
+ 	private CustomerLocalId localId;
  	private CustomerCode code;
  	private CustomerFirstName firstName;
  	private CustomerLastName lastName;

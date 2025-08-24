@@ -8,6 +8,7 @@ import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemLabelN
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemQuantityNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemUnitNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemRemoteIdNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemLocalIdNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemSyncAtNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemUnitPriceNotValid;
 

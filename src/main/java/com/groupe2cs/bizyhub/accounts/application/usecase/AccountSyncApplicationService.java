@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
-import com.groupe2cs.bizyhub.accounts.application.command.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.accounts.application.dto.*;
-import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.accounts.application.command.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.accounts.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -38,6 +38,8 @@ public class AccountSyncApplicationService {
 								.description(AccountDescription.create(d.getDescription()))
 								.isActive(AccountIsActive.create(d.getIsActive()))
 								.isDefault(AccountIsDefault.create(d.getIsDefault()))
+								.remoteId(AccountRemoteId.create(d.getRemoteId()))
+								.localId(AccountLocalId.create(d.getLocalId()))
 								.syncAt(AccountSyncAt.create(d.getSyncAt()))
 						.build();
 
@@ -74,6 +76,8 @@ public class AccountSyncApplicationService {
 							.description(AccountDescription.create(d.getDescription()))
 							.isActive(AccountIsActive.create(d.getIsActive()))
 							.isDefault(AccountIsDefault.create(d.getIsDefault()))
+							.remoteId(AccountRemoteId.create(d.getRemoteId()))
+							.localId(AccountLocalId.create(d.getLocalId()))
 							.syncAt(AccountSyncAt.create(d.getSyncAt()))
 						.build();
 

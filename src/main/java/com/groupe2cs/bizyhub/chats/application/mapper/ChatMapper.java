@@ -17,6 +17,7 @@ return ChatResponse.builder()
 		.state(entity.getState())
 		.syncAt(entity.getSyncAt())
 		.remoteId(entity.getRemoteId())
+		.localId(entity.getLocalId())
 		.account(entity.getAccount() != null ? entity.getAccount().getId() : null)
 		.dateTransaction(entity.getDateTransaction())
     .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
@@ -33,6 +34,7 @@ return ChatResponse.builder()
 	.state(command.getState().value())
 	.syncAt(command.getSyncAt().value())
 	.remoteId(command.getRemoteId().value())
+	.localId(command.getLocalId().value())
 	.account(command.getAccount().value())
 	.dateTransaction(command.getDateTransaction().value())
 .build();
@@ -47,6 +49,7 @@ return ChatResponse.builder()
 	.state(command.getState().value())
 	.syncAt(command.getSyncAt().value())
 	.remoteId(command.getRemoteId().value())
+	.localId(command.getLocalId().value())
 	.account(command.getAccount().value())
 	.dateTransaction(command.getDateTransaction().value())
 .build();
@@ -62,6 +65,7 @@ return CreateChatCommand.builder()
 	.state(ChatState.create(request.getState()))
 	.syncAt(ChatSyncAt.create(request.getSyncAt()))
 	.remoteId(ChatRemoteId.create(request.getRemoteId()))
+	.localId(ChatLocalId.create(request.getLocalId()))
 	.account(ChatAccount.create(request.getAccount()))
 	.dateTransaction(ChatDateTransaction.create(request.getDateTransaction()))
 .build();
@@ -69,7 +73,7 @@ return CreateChatCommand.builder()
 
 
 	public static UpdateChatCommand toUpdateCommand(
-	ChatId id, ChatMessages messages, ChatResponsesJson responsesJson, ChatResponses responses, ChatState state, ChatSyncAt syncAt, ChatRemoteId remoteId, ChatAccount account, ChatDateTransaction dateTransaction
+	ChatId id, ChatMessages messages, ChatResponsesJson responsesJson, ChatResponses responses, ChatState state, ChatSyncAt syncAt, ChatRemoteId remoteId, ChatLocalId localId, ChatAccount account, ChatDateTransaction dateTransaction
 	) {
 	return UpdateChatCommand.builder()
 		.id(id)
@@ -79,6 +83,7 @@ return CreateChatCommand.builder()
 		.state(state)
 		.syncAt(syncAt)
 		.remoteId(remoteId)
+		.localId(localId)
 		.account(account)
 		.dateTransaction(dateTransaction)
 	.build();

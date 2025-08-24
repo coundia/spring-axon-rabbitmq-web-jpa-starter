@@ -19,6 +19,7 @@ public class TransactionEntryUpdatedEvent implements Serializable {
 
 	private TransactionEntryId id;
 	private TransactionEntryRemoteId remoteId;
+	private TransactionEntryLocalId localId;
 	private TransactionEntryCode code;
 	private TransactionEntryDescription description;
 	private TransactionEntryAmount amount;

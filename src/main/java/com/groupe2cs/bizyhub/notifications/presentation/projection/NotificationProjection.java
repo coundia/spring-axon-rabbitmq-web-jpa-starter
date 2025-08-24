@@ -36,6 +36,7 @@ Notification entity = Notification.builder()
  		.message(event.getMessage() == null ? null : event.getMessage().value())
  		.status(event.getStatus() == null ? null : event.getStatus().value())
  		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
  		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
  		.reserved(event.getReserved() == null ? null : event.getReserved().value())
  		.errorMessage(event.getErrorMessage() == null ? null : event.getErrorMessage().value())
@@ -86,6 +87,9 @@ Notification entity = repository.findById(event.getId().value())
     }
 	if(event.getRemoteId() != null) {
 		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getLocalId() != null) {
+		entity.setLocalId(event.getLocalId().value());
     }
 	if(event.getSyncAt() != null) {
 		entity.setSyncAt(event.getSyncAt().value());

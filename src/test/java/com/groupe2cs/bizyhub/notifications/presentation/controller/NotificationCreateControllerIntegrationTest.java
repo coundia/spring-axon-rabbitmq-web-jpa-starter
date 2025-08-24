@@ -41,6 +41,7 @@ void it_should_be_able_to_add_notification() {
 		requestDTO.setMessage(UUID.randomUUID().toString());
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setReserved(UUID.randomUUID().toString());
 		requestDTO.setErrorMessage(UUID.randomUUID().toString());
@@ -55,6 +56,7 @@ void it_should_be_able_to_add_notification() {
 		assertThat(response.getBody().getMessage()).isEqualTo(requestDTO.getMessage());
 		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getReserved()).isEqualTo(requestDTO.getReserved());
 		assertThat(response.getBody().getErrorMessage()).isEqualTo(requestDTO.getErrorMessage());

@@ -39,6 +39,13 @@ public class Product   extends AbstractAuditableEntity  {
 
 	private String remoteId ;
 
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String localId ;
+
 	@Column(nullable = false, 
 		unique = false
 
@@ -115,6 +122,7 @@ public class Product   extends AbstractAuditableEntity  {
 		return "Product{" +
 		"id='" + id + '\'' +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", code=" + code +
 			", name=" + name +
 			", description=" + description +

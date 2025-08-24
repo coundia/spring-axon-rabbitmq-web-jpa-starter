@@ -19,6 +19,7 @@ public class StockLevelCreatedEvent implements Serializable {
 
 	private StockLevelId id;
 	private StockLevelRemoteId remoteId;
+	private StockLevelLocalId localId;
 	private StockLevelStockOnHand stockOnHand;
 	private StockLevelStockAllocated stockAllocated;
 	private StockLevelProductVariant productVariant;

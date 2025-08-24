@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.stock.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
-import com.groupe2cs.bizyhub.stock.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.stock.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.stock.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,8 +43,9 @@ private StockMovementRepository Repository;
 		.deltas(List.of(
 		StockMovementDeltaDto.builder()
 .typeStockMovement(UUID.randomUUID().toString())
-.quantity(54)
+.quantity(14)
 .remoteId(UUID.randomUUID().toString())
+.localId(UUID.randomUUID().toString())
 .company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .productVariant(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value())
@@ -75,8 +76,9 @@ private StockMovementRepository Repository;
 			StockMovementDeltaDto.builder()
 			.id(existingId)
 .typeStockMovement(UUID.randomUUID().toString())
-.quantity(54)
+.quantity(14)
 .remoteId(UUID.randomUUID().toString())
+.localId(UUID.randomUUID().toString())
 .company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .productVariant(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value())

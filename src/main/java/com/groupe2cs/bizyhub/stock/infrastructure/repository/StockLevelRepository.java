@@ -36,6 +36,13 @@ public interface StockLevelRepository extends JpaRepository<StockLevel, String> 
 
         @Query("SELECT e FROM StockLevel e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<StockLevel> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<StockLevel> findByLocalIdAndCreatedById(String localId, String createdById);
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<StockLevel> findByLocalIdAndTenantName(String localId, String tenantName);
+
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<StockLevel> findByLocalIdAndTenantId(String localId, String tenantId);
         @Query("SELECT e FROM StockLevel e WHERE e.stockOnHand = :stockOnHand AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<StockLevel> findByStockOnHandAndCreatedById(Integer stockOnHand, String createdById);
         @Query("SELECT e FROM StockLevel e WHERE e.stockOnHand = :stockOnHand AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

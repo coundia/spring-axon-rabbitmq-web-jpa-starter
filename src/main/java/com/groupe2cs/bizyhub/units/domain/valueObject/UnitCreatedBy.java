@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.units.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.units.domain.exception.UnitIdNotValid;
 import com.groupe2cs.bizyhub.units.domain.exception.UnitRemoteIdNotValid;
+import com.groupe2cs.bizyhub.units.domain.exception.UnitLocalIdNotValid;
 import com.groupe2cs.bizyhub.units.domain.exception.UnitCodeNotValid;
 import com.groupe2cs.bizyhub.units.domain.exception.UnitNameNotValid;
 import com.groupe2cs.bizyhub.units.domain.exception.UnitSyncAtNotValid;

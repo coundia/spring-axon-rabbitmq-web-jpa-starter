@@ -37,6 +37,7 @@ Transaction entity = Transaction.builder()
  		.name(event.getName() == null ? null : event.getName().value())
  		.amount(event.getAmount() == null ? null : event.getAmount().value())
  		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
  		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
@@ -88,6 +89,9 @@ Transaction entity = repository.findById(event.getId().value())
     }
 	if(event.getRemoteId() != null) {
 		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getLocalId() != null) {
+		entity.setLocalId(event.getLocalId().value());
     }
 	if(event.getDetails() != null) {
 		entity.setDetails(event.getDetails().value());

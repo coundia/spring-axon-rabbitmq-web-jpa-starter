@@ -30,6 +30,7 @@ private TransactionItemLabel label;
 private TransactionItemQuantity quantity;
 private TransactionItemUnit unit;
 private TransactionItemRemoteId remoteId;
+private TransactionItemLocalId localId;
 private TransactionItemSyncAt syncAt;
 private TransactionItemUnitPrice unitPrice;
 private TransactionItemTotal total;
@@ -48,6 +49,7 @@ apply(new TransactionItemCreatedEvent(
 		command.getQuantity(),
 		command.getUnit(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getSyncAt(),
 		command.getUnitPrice(),
 		command.getTotal(),
@@ -74,6 +76,7 @@ apply(new TransactionItemUpdatedEvent(
 		command.getQuantity(),
 		command.getUnit(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getSyncAt(),
 		command.getUnitPrice(),
 		command.getTotal(),
@@ -92,6 +95,7 @@ public void on(TransactionItemCreatedEvent event) {
 	this.quantity = event.getQuantity();
 	this.unit = event.getUnit();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.syncAt = event.getSyncAt();
 	this.unitPrice = event.getUnitPrice();
 	this.total = event.getTotal();
@@ -114,6 +118,7 @@ this.id = event.getId();
 	this.quantity = event.getQuantity();
 	this.unit = event.getUnit();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.syncAt = event.getSyncAt();
 	this.unitPrice = event.getUnitPrice();
 	this.total = event.getTotal();

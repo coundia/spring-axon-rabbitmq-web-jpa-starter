@@ -26,6 +26,7 @@ public class CreateDebtCommand implements Serializable {
 	@Builder.Default
 	private DebtId id = DebtId.create(UUID.randomUUID().toString());
  	private DebtRemoteId remoteId;
+ 	private DebtLocalId localId;
  	private DebtCode code;
  	private DebtNotes notes;
  	private DebtBalance balance;
@@ -40,6 +41,7 @@ public class CreateDebtCommand implements Serializable {
 	public CreateDebtCommand(
  
    DebtRemoteId remoteId , 
+   DebtLocalId localId , 
    DebtCode code , 
    DebtNotes notes , 
    DebtBalance balance , 
@@ -55,6 +57,7 @@ public class CreateDebtCommand implements Serializable {
 			this.id = DebtId.create(UUID.randomUUID().toString());
  
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.code = code ; 
   this.notes = notes ; 
   this.balance = balance ; 

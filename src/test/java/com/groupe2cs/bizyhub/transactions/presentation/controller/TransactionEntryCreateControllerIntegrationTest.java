@@ -47,9 +47,10 @@ void it_should_be_able_to_add_transactionentry() {
 		TransactionEntryRequest requestDTO = new TransactionEntryRequest();
 
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setDescription(UUID.randomUUID().toString());
-		requestDTO.setAmount(4667.99);
+		requestDTO.setAmount(148.79);
 		requestDTO.setTypeEntry(UUID.randomUUID().toString());
 		requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setStatus(UUID.randomUUID().toString());
@@ -68,6 +69,7 @@ void it_should_be_able_to_add_transactionentry() {
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getCode()).isEqualTo(requestDTO.getCode());
 		assertThat(response.getBody().getDescription()).isEqualTo(requestDTO.getDescription());
 		assertThat(response.getBody().getAmount()).isEqualTo(requestDTO.getAmount());

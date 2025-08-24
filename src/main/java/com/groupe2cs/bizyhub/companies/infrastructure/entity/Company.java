@@ -39,6 +39,13 @@ public class Company   extends AbstractAuditableEntity  {
 
 	private String remoteId ;
 
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String localId ;
+
 	@Column(nullable = false, 
 		unique = false
 
@@ -172,6 +179,7 @@ public class Company   extends AbstractAuditableEntity  {
 		return "Company{" +
 		"id='" + id + '\'' +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", code=" + code +
 			", name=" + name +
 			", description=" + description +

@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.debts.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.debts.domain.exception.DebtIdNotValid;
 import com.groupe2cs.bizyhub.debts.domain.exception.DebtRemoteIdNotValid;
+import com.groupe2cs.bizyhub.debts.domain.exception.DebtLocalIdNotValid;
 import com.groupe2cs.bizyhub.debts.domain.exception.DebtCodeNotValid;
 
 import java.io.Serializable;

@@ -46,6 +46,8 @@ void it_should_be_able_to_add_accountuser() {
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setUsername(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
+		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setIsActive(true);
 
  		String uri = "/v1/commands/accountUser";
@@ -59,6 +61,8 @@ void it_should_be_able_to_add_accountuser() {
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getUsername()).isEqualTo(requestDTO.getUsername());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
+		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
 	}
 }

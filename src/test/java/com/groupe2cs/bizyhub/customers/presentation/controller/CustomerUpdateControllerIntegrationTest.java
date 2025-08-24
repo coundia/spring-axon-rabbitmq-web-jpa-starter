@@ -63,12 +63,13 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("firstName", UUID.randomUUID().toString());
         body.add("lastName", UUID.randomUUID().toString());
         body.add("fullName", UUID.randomUUID().toString());
-        body.add("balance", 1097.57);
-        body.add("balanceDebt", 3134.58);
+        body.add("balance", 6179.46);
+        body.add("balanceDebt", 7324.39);
         body.add("phone", UUID.randomUUID().toString());
         body.add("email", UUID.randomUUID().toString());
         body.add("notes", UUID.randomUUID().toString());
@@ -81,7 +82,7 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
         body.add("country", UUID.randomUUID().toString());
         body.add("postalCode", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("isActive", true);
+        body.add("isActive", false);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

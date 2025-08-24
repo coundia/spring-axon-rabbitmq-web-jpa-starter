@@ -30,6 +30,8 @@ private AccountUserUser user;
 private AccountUserSyncAt syncAt;
 private AccountUserUsername username;
 private AccountUserDetails details;
+private AccountUserRemoteId remoteId;
+private AccountUserLocalId localId;
 private AccountUserIsActive isActive;
 private AccountUserCreatedBy createdBy;
 private AccountUserTenant tenant;
@@ -45,6 +47,8 @@ apply(new AccountUserCreatedEvent(
 		command.getSyncAt(),
 		command.getUsername(),
 		command.getDetails(),
+		command.getRemoteId(),
+		command.getLocalId(),
 		command.getIsActive(),
 		command.getCreatedBy(),
 		command.getTenant()
@@ -68,6 +72,8 @@ apply(new AccountUserUpdatedEvent(
 		command.getSyncAt(),
 		command.getUsername(),
 		command.getDetails(),
+		command.getRemoteId(),
+		command.getLocalId(),
 		command.getIsActive(),
 		command.getCreatedBy(),
 		command.getTenant()
@@ -83,6 +89,8 @@ public void on(AccountUserCreatedEvent event) {
 	this.syncAt = event.getSyncAt();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
+	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.isActive = event.getIsActive();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
@@ -102,6 +110,8 @@ this.id = event.getId();
 	this.syncAt = event.getSyncAt();
 	this.username = event.getUsername();
 	this.details = event.getDetails();
+	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.isActive = event.getIsActive();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();

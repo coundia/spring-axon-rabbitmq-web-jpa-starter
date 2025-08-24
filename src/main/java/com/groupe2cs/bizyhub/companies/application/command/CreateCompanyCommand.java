@@ -26,6 +26,7 @@ public class CreateCompanyCommand implements Serializable {
 	@Builder.Default
 	private CompanyId id = CompanyId.create(UUID.randomUUID().toString());
  	private CompanyRemoteId remoteId;
+ 	private CompanyLocalId localId;
  	private CompanyCode code;
  	private CompanyName name;
  	private CompanyDescription description;
@@ -48,6 +49,7 @@ public class CreateCompanyCommand implements Serializable {
 	public CreateCompanyCommand(
  
    CompanyRemoteId remoteId , 
+   CompanyLocalId localId , 
    CompanyCode code , 
    CompanyName name , 
    CompanyDescription description , 
@@ -71,6 +73,7 @@ public class CreateCompanyCommand implements Serializable {
 			this.id = CompanyId.create(UUID.randomUUID().toString());
  
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.code = code ; 
   this.name = name ; 
   this.description = description ; 

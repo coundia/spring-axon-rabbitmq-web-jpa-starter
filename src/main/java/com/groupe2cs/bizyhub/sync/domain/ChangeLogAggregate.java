@@ -27,6 +27,7 @@ private ChangeLogId id;
 private ChangeLogEntityTable entityTable;
 private ChangeLogEntityId entityId;
 private ChangeLogRemoteId remoteId;
+private ChangeLogLocalId localId;
 private ChangeLogOperation operation;
 private ChangeLogPayload payload;
 private ChangeLogStatus status;
@@ -44,6 +45,7 @@ apply(new ChangeLogCreatedEvent(
 		command.getEntityTable(),
 		command.getEntityId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getOperation(),
 		command.getPayload(),
 		command.getStatus(),
@@ -69,6 +71,7 @@ apply(new ChangeLogUpdatedEvent(
 		command.getEntityTable(),
 		command.getEntityId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getOperation(),
 		command.getPayload(),
 		command.getStatus(),
@@ -86,6 +89,7 @@ public void on(ChangeLogCreatedEvent event) {
 	this.entityTable = event.getEntityTable();
 	this.entityId = event.getEntityId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.operation = event.getOperation();
 	this.payload = event.getPayload();
 	this.status = event.getStatus();
@@ -107,6 +111,7 @@ this.id = event.getId();
 	this.entityTable = event.getEntityTable();
 	this.entityId = event.getEntityId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.operation = event.getOperation();
 	this.payload = event.getPayload();
 	this.status = event.getStatus();

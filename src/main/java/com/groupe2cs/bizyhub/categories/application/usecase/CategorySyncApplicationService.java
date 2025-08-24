@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.categories.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.categories.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.categories.application.command.*;
+import com.groupe2cs.bizyhub.categories.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import com.groupe2cs.bizyhub.categories.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,7 @@ public class CategorySyncApplicationService {
 								.code(CategoryCode.create(d.getCode()))
 								.name(CategoryName.create(d.getName()))
 								.remoteId(CategoryRemoteId.create(d.getRemoteId()))
+								.localId(CategoryLocalId.create(d.getLocalId()))
 								.description(CategoryDescription.create(d.getDescription()))
 								.typeEntry(CategoryTypeEntry.create(d.getTypeEntry()))
 								.version(CategoryVersion.create(d.getVersion()))
@@ -55,6 +56,7 @@ public class CategorySyncApplicationService {
 							.code(CategoryCode.create(d.getCode()))
 							.name(CategoryName.create(d.getName()))
 							.remoteId(CategoryRemoteId.create(d.getRemoteId()))
+							.localId(CategoryLocalId.create(d.getLocalId()))
 							.description(CategoryDescription.create(d.getDescription()))
 							.typeEntry(CategoryTypeEntry.create(d.getTypeEntry()))
 							.version(CategoryVersion.create(d.getVersion()))

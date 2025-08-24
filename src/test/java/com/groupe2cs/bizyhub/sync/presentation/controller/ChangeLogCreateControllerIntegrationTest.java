@@ -39,11 +39,12 @@ void it_should_be_able_to_add_changelog() {
 		requestDTO.setEntityTable(UUID.randomUUID().toString());
 		requestDTO.setEntityId(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setOperation(UUID.randomUUID().toString());
 		requestDTO.setPayload(UUID.randomUUID().toString());
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setAttempts(50);
+		requestDTO.setAttempts(90);
 		requestDTO.setError(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/changeLog";
@@ -54,6 +55,7 @@ void it_should_be_able_to_add_changelog() {
 		assertThat(response.getBody().getEntityTable()).isEqualTo(requestDTO.getEntityTable());
 		assertThat(response.getBody().getEntityId()).isEqualTo(requestDTO.getEntityId());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getOperation()).isEqualTo(requestDTO.getOperation());
 		assertThat(response.getBody().getPayload()).isEqualTo(requestDTO.getPayload());
 		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());

@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.notifications.domain;
 
-import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import com.groupe2cs.bizyhub.notifications.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
 import java.util.UUID;
+import com.groupe2cs.bizyhub.notifications.domain.exception.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class NotificationAggregateTests extends BaseUnitTests {
@@ -19,12 +19,13 @@ void it_should_create_notification_with_valid_values() {
 	NotificationMessage message = NotificationMessage.create(UUID.randomUUID().toString());
 	NotificationStatus status = NotificationStatus.create(UUID.randomUUID().toString());
 	NotificationRemoteId remoteId = NotificationRemoteId.create(UUID.randomUUID().toString());
+	NotificationLocalId localId = NotificationLocalId.create(UUID.randomUUID().toString());
 	NotificationSyncAt syncAt = NotificationSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	NotificationReserved reserved = NotificationReserved.create(UUID.randomUUID().toString());
 	NotificationErrorMessage errorMessage = NotificationErrorMessage.create(UUID.randomUUID().toString());
 	NotificationCreatedBy createdBy = NotificationCreatedBy.create(UUID.randomUUID().toString());
 	NotificationTenant tenant = NotificationTenant.create(UUID.randomUUID().toString());
-	NotificationAggregate aggregateNotificationAggregate = new NotificationAggregate(id, deviceToken, title, message, status, remoteId, syncAt, reserved, errorMessage, createdBy, tenant);
+	NotificationAggregate aggregateNotificationAggregate = new NotificationAggregate(id, deviceToken, title, message, status, remoteId, localId, syncAt, reserved, errorMessage, createdBy, tenant);
 	assertThat(aggregateNotificationAggregate.getId()).isNotNull();
 	assertThat(aggregateNotificationAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateNotificationAggregate.getDeviceToken()).isEqualTo(deviceToken);
@@ -32,6 +33,7 @@ void it_should_create_notification_with_valid_values() {
 	assertThat(aggregateNotificationAggregate.getMessage()).isEqualTo(message);
 	assertThat(aggregateNotificationAggregate.getStatus()).isEqualTo(status);
 	assertThat(aggregateNotificationAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateNotificationAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateNotificationAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateNotificationAggregate.getReserved()).isEqualTo(reserved);
 	assertThat(aggregateNotificationAggregate.getErrorMessage()).isEqualTo(errorMessage);

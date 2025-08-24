@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.products.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductIdNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductRemoteIdNotValid;
+import com.groupe2cs.bizyhub.products.domain.exception.ProductLocalIdNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductCodeNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductNameNotValid;
 

@@ -31,6 +31,7 @@ private ChatResponses responses;
 private ChatState state;
 private ChatSyncAt syncAt;
 private ChatRemoteId remoteId;
+private ChatLocalId localId;
 private ChatAccount account;
 private ChatFiles files;
 private ChatDateTransaction dateTransaction;
@@ -48,6 +49,7 @@ apply(new ChatCreatedEvent(
 		command.getState(),
 		command.getSyncAt(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getAccount(),
 		command.getFiles(),
 		command.getDateTransaction(),
@@ -73,6 +75,7 @@ apply(new ChatUpdatedEvent(
 		command.getState(),
 		command.getSyncAt(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getAccount(),
 		command.getFiles(),
 		command.getDateTransaction(),
@@ -90,6 +93,7 @@ public void on(ChatCreatedEvent event) {
 	this.state = event.getState();
 	this.syncAt = event.getSyncAt();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.account = event.getAccount();
 	this.files = event.getFiles();
 	this.dateTransaction = event.getDateTransaction();
@@ -111,6 +115,7 @@ this.id = event.getId();
 	this.state = event.getState();
 	this.syncAt = event.getSyncAt();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.account = event.getAccount();
 	this.files = event.getFiles();
 	this.dateTransaction = event.getDateTransaction();

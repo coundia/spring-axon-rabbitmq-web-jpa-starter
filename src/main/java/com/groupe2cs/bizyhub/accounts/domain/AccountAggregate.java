@@ -38,6 +38,8 @@ private AccountBalanceLimit balanceLimit;
 private AccountDescription description;
 private AccountIsActive isActive;
 private AccountIsDefault isDefault;
+private AccountRemoteId remoteId;
+private AccountLocalId localId;
 private AccountSyncAt syncAt;
 private AccountCreatedBy createdBy;
 private AccountTenant tenant;
@@ -61,6 +63,8 @@ apply(new AccountCreatedEvent(
 		command.getDescription(),
 		command.getIsActive(),
 		command.getIsDefault(),
+		command.getRemoteId(),
+		command.getLocalId(),
 		command.getSyncAt(),
 		command.getCreatedBy(),
 		command.getTenant()
@@ -92,6 +96,8 @@ apply(new AccountUpdatedEvent(
 		command.getDescription(),
 		command.getIsActive(),
 		command.getIsDefault(),
+		command.getRemoteId(),
+		command.getLocalId(),
 		command.getSyncAt(),
 		command.getCreatedBy(),
 		command.getTenant()
@@ -115,6 +121,8 @@ public void on(AccountCreatedEvent event) {
 	this.description = event.getDescription();
 	this.isActive = event.getIsActive();
 	this.isDefault = event.getIsDefault();
+	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.syncAt = event.getSyncAt();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
@@ -142,6 +150,8 @@ this.id = event.getId();
 	this.description = event.getDescription();
 	this.isActive = event.getIsActive();
 	this.isDefault = event.getIsDefault();
+	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.syncAt = event.getSyncAt();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();

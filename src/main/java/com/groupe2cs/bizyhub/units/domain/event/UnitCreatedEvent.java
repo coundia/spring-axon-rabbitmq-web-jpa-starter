@@ -19,6 +19,7 @@ public class UnitCreatedEvent implements Serializable {
 
 	private UnitId id;
 	private UnitRemoteId remoteId;
+	private UnitLocalId localId;
 	private UnitCode code;
 	private UnitName name;
 	private UnitSyncAt syncAt;

@@ -19,27 +19,29 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "ProductRequest", description = "Request payload for Product operations")
 public class ProductRequest implements Serializable {
 
-	@Schema(description = "", example = "3a1e950a-80c3-4968-b6c9-e89032b17148")
+	@Schema(description = "", example = "06847d7d-824e-4f82-8783-97b27874a7a7")
 	private String remoteId;
-	@Schema(description = "", example = "cfa4fc04-b27a-40a9-b92b-f447bee0f4fd")
+	@Schema(description = "", example = "59dc38e6-fdd2-468b-bb88-f812221d4dea")
+	private String localId;
+	@Schema(description = "", example = "55d4bd78-cfc5-40b8-a1b6-5887d508c292")
 	private String code;
-	@Schema(description = "", example = "628af038-20fb-4321-9d97-9b1617bc2913")
+	@Schema(description = "", example = "a71b7530-b6cc-40f7-8ca1-91ef35c980aa")
 	private String name;
-	@Schema(description = "", example = "5a7cb88b-7c91-47ce-88ca-dfc8dffb2299")
+	@Schema(description = "", example = "49019853-ed29-46f3-a1f1-2dc5c57802d0")
 	private String description;
-	@Schema(description = "", example = "900876e7-6cb3-42df-a214-801aee67706f")
+	@Schema(description = "", example = "e3975720-1658-46e4-8a6d-eeb34d8f46bb")
 	private String barcode;
-	@Schema(description = "", example = "8b9f2db5-f0b4-45a5-ae2d-58014bea9ce6")
+	@Schema(description = "", example = "6ae2c706-75e7-4e1b-9ffd-6daed778ff9d")
 	private String unit;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "5fbd750b-96bb-4f3c-8729-120a5b85e37c")
+	@Schema(description = "", example = "9308a965-baf2-4289-9cff-6ba0bde51a9f")
 	private String category;
-	@Schema(description = "", example = "7069.72")
+	@Schema(description = "", example = "4277.28")
 	private Double defaultPrice;
-	@Schema(description = "", example = "adeb29d5-17e9-4f96-93a0-56425e0e0f40")
+	@Schema(description = "", example = "79656b20-306b-4d19-a694-53190e643b16")
 	private String statuses;
-	@Schema(description = "", example = "2106.92")
+	@Schema(description = "", example = "6336.82")
 	private Double purchasePrice;
 
 }

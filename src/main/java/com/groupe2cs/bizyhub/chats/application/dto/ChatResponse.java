@@ -34,6 +34,8 @@ public class ChatResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String remoteId;
 	@Schema(description = "", example = "")
+	private String localId;
+	@Schema(description = "", example = "")
 	private String account;
 	@Schema(description = "", example = "")
 	private String files;

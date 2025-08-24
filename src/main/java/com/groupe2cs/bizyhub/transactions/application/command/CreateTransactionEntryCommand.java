@@ -26,6 +26,7 @@ public class CreateTransactionEntryCommand implements Serializable {
 	@Builder.Default
 	private TransactionEntryId id = TransactionEntryId.create(UUID.randomUUID().toString());
  	private TransactionEntryRemoteId remoteId;
+ 	private TransactionEntryLocalId localId;
  	private TransactionEntryCode code;
  	private TransactionEntryDescription description;
  	private TransactionEntryAmount amount;
@@ -45,6 +46,7 @@ public class CreateTransactionEntryCommand implements Serializable {
 	public CreateTransactionEntryCommand(
  
    TransactionEntryRemoteId remoteId , 
+   TransactionEntryLocalId localId , 
    TransactionEntryCode code , 
    TransactionEntryDescription description , 
    TransactionEntryAmount amount , 
@@ -65,6 +67,7 @@ public class CreateTransactionEntryCommand implements Serializable {
 			this.id = TransactionEntryId.create(UUID.randomUUID().toString());
  
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.code = code ; 
   this.description = description ; 
   this.amount = amount ; 

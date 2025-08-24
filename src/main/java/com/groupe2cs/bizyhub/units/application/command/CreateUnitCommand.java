@@ -26,6 +26,7 @@ public class CreateUnitCommand implements Serializable {
 	@Builder.Default
 	private UnitId id = UnitId.create(UUID.randomUUID().toString());
  	private UnitRemoteId remoteId;
+ 	private UnitLocalId localId;
  	private UnitCode code;
  	private UnitName name;
  	private UnitSyncAt syncAt;
@@ -35,6 +36,7 @@ public class CreateUnitCommand implements Serializable {
 	public CreateUnitCommand(
  
    UnitRemoteId remoteId , 
+   UnitLocalId localId , 
    UnitCode code , 
    UnitName name , 
    UnitSyncAt syncAt , 
@@ -45,6 +47,7 @@ public class CreateUnitCommand implements Serializable {
 			this.id = UnitId.create(UUID.randomUUID().toString());
  
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.code = code ; 
   this.name = name ; 
   this.syncAt = syncAt ; 

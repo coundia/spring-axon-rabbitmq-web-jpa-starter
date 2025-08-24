@@ -26,6 +26,7 @@ public class CreateStockLevelCommand implements Serializable {
 	@Builder.Default
 	private StockLevelId id = StockLevelId.create(UUID.randomUUID().toString());
  	private StockLevelRemoteId remoteId;
+ 	private StockLevelLocalId localId;
  	private StockLevelStockOnHand stockOnHand;
  	private StockLevelStockAllocated stockAllocated;
  	private StockLevelProductVariant productVariant;
@@ -36,6 +37,7 @@ public class CreateStockLevelCommand implements Serializable {
 	public CreateStockLevelCommand(
  
    StockLevelRemoteId remoteId , 
+   StockLevelLocalId localId , 
    StockLevelStockOnHand stockOnHand , 
    StockLevelStockAllocated stockAllocated , 
    StockLevelProductVariant productVariant , 
@@ -47,6 +49,7 @@ public class CreateStockLevelCommand implements Serializable {
 			this.id = StockLevelId.create(UUID.randomUUID().toString());
  
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.stockOnHand = stockOnHand ; 
   this.stockAllocated = stockAllocated ; 
   this.productVariant = productVariant ; 

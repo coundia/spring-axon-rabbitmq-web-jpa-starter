@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTransactionCommand command = new CreateTransactionCommand(
- TransactionId.create(UUID.randomUUID().toString()) ,  TransactionName.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(356.9) ,  TransactionRemoteId.create(UUID.randomUUID().toString()) ,  TransactionDetails.create(UUID.randomUUID().toString()) ,  TransactionIsActive.create(false) ,  TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionAccount.create(UUID.randomUUID().toString()) ,  TransactionCategory.create(UUID.randomUUID().toString()) ,  TransactionTypeEntry.create(UUID.randomUUID().toString()) ,  TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()) ,  TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
+ TransactionId.create(UUID.randomUUID().toString()) ,  TransactionName.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(2570.79) ,  TransactionRemoteId.create(UUID.randomUUID().toString()) ,  TransactionLocalId.create(UUID.randomUUID().toString()) ,  TransactionDetails.create(UUID.randomUUID().toString()) ,  TransactionIsActive.create(false) ,  TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionAccount.create(UUID.randomUUID().toString()) ,  TransactionCategory.create(UUID.randomUUID().toString()) ,  TransactionTypeEntry.create(UUID.randomUUID().toString()) ,  TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()) ,  TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -42,6 +42,8 @@ assertThat(sentCommand.getAmount().value()).isEqualTo(
 command.getAmount().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getDetails().value()).isEqualTo(
 command.getDetails().value());
 assertThat(sentCommand.getIsActive().value()).isEqualTo(

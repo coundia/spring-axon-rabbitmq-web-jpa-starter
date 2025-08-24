@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.transactions.domain.exception.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class TransactionEntryAggregateTests extends BaseUnitTests {
@@ -15,9 +15,10 @@ public class TransactionEntryAggregateTests extends BaseUnitTests {
 void it_should_create_transactionEntry_with_valid_values() {
 	TransactionEntryId id = TransactionEntryId.create(UUID.randomUUID().toString());
 	TransactionEntryRemoteId remoteId = TransactionEntryRemoteId.create(UUID.randomUUID().toString());
+	TransactionEntryLocalId localId = TransactionEntryLocalId.create(UUID.randomUUID().toString());
 	TransactionEntryCode code = TransactionEntryCode.create(UUID.randomUUID().toString());
 	TransactionEntryDescription description = TransactionEntryDescription.create(UUID.randomUUID().toString());
-	TransactionEntryAmount amount = TransactionEntryAmount.create(5410.48);
+	TransactionEntryAmount amount = TransactionEntryAmount.create(9756.13);
 	TransactionEntryTypeEntry typeEntry = TransactionEntryTypeEntry.create(UUID.randomUUID().toString());
 	TransactionEntryDateTransaction dateTransaction = TransactionEntryDateTransaction.create(java.time.Instant.now().plusSeconds(3600));
 	TransactionEntryStatus status = TransactionEntryStatus.create(UUID.randomUUID().toString());
@@ -31,10 +32,11 @@ void it_should_create_transactionEntry_with_valid_values() {
 	TransactionEntryDebt debt = TransactionEntryDebt.create(UUID.randomUUID().toString());
 	TransactionEntryCreatedBy createdBy = TransactionEntryCreatedBy.create(UUID.randomUUID().toString());
 	TransactionEntryTenant tenant = TransactionEntryTenant.create(UUID.randomUUID().toString());
-	TransactionEntryAggregate aggregateTransactionEntryAggregate = new TransactionEntryAggregate(id, remoteId, code, description, amount, typeEntry, dateTransaction, status, entityName, entityId, account, syncAt, category, company, customer, debt, createdBy, tenant);
+	TransactionEntryAggregate aggregateTransactionEntryAggregate = new TransactionEntryAggregate(id, remoteId, localId, code, description, amount, typeEntry, dateTransaction, status, entityName, entityId, account, syncAt, category, company, customer, debt, createdBy, tenant);
 	assertThat(aggregateTransactionEntryAggregate.getId()).isNotNull();
 	assertThat(aggregateTransactionEntryAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateTransactionEntryAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateTransactionEntryAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateTransactionEntryAggregate.getCode()).isEqualTo(code);
 	assertThat(aggregateTransactionEntryAggregate.getDescription()).isEqualTo(description);
 	assertThat(aggregateTransactionEntryAggregate.getAmount()).isEqualTo(amount);

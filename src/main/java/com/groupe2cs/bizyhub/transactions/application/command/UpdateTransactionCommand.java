@@ -27,6 +27,7 @@ public class UpdateTransactionCommand implements Serializable {
  	private TransactionName name;
  	private TransactionAmount amount;
  	private TransactionRemoteId remoteId;
+ 	private TransactionLocalId localId;
  	private TransactionDetails details;
  	private TransactionIsActive isActive;
  	private TransactionSyncAt syncAt;

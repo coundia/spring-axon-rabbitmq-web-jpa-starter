@@ -111,6 +111,7 @@ public interface TransactionUserRepository extends JpaRepository<TransactionUser
        List<TransactionUser> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
+	List<TransactionUser> findByLocalIdAndTenantId(String localId, String tenantId);
 
-
+    List<TransactionUser> findByLocalIdAndCreatedById(String localId, String createdById);
 }

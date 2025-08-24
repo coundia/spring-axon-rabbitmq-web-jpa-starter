@@ -63,15 +63,16 @@ public class DebtUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("notes", UUID.randomUUID().toString());
-        body.add("balance", 5383.46);
-        body.add("balanceDebt", 6097.35);
+        body.add("balance", 2883.46);
+        body.add("balanceDebt", 4504.29);
         body.add("dueDate", java.time.Instant.now().plusSeconds(3600));
         body.add("statuses", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("customer", updated.getCustomer().value());
-        body.add("isActive", true);
+        body.add("isActive", false);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

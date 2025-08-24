@@ -50,6 +50,13 @@ public class SyncState   extends AbstractAuditableEntity  {
 		unique = false
 
 	)
+
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
 	@Builder.Default
 	private java.time.Instant syncAt  = java.time.Instant.now() ;
 
@@ -82,6 +89,7 @@ public class SyncState   extends AbstractAuditableEntity  {
 		"id='" + id + '\'' +
 			", entityTable=" + entityTable +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", syncAt=" + syncAt +
 			", lastSyncAt=" + lastSyncAt +
 			", lastCursor=" + lastCursor +

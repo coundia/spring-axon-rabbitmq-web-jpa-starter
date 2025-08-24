@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.sync.application.usecase;
 
-import com.groupe2cs.bizyhub.sync.application.mapper.*;
-import com.groupe2cs.bizyhub.sync.application.query.*;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sync.application.dto.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.sync.application.dto.*;
+import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sync.application.query.*;
+import com.groupe2cs.bizyhub.sync.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -64,6 +64,16 @@ public List<ChangeLogResponse> findByChangeLogRemoteId(
 	) {
 
 	FindByChangeLogRemoteIdQuery query = new FindByChangeLogRemoteIdQuery(value,metaRequest);
+	CompletableFuture<List<ChangeLogResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ChangeLogResponse.class));
+	return future.join();
+}
+public List<ChangeLogResponse> findByChangeLogLocalId(
+	ChangeLogLocalId value,
+	MetaRequest metaRequest
+	) {
+
+	FindByChangeLogLocalIdQuery query = new FindByChangeLogLocalIdQuery(value,metaRequest);
 	CompletableFuture<List<ChangeLogResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ChangeLogResponse.class));
 	return future.join();

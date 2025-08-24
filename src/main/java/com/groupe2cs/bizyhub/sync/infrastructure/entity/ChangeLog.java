@@ -58,6 +58,13 @@ public class ChangeLog   extends AbstractAuditableEntity  {
 
 	)
 
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String operation ;
 
 	@Column(nullable = true, 		columnDefinition = "Text",
@@ -111,6 +118,7 @@ public class ChangeLog   extends AbstractAuditableEntity  {
 			", entityTable=" + entityTable +
 			", entityId=" + entityId +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", operation=" + operation +
 			", payload=" + payload +
 			", status=" + status +

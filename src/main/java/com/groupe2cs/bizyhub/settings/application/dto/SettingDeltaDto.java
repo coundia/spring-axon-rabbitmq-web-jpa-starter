@@ -26,15 +26,17 @@ public class SettingDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "4f521764-f330-4cde-91ea-e5ca0084832b")
+		@Schema(description = "", example = "e44d1802-4c7f-4d49-8c58-588cc7975948")
 		private String name;
-		@Schema(description = "", example = "231c5215-c83c-4ba7-91d8-d3f44c468871")
+		@Schema(description = "", example = "e2c68253-0f01-42a2-8da4-aa88327ecaae")
 		private String value;
-		@Schema(description = "", example = "716f82e9-4346-47cf-9b73-01cfa060940a")
+		@Schema(description = "", example = "5d2efc03-0228-45c1-83aa-11915bda8289")
 		private String locale;
-		@Schema(description = "", example = "965b7007-048f-45b7-a911-a5c59290c3bf")
+		@Schema(description = "", example = "c4a63d82-9326-41d1-93ae-a55ebe57b240")
 		private String remoteId;
-		@Schema(description = "", example = "6e442edb-7b53-4610-b533-1e5eee90da3e")
+		@Schema(description = "", example = "aa9bdb66-d3a3-4fb7-98f7-f7699170ef66")
+		private String localId;
+		@Schema(description = "", example = "56ea635d-f47f-41bb-a3d0-3bfda81fe76f")
 		private String details;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;

@@ -24,6 +24,8 @@ public class CustomerResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String remoteId;
 	@Schema(description = "", example = "")
+	private String localId;
+	@Schema(description = "", example = "")
 	private String code;
 	@Schema(description = "", example = "")
 	private String firstName;

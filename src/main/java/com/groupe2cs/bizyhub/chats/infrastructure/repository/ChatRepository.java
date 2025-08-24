@@ -81,6 +81,13 @@ public interface ChatRepository extends JpaRepository<Chat, String> {
 
         @Query("SELECT e FROM Chat e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Chat> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("SELECT e FROM Chat e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Chat> findByLocalIdAndCreatedById(String localId, String createdById);
+        @Query("SELECT e FROM Chat e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Chat> findByLocalIdAndTenantName(String localId, String tenantName);
+
+        @Query("SELECT e FROM Chat e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Chat> findByLocalIdAndTenantId(String localId, String tenantId);
         @Query("SELECT e FROM Chat e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Chat> findByAccountIdAndCreatedById(String account, String createdById);
         @Query("SELECT e FROM Chat e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

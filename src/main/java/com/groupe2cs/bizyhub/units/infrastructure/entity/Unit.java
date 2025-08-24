@@ -44,6 +44,13 @@ public class Unit   extends AbstractAuditableEntity  {
 
 	)
 
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String code ;
 
 	@Column(nullable = true, 
@@ -81,6 +88,7 @@ public class Unit   extends AbstractAuditableEntity  {
 		return "Unit{" +
 		"id='" + id + '\'' +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", code=" + code +
 			", name=" + name +
 			", syncAt=" + syncAt +

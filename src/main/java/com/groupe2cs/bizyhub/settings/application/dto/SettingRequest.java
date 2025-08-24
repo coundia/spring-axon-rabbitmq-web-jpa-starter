@@ -19,15 +19,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "SettingRequest", description = "Request payload for Setting operations")
 public class SettingRequest implements Serializable {
 
-	@Schema(description = "", example = "1ae11211-da7b-4221-bf69-9621e9a6e499")
+	@Schema(description = "", example = "57a1e927-36d7-44c6-8173-528fb0c50f7b")
 	private String name;
-	@Schema(description = "", example = "b38adc0a-8924-44c8-a429-1455ed91ded4")
+	@Schema(description = "", example = "ac7e20a1-73e0-46c7-a6b5-0fb4182dfbc8")
 	private String value;
-	@Schema(description = "", example = "c861948f-88fb-4b8c-bf58-45d620d10144")
+	@Schema(description = "", example = "c52a995c-e4d6-4120-b7a1-630924af3a5f")
 	private String locale;
-	@Schema(description = "", example = "e9aab4c6-9a90-44b9-b55e-0217c0e724b0")
+	@Schema(description = "", example = "a538f1e1-55f1-4cb1-9b9a-059efe4d2cfe")
 	private String remoteId;
-	@Schema(description = "", example = "50d3d8af-4c3b-4c92-947c-176c1a5fc370")
+	@Schema(description = "", example = "754d003b-0622-4bf6-bc1b-9c67b9788b65")
+	private String localId;
+	@Schema(description = "", example = "545ed192-d3d4-4ff3-9164-8fb96916b857")
 	private String details;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;

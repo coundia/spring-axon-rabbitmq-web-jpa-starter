@@ -39,10 +39,11 @@ void it_should_be_able_to_add_debt() {
 		DebtRequest requestDTO = new DebtRequest();
 
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setNotes(UUID.randomUUID().toString());
-		requestDTO.setBalance(7178.21);
-		requestDTO.setBalanceDebt(7498.91);
+		requestDTO.setBalance(8101.53);
+		requestDTO.setBalanceDebt(1370.78);
 		requestDTO.setDueDate(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setStatuses(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
@@ -55,6 +56,7 @@ void it_should_be_able_to_add_debt() {
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getCode()).isEqualTo(requestDTO.getCode());
 		assertThat(response.getBody().getNotes()).isEqualTo(requestDTO.getNotes());
 		assertThat(response.getBody().getBalance()).isEqualTo(requestDTO.getBalance());

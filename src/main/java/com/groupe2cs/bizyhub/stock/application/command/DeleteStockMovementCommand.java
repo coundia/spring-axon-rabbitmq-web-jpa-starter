@@ -34,6 +34,7 @@ public class DeleteStockMovementCommand implements Serializable {
  	
  	
  	
+ 	
 
 
 }

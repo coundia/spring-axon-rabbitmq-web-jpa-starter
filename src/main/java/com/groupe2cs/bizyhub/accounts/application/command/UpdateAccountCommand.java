@@ -38,6 +38,8 @@ public class UpdateAccountCommand implements Serializable {
  	private AccountDescription description;
  	private AccountIsActive isActive;
  	private AccountIsDefault isDefault;
+ 	private AccountRemoteId remoteId;
+ 	private AccountLocalId localId;
  	private AccountSyncAt syncAt;
  	private AccountCreatedBy createdBy;
  	private AccountTenant tenant;

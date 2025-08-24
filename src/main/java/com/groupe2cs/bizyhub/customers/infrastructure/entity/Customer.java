@@ -44,6 +44,13 @@ public class Customer   extends AbstractAuditableEntity  {
 
 	)
 
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String code ;
 
 	@Column(nullable = true, 
@@ -182,6 +189,7 @@ public class Customer   extends AbstractAuditableEntity  {
 		return "Customer{" +
 		"id='" + id + '\'' +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", code=" + code +
 			", firstName=" + firstName +
 			", lastName=" + lastName +

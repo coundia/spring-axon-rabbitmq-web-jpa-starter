@@ -32,6 +32,7 @@ try {
 Debt entity = Debt.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
  		.code(event.getCode() == null ? null : event.getCode().value())
  		.notes(event.getNotes() == null ? null : event.getNotes().value())
  		.balance(event.getBalance() == null ? null : event.getBalance().value())
@@ -76,6 +77,9 @@ Debt entity = repository.findById(event.getId().value())
     }
 	if(event.getRemoteId() != null) {
 		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getLocalId() != null) {
+		entity.setLocalId(event.getLocalId().value());
     }
 	if(event.getCode() != null) {
 		entity.setCode(event.getCode().value());

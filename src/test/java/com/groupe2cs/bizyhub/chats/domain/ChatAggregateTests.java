@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.chats.domain;
 
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.chats.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.chats.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class ChatAggregateTests extends BaseUnitTests {
@@ -20,12 +20,13 @@ void it_should_create_chat_with_valid_values() {
 	ChatState state = ChatState.create(UUID.randomUUID().toString());
 	ChatSyncAt syncAt = ChatSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	ChatRemoteId remoteId = ChatRemoteId.create(UUID.randomUUID().toString());
+	ChatLocalId localId = ChatLocalId.create(UUID.randomUUID().toString());
 	ChatAccount account = ChatAccount.create(UUID.randomUUID().toString());
 	ChatFiles files = ChatFiles.create(UUID.randomUUID().toString());
 	ChatDateTransaction dateTransaction = ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600));
 	ChatCreatedBy createdBy = ChatCreatedBy.create(UUID.randomUUID().toString());
 	ChatTenant tenant = ChatTenant.create(UUID.randomUUID().toString());
-	ChatAggregate aggregateChatAggregate = new ChatAggregate(id, messages, responsesJson, responses, state, syncAt, remoteId, account, files, dateTransaction, createdBy, tenant);
+	ChatAggregate aggregateChatAggregate = new ChatAggregate(id, messages, responsesJson, responses, state, syncAt, remoteId, localId, account, files, dateTransaction, createdBy, tenant);
 	assertThat(aggregateChatAggregate.getId()).isNotNull();
 	assertThat(aggregateChatAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateChatAggregate.getMessages()).isEqualTo(messages);
@@ -34,6 +35,7 @@ void it_should_create_chat_with_valid_values() {
 	assertThat(aggregateChatAggregate.getState()).isEqualTo(state);
 	assertThat(aggregateChatAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateChatAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateChatAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateChatAggregate.getAccount()).isEqualTo(account);
 	assertThat(aggregateChatAggregate.getFiles()).isEqualTo(files);
 	assertThat(aggregateChatAggregate.getDateTransaction()).isEqualTo(dateTransaction);

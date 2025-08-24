@@ -28,6 +28,7 @@ public class CreateStockMovementCommand implements Serializable {
  	private StockMovementTypeStockMovement typeStockMovement;
  	private StockMovementQuantity quantity;
  	private StockMovementRemoteId remoteId;
+ 	private StockMovementLocalId localId;
  	private StockMovementCompany company;
  	private StockMovementSyncAt syncAt;
  	private StockMovementProductVariant productVariant;
@@ -40,6 +41,7 @@ public class CreateStockMovementCommand implements Serializable {
    StockMovementTypeStockMovement typeStockMovement , 
    StockMovementQuantity quantity , 
    StockMovementRemoteId remoteId , 
+   StockMovementLocalId localId , 
    StockMovementCompany company , 
    StockMovementSyncAt syncAt , 
    StockMovementProductVariant productVariant , 
@@ -53,6 +55,7 @@ public class CreateStockMovementCommand implements Serializable {
   this.typeStockMovement = typeStockMovement ; 
   this.quantity = quantity ; 
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.company = company ; 
   this.syncAt = syncAt ; 
   this.productVariant = productVariant ; 

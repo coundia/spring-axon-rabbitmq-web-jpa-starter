@@ -28,6 +28,7 @@ public class CreateChangeLogCommand implements Serializable {
  	private ChangeLogEntityTable entityTable;
  	private ChangeLogEntityId entityId;
  	private ChangeLogRemoteId remoteId;
+ 	private ChangeLogLocalId localId;
  	private ChangeLogOperation operation;
  	private ChangeLogPayload payload;
  	private ChangeLogStatus status;
@@ -41,6 +42,7 @@ public class CreateChangeLogCommand implements Serializable {
    ChangeLogEntityTable entityTable , 
    ChangeLogEntityId entityId , 
    ChangeLogRemoteId remoteId , 
+   ChangeLogLocalId localId , 
    ChangeLogOperation operation , 
    ChangeLogPayload payload , 
    ChangeLogStatus status , 
@@ -55,6 +57,7 @@ public class CreateChangeLogCommand implements Serializable {
   this.entityTable = entityTable ; 
   this.entityId = entityId ; 
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.operation = operation ; 
   this.payload = payload ; 
   this.status = status ; 

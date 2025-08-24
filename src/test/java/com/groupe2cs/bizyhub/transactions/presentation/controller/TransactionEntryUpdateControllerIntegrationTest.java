@@ -79,9 +79,10 @@ public class TransactionEntryUpdateControllerIntegrationTest extends BaseIntegra
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("description", UUID.randomUUID().toString());
-        body.add("amount", 3037.52);
+        body.add("amount", 7863.44);
         body.add("typeEntry", UUID.randomUUID().toString());
         body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
         body.add("status", UUID.randomUUID().toString());

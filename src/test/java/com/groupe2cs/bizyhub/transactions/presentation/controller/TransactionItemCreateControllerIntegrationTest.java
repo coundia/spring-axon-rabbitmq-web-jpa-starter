@@ -45,12 +45,13 @@ void it_should_be_able_to_add_transactionitem() {
 		requestDTO.setTransaction(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value());
 		requestDTO.setProduct(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value());
 		requestDTO.setLabel(UUID.randomUUID().toString());
-		requestDTO.setQuantity(68);
+		requestDTO.setQuantity(67);
 		requestDTO.setUnit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setUnitPrice(9901.16);
-		requestDTO.setTotal(1782.59);
+		requestDTO.setUnitPrice(4693.02);
+		requestDTO.setTotal(4665.72);
 		requestDTO.setNotes(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/transactionItem";
@@ -64,6 +65,7 @@ void it_should_be_able_to_add_transactionitem() {
 		assertThat(response.getBody().getQuantity()).isEqualTo(requestDTO.getQuantity());
 		assertThat(response.getBody().getUnit()).isEqualTo(requestDTO.getUnit());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getUnitPrice()).isEqualTo(requestDTO.getUnitPrice());
 		assertThat(response.getBody().getTotal()).isEqualTo(requestDTO.getTotal());

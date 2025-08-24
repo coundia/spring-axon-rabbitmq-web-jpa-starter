@@ -43,6 +43,13 @@ public interface SyncStateRepository extends JpaRepository<SyncState, String> {
 
         @Query("SELECT e FROM SyncState e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<SyncState> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("SELECT e FROM SyncState e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<SyncState> findByLocalIdAndCreatedById(String localId, String createdById);
+        @Query("SELECT e FROM SyncState e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<SyncState> findByLocalIdAndTenantName(String localId, String tenantName);
+
+        @Query("SELECT e FROM SyncState e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<SyncState> findByLocalIdAndTenantId(String localId, String tenantId);
         @Query("""
         SELECT e FROM SyncState e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}

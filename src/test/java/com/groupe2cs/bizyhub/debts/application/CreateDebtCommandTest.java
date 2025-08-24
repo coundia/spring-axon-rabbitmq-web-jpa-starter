@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateDebtCommand command = new CreateDebtCommand(
- DebtId.create(UUID.randomUUID().toString()) ,  DebtRemoteId.create(UUID.randomUUID().toString()) ,  DebtCode.create(UUID.randomUUID().toString()) ,  DebtNotes.create(UUID.randomUUID().toString()) ,  DebtBalance.create(4133.55) ,  DebtBalanceDebt.create(4066.39) ,  DebtDueDate.create(java.time.Instant.now().plusSeconds(3600)) ,  DebtStatuses.create(UUID.randomUUID().toString()) ,  DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  DebtCustomer.create(UUID.randomUUID().toString()) ,  DebtIsActive.create(false) ,  DebtCreatedBy.create(UUID.randomUUID().toString()) ,  DebtTenant.create(UUID.randomUUID().toString()) 
+ DebtId.create(UUID.randomUUID().toString()) ,  DebtRemoteId.create(UUID.randomUUID().toString()) ,  DebtLocalId.create(UUID.randomUUID().toString()) ,  DebtCode.create(UUID.randomUUID().toString()) ,  DebtNotes.create(UUID.randomUUID().toString()) ,  DebtBalance.create(1360.73) ,  DebtBalanceDebt.create(7241.32) ,  DebtDueDate.create(java.time.Instant.now().plusSeconds(3600)) ,  DebtStatuses.create(UUID.randomUUID().toString()) ,  DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  DebtCustomer.create(UUID.randomUUID().toString()) ,  DebtIsActive.create(true) ,  DebtCreatedBy.create(UUID.randomUUID().toString()) ,  DebtTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -38,6 +38,8 @@ assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getCode().value()).isEqualTo(
 command.getCode().value());
 assertThat(sentCommand.getNotes().value()).isEqualTo(

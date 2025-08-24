@@ -44,6 +44,13 @@ public class TransactionEntry   extends AbstractAuditableEntity  {
 
 	)
 
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String code ;
 
 	@Column(nullable = true, 
@@ -131,6 +138,7 @@ public class TransactionEntry   extends AbstractAuditableEntity  {
 		return "TransactionEntry{" +
 		"id='" + id + '\'' +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", code=" + code +
 			", description=" + description +
 			", amount=" + amount +

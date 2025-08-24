@@ -26,15 +26,17 @@ public class SyncStateDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "6e70ac64-0801-424e-ade8-4dcb41c84314")
+		@Schema(description = "", example = "039d513e-dd00-48ea-95dc-be9590f5a426")
 		private String entityTable;
-		@Schema(description = "", example = "292739ff-874c-481f-ae79-ec3da2b4c9ab")
+		@Schema(description = "", example = "a652291e-6905-4919-b101-398c453edee8")
 		private String remoteId;
+		@Schema(description = "", example = "715d1ccf-30b6-46a0-bd08-d1e6eea229f7")
+		private String localId;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant lastSyncAt;
-		@Schema(description = "", example = "bfbd08fe-0f6d-4c72-bad8-478943e1831a")
+		@Schema(description = "", example = "28c59c70-f4fa-4ba1-b617-47be803f797c")
 		private String lastCursor;
 
 }

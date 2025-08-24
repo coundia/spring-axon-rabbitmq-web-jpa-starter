@@ -4,6 +4,7 @@ import java.util.Objects;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserIdNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserNameNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserRemoteIdNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserLocalIdNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserTransactionNotValid;
 
 import java.io.Serializable;

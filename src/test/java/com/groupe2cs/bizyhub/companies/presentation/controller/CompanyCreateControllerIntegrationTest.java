@@ -37,6 +37,7 @@ void it_should_be_able_to_add_company() {
 		CompanyRequest requestDTO = new CompanyRequest();
 
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setName(UUID.randomUUID().toString());
 		requestDTO.setDescription(UUID.randomUUID().toString());
@@ -51,9 +52,9 @@ void it_should_be_able_to_add_company() {
 		requestDTO.setRegion(UUID.randomUUID().toString());
 		requestDTO.setCountry(UUID.randomUUID().toString());
 		requestDTO.setPostalCode(UUID.randomUUID().toString());
-		requestDTO.setIsActive(true);
+		requestDTO.setIsActive(false);
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setIsDefault(true);
+		requestDTO.setIsDefault(false);
 
  		String uri = "/v1/commands/company";
 		ResponseEntity<CompanyResponse> response = this.postForEntity(uri, requestDTO, CompanyResponse.class);
@@ -61,6 +62,7 @@ void it_should_be_able_to_add_company() {
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getCode()).isEqualTo(requestDTO.getCode());
 		assertThat(response.getBody().getName()).isEqualTo(requestDTO.getName());
 		assertThat(response.getBody().getDescription()).isEqualTo(requestDTO.getDescription());

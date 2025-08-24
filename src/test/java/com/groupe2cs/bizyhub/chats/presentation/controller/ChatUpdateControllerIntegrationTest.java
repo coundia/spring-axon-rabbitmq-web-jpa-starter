@@ -72,6 +72,7 @@ public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
         body.add("state", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("account", updated.getAccount().value());
         body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
 

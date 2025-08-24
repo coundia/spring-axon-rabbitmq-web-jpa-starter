@@ -47,6 +47,7 @@ public class ChatCreateControllerIntegrationTest extends BaseIntegrationTests {
         body.add("state", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("account", com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
         body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
         body.add("files", new ByteArrayResource("dummy content".getBytes(StandardCharsets.UTF_8)) {
@@ -81,6 +82,8 @@ public class ChatCreateControllerIntegrationTest extends BaseIntegrationTests {
             .isEqualTo(body.getFirst("syncAt").toString());
         assertThat(response.getBody().getRemoteId().toString())
             .isEqualTo(body.getFirst("remoteId").toString());
+        assertThat(response.getBody().getLocalId().toString())
+            .isEqualTo(body.getFirst("localId").toString());
         assertThat(response.getBody().getAccount().toString())
             .isEqualTo(body.getFirst("account").toString());
         assertThat(response.getBody().getDateTransaction().toString())

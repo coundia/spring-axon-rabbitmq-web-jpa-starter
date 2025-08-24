@@ -87,9 +87,10 @@ public class TransactionEntryFixtures {
 
 			CreateTransactionEntryCommand command = CreateTransactionEntryCommand.builder()
 				.remoteId(TransactionEntryRemoteId.create(UUID.randomUUID().toString()))
+				.localId(TransactionEntryLocalId.create(UUID.randomUUID().toString()))
 				.code(TransactionEntryCode.create(UUID.randomUUID().toString()))
 				.description(TransactionEntryDescription.create(UUID.randomUUID().toString()))
-				.amount(TransactionEntryAmount.create(6444.75))
+				.amount(TransactionEntryAmount.create(132.16))
 				.typeEntry(TransactionEntryTypeEntry.create(UUID.randomUUID().toString()))
 				.dateTransaction(TransactionEntryDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
 				.status(TransactionEntryStatus.create(UUID.randomUUID().toString()))
@@ -119,9 +120,10 @@ public class TransactionEntryFixtures {
 
         CreateTransactionEntryCommand command = CreateTransactionEntryCommand.builder()
         .remoteId(TransactionEntryRemoteId.create(UUID.randomUUID().toString()))
+        .localId(TransactionEntryLocalId.create(UUID.randomUUID().toString()))
         .code(TransactionEntryCode.create(UUID.randomUUID().toString()))
         .description(TransactionEntryDescription.create(UUID.randomUUID().toString()))
-        .amount(TransactionEntryAmount.create(6444.75))
+        .amount(TransactionEntryAmount.create(132.16))
         .typeEntry(TransactionEntryTypeEntry.create(UUID.randomUUID().toString()))
         .dateTransaction(TransactionEntryDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
         .status(TransactionEntryStatus.create(UUID.randomUUID().toString()))

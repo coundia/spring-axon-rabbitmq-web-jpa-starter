@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.stock.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelIdNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelRemoteIdNotValid;
+import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelLocalIdNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelStockOnHandNotValid;
 
 import java.io.Serializable;

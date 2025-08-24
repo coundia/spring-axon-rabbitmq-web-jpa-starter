@@ -26,6 +26,7 @@ public class CreateProductCommand implements Serializable {
 	@Builder.Default
 	private ProductId id = ProductId.create(UUID.randomUUID().toString());
  	private ProductRemoteId remoteId;
+ 	private ProductLocalId localId;
  	private ProductCode code;
  	private ProductName name;
  	private ProductDescription description;
@@ -41,6 +42,7 @@ public class CreateProductCommand implements Serializable {
 	public CreateProductCommand(
  
    ProductRemoteId remoteId , 
+   ProductLocalId localId , 
    ProductCode code , 
    ProductName name , 
    ProductDescription description , 
@@ -57,6 +59,7 @@ public class CreateProductCommand implements Serializable {
 			this.id = ProductId.create(UUID.randomUUID().toString());
  
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.code = code ; 
   this.name = name ; 
   this.description = description ; 

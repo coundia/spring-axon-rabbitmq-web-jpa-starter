@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.units.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.units.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.units.application.dto.*;
-import com.groupe2cs.bizyhub.units.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.units.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.units.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.units.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -39,6 +39,7 @@ private UnitRepository Repository;
 		.deltas(List.of(
 		UnitDeltaDto.builder()
 .remoteId(UUID.randomUUID().toString())
+.localId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .name(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
@@ -68,6 +69,7 @@ private UnitRepository Repository;
 			UnitDeltaDto.builder()
 			.id(existingId)
 .remoteId(UUID.randomUUID().toString())
+.localId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .name(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))

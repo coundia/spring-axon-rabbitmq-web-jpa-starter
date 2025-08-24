@@ -41,15 +41,17 @@ void it_should_be_able_to_add_account() {
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setCurrency(UUID.randomUUID().toString());
 		requestDTO.setTypeAccount(UUID.randomUUID().toString());
-		requestDTO.setBalance(7684.87);
-		requestDTO.setBalancePrev(2840.67);
-		requestDTO.setBalanceBlocked(6123.31);
-		requestDTO.setBalanceInit(7343.58);
-		requestDTO.setBalanceGoal(1435.95);
-		requestDTO.setBalanceLimit(2409.27);
+		requestDTO.setBalance(5463.38);
+		requestDTO.setBalancePrev(7369.95);
+		requestDTO.setBalanceBlocked(8004.54);
+		requestDTO.setBalanceInit(340.95);
+		requestDTO.setBalanceGoal(3496.02);
+		requestDTO.setBalanceLimit(929.32);
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setIsActive(true);
-		requestDTO.setIsDefault(true);
+		requestDTO.setIsDefault(false);
+		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 
  		String uri = "/v1/commands/account";
@@ -71,6 +73,8 @@ void it_should_be_able_to_add_account() {
 		assertThat(response.getBody().getDescription()).isEqualTo(requestDTO.getDescription());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
 		assertThat(response.getBody().getIsDefault()).isEqualTo(requestDTO.getIsDefault());
+		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 	}
 }

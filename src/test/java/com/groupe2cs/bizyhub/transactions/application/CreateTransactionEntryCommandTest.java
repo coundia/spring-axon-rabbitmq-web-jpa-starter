@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTransactionEntryCommand command = new CreateTransactionEntryCommand(
- TransactionEntryId.create(UUID.randomUUID().toString()) ,  TransactionEntryRemoteId.create(UUID.randomUUID().toString()) ,  TransactionEntryCode.create(UUID.randomUUID().toString()) ,  TransactionEntryDescription.create(UUID.randomUUID().toString()) ,  TransactionEntryAmount.create(660.15) ,  TransactionEntryTypeEntry.create(UUID.randomUUID().toString()) ,  TransactionEntryDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionEntryStatus.create(UUID.randomUUID().toString()) ,  TransactionEntryEntityName.create(UUID.randomUUID().toString()) ,  TransactionEntryEntityId.create(UUID.randomUUID().toString()) ,  TransactionEntryAccount.create(UUID.randomUUID().toString()) ,  TransactionEntrySyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionEntryCategory.create(UUID.randomUUID().toString()) ,  TransactionEntryCompany.create(UUID.randomUUID().toString()) ,  TransactionEntryCustomer.create(UUID.randomUUID().toString()) ,  TransactionEntryDebt.create(UUID.randomUUID().toString()) ,  TransactionEntryCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionEntryTenant.create(UUID.randomUUID().toString()) 
+ TransactionEntryId.create(UUID.randomUUID().toString()) ,  TransactionEntryRemoteId.create(UUID.randomUUID().toString()) ,  TransactionEntryLocalId.create(UUID.randomUUID().toString()) ,  TransactionEntryCode.create(UUID.randomUUID().toString()) ,  TransactionEntryDescription.create(UUID.randomUUID().toString()) ,  TransactionEntryAmount.create(682.64) ,  TransactionEntryTypeEntry.create(UUID.randomUUID().toString()) ,  TransactionEntryDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionEntryStatus.create(UUID.randomUUID().toString()) ,  TransactionEntryEntityName.create(UUID.randomUUID().toString()) ,  TransactionEntryEntityId.create(UUID.randomUUID().toString()) ,  TransactionEntryAccount.create(UUID.randomUUID().toString()) ,  TransactionEntrySyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionEntryCategory.create(UUID.randomUUID().toString()) ,  TransactionEntryCompany.create(UUID.randomUUID().toString()) ,  TransactionEntryCustomer.create(UUID.randomUUID().toString()) ,  TransactionEntryDebt.create(UUID.randomUUID().toString()) ,  TransactionEntryCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionEntryTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -38,6 +38,8 @@ assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getCode().value()).isEqualTo(
 command.getCode().value());
 assertThat(sentCommand.getDescription().value()).isEqualTo(

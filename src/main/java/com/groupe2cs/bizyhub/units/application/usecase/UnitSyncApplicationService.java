@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.units.application.usecase;
-import com.groupe2cs.bizyhub.units.application.command.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.units.application.dto.*;
-import com.groupe2cs.bizyhub.units.domain.valueObject.*;
+import com.groupe2cs.bizyhub.units.application.command.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.units.domain.valueObject.*;
+import com.groupe2cs.bizyhub.units.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,7 @@ public class UnitSyncApplicationService {
 
 					CreateUnitCommand command = CreateUnitCommand.builder()
 								.remoteId(UnitRemoteId.create(d.getRemoteId()))
+								.localId(UnitLocalId.create(d.getLocalId()))
 								.code(UnitCode.create(d.getCode()))
 								.name(UnitName.create(d.getName()))
 								.syncAt(UnitSyncAt.create(d.getSyncAt()))
@@ -51,6 +52,7 @@ public class UnitSyncApplicationService {
 					UpdateUnitCommand update = UpdateUnitCommand.builder()
 							.id(UnitId.create(d.getId()))
 							.remoteId(UnitRemoteId.create(d.getRemoteId()))
+							.localId(UnitLocalId.create(d.getLocalId()))
 							.code(UnitCode.create(d.getCode()))
 							.name(UnitName.create(d.getName()))
 							.syncAt(UnitSyncAt.create(d.getSyncAt()))

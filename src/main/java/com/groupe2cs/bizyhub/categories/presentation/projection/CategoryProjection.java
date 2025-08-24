@@ -34,6 +34,7 @@ Category entity = Category.builder()
  		.code(event.getCode() == null ? null : event.getCode().value())
  		.name(event.getName() == null ? null : event.getName().value())
  		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
  		.description(event.getDescription() == null ? null : event.getDescription().value())
  		.typeEntry(event.getTypeEntry() == null ? null : event.getTypeEntry().value())
  		.version(event.getVersion() == null ? null : event.getVersion().value())
@@ -79,6 +80,9 @@ Category entity = repository.findById(event.getId().value())
     }
 	if(event.getRemoteId() != null) {
 		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getLocalId() != null) {
+		entity.setLocalId(event.getLocalId().value());
     }
 	if(event.getDescription() != null) {
 		entity.setDescription(event.getDescription().value());

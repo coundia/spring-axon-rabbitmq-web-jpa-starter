@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,7 @@ public class TransactionUserSyncApplicationService {
 					CreateTransactionUserCommand command = CreateTransactionUserCommand.builder()
 								.name(TransactionUserName.create(d.getName()))
 								.remoteId(TransactionUserRemoteId.create(d.getRemoteId()))
+								.localId(TransactionUserLocalId.create(d.getLocalId()))
 								.transaction(TransactionUserTransaction.create(d.getTransaction()))
 								.user(TransactionUserUser.create(d.getUser()))
 								.syncAt(TransactionUserSyncAt.create(d.getSyncAt()))
@@ -66,6 +67,7 @@ public class TransactionUserSyncApplicationService {
 							.id(TransactionUserId.create(d.getId()))
 							.name(TransactionUserName.create(d.getName()))
 							.remoteId(TransactionUserRemoteId.create(d.getRemoteId()))
+							.localId(TransactionUserLocalId.create(d.getLocalId()))
 							.transaction(TransactionUserTransaction.create(d.getTransaction()))
 							.user(TransactionUserUser.create(d.getUser()))
 							.syncAt(TransactionUserSyncAt.create(d.getSyncAt()))

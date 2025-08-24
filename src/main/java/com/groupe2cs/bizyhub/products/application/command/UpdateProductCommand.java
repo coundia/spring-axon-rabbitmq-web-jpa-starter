@@ -25,6 +25,7 @@ public class UpdateProductCommand implements Serializable {
 @TargetAggregateIdentifier
 	private ProductId id;
  	private ProductRemoteId remoteId;
+ 	private ProductLocalId localId;
  	private ProductCode code;
  	private ProductName name;
  	private ProductDescription description;

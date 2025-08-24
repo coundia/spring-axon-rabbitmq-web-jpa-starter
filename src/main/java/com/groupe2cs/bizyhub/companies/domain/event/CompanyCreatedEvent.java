@@ -19,6 +19,7 @@ public class CompanyCreatedEvent implements Serializable {
 
 	private CompanyId id;
 	private CompanyRemoteId remoteId;
+	private CompanyLocalId localId;
 	private CompanyCode code;
 	private CompanyName name;
 	private CompanyDescription description;

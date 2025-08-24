@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.customers.application.usecase;
-import com.groupe2cs.bizyhub.customers.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.customers.application.command.*;
-import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
+import com.groupe2cs.bizyhub.customers.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
+import com.groupe2cs.bizyhub.customers.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,7 @@ public class CustomerSyncApplicationService {
 
 					CreateCustomerCommand command = CreateCustomerCommand.builder()
 								.remoteId(CustomerRemoteId.create(d.getRemoteId()))
+								.localId(CustomerLocalId.create(d.getLocalId()))
 								.code(CustomerCode.create(d.getCode()))
 								.firstName(CustomerFirstName.create(d.getFirstName()))
 								.lastName(CustomerLastName.create(d.getLastName()))
@@ -66,6 +67,7 @@ public class CustomerSyncApplicationService {
 					UpdateCustomerCommand update = UpdateCustomerCommand.builder()
 							.id(CustomerId.create(d.getId()))
 							.remoteId(CustomerRemoteId.create(d.getRemoteId()))
+							.localId(CustomerLocalId.create(d.getLocalId()))
 							.code(CustomerCode.create(d.getCode()))
 							.firstName(CustomerFirstName.create(d.getFirstName()))
 							.lastName(CustomerLastName.create(d.getLastName()))

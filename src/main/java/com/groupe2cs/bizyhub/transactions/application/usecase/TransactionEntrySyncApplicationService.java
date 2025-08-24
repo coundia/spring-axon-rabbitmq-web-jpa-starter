@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,7 @@ public class TransactionEntrySyncApplicationService {
 
 					CreateTransactionEntryCommand command = CreateTransactionEntryCommand.builder()
 								.remoteId(TransactionEntryRemoteId.create(d.getRemoteId()))
+								.localId(TransactionEntryLocalId.create(d.getLocalId()))
 								.code(TransactionEntryCode.create(d.getCode()))
 								.description(TransactionEntryDescription.create(d.getDescription()))
 								.amount(TransactionEntryAmount.create(d.getAmount()))
@@ -61,6 +62,7 @@ public class TransactionEntrySyncApplicationService {
 					UpdateTransactionEntryCommand update = UpdateTransactionEntryCommand.builder()
 							.id(TransactionEntryId.create(d.getId()))
 							.remoteId(TransactionEntryRemoteId.create(d.getRemoteId()))
+							.localId(TransactionEntryLocalId.create(d.getLocalId()))
 							.code(TransactionEntryCode.create(d.getCode()))
 							.description(TransactionEntryDescription.create(d.getDescription()))
 							.amount(TransactionEntryAmount.create(d.getAmount()))

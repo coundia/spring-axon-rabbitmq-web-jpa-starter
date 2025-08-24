@@ -50,6 +50,13 @@ public interface ChangeLogRepository extends JpaRepository<ChangeLog, String> {
 
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<ChangeLog> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<ChangeLog> findByLocalIdAndCreatedById(String localId, String createdById);
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<ChangeLog> findByLocalIdAndTenantName(String localId, String tenantName);
+
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<ChangeLog> findByLocalIdAndTenantId(String localId, String tenantId);
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.operation) LIKE LOWER(CONCAT('%', :operation, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<ChangeLog> findByOperationAndCreatedById(String operation, String createdById);
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.operation) LIKE LOWER(CONCAT('%', :operation, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

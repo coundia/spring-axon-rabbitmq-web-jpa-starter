@@ -28,6 +28,7 @@ public class CreateCategoryCommand implements Serializable {
  	private CategoryCode code;
  	private CategoryName name;
  	private CategoryRemoteId remoteId;
+ 	private CategoryLocalId localId;
  	private CategoryDescription description;
  	private CategoryTypeEntry typeEntry;
  	private CategoryVersion version;
@@ -39,6 +40,7 @@ public class CreateCategoryCommand implements Serializable {
    CategoryCode code , 
    CategoryName name , 
    CategoryRemoteId remoteId , 
+   CategoryLocalId localId , 
    CategoryDescription description , 
    CategoryTypeEntry typeEntry , 
    CategoryVersion version , 
@@ -51,6 +53,7 @@ public class CreateCategoryCommand implements Serializable {
   this.code = code ; 
   this.name = name ; 
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.description = description ; 
   this.typeEntry = typeEntry ; 
   this.version = version ; 

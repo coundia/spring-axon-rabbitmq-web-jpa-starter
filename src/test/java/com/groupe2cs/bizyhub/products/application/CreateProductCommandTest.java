@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateProductCommand command = new CreateProductCommand(
- ProductId.create(UUID.randomUUID().toString()) ,  ProductRemoteId.create(UUID.randomUUID().toString()) ,  ProductCode.create(UUID.randomUUID().toString()) ,  ProductName.create(UUID.randomUUID().toString()) ,  ProductDescription.create(UUID.randomUUID().toString()) ,  ProductBarcode.create(UUID.randomUUID().toString()) ,  ProductUnit.create(UUID.randomUUID().toString()) ,  ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ProductCategory.create(UUID.randomUUID().toString()) ,  ProductDefaultPrice.create(9661.07) ,  ProductStatuses.create(UUID.randomUUID().toString()) ,  ProductPurchasePrice.create(7732.01) ,  ProductCreatedBy.create(UUID.randomUUID().toString()) ,  ProductTenant.create(UUID.randomUUID().toString()) 
+ ProductId.create(UUID.randomUUID().toString()) ,  ProductRemoteId.create(UUID.randomUUID().toString()) ,  ProductLocalId.create(UUID.randomUUID().toString()) ,  ProductCode.create(UUID.randomUUID().toString()) ,  ProductName.create(UUID.randomUUID().toString()) ,  ProductDescription.create(UUID.randomUUID().toString()) ,  ProductBarcode.create(UUID.randomUUID().toString()) ,  ProductUnit.create(UUID.randomUUID().toString()) ,  ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ProductCategory.create(UUID.randomUUID().toString()) ,  ProductDefaultPrice.create(4644.6) ,  ProductStatuses.create(UUID.randomUUID().toString()) ,  ProductPurchasePrice.create(7053.67) ,  ProductCreatedBy.create(UUID.randomUUID().toString()) ,  ProductTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -38,6 +38,8 @@ assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getCode().value()).isEqualTo(
 command.getCode().value());
 assertThat(sentCommand.getName().value()).isEqualTo(

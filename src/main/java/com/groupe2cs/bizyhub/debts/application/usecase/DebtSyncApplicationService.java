@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.debts.application.usecase;
-import com.groupe2cs.bizyhub.debts.application.command.*;
-import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.debts.application.dto.*;
+import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.debts.application.command.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.debts.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,7 @@ public class DebtSyncApplicationService {
 
 					CreateDebtCommand command = CreateDebtCommand.builder()
 								.remoteId(DebtRemoteId.create(d.getRemoteId()))
+								.localId(DebtLocalId.create(d.getLocalId()))
 								.code(DebtCode.create(d.getCode()))
 								.notes(DebtNotes.create(d.getNotes()))
 								.balance(DebtBalance.create(d.getBalance()))
@@ -56,6 +57,7 @@ public class DebtSyncApplicationService {
 					UpdateDebtCommand update = UpdateDebtCommand.builder()
 							.id(DebtId.create(d.getId()))
 							.remoteId(DebtRemoteId.create(d.getRemoteId()))
+							.localId(DebtLocalId.create(d.getLocalId()))
 							.code(DebtCode.create(d.getCode()))
 							.notes(DebtNotes.create(d.getNotes()))
 							.balance(DebtBalance.create(d.getBalance()))

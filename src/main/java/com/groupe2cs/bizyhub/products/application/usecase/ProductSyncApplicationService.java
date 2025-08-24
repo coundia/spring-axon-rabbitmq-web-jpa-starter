@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.products.application.command.*;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.products.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.products.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,7 @@ public class ProductSyncApplicationService {
 
 					CreateProductCommand command = CreateProductCommand.builder()
 								.remoteId(ProductRemoteId.create(d.getRemoteId()))
+								.localId(ProductLocalId.create(d.getLocalId()))
 								.code(ProductCode.create(d.getCode()))
 								.name(ProductName.create(d.getName()))
 								.description(ProductDescription.create(d.getDescription()))
@@ -57,6 +58,7 @@ public class ProductSyncApplicationService {
 					UpdateProductCommand update = UpdateProductCommand.builder()
 							.id(ProductId.create(d.getId()))
 							.remoteId(ProductRemoteId.create(d.getRemoteId()))
+							.localId(ProductLocalId.create(d.getLocalId()))
 							.code(ProductCode.create(d.getCode()))
 							.name(ProductName.create(d.getName()))
 							.description(ProductDescription.create(d.getDescription()))

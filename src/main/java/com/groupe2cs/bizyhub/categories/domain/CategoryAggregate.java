@@ -27,6 +27,7 @@ private CategoryId id;
 private CategoryCode code;
 private CategoryName name;
 private CategoryRemoteId remoteId;
+private CategoryLocalId localId;
 private CategoryDescription description;
 private CategoryTypeEntry typeEntry;
 private CategoryVersion version;
@@ -42,6 +43,7 @@ apply(new CategoryCreatedEvent(
 		command.getCode(),
 		command.getName(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getDescription(),
 		command.getTypeEntry(),
 		command.getVersion(),
@@ -65,6 +67,7 @@ apply(new CategoryUpdatedEvent(
 		command.getCode(),
 		command.getName(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getDescription(),
 		command.getTypeEntry(),
 		command.getVersion(),
@@ -80,6 +83,7 @@ public void on(CategoryCreatedEvent event) {
 	this.code = event.getCode();
 	this.name = event.getName();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.description = event.getDescription();
 	this.typeEntry = event.getTypeEntry();
 	this.version = event.getVersion();
@@ -99,6 +103,7 @@ this.id = event.getId();
 	this.code = event.getCode();
 	this.name = event.getName();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.description = event.getDescription();
 	this.typeEntry = event.getTypeEntry();
 	this.version = event.getVersion();

@@ -27,6 +27,7 @@ public class CreateTransactionUserCommand implements Serializable {
 	private TransactionUserId id = TransactionUserId.create(UUID.randomUUID().toString());
  	private TransactionUserName name;
  	private TransactionUserRemoteId remoteId;
+ 	private TransactionUserLocalId localId;
  	private TransactionUserTransaction transaction;
  	private TransactionUserUser user;
  	private TransactionUserSyncAt syncAt;
@@ -39,6 +40,7 @@ public class CreateTransactionUserCommand implements Serializable {
  
    TransactionUserName name , 
    TransactionUserRemoteId remoteId , 
+   TransactionUserLocalId localId , 
    TransactionUserTransaction transaction , 
    TransactionUserUser user , 
    TransactionUserSyncAt syncAt , 
@@ -52,6 +54,7 @@ public class CreateTransactionUserCommand implements Serializable {
  
   this.name = name ; 
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.transaction = transaction ; 
   this.user = user ; 
   this.syncAt = syncAt ; 

@@ -104,6 +104,11 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
        List<AccountUser> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
+	List<AccountUser> findByRemoteIdAndTenantId(String remoteId, String tenantId);
 
+    List<AccountUser> findByRemoteIdAndCreatedById(String remoteId, String createdById);
 
+    List<AccountUser> findByLocalIdAndTenantId(String localId, String tenantId);
+
+    List<AccountUser> findByLocalIdAndCreatedById(String localId, String createdById);
 }

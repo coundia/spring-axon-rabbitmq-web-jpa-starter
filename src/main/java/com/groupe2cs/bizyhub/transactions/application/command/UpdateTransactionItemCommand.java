@@ -30,6 +30,7 @@ public class UpdateTransactionItemCommand implements Serializable {
  	private TransactionItemQuantity quantity;
  	private TransactionItemUnit unit;
  	private TransactionItemRemoteId remoteId;
+ 	private TransactionItemLocalId localId;
  	private TransactionItemSyncAt syncAt;
  	private TransactionItemUnitPrice unitPrice;
  	private TransactionItemTotal total;

@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateAccountUserCommand command = new CreateAccountUserCommand(
- AccountUserId.create(UUID.randomUUID().toString()) ,  AccountUserName.create(UUID.randomUUID().toString()) ,  AccountUserAccount.create(UUID.randomUUID().toString()) ,  AccountUserUser.create(UUID.randomUUID().toString()) ,  AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountUserUsername.create(UUID.randomUUID().toString()) ,  AccountUserDetails.create(UUID.randomUUID().toString()) ,  AccountUserIsActive.create(false) ,  AccountUserCreatedBy.create(UUID.randomUUID().toString()) ,  AccountUserTenant.create(UUID.randomUUID().toString()) 
+ AccountUserId.create(UUID.randomUUID().toString()) ,  AccountUserName.create(UUID.randomUUID().toString()) ,  AccountUserAccount.create(UUID.randomUUID().toString()) ,  AccountUserUser.create(UUID.randomUUID().toString()) ,  AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountUserUsername.create(UUID.randomUUID().toString()) ,  AccountUserDetails.create(UUID.randomUUID().toString()) ,  AccountUserRemoteId.create(UUID.randomUUID().toString()) ,  AccountUserLocalId.create(UUID.randomUUID().toString()) ,  AccountUserIsActive.create(true) ,  AccountUserCreatedBy.create(UUID.randomUUID().toString()) ,  AccountUserTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -48,6 +48,10 @@ assertThat(sentCommand.getUsername().value()).isEqualTo(
 command.getUsername().value());
 assertThat(sentCommand.getDetails().value()).isEqualTo(
 command.getDetails().value());
+assertThat(sentCommand.getRemoteId().value()).isEqualTo(
+command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getIsActive().value()).isEqualTo(
 command.getIsActive().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(

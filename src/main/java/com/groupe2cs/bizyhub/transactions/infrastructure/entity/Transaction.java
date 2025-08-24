@@ -58,6 +58,13 @@ public class Transaction   extends AbstractAuditableEntity  {
 
 	)
 
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String details ;
 
 	@Column(nullable = true, 
@@ -117,6 +124,7 @@ public class Transaction   extends AbstractAuditableEntity  {
 			", name=" + name +
 			", amount=" + amount +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", details=" + details +
 			", isActive=" + isActive +
 			", syncAt=" + syncAt +

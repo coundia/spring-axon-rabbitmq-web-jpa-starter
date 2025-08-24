@@ -71,6 +71,20 @@ public class AccountUser   extends AbstractAuditableEntity  {
 
 	)
 
+	private String remoteId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private Boolean isActive ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
@@ -92,6 +106,8 @@ public class AccountUser   extends AbstractAuditableEntity  {
 			", syncAt=" + syncAt +
 			", username=" + username +
 			", details=" + details +
+			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", isActive=" + isActive +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +

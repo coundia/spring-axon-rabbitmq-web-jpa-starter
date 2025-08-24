@@ -21,6 +21,7 @@ public class StockMovementCreatedEvent implements Serializable {
 	private StockMovementTypeStockMovement typeStockMovement;
 	private StockMovementQuantity quantity;
 	private StockMovementRemoteId remoteId;
+	private StockMovementLocalId localId;
 	private StockMovementCompany company;
 	private StockMovementSyncAt syncAt;
 	private StockMovementProductVariant productVariant;

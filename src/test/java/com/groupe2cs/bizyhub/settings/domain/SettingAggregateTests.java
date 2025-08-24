@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.settings.domain;
 
-import com.groupe2cs.bizyhub.settings.domain.exception.*;
-import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
+import com.groupe2cs.bizyhub.settings.domain.exception.*;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class SettingAggregateTests extends BaseUnitTests {
@@ -18,18 +18,20 @@ void it_should_create_setting_with_valid_values() {
 	SettingValue value = SettingValue.create(UUID.randomUUID().toString());
 	SettingLocale locale = SettingLocale.create(UUID.randomUUID().toString());
 	SettingRemoteId remoteId = SettingRemoteId.create(UUID.randomUUID().toString());
+	SettingLocalId localId = SettingLocalId.create(UUID.randomUUID().toString());
 	SettingDetails details = SettingDetails.create(UUID.randomUUID().toString());
 	SettingSyncAt syncAt = SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	SettingIsActive isActive = SettingIsActive.create(true);
 	SettingCreatedBy createdBy = SettingCreatedBy.create(UUID.randomUUID().toString());
 	SettingTenant tenant = SettingTenant.create(UUID.randomUUID().toString());
-	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, value, locale, remoteId, details, syncAt, isActive, createdBy, tenant);
+	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, value, locale, remoteId, localId, details, syncAt, isActive, createdBy, tenant);
 	assertThat(aggregateSettingAggregate.getId()).isNotNull();
 	assertThat(aggregateSettingAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateSettingAggregate.getName()).isEqualTo(name);
 	assertThat(aggregateSettingAggregate.getValue()).isEqualTo(value);
 	assertThat(aggregateSettingAggregate.getLocale()).isEqualTo(locale);
 	assertThat(aggregateSettingAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateSettingAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateSettingAggregate.getDetails()).isEqualTo(details);
 	assertThat(aggregateSettingAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateSettingAggregate.getIsActive()).isEqualTo(isActive);

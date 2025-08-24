@@ -32,6 +32,7 @@ try {
 Company entity = Company.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
  		.code(event.getCode() == null ? null : event.getCode().value())
  		.name(event.getName() == null ? null : event.getName().value())
  		.description(event.getDescription() == null ? null : event.getDescription().value())
@@ -84,6 +85,9 @@ Company entity = repository.findById(event.getId().value())
     }
 	if(event.getRemoteId() != null) {
 		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getLocalId() != null) {
+		entity.setLocalId(event.getLocalId().value());
     }
 	if(event.getCode() != null) {
 		entity.setCode(event.getCode().value());

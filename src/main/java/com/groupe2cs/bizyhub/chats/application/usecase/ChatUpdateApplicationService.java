@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.chats.application.command.*;
-import com.groupe2cs.bizyhub.chats.application.mapper.*;
-import com.groupe2cs.bizyhub.chats.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.chats.application.query.*;
+import com.groupe2cs.bizyhub.chats.application.dto.*;
+import com.groupe2cs.bizyhub.chats.application.mapper.*;
 import java.util.List;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -28,6 +28,7 @@ ChatId id, List<MultipartFile> filesMultipartFile,
 		String state,
 		java.time.Instant syncAt,
 		String remoteId,
+		String localId,
 		String account,
 		java.time.Instant dateTransaction
 ,
@@ -42,6 +43,7 @@ UpdateChatCommand command = ChatMapper.toUpdateCommand(
      new ChatState(state),
      new ChatSyncAt(syncAt),
      new ChatRemoteId(remoteId),
+     new ChatLocalId(localId),
      new ChatAccount(account),
      new ChatDateTransaction(dateTransaction)  
 );

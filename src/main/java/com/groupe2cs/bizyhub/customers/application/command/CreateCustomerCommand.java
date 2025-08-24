@@ -26,6 +26,7 @@ public class CreateCustomerCommand implements Serializable {
 	@Builder.Default
 	private CustomerId id = CustomerId.create(UUID.randomUUID().toString());
  	private CustomerRemoteId remoteId;
+ 	private CustomerLocalId localId;
  	private CustomerCode code;
  	private CustomerFirstName firstName;
  	private CustomerLastName lastName;
@@ -50,6 +51,7 @@ public class CreateCustomerCommand implements Serializable {
 	public CreateCustomerCommand(
  
    CustomerRemoteId remoteId , 
+   CustomerLocalId localId , 
    CustomerCode code , 
    CustomerFirstName firstName , 
    CustomerLastName lastName , 
@@ -75,6 +77,7 @@ public class CreateCustomerCommand implements Serializable {
 			this.id = CustomerId.create(UUID.randomUUID().toString());
  
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.code = code ; 
   this.firstName = firstName ; 
   this.lastName = lastName ; 

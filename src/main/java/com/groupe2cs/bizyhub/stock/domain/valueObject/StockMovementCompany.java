@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementIdNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementTypeStockMovementNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementQuantityNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementRemoteIdNotValid;
+import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementLocalIdNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementCompanyNotValid;
 
 import java.io.Serializable;

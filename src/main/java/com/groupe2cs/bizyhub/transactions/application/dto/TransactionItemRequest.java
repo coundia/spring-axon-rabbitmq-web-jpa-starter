@@ -19,25 +19,27 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TransactionItemRequest", description = "Request payload for TransactionItem operations")
 public class TransactionItemRequest implements Serializable {
 
-	@Schema(description = "", example = "a8d54928-07c4-4122-88ed-34aecd2105a4")
+	@Schema(description = "", example = "180a070f-651f-4887-b18c-aea2278729f7")
 	private String transaction;
-	@Schema(description = "", example = "39af2b0a-8d4d-4050-870d-8447eb66e5b2")
+	@Schema(description = "", example = "32723d8e-c287-453e-b9d5-ed04d7405ecd")
 	private String product;
-	@Schema(description = "", example = "3a5908cd-e375-4da9-81ff-2f57ff57d95e")
+	@Schema(description = "", example = "53c4abd8-cdcc-4695-8bde-689411ee8fb4")
 	private String label;
-	@Schema(description = "", example = "37")
+	@Schema(description = "", example = "31")
 	private Integer quantity;
-	@Schema(description = "", example = "1f3b0795-5496-4234-8d72-72f925fa667c")
+	@Schema(description = "", example = "6b60f57a-bc26-4789-9b2b-1e817b59e1fe")
 	private String unit;
-	@Schema(description = "", example = "1cf337af-4846-41e6-a30a-3fbf1cabfa6e")
+	@Schema(description = "", example = "f3ea05b1-e83d-4031-a95d-5ebf2cefafb1")
 	private String remoteId;
+	@Schema(description = "", example = "e33f8244-2cb3-4829-a37e-974fc36c019c")
+	private String localId;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "205.59")
+	@Schema(description = "", example = "2915.2")
 	private Double unitPrice;
-	@Schema(description = "", example = "2368.62")
+	@Schema(description = "", example = "3770.07")
 	private Double total;
-	@Schema(description = "", example = "405f3e76-56cb-4520-b2b4-56ab0ea9f47f")
+	@Schema(description = "", example = "5b1c1111-9b2b-44cf-9ba1-510b145ea805")
 	private String notes;
 
 }

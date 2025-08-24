@@ -44,6 +44,13 @@ public class Debt   extends AbstractAuditableEntity  {
 
 	)
 
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String code ;
 
 	@Column(nullable = true, 
@@ -112,6 +119,7 @@ public class Debt   extends AbstractAuditableEntity  {
 		return "Debt{" +
 		"id='" + id + '\'' +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", code=" + code +
 			", notes=" + notes +
 			", balance=" + balance +

@@ -67,8 +67,9 @@ public class StockMovementUpdateControllerIntegrationTest extends BaseIntegratio
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("typeStockMovement", UUID.randomUUID().toString());
-        body.add("quantity", 79);
+        body.add("quantity", 61);
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("company", updated.getCompany().value());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("productVariant", updated.getProductVariant().value());

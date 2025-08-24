@@ -20,6 +20,7 @@ public class TransactionUserCreatedEvent implements Serializable {
 	private TransactionUserId id;
 	private TransactionUserName name;
 	private TransactionUserRemoteId remoteId;
+	private TransactionUserLocalId localId;
 	private TransactionUserTransaction transaction;
 	private TransactionUserUser user;
 	private TransactionUserSyncAt syncAt;

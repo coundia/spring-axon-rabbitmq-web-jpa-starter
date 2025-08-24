@@ -31,6 +31,7 @@ public class CreateTransactionItemCommand implements Serializable {
  	private TransactionItemQuantity quantity;
  	private TransactionItemUnit unit;
  	private TransactionItemRemoteId remoteId;
+ 	private TransactionItemLocalId localId;
  	private TransactionItemSyncAt syncAt;
  	private TransactionItemUnitPrice unitPrice;
  	private TransactionItemTotal total;
@@ -45,6 +46,7 @@ public class CreateTransactionItemCommand implements Serializable {
    TransactionItemQuantity quantity , 
    TransactionItemUnit unit , 
    TransactionItemRemoteId remoteId , 
+   TransactionItemLocalId localId , 
    TransactionItemSyncAt syncAt , 
    TransactionItemUnitPrice unitPrice , 
    TransactionItemTotal total , 
@@ -60,6 +62,7 @@ public class CreateTransactionItemCommand implements Serializable {
   this.quantity = quantity ; 
   this.unit = unit ; 
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.syncAt = syncAt ; 
   this.unitPrice = unitPrice ; 
   this.total = total ; 

@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.products.domain;
 
-import com.groupe2cs.bizyhub.products.domain.exception.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.products.domain.exception.*;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import org.junit.jupiter.api.Test;
 
 
 public class ProductAggregateTests extends BaseUnitTests {
@@ -15,6 +15,7 @@ public class ProductAggregateTests extends BaseUnitTests {
 void it_should_create_product_with_valid_values() {
 	ProductId id = ProductId.create(UUID.randomUUID().toString());
 	ProductRemoteId remoteId = ProductRemoteId.create(UUID.randomUUID().toString());
+	ProductLocalId localId = ProductLocalId.create(UUID.randomUUID().toString());
 	ProductCode code = ProductCode.create(UUID.randomUUID().toString());
 	ProductName name = ProductName.create(UUID.randomUUID().toString());
 	ProductDescription description = ProductDescription.create(UUID.randomUUID().toString());
@@ -22,15 +23,16 @@ void it_should_create_product_with_valid_values() {
 	ProductUnit unit = ProductUnit.create(UUID.randomUUID().toString());
 	ProductSyncAt syncAt = ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	ProductCategory category = ProductCategory.create(UUID.randomUUID().toString());
-	ProductDefaultPrice defaultPrice = ProductDefaultPrice.create(6331.47);
+	ProductDefaultPrice defaultPrice = ProductDefaultPrice.create(3672.91);
 	ProductStatuses statuses = ProductStatuses.create(UUID.randomUUID().toString());
-	ProductPurchasePrice purchasePrice = ProductPurchasePrice.create(5311.72);
+	ProductPurchasePrice purchasePrice = ProductPurchasePrice.create(3040.73);
 	ProductCreatedBy createdBy = ProductCreatedBy.create(UUID.randomUUID().toString());
 	ProductTenant tenant = ProductTenant.create(UUID.randomUUID().toString());
-	ProductAggregate aggregateProductAggregate = new ProductAggregate(id, remoteId, code, name, description, barcode, unit, syncAt, category, defaultPrice, statuses, purchasePrice, createdBy, tenant);
+	ProductAggregate aggregateProductAggregate = new ProductAggregate(id, remoteId, localId, code, name, description, barcode, unit, syncAt, category, defaultPrice, statuses, purchasePrice, createdBy, tenant);
 	assertThat(aggregateProductAggregate.getId()).isNotNull();
 	assertThat(aggregateProductAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateProductAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateProductAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateProductAggregate.getCode()).isEqualTo(code);
 	assertThat(aggregateProductAggregate.getName()).isEqualTo(name);
 	assertThat(aggregateProductAggregate.getDescription()).isEqualTo(description);

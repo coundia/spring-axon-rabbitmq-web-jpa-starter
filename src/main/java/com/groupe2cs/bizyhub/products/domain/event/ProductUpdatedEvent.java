@@ -19,6 +19,7 @@ public class ProductUpdatedEvent implements Serializable {
 
 	private ProductId id;
 	private ProductRemoteId remoteId;
+	private ProductLocalId localId;
 	private ProductCode code;
 	private ProductName name;
 	private ProductDescription description;

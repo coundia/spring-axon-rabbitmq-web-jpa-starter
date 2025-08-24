@@ -37,6 +37,8 @@ AccountUser entity = AccountUser.builder()
 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
  		.username(event.getUsername() == null ? null : event.getUsername().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
  .build();
 
@@ -90,6 +92,12 @@ AccountUser entity = repository.findById(event.getId().value())
     }
 	if(event.getDetails() != null) {
 		entity.setDetails(event.getDetails().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getLocalId() != null) {
+		entity.setLocalId(event.getLocalId().value());
     }
 	if(event.getIsActive() != null) {
 		entity.setIsActive(event.getIsActive().value());

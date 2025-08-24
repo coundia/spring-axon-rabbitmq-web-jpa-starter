@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.customers.application.usecase;
 
-import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
-import com.groupe2cs.bizyhub.customers.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.customers.application.query.*;
-import com.groupe2cs.bizyhub.customers.application.dto.*;
+import com.groupe2cs.bizyhub.customers.application.mapper.*;
+import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.customers.application.dto.*;
+import com.groupe2cs.bizyhub.customers.application.query.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +44,16 @@ public List<CustomerResponse> findByCustomerRemoteId(
 	) {
 
 	FindByCustomerRemoteIdQuery query = new FindByCustomerRemoteIdQuery(value,metaRequest);
+	CompletableFuture<List<CustomerResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CustomerResponse.class));
+	return future.join();
+}
+public List<CustomerResponse> findByCustomerLocalId(
+	CustomerLocalId value,
+	MetaRequest metaRequest
+	) {
+
+	FindByCustomerLocalIdQuery query = new FindByCustomerLocalIdQuery(value,metaRequest);
 	CompletableFuture<List<CustomerResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CustomerResponse.class));
 	return future.join();

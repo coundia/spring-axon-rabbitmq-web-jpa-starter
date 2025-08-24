@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.transactions.domain.exception.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class TransactionAggregateTests extends BaseUnitTests {
@@ -15,8 +15,9 @@ public class TransactionAggregateTests extends BaseUnitTests {
 void it_should_create_transaction_with_valid_values() {
 	TransactionId id = TransactionId.create(UUID.randomUUID().toString());
 	TransactionName name = TransactionName.create(UUID.randomUUID().toString());
-	TransactionAmount amount = TransactionAmount.create(2298.93);
+	TransactionAmount amount = TransactionAmount.create(912.15);
 	TransactionRemoteId remoteId = TransactionRemoteId.create(UUID.randomUUID().toString());
+	TransactionLocalId localId = TransactionLocalId.create(UUID.randomUUID().toString());
 	TransactionDetails details = TransactionDetails.create(UUID.randomUUID().toString());
 	TransactionIsActive isActive = TransactionIsActive.create(false);
 	TransactionSyncAt syncAt = TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600));
@@ -27,12 +28,13 @@ void it_should_create_transaction_with_valid_values() {
 	TransactionDateTransaction dateTransaction = TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600));
 	TransactionCreatedBy createdBy = TransactionCreatedBy.create(UUID.randomUUID().toString());
 	TransactionTenant tenant = TransactionTenant.create(UUID.randomUUID().toString());
-	TransactionAggregate aggregateTransactionAggregate = new TransactionAggregate(id, name, amount, remoteId, details, isActive, syncAt, account, category, typeEntry, typeTransactionRaw, dateTransaction, createdBy, tenant);
+	TransactionAggregate aggregateTransactionAggregate = new TransactionAggregate(id, name, amount, remoteId, localId, details, isActive, syncAt, account, category, typeEntry, typeTransactionRaw, dateTransaction, createdBy, tenant);
 	assertThat(aggregateTransactionAggregate.getId()).isNotNull();
 	assertThat(aggregateTransactionAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateTransactionAggregate.getName()).isEqualTo(name);
 	assertThat(aggregateTransactionAggregate.getAmount()).isEqualTo(amount);
 	assertThat(aggregateTransactionAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateTransactionAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateTransactionAggregate.getDetails()).isEqualTo(details);
 	assertThat(aggregateTransactionAggregate.getIsActive()).isEqualTo(isActive);
 	assertThat(aggregateTransactionAggregate.getSyncAt()).isEqualTo(syncAt);

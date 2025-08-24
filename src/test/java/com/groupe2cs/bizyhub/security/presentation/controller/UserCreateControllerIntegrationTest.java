@@ -42,7 +42,7 @@ void it_should_be_able_to_add_user() {
 		requestDTO.setLastName(UUID.randomUUID().toString());
 		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setTelephone(UUID.randomUUID().toString());
-		requestDTO.setLimitPerDay(67);
+		requestDTO.setLimitPerDay(13);
 		requestDTO.setIsPremium(false);
 		requestDTO.setEnabled(true);
 		requestDTO.setIsBan(false);

@@ -75,7 +75,7 @@ public class TenantFixtures {
 				.description(TenantDescription.create(UUID.randomUUID().toString()))
 				.domain(TenantDomain.create(UUID.randomUUID().toString()))
 				.language(TenantLanguage.create(UUID.randomUUID().toString()))
-				.active(TenantActive.create(true))
+				.active(TenantActive.create(false))
 			.build();
 
 		command.setCreatedBy(TenantCreatedBy.create(user.getId()));

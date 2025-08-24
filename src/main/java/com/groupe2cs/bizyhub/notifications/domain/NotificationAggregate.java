@@ -29,6 +29,7 @@ private NotificationTitle title;
 private NotificationMessage message;
 private NotificationStatus status;
 private NotificationRemoteId remoteId;
+private NotificationLocalId localId;
 private NotificationSyncAt syncAt;
 private NotificationReserved reserved;
 private NotificationErrorMessage errorMessage;
@@ -45,6 +46,7 @@ apply(new NotificationCreatedEvent(
 		command.getMessage(),
 		command.getStatus(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getSyncAt(),
 		command.getReserved(),
 		command.getErrorMessage(),
@@ -69,6 +71,7 @@ apply(new NotificationUpdatedEvent(
 		command.getMessage(),
 		command.getStatus(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getSyncAt(),
 		command.getReserved(),
 		command.getErrorMessage(),
@@ -85,6 +88,7 @@ public void on(NotificationCreatedEvent event) {
 	this.message = event.getMessage();
 	this.status = event.getStatus();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.syncAt = event.getSyncAt();
 	this.reserved = event.getReserved();
 	this.errorMessage = event.getErrorMessage();
@@ -105,6 +109,7 @@ this.id = event.getId();
 	this.message = event.getMessage();
 	this.status = event.getStatus();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.syncAt = event.getSyncAt();
 	this.reserved = event.getReserved();
 	this.errorMessage = event.getErrorMessage();

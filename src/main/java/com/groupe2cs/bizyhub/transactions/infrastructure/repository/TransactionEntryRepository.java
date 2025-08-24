@@ -36,6 +36,13 @@ public interface TransactionEntryRepository extends JpaRepository<TransactionEnt
 
         @Query("SELECT e FROM TransactionEntry e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<TransactionEntry> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("SELECT e FROM TransactionEntry e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<TransactionEntry> findByLocalIdAndCreatedById(String localId, String createdById);
+        @Query("SELECT e FROM TransactionEntry e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<TransactionEntry> findByLocalIdAndTenantName(String localId, String tenantName);
+
+        @Query("SELECT e FROM TransactionEntry e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<TransactionEntry> findByLocalIdAndTenantId(String localId, String tenantId);
         @Query("SELECT e FROM TransactionEntry e WHERE LOWER(e.code) LIKE LOWER(CONCAT('%', :code, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<TransactionEntry> findByCodeAndCreatedById(String code, String createdById);
         @Query("SELECT e FROM TransactionEntry e WHERE LOWER(e.code) LIKE LOWER(CONCAT('%', :code, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

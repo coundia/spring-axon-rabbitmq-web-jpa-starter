@@ -26,23 +26,25 @@ public class DebtDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "b2786727-f4bf-4e69-bf13-2219037ae90e")
+		@Schema(description = "", example = "4c1a4c35-8388-4ac1-871a-2afb649242dd")
 		private String remoteId;
-		@Schema(description = "", example = "e6ecc696-6c1d-490d-9d42-b92717b83064")
+		@Schema(description = "", example = "751062ec-c62e-4ef1-b692-065fc571465c")
+		private String localId;
+		@Schema(description = "", example = "20f80a4e-f93f-45fb-ac65-8d8fede32391")
 		private String code;
-		@Schema(description = "", example = "fb0d4f3d-b473-4385-8e5c-c3b6c2e6865c")
+		@Schema(description = "", example = "c995028a-eeed-48da-8d87-bceaf0fcc8fd")
 		private String notes;
-		@Schema(description = "", example = "2150.72")
+		@Schema(description = "", example = "4763.12")
 		private Double balance;
-		@Schema(description = "", example = "8539.42")
+		@Schema(description = "", example = "5252.62")
 		private Double balanceDebt;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant dueDate;
-		@Schema(description = "", example = "2464e86f-f7c0-4d4c-8961-bb365fc2ecd7")
+		@Schema(description = "", example = "c5f234ff-e7bd-4ede-83a6-b0452563dbbb")
 		private String statuses;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "b13cff62-f2ca-4993-8b1f-f40b2357c620")
+		@Schema(description = "", example = "a38d6917-c1d5-4575-bddc-f5a1e9d6789b")
 		private String customer;
 		@Schema(description = "", example = "false")
 		private Boolean isActive;

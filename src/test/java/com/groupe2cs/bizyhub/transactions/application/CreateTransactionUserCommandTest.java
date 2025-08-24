@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTransactionUserCommand command = new CreateTransactionUserCommand(
- TransactionUserId.create(UUID.randomUUID().toString()) ,  TransactionUserName.create(UUID.randomUUID().toString()) ,  TransactionUserRemoteId.create(UUID.randomUUID().toString()) ,  TransactionUserTransaction.create(UUID.randomUUID().toString()) ,  TransactionUserUser.create(UUID.randomUUID().toString()) ,  TransactionUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionUserUsername.create(UUID.randomUUID().toString()) ,  TransactionUserDetails.create(UUID.randomUUID().toString()) ,  TransactionUserIsActive.create(false) ,  TransactionUserCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionUserTenant.create(UUID.randomUUID().toString()) 
+ TransactionUserId.create(UUID.randomUUID().toString()) ,  TransactionUserName.create(UUID.randomUUID().toString()) ,  TransactionUserRemoteId.create(UUID.randomUUID().toString()) ,  TransactionUserLocalId.create(UUID.randomUUID().toString()) ,  TransactionUserTransaction.create(UUID.randomUUID().toString()) ,  TransactionUserUser.create(UUID.randomUUID().toString()) ,  TransactionUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionUserUsername.create(UUID.randomUUID().toString()) ,  TransactionUserDetails.create(UUID.randomUUID().toString()) ,  TransactionUserIsActive.create(true) ,  TransactionUserCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionUserTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -40,6 +40,8 @@ assertThat(sentCommand.getName().value()).isEqualTo(
 command.getName().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getTransaction().value()).isEqualTo(
 command.getTransaction().value());
 assertThat(sentCommand.getUser().value()).isEqualTo(

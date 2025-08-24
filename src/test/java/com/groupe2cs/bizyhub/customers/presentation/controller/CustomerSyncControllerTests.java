@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.customers.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.customers.application.dto.*;
-import com.groupe2cs.bizyhub.customers.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.customers.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.customers.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.customers.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.customers.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -41,12 +41,13 @@ private CustomerRepository Repository;
 		.deltas(List.of(
 		CustomerDeltaDto.builder()
 .remoteId(UUID.randomUUID().toString())
+.localId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .firstName(UUID.randomUUID().toString())
 .lastName(UUID.randomUUID().toString())
 .fullName(UUID.randomUUID().toString())
-.balance(5348.12)
-.balanceDebt(8611.62)
+.balance(8627.78)
+.balanceDebt(3726.11)
 .phone(UUID.randomUUID().toString())
 .email(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
@@ -59,7 +60,7 @@ private CustomerRepository Repository;
 .country(UUID.randomUUID().toString())
 .postalCode(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.isActive(true)
+.isActive(false)
 		.type("CREATE")
 		.build()
 		))
@@ -85,12 +86,13 @@ private CustomerRepository Repository;
 			CustomerDeltaDto.builder()
 			.id(existingId)
 .remoteId(UUID.randomUUID().toString())
+.localId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .firstName(UUID.randomUUID().toString())
 .lastName(UUID.randomUUID().toString())
 .fullName(UUID.randomUUID().toString())
-.balance(5348.12)
-.balanceDebt(8611.62)
+.balance(8627.78)
+.balanceDebt(3726.11)
 .phone(UUID.randomUUID().toString())
 .email(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
@@ -103,7 +105,7 @@ private CustomerRepository Repository;
 .country(UUID.randomUUID().toString())
 .postalCode(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.isActive(true)
+.isActive(false)
 			.type("UPDATE")
 			.build()
 			))

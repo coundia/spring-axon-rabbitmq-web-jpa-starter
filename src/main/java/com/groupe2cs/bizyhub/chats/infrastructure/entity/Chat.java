@@ -73,6 +73,13 @@ public class Chat   extends AbstractAuditableEntity  {
 	)
 
 	private String remoteId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String localId ;
 	@ManyToOne
 	@JoinColumn(name = "account_id", nullable = true)
 	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
@@ -103,6 +110,7 @@ public class Chat   extends AbstractAuditableEntity  {
 			", state=" + state +
 			", syncAt=" + syncAt +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", account=" + account +
 			", dateTransaction=" + dateTransaction +
 			", createdBy=" + createdBy +

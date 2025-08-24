@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.customers.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerIdNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerRemoteIdNotValid;
+import com.groupe2cs.bizyhub.customers.domain.exception.CustomerLocalIdNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerCodeNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerFirstNameNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerLastNameNotValid;

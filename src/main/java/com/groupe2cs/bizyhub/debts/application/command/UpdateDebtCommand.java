@@ -25,6 +25,7 @@ public class UpdateDebtCommand implements Serializable {
 @TargetAggregateIdentifier
 	private DebtId id;
  	private DebtRemoteId remoteId;
+ 	private DebtLocalId localId;
  	private DebtCode code;
  	private DebtNotes notes;
  	private DebtBalance balance;

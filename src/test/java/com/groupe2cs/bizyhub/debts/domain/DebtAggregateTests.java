@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.debts.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import java.util.UUID;
+import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.debts.domain.exception.*;
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class DebtAggregateTests extends BaseUnitTests {
@@ -15,10 +15,11 @@ public class DebtAggregateTests extends BaseUnitTests {
 void it_should_create_debt_with_valid_values() {
 	DebtId id = DebtId.create(UUID.randomUUID().toString());
 	DebtRemoteId remoteId = DebtRemoteId.create(UUID.randomUUID().toString());
+	DebtLocalId localId = DebtLocalId.create(UUID.randomUUID().toString());
 	DebtCode code = DebtCode.create(UUID.randomUUID().toString());
 	DebtNotes notes = DebtNotes.create(UUID.randomUUID().toString());
-	DebtBalance balance = DebtBalance.create(9113.32);
-	DebtBalanceDebt balanceDebt = DebtBalanceDebt.create(8590.56);
+	DebtBalance balance = DebtBalance.create(4501.38);
+	DebtBalanceDebt balanceDebt = DebtBalanceDebt.create(6458.09);
 	DebtDueDate dueDate = DebtDueDate.create(java.time.Instant.now().plusSeconds(3600));
 	DebtStatuses statuses = DebtStatuses.create(UUID.randomUUID().toString());
 	DebtSyncAt syncAt = DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600));
@@ -26,10 +27,11 @@ void it_should_create_debt_with_valid_values() {
 	DebtIsActive isActive = DebtIsActive.create(true);
 	DebtCreatedBy createdBy = DebtCreatedBy.create(UUID.randomUUID().toString());
 	DebtTenant tenant = DebtTenant.create(UUID.randomUUID().toString());
-	DebtAggregate aggregateDebtAggregate = new DebtAggregate(id, remoteId, code, notes, balance, balanceDebt, dueDate, statuses, syncAt, customer, isActive, createdBy, tenant);
+	DebtAggregate aggregateDebtAggregate = new DebtAggregate(id, remoteId, localId, code, notes, balance, balanceDebt, dueDate, statuses, syncAt, customer, isActive, createdBy, tenant);
 	assertThat(aggregateDebtAggregate.getId()).isNotNull();
 	assertThat(aggregateDebtAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateDebtAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateDebtAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateDebtAggregate.getCode()).isEqualTo(code);
 	assertThat(aggregateDebtAggregate.getNotes()).isEqualTo(notes);
 	assertThat(aggregateDebtAggregate.getBalance()).isEqualTo(balance);

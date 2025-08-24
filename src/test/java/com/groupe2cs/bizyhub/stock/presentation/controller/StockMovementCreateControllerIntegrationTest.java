@@ -41,8 +41,9 @@ void it_should_be_able_to_add_stockmovement() {
 		StockMovementRequest requestDTO = new StockMovementRequest();
 
 		requestDTO.setTypeStockMovement(UUID.randomUUID().toString());
-		requestDTO.setQuantity(48);
+		requestDTO.setQuantity(56);
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCompany(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setProductVariant(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value());
@@ -57,6 +58,7 @@ void it_should_be_able_to_add_stockmovement() {
 		assertThat(response.getBody().getTypeStockMovement()).isEqualTo(requestDTO.getTypeStockMovement());
 		assertThat(response.getBody().getQuantity()).isEqualTo(requestDTO.getQuantity());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getCompany()).isEqualTo(requestDTO.getCompany());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getProductVariant()).isEqualTo(requestDTO.getProductVariant());

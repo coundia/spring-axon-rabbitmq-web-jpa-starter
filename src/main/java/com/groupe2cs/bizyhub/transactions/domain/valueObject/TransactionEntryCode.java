@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.transactions.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionEntryIdNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionEntryRemoteIdNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionEntryLocalIdNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionEntryCodeNotValid;
 
 import java.io.Serializable;

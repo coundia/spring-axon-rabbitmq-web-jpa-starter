@@ -25,6 +25,7 @@ public class UnitDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private UnitId id;
 

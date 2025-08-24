@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.transactions.domain.exception.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class TransactionItemAggregateTests extends BaseUnitTests {
@@ -17,16 +17,17 @@ void it_should_create_transactionItem_with_valid_values() {
 	TransactionItemTransaction transaction = TransactionItemTransaction.create(UUID.randomUUID().toString());
 	TransactionItemProduct product = TransactionItemProduct.create(UUID.randomUUID().toString());
 	TransactionItemLabel label = TransactionItemLabel.create(UUID.randomUUID().toString());
-	TransactionItemQuantity quantity = TransactionItemQuantity.create(80);
+	TransactionItemQuantity quantity = TransactionItemQuantity.create(36);
 	TransactionItemUnit unit = TransactionItemUnit.create(UUID.randomUUID().toString());
 	TransactionItemRemoteId remoteId = TransactionItemRemoteId.create(UUID.randomUUID().toString());
+	TransactionItemLocalId localId = TransactionItemLocalId.create(UUID.randomUUID().toString());
 	TransactionItemSyncAt syncAt = TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600));
-	TransactionItemUnitPrice unitPrice = TransactionItemUnitPrice.create(2885.39);
-	TransactionItemTotal total = TransactionItemTotal.create(8035.23);
+	TransactionItemUnitPrice unitPrice = TransactionItemUnitPrice.create(8924.03);
+	TransactionItemTotal total = TransactionItemTotal.create(5952.48);
 	TransactionItemNotes notes = TransactionItemNotes.create(UUID.randomUUID().toString());
 	TransactionItemCreatedBy createdBy = TransactionItemCreatedBy.create(UUID.randomUUID().toString());
 	TransactionItemTenant tenant = TransactionItemTenant.create(UUID.randomUUID().toString());
-	TransactionItemAggregate aggregateTransactionItemAggregate = new TransactionItemAggregate(id, transaction, product, label, quantity, unit, remoteId, syncAt, unitPrice, total, notes, createdBy, tenant);
+	TransactionItemAggregate aggregateTransactionItemAggregate = new TransactionItemAggregate(id, transaction, product, label, quantity, unit, remoteId, localId, syncAt, unitPrice, total, notes, createdBy, tenant);
 	assertThat(aggregateTransactionItemAggregate.getId()).isNotNull();
 	assertThat(aggregateTransactionItemAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateTransactionItemAggregate.getTransaction()).isEqualTo(transaction);
@@ -35,6 +36,7 @@ void it_should_create_transactionItem_with_valid_values() {
 	assertThat(aggregateTransactionItemAggregate.getQuantity()).isEqualTo(quantity);
 	assertThat(aggregateTransactionItemAggregate.getUnit()).isEqualTo(unit);
 	assertThat(aggregateTransactionItemAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateTransactionItemAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateTransactionItemAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateTransactionItemAggregate.getUnitPrice()).isEqualTo(unitPrice);
 	assertThat(aggregateTransactionItemAggregate.getTotal()).isEqualTo(total);

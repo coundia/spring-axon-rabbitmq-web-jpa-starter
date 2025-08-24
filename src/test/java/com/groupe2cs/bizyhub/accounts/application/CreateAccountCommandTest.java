@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateAccountCommand command = new CreateAccountCommand(
- AccountId.create(UUID.randomUUID().toString()) ,  AccountCode.create(UUID.randomUUID().toString()) ,  AccountName.create(UUID.randomUUID().toString()) ,  AccountStatus.create(UUID.randomUUID().toString()) ,  AccountCurrency.create(UUID.randomUUID().toString()) ,  AccountTypeAccount.create(UUID.randomUUID().toString()) ,  AccountBalance.create(7784.56) ,  AccountBalancePrev.create(9915.77) ,  AccountBalanceBlocked.create(1742.02) ,  AccountBalanceInit.create(1540.56) ,  AccountBalanceGoal.create(2949.75) ,  AccountBalanceLimit.create(2036.71) ,  AccountDescription.create(UUID.randomUUID().toString()) ,  AccountIsActive.create(true) ,  AccountIsDefault.create(true) ,  AccountSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountCreatedBy.create(UUID.randomUUID().toString()) ,  AccountTenant.create(UUID.randomUUID().toString()) 
+ AccountId.create(UUID.randomUUID().toString()) ,  AccountCode.create(UUID.randomUUID().toString()) ,  AccountName.create(UUID.randomUUID().toString()) ,  AccountStatus.create(UUID.randomUUID().toString()) ,  AccountCurrency.create(UUID.randomUUID().toString()) ,  AccountTypeAccount.create(UUID.randomUUID().toString()) ,  AccountBalance.create(9218.33) ,  AccountBalancePrev.create(9821.68) ,  AccountBalanceBlocked.create(8040.7) ,  AccountBalanceInit.create(7248.25) ,  AccountBalanceGoal.create(520.69) ,  AccountBalanceLimit.create(8977.05) ,  AccountDescription.create(UUID.randomUUID().toString()) ,  AccountIsActive.create(false) ,  AccountIsDefault.create(true) ,  AccountRemoteId.create(UUID.randomUUID().toString()) ,  AccountLocalId.create(UUID.randomUUID().toString()) ,  AccountSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountCreatedBy.create(UUID.randomUUID().toString()) ,  AccountTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -64,6 +64,10 @@ assertThat(sentCommand.getIsActive().value()).isEqualTo(
 command.getIsActive().value());
 assertThat(sentCommand.getIsDefault().value()).isEqualTo(
 command.getIsDefault().value());
+assertThat(sentCommand.getRemoteId().value()).isEqualTo(
+command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(
 command.getSyncAt().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(

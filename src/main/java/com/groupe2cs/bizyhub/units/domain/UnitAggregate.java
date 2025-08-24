@@ -25,6 +25,7 @@ public class UnitAggregate {
 @AggregateIdentifier
 private UnitId id;
 private UnitRemoteId remoteId;
+private UnitLocalId localId;
 private UnitCode code;
 private UnitName name;
 private UnitSyncAt syncAt;
@@ -38,6 +39,7 @@ public UnitAggregate(CreateUnitCommand command) {
 apply(new UnitCreatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getName(),
 		command.getSyncAt(),
@@ -59,6 +61,7 @@ public void handle(UpdateUnitCommand command) {
 apply(new UnitUpdatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getName(),
 		command.getSyncAt(),
@@ -72,6 +75,7 @@ apply(new UnitUpdatedEvent(
 public void on(UnitCreatedEvent event) {
 	this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.name = event.getName();
 	this.syncAt = event.getSyncAt();
@@ -89,6 +93,7 @@ this.id = event.getId();
 public void on(UnitUpdatedEvent event) {
 this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.name = event.getName();
 	this.syncAt = event.getSyncAt();

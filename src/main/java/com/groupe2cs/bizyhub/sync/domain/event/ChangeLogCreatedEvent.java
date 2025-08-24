@@ -21,6 +21,7 @@ public class ChangeLogCreatedEvent implements Serializable {
 	private ChangeLogEntityTable entityTable;
 	private ChangeLogEntityId entityId;
 	private ChangeLogRemoteId remoteId;
+	private ChangeLogLocalId localId;
 	private ChangeLogOperation operation;
 	private ChangeLogPayload payload;
 	private ChangeLogStatus status;

@@ -60,6 +60,7 @@ public class SyncStateUpdateControllerIntegrationTest extends BaseIntegrationTes
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("entityTable", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("lastSyncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("lastCursor", UUID.randomUUID().toString());

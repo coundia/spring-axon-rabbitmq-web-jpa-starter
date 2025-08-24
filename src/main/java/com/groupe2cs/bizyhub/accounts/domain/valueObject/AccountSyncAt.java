@@ -16,6 +16,8 @@ import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceLimitNotVal
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountDescriptionNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIsActiveNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIsDefaultNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountRemoteIdNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountLocalIdNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountSyncAtNotValid;
 
 import java.io.Serializable;

@@ -31,6 +31,7 @@ public class CreateChatCommand implements Serializable {
  	private ChatState state;
  	private ChatSyncAt syncAt;
  	private ChatRemoteId remoteId;
+ 	private ChatLocalId localId;
  	private ChatAccount account;
  	private ChatFiles files;
  	private ChatDateTransaction dateTransaction;
@@ -44,6 +45,7 @@ public class CreateChatCommand implements Serializable {
    ChatState state , 
    ChatSyncAt syncAt , 
    ChatRemoteId remoteId , 
+   ChatLocalId localId , 
    ChatAccount account , 
    ChatFiles files , 
    ChatDateTransaction dateTransaction , 
@@ -58,6 +60,7 @@ public class CreateChatCommand implements Serializable {
   this.state = state ; 
   this.syncAt = syncAt ; 
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.account = account ; 
   this.files = files ; 
   this.dateTransaction = dateTransaction ; 

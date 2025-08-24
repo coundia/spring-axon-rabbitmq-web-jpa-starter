@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.companies.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyRemoteIdNotValid;
+import com.groupe2cs.bizyhub.companies.domain.exception.CompanyLocalIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyCodeNotValid;
 
 import java.io.Serializable;

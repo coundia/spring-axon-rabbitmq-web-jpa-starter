@@ -27,6 +27,7 @@ private TransactionId id;
 private TransactionName name;
 private TransactionAmount amount;
 private TransactionRemoteId remoteId;
+private TransactionLocalId localId;
 private TransactionDetails details;
 private TransactionIsActive isActive;
 private TransactionSyncAt syncAt;
@@ -46,6 +47,7 @@ apply(new TransactionCreatedEvent(
 		command.getName(),
 		command.getAmount(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getDetails(),
 		command.getIsActive(),
 		command.getSyncAt(),
@@ -73,6 +75,7 @@ apply(new TransactionUpdatedEvent(
 		command.getName(),
 		command.getAmount(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getDetails(),
 		command.getIsActive(),
 		command.getSyncAt(),
@@ -92,6 +95,7 @@ public void on(TransactionCreatedEvent event) {
 	this.name = event.getName();
 	this.amount = event.getAmount();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.syncAt = event.getSyncAt();
@@ -115,6 +119,7 @@ this.id = event.getId();
 	this.name = event.getName();
 	this.amount = event.getAmount();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.syncAt = event.getSyncAt();

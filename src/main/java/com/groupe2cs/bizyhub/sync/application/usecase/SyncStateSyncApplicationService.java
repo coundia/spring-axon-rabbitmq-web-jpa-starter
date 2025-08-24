@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.sync.application.usecase;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.sync.application.command.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
 import com.groupe2cs.bizyhub.sync.application.dto.*;
+import com.groupe2cs.bizyhub.sync.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,7 @@ public class SyncStateSyncApplicationService {
 					CreateSyncStateCommand command = CreateSyncStateCommand.builder()
 								.entityTable(SyncStateEntityTable.create(d.getEntityTable()))
 								.remoteId(SyncStateRemoteId.create(d.getRemoteId()))
+								.localId(SyncStateLocalId.create(d.getLocalId()))
 								.syncAt(SyncStateSyncAt.create(d.getSyncAt()))
 								.lastSyncAt(SyncStateLastSyncAt.create(d.getLastSyncAt()))
 								.lastCursor(SyncStateLastCursor.create(d.getLastCursor()))
@@ -52,6 +53,7 @@ public class SyncStateSyncApplicationService {
 							.id(SyncStateId.create(d.getId()))
 							.entityTable(SyncStateEntityTable.create(d.getEntityTable()))
 							.remoteId(SyncStateRemoteId.create(d.getRemoteId()))
+							.localId(SyncStateLocalId.create(d.getLocalId()))
 							.syncAt(SyncStateSyncAt.create(d.getSyncAt()))
 							.lastSyncAt(SyncStateLastSyncAt.create(d.getLastSyncAt()))
 							.lastCursor(SyncStateLastCursor.create(d.getLastCursor()))

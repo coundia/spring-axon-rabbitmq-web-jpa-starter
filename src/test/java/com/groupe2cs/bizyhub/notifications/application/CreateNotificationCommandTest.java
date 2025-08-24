@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateNotificationCommand command = new CreateNotificationCommand(
- NotificationId.create(UUID.randomUUID().toString()) ,  NotificationDeviceToken.create(UUID.randomUUID().toString()) ,  NotificationTitle.create(UUID.randomUUID().toString()) ,  NotificationMessage.create(UUID.randomUUID().toString()) ,  NotificationStatus.create(UUID.randomUUID().toString()) ,  NotificationRemoteId.create(UUID.randomUUID().toString()) ,  NotificationSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  NotificationReserved.create(UUID.randomUUID().toString()) ,  NotificationErrorMessage.create(UUID.randomUUID().toString()) ,  NotificationCreatedBy.create(UUID.randomUUID().toString()) ,  NotificationTenant.create(UUID.randomUUID().toString()) 
+ NotificationId.create(UUID.randomUUID().toString()) ,  NotificationDeviceToken.create(UUID.randomUUID().toString()) ,  NotificationTitle.create(UUID.randomUUID().toString()) ,  NotificationMessage.create(UUID.randomUUID().toString()) ,  NotificationStatus.create(UUID.randomUUID().toString()) ,  NotificationRemoteId.create(UUID.randomUUID().toString()) ,  NotificationLocalId.create(UUID.randomUUID().toString()) ,  NotificationSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  NotificationReserved.create(UUID.randomUUID().toString()) ,  NotificationErrorMessage.create(UUID.randomUUID().toString()) ,  NotificationCreatedBy.create(UUID.randomUUID().toString()) ,  NotificationTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -46,6 +46,8 @@ assertThat(sentCommand.getStatus().value()).isEqualTo(
 command.getStatus().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(
 command.getSyncAt().value());
 assertThat(sentCommand.getReserved().value()).isEqualTo(

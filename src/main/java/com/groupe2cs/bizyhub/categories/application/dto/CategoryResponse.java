@@ -28,6 +28,8 @@ public class CategoryResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String remoteId;
 	@Schema(description = "", example = "")
+	private String localId;
+	@Schema(description = "", example = "")
 	private String description;
 	@Schema(description = "", example = "")
 	private String typeEntry;

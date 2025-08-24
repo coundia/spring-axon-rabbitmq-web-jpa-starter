@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateUnitCommand command = new CreateUnitCommand(
- UnitId.create(UUID.randomUUID().toString()) ,  UnitRemoteId.create(UUID.randomUUID().toString()) ,  UnitCode.create(UUID.randomUUID().toString()) ,  UnitName.create(UUID.randomUUID().toString()) ,  UnitSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  UnitDescription.create(UUID.randomUUID().toString()) ,  UnitCreatedBy.create(UUID.randomUUID().toString()) ,  UnitTenant.create(UUID.randomUUID().toString()) 
+ UnitId.create(UUID.randomUUID().toString()) ,  UnitRemoteId.create(UUID.randomUUID().toString()) ,  UnitLocalId.create(UUID.randomUUID().toString()) ,  UnitCode.create(UUID.randomUUID().toString()) ,  UnitName.create(UUID.randomUUID().toString()) ,  UnitSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  UnitDescription.create(UUID.randomUUID().toString()) ,  UnitCreatedBy.create(UUID.randomUUID().toString()) ,  UnitTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -38,6 +38,8 @@ assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
+assertThat(sentCommand.getLocalId().value()).isEqualTo(
+command.getLocalId().value());
 assertThat(sentCommand.getCode().value()).isEqualTo(
 command.getCode().value());
 assertThat(sentCommand.getName().value()).isEqualTo(

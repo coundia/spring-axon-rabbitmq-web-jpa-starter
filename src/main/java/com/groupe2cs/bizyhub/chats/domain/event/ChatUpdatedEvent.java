@@ -24,6 +24,7 @@ public class ChatUpdatedEvent implements Serializable {
 	private ChatState state;
 	private ChatSyncAt syncAt;
 	private ChatRemoteId remoteId;
+	private ChatLocalId localId;
 	private ChatAccount account;
 	private ChatFiles files;
 	private ChatDateTransaction dateTransaction;

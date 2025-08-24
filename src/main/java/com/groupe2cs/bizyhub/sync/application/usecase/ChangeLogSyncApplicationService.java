@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.sync.application.usecase;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.sync.application.command.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
 import com.groupe2cs.bizyhub.sync.application.dto.*;
+import com.groupe2cs.bizyhub.sync.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,7 @@ public class ChangeLogSyncApplicationService {
 								.entityTable(ChangeLogEntityTable.create(d.getEntityTable()))
 								.entityId(ChangeLogEntityId.create(d.getEntityId()))
 								.remoteId(ChangeLogRemoteId.create(d.getRemoteId()))
+								.localId(ChangeLogLocalId.create(d.getLocalId()))
 								.operation(ChangeLogOperation.create(d.getOperation()))
 								.payload(ChangeLogPayload.create(d.getPayload()))
 								.status(ChangeLogStatus.create(d.getStatus()))
@@ -57,6 +58,7 @@ public class ChangeLogSyncApplicationService {
 							.entityTable(ChangeLogEntityTable.create(d.getEntityTable()))
 							.entityId(ChangeLogEntityId.create(d.getEntityId()))
 							.remoteId(ChangeLogRemoteId.create(d.getRemoteId()))
+							.localId(ChangeLogLocalId.create(d.getLocalId()))
 							.operation(ChangeLogOperation.create(d.getOperation()))
 							.payload(ChangeLogPayload.create(d.getPayload()))
 							.status(ChangeLogStatus.create(d.getStatus()))

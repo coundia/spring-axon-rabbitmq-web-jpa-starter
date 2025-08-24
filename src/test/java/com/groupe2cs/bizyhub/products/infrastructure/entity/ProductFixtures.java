@@ -78,6 +78,7 @@ public class ProductFixtures {
 
 			CreateProductCommand command = CreateProductCommand.builder()
 				.remoteId(ProductRemoteId.create(UUID.randomUUID().toString()))
+				.localId(ProductLocalId.create(UUID.randomUUID().toString()))
 				.code(ProductCode.create(UUID.randomUUID().toString()))
 				.name(ProductName.create(UUID.randomUUID().toString()))
 				.description(ProductDescription.create(UUID.randomUUID().toString()))
@@ -85,9 +86,9 @@ public class ProductFixtures {
 				.unit(ProductUnit.create(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value()))
 				.syncAt(ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.category(ProductCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
-				.defaultPrice(ProductDefaultPrice.create(8762.66))
+				.defaultPrice(ProductDefaultPrice.create(9507.58))
 				.statuses(ProductStatuses.create(UUID.randomUUID().toString()))
-				.purchasePrice(ProductPurchasePrice.create(6138.52))
+				.purchasePrice(ProductPurchasePrice.create(7383.99))
 			.build();
 
 		command.setCreatedBy(ProductCreatedBy.create(user.getId()));
@@ -106,14 +107,15 @@ public class ProductFixtures {
 
         CreateProductCommand command = CreateProductCommand.builder()
         .remoteId(ProductRemoteId.create(UUID.randomUUID().toString()))
+        .localId(ProductLocalId.create(UUID.randomUUID().toString()))
         .code(ProductCode.create(UUID.randomUUID().toString()))
         .name(ProductName.create(UUID.randomUUID().toString()))
         .description(ProductDescription.create(UUID.randomUUID().toString()))
         .barcode(ProductBarcode.create(UUID.randomUUID().toString()))
         .syncAt(ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .defaultPrice(ProductDefaultPrice.create(8762.66))
+        .defaultPrice(ProductDefaultPrice.create(9507.58))
         .statuses(ProductStatuses.create(UUID.randomUUID().toString()))
-        .purchasePrice(ProductPurchasePrice.create(6138.52))
+        .purchasePrice(ProductPurchasePrice.create(7383.99))
         .build();
 
 		command.setCreatedBy(ProductCreatedBy.create(user.getId()));

@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.sync.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.sync.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.sync.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.sync.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.sync.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.sync.application.dto.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.sync.infrastructure.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -40,6 +40,7 @@ private SyncStateRepository Repository;
 		SyncStateDeltaDto.builder()
 .entityTable(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
+.localId(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .lastSyncAt(java.time.Instant.now().plusSeconds(3600))
 .lastCursor(UUID.randomUUID().toString())
@@ -69,6 +70,7 @@ private SyncStateRepository Repository;
 			.id(existingId)
 .entityTable(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
+.localId(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .lastSyncAt(java.time.Instant.now().plusSeconds(3600))
 .lastCursor(UUID.randomUUID().toString())

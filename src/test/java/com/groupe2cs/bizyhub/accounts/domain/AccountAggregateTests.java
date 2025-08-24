@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.accounts.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
-import com.groupe2cs.bizyhub.accounts.domain.exception.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.accounts.domain.exception.*;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import org.junit.jupiter.api.Test;
 
 
 public class AccountAggregateTests extends BaseUnitTests {
@@ -19,19 +19,21 @@ void it_should_create_account_with_valid_values() {
 	AccountStatus status = AccountStatus.create(UUID.randomUUID().toString());
 	AccountCurrency currency = AccountCurrency.create(UUID.randomUUID().toString());
 	AccountTypeAccount typeAccount = AccountTypeAccount.create(UUID.randomUUID().toString());
-	AccountBalance balance = AccountBalance.create(361.13);
-	AccountBalancePrev balancePrev = AccountBalancePrev.create(9699.0);
-	AccountBalanceBlocked balanceBlocked = AccountBalanceBlocked.create(9145.49);
-	AccountBalanceInit balanceInit = AccountBalanceInit.create(9700.32);
-	AccountBalanceGoal balanceGoal = AccountBalanceGoal.create(7957.78);
-	AccountBalanceLimit balanceLimit = AccountBalanceLimit.create(3724.86);
+	AccountBalance balance = AccountBalance.create(8704.38);
+	AccountBalancePrev balancePrev = AccountBalancePrev.create(9791.1);
+	AccountBalanceBlocked balanceBlocked = AccountBalanceBlocked.create(4958.34);
+	AccountBalanceInit balanceInit = AccountBalanceInit.create(1537.85);
+	AccountBalanceGoal balanceGoal = AccountBalanceGoal.create(7410.18);
+	AccountBalanceLimit balanceLimit = AccountBalanceLimit.create(7490.64);
 	AccountDescription description = AccountDescription.create(UUID.randomUUID().toString());
-	AccountIsActive isActive = AccountIsActive.create(true);
+	AccountIsActive isActive = AccountIsActive.create(false);
 	AccountIsDefault isDefault = AccountIsDefault.create(true);
+	AccountRemoteId remoteId = AccountRemoteId.create(UUID.randomUUID().toString());
+	AccountLocalId localId = AccountLocalId.create(UUID.randomUUID().toString());
 	AccountSyncAt syncAt = AccountSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	AccountCreatedBy createdBy = AccountCreatedBy.create(UUID.randomUUID().toString());
 	AccountTenant tenant = AccountTenant.create(UUID.randomUUID().toString());
-	AccountAggregate aggregateAccountAggregate = new AccountAggregate(id, code, name, status, currency, typeAccount, balance, balancePrev, balanceBlocked, balanceInit, balanceGoal, balanceLimit, description, isActive, isDefault, syncAt, createdBy, tenant);
+	AccountAggregate aggregateAccountAggregate = new AccountAggregate(id, code, name, status, currency, typeAccount, balance, balancePrev, balanceBlocked, balanceInit, balanceGoal, balanceLimit, description, isActive, isDefault, remoteId, localId, syncAt, createdBy, tenant);
 	assertThat(aggregateAccountAggregate.getId()).isNotNull();
 	assertThat(aggregateAccountAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateAccountAggregate.getCode()).isEqualTo(code);
@@ -48,6 +50,8 @@ void it_should_create_account_with_valid_values() {
 	assertThat(aggregateAccountAggregate.getDescription()).isEqualTo(description);
 	assertThat(aggregateAccountAggregate.getIsActive()).isEqualTo(isActive);
 	assertThat(aggregateAccountAggregate.getIsDefault()).isEqualTo(isDefault);
+	assertThat(aggregateAccountAggregate.getRemoteId()).isEqualTo(remoteId);
+	assertThat(aggregateAccountAggregate.getLocalId()).isEqualTo(localId);
 	assertThat(aggregateAccountAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateAccountAggregate.getCreatedBy()).isEqualTo(createdBy);
 	assertThat(aggregateAccountAggregate.getTenant()).isEqualTo(tenant);

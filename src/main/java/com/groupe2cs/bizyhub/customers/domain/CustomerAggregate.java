@@ -25,6 +25,7 @@ public class CustomerAggregate {
 @AggregateIdentifier
 private CustomerId id;
 private CustomerRemoteId remoteId;
+private CustomerLocalId localId;
 private CustomerCode code;
 private CustomerFirstName firstName;
 private CustomerLastName lastName;
@@ -53,6 +54,7 @@ public CustomerAggregate(CreateCustomerCommand command) {
 apply(new CustomerCreatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getFirstName(),
 		command.getLastName(),
@@ -89,6 +91,7 @@ public void handle(UpdateCustomerCommand command) {
 apply(new CustomerUpdatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getFirstName(),
 		command.getLastName(),
@@ -117,6 +120,7 @@ apply(new CustomerUpdatedEvent(
 public void on(CustomerCreatedEvent event) {
 	this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.firstName = event.getFirstName();
 	this.lastName = event.getLastName();
@@ -149,6 +153,7 @@ this.id = event.getId();
 public void on(CustomerUpdatedEvent event) {
 this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.firstName = event.getFirstName();
 	this.lastName = event.getLastName();

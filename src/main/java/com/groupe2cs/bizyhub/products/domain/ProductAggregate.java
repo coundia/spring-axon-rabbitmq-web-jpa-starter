@@ -25,6 +25,7 @@ public class ProductAggregate {
 @AggregateIdentifier
 private ProductId id;
 private ProductRemoteId remoteId;
+private ProductLocalId localId;
 private ProductCode code;
 private ProductName name;
 private ProductDescription description;
@@ -44,6 +45,7 @@ public ProductAggregate(CreateProductCommand command) {
 apply(new ProductCreatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getName(),
 		command.getDescription(),
@@ -71,6 +73,7 @@ public void handle(UpdateProductCommand command) {
 apply(new ProductUpdatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getName(),
 		command.getDescription(),
@@ -90,6 +93,7 @@ apply(new ProductUpdatedEvent(
 public void on(ProductCreatedEvent event) {
 	this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.name = event.getName();
 	this.description = event.getDescription();
@@ -113,6 +117,7 @@ this.id = event.getId();
 public void on(ProductUpdatedEvent event) {
 this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.name = event.getName();
 	this.description = event.getDescription();

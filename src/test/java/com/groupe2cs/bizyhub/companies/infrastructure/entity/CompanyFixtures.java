@@ -72,6 +72,7 @@ public class CompanyFixtures {
 
 			CreateCompanyCommand command = CreateCompanyCommand.builder()
 				.remoteId(CompanyRemoteId.create(UUID.randomUUID().toString()))
+				.localId(CompanyLocalId.create(UUID.randomUUID().toString()))
 				.code(CompanyCode.create(UUID.randomUUID().toString()))
 				.name(CompanyName.create(UUID.randomUUID().toString()))
 				.description(CompanyDescription.create(UUID.randomUUID().toString()))
@@ -86,9 +87,9 @@ public class CompanyFixtures {
 				.region(CompanyRegion.create(UUID.randomUUID().toString()))
 				.country(CompanyCountry.create(UUID.randomUUID().toString()))
 				.postalCode(CompanyPostalCode.create(UUID.randomUUID().toString()))
-				.isActive(CompanyIsActive.create(true))
+				.isActive(CompanyIsActive.create(false))
 				.syncAt(CompanySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.isDefault(CompanyIsDefault.create(true))
+				.isDefault(CompanyIsDefault.create(false))
 			.build();
 
 		command.setCreatedBy(CompanyCreatedBy.create(user.getId()));
@@ -107,6 +108,7 @@ public class CompanyFixtures {
 
         CreateCompanyCommand command = CreateCompanyCommand.builder()
         .remoteId(CompanyRemoteId.create(UUID.randomUUID().toString()))
+        .localId(CompanyLocalId.create(UUID.randomUUID().toString()))
         .code(CompanyCode.create(UUID.randomUUID().toString()))
         .name(CompanyName.create(UUID.randomUUID().toString()))
         .description(CompanyDescription.create(UUID.randomUUID().toString()))
@@ -121,9 +123,9 @@ public class CompanyFixtures {
         .region(CompanyRegion.create(UUID.randomUUID().toString()))
         .country(CompanyCountry.create(UUID.randomUUID().toString()))
         .postalCode(CompanyPostalCode.create(UUID.randomUUID().toString()))
-        .isActive(CompanyIsActive.create(true))
+        .isActive(CompanyIsActive.create(false))
         .syncAt(CompanySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .isDefault(CompanyIsDefault.create(true))
+        .isDefault(CompanyIsDefault.create(false))
         .build();
 
 		command.setCreatedBy(CompanyCreatedBy.create(user.getId()));

@@ -61,11 +61,12 @@ public class ChangeLogUpdateControllerIntegrationTest extends BaseIntegrationTes
         body.add("entityTable", UUID.randomUUID().toString());
         body.add("entityId", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("operation", UUID.randomUUID().toString());
         body.add("payload", UUID.randomUUID().toString());
         body.add("status", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("attempts", 61);
+        body.add("attempts", 38);
         body.add("error", UUID.randomUUID().toString());
 
         HttpHeaders multipartHeaders = new HttpHeaders();

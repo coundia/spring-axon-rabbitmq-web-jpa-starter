@@ -25,6 +25,7 @@ public class CompanyAggregate {
 @AggregateIdentifier
 private CompanyId id;
 private CompanyRemoteId remoteId;
+private CompanyLocalId localId;
 private CompanyCode code;
 private CompanyName name;
 private CompanyDescription description;
@@ -51,6 +52,7 @@ public CompanyAggregate(CreateCompanyCommand command) {
 apply(new CompanyCreatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getName(),
 		command.getDescription(),
@@ -85,6 +87,7 @@ public void handle(UpdateCompanyCommand command) {
 apply(new CompanyUpdatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getName(),
 		command.getDescription(),
@@ -111,6 +114,7 @@ apply(new CompanyUpdatedEvent(
 public void on(CompanyCreatedEvent event) {
 	this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.name = event.getName();
 	this.description = event.getDescription();
@@ -141,6 +145,7 @@ this.id = event.getId();
 public void on(CompanyUpdatedEvent event) {
 this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.name = event.getName();
 	this.description = event.getDescription();

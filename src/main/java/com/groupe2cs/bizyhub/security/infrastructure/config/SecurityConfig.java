@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.security.infrastructure.config;
 
 import com.groupe2cs.bizyhub.security.application.service.CustomUserDetailsService;
-import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
 import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.TENANT_HEADER;
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.API_KEY_HEADER;
 
 import org.springframework.security.config.Customizer;
 import io.swagger.v3.oas.models.servers.Server;

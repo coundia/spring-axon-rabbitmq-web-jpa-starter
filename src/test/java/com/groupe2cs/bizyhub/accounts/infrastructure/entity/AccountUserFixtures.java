@@ -83,6 +83,8 @@ public class AccountUserFixtures {
 				.syncAt(AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.username(AccountUserUsername.create(UUID.randomUUID().toString()))
 				.details(AccountUserDetails.create(UUID.randomUUID().toString()))
+				.remoteId(AccountUserRemoteId.create(UUID.randomUUID().toString()))
+				.localId(AccountUserLocalId.create(UUID.randomUUID().toString()))
 				.isActive(AccountUserIsActive.create(false))
 			.build();
 
@@ -105,6 +107,8 @@ public class AccountUserFixtures {
         .syncAt(AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .username(AccountUserUsername.create(UUID.randomUUID().toString()))
         .details(AccountUserDetails.create(UUID.randomUUID().toString()))
+        .remoteId(AccountUserRemoteId.create(UUID.randomUUID().toString()))
+        .localId(AccountUserLocalId.create(UUID.randomUUID().toString()))
         .isActive(AccountUserIsActive.create(false))
         .build();
 

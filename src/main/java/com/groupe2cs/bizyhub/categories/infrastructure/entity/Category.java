@@ -58,6 +58,13 @@ public class Category   extends AbstractAuditableEntity  {
 
 	)
 
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String description ;
 
 	@Column(nullable = true, 
@@ -97,6 +104,7 @@ public class Category   extends AbstractAuditableEntity  {
 			", code=" + code +
 			", name=" + name +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", description=" + description +
 			", typeEntry=" + typeEntry +
 			", version=" + version +

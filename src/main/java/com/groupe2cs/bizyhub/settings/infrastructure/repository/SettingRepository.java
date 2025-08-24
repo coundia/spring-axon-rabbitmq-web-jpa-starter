@@ -57,6 +57,13 @@ public interface SettingRepository extends JpaRepository<Setting, String> {
 
         @Query("SELECT e FROM Setting e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Setting> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("SELECT e FROM Setting e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Setting> findByLocalIdAndCreatedById(String localId, String createdById);
+        @Query("SELECT e FROM Setting e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Setting> findByLocalIdAndTenantName(String localId, String tenantName);
+
+        @Query("SELECT e FROM Setting e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Setting> findByLocalIdAndTenantId(String localId, String tenantId);
         @Query("SELECT e FROM Setting e WHERE LOWER(e.details) LIKE LOWER(CONCAT('%', :details, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Setting> findByDetailsAndCreatedById(String details, String createdById);
         @Query("SELECT e FROM Setting e WHERE LOWER(e.details) LIKE LOWER(CONCAT('%', :details, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

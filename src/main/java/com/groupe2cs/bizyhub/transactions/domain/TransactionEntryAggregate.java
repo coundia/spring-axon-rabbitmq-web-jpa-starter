@@ -25,6 +25,7 @@ public class TransactionEntryAggregate {
 @AggregateIdentifier
 private TransactionEntryId id;
 private TransactionEntryRemoteId remoteId;
+private TransactionEntryLocalId localId;
 private TransactionEntryCode code;
 private TransactionEntryDescription description;
 private TransactionEntryAmount amount;
@@ -48,6 +49,7 @@ public TransactionEntryAggregate(CreateTransactionEntryCommand command) {
 apply(new TransactionEntryCreatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getDescription(),
 		command.getAmount(),
@@ -79,6 +81,7 @@ public void handle(UpdateTransactionEntryCommand command) {
 apply(new TransactionEntryUpdatedEvent(
 		command.getId(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getCode(),
 		command.getDescription(),
 		command.getAmount(),
@@ -102,6 +105,7 @@ apply(new TransactionEntryUpdatedEvent(
 public void on(TransactionEntryCreatedEvent event) {
 	this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.description = event.getDescription();
 	this.amount = event.getAmount();
@@ -129,6 +133,7 @@ this.id = event.getId();
 public void on(TransactionEntryUpdatedEvent event) {
 this.id = event.getId();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.code = event.getCode();
 	this.description = event.getDescription();
 	this.amount = event.getAmount();

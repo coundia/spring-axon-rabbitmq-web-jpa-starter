@@ -28,6 +28,7 @@ public class CreateTransactionCommand implements Serializable {
  	private TransactionName name;
  	private TransactionAmount amount;
  	private TransactionRemoteId remoteId;
+ 	private TransactionLocalId localId;
  	private TransactionDetails details;
  	private TransactionIsActive isActive;
  	private TransactionSyncAt syncAt;
@@ -43,6 +44,7 @@ public class CreateTransactionCommand implements Serializable {
    TransactionName name , 
    TransactionAmount amount , 
    TransactionRemoteId remoteId , 
+   TransactionLocalId localId , 
    TransactionDetails details , 
    TransactionIsActive isActive , 
    TransactionSyncAt syncAt , 
@@ -59,6 +61,7 @@ public class CreateTransactionCommand implements Serializable {
   this.name = name ; 
   this.amount = amount ; 
   this.remoteId = remoteId ; 
+  this.localId = localId ; 
   this.details = details ; 
   this.isActive = isActive ; 
   this.syncAt = syncAt ; 

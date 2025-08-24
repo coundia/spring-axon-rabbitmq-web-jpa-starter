@@ -19,25 +19,27 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TransactionRequest", description = "Request payload for Transaction operations")
 public class TransactionRequest implements Serializable {
 
-	@Schema(description = "", example = "d2d90088-f4d8-417a-8371-12b3b2bd939d")
+	@Schema(description = "", example = "c439d621-9d87-4b64-b9fd-a48681205550")
 	private String name;
-	@Schema(description = "", example = "1564.12")
+	@Schema(description = "", example = "7460.3")
 	private Double amount;
-	@Schema(description = "", example = "80fee18d-26bf-4e4f-ac69-7e5d4ff08ed5")
+	@Schema(description = "", example = "906e5d78-2258-4aee-bfa1-ce807b394e3d")
 	private String remoteId;
-	@Schema(description = "", example = "5fe60f9a-9331-4dd6-b783-e59752033b50")
+	@Schema(description = "", example = "8bb7ecb7-aabe-48c6-91d4-4042d99f8a2a")
+	private String localId;
+	@Schema(description = "", example = "0138da6d-2eeb-4514-a72c-7c3080bf76a5")
 	private String details;
 	@Schema(description = "", example = "true")
 	private Boolean isActive;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "2340ca6a-94ce-4e73-a510-4c824ee5bf14")
+	@Schema(description = "", example = "a149923c-313a-4cb1-bc8d-e1266dd384db")
 	private String account;
-	@Schema(description = "", example = "9769d07b-3742-4fa2-a2ff-7ff764b1014b")
+	@Schema(description = "", example = "8dbe2607-98ab-49d1-98ad-9e5ce182b006")
 	private String category;
-	@Schema(description = "", example = "a0554c1b-97fa-4bc6-874f-e54f32ceac8d")
+	@Schema(description = "", example = "48b630c5-48d0-4d0e-81fa-7a18db7f0130")
 	private String typeEntry;
-	@Schema(description = "", example = "e1b23846-518f-4a70-aa81-74d8fdb66201")
+	@Schema(description = "", example = "b79c5aef-54e2-47f8-b0fd-83d826434eab")
 	private String typeTransactionRaw;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant dateTransaction;

@@ -72,6 +72,8 @@ public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationT
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("username", UUID.randomUUID().toString());
         body.add("details", UUID.randomUUID().toString());
+        body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("isActive", true);
 
         HttpHeaders multipartHeaders = new HttpHeaders();

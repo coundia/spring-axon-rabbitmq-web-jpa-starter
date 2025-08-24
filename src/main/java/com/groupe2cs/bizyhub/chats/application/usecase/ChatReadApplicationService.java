@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
 
-import com.groupe2cs.bizyhub.chats.application.dto.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import com.groupe2cs.bizyhub.chats.application.mapper.*;
-import com.groupe2cs.bizyhub.chats.application.query.*;
+import com.groupe2cs.bizyhub.chats.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.chats.application.query.*;
+import com.groupe2cs.bizyhub.chats.application.mapper.*;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -94,6 +94,16 @@ public List<ChatResponse> findByChatRemoteId(
 	) {
 
 	FindByChatRemoteIdQuery query = new FindByChatRemoteIdQuery(value,metaRequest);
+	CompletableFuture<List<ChatResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ChatResponse.class));
+	return future.join();
+}
+public List<ChatResponse> findByChatLocalId(
+	ChatLocalId value,
+	MetaRequest metaRequest
+	) {
+
+	FindByChatLocalIdQuery query = new FindByChatLocalIdQuery(value,metaRequest);
 	CompletableFuture<List<ChatResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ChatResponse.class));
 	return future.join();

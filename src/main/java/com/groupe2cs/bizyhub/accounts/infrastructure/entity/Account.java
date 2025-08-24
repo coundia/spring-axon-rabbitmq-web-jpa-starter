@@ -134,6 +134,20 @@ public class Account   extends AbstractAuditableEntity  {
 		unique = false
 
 	)
+
+	private String remoteId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
 	@Builder.Default
 	private java.time.Instant syncAt  = java.time.Instant.now() ;
 	@ManyToOne
@@ -164,6 +178,8 @@ public class Account   extends AbstractAuditableEntity  {
 			", description=" + description +
 			", isActive=" + isActive +
 			", isDefault=" + isDefault +
+			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", syncAt=" + syncAt +
 			", createdBy=" + createdBy +
 			", tenant=" + tenant +

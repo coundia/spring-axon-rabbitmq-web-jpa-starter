@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,7 @@ public class TransactionItemSyncApplicationService {
 								.quantity(TransactionItemQuantity.create(d.getQuantity()))
 								.unit(TransactionItemUnit.create(d.getUnit()))
 								.remoteId(TransactionItemRemoteId.create(d.getRemoteId()))
+								.localId(TransactionItemLocalId.create(d.getLocalId()))
 								.syncAt(TransactionItemSyncAt.create(d.getSyncAt()))
 								.unitPrice(TransactionItemUnitPrice.create(d.getUnitPrice()))
 								.total(TransactionItemTotal.create(d.getTotal()))
@@ -61,6 +62,7 @@ public class TransactionItemSyncApplicationService {
 							.quantity(TransactionItemQuantity.create(d.getQuantity()))
 							.unit(TransactionItemUnit.create(d.getUnit()))
 							.remoteId(TransactionItemRemoteId.create(d.getRemoteId()))
+							.localId(TransactionItemLocalId.create(d.getLocalId()))
 							.syncAt(TransactionItemSyncAt.create(d.getSyncAt()))
 							.unitPrice(TransactionItemUnitPrice.create(d.getUnitPrice()))
 							.total(TransactionItemTotal.create(d.getTotal()))

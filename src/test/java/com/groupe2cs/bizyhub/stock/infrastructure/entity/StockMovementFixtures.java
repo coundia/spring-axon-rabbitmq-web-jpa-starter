@@ -78,8 +78,9 @@ public class StockMovementFixtures {
 
 			CreateStockMovementCommand command = CreateStockMovementCommand.builder()
 				.typeStockMovement(StockMovementTypeStockMovement.create(UUID.randomUUID().toString()))
-				.quantity(StockMovementQuantity.create(70))
+				.quantity(StockMovementQuantity.create(89))
 				.remoteId(StockMovementRemoteId.create(UUID.randomUUID().toString()))
+				.localId(StockMovementLocalId.create(UUID.randomUUID().toString()))
 				.company(StockMovementCompany.create(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value()))
 				.syncAt(StockMovementSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.productVariant(StockMovementProductVariant.create(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value()))
@@ -103,8 +104,9 @@ public class StockMovementFixtures {
 
         CreateStockMovementCommand command = CreateStockMovementCommand.builder()
         .typeStockMovement(StockMovementTypeStockMovement.create(UUID.randomUUID().toString()))
-        .quantity(StockMovementQuantity.create(70))
+        .quantity(StockMovementQuantity.create(89))
         .remoteId(StockMovementRemoteId.create(UUID.randomUUID().toString()))
+        .localId(StockMovementLocalId.create(UUID.randomUUID().toString()))
         .syncAt(StockMovementSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .orderLineId(StockMovementOrderLineId.create(UUID.randomUUID().toString()))
         .discriminator(StockMovementDiscriminator.create(UUID.randomUUID().toString()))

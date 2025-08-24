@@ -75,12 +75,13 @@ public class CustomerFixtures {
 
 			CreateCustomerCommand command = CreateCustomerCommand.builder()
 				.remoteId(CustomerRemoteId.create(UUID.randomUUID().toString()))
+				.localId(CustomerLocalId.create(UUID.randomUUID().toString()))
 				.code(CustomerCode.create(UUID.randomUUID().toString()))
 				.firstName(CustomerFirstName.create(UUID.randomUUID().toString()))
 				.lastName(CustomerLastName.create(UUID.randomUUID().toString()))
 				.fullName(CustomerFullName.create(UUID.randomUUID().toString()))
-				.balance(CustomerBalance.create(7327.3))
-				.balanceDebt(CustomerBalanceDebt.create(6298.67))
+				.balance(CustomerBalance.create(9761.16))
+				.balanceDebt(CustomerBalanceDebt.create(6742.07))
 				.phone(CustomerPhone.create(UUID.randomUUID().toString()))
 				.email(CustomerEmail.create(UUID.randomUUID().toString()))
 				.notes(CustomerNotes.create(UUID.randomUUID().toString()))
@@ -93,7 +94,7 @@ public class CustomerFixtures {
 				.country(CustomerCountry.create(UUID.randomUUID().toString()))
 				.postalCode(CustomerPostalCode.create(UUID.randomUUID().toString()))
 				.syncAt(CustomerSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.isActive(CustomerIsActive.create(false))
+				.isActive(CustomerIsActive.create(true))
 			.build();
 
 		command.setCreatedBy(CustomerCreatedBy.create(user.getId()));
@@ -112,12 +113,13 @@ public class CustomerFixtures {
 
         CreateCustomerCommand command = CreateCustomerCommand.builder()
         .remoteId(CustomerRemoteId.create(UUID.randomUUID().toString()))
+        .localId(CustomerLocalId.create(UUID.randomUUID().toString()))
         .code(CustomerCode.create(UUID.randomUUID().toString()))
         .firstName(CustomerFirstName.create(UUID.randomUUID().toString()))
         .lastName(CustomerLastName.create(UUID.randomUUID().toString()))
         .fullName(CustomerFullName.create(UUID.randomUUID().toString()))
-        .balance(CustomerBalance.create(7327.3))
-        .balanceDebt(CustomerBalanceDebt.create(6298.67))
+        .balance(CustomerBalance.create(9761.16))
+        .balanceDebt(CustomerBalanceDebt.create(6742.07))
         .phone(CustomerPhone.create(UUID.randomUUID().toString()))
         .email(CustomerEmail.create(UUID.randomUUID().toString()))
         .notes(CustomerNotes.create(UUID.randomUUID().toString()))
@@ -129,7 +131,7 @@ public class CustomerFixtures {
         .country(CustomerCountry.create(UUID.randomUUID().toString()))
         .postalCode(CustomerPostalCode.create(UUID.randomUUID().toString()))
         .syncAt(CustomerSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .isActive(CustomerIsActive.create(false))
+        .isActive(CustomerIsActive.create(true))
         .build();
 
 		command.setCreatedBy(CustomerCreatedBy.create(user.getId()));

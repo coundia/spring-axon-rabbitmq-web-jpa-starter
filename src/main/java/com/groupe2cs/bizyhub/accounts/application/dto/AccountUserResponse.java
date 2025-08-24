@@ -34,6 +34,10 @@ public class AccountUserResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String details;
 	@Schema(description = "", example = "")
+	private String remoteId;
+	@Schema(description = "", example = "")
+	private String localId;
+	@Schema(description = "", example = "")
 	private Boolean isActive;
 	@Schema(description = "", example = "")
 	private String createdBy;

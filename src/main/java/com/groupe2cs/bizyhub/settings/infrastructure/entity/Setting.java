@@ -65,6 +65,13 @@ public class Setting   extends AbstractAuditableEntity  {
 
 	)
 
+	private String localId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String details ;
 
 	@Column(nullable = true, 
@@ -98,6 +105,7 @@ public class Setting   extends AbstractAuditableEntity  {
 			", value=" + value +
 			", locale=" + locale +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", details=" + details +
 			", syncAt=" + syncAt +
 			", isActive=" + isActive +

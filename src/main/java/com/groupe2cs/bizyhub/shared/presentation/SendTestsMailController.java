@@ -1,7 +1,7 @@
 package com.groupe2cs.bizyhub.shared.presentation;
 
-import com.groupe2cs.bizyhub.shared.application.NotificationService;
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
+import com.groupe2cs.bizyhub.shared.application.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

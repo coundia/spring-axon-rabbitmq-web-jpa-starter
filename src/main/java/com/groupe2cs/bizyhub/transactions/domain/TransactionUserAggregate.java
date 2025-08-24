@@ -26,6 +26,7 @@ public class TransactionUserAggregate {
 private TransactionUserId id;
 private TransactionUserName name;
 private TransactionUserRemoteId remoteId;
+private TransactionUserLocalId localId;
 private TransactionUserTransaction transaction;
 private TransactionUserUser user;
 private TransactionUserSyncAt syncAt;
@@ -42,6 +43,7 @@ apply(new TransactionUserCreatedEvent(
 		command.getId(),
 		command.getName(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getTransaction(),
 		command.getUser(),
 		command.getSyncAt(),
@@ -66,6 +68,7 @@ apply(new TransactionUserUpdatedEvent(
 		command.getId(),
 		command.getName(),
 		command.getRemoteId(),
+		command.getLocalId(),
 		command.getTransaction(),
 		command.getUser(),
 		command.getSyncAt(),
@@ -82,6 +85,7 @@ public void on(TransactionUserCreatedEvent event) {
 	this.id = event.getId();
 	this.name = event.getName();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.transaction = event.getTransaction();
 	this.user = event.getUser();
 	this.syncAt = event.getSyncAt();
@@ -102,6 +106,7 @@ public void on(TransactionUserUpdatedEvent event) {
 this.id = event.getId();
 	this.name = event.getName();
 	this.remoteId = event.getRemoteId();
+	this.localId = event.getLocalId();
 	this.transaction = event.getTransaction();
 	this.user = event.getUser();
 	this.syncAt = event.getSyncAt();

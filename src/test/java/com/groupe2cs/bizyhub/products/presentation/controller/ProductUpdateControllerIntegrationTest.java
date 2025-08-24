@@ -67,6 +67,7 @@ public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("remoteId", UUID.randomUUID().toString());
+        body.add("localId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("name", UUID.randomUUID().toString());
         body.add("description", UUID.randomUUID().toString());
@@ -74,9 +75,9 @@ public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests
         body.add("unit", updated.getUnit().value());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("category", updated.getCategory().value());
-        body.add("defaultPrice", 7035.86);
+        body.add("defaultPrice", 4864.13);
         body.add("statuses", UUID.randomUUID().toString());
-        body.add("purchasePrice", 5925.66);
+        body.add("purchasePrice", 4431.45);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

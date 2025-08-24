@@ -45,6 +45,13 @@ public class TransactionUser   extends AbstractAuditableEntity  {
 	)
 
 	private String remoteId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String localId ;
 	@ManyToOne
 	@JoinColumn(name = "transaction_id", nullable = true)
 	private com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction transaction;
@@ -95,6 +102,7 @@ public class TransactionUser   extends AbstractAuditableEntity  {
 		"id='" + id + '\'' +
 			", name=" + name +
 			", remoteId=" + remoteId +
+			", localId=" + localId +
 			", transaction=" + transaction +
 			", user=" + user +
 			", syncAt=" + syncAt +
