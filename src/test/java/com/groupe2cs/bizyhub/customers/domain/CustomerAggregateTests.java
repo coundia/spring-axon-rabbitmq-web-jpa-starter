@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.customers.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.customers.domain.exception.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.UUID;
-import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.customers.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
+import java.util.UUID;
 
 
 public class CustomerAggregateTests extends BaseUnitTests {
@@ -19,8 +19,8 @@ void it_should_create_customer_with_valid_values() {
 	CustomerFirstName firstName = CustomerFirstName.create(UUID.randomUUID().toString());
 	CustomerLastName lastName = CustomerLastName.create(UUID.randomUUID().toString());
 	CustomerFullName fullName = CustomerFullName.create(UUID.randomUUID().toString());
-	CustomerBalance balance = CustomerBalance.create(5987.23);
-	CustomerBalanceDebt balanceDebt = CustomerBalanceDebt.create(8472.99);
+	CustomerBalance balance = CustomerBalance.create(7670.55);
+	CustomerBalanceDebt balanceDebt = CustomerBalanceDebt.create(2520.4);
 	CustomerPhone phone = CustomerPhone.create(UUID.randomUUID().toString());
 	CustomerEmail email = CustomerEmail.create(UUID.randomUUID().toString());
 	CustomerNotes notes = CustomerNotes.create(UUID.randomUUID().toString());

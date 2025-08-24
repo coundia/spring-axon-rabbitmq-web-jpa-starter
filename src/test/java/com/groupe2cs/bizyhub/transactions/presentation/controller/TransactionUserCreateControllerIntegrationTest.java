@@ -41,6 +41,7 @@ void it_should_be_able_to_add_transactionuser() {
 		TransactionUserRequest requestDTO = new TransactionUserRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
+		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setTransaction(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value());
 		requestDTO.setUser(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
@@ -54,6 +55,7 @@ void it_should_be_able_to_add_transactionuser() {
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getName()).isEqualTo(requestDTO.getName());
+		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
 		assertThat(response.getBody().getTransaction()).isEqualTo(requestDTO.getTransaction());
 		assertThat(response.getBody().getUser()).isEqualTo(requestDTO.getUser());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());

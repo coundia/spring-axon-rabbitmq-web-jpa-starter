@@ -56,6 +56,17 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
         LEFT JOIN AccountUser au ON au.account.id = t.account.id
         WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
         """)
+        List<Transaction> findByRemoteIdAndCreatedById(String valueId, String userId);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByRemoteIdAndTenantName(String remoteId, String tenantName);
+
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Transaction> findByRemoteIdAndTenantId(String remoteId, String tenantId);
+        @Query("""
+        SELECT DISTINCT t FROM Transaction t
+        LEFT JOIN AccountUser au ON au.account.id = t.account.id
+        WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
+        """)
         List<Transaction> findByDetailsAndCreatedById(String valueId, String userId);
         @Query("SELECT e FROM Transaction e WHERE LOWER(e.details) LIKE LOWER(CONCAT('%', :details, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Transaction> findByDetailsAndTenantName(String details, String tenantName);
@@ -76,7 +87,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
         @Query("""
         SELECT e FROM Transaction e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -85,7 +95,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
          @Query("""
         SELECT e FROM Transaction e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -119,6 +128,17 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
         LEFT JOIN AccountUser au ON au.account.id = t.account.id
         WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
         """)
+        List<Transaction> findByTypeEntryAndCreatedById(String valueId, String userId);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.typeEntry) LIKE LOWER(CONCAT('%', :typeEntry, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByTypeEntryAndTenantName(String typeEntry, String tenantName);
+
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.typeEntry) LIKE LOWER(CONCAT('%', :typeEntry, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Transaction> findByTypeEntryAndTenantId(String typeEntry, String tenantId);
+        @Query("""
+        SELECT DISTINCT t FROM Transaction t
+        LEFT JOIN AccountUser au ON au.account.id = t.account.id
+        WHERE t.account.id = :valueId AND (t.createdBy.id = :userId OR au.user.id = :userId OR au.account.createdBy.id = :userId)
+        """)
         List<Transaction> findByTypeTransactionRawAndCreatedById(String valueId, String userId);
         @Query("SELECT e FROM Transaction e WHERE LOWER(e.typeTransactionRaw) LIKE LOWER(CONCAT('%', :typeTransactionRaw, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Transaction> findByTypeTransactionRawAndTenantName(String typeTransactionRaw, String tenantName);
@@ -128,7 +148,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
         @Query("""
         SELECT e FROM Transaction e
         WHERE e.dateTransaction >= :#{#dateTransaction.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.dateTransaction < :#{#dateTransaction.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -137,7 +156,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
          @Query("""
         SELECT e FROM Transaction e
         WHERE e.dateTransaction >= :#{#dateTransaction.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.dateTransaction < :#{#dateTransaction.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)

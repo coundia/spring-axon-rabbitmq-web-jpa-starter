@@ -28,6 +28,7 @@ public class CreateSettingCommand implements Serializable {
  	private SettingName name;
  	private SettingValue value;
  	private SettingLocale locale;
+ 	private SettingRemoteId remoteId;
  	private SettingDetails details;
  	private SettingSyncAt syncAt;
  	private SettingIsActive isActive;
@@ -38,6 +39,7 @@ public class CreateSettingCommand implements Serializable {
    SettingName name , 
    SettingValue value , 
    SettingLocale locale , 
+   SettingRemoteId remoteId , 
    SettingDetails details , 
    SettingSyncAt syncAt , 
    SettingIsActive isActive , 
@@ -49,6 +51,7 @@ public class CreateSettingCommand implements Serializable {
   this.name = name ; 
   this.value = value ; 
   this.locale = locale ; 
+  this.remoteId = remoteId ; 
   this.details = details ; 
   this.syncAt = syncAt ; 
   this.isActive = isActive ; 

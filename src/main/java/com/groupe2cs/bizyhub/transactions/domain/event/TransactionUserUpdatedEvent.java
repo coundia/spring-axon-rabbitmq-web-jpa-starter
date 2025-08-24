@@ -19,6 +19,7 @@ public class TransactionUserUpdatedEvent implements Serializable {
 
 	private TransactionUserId id;
 	private TransactionUserName name;
+	private TransactionUserRemoteId remoteId;
 	private TransactionUserTransaction transaction;
 	private TransactionUserUser user;
 	private TransactionUserSyncAt syncAt;

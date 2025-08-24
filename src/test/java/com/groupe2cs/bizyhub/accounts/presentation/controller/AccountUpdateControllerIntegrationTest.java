@@ -63,12 +63,12 @@ public class AccountUpdateControllerIntegrationTest extends BaseIntegrationTests
         body.add("status", UUID.randomUUID().toString());
         body.add("currency", UUID.randomUUID().toString());
         body.add("typeAccount", UUID.randomUUID().toString());
-        body.add("balance", 9613.46);
-        body.add("balancePrev", 2671.36);
-        body.add("balanceBlocked", 33.37);
-        body.add("balanceInit", 3698.14);
-        body.add("balanceGoal", 3558.45);
-        body.add("balanceLimit", 2901.81);
+        body.add("balance", 5792.66);
+        body.add("balancePrev", 4084.76);
+        body.add("balanceBlocked", 1503.48);
+        body.add("balanceInit", 175.69);
+        body.add("balanceGoal", 8716.08);
+        body.add("balanceLimit", 2507.81);
         body.add("description", UUID.randomUUID().toString());
         body.add("isActive", false);
         body.add("isDefault", true);

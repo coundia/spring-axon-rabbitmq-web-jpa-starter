@@ -1,7 +1,7 @@
 package com.groupe2cs.bizyhub.companies.application.usecase;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.companies.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.companies.infrastructure.entity.Company;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;

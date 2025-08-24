@@ -32,6 +32,7 @@ try {
 TransactionUser entity = TransactionUser.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.name(event.getName() == null ? null : event.getName().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
   		.transaction( event.getTransaction() == null ? null : new com.groupe2cs.bizyhub.transactions.infrastructure.entity.Transaction(event.getTransaction().value()))
  		.user( event.getUser() == null ? null : new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUser().value()))
 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
@@ -73,6 +74,9 @@ TransactionUser entity = repository.findById(event.getId().value())
     }
 	if(event.getName() != null) {
 		entity.setName(event.getName().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
     }
 
      if(event.getTransaction() != null) {

@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateStockMovementCommand command = new CreateStockMovementCommand(
- StockMovementId.create(UUID.randomUUID().toString()) ,  StockMovementTypeStockMovement.create(UUID.randomUUID().toString()) ,  StockMovementQuantity.create(68) ,  StockMovementCompany.create(UUID.randomUUID().toString()) ,  StockMovementSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  StockMovementProductVariant.create(UUID.randomUUID().toString()) ,  StockMovementOrderLineId.create(UUID.randomUUID().toString()) ,  StockMovementDiscriminator.create(UUID.randomUUID().toString()) ,  StockMovementCreatedBy.create(UUID.randomUUID().toString()) ,  StockMovementTenant.create(UUID.randomUUID().toString()) 
+ StockMovementId.create(UUID.randomUUID().toString()) ,  StockMovementTypeStockMovement.create(UUID.randomUUID().toString()) ,  StockMovementQuantity.create(57) ,  StockMovementRemoteId.create(UUID.randomUUID().toString()) ,  StockMovementCompany.create(UUID.randomUUID().toString()) ,  StockMovementSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  StockMovementProductVariant.create(UUID.randomUUID().toString()) ,  StockMovementOrderLineId.create(UUID.randomUUID().toString()) ,  StockMovementDiscriminator.create(UUID.randomUUID().toString()) ,  StockMovementCreatedBy.create(UUID.randomUUID().toString()) ,  StockMovementTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -40,6 +40,8 @@ assertThat(sentCommand.getTypeStockMovement().value()).isEqualTo(
 command.getTypeStockMovement().value());
 assertThat(sentCommand.getQuantity().value()).isEqualTo(
 command.getQuantity().value());
+assertThat(sentCommand.getRemoteId().value()).isEqualTo(
+command.getRemoteId().value());
 assertThat(sentCommand.getCompany().value()).isEqualTo(
 command.getCompany().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(

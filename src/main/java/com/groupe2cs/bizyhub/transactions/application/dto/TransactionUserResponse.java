@@ -24,6 +24,8 @@ public class TransactionUserResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String name;
 	@Schema(description = "", example = "")
+	private String remoteId;
+	@Schema(description = "", example = "")
 	private String transaction;
 	@Schema(description = "", example = "")
 	private String user;

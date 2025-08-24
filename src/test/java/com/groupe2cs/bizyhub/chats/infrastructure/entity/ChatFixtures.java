@@ -84,6 +84,7 @@ public class ChatFixtures {
 				.responses(ChatResponses.create(UUID.randomUUID().toString()))
 				.state(ChatState.create(UUID.randomUUID().toString()))
 				.syncAt(ChatSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
+				.remoteId(ChatRemoteId.create(UUID.randomUUID().toString()))
 				.account(ChatAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
 				.dateTransaction(ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
 					.files(ChatFiles.create(fileName))
@@ -111,6 +112,7 @@ public class ChatFixtures {
         .responses(ChatResponses.create(UUID.randomUUID().toString()))
         .state(ChatState.create(UUID.randomUUID().toString()))
         .syncAt(ChatSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
+        .remoteId(ChatRemoteId.create(UUID.randomUUID().toString()))
         .dateTransaction(ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
         .files(ChatFiles.create(fileName))
         .build();

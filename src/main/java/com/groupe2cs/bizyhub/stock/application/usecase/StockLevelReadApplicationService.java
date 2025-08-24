@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.stock.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
-import com.groupe2cs.bizyhub.stock.application.query.*;
-import com.groupe2cs.bizyhub.stock.application.mapper.*;
 import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import com.groupe2cs.bizyhub.stock.application.mapper.*;
+import com.groupe2cs.bizyhub.stock.application.query.*;
+import com.groupe2cs.bizyhub.stock.application.dto.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -38,6 +38,16 @@ public StockLevelResponse findByStockLevelId(StockLevelId value, MetaRequest met
 }
 
 
+public List<StockLevelResponse> findByStockLevelRemoteId(
+	StockLevelRemoteId value,
+	MetaRequest metaRequest
+	) {
+
+	FindByStockLevelRemoteIdQuery query = new FindByStockLevelRemoteIdQuery(value,metaRequest);
+	CompletableFuture<List<StockLevelResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(StockLevelResponse.class));
+	return future.join();
+}
 public List<StockLevelResponse> findByStockLevelStockOnHand(
 	StockLevelStockOnHand value,
 	MetaRequest metaRequest

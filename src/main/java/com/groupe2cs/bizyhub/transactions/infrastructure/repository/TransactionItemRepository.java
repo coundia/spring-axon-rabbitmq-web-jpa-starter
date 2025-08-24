@@ -64,10 +64,16 @@ public interface TransactionItemRepository extends JpaRepository<TransactionItem
 
         @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.unit.id) LIKE LOWER(CONCAT('%', :unit, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<TransactionItem> findByUnitIdAndTenantId(String unit, String tenantId);
+        @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<TransactionItem> findByRemoteIdAndCreatedById(String remoteId, String createdById);
+        @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<TransactionItem> findByRemoteIdAndTenantName(String remoteId, String tenantName);
+
+        @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<TransactionItem> findByRemoteIdAndTenantId(String remoteId, String tenantId);
         @Query("""
         SELECT e FROM TransactionItem e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -76,7 +82,6 @@ public interface TransactionItemRepository extends JpaRepository<TransactionItem
          @Query("""
         SELECT e FROM TransactionItem e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)

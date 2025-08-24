@@ -78,12 +78,14 @@ public class TransactionFixtures {
 
 			CreateTransactionCommand command = CreateTransactionCommand.builder()
 				.name(TransactionName.create(UUID.randomUUID().toString()))
-				.amount(TransactionAmount.create(338.35))
+				.amount(TransactionAmount.create(9651.09))
+				.remoteId(TransactionRemoteId.create(UUID.randomUUID().toString()))
 				.details(TransactionDetails.create(UUID.randomUUID().toString()))
-				.isActive(TransactionIsActive.create(false))
+				.isActive(TransactionIsActive.create(true))
 				.syncAt(TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.account(TransactionAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
 				.category(TransactionCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
+				.typeEntry(TransactionTypeEntry.create(UUID.randomUUID().toString()))
 				.typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
 				.dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
 			.build();
@@ -104,10 +106,12 @@ public class TransactionFixtures {
 
         CreateTransactionCommand command = CreateTransactionCommand.builder()
         .name(TransactionName.create(UUID.randomUUID().toString()))
-        .amount(TransactionAmount.create(338.35))
+        .amount(TransactionAmount.create(9651.09))
+        .remoteId(TransactionRemoteId.create(UUID.randomUUID().toString()))
         .details(TransactionDetails.create(UUID.randomUUID().toString()))
-        .isActive(TransactionIsActive.create(false))
+        .isActive(TransactionIsActive.create(true))
         .syncAt(TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
+        .typeEntry(TransactionTypeEntry.create(UUID.randomUUID().toString()))
         .typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
         .dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
         .build();

@@ -50,6 +50,23 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 
         @Query("SELECT e FROM AccountUser e WHERE LOWER(e.user.id) LIKE LOWER(CONCAT('%', :user, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<AccountUser> findByUserIdAndTenantId(String user, String tenantId);
+        @Query("""
+        SELECT e FROM AccountUser e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.createdBy.id = :createdById
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<AccountUser> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+        SELECT e FROM AccountUser e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+        AND e.tenant.id = :tenantId
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<AccountUser> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
+
         @Query("SELECT e FROM AccountUser e WHERE LOWER(e.username) LIKE LOWER(CONCAT('%', :username, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<AccountUser> findByUsernameAndCreatedById(String username, String createdById);
         @Query("SELECT e FROM AccountUser e WHERE LOWER(e.username) LIKE LOWER(CONCAT('%', :username, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -87,7 +104,6 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
        List<AccountUser> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
-	List<AccountUser> findBySyncAtAndTenantId(Instant syncAt, String tenantId);
 
-    List<AccountUser> findBySyncAtAndCreatedById(Instant syncAt, String createdById);
+
 }

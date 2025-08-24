@@ -41,15 +41,15 @@ void it_should_be_able_to_add_account() {
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setCurrency(UUID.randomUUID().toString());
 		requestDTO.setTypeAccount(UUID.randomUUID().toString());
-		requestDTO.setBalance(8836.15);
-		requestDTO.setBalancePrev(6130.26);
-		requestDTO.setBalanceBlocked(3871.45);
-		requestDTO.setBalanceInit(3681.44);
-		requestDTO.setBalanceGoal(7237.87);
-		requestDTO.setBalanceLimit(3080.6);
+		requestDTO.setBalance(7684.87);
+		requestDTO.setBalancePrev(2840.67);
+		requestDTO.setBalanceBlocked(6123.31);
+		requestDTO.setBalanceInit(7343.58);
+		requestDTO.setBalanceGoal(1435.95);
+		requestDTO.setBalanceLimit(2409.27);
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setIsActive(true);
-		requestDTO.setIsDefault(false);
+		requestDTO.setIsDefault(true);
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 
  		String uri = "/v1/commands/account";

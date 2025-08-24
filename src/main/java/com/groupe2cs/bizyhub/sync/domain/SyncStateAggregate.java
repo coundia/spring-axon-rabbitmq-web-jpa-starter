@@ -25,6 +25,7 @@ public class SyncStateAggregate {
 @AggregateIdentifier
 private SyncStateId id;
 private SyncStateEntityTable entityTable;
+private SyncStateRemoteId remoteId;
 private SyncStateSyncAt syncAt;
 private SyncStateLastSyncAt lastSyncAt;
 private SyncStateLastCursor lastCursor;
@@ -37,6 +38,7 @@ public SyncStateAggregate(CreateSyncStateCommand command) {
 apply(new SyncStateCreatedEvent(
 		command.getId(),
 		command.getEntityTable(),
+		command.getRemoteId(),
 		command.getSyncAt(),
 		command.getLastSyncAt(),
 		command.getLastCursor(),
@@ -57,6 +59,7 @@ public void handle(UpdateSyncStateCommand command) {
 apply(new SyncStateUpdatedEvent(
 		command.getId(),
 		command.getEntityTable(),
+		command.getRemoteId(),
 		command.getSyncAt(),
 		command.getLastSyncAt(),
 		command.getLastCursor(),
@@ -69,6 +72,7 @@ apply(new SyncStateUpdatedEvent(
 public void on(SyncStateCreatedEvent event) {
 	this.id = event.getId();
 	this.entityTable = event.getEntityTable();
+	this.remoteId = event.getRemoteId();
 	this.syncAt = event.getSyncAt();
 	this.lastSyncAt = event.getLastSyncAt();
 	this.lastCursor = event.getLastCursor();
@@ -85,6 +89,7 @@ this.id = event.getId();
 public void on(SyncStateUpdatedEvent event) {
 this.id = event.getId();
 	this.entityTable = event.getEntityTable();
+	this.remoteId = event.getRemoteId();
 	this.syncAt = event.getSyncAt();
 	this.lastSyncAt = event.getLastSyncAt();
 	this.lastCursor = event.getLastCursor();

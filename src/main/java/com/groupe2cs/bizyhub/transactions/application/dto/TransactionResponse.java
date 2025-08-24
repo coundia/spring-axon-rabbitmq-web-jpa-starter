@@ -26,6 +26,8 @@ public class TransactionResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private Double amount;
 	@Schema(description = "", example = "")
+	private String remoteId;
+	@Schema(description = "", example = "")
 	private String details;
 	@Schema(description = "", example = "")
 	private Boolean isActive;
@@ -35,6 +37,8 @@ public class TransactionResponse implements Serializable {
 	private String account;
 	@Schema(description = "", example = "")
 	private String category;
+	@Schema(description = "", example = "")
+	private String typeEntry;
 	@Schema(description = "", example = "")
 	private String typeTransactionRaw;
 	@Schema(description = "", example = "")

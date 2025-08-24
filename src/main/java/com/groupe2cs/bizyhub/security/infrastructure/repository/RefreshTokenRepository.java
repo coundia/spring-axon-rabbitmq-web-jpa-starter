@@ -46,7 +46,6 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
         @Query("""
         SELECT e FROM RefreshToken e
         WHERE e.expiration >= :#{#expiration.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.expiration < :#{#expiration.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -55,7 +54,6 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
          @Query("""
         SELECT e FROM RefreshToken e
         WHERE e.expiration >= :#{#expiration.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.expiration < :#{#expiration.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)

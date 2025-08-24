@@ -51,6 +51,13 @@ public class Transaction   extends AbstractAuditableEntity  {
 
 	)
 
+	private String remoteId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String details ;
 
 	@Column(nullable = true, 
@@ -72,6 +79,13 @@ public class Transaction   extends AbstractAuditableEntity  {
 	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = true)
 	private com.groupe2cs.bizyhub.categories.infrastructure.entity.Category category;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String typeEntry ;
 
 	@Column(nullable = true, 
 		unique = false
@@ -102,11 +116,13 @@ public class Transaction   extends AbstractAuditableEntity  {
 		"id='" + id + '\'' +
 			", name=" + name +
 			", amount=" + amount +
+			", remoteId=" + remoteId +
 			", details=" + details +
 			", isActive=" + isActive +
 			", syncAt=" + syncAt +
 			", account=" + account +
 			", category=" + category +
+			", typeEntry=" + typeEntry +
 			", typeTransactionRaw=" + typeTransactionRaw +
 			", dateTransaction=" + dateTransaction +
 			", createdBy=" + createdBy +

@@ -26,6 +26,7 @@ public class ChangeLogAggregate {
 private ChangeLogId id;
 private ChangeLogEntityTable entityTable;
 private ChangeLogEntityId entityId;
+private ChangeLogRemoteId remoteId;
 private ChangeLogOperation operation;
 private ChangeLogPayload payload;
 private ChangeLogStatus status;
@@ -42,6 +43,7 @@ apply(new ChangeLogCreatedEvent(
 		command.getId(),
 		command.getEntityTable(),
 		command.getEntityId(),
+		command.getRemoteId(),
 		command.getOperation(),
 		command.getPayload(),
 		command.getStatus(),
@@ -66,6 +68,7 @@ apply(new ChangeLogUpdatedEvent(
 		command.getId(),
 		command.getEntityTable(),
 		command.getEntityId(),
+		command.getRemoteId(),
 		command.getOperation(),
 		command.getPayload(),
 		command.getStatus(),
@@ -82,6 +85,7 @@ public void on(ChangeLogCreatedEvent event) {
 	this.id = event.getId();
 	this.entityTable = event.getEntityTable();
 	this.entityId = event.getEntityId();
+	this.remoteId = event.getRemoteId();
 	this.operation = event.getOperation();
 	this.payload = event.getPayload();
 	this.status = event.getStatus();
@@ -102,6 +106,7 @@ public void on(ChangeLogUpdatedEvent event) {
 this.id = event.getId();
 	this.entityTable = event.getEntityTable();
 	this.entityId = event.getEntityId();
+	this.remoteId = event.getRemoteId();
 	this.operation = event.getOperation();
 	this.payload = event.getPayload();
 	this.status = event.getStatus();

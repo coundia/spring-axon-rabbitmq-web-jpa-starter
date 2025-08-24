@@ -19,21 +19,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TransactionRequest", description = "Request payload for Transaction operations")
 public class TransactionRequest implements Serializable {
 
-	@Schema(description = "", example = "26346248-a8c5-44be-809a-28e87dffd5fa")
+	@Schema(description = "", example = "d2d90088-f4d8-417a-8371-12b3b2bd939d")
 	private String name;
-	@Schema(description = "", example = "3524.41")
+	@Schema(description = "", example = "1564.12")
 	private Double amount;
-	@Schema(description = "", example = "e8c23087-5302-47bb-855e-f420bbac8f85")
+	@Schema(description = "", example = "80fee18d-26bf-4e4f-ac69-7e5d4ff08ed5")
+	private String remoteId;
+	@Schema(description = "", example = "5fe60f9a-9331-4dd6-b783-e59752033b50")
 	private String details;
 	@Schema(description = "", example = "true")
 	private Boolean isActive;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "14bdbdff-39a9-4980-9d3e-516482a849ab")
+	@Schema(description = "", example = "2340ca6a-94ce-4e73-a510-4c824ee5bf14")
 	private String account;
-	@Schema(description = "", example = "bbf9806b-deef-4966-845d-59b9f5e3440c")
+	@Schema(description = "", example = "9769d07b-3742-4fa2-a2ff-7ff764b1014b")
 	private String category;
-	@Schema(description = "", example = "8f060197-6e92-4d60-a774-0be097da8817")
+	@Schema(description = "", example = "a0554c1b-97fa-4bc6-874f-e54f32ceac8d")
+	private String typeEntry;
+	@Schema(description = "", example = "e1b23846-518f-4a70-aa81-74d8fdb66201")
 	private String typeTransactionRaw;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant dateTransaction;

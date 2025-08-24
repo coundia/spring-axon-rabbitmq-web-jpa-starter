@@ -74,7 +74,6 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
         @Query("""
         SELECT e FROM Category e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -83,7 +82,6 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
          @Query("""
         SELECT e FROM Category e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)

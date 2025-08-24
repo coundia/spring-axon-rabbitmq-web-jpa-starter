@@ -25,6 +25,7 @@ public class UpdateTransactionUserCommand implements Serializable {
 @TargetAggregateIdentifier
 	private TransactionUserId id;
  	private TransactionUserName name;
+ 	private TransactionUserRemoteId remoteId;
  	private TransactionUserTransaction transaction;
  	private TransactionUserUser user;
  	private TransactionUserSyncAt syncAt;

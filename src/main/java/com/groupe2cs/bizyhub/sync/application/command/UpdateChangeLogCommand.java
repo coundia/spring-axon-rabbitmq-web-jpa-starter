@@ -26,6 +26,7 @@ public class UpdateChangeLogCommand implements Serializable {
 	private ChangeLogId id;
  	private ChangeLogEntityTable entityTable;
  	private ChangeLogEntityId entityId;
+ 	private ChangeLogRemoteId remoteId;
  	private ChangeLogOperation operation;
  	private ChangeLogPayload payload;
  	private ChangeLogStatus status;

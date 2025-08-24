@@ -36,6 +36,7 @@ Chat entity = Chat.builder()
  		.responses(event.getResponses() == null ? null : event.getResponses().value())
  		.state(event.getState() == null ? null : event.getState().value())
  		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
   		.account( event.getAccount() == null ? null : new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()))
 		.dateTransaction(event.getDateTransaction() == null ? null : event.getDateTransaction().value())
  .build();
@@ -85,6 +86,9 @@ Chat entity = repository.findById(event.getId().value())
     }
 	if(event.getSyncAt() != null) {
 		entity.setSyncAt(event.getSyncAt().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
     }
 
      if(event.getAccount() != null) {

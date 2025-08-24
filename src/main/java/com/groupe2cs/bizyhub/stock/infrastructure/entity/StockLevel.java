@@ -37,6 +37,13 @@ public class StockLevel   extends AbstractAuditableEntity  {
 
 	)
 
+	private String remoteId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private Integer stockOnHand ;
 
 	@Column(nullable = true, 
@@ -72,6 +79,7 @@ public class StockLevel   extends AbstractAuditableEntity  {
  	public String toString() {
 		return "StockLevel{" +
 		"id='" + id + '\'' +
+			", remoteId=" + remoteId +
 			", stockOnHand=" + stockOnHand +
 			", stockAllocated=" + stockAllocated +
 			", productVariant=" + productVariant +

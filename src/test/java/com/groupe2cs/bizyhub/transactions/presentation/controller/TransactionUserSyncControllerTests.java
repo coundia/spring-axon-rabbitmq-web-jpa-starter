@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,6 +43,7 @@ private TransactionUserRepository Repository;
 		.deltas(List.of(
 		TransactionUserDeltaDto.builder()
 .name(UUID.randomUUID().toString())
+.remoteId(UUID.randomUUID().toString())
 .transaction(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value())
 .user(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
@@ -74,6 +75,7 @@ private TransactionUserRepository Repository;
 			TransactionUserDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
+.remoteId(UUID.randomUUID().toString())
 .transaction(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value())
 .user(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value())
 .syncAt(java.time.Instant.now().plusSeconds(3600))

@@ -19,23 +19,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TransactionItemRequest", description = "Request payload for TransactionItem operations")
 public class TransactionItemRequest implements Serializable {
 
-	@Schema(description = "", example = "45df84cd-dac9-4f96-aa94-c2f6d6202ac9")
+	@Schema(description = "", example = "a8d54928-07c4-4122-88ed-34aecd2105a4")
 	private String transaction;
-	@Schema(description = "", example = "44a46599-a5ca-4825-8faf-73c458429133")
+	@Schema(description = "", example = "39af2b0a-8d4d-4050-870d-8447eb66e5b2")
 	private String product;
-	@Schema(description = "", example = "45512d88-eb64-426e-8428-ff5edc21732c")
+	@Schema(description = "", example = "3a5908cd-e375-4da9-81ff-2f57ff57d95e")
 	private String label;
-	@Schema(description = "", example = "58")
+	@Schema(description = "", example = "37")
 	private Integer quantity;
-	@Schema(description = "", example = "0eef2149-83a5-4a2b-adcb-bbd181eebdf5")
+	@Schema(description = "", example = "1f3b0795-5496-4234-8d72-72f925fa667c")
 	private String unit;
+	@Schema(description = "", example = "1cf337af-4846-41e6-a30a-3fbf1cabfa6e")
+	private String remoteId;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "4268.37")
+	@Schema(description = "", example = "205.59")
 	private Double unitPrice;
-	@Schema(description = "", example = "5672.48")
+	@Schema(description = "", example = "2368.62")
 	private Double total;
-	@Schema(description = "", example = "af0c9e04-fab7-4a73-924c-72703c1a5bee")
+	@Schema(description = "", example = "405f3e76-56cb-4520-b2b4-56ab0ea9f47f")
 	private String notes;
 
 }

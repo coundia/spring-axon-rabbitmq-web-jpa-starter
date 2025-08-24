@@ -27,6 +27,7 @@ public class StockMovementDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private StockMovementId id;
 

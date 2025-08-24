@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.settings.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.settings.application.dto.*;
 import com.groupe2cs.bizyhub.settings.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.settings.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,7 @@ public class SettingSyncApplicationService {
 								.name(SettingName.create(d.getName()))
 								.value(SettingValue.create(d.getValue()))
 								.locale(SettingLocale.create(d.getLocale()))
+								.remoteId(SettingRemoteId.create(d.getRemoteId()))
 								.details(SettingDetails.create(d.getDetails()))
 								.syncAt(SettingSyncAt.create(d.getSyncAt()))
 								.isActive(SettingIsActive.create(d.getIsActive()))
@@ -54,6 +55,7 @@ public class SettingSyncApplicationService {
 							.name(SettingName.create(d.getName()))
 							.value(SettingValue.create(d.getValue()))
 							.locale(SettingLocale.create(d.getLocale()))
+							.remoteId(SettingRemoteId.create(d.getRemoteId()))
 							.details(SettingDetails.create(d.getDetails()))
 							.syncAt(SettingSyncAt.create(d.getSyncAt()))
 							.isActive(SettingIsActive.create(d.getIsActive()))

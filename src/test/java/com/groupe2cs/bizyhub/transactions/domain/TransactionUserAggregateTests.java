@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import com.groupe2cs.bizyhub.transactions.domain.exception.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.transactions.domain.exception.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class TransactionUserAggregateTests extends BaseUnitTests {
@@ -15,18 +15,20 @@ public class TransactionUserAggregateTests extends BaseUnitTests {
 void it_should_create_transactionUser_with_valid_values() {
 	TransactionUserId id = TransactionUserId.create(UUID.randomUUID().toString());
 	TransactionUserName name = TransactionUserName.create(UUID.randomUUID().toString());
+	TransactionUserRemoteId remoteId = TransactionUserRemoteId.create(UUID.randomUUID().toString());
 	TransactionUserTransaction transaction = TransactionUserTransaction.create(UUID.randomUUID().toString());
 	TransactionUserUser user = TransactionUserUser.create(UUID.randomUUID().toString());
 	TransactionUserSyncAt syncAt = TransactionUserSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	TransactionUserUsername username = TransactionUserUsername.create(UUID.randomUUID().toString());
 	TransactionUserDetails details = TransactionUserDetails.create(UUID.randomUUID().toString());
-	TransactionUserIsActive isActive = TransactionUserIsActive.create(false);
+	TransactionUserIsActive isActive = TransactionUserIsActive.create(true);
 	TransactionUserCreatedBy createdBy = TransactionUserCreatedBy.create(UUID.randomUUID().toString());
 	TransactionUserTenant tenant = TransactionUserTenant.create(UUID.randomUUID().toString());
-	TransactionUserAggregate aggregateTransactionUserAggregate = new TransactionUserAggregate(id, name, transaction, user, syncAt, username, details, isActive, createdBy, tenant);
+	TransactionUserAggregate aggregateTransactionUserAggregate = new TransactionUserAggregate(id, name, remoteId, transaction, user, syncAt, username, details, isActive, createdBy, tenant);
 	assertThat(aggregateTransactionUserAggregate.getId()).isNotNull();
 	assertThat(aggregateTransactionUserAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateTransactionUserAggregate.getName()).isEqualTo(name);
+	assertThat(aggregateTransactionUserAggregate.getRemoteId()).isEqualTo(remoteId);
 	assertThat(aggregateTransactionUserAggregate.getTransaction()).isEqualTo(transaction);
 	assertThat(aggregateTransactionUserAggregate.getUser()).isEqualTo(user);
 	assertThat(aggregateTransactionUserAggregate.getSyncAt()).isEqualTo(syncAt);

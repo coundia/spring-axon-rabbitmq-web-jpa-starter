@@ -26,6 +26,7 @@ public class StockMovementAggregate {
 private StockMovementId id;
 private StockMovementTypeStockMovement typeStockMovement;
 private StockMovementQuantity quantity;
+private StockMovementRemoteId remoteId;
 private StockMovementCompany company;
 private StockMovementSyncAt syncAt;
 private StockMovementProductVariant productVariant;
@@ -41,6 +42,7 @@ apply(new StockMovementCreatedEvent(
 		command.getId(),
 		command.getTypeStockMovement(),
 		command.getQuantity(),
+		command.getRemoteId(),
 		command.getCompany(),
 		command.getSyncAt(),
 		command.getProductVariant(),
@@ -64,6 +66,7 @@ apply(new StockMovementUpdatedEvent(
 		command.getId(),
 		command.getTypeStockMovement(),
 		command.getQuantity(),
+		command.getRemoteId(),
 		command.getCompany(),
 		command.getSyncAt(),
 		command.getProductVariant(),
@@ -79,6 +82,7 @@ public void on(StockMovementCreatedEvent event) {
 	this.id = event.getId();
 	this.typeStockMovement = event.getTypeStockMovement();
 	this.quantity = event.getQuantity();
+	this.remoteId = event.getRemoteId();
 	this.company = event.getCompany();
 	this.syncAt = event.getSyncAt();
 	this.productVariant = event.getProductVariant();
@@ -98,6 +102,7 @@ public void on(StockMovementUpdatedEvent event) {
 this.id = event.getId();
 	this.typeStockMovement = event.getTypeStockMovement();
 	this.quantity = event.getQuantity();
+	this.remoteId = event.getRemoteId();
 	this.company = event.getCompany();
 	this.syncAt = event.getSyncAt();
 	this.productVariant = event.getProductVariant();

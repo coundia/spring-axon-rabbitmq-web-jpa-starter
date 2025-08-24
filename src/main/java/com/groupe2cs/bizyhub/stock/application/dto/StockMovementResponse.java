@@ -26,6 +26,8 @@ public class StockMovementResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private Integer quantity;
 	@Schema(description = "", example = "")
+	private String remoteId;
+	@Schema(description = "", example = "")
 	private String company;
 	@Schema(description = "", example = "")
 	private java.time.Instant syncAt;

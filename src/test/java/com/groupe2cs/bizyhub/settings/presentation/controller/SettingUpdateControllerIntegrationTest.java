@@ -61,6 +61,7 @@ public class SettingUpdateControllerIntegrationTest extends BaseIntegrationTests
         body.add("name", UUID.randomUUID().toString());
         body.add("value", UUID.randomUUID().toString());
         body.add("locale", UUID.randomUUID().toString());
+        body.add("remoteId", UUID.randomUUID().toString());
         body.add("details", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("isActive", false);

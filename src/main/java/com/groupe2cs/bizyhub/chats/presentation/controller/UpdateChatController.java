@@ -58,6 +58,7 @@ public ResponseEntity<ChatResponse> addChat(
 			@RequestPart(value ="responses", required = false) String responses,
 			@RequestPart(value ="state", required = false) String state,
 			@RequestPart(value ="syncAt", required = false) java.time.Instant syncAt,
+			@RequestPart(value ="remoteId", required = false) String remoteId,
 			@RequestPart(value ="account", required = false) String account,
 			@RequestPart(value ="dateTransaction", required = false) java.time.Instant dateTransaction
 	) {
@@ -71,7 +72,7 @@ public ResponseEntity<ChatResponse> addChat(
 
 	ChatResponse response = applicationService.updateChat(
 	ChatId.create(id),
-	files,		messages,		responsesJson,		responses,		state,		syncAt,		account,		dateTransaction,
+	files,		messages,		responsesJson,		responses,		state,		syncAt,		remoteId,		account,		dateTransaction,
 	metaRequest
 	);
 

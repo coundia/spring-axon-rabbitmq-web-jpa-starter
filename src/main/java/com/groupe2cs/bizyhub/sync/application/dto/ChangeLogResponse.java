@@ -26,6 +26,8 @@ public class ChangeLogResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String entityId;
 	@Schema(description = "", example = "")
+	private String remoteId;
+	@Schema(description = "", example = "")
 	private String operation;
 	@Schema(description = "", example = "")
 	private String payload;

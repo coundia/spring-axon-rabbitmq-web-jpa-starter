@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -50,9 +50,9 @@ private ProductRepository Repository;
 .unit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
-.defaultPrice(6006.97)
+.defaultPrice(7720.98)
 .statuses(UUID.randomUUID().toString())
-.purchasePrice(4763.05)
+.purchasePrice(1585.31)
 		.type("CREATE")
 		.build()
 		))
@@ -85,9 +85,9 @@ private ProductRepository Repository;
 .unit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
-.defaultPrice(6006.97)
+.defaultPrice(7720.98)
 .statuses(UUID.randomUUID().toString())
-.purchasePrice(4763.05)
+.purchasePrice(1585.31)
 			.type("UPDATE")
 			.build()
 			))

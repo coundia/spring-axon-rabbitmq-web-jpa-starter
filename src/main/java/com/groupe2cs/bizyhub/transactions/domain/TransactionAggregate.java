@@ -26,11 +26,13 @@ public class TransactionAggregate {
 private TransactionId id;
 private TransactionName name;
 private TransactionAmount amount;
+private TransactionRemoteId remoteId;
 private TransactionDetails details;
 private TransactionIsActive isActive;
 private TransactionSyncAt syncAt;
 private TransactionAccount account;
 private TransactionCategory category;
+private TransactionTypeEntry typeEntry;
 private TransactionTypeTransactionRaw typeTransactionRaw;
 private TransactionDateTransaction dateTransaction;
 private TransactionCreatedBy createdBy;
@@ -43,11 +45,13 @@ apply(new TransactionCreatedEvent(
 		command.getId(),
 		command.getName(),
 		command.getAmount(),
+		command.getRemoteId(),
 		command.getDetails(),
 		command.getIsActive(),
 		command.getSyncAt(),
 		command.getAccount(),
 		command.getCategory(),
+		command.getTypeEntry(),
 		command.getTypeTransactionRaw(),
 		command.getDateTransaction(),
 		command.getCreatedBy(),
@@ -68,11 +72,13 @@ apply(new TransactionUpdatedEvent(
 		command.getId(),
 		command.getName(),
 		command.getAmount(),
+		command.getRemoteId(),
 		command.getDetails(),
 		command.getIsActive(),
 		command.getSyncAt(),
 		command.getAccount(),
 		command.getCategory(),
+		command.getTypeEntry(),
 		command.getTypeTransactionRaw(),
 		command.getDateTransaction(),
 		command.getCreatedBy(),
@@ -85,11 +91,13 @@ public void on(TransactionCreatedEvent event) {
 	this.id = event.getId();
 	this.name = event.getName();
 	this.amount = event.getAmount();
+	this.remoteId = event.getRemoteId();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.syncAt = event.getSyncAt();
 	this.account = event.getAccount();
 	this.category = event.getCategory();
+	this.typeEntry = event.getTypeEntry();
 	this.typeTransactionRaw = event.getTypeTransactionRaw();
 	this.dateTransaction = event.getDateTransaction();
 	this.createdBy = event.getCreatedBy();
@@ -106,11 +114,13 @@ public void on(TransactionUpdatedEvent event) {
 this.id = event.getId();
 	this.name = event.getName();
 	this.amount = event.getAmount();
+	this.remoteId = event.getRemoteId();
 	this.details = event.getDetails();
 	this.isActive = event.getIsActive();
 	this.syncAt = event.getSyncAt();
 	this.account = event.getAccount();
 	this.category = event.getCategory();
+	this.typeEntry = event.getTypeEntry();
 	this.typeTransactionRaw = event.getTypeTransactionRaw();
 	this.dateTransaction = event.getDateTransaction();
 	this.createdBy = event.getCreatedBy();

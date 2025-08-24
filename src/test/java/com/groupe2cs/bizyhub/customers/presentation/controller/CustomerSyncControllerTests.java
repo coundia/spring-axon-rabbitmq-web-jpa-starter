@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.customers.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.customers.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.customers.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.customers.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.customers.application.dto.*;
+import com.groupe2cs.bizyhub.customers.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.customers.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -45,8 +45,8 @@ private CustomerRepository Repository;
 .firstName(UUID.randomUUID().toString())
 .lastName(UUID.randomUUID().toString())
 .fullName(UUID.randomUUID().toString())
-.balance(5023.15)
-.balanceDebt(200.13)
+.balance(5348.12)
+.balanceDebt(8611.62)
 .phone(UUID.randomUUID().toString())
 .email(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
@@ -89,8 +89,8 @@ private CustomerRepository Repository;
 .firstName(UUID.randomUUID().toString())
 .lastName(UUID.randomUUID().toString())
 .fullName(UUID.randomUUID().toString())
-.balance(5023.15)
-.balanceDebt(200.13)
+.balance(5348.12)
+.balanceDebt(8611.62)
 .phone(UUID.randomUUID().toString())
 .email(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())

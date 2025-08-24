@@ -49,7 +49,7 @@ void it_should_be_able_to_add_transactionentry() {
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setDescription(UUID.randomUUID().toString());
-		requestDTO.setAmount(7404.41);
+		requestDTO.setAmount(4667.99);
 		requestDTO.setTypeEntry(UUID.randomUUID().toString());
 		requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setStatus(UUID.randomUUID().toString());

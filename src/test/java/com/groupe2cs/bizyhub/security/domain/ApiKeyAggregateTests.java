@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.security.domain;
 
-import com.groupe2cs.bizyhub.security.domain.exception.*;
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.domain.exception.*;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class ApiKeyAggregateTests extends BaseUnitTests {

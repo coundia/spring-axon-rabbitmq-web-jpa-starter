@@ -74,9 +74,9 @@ public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests
         body.add("unit", updated.getUnit().value());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("category", updated.getCategory().value());
-        body.add("defaultPrice", 9498.42);
+        body.add("defaultPrice", 7035.86);
         body.add("statuses", UUID.randomUUID().toString());
-        body.add("purchasePrice", 1394.62);
+        body.add("purchasePrice", 5925.66);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

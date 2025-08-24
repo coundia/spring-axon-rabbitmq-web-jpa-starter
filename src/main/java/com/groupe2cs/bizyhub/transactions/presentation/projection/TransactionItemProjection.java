@@ -36,7 +36,8 @@ TransactionItem entity = TransactionItem.builder()
 		.label(event.getLabel() == null ? null : event.getLabel().value())
  		.quantity(event.getQuantity() == null ? null : event.getQuantity().value())
   		.unit( event.getUnit() == null ? null : new com.groupe2cs.bizyhub.units.infrastructure.entity.Unit(event.getUnit().value()))
-		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
+		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
+ 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
  		.unitPrice(event.getUnitPrice() == null ? null : event.getUnitPrice().value())
  		.total(event.getTotal() == null ? null : event.getTotal().value())
  		.notes(event.getNotes() == null ? null : event.getNotes().value())
@@ -91,6 +92,9 @@ TransactionItem entity = repository.findById(event.getId().value())
      if(event.getUnit() != null) {
 		  entity.setUnit(new com.groupe2cs.bizyhub.units.infrastructure.entity.Unit(event.getUnit().value()));
 	  }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
+    }
 	if(event.getSyncAt() != null) {
 		entity.setSyncAt(event.getSyncAt().value());
     }

@@ -21,6 +21,7 @@ public class SettingCreatedEvent implements Serializable {
 	private SettingName name;
 	private SettingValue value;
 	private SettingLocale locale;
+	private SettingRemoteId remoteId;
 	private SettingDetails details;
 	private SettingSyncAt syncAt;
 	private SettingIsActive isActive;

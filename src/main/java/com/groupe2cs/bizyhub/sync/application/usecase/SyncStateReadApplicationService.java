@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.sync.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.sync.application.dto.*;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sync.application.query.*;
 import com.groupe2cs.bizyhub.sync.application.mapper.*;
+import com.groupe2cs.bizyhub.sync.application.query.*;
+import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
+import com.groupe2cs.bizyhub.sync.application.dto.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -44,6 +44,16 @@ public List<SyncStateResponse> findBySyncStateEntityTable(
 	) {
 
 	FindBySyncStateEntityTableQuery query = new FindBySyncStateEntityTableQuery(value,metaRequest);
+	CompletableFuture<List<SyncStateResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(SyncStateResponse.class));
+	return future.join();
+}
+public List<SyncStateResponse> findBySyncStateRemoteId(
+	SyncStateRemoteId value,
+	MetaRequest metaRequest
+	) {
+
+	FindBySyncStateRemoteIdQuery query = new FindBySyncStateRemoteIdQuery(value,metaRequest);
 	CompletableFuture<List<SyncStateResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(SyncStateResponse.class));
 	return future.join();

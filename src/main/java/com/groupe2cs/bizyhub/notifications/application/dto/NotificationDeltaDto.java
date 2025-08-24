@@ -26,19 +26,21 @@ public class NotificationDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "d460d354-8327-43a8-affc-590bf01e9b0a")
+		@Schema(description = "", example = "ff695ac8-84b8-4b9b-8b74-6ae1c4aab578")
 		private String deviceToken;
-		@Schema(description = "", example = "3b28ee93-cbc2-4958-8c0d-ba22a3a3610c")
+		@Schema(description = "", example = "44160eb2-3490-45d6-8a7e-4ae421748550")
 		private String title;
-		@Schema(description = "", example = "2a668021-8367-4fac-a98b-d66af233636e")
+		@Schema(description = "", example = "3697146f-0504-4b8b-8a25-2bbea47e9936")
 		private String message;
-		@Schema(description = "", example = "46bfaf99-9bf9-4fca-bc66-f605946202f1")
+		@Schema(description = "", example = "a516e886-6181-4630-aa0b-f54334167eda")
 		private String status;
+		@Schema(description = "", example = "4278340d-272b-4eef-b2c9-182f62deed74")
+		private String remoteId;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "de639376-e859-45f8-8255-7e47b2f1ad31")
+		@Schema(description = "", example = "f815336f-6302-4729-872c-acb760fa98f6")
 		private String reserved;
-		@Schema(description = "", example = "07dfcd4d-1cfe-43d2-ab8b-d8db754b8a3d")
+		@Schema(description = "", example = "faf47495-4477-4946-ba94-af0b3f4890e2")
 		private String errorMessage;
 
 }

@@ -27,11 +27,13 @@ public class CreateTransactionCommand implements Serializable {
 	private TransactionId id = TransactionId.create(UUID.randomUUID().toString());
  	private TransactionName name;
  	private TransactionAmount amount;
+ 	private TransactionRemoteId remoteId;
  	private TransactionDetails details;
  	private TransactionIsActive isActive;
  	private TransactionSyncAt syncAt;
  	private TransactionAccount account;
  	private TransactionCategory category;
+ 	private TransactionTypeEntry typeEntry;
  	private TransactionTypeTransactionRaw typeTransactionRaw;
  	private TransactionDateTransaction dateTransaction;
  	private TransactionCreatedBy createdBy;
@@ -40,11 +42,13 @@ public class CreateTransactionCommand implements Serializable {
  
    TransactionName name , 
    TransactionAmount amount , 
+   TransactionRemoteId remoteId , 
    TransactionDetails details , 
    TransactionIsActive isActive , 
    TransactionSyncAt syncAt , 
    TransactionAccount account , 
    TransactionCategory category , 
+   TransactionTypeEntry typeEntry , 
    TransactionTypeTransactionRaw typeTransactionRaw , 
    TransactionDateTransaction dateTransaction , 
    TransactionCreatedBy createdBy , 
@@ -54,11 +58,13 @@ public class CreateTransactionCommand implements Serializable {
  
   this.name = name ; 
   this.amount = amount ; 
+  this.remoteId = remoteId ; 
   this.details = details ; 
   this.isActive = isActive ; 
   this.syncAt = syncAt ; 
   this.account = account ; 
   this.category = category ; 
+  this.typeEntry = typeEntry ; 
   this.typeTransactionRaw = typeTransactionRaw ; 
   this.dateTransaction = dateTransaction ; 
   this.createdBy = createdBy ; 

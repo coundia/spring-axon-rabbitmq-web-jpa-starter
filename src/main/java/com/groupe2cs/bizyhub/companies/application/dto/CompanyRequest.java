@@ -19,41 +19,41 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "CompanyRequest", description = "Request payload for Company operations")
 public class CompanyRequest implements Serializable {
 
-	@Schema(description = "", example = "302f3a63-c35d-4a59-bead-450e902e245a")
+	@Schema(description = "", example = "56d1150a-bc6f-4385-a080-902c8c271697")
 	private String remoteId;
-	@Schema(description = "", example = "a43e1b9c-e67c-48e3-ae8b-09f17f00e5ab")
+	@Schema(description = "", example = "973a4140-559c-41bb-aae1-1b54310e1c01")
 	private String code;
-	@Schema(description = "", example = "5cf997e3-d406-4864-aea5-0d7583d63452")
+	@Schema(description = "", example = "59eed48d-a363-43b4-b5d0-256994339a5c")
 	private String name;
-	@Schema(description = "", example = "3340d83b-f3c6-431b-9ccf-9b29110dea53")
+	@Schema(description = "", example = "7c782829-6664-4cc0-97e8-eb5d707310ee")
 	private String description;
-	@Schema(description = "", example = "642cf302-2cf7-484a-8bba-9bcd77735dc6")
+	@Schema(description = "", example = "34cb67f2-613a-41c1-a05c-191bb30283c4")
 	private String phone;
-	@Schema(description = "", example = "5faea189-4eca-4cce-8a15-df7c1af97a7b")
+	@Schema(description = "", example = "750f3692-87c6-4f64-909a-529624290285")
 	private String email;
-	@Schema(description = "", example = "64d99aa0-6130-4326-a128-76380181cbee")
+	@Schema(description = "", example = "6efe160e-eb08-435d-9ef7-e361021cb576")
 	private String website;
-	@Schema(description = "", example = "9b0a4115-0538-40aa-b022-b48921ab0a5c")
+	@Schema(description = "", example = "3875332f-5444-491d-b455-5885a612e726")
 	private String taxId;
-	@Schema(description = "", example = "fdc4447f-f05b-48fb-8ed2-d0ffc0c9b7f2")
+	@Schema(description = "", example = "c8770107-001c-4caa-acde-6591ae927183")
 	private String currency;
-	@Schema(description = "", example = "2bb1703b-86ec-47e5-9eb5-6d62c8da1765")
+	@Schema(description = "", example = "aa28a3fb-4c5b-4c0d-84cd-3bd170c6e04d")
 	private String addressLine1;
-	@Schema(description = "", example = "43286246-f28c-43f3-ba74-60438ec58740")
+	@Schema(description = "", example = "3d182dc9-e3d4-4fe7-9a03-f059e4ea09b9")
 	private String addressLine2;
-	@Schema(description = "", example = "3640c002-05df-4ed6-b7d9-3e208f8e70f9")
+	@Schema(description = "", example = "dff73d36-0e40-41b3-9c5f-331cf1db7d85")
 	private String city;
-	@Schema(description = "", example = "c1ca0d68-1daa-4fe6-9eaf-f7d21274fe12")
+	@Schema(description = "", example = "3f715303-71b1-4f04-87e3-b51be69051e5")
 	private String region;
-	@Schema(description = "", example = "cc51e8bd-d340-4f00-bd1c-4a71c5f7c91a")
+	@Schema(description = "", example = "8c8a544a-2c03-4fc6-aab9-442f4c4c9485")
 	private String country;
-	@Schema(description = "", example = "cd306d50-88be-405b-b08c-19bccaada915")
+	@Schema(description = "", example = "423e7aec-aac2-4d0c-9a7e-d246cf9e28b7")
 	private String postalCode;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isActive;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean isDefault;
 
 }

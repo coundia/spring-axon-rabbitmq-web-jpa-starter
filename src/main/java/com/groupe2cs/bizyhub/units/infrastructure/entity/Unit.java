@@ -39,7 +39,7 @@ public class Unit   extends AbstractAuditableEntity  {
 
 	private String remoteId ;
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
 		unique = false
 
 	)

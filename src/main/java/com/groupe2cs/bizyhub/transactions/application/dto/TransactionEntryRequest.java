@@ -19,35 +19,35 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TransactionEntryRequest", description = "Request payload for TransactionEntry operations")
 public class TransactionEntryRequest implements Serializable {
 
-	@Schema(description = "", example = "3c3383f2-4922-4352-92c3-ad9ec0b12722")
+	@Schema(description = "", example = "160f5c7d-e9f3-47e3-84bf-bf10b22addd8")
 	private String remoteId;
-	@Schema(description = "", example = "d47772c1-1f2e-47cd-9cff-37022d5c436c")
+	@Schema(description = "", example = "063f8827-b09b-495e-bf46-0dfe0ff77030")
 	private String code;
-	@Schema(description = "", example = "a3996516-f9e6-4738-9053-b98dee9e1fda")
+	@Schema(description = "", example = "24574867-d1b6-468e-8988-904eaf61e217")
 	private String description;
-	@Schema(description = "", example = "6585.36")
+	@Schema(description = "", example = "2540.77")
 	private Double amount;
-	@Schema(description = "", example = "678bbcb9-9de3-41c5-a3bc-23f3afa554aa")
+	@Schema(description = "", example = "e9d0a524-d0da-4e6a-8943-d9e1cc9503ec")
 	private String typeEntry;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant dateTransaction;
-	@Schema(description = "", example = "6dac172e-be11-43e3-9c19-711559ad88b4")
+	@Schema(description = "", example = "39f3e052-7247-4a04-9e0e-3ef918df3c46")
 	private String status;
-	@Schema(description = "", example = "9ac5c709-7ad6-4815-b5a5-087d323352d2")
+	@Schema(description = "", example = "49fa8b5b-359b-4be6-b4c6-749018939b67")
 	private String entityName;
-	@Schema(description = "", example = "5f5e6925-160c-40fe-b509-46b0f95fae19")
+	@Schema(description = "", example = "1fd0a29c-f095-4436-bec1-730be887f0ab")
 	private String entityId;
-	@Schema(description = "", example = "cf193aae-a39f-46ee-ac85-2ac16d4b969c")
+	@Schema(description = "", example = "4656c1cd-ea65-4cc1-94e3-2b247c35b5e8")
 	private String account;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "0f27a75a-f46f-411c-ab3d-4bbb0c845ae4")
+	@Schema(description = "", example = "07ca7ebb-0ff1-4b74-8edd-14a8b0488440")
 	private String category;
-	@Schema(description = "", example = "32122264-fafd-47ca-bf24-5c766d3277f6")
+	@Schema(description = "", example = "3d05389a-e92e-4fde-925d-3fcd930b8bca")
 	private String company;
-	@Schema(description = "", example = "4d4e77ea-c550-4738-b3c7-446e2dfe106f")
+	@Schema(description = "", example = "b9747b01-7938-48fd-a52f-093abbe7cf52")
 	private String customer;
-	@Schema(description = "", example = "3e346b4d-c707-424b-b335-03e60ef90988")
+	@Schema(description = "", example = "ba246795-7353-48c5-9c98-a6251244370b")
 	private String debt;
 
 }

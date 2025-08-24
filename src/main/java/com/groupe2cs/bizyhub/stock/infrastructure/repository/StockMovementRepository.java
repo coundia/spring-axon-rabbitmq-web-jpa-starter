@@ -43,6 +43,13 @@ public interface StockMovementRepository extends JpaRepository<StockMovement, St
 
         @Query("SELECT e FROM StockMovement e WHERE e.quantity = :quantity AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<StockMovement> findByQuantityAndTenantId(Integer quantity, String tenantId);
+        @Query("SELECT e FROM StockMovement e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<StockMovement> findByRemoteIdAndCreatedById(String remoteId, String createdById);
+        @Query("SELECT e FROM StockMovement e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<StockMovement> findByRemoteIdAndTenantName(String remoteId, String tenantName);
+
+        @Query("SELECT e FROM StockMovement e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<StockMovement> findByRemoteIdAndTenantId(String remoteId, String tenantId);
         @Query("SELECT e FROM StockMovement e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<StockMovement> findByCompanyIdAndCreatedById(String company, String createdById);
         @Query("SELECT e FROM StockMovement e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -53,7 +60,6 @@ public interface StockMovementRepository extends JpaRepository<StockMovement, St
         @Query("""
         SELECT e FROM StockMovement e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -62,7 +68,6 @@ public interface StockMovementRepository extends JpaRepository<StockMovement, St
          @Query("""
         SELECT e FROM StockMovement e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)

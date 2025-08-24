@@ -27,6 +27,7 @@ private SettingId id;
 private SettingName name;
 private SettingValue value;
 private SettingLocale locale;
+private SettingRemoteId remoteId;
 private SettingDetails details;
 private SettingSyncAt syncAt;
 private SettingIsActive isActive;
@@ -41,6 +42,7 @@ apply(new SettingCreatedEvent(
 		command.getName(),
 		command.getValue(),
 		command.getLocale(),
+		command.getRemoteId(),
 		command.getDetails(),
 		command.getSyncAt(),
 		command.getIsActive(),
@@ -63,6 +65,7 @@ apply(new SettingUpdatedEvent(
 		command.getName(),
 		command.getValue(),
 		command.getLocale(),
+		command.getRemoteId(),
 		command.getDetails(),
 		command.getSyncAt(),
 		command.getIsActive(),
@@ -77,6 +80,7 @@ public void on(SettingCreatedEvent event) {
 	this.name = event.getName();
 	this.value = event.getValue();
 	this.locale = event.getLocale();
+	this.remoteId = event.getRemoteId();
 	this.details = event.getDetails();
 	this.syncAt = event.getSyncAt();
 	this.isActive = event.getIsActive();
@@ -95,6 +99,7 @@ this.id = event.getId();
 	this.name = event.getName();
 	this.value = event.getValue();
 	this.locale = event.getLocale();
+	this.remoteId = event.getRemoteId();
 	this.details = event.getDetails();
 	this.syncAt = event.getSyncAt();
 	this.isActive = event.getIsActive();

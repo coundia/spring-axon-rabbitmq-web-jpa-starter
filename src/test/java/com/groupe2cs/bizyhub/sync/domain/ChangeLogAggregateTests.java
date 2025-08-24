@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sync.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.sync.domain.exception.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class ChangeLogAggregateTests extends BaseUnitTests {
@@ -16,19 +16,21 @@ void it_should_create_changeLog_with_valid_values() {
 	ChangeLogId id = ChangeLogId.create(UUID.randomUUID().toString());
 	ChangeLogEntityTable entityTable = ChangeLogEntityTable.create(UUID.randomUUID().toString());
 	ChangeLogEntityId entityId = ChangeLogEntityId.create(UUID.randomUUID().toString());
+	ChangeLogRemoteId remoteId = ChangeLogRemoteId.create(UUID.randomUUID().toString());
 	ChangeLogOperation operation = ChangeLogOperation.create(UUID.randomUUID().toString());
 	ChangeLogPayload payload = ChangeLogPayload.create(UUID.randomUUID().toString());
 	ChangeLogStatus status = ChangeLogStatus.create(UUID.randomUUID().toString());
 	ChangeLogSyncAt syncAt = ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600));
-	ChangeLogAttempts attempts = ChangeLogAttempts.create(30);
+	ChangeLogAttempts attempts = ChangeLogAttempts.create(82);
 	ChangeLogError error = ChangeLogError.create(UUID.randomUUID().toString());
 	ChangeLogCreatedBy createdBy = ChangeLogCreatedBy.create(UUID.randomUUID().toString());
 	ChangeLogTenant tenant = ChangeLogTenant.create(UUID.randomUUID().toString());
-	ChangeLogAggregate aggregateChangeLogAggregate = new ChangeLogAggregate(id, entityTable, entityId, operation, payload, status, syncAt, attempts, error, createdBy, tenant);
+	ChangeLogAggregate aggregateChangeLogAggregate = new ChangeLogAggregate(id, entityTable, entityId, remoteId, operation, payload, status, syncAt, attempts, error, createdBy, tenant);
 	assertThat(aggregateChangeLogAggregate.getId()).isNotNull();
 	assertThat(aggregateChangeLogAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateChangeLogAggregate.getEntityTable()).isEqualTo(entityTable);
 	assertThat(aggregateChangeLogAggregate.getEntityId()).isEqualTo(entityId);
+	assertThat(aggregateChangeLogAggregate.getRemoteId()).isEqualTo(remoteId);
 	assertThat(aggregateChangeLogAggregate.getOperation()).isEqualTo(operation);
 	assertThat(aggregateChangeLogAggregate.getPayload()).isEqualTo(payload);
 	assertThat(aggregateChangeLogAggregate.getStatus()).isEqualTo(status);

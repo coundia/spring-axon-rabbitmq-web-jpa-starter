@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationDeviceTo
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationTitleNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationMessageNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationStatusNotValid;
+import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationRemoteIdNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationSyncAtNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationReservedNotValid;
 

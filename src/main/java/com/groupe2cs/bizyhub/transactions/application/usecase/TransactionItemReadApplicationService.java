@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import com.groupe2cs.bizyhub.transactions.application.query.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.transactions.application.mapper.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.query.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -84,6 +84,16 @@ public List<TransactionItemResponse> findByTransactionItemUnit(
 	) {
 
 	FindByTransactionItemUnitQuery query = new FindByTransactionItemUnitQuery(value,metaRequest);
+	CompletableFuture<List<TransactionItemResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionItemResponse.class));
+	return future.join();
+}
+public List<TransactionItemResponse> findByTransactionItemRemoteId(
+	TransactionItemRemoteId value,
+	MetaRequest metaRequest
+	) {
+
+	FindByTransactionItemRemoteIdQuery query = new FindByTransactionItemRemoteIdQuery(value,metaRequest);
 	CompletableFuture<List<TransactionItemResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionItemResponse.class));
 	return future.join();

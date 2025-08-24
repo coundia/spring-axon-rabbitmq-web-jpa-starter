@@ -29,6 +29,7 @@ public class TransactionItemDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private TransactionItemId id;
 

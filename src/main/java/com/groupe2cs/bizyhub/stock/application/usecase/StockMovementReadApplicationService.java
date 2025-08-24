@@ -1,10 +1,10 @@
 package com.groupe2cs.bizyhub.stock.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
-import com.groupe2cs.bizyhub.stock.application.query.*;
-import com.groupe2cs.bizyhub.stock.application.mapper.*;
 import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import com.groupe2cs.bizyhub.stock.application.mapper.*;
+import com.groupe2cs.bizyhub.stock.application.query.*;
+import com.groupe2cs.bizyhub.stock.application.dto.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
@@ -54,6 +54,16 @@ public List<StockMovementResponse> findByStockMovementQuantity(
 	) {
 
 	FindByStockMovementQuantityQuery query = new FindByStockMovementQuantityQuery(value,metaRequest);
+	CompletableFuture<List<StockMovementResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(StockMovementResponse.class));
+	return future.join();
+}
+public List<StockMovementResponse> findByStockMovementRemoteId(
+	StockMovementRemoteId value,
+	MetaRequest metaRequest
+	) {
+
+	FindByStockMovementRemoteIdQuery query = new FindByStockMovementRemoteIdQuery(value,metaRequest);
 	CompletableFuture<List<StockMovementResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(StockMovementResponse.class));
 	return future.join();

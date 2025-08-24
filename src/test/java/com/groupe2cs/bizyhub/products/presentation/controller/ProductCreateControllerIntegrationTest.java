@@ -48,9 +48,9 @@ void it_should_be_able_to_add_product() {
 		requestDTO.setUnit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value());
-		requestDTO.setDefaultPrice(7003.13);
+		requestDTO.setDefaultPrice(3028.47);
 		requestDTO.setStatuses(UUID.randomUUID().toString());
-		requestDTO.setPurchasePrice(4329.97);
+		requestDTO.setPurchasePrice(258.88);
 
  		String uri = "/v1/commands/product";
 		ResponseEntity<ProductResponse> response = this.postForEntity(uri, requestDTO, ProductResponse.class);

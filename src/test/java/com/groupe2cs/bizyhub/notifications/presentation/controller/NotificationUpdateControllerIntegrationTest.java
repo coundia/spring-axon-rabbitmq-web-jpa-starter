@@ -62,6 +62,7 @@ public class NotificationUpdateControllerIntegrationTest extends BaseIntegration
         body.add("title", UUID.randomUUID().toString());
         body.add("message", UUID.randomUUID().toString());
         body.add("status", UUID.randomUUID().toString());
+        body.add("remoteId", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("reserved", UUID.randomUUID().toString());
         body.add("errorMessage", UUID.randomUUID().toString());

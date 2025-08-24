@@ -32,6 +32,7 @@ try {
 SyncState entity = SyncState.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.entityTable(event.getEntityTable() == null ? null : event.getEntityTable().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
  		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
  		.lastSyncAt(event.getLastSyncAt() == null ? null : event.getLastSyncAt().value())
  		.lastCursor(event.getLastCursor() == null ? null : event.getLastCursor().value())
@@ -70,6 +71,9 @@ SyncState entity = repository.findById(event.getId().value())
     }
 	if(event.getEntityTable() != null) {
 		entity.setEntityTable(event.getEntityTable().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
     }
 	if(event.getSyncAt() != null) {
 		entity.setSyncAt(event.getSyncAt().value());

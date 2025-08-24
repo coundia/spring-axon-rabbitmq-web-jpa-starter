@@ -81,7 +81,7 @@ public class TransactionEntryUpdateControllerIntegrationTest extends BaseIntegra
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("description", UUID.randomUUID().toString());
-        body.add("amount", 1895.8);
+        body.add("amount", 3037.52);
         body.add("typeEntry", UUID.randomUUID().toString());
         body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
         body.add("status", UUID.randomUUID().toString());

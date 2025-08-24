@@ -26,6 +26,7 @@ public class CreateSyncStateCommand implements Serializable {
 	@Builder.Default
 	private SyncStateId id = SyncStateId.create(UUID.randomUUID().toString());
  	private SyncStateEntityTable entityTable;
+ 	private SyncStateRemoteId remoteId;
  	private SyncStateSyncAt syncAt;
  	private SyncStateLastSyncAt lastSyncAt;
  	private SyncStateLastCursor lastCursor;
@@ -34,6 +35,7 @@ public class CreateSyncStateCommand implements Serializable {
 	public CreateSyncStateCommand(
  
    SyncStateEntityTable entityTable , 
+   SyncStateRemoteId remoteId , 
    SyncStateSyncAt syncAt , 
    SyncStateLastSyncAt lastSyncAt , 
    SyncStateLastCursor lastCursor , 
@@ -43,6 +45,7 @@ public class CreateSyncStateCommand implements Serializable {
 			this.id = SyncStateId.create(UUID.randomUUID().toString());
  
   this.entityTable = entityTable ; 
+  this.remoteId = remoteId ; 
   this.syncAt = syncAt ; 
   this.lastSyncAt = lastSyncAt ; 
   this.lastCursor = lastCursor ; 

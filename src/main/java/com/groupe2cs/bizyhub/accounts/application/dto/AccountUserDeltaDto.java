@@ -26,17 +26,17 @@ public class AccountUserDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "04f5c63d-e047-4755-a981-35edcebad371")
+		@Schema(description = "", example = "5d8c2d5e-e4e8-413b-a673-275b3c5a36c9")
 		private String name;
-		@Schema(description = "", example = "58bf5704-e854-457d-9d39-44b0de8d1494")
+		@Schema(description = "", example = "db628e3f-7a1f-41e6-be35-d0d16654e07c")
 		private String account;
-		@Schema(description = "", example = "e3b44a6c-523d-4be5-a9c6-e617cefbf466")
+		@Schema(description = "", example = "42608492-d96f-4a35-b511-0c19d08954c6")
 		private String user;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "a823d780-1ad2-4b5e-9ebf-178e478c428c")
+		@Schema(description = "", example = "8c756e81-ce00-4f89-82d6-4a9511508a21")
 		private String username;
-		@Schema(description = "", example = "42e162e5-a428-49a1-aa57-6024f76f4a04")
+		@Schema(description = "", example = "ab86215c-02e5-41b5-b955-16de44b538c6")
 		private String details;
 		@Schema(description = "", example = "true")
 		private Boolean isActive;

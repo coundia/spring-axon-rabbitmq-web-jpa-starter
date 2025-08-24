@@ -25,6 +25,7 @@ public class StockLevelDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private StockLevelId id;
 

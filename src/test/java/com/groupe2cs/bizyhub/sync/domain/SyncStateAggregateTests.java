@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sync.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.sync.domain.exception.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class SyncStateAggregateTests extends BaseUnitTests {
@@ -15,15 +15,17 @@ public class SyncStateAggregateTests extends BaseUnitTests {
 void it_should_create_syncState_with_valid_values() {
 	SyncStateId id = SyncStateId.create(UUID.randomUUID().toString());
 	SyncStateEntityTable entityTable = SyncStateEntityTable.create(UUID.randomUUID().toString());
+	SyncStateRemoteId remoteId = SyncStateRemoteId.create(UUID.randomUUID().toString());
 	SyncStateSyncAt syncAt = SyncStateSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	SyncStateLastSyncAt lastSyncAt = SyncStateLastSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	SyncStateLastCursor lastCursor = SyncStateLastCursor.create(UUID.randomUUID().toString());
 	SyncStateCreatedBy createdBy = SyncStateCreatedBy.create(UUID.randomUUID().toString());
 	SyncStateTenant tenant = SyncStateTenant.create(UUID.randomUUID().toString());
-	SyncStateAggregate aggregateSyncStateAggregate = new SyncStateAggregate(id, entityTable, syncAt, lastSyncAt, lastCursor, createdBy, tenant);
+	SyncStateAggregate aggregateSyncStateAggregate = new SyncStateAggregate(id, entityTable, remoteId, syncAt, lastSyncAt, lastCursor, createdBy, tenant);
 	assertThat(aggregateSyncStateAggregate.getId()).isNotNull();
 	assertThat(aggregateSyncStateAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateSyncStateAggregate.getEntityTable()).isEqualTo(entityTable);
+	assertThat(aggregateSyncStateAggregate.getRemoteId()).isEqualTo(remoteId);
 	assertThat(aggregateSyncStateAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateSyncStateAggregate.getLastSyncAt()).isEqualTo(lastSyncAt);
 	assertThat(aggregateSyncStateAggregate.getLastCursor()).isEqualTo(lastCursor);

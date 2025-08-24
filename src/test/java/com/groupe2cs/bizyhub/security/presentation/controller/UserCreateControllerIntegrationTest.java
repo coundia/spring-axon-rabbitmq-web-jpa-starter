@@ -42,8 +42,8 @@ void it_should_be_able_to_add_user() {
 		requestDTO.setLastName(UUID.randomUUID().toString());
 		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setTelephone(UUID.randomUUID().toString());
-		requestDTO.setLimitPerDay(33);
-		requestDTO.setIsPremium(true);
+		requestDTO.setLimitPerDay(67);
+		requestDTO.setIsPremium(false);
 		requestDTO.setEnabled(true);
 		requestDTO.setIsBan(false);
 		requestDTO.setMessage(UUID.randomUUID().toString());

@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTransactionItemCommand command = new CreateTransactionItemCommand(
- TransactionItemId.create(UUID.randomUUID().toString()) ,  TransactionItemTransaction.create(UUID.randomUUID().toString()) ,  TransactionItemProduct.create(UUID.randomUUID().toString()) ,  TransactionItemLabel.create(UUID.randomUUID().toString()) ,  TransactionItemQuantity.create(16) ,  TransactionItemUnit.create(UUID.randomUUID().toString()) ,  TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionItemUnitPrice.create(6659.39) ,  TransactionItemTotal.create(3659.15) ,  TransactionItemNotes.create(UUID.randomUUID().toString()) ,  TransactionItemCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionItemTenant.create(UUID.randomUUID().toString()) 
+ TransactionItemId.create(UUID.randomUUID().toString()) ,  TransactionItemTransaction.create(UUID.randomUUID().toString()) ,  TransactionItemProduct.create(UUID.randomUUID().toString()) ,  TransactionItemLabel.create(UUID.randomUUID().toString()) ,  TransactionItemQuantity.create(23) ,  TransactionItemUnit.create(UUID.randomUUID().toString()) ,  TransactionItemRemoteId.create(UUID.randomUUID().toString()) ,  TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionItemUnitPrice.create(2617.1) ,  TransactionItemTotal.create(3783.01) ,  TransactionItemNotes.create(UUID.randomUUID().toString()) ,  TransactionItemCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionItemTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -46,6 +46,8 @@ assertThat(sentCommand.getQuantity().value()).isEqualTo(
 command.getQuantity().value());
 assertThat(sentCommand.getUnit().value()).isEqualTo(
 command.getUnit().value());
+assertThat(sentCommand.getRemoteId().value()).isEqualTo(
+command.getRemoteId().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(
 command.getSyncAt().value());
 assertThat(sentCommand.getUnitPrice().value()).isEqualTo(

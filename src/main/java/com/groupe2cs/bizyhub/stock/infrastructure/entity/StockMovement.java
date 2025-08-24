@@ -45,6 +45,13 @@ public class StockMovement   extends AbstractAuditableEntity  {
 	)
 
 	private Integer quantity ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String remoteId ;
 	@ManyToOne
 	@JoinColumn(name = "company_id", nullable = false)
 	private com.groupe2cs.bizyhub.companies.infrastructure.entity.Company company;
@@ -88,6 +95,7 @@ public class StockMovement   extends AbstractAuditableEntity  {
 		"id='" + id + '\'' +
 			", typeStockMovement=" + typeStockMovement +
 			", quantity=" + quantity +
+			", remoteId=" + remoteId +
 			", company=" + company +
 			", syncAt=" + syncAt +
 			", productVariant=" + productVariant +

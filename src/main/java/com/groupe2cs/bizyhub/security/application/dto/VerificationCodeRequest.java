@@ -19,21 +19,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "VerificationCodeRequest", description = "Request payload for VerificationCode operations")
 public class VerificationCodeRequest implements Serializable {
 
-	@Schema(description = "", example = "618d515c-c7ee-4d78-8028-00c1a4395487")
+	@Schema(description = "", example = "70ef1fc0-3229-4ff2-b8af-df76c3f91027")
 	private String notes;
-	@Schema(description = "", example = "5af4d304-fe0f-42dc-a525-cfcce83025a2")
+	@Schema(description = "", example = "62d894b7-bd15-43a3-95aa-27df098592d8")
 	private String token;
-	@Schema(description = "", example = "4fbd34ac-f6eb-4e85-b7c6-ad04c7c0a1a6")
+	@Schema(description = "", example = "5290704e-e603-4c01-828f-385628a27e07")
 	private String username;
-	@Schema(description = "", example = "8f652ed3-a9df-424b-bbb0-e9c06035cbed")
+	@Schema(description = "", example = "1cd7f350-a1ce-48f4-ba61-e683dc9c0915")
 	private String phone;
-	@Schema(description = "", example = "a1477555-5c2b-433c-80e3-e768101024c6")
+	@Schema(description = "", example = "cd459829-5132-493b-883b-d8de14def98d")
 	private String email;
-	@Schema(description = "", example = "d04266fc-8987-467a-bb6b-0c209dbffafc")
+	@Schema(description = "", example = "6401424e-5fb8-40c2-95e0-2322e0c69745")
 	private String code;
-	@Schema(description = "", example = "637092d6-a392-4dc0-9578-aca086a7a500")
+	@Schema(description = "", example = "a8fbaf22-e13d-47c2-89e9-480d63902cd7")
 	private String status;
-	@Schema(description = "", example = "2a5fac66-8bf8-4543-9564-0f570d1cd17d")
+	@Schema(description = "", example = "9279e855-9c67-49a1-a723-3826ef23be26")
 	private String source;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant expiration;

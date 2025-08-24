@@ -26,21 +26,25 @@ public class TransactionDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "f0a4735f-481b-48f5-92d5-fb71a1adf48a")
+		@Schema(description = "", example = "17b39e37-9e3c-4d6e-a175-7a08a5b71216")
 		private String name;
-		@Schema(description = "", example = "277.91")
+		@Schema(description = "", example = "1548.2")
 		private Double amount;
-		@Schema(description = "", example = "e65f9ff8-a8a0-4141-9530-76a21ce86e9f")
+		@Schema(description = "", example = "d28c035a-3f03-4f35-aa42-cbc36bb8cf82")
+		private String remoteId;
+		@Schema(description = "", example = "3d0ab484-e63c-47c5-b694-17bf8300efd9")
 		private String details;
 		@Schema(description = "", example = "false")
 		private Boolean isActive;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "da1ba4d5-5aff-4f45-ae9d-c676383596d1")
+		@Schema(description = "", example = "e61756ba-3493-4be8-b6dd-0060ca7e7ccf")
 		private String account;
-		@Schema(description = "", example = "1bf64ee4-9017-48a0-aa7b-fde998e2585c")
+		@Schema(description = "", example = "cb5fa945-c802-4b75-87e8-046eead062d1")
 		private String category;
-		@Schema(description = "", example = "0db7a5e4-9ea3-4b87-8a04-011a6fa5ca04")
+		@Schema(description = "", example = "e49f4e38-60e4-47d2-a86d-d5b622e218c9")
+		private String typeEntry;
+		@Schema(description = "", example = "403e4758-df7a-451e-a8c2-44d377769774")
 		private String typeTransactionRaw;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant dateTransaction;

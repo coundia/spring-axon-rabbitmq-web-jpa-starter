@@ -18,6 +18,7 @@ import java.util.*;
 public class StockLevelUpdatedEvent implements Serializable {
 
 	private StockLevelId id;
+	private StockLevelRemoteId remoteId;
 	private StockLevelStockOnHand stockOnHand;
 	private StockLevelStockAllocated stockAllocated;
 	private StockLevelProductVariant productVariant;

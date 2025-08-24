@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,15 +43,15 @@ private AccountRepository Repository;
 .status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
 .typeAccount(UUID.randomUUID().toString())
-.balance(9534.12)
-.balancePrev(9691.26)
-.balanceBlocked(6775.16)
-.balanceInit(9140.42)
-.balanceGoal(7995.12)
-.balanceLimit(9080.04)
+.balance(6870.36)
+.balancePrev(1079.08)
+.balanceBlocked(1579.88)
+.balanceInit(8829.34)
+.balanceGoal(1081.89)
+.balanceLimit(4990.96)
 .description(UUID.randomUUID().toString())
 .isActive(false)
-.isDefault(false)
+.isDefault(true)
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 		.type("CREATE")
 		.build()
@@ -82,15 +82,15 @@ private AccountRepository Repository;
 .status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
 .typeAccount(UUID.randomUUID().toString())
-.balance(9534.12)
-.balancePrev(9691.26)
-.balanceBlocked(6775.16)
-.balanceInit(9140.42)
-.balanceGoal(7995.12)
-.balanceLimit(9080.04)
+.balance(6870.36)
+.balancePrev(1079.08)
+.balanceBlocked(1579.88)
+.balanceInit(8829.34)
+.balanceGoal(1081.89)
+.balanceLimit(4990.96)
 .description(UUID.randomUUID().toString())
 .isActive(false)
-.isDefault(false)
+.isDefault(true)
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 			.type("UPDATE")
 			.build()

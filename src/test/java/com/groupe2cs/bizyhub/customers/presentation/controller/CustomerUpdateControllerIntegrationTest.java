@@ -67,8 +67,8 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
         body.add("firstName", UUID.randomUUID().toString());
         body.add("lastName", UUID.randomUUID().toString());
         body.add("fullName", UUID.randomUUID().toString());
-        body.add("balance", 9004.69);
-        body.add("balanceDebt", 5397.22);
+        body.add("balance", 1097.57);
+        body.add("balanceDebt", 3134.58);
         body.add("phone", UUID.randomUUID().toString());
         body.add("email", UUID.randomUUID().toString());
         body.add("notes", UUID.randomUUID().toString());

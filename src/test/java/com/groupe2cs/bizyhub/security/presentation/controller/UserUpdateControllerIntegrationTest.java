@@ -64,10 +64,10 @@ public class UserUpdateControllerIntegrationTest extends BaseIntegrationTests {
         body.add("lastName", UUID.randomUUID().toString());
         body.add("email", UUID.randomUUID().toString());
         body.add("telephone", UUID.randomUUID().toString());
-        body.add("limitPerDay", 45);
+        body.add("limitPerDay", 97);
         body.add("isPremium", false);
         body.add("enabled", false);
-        body.add("isBan", false);
+        body.add("isBan", true);
         body.add("message", UUID.randomUUID().toString());
 
         HttpHeaders multipartHeaders = new HttpHeaders();

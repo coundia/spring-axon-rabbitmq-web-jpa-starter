@@ -19,17 +19,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "CategoryRequest", description = "Request payload for Category operations")
 public class CategoryRequest implements Serializable {
 
-	@Schema(description = "", example = "d1dca21d-c417-4ef8-a0a1-93127153363d")
+	@Schema(description = "", example = "2a4af217-0f02-41f3-8ea5-dcbba1f03913")
 	private String code;
-	@Schema(description = "", example = "6afa6f02-d681-41df-a374-7118f7c21b52")
+	@Schema(description = "", example = "10e34a91-768d-49a5-bed4-4e8cc2d7c901")
 	private String name;
-	@Schema(description = "", example = "a8698e14-3e97-442b-99af-8945dba16993")
+	@Schema(description = "", example = "5db866e7-1e27-4c42-b628-5ddfc80492e3")
 	private String remoteId;
-	@Schema(description = "", example = "bcb7eba9-a732-4b82-b53e-84417573f385")
+	@Schema(description = "", example = "bce0ee61-adc7-45e3-80d8-fb0ccd83dccc")
 	private String description;
-	@Schema(description = "", example = "ad6aac4f-491d-4798-b91e-26b87de4c8b8")
+	@Schema(description = "", example = "47a79473-6769-4d1c-a14e-3af54ca147b2")
 	private String typeEntry;
-	@Schema(description = "", example = "47")
+	@Schema(description = "", example = "52")
 	private Integer version;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;

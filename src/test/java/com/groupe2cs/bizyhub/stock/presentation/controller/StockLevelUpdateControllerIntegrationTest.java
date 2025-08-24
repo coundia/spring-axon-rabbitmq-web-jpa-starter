@@ -66,8 +66,9 @@ public class StockLevelUpdateControllerIntegrationTest extends BaseIntegrationTe
         StockLevelFixtures.byIdWaitExist(stocklevelRepository, updated.getId().value());
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("stockOnHand", 97);
-        body.add("stockAllocated", 91);
+        body.add("remoteId", UUID.randomUUID().toString());
+        body.add("stockOnHand", 18);
+        body.add("stockAllocated", 36);
         body.add("productVariant", updated.getProductVariant().value());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("company", updated.getCompany().value());

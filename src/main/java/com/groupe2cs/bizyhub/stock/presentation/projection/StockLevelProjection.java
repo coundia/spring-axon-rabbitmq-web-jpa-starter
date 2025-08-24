@@ -31,6 +31,7 @@ public void on(StockLevelCreatedEvent event) {
 try {
 StockLevel entity = StockLevel.builder()
 		.id(event.getId() == null ? null : event.getId().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
  		.stockOnHand(event.getStockOnHand() == null ? null : event.getStockOnHand().value())
  		.stockAllocated(event.getStockAllocated() == null ? null : event.getStockAllocated().value())
   		.productVariant( event.getProductVariant() == null ? null : new com.groupe2cs.bizyhub.products.infrastructure.entity.Product(event.getProductVariant().value()))
@@ -68,6 +69,9 @@ StockLevel entity = repository.findById(event.getId().value())
 
 	if(event.getId() != null) {
 		entity.setId(event.getId().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
     }
 	if(event.getStockOnHand() != null) {
 		entity.setStockOnHand(event.getStockOnHand().value());

@@ -33,6 +33,7 @@ ChangeLog entity = ChangeLog.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.entityTable(event.getEntityTable() == null ? null : event.getEntityTable().value())
  		.entityId(event.getEntityId() == null ? null : event.getEntityId().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
  		.operation(event.getOperation() == null ? null : event.getOperation().value())
  		.payload(event.getPayload() == null ? null : event.getPayload().value())
  		.status(event.getStatus() == null ? null : event.getStatus().value())
@@ -77,6 +78,9 @@ ChangeLog entity = repository.findById(event.getId().value())
     }
 	if(event.getEntityId() != null) {
 		entity.setEntityId(event.getEntityId().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
     }
 	if(event.getOperation() != null) {
 		entity.setOperation(event.getOperation().value());

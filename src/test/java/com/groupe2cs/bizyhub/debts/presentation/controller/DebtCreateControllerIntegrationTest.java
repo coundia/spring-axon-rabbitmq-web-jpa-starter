@@ -41,8 +41,8 @@ void it_should_be_able_to_add_debt() {
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setNotes(UUID.randomUUID().toString());
-		requestDTO.setBalance(9691.93);
-		requestDTO.setBalanceDebt(1046.47);
+		requestDTO.setBalance(7178.21);
+		requestDTO.setBalanceDebt(7498.91);
 		requestDTO.setDueDate(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setStatuses(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));

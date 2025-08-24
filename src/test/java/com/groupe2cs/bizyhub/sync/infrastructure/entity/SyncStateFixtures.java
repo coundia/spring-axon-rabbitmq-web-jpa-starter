@@ -72,6 +72,7 @@ public class SyncStateFixtures {
 
 			CreateSyncStateCommand command = CreateSyncStateCommand.builder()
 				.entityTable(SyncStateEntityTable.create(UUID.randomUUID().toString()))
+				.remoteId(SyncStateRemoteId.create(UUID.randomUUID().toString()))
 				.syncAt(SyncStateSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.lastSyncAt(SyncStateLastSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.lastCursor(SyncStateLastCursor.create(UUID.randomUUID().toString()))
@@ -93,6 +94,7 @@ public class SyncStateFixtures {
 
         CreateSyncStateCommand command = CreateSyncStateCommand.builder()
         .entityTable(SyncStateEntityTable.create(UUID.randomUUID().toString()))
+        .remoteId(SyncStateRemoteId.create(UUID.randomUUID().toString()))
         .syncAt(SyncStateSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .lastSyncAt(SyncStateLastSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .lastCursor(SyncStateLastCursor.create(UUID.randomUUID().toString()))

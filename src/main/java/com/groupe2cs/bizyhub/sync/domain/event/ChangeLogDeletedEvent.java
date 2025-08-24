@@ -28,6 +28,7 @@ public class ChangeLogDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private ChangeLogId id;
 

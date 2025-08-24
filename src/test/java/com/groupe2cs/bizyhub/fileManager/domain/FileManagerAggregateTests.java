@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.fileManager.domain;
 
-import com.groupe2cs.bizyhub.fileManager.domain.exception.*;
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.fileManager.domain.exception.*;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class FileManagerAggregateTests extends BaseUnitTests {
@@ -20,10 +20,10 @@ void it_should_create_fileManager_with_valid_values() {
 	FileManagerObjectName objectName = FileManagerObjectName.create(UUID.randomUUID().toString());
 	FileManagerOriginalName originalName = FileManagerOriginalName.create(UUID.randomUUID().toString());
 	FileManagerMimeType mimeType = FileManagerMimeType.create(UUID.randomUUID().toString());
-	FileManagerSize size = FileManagerSize.create(76867L);
+	FileManagerSize size = FileManagerSize.create(29768L);
 	FileManagerPath path = FileManagerPath.create(UUID.randomUUID().toString());
 	FileManagerUri uri = FileManagerUri.create(UUID.randomUUID().toString());
-	FileManagerIsPublic isPublic = FileManagerIsPublic.create(true);
+	FileManagerIsPublic isPublic = FileManagerIsPublic.create(false);
 	FileManagerCreatedBy createdBy = FileManagerCreatedBy.create(UUID.randomUUID().toString());
 	FileManagerTenant tenant = FileManagerTenant.create(UUID.randomUUID().toString());
 	FileManagerAggregate aggregateFileManagerAggregate = new FileManagerAggregate(id, name, details, objectId, objectName, originalName, mimeType, size, path, uri, isPublic, createdBy, tenant);

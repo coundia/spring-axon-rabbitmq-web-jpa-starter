@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.debts.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.debts.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.debts.application.dto.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.debts.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.debts.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.debts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.debts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,8 +43,8 @@ private DebtRepository Repository;
 .remoteId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
-.balance(8617.46)
-.balanceDebt(5739.41)
+.balance(5932.27)
+.balanceDebt(8950.37)
 .dueDate(java.time.Instant.now().plusSeconds(3600))
 .statuses(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
@@ -77,8 +77,8 @@ private DebtRepository Repository;
 .remoteId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
-.balance(8617.46)
-.balanceDebt(5739.41)
+.balance(5932.27)
+.balanceDebt(8950.37)
 .dueDate(java.time.Instant.now().plusSeconds(3600))
 .statuses(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))

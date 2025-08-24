@@ -19,6 +19,7 @@ public class SyncStateUpdatedEvent implements Serializable {
 
 	private SyncStateId id;
 	private SyncStateEntityTable entityTable;
+	private SyncStateRemoteId remoteId;
 	private SyncStateSyncAt syncAt;
 	private SyncStateLastSyncAt lastSyncAt;
 	private SyncStateLastCursor lastCursor;

@@ -24,6 +24,7 @@ public class SyncStateDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private SyncStateId id;
 

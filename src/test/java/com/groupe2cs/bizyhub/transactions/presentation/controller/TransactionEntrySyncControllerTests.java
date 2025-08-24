@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -51,7 +51,7 @@ private TransactionEntryRepository Repository;
 .remoteId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .description(UUID.randomUUID().toString())
-.amount(3674.83)
+.amount(9451.99)
 .typeEntry(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
 .status(UUID.randomUUID().toString())
@@ -90,7 +90,7 @@ private TransactionEntryRepository Repository;
 .remoteId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .description(UUID.randomUUID().toString())
-.amount(3674.83)
+.amount(9451.99)
 .typeEntry(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
 .status(UUID.randomUUID().toString())

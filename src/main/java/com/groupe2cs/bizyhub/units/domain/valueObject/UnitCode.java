@@ -29,10 +29,7 @@ this.code = code;
 
 public static UnitCode create(String code) {
 
-if (code == null || code.isBlank()) {
-throw new UnitCodeNotValid("Code is invalid");
-}
-return new UnitCode(code);
+	return new UnitCode(code);
 }
 
 public String value() {

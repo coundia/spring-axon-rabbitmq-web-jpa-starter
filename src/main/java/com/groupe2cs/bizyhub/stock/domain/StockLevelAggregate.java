@@ -24,6 +24,7 @@ public class StockLevelAggregate {
 
 @AggregateIdentifier
 private StockLevelId id;
+private StockLevelRemoteId remoteId;
 private StockLevelStockOnHand stockOnHand;
 private StockLevelStockAllocated stockAllocated;
 private StockLevelProductVariant productVariant;
@@ -37,6 +38,7 @@ private StockLevelTenant tenant;
 public StockLevelAggregate(CreateStockLevelCommand command) {
 apply(new StockLevelCreatedEvent(
 		command.getId(),
+		command.getRemoteId(),
 		command.getStockOnHand(),
 		command.getStockAllocated(),
 		command.getProductVariant(),
@@ -58,6 +60,7 @@ public void handle(DeleteStockLevelCommand command) {
 public void handle(UpdateStockLevelCommand command) {
 apply(new StockLevelUpdatedEvent(
 		command.getId(),
+		command.getRemoteId(),
 		command.getStockOnHand(),
 		command.getStockAllocated(),
 		command.getProductVariant(),
@@ -71,6 +74,7 @@ apply(new StockLevelUpdatedEvent(
 @EventSourcingHandler
 public void on(StockLevelCreatedEvent event) {
 	this.id = event.getId();
+	this.remoteId = event.getRemoteId();
 	this.stockOnHand = event.getStockOnHand();
 	this.stockAllocated = event.getStockAllocated();
 	this.productVariant = event.getProductVariant();
@@ -88,6 +92,7 @@ this.id = event.getId();
 @EventSourcingHandler
 public void on(StockLevelUpdatedEvent event) {
 this.id = event.getId();
+	this.remoteId = event.getRemoteId();
 	this.stockOnHand = event.getStockOnHand();
 	this.stockAllocated = event.getStockAllocated();
 	this.productVariant = event.getProductVariant();

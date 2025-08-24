@@ -24,6 +24,7 @@ import java.util.*;
 public class UpdateStockLevelCommand implements Serializable {
 @TargetAggregateIdentifier
 	private StockLevelId id;
+ 	private StockLevelRemoteId remoteId;
  	private StockLevelStockOnHand stockOnHand;
  	private StockLevelStockAllocated stockAllocated;
  	private StockLevelProductVariant productVariant;

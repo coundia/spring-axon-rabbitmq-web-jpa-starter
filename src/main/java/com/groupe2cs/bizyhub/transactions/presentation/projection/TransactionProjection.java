@@ -36,12 +36,14 @@ Transaction entity = Transaction.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.name(event.getName() == null ? null : event.getName().value())
  		.amount(event.getAmount() == null ? null : event.getAmount().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
  		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
   		.account( event.getAccount() == null ? null : new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()))
  		.category( event.getCategory() == null ? null : new com.groupe2cs.bizyhub.categories.infrastructure.entity.Category(event.getCategory().value()))
-		.typeTransactionRaw(event.getTypeTransactionRaw() == null ? null : event.getTypeTransactionRaw().value())
+		.typeEntry(event.getTypeEntry() == null ? null : event.getTypeEntry().value())
+ 		.typeTransactionRaw(event.getTypeTransactionRaw() == null ? null : event.getTypeTransactionRaw().value())
  		.dateTransaction(event.getDateTransaction() == null ? null : event.getDateTransaction().value())
  .build();
 
@@ -84,6 +86,9 @@ Transaction entity = repository.findById(event.getId().value())
 	if(event.getAmount() != null) {
 		entity.setAmount(event.getAmount().value());
     }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
+    }
 	if(event.getDetails() != null) {
 		entity.setDetails(event.getDetails().value());
     }
@@ -101,6 +106,9 @@ Transaction entity = repository.findById(event.getId().value())
      if(event.getCategory() != null) {
 		  entity.setCategory(new com.groupe2cs.bizyhub.categories.infrastructure.entity.Category(event.getCategory().value()));
 	  }
+	if(event.getTypeEntry() != null) {
+		entity.setTypeEntry(event.getTypeEntry().value());
+    }
 	if(event.getTypeTransactionRaw() != null) {
 		entity.setTypeTransactionRaw(event.getTypeTransactionRaw().value());
     }
@@ -154,7 +162,7 @@ public void applyTransactionToAccount(String accountId, Double amount, String ty
 			throw new IllegalArgumentException("Transaction amount cannot be negative");
 		}
 
-		if ("IN".equalsIgnoreCase(type)) {
+		if ("IN".equalsIgnoreCase(type) ) {
 			account.setBalance(account.getBalance() + amount);
 			log.info("Account updated with credit amount: {}, account:{}", amount, account.getId());
 		}

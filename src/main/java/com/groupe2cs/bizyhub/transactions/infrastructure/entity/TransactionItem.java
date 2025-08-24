@@ -59,6 +59,13 @@ public class TransactionItem   extends AbstractAuditableEntity  {
 		unique = false
 
 	)
+
+	private String remoteId ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
 	@Builder.Default
 	private java.time.Instant syncAt  = java.time.Instant.now() ;
 
@@ -101,6 +108,7 @@ public class TransactionItem   extends AbstractAuditableEntity  {
 			", label=" + label +
 			", quantity=" + quantity +
 			", unit=" + unit +
+			", remoteId=" + remoteId +
 			", syncAt=" + syncAt +
 			", unitPrice=" + unitPrice +
 			", total=" + total +

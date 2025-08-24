@@ -76,7 +76,7 @@ public class CategoryFixtures {
 				.remoteId(CategoryRemoteId.create(UUID.randomUUID().toString()))
 				.description(CategoryDescription.create(UUID.randomUUID().toString()))
 				.typeEntry(CategoryTypeEntry.create(UUID.randomUUID().toString()))
-				.version(CategoryVersion.create(7))
+				.version(CategoryVersion.create(89))
 				.syncAt(CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 			.build();
 
@@ -100,7 +100,7 @@ public class CategoryFixtures {
         .remoteId(CategoryRemoteId.create(UUID.randomUUID().toString()))
         .description(CategoryDescription.create(UUID.randomUUID().toString()))
         .typeEntry(CategoryTypeEntry.create(UUID.randomUUID().toString()))
-        .version(CategoryVersion.create(7))
+        .version(CategoryVersion.create(89))
         .syncAt(CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .build();
 

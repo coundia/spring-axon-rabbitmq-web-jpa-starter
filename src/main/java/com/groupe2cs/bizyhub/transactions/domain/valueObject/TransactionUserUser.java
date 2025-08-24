@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.transactions.domain.valueObject;
 import java.util.Objects;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserIdNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserNameNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserRemoteIdNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserTransactionNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionUserUserNotValid;
 

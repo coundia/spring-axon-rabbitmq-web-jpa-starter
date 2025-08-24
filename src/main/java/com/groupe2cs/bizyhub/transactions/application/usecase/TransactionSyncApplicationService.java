@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.transactions.application.command.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -26,11 +26,13 @@ public class TransactionSyncApplicationService {
 					CreateTransactionCommand command = CreateTransactionCommand.builder()
 								.name(TransactionName.create(d.getName()))
 								.amount(TransactionAmount.create(d.getAmount()))
+								.remoteId(TransactionRemoteId.create(d.getRemoteId()))
 								.details(TransactionDetails.create(d.getDetails()))
 								.isActive(TransactionIsActive.create(d.getIsActive()))
 								.syncAt(TransactionSyncAt.create(d.getSyncAt()))
 								.account(TransactionAccount.create(d.getAccount()))
 								.category(TransactionCategory.create(d.getCategory()))
+								.typeEntry(TransactionTypeEntry.create(d.getTypeEntry()))
 								.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
 								.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
 						.build();
@@ -56,11 +58,13 @@ public class TransactionSyncApplicationService {
 							.id(TransactionId.create(d.getId()))
 							.name(TransactionName.create(d.getName()))
 							.amount(TransactionAmount.create(d.getAmount()))
+							.remoteId(TransactionRemoteId.create(d.getRemoteId()))
 							.details(TransactionDetails.create(d.getDetails()))
 							.isActive(TransactionIsActive.create(d.getIsActive()))
 							.syncAt(TransactionSyncAt.create(d.getSyncAt()))
 							.account(TransactionAccount.create(d.getAccount()))
 							.category(TransactionCategory.create(d.getCategory()))
+							.typeEntry(TransactionTypeEntry.create(d.getTypeEntry()))
 							.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
 							.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
 						.build();

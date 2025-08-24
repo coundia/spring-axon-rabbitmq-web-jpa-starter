@@ -34,6 +34,7 @@ Setting entity = Setting.builder()
  		.name(event.getName() == null ? null : event.getName().value())
  		.value(event.getValue() == null ? null : event.getValue().value())
  		.locale(event.getLocale() == null ? null : event.getLocale().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
  		.details(event.getDetails() == null ? null : event.getDetails().value())
  		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
  		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
@@ -78,6 +79,9 @@ Setting entity = repository.findById(event.getId().value())
     }
 	if(event.getLocale() != null) {
 		entity.setLocale(event.getLocale().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
     }
 	if(event.getDetails() != null) {
 		entity.setDetails(event.getDetails().value());

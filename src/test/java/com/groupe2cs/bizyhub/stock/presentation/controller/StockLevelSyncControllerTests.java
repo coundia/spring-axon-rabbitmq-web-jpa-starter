@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.stock.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.stock.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.stock.application.dto.*;
+import com.groupe2cs.bizyhub.stock.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -42,8 +42,9 @@ private StockLevelRepository Repository;
 		StockLevelSyncRequest requestDTO = StockLevelSyncRequest.builder()
 		.deltas(List.of(
 		StockLevelDeltaDto.builder()
-.stockOnHand(26)
-.stockAllocated(75)
+.remoteId(UUID.randomUUID().toString())
+.stockOnHand(6)
+.stockAllocated(41)
 .productVariant(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())
@@ -71,8 +72,9 @@ private StockLevelRepository Repository;
 			.deltas(List.of(
 			StockLevelDeltaDto.builder()
 			.id(existingId)
-.stockOnHand(26)
-.stockAllocated(75)
+.remoteId(UUID.randomUUID().toString())
+.stockOnHand(6)
+.stockAllocated(41)
 .productVariant(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())

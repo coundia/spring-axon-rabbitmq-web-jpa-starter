@@ -67,6 +67,7 @@ public class TransactionUserUpdateControllerIntegrationTest extends BaseIntegrat
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("name", UUID.randomUUID().toString());
+        body.add("remoteId", UUID.randomUUID().toString());
         body.add("transaction", updated.getTransaction().value());
         body.add("user", updated.getUser().value());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));

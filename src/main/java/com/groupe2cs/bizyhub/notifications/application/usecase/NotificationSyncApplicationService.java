@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.notifications.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.notifications.application.dto.*;
 import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.notifications.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.notifications.application.command.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -28,6 +28,7 @@ public class NotificationSyncApplicationService {
 								.title(NotificationTitle.create(d.getTitle()))
 								.message(NotificationMessage.create(d.getMessage()))
 								.status(NotificationStatus.create(d.getStatus()))
+								.remoteId(NotificationRemoteId.create(d.getRemoteId()))
 								.syncAt(NotificationSyncAt.create(d.getSyncAt()))
 								.reserved(NotificationReserved.create(d.getReserved()))
 								.errorMessage(NotificationErrorMessage.create(d.getErrorMessage()))
@@ -56,6 +57,7 @@ public class NotificationSyncApplicationService {
 							.title(NotificationTitle.create(d.getTitle()))
 							.message(NotificationMessage.create(d.getMessage()))
 							.status(NotificationStatus.create(d.getStatus()))
+							.remoteId(NotificationRemoteId.create(d.getRemoteId()))
 							.syncAt(NotificationSyncAt.create(d.getSyncAt()))
 							.reserved(NotificationReserved.create(d.getReserved()))
 							.errorMessage(NotificationErrorMessage.create(d.getErrorMessage()))

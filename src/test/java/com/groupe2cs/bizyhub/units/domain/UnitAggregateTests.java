@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.units.domain;
 
-import com.groupe2cs.bizyhub.units.domain.exception.*;
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.units.domain.valueObject.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.units.domain.exception.*;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class UnitAggregateTests extends BaseUnitTests {
@@ -37,11 +37,6 @@ void it_should_create_unit_with_valid_values() {
 		void it_should_throw_when_id_is_invalid() {
 		UnitIdNotValid error = assertThrows(UnitIdNotValid.class, () -> UnitId.create(""));
 		assertThat(error.getMessage()).isEqualTo("Id is invalid");
-		}
-		@Test
-		void it_should_throw_when_code_is_invalid() {
-		UnitCodeNotValid error = assertThrows(UnitCodeNotValid.class, () -> UnitCode.create(""));
-		assertThat(error.getMessage()).isEqualTo("Code is invalid");
 		}
 
 }

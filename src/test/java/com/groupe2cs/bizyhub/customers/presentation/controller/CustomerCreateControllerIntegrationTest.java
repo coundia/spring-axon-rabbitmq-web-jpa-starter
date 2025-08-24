@@ -43,8 +43,8 @@ void it_should_be_able_to_add_customer() {
 		requestDTO.setFirstName(UUID.randomUUID().toString());
 		requestDTO.setLastName(UUID.randomUUID().toString());
 		requestDTO.setFullName(UUID.randomUUID().toString());
-		requestDTO.setBalance(75.82);
-		requestDTO.setBalanceDebt(5961.32);
+		requestDTO.setBalance(3163.25);
+		requestDTO.setBalanceDebt(1400.09);
 		requestDTO.setPhone(UUID.randomUUID().toString());
 		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setNotes(UUID.randomUUID().toString());

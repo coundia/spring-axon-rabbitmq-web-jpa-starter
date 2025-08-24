@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.stock.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.stock.domain.exception.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class StockLevelAggregateTests extends BaseUnitTests {
@@ -14,16 +14,18 @@ public class StockLevelAggregateTests extends BaseUnitTests {
 @Test
 void it_should_create_stockLevel_with_valid_values() {
 	StockLevelId id = StockLevelId.create(UUID.randomUUID().toString());
-	StockLevelStockOnHand stockOnHand = StockLevelStockOnHand.create(35);
+	StockLevelRemoteId remoteId = StockLevelRemoteId.create(UUID.randomUUID().toString());
+	StockLevelStockOnHand stockOnHand = StockLevelStockOnHand.create(85);
 	StockLevelStockAllocated stockAllocated = StockLevelStockAllocated.create(19);
 	StockLevelProductVariant productVariant = StockLevelProductVariant.create(UUID.randomUUID().toString());
 	StockLevelSyncAt syncAt = StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	StockLevelCompany company = StockLevelCompany.create(UUID.randomUUID().toString());
 	StockLevelCreatedBy createdBy = StockLevelCreatedBy.create(UUID.randomUUID().toString());
 	StockLevelTenant tenant = StockLevelTenant.create(UUID.randomUUID().toString());
-	StockLevelAggregate aggregateStockLevelAggregate = new StockLevelAggregate(id, stockOnHand, stockAllocated, productVariant, syncAt, company, createdBy, tenant);
+	StockLevelAggregate aggregateStockLevelAggregate = new StockLevelAggregate(id, remoteId, stockOnHand, stockAllocated, productVariant, syncAt, company, createdBy, tenant);
 	assertThat(aggregateStockLevelAggregate.getId()).isNotNull();
 	assertThat(aggregateStockLevelAggregate.getId()).isEqualTo(id);
+	assertThat(aggregateStockLevelAggregate.getRemoteId()).isEqualTo(remoteId);
 	assertThat(aggregateStockLevelAggregate.getStockOnHand()).isEqualTo(stockOnHand);
 	assertThat(aggregateStockLevelAggregate.getStockAllocated()).isEqualTo(stockAllocated);
 	assertThat(aggregateStockLevelAggregate.getProductVariant()).isEqualTo(productVariant);

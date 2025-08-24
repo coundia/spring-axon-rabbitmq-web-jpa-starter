@@ -64,7 +64,7 @@ public class FileManagerUpdateControllerIntegrationTest extends BaseIntegrationT
         body.add("objectName", UUID.randomUUID().toString());
         body.add("originalName", UUID.randomUUID().toString());
         body.add("mimeType", UUID.randomUUID().toString());
-        body.add("size", 18400L);
+        body.add("size", 15485L);
         body.add("path", UUID.randomUUID().toString());
         body.add("uri", UUID.randomUUID().toString());
         body.add("isPublic", true);

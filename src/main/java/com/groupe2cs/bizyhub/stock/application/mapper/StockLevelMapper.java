@@ -11,6 +11,7 @@ public class StockLevelMapper {
 public static StockLevelResponse toResponse(StockLevel entity) {
 return StockLevelResponse.builder()
 		.id(entity.getId())
+		.remoteId(entity.getRemoteId())
 		.stockOnHand(entity.getStockOnHand())
 		.stockAllocated(entity.getStockAllocated())
 		.productVariant(entity.getProductVariant() != null ? entity.getProductVariant().getId() : null)
@@ -24,6 +25,7 @@ return StockLevelResponse.builder()
 public static StockLevelResponse toResponse(CreateStockLevelCommand command) {
 return StockLevelResponse.builder()
 	.id(command.getId().value())
+	.remoteId(command.getRemoteId().value())
 	.stockOnHand(command.getStockOnHand().value())
 	.stockAllocated(command.getStockAllocated().value())
 	.productVariant(command.getProductVariant().value())
@@ -35,6 +37,7 @@ return StockLevelResponse.builder()
 public static StockLevelResponse toResponse(UpdateStockLevelCommand command) {
 return StockLevelResponse.builder()
 	.id(command.getId().value())
+	.remoteId(command.getRemoteId().value())
 	.stockOnHand(command.getStockOnHand().value())
 	.stockAllocated(command.getStockAllocated().value())
 	.productVariant(command.getProductVariant().value())
@@ -47,6 +50,7 @@ public static CreateStockLevelCommand toCommand(
 StockLevelRequest request
 ) {
 return CreateStockLevelCommand.builder()
+	.remoteId(StockLevelRemoteId.create(request.getRemoteId()))
 	.stockOnHand(StockLevelStockOnHand.create(request.getStockOnHand()))
 	.stockAllocated(StockLevelStockAllocated.create(request.getStockAllocated()))
 	.productVariant(StockLevelProductVariant.create(request.getProductVariant()))
@@ -58,6 +62,7 @@ return CreateStockLevelCommand.builder()
 	public static UpdateStockLevelCommand toUpdateCommand(StockLevelId id, StockLevelRequest request) {
 	return UpdateStockLevelCommand.builder()
 	.id(id)
+		.remoteId(StockLevelRemoteId.create(request.getRemoteId()))
 		.stockOnHand(StockLevelStockOnHand.create(request.getStockOnHand()))
 		.stockAllocated(StockLevelStockAllocated.create(request.getStockAllocated()))
 		.productVariant(StockLevelProductVariant.create(request.getProductVariant()))

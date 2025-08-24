@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,12 +43,14 @@ private TransactionRepository Repository;
 		.deltas(List.of(
 		TransactionDeltaDto.builder()
 .name(UUID.randomUUID().toString())
-.amount(5947.17)
+.amount(3437.64)
+.remoteId(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
 .isActive(true)
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
 .category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
+.typeEntry(UUID.randomUUID().toString())
 .typeTransactionRaw(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
 		.type("CREATE")
@@ -76,12 +78,14 @@ private TransactionRepository Repository;
 			TransactionDeltaDto.builder()
 			.id(existingId)
 .name(UUID.randomUUID().toString())
-.amount(5947.17)
+.amount(3437.64)
+.remoteId(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
 .isActive(true)
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
 .category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
+.typeEntry(UUID.randomUUID().toString())
 .typeTransactionRaw(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
 			.type("UPDATE")

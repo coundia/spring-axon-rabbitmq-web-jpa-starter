@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.accounts.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import com.groupe2cs.bizyhub.accounts.domain.exception.*;
-import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.accounts.domain.exception.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class AccountAggregateTests extends BaseUnitTests {
@@ -19,15 +19,15 @@ void it_should_create_account_with_valid_values() {
 	AccountStatus status = AccountStatus.create(UUID.randomUUID().toString());
 	AccountCurrency currency = AccountCurrency.create(UUID.randomUUID().toString());
 	AccountTypeAccount typeAccount = AccountTypeAccount.create(UUID.randomUUID().toString());
-	AccountBalance balance = AccountBalance.create(2780.58);
-	AccountBalancePrev balancePrev = AccountBalancePrev.create(915.57);
-	AccountBalanceBlocked balanceBlocked = AccountBalanceBlocked.create(8266.6);
-	AccountBalanceInit balanceInit = AccountBalanceInit.create(3369.05);
-	AccountBalanceGoal balanceGoal = AccountBalanceGoal.create(58.78);
-	AccountBalanceLimit balanceLimit = AccountBalanceLimit.create(8204.15);
+	AccountBalance balance = AccountBalance.create(361.13);
+	AccountBalancePrev balancePrev = AccountBalancePrev.create(9699.0);
+	AccountBalanceBlocked balanceBlocked = AccountBalanceBlocked.create(9145.49);
+	AccountBalanceInit balanceInit = AccountBalanceInit.create(9700.32);
+	AccountBalanceGoal balanceGoal = AccountBalanceGoal.create(7957.78);
+	AccountBalanceLimit balanceLimit = AccountBalanceLimit.create(3724.86);
 	AccountDescription description = AccountDescription.create(UUID.randomUUID().toString());
 	AccountIsActive isActive = AccountIsActive.create(true);
-	AccountIsDefault isDefault = AccountIsDefault.create(false);
+	AccountIsDefault isDefault = AccountIsDefault.create(true);
 	AccountSyncAt syncAt = AccountSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	AccountCreatedBy createdBy = AccountCreatedBy.create(UUID.randomUUID().toString());
 	AccountTenant tenant = AccountTenant.create(UUID.randomUUID().toString());

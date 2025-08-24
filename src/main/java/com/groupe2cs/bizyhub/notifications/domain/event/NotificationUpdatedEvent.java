@@ -22,6 +22,7 @@ public class NotificationUpdatedEvent implements Serializable {
 	private NotificationTitle title;
 	private NotificationMessage message;
 	private NotificationStatus status;
+	private NotificationRemoteId remoteId;
 	private NotificationSyncAt syncAt;
 	private NotificationReserved reserved;
 	private NotificationErrorMessage errorMessage;

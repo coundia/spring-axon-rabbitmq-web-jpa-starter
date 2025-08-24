@@ -41,12 +41,14 @@ void it_should_be_able_to_add_transaction() {
 		TransactionRequest requestDTO = new TransactionRequest();
 
 		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(5318.19);
+		requestDTO.setAmount(2164.59);
+		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setIsActive(true);
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
 		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value());
+		requestDTO.setTypeEntry(UUID.randomUUID().toString());
 		requestDTO.setTypeTransactionRaw(UUID.randomUUID().toString());
 		requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
 
@@ -57,11 +59,13 @@ void it_should_be_able_to_add_transaction() {
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getName()).isEqualTo(requestDTO.getName());
 		assertThat(response.getBody().getAmount()).isEqualTo(requestDTO.getAmount());
+		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getCategory()).isEqualTo(requestDTO.getCategory());
+		assertThat(response.getBody().getTypeEntry()).isEqualTo(requestDTO.getTypeEntry());
 		assertThat(response.getBody().getTypeTransactionRaw()).isEqualTo(requestDTO.getTypeTransactionRaw());
 		assertThat(response.getBody().getDateTransaction()).isEqualTo(requestDTO.getDateTransaction());
 	}

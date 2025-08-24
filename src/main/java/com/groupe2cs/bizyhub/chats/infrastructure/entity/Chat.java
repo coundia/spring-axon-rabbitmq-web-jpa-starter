@@ -66,6 +66,13 @@ public class Chat   extends AbstractAuditableEntity  {
 	)
 	@Builder.Default
 	private java.time.Instant syncAt  = java.time.Instant.now() ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String remoteId ;
 	@ManyToOne
 	@JoinColumn(name = "account_id", nullable = true)
 	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
@@ -95,6 +102,7 @@ public class Chat   extends AbstractAuditableEntity  {
 			", responses=" + responses +
 			", state=" + state +
 			", syncAt=" + syncAt +
+			", remoteId=" + remoteId +
 			", account=" + account +
 			", dateTransaction=" + dateTransaction +
 			", createdBy=" + createdBy +

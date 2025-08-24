@@ -77,10 +77,10 @@ public class UserFixtures {
 				.lastName(UserLastName.create(UUID.randomUUID().toString()))
 				.email(UserEmail.create(UUID.randomUUID().toString()))
 				.telephone(UserTelephone.create(UUID.randomUUID().toString()))
-				.limitPerDay(UserLimitPerDay.create(98))
-				.isPremium(UserIsPremium.create(true))
-				.enabled(UserEnabled.create(false))
-				.isBan(UserIsBan.create(true))
+				.limitPerDay(UserLimitPerDay.create(24))
+				.isPremium(UserIsPremium.create(false))
+				.enabled(UserEnabled.create(true))
+				.isBan(UserIsBan.create(false))
 				.message(UserMessage.create(UUID.randomUUID().toString()))
 			.build();
 
@@ -105,10 +105,10 @@ public class UserFixtures {
         .lastName(UserLastName.create(UUID.randomUUID().toString()))
         .email(UserEmail.create(UUID.randomUUID().toString()))
         .telephone(UserTelephone.create(UUID.randomUUID().toString()))
-        .limitPerDay(UserLimitPerDay.create(98))
-        .isPremium(UserIsPremium.create(true))
-        .enabled(UserEnabled.create(false))
-        .isBan(UserIsBan.create(true))
+        .limitPerDay(UserLimitPerDay.create(24))
+        .isPremium(UserIsPremium.create(false))
+        .enabled(UserEnabled.create(true))
+        .isBan(UserIsBan.create(false))
         .message(UserMessage.create(UUID.randomUUID().toString()))
         .build();
 

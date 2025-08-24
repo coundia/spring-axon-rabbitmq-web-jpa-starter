@@ -22,6 +22,8 @@ public class StockLevelResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String id;
 	@Schema(description = "", example = "")
+	private String remoteId;
+	@Schema(description = "", example = "")
 	private Integer stockOnHand;
 	@Schema(description = "", example = "")
 	private Integer stockAllocated;

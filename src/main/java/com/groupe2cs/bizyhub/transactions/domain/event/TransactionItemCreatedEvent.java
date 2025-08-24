@@ -23,6 +23,7 @@ public class TransactionItemCreatedEvent implements Serializable {
 	private TransactionItemLabel label;
 	private TransactionItemQuantity quantity;
 	private TransactionItemUnit unit;
+	private TransactionItemRemoteId remoteId;
 	private TransactionItemSyncAt syncAt;
 	private TransactionItemUnitPrice unitPrice;
 	private TransactionItemTotal total;

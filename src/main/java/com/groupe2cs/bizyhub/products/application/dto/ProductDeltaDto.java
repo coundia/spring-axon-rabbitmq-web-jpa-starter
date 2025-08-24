@@ -26,27 +26,27 @@ public class ProductDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "2c8f3963-c2cb-47b8-b223-7d68478346e7")
+		@Schema(description = "", example = "1ffc6861-9232-4c53-907f-806a697238aa")
 		private String remoteId;
-		@Schema(description = "", example = "0536cd1f-66be-409e-bec6-1bc48efc4fba")
+		@Schema(description = "", example = "b0e26939-e1a2-44b4-82ae-dc93bf47e325")
 		private String code;
-		@Schema(description = "", example = "d9db6f77-0e96-48d9-95dd-fa48a4f16438")
+		@Schema(description = "", example = "674adbda-9255-4cee-8fd8-8f2e593fe174")
 		private String name;
-		@Schema(description = "", example = "6ba7522c-0d66-497a-b637-e1a552a07535")
+		@Schema(description = "", example = "d0e4bfcb-7b87-4c1b-acd0-a6eb33c49e8e")
 		private String description;
-		@Schema(description = "", example = "f88a71f9-4f30-4b1f-9d59-52a04538ee57")
+		@Schema(description = "", example = "b3a8c66d-8438-474b-8bf8-5fe0cccccb2b")
 		private String barcode;
-		@Schema(description = "", example = "c589be11-81f8-44c3-920a-735083f8b06e")
+		@Schema(description = "", example = "9199baff-9239-45bf-9bea-3ac550ebd53a")
 		private String unit;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "56267e3e-baa2-41a8-86c9-37da8319afa6")
+		@Schema(description = "", example = "7d295f41-9806-4dec-bfde-b1afda3f3227")
 		private String category;
-		@Schema(description = "", example = "1561.29")
+		@Schema(description = "", example = "8408.19")
 		private Double defaultPrice;
-		@Schema(description = "", example = "0e6e988c-afee-45dd-a743-094e445b3ed5")
+		@Schema(description = "", example = "bde09b11-0da0-4575-9143-3c82400f6210")
 		private String statuses;
-		@Schema(description = "", example = "9104.98")
+		@Schema(description = "", example = "9210.08")
 		private Double purchasePrice;
 
 }

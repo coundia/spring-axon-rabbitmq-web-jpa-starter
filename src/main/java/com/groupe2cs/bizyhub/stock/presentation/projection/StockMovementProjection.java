@@ -33,6 +33,7 @@ StockMovement entity = StockMovement.builder()
 		.id(event.getId() == null ? null : event.getId().value())
  		.typeStockMovement(event.getTypeStockMovement() == null ? null : event.getTypeStockMovement().value())
  		.quantity(event.getQuantity() == null ? null : event.getQuantity().value())
+ 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
   		.company( event.getCompany() == null ? null : new com.groupe2cs.bizyhub.companies.infrastructure.entity.Company(event.getCompany().value()))
 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
   		.productVariant( event.getProductVariant() == null ? null : new com.groupe2cs.bizyhub.products.infrastructure.entity.Product(event.getProductVariant().value()))
@@ -76,6 +77,9 @@ StockMovement entity = repository.findById(event.getId().value())
     }
 	if(event.getQuantity() != null) {
 		entity.setQuantity(event.getQuantity().value());
+    }
+	if(event.getRemoteId() != null) {
+		entity.setRemoteId(event.getRemoteId().value());
     }
 
      if(event.getCompany() != null) {

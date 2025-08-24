@@ -26,15 +26,17 @@ public class StockLevelDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "89")
+		@Schema(description = "", example = "a0aaf60a-40f2-488d-898e-b3c0b6384a98")
+		private String remoteId;
+		@Schema(description = "", example = "76")
 		private Integer stockOnHand;
 		@Schema(description = "", example = "70")
 		private Integer stockAllocated;
-		@Schema(description = "", example = "17ef2fce-8871-4314-9b39-0adb966af3e2")
+		@Schema(description = "", example = "247b3f3a-42fe-4bf1-95f7-2d69ee20b4df")
 		private String productVariant;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "25cc94f4-22a8-4136-8949-a4225af2a62e")
+		@Schema(description = "", example = "d5ea52d9-1bbd-4dc9-9f92-0632e6532d26")
 		private String company;
 
 }

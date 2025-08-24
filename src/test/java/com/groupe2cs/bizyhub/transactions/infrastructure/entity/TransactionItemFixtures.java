@@ -83,11 +83,12 @@ public class TransactionItemFixtures {
 				.transaction(TransactionItemTransaction.create(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value()))
 				.product(TransactionItemProduct.create(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value()))
 				.label(TransactionItemLabel.create(UUID.randomUUID().toString()))
-				.quantity(TransactionItemQuantity.create(97))
+				.quantity(TransactionItemQuantity.create(18))
 				.unit(TransactionItemUnit.create(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value()))
+				.remoteId(TransactionItemRemoteId.create(UUID.randomUUID().toString()))
 				.syncAt(TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.unitPrice(TransactionItemUnitPrice.create(6263.13))
-				.total(TransactionItemTotal.create(1265.12))
+				.unitPrice(TransactionItemUnitPrice.create(3594.02))
+				.total(TransactionItemTotal.create(386.5))
 				.notes(TransactionItemNotes.create(UUID.randomUUID().toString()))
 			.build();
 
@@ -107,10 +108,11 @@ public class TransactionItemFixtures {
 
         CreateTransactionItemCommand command = CreateTransactionItemCommand.builder()
         .label(TransactionItemLabel.create(UUID.randomUUID().toString()))
-        .quantity(TransactionItemQuantity.create(97))
+        .quantity(TransactionItemQuantity.create(18))
+        .remoteId(TransactionItemRemoteId.create(UUID.randomUUID().toString()))
         .syncAt(TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .unitPrice(TransactionItemUnitPrice.create(6263.13))
-        .total(TransactionItemTotal.create(1265.12))
+        .unitPrice(TransactionItemUnitPrice.create(3594.02))
+        .total(TransactionItemTotal.create(386.5))
         .notes(TransactionItemNotes.create(UUID.randomUUID().toString()))
         .build();
 

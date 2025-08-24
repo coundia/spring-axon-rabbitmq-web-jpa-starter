@@ -36,10 +36,16 @@ public interface SyncStateRepository extends JpaRepository<SyncState, String> {
 
         @Query("SELECT e FROM SyncState e WHERE LOWER(e.entityTable) LIKE LOWER(CONCAT('%', :entityTable, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<SyncState> findByEntityTableAndTenantId(String entityTable, String tenantId);
+        @Query("SELECT e FROM SyncState e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<SyncState> findByRemoteIdAndCreatedById(String remoteId, String createdById);
+        @Query("SELECT e FROM SyncState e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<SyncState> findByRemoteIdAndTenantName(String remoteId, String tenantName);
+
+        @Query("SELECT e FROM SyncState e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<SyncState> findByRemoteIdAndTenantId(String remoteId, String tenantId);
         @Query("""
         SELECT e FROM SyncState e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -48,7 +54,6 @@ public interface SyncStateRepository extends JpaRepository<SyncState, String> {
          @Query("""
         SELECT e FROM SyncState e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -58,7 +63,6 @@ public interface SyncStateRepository extends JpaRepository<SyncState, String> {
         @Query("""
         SELECT e FROM SyncState e
         WHERE e.lastSyncAt >= :#{#lastSyncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.lastSyncAt < :#{#lastSyncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -67,7 +71,6 @@ public interface SyncStateRepository extends JpaRepository<SyncState, String> {
          @Query("""
         SELECT e FROM SyncState e
         WHERE e.lastSyncAt >= :#{#lastSyncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.lastSyncAt < :#{#lastSyncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)

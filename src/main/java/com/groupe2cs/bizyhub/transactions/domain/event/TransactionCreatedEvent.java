@@ -20,11 +20,13 @@ public class TransactionCreatedEvent implements Serializable {
 	private TransactionId id;
 	private TransactionName name;
 	private TransactionAmount amount;
+	private TransactionRemoteId remoteId;
 	private TransactionDetails details;
 	private TransactionIsActive isActive;
 	private TransactionSyncAt syncAt;
 	private TransactionAccount account;
 	private TransactionCategory category;
+	private TransactionTypeEntry typeEntry;
 	private TransactionTypeTransactionRaw typeTransactionRaw;
 	private TransactionDateTransaction dateTransaction;
 	private TransactionCreatedBy createdBy;

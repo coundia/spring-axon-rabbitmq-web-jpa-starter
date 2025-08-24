@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import com.groupe2cs.bizyhub.transactions.domain.exception.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.groupe2cs.bizyhub.transactions.domain.exception.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.*;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 
 
 public class TransactionEntryAggregateTests extends BaseUnitTests {
@@ -17,7 +17,7 @@ void it_should_create_transactionEntry_with_valid_values() {
 	TransactionEntryRemoteId remoteId = TransactionEntryRemoteId.create(UUID.randomUUID().toString());
 	TransactionEntryCode code = TransactionEntryCode.create(UUID.randomUUID().toString());
 	TransactionEntryDescription description = TransactionEntryDescription.create(UUID.randomUUID().toString());
-	TransactionEntryAmount amount = TransactionEntryAmount.create(3505.58);
+	TransactionEntryAmount amount = TransactionEntryAmount.create(5410.48);
 	TransactionEntryTypeEntry typeEntry = TransactionEntryTypeEntry.create(UUID.randomUUID().toString());
 	TransactionEntryDateTransaction dateTransaction = TransactionEntryDateTransaction.create(java.time.Instant.now().plusSeconds(3600));
 	TransactionEntryStatus status = TransactionEntryStatus.create(UUID.randomUUID().toString());

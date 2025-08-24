@@ -43,6 +43,13 @@ public interface ChangeLogRepository extends JpaRepository<ChangeLog, String> {
 
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.entityId) LIKE LOWER(CONCAT('%', :entityId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<ChangeLog> findByEntityIdAndTenantId(String entityId, String tenantId);
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<ChangeLog> findByRemoteIdAndCreatedById(String remoteId, String createdById);
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<ChangeLog> findByRemoteIdAndTenantName(String remoteId, String tenantName);
+
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<ChangeLog> findByRemoteIdAndTenantId(String remoteId, String tenantId);
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.operation) LIKE LOWER(CONCAT('%', :operation, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<ChangeLog> findByOperationAndCreatedById(String operation, String createdById);
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.operation) LIKE LOWER(CONCAT('%', :operation, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -67,7 +74,6 @@ public interface ChangeLogRepository extends JpaRepository<ChangeLog, String> {
         @Query("""
         SELECT e FROM ChangeLog e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.createdBy.id = :createdById
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
@@ -76,7 +82,6 @@ public interface ChangeLogRepository extends JpaRepository<ChangeLog, String> {
          @Query("""
         SELECT e FROM ChangeLog e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.syncAt < :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().plusDays(1).atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
         AND e.tenant.id = :tenantId
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
