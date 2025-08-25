@@ -26,91 +26,91 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Entity
 @EntityListeners(AuditListener.class)
 @Table(name = "transaction")
-public class Transaction   extends AbstractAuditableEntity  {
+public class Transaction extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String remoteId ;
+	private String remoteId;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String localId ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String code ;
+	private String localId;
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String code;
+
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String description ;
+	private String description;
 
-	@Column(nullable = false, 
-		unique = false
-
-	)
-	@Builder.Default
-	private Double amount  = 0.0 ;
-
-	@Column(nullable = false, 
-		unique = false
+	@Column(nullable = false,
+			unique = false
 
 	)
 	@Builder.Default
-	private String typeEntry  = "DEBIT" ;
+	private Double amount = 0.0;
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = false,
+			unique = false
 
 	)
 	@Builder.Default
-	private java.time.Instant dateTransaction  = java.time.Instant.now() ;
+	private String typeEntry = "DEBIT";
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
+
+	)
+	@Builder.Default
+	private java.time.Instant dateTransaction = java.time.Instant.now();
+
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String status ;
+	private String status;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String entityName ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String entityId ;
+	private String entityName;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String entityId;
 	@ManyToOne
 	@JoinColumn(name = "account_id", nullable = true)
 	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 	@Builder.Default
-	private java.time.Instant syncAt  = java.time.Instant.now() ;
+	private java.time.Instant syncAt = java.time.Instant.now();
 	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = true)
 	private com.groupe2cs.bizyhub.categories.infrastructure.entity.Category category;
@@ -129,32 +129,33 @@ public class Transaction   extends AbstractAuditableEntity  {
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
+
 	public Transaction(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "Transaction{" +
-		"id='" + id + '\'' +
-			", remoteId=" + remoteId +
-			", localId=" + localId +
-			", code=" + code +
-			", description=" + description +
-			", amount=" + amount +
-			", typeEntry=" + typeEntry +
-			", dateTransaction=" + dateTransaction +
-			", status=" + status +
-			", entityName=" + entityName +
-			", entityId=" + entityId +
-			", account=" + account +
-			", syncAt=" + syncAt +
-			", category=" + category +
-			", company=" + company +
-			", customer=" + customer +
-			", debt=" + debt +
-			", createdBy=" + createdBy +
-			", tenant=" + tenant +
-		'}';
+				"id='" + id + '\'' +
+				", remoteId=" + remoteId +
+				", localId=" + localId +
+				", code=" + code +
+				", description=" + description +
+				", amount=" + amount +
+				", typeEntry=" + typeEntry +
+				", dateTransaction=" + dateTransaction +
+				", status=" + status +
+				", entityName=" + entityName +
+				", entityId=" + entityId +
+				", account=" + account +
+				", syncAt=" + syncAt +
+				", category=" + category +
+				", company=" + company +
+				", customer=" + customer +
+				", debt=" + debt +
+				", createdBy=" + createdBy +
+				", tenant=" + tenant +
+				'}';
 	}
 }
