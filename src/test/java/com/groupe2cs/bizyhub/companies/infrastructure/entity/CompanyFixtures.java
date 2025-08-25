@@ -89,7 +89,7 @@ public class CompanyFixtures {
 				.postalCode(CompanyPostalCode.create(UUID.randomUUID().toString()))
 				.isActive(CompanyIsActive.create(false))
 				.syncAt(CompanySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.isDefault(CompanyIsDefault.create(false))
+				.isDefault(CompanyIsDefault.create(true))
 			.build();
 
 		command.setCreatedBy(CompanyCreatedBy.create(user.getId()));
@@ -125,7 +125,7 @@ public class CompanyFixtures {
         .postalCode(CompanyPostalCode.create(UUID.randomUUID().toString()))
         .isActive(CompanyIsActive.create(false))
         .syncAt(CompanySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .isDefault(CompanyIsDefault.create(false))
+        .isDefault(CompanyIsDefault.create(true))
         .build();
 
 		command.setCreatedBy(CompanyCreatedBy.create(user.getId()));

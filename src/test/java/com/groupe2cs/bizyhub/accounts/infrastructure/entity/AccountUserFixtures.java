@@ -85,7 +85,7 @@ public class AccountUserFixtures {
 				.details(AccountUserDetails.create(UUID.randomUUID().toString()))
 				.remoteId(AccountUserRemoteId.create(UUID.randomUUID().toString()))
 				.localId(AccountUserLocalId.create(UUID.randomUUID().toString()))
-				.isActive(AccountUserIsActive.create(false))
+				.isActive(AccountUserIsActive.create(true))
 			.build();
 
 		command.setCreatedBy(AccountUserCreatedBy.create(user.getId()));
@@ -109,7 +109,7 @@ public class AccountUserFixtures {
         .details(AccountUserDetails.create(UUID.randomUUID().toString()))
         .remoteId(AccountUserRemoteId.create(UUID.randomUUID().toString()))
         .localId(AccountUserLocalId.create(UUID.randomUUID().toString()))
-        .isActive(AccountUserIsActive.create(false))
+        .isActive(AccountUserIsActive.create(true))
         .build();
 
 		command.setCreatedBy(AccountUserCreatedBy.create(user.getId()));

@@ -18,18 +18,22 @@ import java.util.*;
 public class TransactionUpdatedEvent implements Serializable {
 
 	private TransactionId id;
-	private TransactionName name;
-	private TransactionAmount amount;
 	private TransactionRemoteId remoteId;
 	private TransactionLocalId localId;
-	private TransactionDetails details;
-	private TransactionIsActive isActive;
-	private TransactionSyncAt syncAt;
-	private TransactionAccount account;
-	private TransactionCategory category;
+	private TransactionCode code;
+	private TransactionDescription description;
+	private TransactionAmount amount;
 	private TransactionTypeEntry typeEntry;
-	private TransactionTypeTransactionRaw typeTransactionRaw;
 	private TransactionDateTransaction dateTransaction;
+	private TransactionStatus status;
+	private TransactionEntityName entityName;
+	private TransactionEntityId entityId;
+	private TransactionAccount account;
+	private TransactionSyncAt syncAt;
+	private TransactionCategory category;
+	private TransactionCompany company;
+	private TransactionCustomer customer;
+	private TransactionDebt debt;
 	private TransactionCreatedBy createdBy;
 	private TransactionTenant tenant;
 

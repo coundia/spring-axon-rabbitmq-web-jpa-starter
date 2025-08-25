@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateFileManagerCommand command = new CreateFileManagerCommand(
- FileManagerId.create(UUID.randomUUID().toString()) ,  FileManagerName.create(UUID.randomUUID().toString()) ,  FileManagerDetails.create(UUID.randomUUID().toString()) ,  FileManagerObjectId.create(UUID.randomUUID().toString()) ,  FileManagerObjectName.create(UUID.randomUUID().toString()) ,  FileManagerOriginalName.create(UUID.randomUUID().toString()) ,  FileManagerMimeType.create(UUID.randomUUID().toString()) ,  FileManagerSize.create(92793L) ,  FileManagerPath.create(UUID.randomUUID().toString()) ,  FileManagerUri.create(UUID.randomUUID().toString()) ,  FileManagerIsPublic.create(true) ,  FileManagerCreatedBy.create(UUID.randomUUID().toString()) ,  FileManagerTenant.create(UUID.randomUUID().toString()) 
+ FileManagerId.create(UUID.randomUUID().toString()) ,  FileManagerName.create(UUID.randomUUID().toString()) ,  FileManagerDetails.create(UUID.randomUUID().toString()) ,  FileManagerObjectId.create(UUID.randomUUID().toString()) ,  FileManagerObjectName.create(UUID.randomUUID().toString()) ,  FileManagerOriginalName.create(UUID.randomUUID().toString()) ,  FileManagerMimeType.create(UUID.randomUUID().toString()) ,  FileManagerSize.create(63858L) ,  FileManagerPath.create(UUID.randomUUID().toString()) ,  FileManagerUri.create(UUID.randomUUID().toString()) ,  FileManagerIsPublic.create(false) ,  FileManagerCreatedBy.create(UUID.randomUUID().toString()) ,  FileManagerTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

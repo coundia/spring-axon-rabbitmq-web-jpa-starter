@@ -74,7 +74,7 @@ public class TransactionUserUpdateControllerIntegrationTest extends BaseIntegrat
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("username", UUID.randomUUID().toString());
         body.add("details", UUID.randomUUID().toString());
-        body.add("isActive", true);
+        body.add("isActive", false);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

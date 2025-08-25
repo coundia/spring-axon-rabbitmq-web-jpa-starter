@@ -25,51 +25,63 @@ public class CreateTransactionCommand implements Serializable {
 @TargetAggregateIdentifier
 	@Builder.Default
 	private TransactionId id = TransactionId.create(UUID.randomUUID().toString());
- 	private TransactionName name;
- 	private TransactionAmount amount;
  	private TransactionRemoteId remoteId;
  	private TransactionLocalId localId;
- 	private TransactionDetails details;
- 	private TransactionIsActive isActive;
- 	private TransactionSyncAt syncAt;
- 	private TransactionAccount account;
- 	private TransactionCategory category;
+ 	private TransactionCode code;
+ 	private TransactionDescription description;
+ 	private TransactionAmount amount;
  	private TransactionTypeEntry typeEntry;
- 	private TransactionTypeTransactionRaw typeTransactionRaw;
  	private TransactionDateTransaction dateTransaction;
+ 	private TransactionStatus status;
+ 	private TransactionEntityName entityName;
+ 	private TransactionEntityId entityId;
+ 	private TransactionAccount account;
+ 	private TransactionSyncAt syncAt;
+ 	private TransactionCategory category;
+ 	private TransactionCompany company;
+ 	private TransactionCustomer customer;
+ 	private TransactionDebt debt;
  	private TransactionCreatedBy createdBy;
  	private TransactionTenant tenant;
 	public CreateTransactionCommand(
  
-   TransactionName name , 
-   TransactionAmount amount , 
    TransactionRemoteId remoteId , 
    TransactionLocalId localId , 
-   TransactionDetails details , 
-   TransactionIsActive isActive , 
-   TransactionSyncAt syncAt , 
-   TransactionAccount account , 
-   TransactionCategory category , 
+   TransactionCode code , 
+   TransactionDescription description , 
+   TransactionAmount amount , 
    TransactionTypeEntry typeEntry , 
-   TransactionTypeTransactionRaw typeTransactionRaw , 
    TransactionDateTransaction dateTransaction , 
+   TransactionStatus status , 
+   TransactionEntityName entityName , 
+   TransactionEntityId entityId , 
+   TransactionAccount account , 
+   TransactionSyncAt syncAt , 
+   TransactionCategory category , 
+   TransactionCompany company , 
+   TransactionCustomer customer , 
+   TransactionDebt debt , 
    TransactionCreatedBy createdBy , 
    TransactionTenant tenant  
 		){
 			this.id = TransactionId.create(UUID.randomUUID().toString());
  
-  this.name = name ; 
-  this.amount = amount ; 
   this.remoteId = remoteId ; 
   this.localId = localId ; 
-  this.details = details ; 
-  this.isActive = isActive ; 
-  this.syncAt = syncAt ; 
-  this.account = account ; 
-  this.category = category ; 
+  this.code = code ; 
+  this.description = description ; 
+  this.amount = amount ; 
   this.typeEntry = typeEntry ; 
-  this.typeTransactionRaw = typeTransactionRaw ; 
   this.dateTransaction = dateTransaction ; 
+  this.status = status ; 
+  this.entityName = entityName ; 
+  this.entityId = entityId ; 
+  this.account = account ; 
+  this.syncAt = syncAt ; 
+  this.category = category ; 
+  this.company = company ; 
+  this.customer = customer ; 
+  this.debt = debt ; 
   this.createdBy = createdBy ; 
   this.tenant = tenant ; 
 	}

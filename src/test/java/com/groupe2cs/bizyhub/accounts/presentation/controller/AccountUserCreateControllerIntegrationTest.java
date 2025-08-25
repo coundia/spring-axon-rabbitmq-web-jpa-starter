@@ -48,7 +48,7 @@ void it_should_be_able_to_add_accountuser() {
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
-		requestDTO.setIsActive(true);
+		requestDTO.setIsActive(false);
 
  		String uri = "/v1/commands/accountUser";
 		ResponseEntity<AccountUserResponse> response = this.postForEntity(uri, requestDTO, AccountUserResponse.class);

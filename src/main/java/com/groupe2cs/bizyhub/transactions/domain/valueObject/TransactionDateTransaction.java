@@ -2,17 +2,12 @@ package com.groupe2cs.bizyhub.transactions.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionNameNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAmountNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionRemoteIdNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionLocalIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionDetailsNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionIsActiveNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionSyncAtNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAccountNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionCategoryNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionCodeNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionDescriptionNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAmountNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionTypeEntryNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionTypeTransactionRawNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionDateTransactionNotValid;
 
 import java.io.Serializable;

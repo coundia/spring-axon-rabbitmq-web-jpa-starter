@@ -19,25 +19,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "ChangeLogRequest", description = "Request payload for ChangeLog operations")
 public class ChangeLogRequest implements Serializable {
 
-	@Schema(description = "", example = "4057aeba-767d-4889-91d6-52fd29432c1d")
+	@Schema(description = "", example = "c7e8d560-dddb-4100-b2b7-4028ac221d31")
 	private String entityTable;
-	@Schema(description = "", example = "1f2137c2-c3fd-4872-a2da-c28fc1c3a4be")
+	@Schema(description = "", example = "da621e9e-ba1c-4a49-9deb-10182532fbda")
 	private String entityId;
-	@Schema(description = "", example = "1f0ad069-6011-421a-a068-515efeb47ea1")
+	@Schema(description = "", example = "c3c975b2-3a88-4125-b815-9fa68999a1b1")
 	private String remoteId;
-	@Schema(description = "", example = "32ffd09d-b448-4e3f-b25c-c92fae51ac93")
+	@Schema(description = "", example = "8badfe81-70a1-4b6f-9912-cea0e34884d9")
 	private String localId;
-	@Schema(description = "", example = "8d3b2637-fb62-4e36-9257-c0e3d31cafea")
+	@Schema(description = "", example = "5e098395-7783-4d4c-a6ee-47dcdbf23aa3")
 	private String operation;
-	@Schema(description = "", example = "506f77ac-dd12-492a-acf6-bf92f6e3faef")
+	@Schema(description = "", example = "1c4a41a2-4e79-44ca-b4c5-4c054ff9e98c")
 	private String payload;
-	@Schema(description = "", example = "606d4497-a368-42c1-8389-dc4e042b811a")
+	@Schema(description = "", example = "1a4e3e29-7fc9-41af-8acf-80bea45517a4")
 	private String status;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "39")
+	@Schema(description = "", example = "73")
 	private Integer attempts;
-	@Schema(description = "", example = "ee7315a9-c787-44fc-9eaf-ad0c3c89a698")
+	@Schema(description = "", example = "7b0ca13b-6685-4d1b-909f-bb01a8733537")
 	private String error;
 
 }

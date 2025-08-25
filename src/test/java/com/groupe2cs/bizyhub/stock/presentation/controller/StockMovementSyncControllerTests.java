@@ -43,7 +43,7 @@ private StockMovementRepository Repository;
 		.deltas(List.of(
 		StockMovementDeltaDto.builder()
 .typeStockMovement(UUID.randomUUID().toString())
-.quantity(14)
+.quantity(21)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
 .company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())
@@ -76,7 +76,7 @@ private StockMovementRepository Repository;
 			StockMovementDeltaDto.builder()
 			.id(existingId)
 .typeStockMovement(UUID.randomUUID().toString())
-.quantity(14)
+.quantity(21)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
 .company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())

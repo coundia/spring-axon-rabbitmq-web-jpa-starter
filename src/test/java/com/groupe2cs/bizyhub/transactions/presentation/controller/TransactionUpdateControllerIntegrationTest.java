@@ -37,6 +37,12 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
     @Autowired
     private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository;
     @Autowired
+    private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository;
+    @Autowired
+    private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository;
+    @Autowired
+    private com.groupe2cs.bizyhub.debts.infrastructure.repository.DebtRepository debtDataRepository;
+    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -48,6 +54,9 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
             commandGateway, transactionRepository,
         accountDataRepository,
         categoryDataRepository,
+        companyDataRepository,
+        customerDataRepository,
+        debtDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -57,6 +66,9 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
             commandGatewayUpdate, transactionRepository,
         accountDataRepository,
         categoryDataRepository,
+        companyDataRepository,
+        customerDataRepository,
+        debtDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -66,18 +78,22 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
         TransactionFixtures.byIdWaitExist(transactionRepository, updated.getId().value());
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("name", UUID.randomUUID().toString());
-        body.add("amount", 5813.1);
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("details", UUID.randomUUID().toString());
-        body.add("isActive", false);
-        body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("account", updated.getAccount().value());
-        body.add("category", updated.getCategory().value());
+        body.add("code", UUID.randomUUID().toString());
+        body.add("description", UUID.randomUUID().toString());
+        body.add("amount", 9269.72);
         body.add("typeEntry", UUID.randomUUID().toString());
-        body.add("typeTransactionRaw", UUID.randomUUID().toString());
         body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
+        body.add("status", UUID.randomUUID().toString());
+        body.add("entityName", UUID.randomUUID().toString());
+        body.add("entityId", UUID.randomUUID().toString());
+        body.add("account", updated.getAccount().value());
+        body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
+        body.add("category", updated.getCategory().value());
+        body.add("company", updated.getCompany().value());
+        body.add("customer", updated.getCustomer().value());
+        body.add("debt", updated.getDebt().value());
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

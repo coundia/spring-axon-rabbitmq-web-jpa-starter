@@ -33,6 +33,12 @@ private TransactionRepository Repository;
     @Autowired
     private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
     @Autowired
+    private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
+    @Autowired
+    private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
+    @Autowired
+    private com.groupe2cs.bizyhub.debts.infrastructure.repository.DebtRepository debtDataRepository ;
+    @Autowired
     private UserRepository createdByDataRepository ;
     @Autowired
     private TenantRepository tenantDataRepository ;
@@ -42,18 +48,22 @@ private TransactionRepository Repository;
 		TransactionSyncRequest requestDTO = TransactionSyncRequest.builder()
 		.deltas(List.of(
 		TransactionDeltaDto.builder()
-.name(UUID.randomUUID().toString())
-.amount(9052.69)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
-.details(UUID.randomUUID().toString())
-.isActive(true)
-.syncAt(java.time.Instant.now().plusSeconds(3600))
-.account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
-.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
+.code(UUID.randomUUID().toString())
+.description(UUID.randomUUID().toString())
+.amount(6546.9)
 .typeEntry(UUID.randomUUID().toString())
-.typeTransactionRaw(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
+.status(UUID.randomUUID().toString())
+.entityName(UUID.randomUUID().toString())
+.entityId(UUID.randomUUID().toString())
+.account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
+.syncAt(java.time.Instant.now().plusSeconds(3600))
+.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
+.company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())
+.customer(com.groupe2cs.bizyhub.customers.infrastructure.entity.CustomerFixtures.randomOneViaCommand(commandGateway,customerDataRepository, user).getId().value())
+.debt(com.groupe2cs.bizyhub.debts.infrastructure.entity.DebtFixtures.randomOneViaCommand(commandGateway,debtDataRepository, user).getId().value())
 		.type("CREATE")
 		.build()
 		))
@@ -78,18 +88,22 @@ private TransactionRepository Repository;
 			.deltas(List.of(
 			TransactionDeltaDto.builder()
 			.id(existingId)
-.name(UUID.randomUUID().toString())
-.amount(9052.69)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
-.details(UUID.randomUUID().toString())
-.isActive(true)
-.syncAt(java.time.Instant.now().plusSeconds(3600))
-.account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
-.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
+.code(UUID.randomUUID().toString())
+.description(UUID.randomUUID().toString())
+.amount(6546.9)
 .typeEntry(UUID.randomUUID().toString())
-.typeTransactionRaw(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
+.status(UUID.randomUUID().toString())
+.entityName(UUID.randomUUID().toString())
+.entityId(UUID.randomUUID().toString())
+.account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
+.syncAt(java.time.Instant.now().plusSeconds(3600))
+.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
+.company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())
+.customer(com.groupe2cs.bizyhub.customers.infrastructure.entity.CustomerFixtures.randomOneViaCommand(commandGateway,customerDataRepository, user).getId().value())
+.debt(com.groupe2cs.bizyhub.debts.infrastructure.entity.DebtFixtures.randomOneViaCommand(commandGateway,debtDataRepository, user).getId().value())
 			.type("UPDATE")
 			.build()
 			))

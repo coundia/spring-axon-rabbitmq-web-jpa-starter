@@ -20,8 +20,8 @@ void it_should_create_customer_with_valid_values() {
 	CustomerFirstName firstName = CustomerFirstName.create(UUID.randomUUID().toString());
 	CustomerLastName lastName = CustomerLastName.create(UUID.randomUUID().toString());
 	CustomerFullName fullName = CustomerFullName.create(UUID.randomUUID().toString());
-	CustomerBalance balance = CustomerBalance.create(7896.5);
-	CustomerBalanceDebt balanceDebt = CustomerBalanceDebt.create(458.02);
+	CustomerBalance balance = CustomerBalance.create(5849.66);
+	CustomerBalanceDebt balanceDebt = CustomerBalanceDebt.create(4497.41);
 	CustomerPhone phone = CustomerPhone.create(UUID.randomUUID().toString());
 	CustomerEmail email = CustomerEmail.create(UUID.randomUUID().toString());
 	CustomerNotes notes = CustomerNotes.create(UUID.randomUUID().toString());

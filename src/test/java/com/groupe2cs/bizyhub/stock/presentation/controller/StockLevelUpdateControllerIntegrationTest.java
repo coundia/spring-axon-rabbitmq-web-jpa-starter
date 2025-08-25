@@ -68,8 +68,8 @@ public class StockLevelUpdateControllerIntegrationTest extends BaseIntegrationTe
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("stockOnHand", 51);
-        body.add("stockAllocated", 59);
+        body.add("stockOnHand", 99);
+        body.add("stockAllocated", 64);
         body.add("productVariant", updated.getProductVariant().value());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("company", updated.getCompany().value());

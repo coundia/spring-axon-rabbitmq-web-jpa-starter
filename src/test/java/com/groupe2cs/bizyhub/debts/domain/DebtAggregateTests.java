@@ -18,13 +18,13 @@ void it_should_create_debt_with_valid_values() {
 	DebtLocalId localId = DebtLocalId.create(UUID.randomUUID().toString());
 	DebtCode code = DebtCode.create(UUID.randomUUID().toString());
 	DebtNotes notes = DebtNotes.create(UUID.randomUUID().toString());
-	DebtBalance balance = DebtBalance.create(4501.38);
-	DebtBalanceDebt balanceDebt = DebtBalanceDebt.create(6458.09);
+	DebtBalance balance = DebtBalance.create(2641.05);
+	DebtBalanceDebt balanceDebt = DebtBalanceDebt.create(7389.22);
 	DebtDueDate dueDate = DebtDueDate.create(java.time.Instant.now().plusSeconds(3600));
 	DebtStatuses statuses = DebtStatuses.create(UUID.randomUUID().toString());
 	DebtSyncAt syncAt = DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	DebtCustomer customer = DebtCustomer.create(UUID.randomUUID().toString());
-	DebtIsActive isActive = DebtIsActive.create(true);
+	DebtIsActive isActive = DebtIsActive.create(false);
 	DebtCreatedBy createdBy = DebtCreatedBy.create(UUID.randomUUID().toString());
 	DebtTenant tenant = DebtTenant.create(UUID.randomUUID().toString());
 	DebtAggregate aggregateDebtAggregate = new DebtAggregate(id, remoteId, localId, code, notes, balance, balanceDebt, dueDate, statuses, syncAt, customer, isActive, createdBy, tenant);

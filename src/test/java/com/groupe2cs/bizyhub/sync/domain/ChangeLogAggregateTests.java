@@ -22,7 +22,7 @@ void it_should_create_changeLog_with_valid_values() {
 	ChangeLogPayload payload = ChangeLogPayload.create(UUID.randomUUID().toString());
 	ChangeLogStatus status = ChangeLogStatus.create(UUID.randomUUID().toString());
 	ChangeLogSyncAt syncAt = ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600));
-	ChangeLogAttempts attempts = ChangeLogAttempts.create(84);
+	ChangeLogAttempts attempts = ChangeLogAttempts.create(66);
 	ChangeLogError error = ChangeLogError.create(UUID.randomUUID().toString());
 	ChangeLogCreatedBy createdBy = ChangeLogCreatedBy.create(UUID.randomUUID().toString());
 	ChangeLogTenant tenant = ChangeLogTenant.create(UUID.randomUUID().toString());

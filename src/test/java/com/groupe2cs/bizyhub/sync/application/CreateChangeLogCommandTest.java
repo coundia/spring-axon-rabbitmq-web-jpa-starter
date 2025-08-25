@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateChangeLogCommand command = new CreateChangeLogCommand(
- ChangeLogId.create(UUID.randomUUID().toString()) ,  ChangeLogEntityTable.create(UUID.randomUUID().toString()) ,  ChangeLogEntityId.create(UUID.randomUUID().toString()) ,  ChangeLogRemoteId.create(UUID.randomUUID().toString()) ,  ChangeLogLocalId.create(UUID.randomUUID().toString()) ,  ChangeLogOperation.create(UUID.randomUUID().toString()) ,  ChangeLogPayload.create(UUID.randomUUID().toString()) ,  ChangeLogStatus.create(UUID.randomUUID().toString()) ,  ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ChangeLogAttempts.create(22) ,  ChangeLogError.create(UUID.randomUUID().toString()) ,  ChangeLogCreatedBy.create(UUID.randomUUID().toString()) ,  ChangeLogTenant.create(UUID.randomUUID().toString()) 
+ ChangeLogId.create(UUID.randomUUID().toString()) ,  ChangeLogEntityTable.create(UUID.randomUUID().toString()) ,  ChangeLogEntityId.create(UUID.randomUUID().toString()) ,  ChangeLogRemoteId.create(UUID.randomUUID().toString()) ,  ChangeLogLocalId.create(UUID.randomUUID().toString()) ,  ChangeLogOperation.create(UUID.randomUUID().toString()) ,  ChangeLogPayload.create(UUID.randomUUID().toString()) ,  ChangeLogStatus.create(UUID.randomUUID().toString()) ,  ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ChangeLogAttempts.create(45) ,  ChangeLogError.create(UUID.randomUUID().toString()) ,  ChangeLogCreatedBy.create(UUID.randomUUID().toString()) ,  ChangeLogTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

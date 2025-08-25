@@ -79,7 +79,7 @@ public class ChangeLogFixtures {
 				.payload(ChangeLogPayload.create(UUID.randomUUID().toString()))
 				.status(ChangeLogStatus.create(UUID.randomUUID().toString()))
 				.syncAt(ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.attempts(ChangeLogAttempts.create(78))
+				.attempts(ChangeLogAttempts.create(75))
 				.error(ChangeLogError.create(UUID.randomUUID().toString()))
 			.build();
 
@@ -106,7 +106,7 @@ public class ChangeLogFixtures {
         .payload(ChangeLogPayload.create(UUID.randomUUID().toString()))
         .status(ChangeLogStatus.create(UUID.randomUUID().toString()))
         .syncAt(ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .attempts(ChangeLogAttempts.create(78))
+        .attempts(ChangeLogAttempts.create(75))
         .error(ChangeLogError.create(UUID.randomUUID().toString()))
         .build();
 

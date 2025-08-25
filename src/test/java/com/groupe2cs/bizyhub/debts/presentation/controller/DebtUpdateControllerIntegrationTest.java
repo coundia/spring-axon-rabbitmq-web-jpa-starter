@@ -66,13 +66,13 @@ public class DebtUpdateControllerIntegrationTest extends BaseIntegrationTests {
         body.add("localId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("notes", UUID.randomUUID().toString());
-        body.add("balance", 2883.46);
-        body.add("balanceDebt", 4504.29);
+        body.add("balance", 2877.74);
+        body.add("balanceDebt", 4534.25);
         body.add("dueDate", java.time.Instant.now().plusSeconds(3600));
         body.add("statuses", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("customer", updated.getCustomer().value());
-        body.add("isActive", false);
+        body.add("isActive", true);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

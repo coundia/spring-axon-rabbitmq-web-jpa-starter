@@ -41,7 +41,7 @@ void it_should_be_able_to_add_stockmovement() {
 		StockMovementRequest requestDTO = new StockMovementRequest();
 
 		requestDTO.setTypeStockMovement(UUID.randomUUID().toString());
-		requestDTO.setQuantity(56);
+		requestDTO.setQuantity(10);
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCompany(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value());

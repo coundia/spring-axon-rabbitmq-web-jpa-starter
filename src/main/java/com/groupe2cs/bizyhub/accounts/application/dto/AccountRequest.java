@@ -19,37 +19,37 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "AccountRequest", description = "Request payload for Account operations")
 public class AccountRequest implements Serializable {
 
-	@Schema(description = "", example = "467c9bcc-be0c-499e-960b-f4d86f7c67aa")
+	@Schema(description = "", example = "e95bb9a4-8ba6-48f4-9387-599417f6c635")
 	private String code;
-	@Schema(description = "", example = "baae104b-de15-48df-b72e-338e766f0315")
+	@Schema(description = "", example = "b4f808a6-3473-4ac2-9ba9-efcc98dfa979")
 	private String name;
-	@Schema(description = "", example = "1f398bd0-7bb9-44a4-b653-a4b31994ec9a")
+	@Schema(description = "", example = "ab047cba-c94c-4e02-8efd-1a655406124c")
 	private String status;
-	@Schema(description = "", example = "c1a3dda7-f81f-48b7-b5b3-b0c1fee18ce5")
+	@Schema(description = "", example = "de2cacf7-1ba7-42b6-91e8-407b1164c6f0")
 	private String currency;
-	@Schema(description = "", example = "e36fedf4-b552-4e9e-b52e-0d5ddd6c1f6c")
+	@Schema(description = "", example = "6b0f5ad4-fde7-4d86-9ffb-6135d4f99757")
 	private String typeAccount;
-	@Schema(description = "", example = "7098.31")
+	@Schema(description = "", example = "764.38")
 	private Double balance;
-	@Schema(description = "", example = "9088.0")
+	@Schema(description = "", example = "2199.79")
 	private Double balancePrev;
-	@Schema(description = "", example = "4693.08")
+	@Schema(description = "", example = "761.51")
 	private Double balanceBlocked;
-	@Schema(description = "", example = "7302.81")
+	@Schema(description = "", example = "7717.07")
 	private Double balanceInit;
-	@Schema(description = "", example = "1458.52")
+	@Schema(description = "", example = "4036.03")
 	private Double balanceGoal;
-	@Schema(description = "", example = "1251.98")
+	@Schema(description = "", example = "2197.84")
 	private Double balanceLimit;
-	@Schema(description = "", example = "7b4dabfe-6af5-4a5e-a258-cf742c14218a")
+	@Schema(description = "", example = "793f6fe3-167c-44f5-9f32-314881bb42b6")
 	private String description;
-	@Schema(description = "", example = "false")
+	@Schema(description = "", example = "true")
 	private Boolean isActive;
 	@Schema(description = "", example = "false")
 	private Boolean isDefault;
-	@Schema(description = "", example = "a058e910-fff7-4213-80de-128d62389d1c")
+	@Schema(description = "", example = "4593fc7a-6b34-4cde-b5b4-16646ca2b0b0")
 	private String remoteId;
-	@Schema(description = "", example = "fe0bb0d4-2a3c-4260-b0a1-69372c6814b7")
+	@Schema(description = "", example = "df0a5346-f6bd-4d28-af3b-dbde43b66196")
 	private String localId;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;

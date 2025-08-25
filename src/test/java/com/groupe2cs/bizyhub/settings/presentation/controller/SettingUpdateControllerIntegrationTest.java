@@ -65,7 +65,7 @@ public class SettingUpdateControllerIntegrationTest extends BaseIntegrationTests
         body.add("localId", UUID.randomUUID().toString());
         body.add("details", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("isActive", false);
+        body.add("isActive", true);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

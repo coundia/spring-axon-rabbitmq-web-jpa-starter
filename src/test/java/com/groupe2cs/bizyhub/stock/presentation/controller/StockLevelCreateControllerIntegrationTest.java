@@ -42,8 +42,8 @@ void it_should_be_able_to_add_stocklevel() {
 
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
-		requestDTO.setStockOnHand(27);
-		requestDTO.setStockAllocated(84);
+		requestDTO.setStockOnHand(98);
+		requestDTO.setStockAllocated(39);
 		requestDTO.setProductVariant(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setCompany(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value());

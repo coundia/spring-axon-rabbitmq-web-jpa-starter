@@ -17,13 +17,13 @@ void it_should_create_transactionItem_with_valid_values() {
 	TransactionItemTransaction transaction = TransactionItemTransaction.create(UUID.randomUUID().toString());
 	TransactionItemProduct product = TransactionItemProduct.create(UUID.randomUUID().toString());
 	TransactionItemLabel label = TransactionItemLabel.create(UUID.randomUUID().toString());
-	TransactionItemQuantity quantity = TransactionItemQuantity.create(36);
+	TransactionItemQuantity quantity = TransactionItemQuantity.create(98);
 	TransactionItemUnit unit = TransactionItemUnit.create(UUID.randomUUID().toString());
 	TransactionItemRemoteId remoteId = TransactionItemRemoteId.create(UUID.randomUUID().toString());
 	TransactionItemLocalId localId = TransactionItemLocalId.create(UUID.randomUUID().toString());
 	TransactionItemSyncAt syncAt = TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600));
-	TransactionItemUnitPrice unitPrice = TransactionItemUnitPrice.create(8924.03);
-	TransactionItemTotal total = TransactionItemTotal.create(5952.48);
+	TransactionItemUnitPrice unitPrice = TransactionItemUnitPrice.create(9301.72);
+	TransactionItemTotal total = TransactionItemTotal.create(5068.54);
 	TransactionItemNotes notes = TransactionItemNotes.create(UUID.randomUUID().toString());
 	TransactionItemCreatedBy createdBy = TransactionItemCreatedBy.create(UUID.randomUUID().toString());
 	TransactionItemTenant tenant = TransactionItemTenant.create(UUID.randomUUID().toString());

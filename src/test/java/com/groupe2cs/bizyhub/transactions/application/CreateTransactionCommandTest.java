@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateTransactionCommand command = new CreateTransactionCommand(
- TransactionId.create(UUID.randomUUID().toString()) ,  TransactionName.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(2570.79) ,  TransactionRemoteId.create(UUID.randomUUID().toString()) ,  TransactionLocalId.create(UUID.randomUUID().toString()) ,  TransactionDetails.create(UUID.randomUUID().toString()) ,  TransactionIsActive.create(false) ,  TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionAccount.create(UUID.randomUUID().toString()) ,  TransactionCategory.create(UUID.randomUUID().toString()) ,  TransactionTypeEntry.create(UUID.randomUUID().toString()) ,  TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()) ,  TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
+ TransactionId.create(UUID.randomUUID().toString()) ,  TransactionRemoteId.create(UUID.randomUUID().toString()) ,  TransactionLocalId.create(UUID.randomUUID().toString()) ,  TransactionCode.create(UUID.randomUUID().toString()) ,  TransactionDescription.create(UUID.randomUUID().toString()) ,  TransactionAmount.create(5314.1) ,  TransactionTypeEntry.create(UUID.randomUUID().toString()) ,  TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionStatus.create(UUID.randomUUID().toString()) ,  TransactionEntityName.create(UUID.randomUUID().toString()) ,  TransactionEntityId.create(UUID.randomUUID().toString()) ,  TransactionAccount.create(UUID.randomUUID().toString()) ,  TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  TransactionCategory.create(UUID.randomUUID().toString()) ,  TransactionCompany.create(UUID.randomUUID().toString()) ,  TransactionCustomer.create(UUID.randomUUID().toString()) ,  TransactionDebt.create(UUID.randomUUID().toString()) ,  TransactionCreatedBy.create(UUID.randomUUID().toString()) ,  TransactionTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -36,30 +36,38 @@ verify(commandGateway, times(1)).send(commandCaptor.capture());
 CreateTransactionCommand sentCommand = commandCaptor.getValue();
 assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
-assertThat(sentCommand.getName().value()).isEqualTo(
-command.getName().value());
-assertThat(sentCommand.getAmount().value()).isEqualTo(
-command.getAmount().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
 assertThat(sentCommand.getLocalId().value()).isEqualTo(
 command.getLocalId().value());
-assertThat(sentCommand.getDetails().value()).isEqualTo(
-command.getDetails().value());
-assertThat(sentCommand.getIsActive().value()).isEqualTo(
-command.getIsActive().value());
-assertThat(sentCommand.getSyncAt().value()).isEqualTo(
-command.getSyncAt().value());
-assertThat(sentCommand.getAccount().value()).isEqualTo(
-command.getAccount().value());
-assertThat(sentCommand.getCategory().value()).isEqualTo(
-command.getCategory().value());
+assertThat(sentCommand.getCode().value()).isEqualTo(
+command.getCode().value());
+assertThat(sentCommand.getDescription().value()).isEqualTo(
+command.getDescription().value());
+assertThat(sentCommand.getAmount().value()).isEqualTo(
+command.getAmount().value());
 assertThat(sentCommand.getTypeEntry().value()).isEqualTo(
 command.getTypeEntry().value());
-assertThat(sentCommand.getTypeTransactionRaw().value()).isEqualTo(
-command.getTypeTransactionRaw().value());
 assertThat(sentCommand.getDateTransaction().value()).isEqualTo(
 command.getDateTransaction().value());
+assertThat(sentCommand.getStatus().value()).isEqualTo(
+command.getStatus().value());
+assertThat(sentCommand.getEntityName().value()).isEqualTo(
+command.getEntityName().value());
+assertThat(sentCommand.getEntityId().value()).isEqualTo(
+command.getEntityId().value());
+assertThat(sentCommand.getAccount().value()).isEqualTo(
+command.getAccount().value());
+assertThat(sentCommand.getSyncAt().value()).isEqualTo(
+command.getSyncAt().value());
+assertThat(sentCommand.getCategory().value()).isEqualTo(
+command.getCategory().value());
+assertThat(sentCommand.getCompany().value()).isEqualTo(
+command.getCompany().value());
+assertThat(sentCommand.getCustomer().value()).isEqualTo(
+command.getCustomer().value());
+assertThat(sentCommand.getDebt().value()).isEqualTo(
+command.getDebt().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(
 command.getCreatedBy().value());
 assertThat(sentCommand.getTenant().value()).isEqualTo(

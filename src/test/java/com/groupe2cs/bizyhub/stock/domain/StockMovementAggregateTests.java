@@ -15,7 +15,7 @@ public class StockMovementAggregateTests extends BaseUnitTests {
 void it_should_create_stockMovement_with_valid_values() {
 	StockMovementId id = StockMovementId.create(UUID.randomUUID().toString());
 	StockMovementTypeStockMovement typeStockMovement = StockMovementTypeStockMovement.create(UUID.randomUUID().toString());
-	StockMovementQuantity quantity = StockMovementQuantity.create(71);
+	StockMovementQuantity quantity = StockMovementQuantity.create(73);
 	StockMovementRemoteId remoteId = StockMovementRemoteId.create(UUID.randomUUID().toString());
 	StockMovementLocalId localId = StockMovementLocalId.create(UUID.randomUUID().toString());
 	StockMovementCompany company = StockMovementCompany.create(UUID.randomUUID().toString());

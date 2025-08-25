@@ -31,6 +31,12 @@ private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountReposito
 @Autowired
 private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
 @Autowired
+private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
+@Autowired
+private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
+@Autowired
+private com.groupe2cs.bizyhub.debts.infrastructure.repository.DebtRepository debtDataRepository ;
+@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -40,35 +46,43 @@ void it_should_be_able_to_add_transaction() {
 
 		TransactionRequest requestDTO = new TransactionRequest();
 
-		requestDTO.setName(UUID.randomUUID().toString());
-		requestDTO.setAmount(6672.5);
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
-		requestDTO.setDetails(UUID.randomUUID().toString());
-		requestDTO.setIsActive(false);
-		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
-		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value());
+		requestDTO.setCode(UUID.randomUUID().toString());
+		requestDTO.setDescription(UUID.randomUUID().toString());
+		requestDTO.setAmount(8054.15);
 		requestDTO.setTypeEntry(UUID.randomUUID().toString());
-		requestDTO.setTypeTransactionRaw(UUID.randomUUID().toString());
 		requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
+		requestDTO.setStatus(UUID.randomUUID().toString());
+		requestDTO.setEntityName(UUID.randomUUID().toString());
+		requestDTO.setEntityId(UUID.randomUUID().toString());
+		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
+		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
+		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value());
+		requestDTO.setCompany(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value());
+		requestDTO.setCustomer(com.groupe2cs.bizyhub.customers.infrastructure.entity.CustomerFixtures.randomOneViaCommand(commandGateway,customerDataRepository, user).getId().value());
+		requestDTO.setDebt(com.groupe2cs.bizyhub.debts.infrastructure.entity.DebtFixtures.randomOneViaCommand(commandGateway,debtDataRepository, user).getId().value());
 
  		String uri = "/v1/commands/transaction";
 		ResponseEntity<TransactionResponse> response = this.postForEntity(uri, requestDTO, TransactionResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();
-		assertThat(response.getBody().getName()).isEqualTo(requestDTO.getName());
-		assertThat(response.getBody().getAmount()).isEqualTo(requestDTO.getAmount());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
 		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
-		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
-		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
-		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
-		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
-		assertThat(response.getBody().getCategory()).isEqualTo(requestDTO.getCategory());
+		assertThat(response.getBody().getCode()).isEqualTo(requestDTO.getCode());
+		assertThat(response.getBody().getDescription()).isEqualTo(requestDTO.getDescription());
+		assertThat(response.getBody().getAmount()).isEqualTo(requestDTO.getAmount());
 		assertThat(response.getBody().getTypeEntry()).isEqualTo(requestDTO.getTypeEntry());
-		assertThat(response.getBody().getTypeTransactionRaw()).isEqualTo(requestDTO.getTypeTransactionRaw());
 		assertThat(response.getBody().getDateTransaction()).isEqualTo(requestDTO.getDateTransaction());
+		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());
+		assertThat(response.getBody().getEntityName()).isEqualTo(requestDTO.getEntityName());
+		assertThat(response.getBody().getEntityId()).isEqualTo(requestDTO.getEntityId());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
+		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
+		assertThat(response.getBody().getCategory()).isEqualTo(requestDTO.getCategory());
+		assertThat(response.getBody().getCompany()).isEqualTo(requestDTO.getCompany());
+		assertThat(response.getBody().getCustomer()).isEqualTo(requestDTO.getCustomer());
+		assertThat(response.getBody().getDebt()).isEqualTo(requestDTO.getDebt());
 	}
 }

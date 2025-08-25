@@ -20,7 +20,7 @@ void it_should_create_category_with_valid_values() {
 	CategoryLocalId localId = CategoryLocalId.create(UUID.randomUUID().toString());
 	CategoryDescription description = CategoryDescription.create(UUID.randomUUID().toString());
 	CategoryTypeEntry typeEntry = CategoryTypeEntry.create(UUID.randomUUID().toString());
-	CategoryVersion version = CategoryVersion.create(76);
+	CategoryVersion version = CategoryVersion.create(70);
 	CategorySyncAt syncAt = CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	CategoryCreatedBy createdBy = CategoryCreatedBy.create(UUID.randomUUID().toString());
 	CategoryTenant tenant = CategoryTenant.create(UUID.randomUUID().toString());

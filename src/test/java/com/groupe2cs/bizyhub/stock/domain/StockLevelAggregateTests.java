@@ -16,8 +16,8 @@ void it_should_create_stockLevel_with_valid_values() {
 	StockLevelId id = StockLevelId.create(UUID.randomUUID().toString());
 	StockLevelRemoteId remoteId = StockLevelRemoteId.create(UUID.randomUUID().toString());
 	StockLevelLocalId localId = StockLevelLocalId.create(UUID.randomUUID().toString());
-	StockLevelStockOnHand stockOnHand = StockLevelStockOnHand.create(64);
-	StockLevelStockAllocated stockAllocated = StockLevelStockAllocated.create(35);
+	StockLevelStockOnHand stockOnHand = StockLevelStockOnHand.create(86);
+	StockLevelStockAllocated stockAllocated = StockLevelStockAllocated.create(54);
 	StockLevelProductVariant productVariant = StockLevelProductVariant.create(UUID.randomUUID().toString());
 	StockLevelSyncAt syncAt = StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	StockLevelCompany company = StockLevelCompany.create(UUID.randomUUID().toString());

@@ -44,8 +44,8 @@ void it_should_be_able_to_add_customer() {
 		requestDTO.setFirstName(UUID.randomUUID().toString());
 		requestDTO.setLastName(UUID.randomUUID().toString());
 		requestDTO.setFullName(UUID.randomUUID().toString());
-		requestDTO.setBalance(9374.41);
-		requestDTO.setBalanceDebt(3188.08);
+		requestDTO.setBalance(1420.81);
+		requestDTO.setBalanceDebt(8493.84);
 		requestDTO.setPhone(UUID.randomUUID().toString());
 		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setNotes(UUID.randomUUID().toString());
@@ -58,7 +58,7 @@ void it_should_be_able_to_add_customer() {
 		requestDTO.setCountry(UUID.randomUUID().toString());
 		requestDTO.setPostalCode(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setIsActive(true);
+		requestDTO.setIsActive(false);
 
  		String uri = "/v1/commands/customer";
 		ResponseEntity<CustomerResponse> response = this.postForEntity(uri, requestDTO, CustomerResponse.class);

@@ -64,7 +64,7 @@ public class ChatAutoResponder {
 			log.warn("❌ Category not found in response, falling back to default category");
 			dto.setCategory(
 					iaService.getCategory(
-							dto.getTypeTransactionRaw(),
+							dto.getTypeEntry(),
 							event.getCreatedBy().value(),
 							categoryName,
 							event.getTenant().value()
@@ -72,16 +72,16 @@ public class ChatAutoResponder {
 			);
 
 			String confirmation = "Voulez-vous confirmer la création de cette transaction ?\n" +
-					"Description : " + dto.getDetails() + "\n" +
+					"Description : " + dto.getDescription() + "\n" +
 					"Montant : " + dto.getAmount() + "\n" +
 					"Date : " + dto.getDateTransaction() + "\n" +
 					"Catégorie : " + categoryName + "\n";
 
 			dto.setId(UUID.randomUUID().toString());
 			//dto.setReference(UUID.randomUUID().toString());
-			dto.setName(dto.getDetails());
+//			dto.setName(dto.getDetails());
 			//dto.setUpdatedAt(Instant.now());
-			dto.setIsActive(true);
+//			dto.setIsActive(true);
 
 			String updatedResponseJson = mapper.writeValueAsString(Map.of("deltas", List.of(dto)));
 			updateChatCommand.setResponsesJson(new ChatResponsesJson(updatedResponseJson));

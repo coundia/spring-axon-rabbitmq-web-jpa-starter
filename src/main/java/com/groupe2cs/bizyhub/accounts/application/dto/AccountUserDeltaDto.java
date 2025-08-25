@@ -26,23 +26,23 @@ public class AccountUserDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "e774f054-5af6-4c51-a903-2decbfae4bf0")
+		@Schema(description = "", example = "38f108a2-b2fc-496c-a688-5ec4167f4a6c")
 		private String name;
-		@Schema(description = "", example = "7d50af46-524f-4c01-bf8c-7520bf05a2f9")
+		@Schema(description = "", example = "b0cdcf61-69be-46cf-9a96-fd7824008586")
 		private String account;
-		@Schema(description = "", example = "667e4d68-d7f5-4a7a-a7b4-851c2729f17d")
+		@Schema(description = "", example = "715acd35-b22f-4503-85c4-e2f276a1b631")
 		private String user;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "c49227cd-af71-45eb-aa0b-1869cee5e2a0")
+		@Schema(description = "", example = "3a9ea6d8-4c6c-44f3-baaf-025decaef3d4")
 		private String username;
-		@Schema(description = "", example = "3fd816a2-fa5f-4d84-9041-3021f65971e7")
+		@Schema(description = "", example = "7ac47ddf-83a6-4433-9f49-6ac9af7fb16b")
 		private String details;
-		@Schema(description = "", example = "f7888e5d-54f0-4423-b5e4-94c1b211c45a")
+		@Schema(description = "", example = "cabdb87a-b3e6-4dae-a570-e67459ba16d1")
 		private String remoteId;
-		@Schema(description = "", example = "9a6aefa4-03c7-453c-8650-2f8849506a24")
+		@Schema(description = "", example = "3da4b8a9-7fcd-4c43-ad0c-85bda3094e85")
 		private String localId;
-		@Schema(description = "", example = "true")
+		@Schema(description = "", example = "false")
 		private Boolean isActive;
 
 }

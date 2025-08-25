@@ -24,18 +24,22 @@ public class TransactionAggregate {
 
 @AggregateIdentifier
 private TransactionId id;
-private TransactionName name;
-private TransactionAmount amount;
 private TransactionRemoteId remoteId;
 private TransactionLocalId localId;
-private TransactionDetails details;
-private TransactionIsActive isActive;
-private TransactionSyncAt syncAt;
-private TransactionAccount account;
-private TransactionCategory category;
+private TransactionCode code;
+private TransactionDescription description;
+private TransactionAmount amount;
 private TransactionTypeEntry typeEntry;
-private TransactionTypeTransactionRaw typeTransactionRaw;
 private TransactionDateTransaction dateTransaction;
+private TransactionStatus status;
+private TransactionEntityName entityName;
+private TransactionEntityId entityId;
+private TransactionAccount account;
+private TransactionSyncAt syncAt;
+private TransactionCategory category;
+private TransactionCompany company;
+private TransactionCustomer customer;
+private TransactionDebt debt;
 private TransactionCreatedBy createdBy;
 private TransactionTenant tenant;
 
@@ -44,18 +48,22 @@ private TransactionTenant tenant;
 public TransactionAggregate(CreateTransactionCommand command) {
 apply(new TransactionCreatedEvent(
 		command.getId(),
-		command.getName(),
-		command.getAmount(),
 		command.getRemoteId(),
 		command.getLocalId(),
-		command.getDetails(),
-		command.getIsActive(),
-		command.getSyncAt(),
-		command.getAccount(),
-		command.getCategory(),
+		command.getCode(),
+		command.getDescription(),
+		command.getAmount(),
 		command.getTypeEntry(),
-		command.getTypeTransactionRaw(),
 		command.getDateTransaction(),
+		command.getStatus(),
+		command.getEntityName(),
+		command.getEntityId(),
+		command.getAccount(),
+		command.getSyncAt(),
+		command.getCategory(),
+		command.getCompany(),
+		command.getCustomer(),
+		command.getDebt(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -72,18 +80,22 @@ public void handle(DeleteTransactionCommand command) {
 public void handle(UpdateTransactionCommand command) {
 apply(new TransactionUpdatedEvent(
 		command.getId(),
-		command.getName(),
-		command.getAmount(),
 		command.getRemoteId(),
 		command.getLocalId(),
-		command.getDetails(),
-		command.getIsActive(),
-		command.getSyncAt(),
-		command.getAccount(),
-		command.getCategory(),
+		command.getCode(),
+		command.getDescription(),
+		command.getAmount(),
 		command.getTypeEntry(),
-		command.getTypeTransactionRaw(),
 		command.getDateTransaction(),
+		command.getStatus(),
+		command.getEntityName(),
+		command.getEntityId(),
+		command.getAccount(),
+		command.getSyncAt(),
+		command.getCategory(),
+		command.getCompany(),
+		command.getCustomer(),
+		command.getDebt(),
 		command.getCreatedBy(),
 		command.getTenant()
 ));
@@ -92,18 +104,22 @@ apply(new TransactionUpdatedEvent(
 @EventSourcingHandler
 public void on(TransactionCreatedEvent event) {
 	this.id = event.getId();
-	this.name = event.getName();
-	this.amount = event.getAmount();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
-	this.details = event.getDetails();
-	this.isActive = event.getIsActive();
-	this.syncAt = event.getSyncAt();
-	this.account = event.getAccount();
-	this.category = event.getCategory();
+	this.code = event.getCode();
+	this.description = event.getDescription();
+	this.amount = event.getAmount();
 	this.typeEntry = event.getTypeEntry();
-	this.typeTransactionRaw = event.getTypeTransactionRaw();
 	this.dateTransaction = event.getDateTransaction();
+	this.status = event.getStatus();
+	this.entityName = event.getEntityName();
+	this.entityId = event.getEntityId();
+	this.account = event.getAccount();
+	this.syncAt = event.getSyncAt();
+	this.category = event.getCategory();
+	this.company = event.getCompany();
+	this.customer = event.getCustomer();
+	this.debt = event.getDebt();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }
@@ -116,18 +132,22 @@ this.id = event.getId();
 @EventSourcingHandler
 public void on(TransactionUpdatedEvent event) {
 this.id = event.getId();
-	this.name = event.getName();
-	this.amount = event.getAmount();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
-	this.details = event.getDetails();
-	this.isActive = event.getIsActive();
-	this.syncAt = event.getSyncAt();
-	this.account = event.getAccount();
-	this.category = event.getCategory();
+	this.code = event.getCode();
+	this.description = event.getDescription();
+	this.amount = event.getAmount();
 	this.typeEntry = event.getTypeEntry();
-	this.typeTransactionRaw = event.getTypeTransactionRaw();
 	this.dateTransaction = event.getDateTransaction();
+	this.status = event.getStatus();
+	this.entityName = event.getEntityName();
+	this.entityId = event.getEntityId();
+	this.account = event.getAccount();
+	this.syncAt = event.getSyncAt();
+	this.category = event.getCategory();
+	this.company = event.getCompany();
+	this.customer = event.getCustomer();
+	this.debt = event.getDebt();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
 }

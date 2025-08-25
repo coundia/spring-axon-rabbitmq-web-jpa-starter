@@ -79,8 +79,8 @@ public class StockLevelFixtures {
 			CreateStockLevelCommand command = CreateStockLevelCommand.builder()
 				.remoteId(StockLevelRemoteId.create(UUID.randomUUID().toString()))
 				.localId(StockLevelLocalId.create(UUID.randomUUID().toString()))
-				.stockOnHand(StockLevelStockOnHand.create(11))
-				.stockAllocated(StockLevelStockAllocated.create(96))
+				.stockOnHand(StockLevelStockOnHand.create(1))
+				.stockAllocated(StockLevelStockAllocated.create(60))
 				.productVariant(StockLevelProductVariant.create(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value()))
 				.syncAt(StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.company(StockLevelCompany.create(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value()))
@@ -103,8 +103,8 @@ public class StockLevelFixtures {
         CreateStockLevelCommand command = CreateStockLevelCommand.builder()
         .remoteId(StockLevelRemoteId.create(UUID.randomUUID().toString()))
         .localId(StockLevelLocalId.create(UUID.randomUUID().toString()))
-        .stockOnHand(StockLevelStockOnHand.create(11))
-        .stockAllocated(StockLevelStockAllocated.create(96))
+        .stockOnHand(StockLevelStockOnHand.create(1))
+        .stockAllocated(StockLevelStockAllocated.create(60))
         .syncAt(StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .build();
 

@@ -66,7 +66,7 @@ public class ChangeLogUpdateControllerIntegrationTest extends BaseIntegrationTes
         body.add("payload", UUID.randomUUID().toString());
         body.add("status", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("attempts", 38);
+        body.add("attempts", 73);
         body.add("error", UUID.randomUUID().toString());
 
         HttpHeaders multipartHeaders = new HttpHeaders();

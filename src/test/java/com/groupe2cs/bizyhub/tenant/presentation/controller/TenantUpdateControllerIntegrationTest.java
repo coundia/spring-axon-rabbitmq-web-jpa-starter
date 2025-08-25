@@ -62,7 +62,7 @@ public class TenantUpdateControllerIntegrationTest extends BaseIntegrationTests 
         body.add("description", UUID.randomUUID().toString());
         body.add("domain", UUID.randomUUID().toString());
         body.add("language", UUID.randomUUID().toString());
-        body.add("active", false);
+        body.add("active", true);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

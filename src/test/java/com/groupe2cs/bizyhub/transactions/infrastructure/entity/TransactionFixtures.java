@@ -43,6 +43,9 @@ public class TransactionFixtures {
 		TransactionRepository repository,
         com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
         com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
+        com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository,
+        com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository,
+        com.groupe2cs.bizyhub.debts.infrastructure.repository.DebtRepository debtDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -55,6 +58,9 @@ public class TransactionFixtures {
 			 repository,
             accountDataRepository,
             categoryDataRepository,
+            companyDataRepository,
+            customerDataRepository,
+            debtDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -72,23 +78,30 @@ public class TransactionFixtures {
 		TransactionRepository  repository,
         com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
         com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
+        com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository,
+        com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository,
+        com.groupe2cs.bizyhub.debts.infrastructure.repository.DebtRepository debtDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
 
 			CreateTransactionCommand command = CreateTransactionCommand.builder()
-				.name(TransactionName.create(UUID.randomUUID().toString()))
-				.amount(TransactionAmount.create(7809.76))
 				.remoteId(TransactionRemoteId.create(UUID.randomUUID().toString()))
 				.localId(TransactionLocalId.create(UUID.randomUUID().toString()))
-				.details(TransactionDetails.create(UUID.randomUUID().toString()))
-				.isActive(TransactionIsActive.create(false))
-				.syncAt(TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.account(TransactionAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
-				.category(TransactionCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
+				.code(TransactionCode.create(UUID.randomUUID().toString()))
+				.description(TransactionDescription.create(UUID.randomUUID().toString()))
+				.amount(TransactionAmount.create(9532.25))
 				.typeEntry(TransactionTypeEntry.create(UUID.randomUUID().toString()))
-				.typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
 				.dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
+				.status(TransactionStatus.create(UUID.randomUUID().toString()))
+				.entityName(TransactionEntityName.create(UUID.randomUUID().toString()))
+				.entityId(TransactionEntityId.create(UUID.randomUUID().toString()))
+				.account(TransactionAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
+				.syncAt(TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
+				.category(TransactionCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
+				.company(TransactionCompany.create(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value()))
+				.customer(TransactionCustomer.create(com.groupe2cs.bizyhub.customers.infrastructure.entity.CustomerFixtures.randomOneViaCommand(commandGateway,customerDataRepository, user).getId().value()))
+				.debt(TransactionDebt.create(com.groupe2cs.bizyhub.debts.infrastructure.entity.DebtFixtures.randomOneViaCommand(commandGateway,debtDataRepository, user).getId().value()))
 			.build();
 
 		command.setCreatedBy(TransactionCreatedBy.create(user.getId()));
@@ -106,16 +119,17 @@ public class TransactionFixtures {
         ) {
 
         CreateTransactionCommand command = CreateTransactionCommand.builder()
-        .name(TransactionName.create(UUID.randomUUID().toString()))
-        .amount(TransactionAmount.create(7809.76))
         .remoteId(TransactionRemoteId.create(UUID.randomUUID().toString()))
         .localId(TransactionLocalId.create(UUID.randomUUID().toString()))
-        .details(TransactionDetails.create(UUID.randomUUID().toString()))
-        .isActive(TransactionIsActive.create(false))
-        .syncAt(TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
+        .code(TransactionCode.create(UUID.randomUUID().toString()))
+        .description(TransactionDescription.create(UUID.randomUUID().toString()))
+        .amount(TransactionAmount.create(9532.25))
         .typeEntry(TransactionTypeEntry.create(UUID.randomUUID().toString()))
-        .typeTransactionRaw(TransactionTypeTransactionRaw.create(UUID.randomUUID().toString()))
         .dateTransaction(TransactionDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
+        .status(TransactionStatus.create(UUID.randomUUID().toString()))
+        .entityName(TransactionEntityName.create(UUID.randomUUID().toString()))
+        .entityId(TransactionEntityId.create(UUID.randomUUID().toString()))
+        .syncAt(TransactionSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .build();
 
 		command.setCreatedBy(TransactionCreatedBy.create(user.getId()));

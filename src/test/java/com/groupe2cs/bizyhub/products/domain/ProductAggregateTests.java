@@ -23,9 +23,9 @@ void it_should_create_product_with_valid_values() {
 	ProductUnit unit = ProductUnit.create(UUID.randomUUID().toString());
 	ProductSyncAt syncAt = ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	ProductCategory category = ProductCategory.create(UUID.randomUUID().toString());
-	ProductDefaultPrice defaultPrice = ProductDefaultPrice.create(3672.91);
+	ProductDefaultPrice defaultPrice = ProductDefaultPrice.create(802.16);
 	ProductStatuses statuses = ProductStatuses.create(UUID.randomUUID().toString());
-	ProductPurchasePrice purchasePrice = ProductPurchasePrice.create(3040.73);
+	ProductPurchasePrice purchasePrice = ProductPurchasePrice.create(3611.8);
 	ProductCreatedBy createdBy = ProductCreatedBy.create(UUID.randomUUID().toString());
 	ProductTenant tenant = ProductTenant.create(UUID.randomUUID().toString());
 	ProductAggregate aggregateProductAggregate = new ProductAggregate(id, remoteId, localId, code, name, description, barcode, unit, syncAt, category, defaultPrice, statuses, purchasePrice, createdBy, tenant);

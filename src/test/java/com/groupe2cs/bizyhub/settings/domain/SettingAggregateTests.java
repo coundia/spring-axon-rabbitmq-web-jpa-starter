@@ -21,7 +21,7 @@ void it_should_create_setting_with_valid_values() {
 	SettingLocalId localId = SettingLocalId.create(UUID.randomUUID().toString());
 	SettingDetails details = SettingDetails.create(UUID.randomUUID().toString());
 	SettingSyncAt syncAt = SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600));
-	SettingIsActive isActive = SettingIsActive.create(true);
+	SettingIsActive isActive = SettingIsActive.create(false);
 	SettingCreatedBy createdBy = SettingCreatedBy.create(UUID.randomUUID().toString());
 	SettingTenant tenant = SettingTenant.create(UUID.randomUUID().toString());
 	SettingAggregate aggregateSettingAggregate = new SettingAggregate(id, name, value, locale, remoteId, localId, details, syncAt, isActive, createdBy, tenant);
