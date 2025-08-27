@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sync.domain;
 
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.sync.domain.exception.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 
 
 public class ChangeLogAggregateTests extends BaseUnitTests {
@@ -22,7 +22,7 @@ void it_should_create_changeLog_with_valid_values() {
 	ChangeLogPayload payload = ChangeLogPayload.create(UUID.randomUUID().toString());
 	ChangeLogStatus status = ChangeLogStatus.create(UUID.randomUUID().toString());
 	ChangeLogSyncAt syncAt = ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600));
-	ChangeLogAttempts attempts = ChangeLogAttempts.create(66);
+	ChangeLogAttempts attempts = ChangeLogAttempts.create(18);
 	ChangeLogError error = ChangeLogError.create(UUID.randomUUID().toString());
 	ChangeLogCreatedBy createdBy = ChangeLogCreatedBy.create(UUID.randomUUID().toString());
 	ChangeLogTenant tenant = ChangeLogTenant.create(UUID.randomUUID().toString());

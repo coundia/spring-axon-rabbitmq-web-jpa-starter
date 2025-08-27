@@ -39,8 +39,6 @@ private CommandGateway commandGateway;
 private DebtRepository debtRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -51,7 +49,6 @@ void it_should_return_only_user_debts_for_normal_user() throws Exception {
 List<CreateDebtCommand> userCommands =
 DebtFixtures.randomManyViaCommand(
 commandGateway,debtRepository,
-customerDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -87,7 +84,6 @@ void it_should_return_all_debts_for_admin() throws Exception {
     DebtFixtures.randomManyViaCommand(
         commandGateway,
         debtRepository,
-         customerDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -100,7 +96,6 @@ void it_should_return_all_debts_for_admin() throws Exception {
 List<CreateDebtCommand> adminCommands =
 DebtFixtures.randomManyViaCommand(
 commandGateway,debtRepository,
-        customerDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));

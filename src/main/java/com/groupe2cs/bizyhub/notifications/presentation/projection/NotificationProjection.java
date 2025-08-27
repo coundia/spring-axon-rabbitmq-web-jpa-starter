@@ -26,27 +26,52 @@ public class NotificationProjection {
 private final NotificationRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(NotificationCreatedEvent event) {
 try {
-Notification entity = Notification.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.deviceToken(event.getDeviceToken() == null ? null : event.getDeviceToken().value())
- 		.title(event.getTitle() == null ? null : event.getTitle().value())
- 		.message(event.getMessage() == null ? null : event.getMessage().value())
- 		.status(event.getStatus() == null ? null : event.getStatus().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- 		.reserved(event.getReserved() == null ? null : event.getReserved().value())
- 		.errorMessage(event.getErrorMessage() == null ? null : event.getErrorMessage().value())
- .build();
+Notification entity = Notification.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getDeviceToken() !=null  && hasId(event.getDeviceToken().value()) ) {
+            entity.setDeviceToken( event.getDeviceToken().value());
+        }
+ 		if(event.getTitle() !=null  && hasId(event.getTitle().value()) ) {
+            entity.setTitle( event.getTitle().value());
+        }
+ 		if(event.getMessage() !=null  && hasId(event.getMessage().value()) ) {
+            entity.setMessage( event.getMessage().value());
+        }
+ 		if(event.getStatus() !=null  && hasId(event.getStatus().value()) ) {
+            entity.setStatus( event.getStatus().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getReserved() !=null  && hasId(event.getReserved().value()) ) {
+            entity.setReserved( event.getReserved().value());
+        }
+ 		if(event.getErrorMessage() !=null  && hasId(event.getErrorMessage().value()) ) {
+            entity.setErrorMessage( event.getErrorMessage().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -70,34 +95,34 @@ Notification entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Notification not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getDeviceToken() != null) {
+	if(event.getDeviceToken() != null  && hasId(event.getDeviceToken().value())) {
 		entity.setDeviceToken(event.getDeviceToken().value());
     }
-	if(event.getTitle() != null) {
+	if(event.getTitle() != null  && hasId(event.getTitle().value())) {
 		entity.setTitle(event.getTitle().value());
     }
-	if(event.getMessage() != null) {
+	if(event.getMessage() != null  && hasId(event.getMessage().value())) {
 		entity.setMessage(event.getMessage().value());
     }
-	if(event.getStatus() != null) {
+	if(event.getStatus() != null  && hasId(event.getStatus().value())) {
 		entity.setStatus(event.getStatus().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-	if(event.getReserved() != null) {
+	if(event.getReserved() != null  && hasId(event.getReserved().value())) {
 		entity.setReserved(event.getReserved().value());
     }
-	if(event.getErrorMessage() != null) {
+	if(event.getErrorMessage() != null  && hasId(event.getErrorMessage().value())) {
 		entity.setErrorMessage(event.getErrorMessage().value());
     }
 

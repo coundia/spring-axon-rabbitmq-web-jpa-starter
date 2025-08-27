@@ -29,10 +29,6 @@ private CommandGateway commandGateway;
 private StockLevelRepository repository;
 
 @Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -42,8 +38,6 @@ void it_should_be_able_to_get_stocklevel_by_id() {
 
 	String existingId = StockLevelFixtures.randomOneViaCommand(
 	commandGateway,repository,
-        productVariantDataRepository,
-        companyDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

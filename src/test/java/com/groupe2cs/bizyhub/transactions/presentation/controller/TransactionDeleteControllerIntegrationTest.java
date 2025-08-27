@@ -30,16 +30,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.debts.infrastructure.repository.DebtRepository debtDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -47,11 +37,6 @@ private TenantRepository tenantDataRepository ;
 @Test
 void it_should_be_able_to_delete_transaction() {
 	String existingId = TransactionFixtures.randomOneViaCommand(commandGateway, transactionRepository,
-        accountDataRepository,
-        categoryDataRepository,
-        companyDataRepository,
-        customerDataRepository,
-        debtDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	getCurrentUser()).getId().value();

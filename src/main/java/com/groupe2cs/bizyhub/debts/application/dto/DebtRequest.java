@@ -19,27 +19,27 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "DebtRequest", description = "Request payload for Debt operations")
 public class DebtRequest implements Serializable {
 
-	@Schema(description = "", example = "b9483f46-c812-4ce7-a17d-93010214435b")
+	@Schema(description = "", example = "23cf7c5e-d7d8-4f48-935d-5b9d6a4e25f7")
 	private String remoteId;
-	@Schema(description = "", example = "431c9ff6-ca2c-403b-9d5d-fd0bf98baeff")
+	@Schema(description = "", example = "7bb7256d-f5e6-46ad-b888-c1e6a53fbc5d")
 	private String localId;
-	@Schema(description = "", example = "0e6875c0-7a3f-4e60-bfc1-0cd338e63877")
+	@Schema(description = "", example = "fb056e0c-05bf-4d8d-83cf-b7a98e267cd0")
 	private String code;
-	@Schema(description = "", example = "c4f78dfa-14d0-444a-b9b7-652ffdb8b34b")
+	@Schema(description = "", example = "c0afbed9-48bc-41e3-978d-fb4ac80cb61d")
 	private String notes;
-	@Schema(description = "", example = "4687.69")
+	@Schema(description = "", example = "9591.2")
 	private Double balance;
-	@Schema(description = "", example = "1157.39")
+	@Schema(description = "", example = "5195.38")
 	private Double balanceDebt;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant dueDate;
-	@Schema(description = "", example = "1774abb1-f08e-44b0-9098-1da5a0a85be2")
+	@Schema(description = "", example = "19e337f9-18ab-472a-b277-c420c85f1e33")
 	private String statuses;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "323bcb55-6d1c-4bc8-8386-cc3b23b9b2af")
+	@Schema(description = "", example = "ec087235-f558-4a90-b17f-31327772c4c7")
 	private String customer;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isActive;
 
 }

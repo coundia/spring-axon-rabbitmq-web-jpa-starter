@@ -1,5 +1,8 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.*;
@@ -7,9 +10,6 @@ import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -29,12 +29,6 @@ public class TransactionItemSyncControllerTests extends BaseIntegrationTests {
 private TransactionItemRepository Repository;
 
     @Autowired
-    private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository ;
-    @Autowired
-    private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository ;
-    @Autowired
-    private com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository ;
-    @Autowired
     private UserRepository createdByDataRepository ;
     @Autowired
     private TenantRepository tenantDataRepository ;
@@ -44,16 +38,16 @@ private TransactionItemRepository Repository;
 		TransactionItemSyncRequest requestDTO = TransactionItemSyncRequest.builder()
 		.deltas(List.of(
 		TransactionItemDeltaDto.builder()
-.transaction(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value())
-.product(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value())
+.transaction(UUID.randomUUID().toString())
+.product(UUID.randomUUID().toString())
 .label(UUID.randomUUID().toString())
-.quantity(32)
-.unit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value())
+.quantity(45)
+.unit(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.unitPrice(8719.42)
-.total(6978.88)
+.unitPrice(2969.57)
+.total(9214.77)
 .notes(UUID.randomUUID().toString())
 		.type("CREATE")
 		.build()
@@ -79,16 +73,16 @@ private TransactionItemRepository Repository;
 			.deltas(List.of(
 			TransactionItemDeltaDto.builder()
 			.id(existingId)
-.transaction(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value())
-.product(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value())
+.transaction(UUID.randomUUID().toString())
+.product(UUID.randomUUID().toString())
 .label(UUID.randomUUID().toString())
-.quantity(32)
-.unit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value())
+.quantity(45)
+.unit(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.unitPrice(8719.42)
-.total(6978.88)
+.unitPrice(2969.57)
+.total(9214.77)
 .notes(UUID.randomUUID().toString())
 			.type("UPDATE")
 			.build()

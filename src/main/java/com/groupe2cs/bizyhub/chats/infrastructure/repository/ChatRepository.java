@@ -88,13 +88,13 @@ public interface ChatRepository extends JpaRepository<Chat, String> {
 
         @Query("SELECT e FROM Chat e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Chat> findByLocalIdAndTenantId(String localId, String tenantId);
-        @Query("SELECT e FROM Chat e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Chat> findByAccountIdAndCreatedById(String account, String createdById);
-        @Query("SELECT e FROM Chat e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Chat> findByAccountIdAndTenantName(String account, String tenantName);
+        @Query("SELECT e FROM Chat e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Chat> findByAccountAndCreatedById(String account, String createdById);
+        @Query("SELECT e FROM Chat e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Chat> findByAccountAndTenantName(String account, String tenantName);
 
-        @Query("SELECT e FROM Chat e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Chat> findByAccountIdAndTenantId(String account, String tenantId);
+        @Query("SELECT e FROM Chat e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Chat> findByAccountAndTenantId(String account, String tenantId);
         @Query("""
         SELECT e FROM Chat e
         WHERE e.dateTransaction >= :#{#dateTransaction.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}

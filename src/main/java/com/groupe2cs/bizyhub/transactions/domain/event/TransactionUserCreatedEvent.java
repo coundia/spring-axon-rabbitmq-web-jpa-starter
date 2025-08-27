@@ -1,0 +1,35 @@
+package com.groupe2cs.bizyhub.transactions.domain.event;
+
+	import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.*;
+import java.util.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class TransactionUserCreatedEvent implements Serializable {
+
+	private TransactionUserId id;
+	private TransactionUserName name;
+	private TransactionUserRemoteId remoteId;
+	private TransactionUserLocalId localId;
+	private TransactionUserTransaction transaction;
+	private TransactionUserUser user;
+	private TransactionUserSyncAt syncAt;
+	private TransactionUserUsername username;
+	private TransactionUserDetails details;
+	private TransactionUserIsActive isActive;
+	private TransactionUserCreatedBy createdBy;
+	private TransactionUserTenant tenant;
+
+
+
+}

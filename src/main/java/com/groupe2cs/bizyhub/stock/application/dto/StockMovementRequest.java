@@ -19,23 +19,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "StockMovementRequest", description = "Request payload for StockMovement operations")
 public class StockMovementRequest implements Serializable {
 
-	@Schema(description = "", example = "0a2f6b0b-a1df-49a2-8ca9-63578815929b")
+	@Schema(description = "", example = "082872a2-5310-4c93-84a0-f7d218e1d93a")
 	private String typeStockMovement;
-	@Schema(description = "", example = "62")
+	@Schema(description = "", example = "12")
 	private Integer quantity;
-	@Schema(description = "", example = "e3da0ec0-e591-4175-b265-aaa65119f93b")
+	@Schema(description = "", example = "8d4ed9f5-6ab9-4be4-b186-3d416a02ebad")
 	private String remoteId;
-	@Schema(description = "", example = "81d75ede-c945-4329-88df-d14d4a75e1bc")
+	@Schema(description = "", example = "6fa0f355-b71e-47cd-ab62-3db7f44d4c3c")
 	private String localId;
-	@Schema(description = "", example = "42af8927-ee42-4d63-9301-99ec007a710c")
+	@Schema(description = "", example = "1547bad9-f5c3-4f2f-af86-aaf307afcced")
 	private String company;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "e230b257-bee9-4afc-ae82-f540b2a91224")
+	@Schema(description = "", example = "005a5405-794d-4a8d-8aec-e8b589236cea")
 	private String productVariant;
-	@Schema(description = "", example = "34c143de-4b78-4bb3-850a-70976f6d9cbe")
+	@Schema(description = "", example = "09d4a87f-c221-4a45-af7f-2a247566f24d")
 	private String orderLineId;
-	@Schema(description = "", example = "8c5f33c5-502d-422a-a5c8-2354feaafa37")
+	@Schema(description = "", example = "87ec593c-26f3-4635-af39-da2818d3e17d")
 	private String discriminator;
 
 }

@@ -34,10 +34,7 @@ this.productVariant = productVariant;
 
 public static StockMovementProductVariant create(String productVariant) {
 
-if (productVariant == null || productVariant.isBlank()) {
-throw new StockMovementProductVariantNotValid("ProductVariant is invalid");
-}
-return new StockMovementProductVariant(productVariant);
+	return new StockMovementProductVariant(productVariant);
 }
 
 public String value() {

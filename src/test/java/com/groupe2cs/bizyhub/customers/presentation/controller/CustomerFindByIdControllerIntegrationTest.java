@@ -29,8 +29,6 @@ private CommandGateway commandGateway;
 private CustomerRepository repository;
 
 @Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -40,7 +38,6 @@ void it_should_be_able_to_get_customer_by_id() {
 
 	String existingId = CustomerFixtures.randomOneViaCommand(
 	commandGateway,repository,
-        companyDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

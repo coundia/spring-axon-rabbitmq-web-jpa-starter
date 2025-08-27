@@ -19,23 +19,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "NotificationRequest", description = "Request payload for Notification operations")
 public class NotificationRequest implements Serializable {
 
-	@Schema(description = "", example = "db56b32a-79ab-4829-8644-a7b7b700d51f")
+	@Schema(description = "", example = "b2c3a24a-a452-4545-bd47-6706ea02053d")
 	private String deviceToken;
-	@Schema(description = "", example = "2269d8db-22c0-4c4d-ae3d-3b2a998511b4")
+	@Schema(description = "", example = "b61814f5-0d41-47da-9d18-8ec694d0cd98")
 	private String title;
-	@Schema(description = "", example = "8a481d70-20e3-4dff-aa55-bbc277361e86")
+	@Schema(description = "", example = "3c9ded08-3889-4ae5-b102-971c9cb651da")
 	private String message;
-	@Schema(description = "", example = "b1e123fa-2146-4154-b39b-22a6dfb7d264")
+	@Schema(description = "", example = "1d7b80a0-8ecd-4aa8-a7e6-b8960500f658")
 	private String status;
-	@Schema(description = "", example = "cee9618b-ea1b-474e-aa8d-28f0fe459b9c")
+	@Schema(description = "", example = "48cff2f7-662b-472f-89b8-cc9b305e7be8")
 	private String remoteId;
-	@Schema(description = "", example = "728dd912-1312-4647-af8f-ceb6725daf04")
+	@Schema(description = "", example = "09df55e1-517f-4fa8-a1aa-a8fa542d0020")
 	private String localId;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "458c7f20-39b3-4be3-9d34-3d214fe34a8c")
+	@Schema(description = "", example = "f8b450ff-f807-4e81-b0f6-846ac9c2642f")
 	private String reserved;
-	@Schema(description = "", example = "5cf456d1-e6db-487a-ab09-4fc0f5150f33")
+	@Schema(description = "", example = "1ec04828-04b7-44d5-9763-be7697da7bb3")
 	private String errorMessage;
 
 }

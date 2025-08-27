@@ -26,24 +26,43 @@ public class UnitProjection {
 private final UnitRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(UnitCreatedEvent event) {
 try {
-Unit entity = Unit.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.code(event.getCode() == null ? null : event.getCode().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- 		.description(event.getDescription() == null ? null : event.getDescription().value())
- .build();
+Unit entity = Unit.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getCode() !=null  && hasId(event.getCode().value()) ) {
+            entity.setCode( event.getCode().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getDescription() !=null  && hasId(event.getDescription().value()) ) {
+            entity.setDescription( event.getDescription().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -67,25 +86,25 @@ Unit entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Unit not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getCode() != null) {
+	if(event.getCode() != null  && hasId(event.getCode().value())) {
 		entity.setCode(event.getCode().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-	if(event.getDescription() != null) {
+	if(event.getDescription() != null  && hasId(event.getDescription().value())) {
 		entity.setDescription(event.getDescription().value());
     }
 

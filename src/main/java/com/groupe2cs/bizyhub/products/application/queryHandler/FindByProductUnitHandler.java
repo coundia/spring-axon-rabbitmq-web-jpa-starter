@@ -29,9 +29,9 @@ public List<ProductResponse> handle(FindByProductUnitQuery query) {
 	 String value = query.getUnit().value();
 
 	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByUnitIdAndTenantId(value, metaRequest.getTenantId());
+	    entities = repository.findByUnitAndTenantId(value, metaRequest.getTenantId());
 	 }else{
-	    entities = repository.findByUnitIdAndCreatedById(value, metaRequest.getUserId());
+	    entities = repository.findByUnitAndCreatedById(value, metaRequest.getUserId());
 	 }
 
  	return entities.stream()

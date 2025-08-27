@@ -41,8 +41,6 @@ public class StockLevelFixtures {
 	public static List<CreateStockLevelCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		StockLevelRepository repository,
-        com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository,
-        com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -53,8 +51,6 @@ public class StockLevelFixtures {
 			CreateStockLevelCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            productVariantDataRepository,
-            companyDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -70,8 +66,6 @@ public class StockLevelFixtures {
 		public static CreateStockLevelCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		StockLevelRepository  repository,
-        com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository,
-        com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
@@ -79,11 +73,11 @@ public class StockLevelFixtures {
 			CreateStockLevelCommand command = CreateStockLevelCommand.builder()
 				.remoteId(StockLevelRemoteId.create(UUID.randomUUID().toString()))
 				.localId(StockLevelLocalId.create(UUID.randomUUID().toString()))
-				.stockOnHand(StockLevelStockOnHand.create(1))
-				.stockAllocated(StockLevelStockAllocated.create(60))
-				.productVariant(StockLevelProductVariant.create(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value()))
+				.stockOnHand(StockLevelStockOnHand.create(34))
+				.stockAllocated(StockLevelStockAllocated.create(86))
+				.productVariant(StockLevelProductVariant.create(UUID.randomUUID().toString()))
 				.syncAt(StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.company(StockLevelCompany.create(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value()))
+				.company(StockLevelCompany.create(UUID.randomUUID().toString()))
 			.build();
 
 		command.setCreatedBy(StockLevelCreatedBy.create(user.getId()));
@@ -103,9 +97,11 @@ public class StockLevelFixtures {
         CreateStockLevelCommand command = CreateStockLevelCommand.builder()
         .remoteId(StockLevelRemoteId.create(UUID.randomUUID().toString()))
         .localId(StockLevelLocalId.create(UUID.randomUUID().toString()))
-        .stockOnHand(StockLevelStockOnHand.create(1))
-        .stockAllocated(StockLevelStockAllocated.create(60))
+        .stockOnHand(StockLevelStockOnHand.create(34))
+        .stockAllocated(StockLevelStockAllocated.create(86))
+        .productVariant(StockLevelProductVariant.create(UUID.randomUUID().toString()))
         .syncAt(StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
+        .company(StockLevelCompany.create(UUID.randomUUID().toString()))
         .build();
 
 		command.setCreatedBy(StockLevelCreatedBy.create(user.getId()));

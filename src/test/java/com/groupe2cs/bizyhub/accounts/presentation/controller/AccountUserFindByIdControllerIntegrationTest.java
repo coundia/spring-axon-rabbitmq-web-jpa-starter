@@ -29,10 +29,6 @@ private CommandGateway commandGateway;
 private AccountUserRepository repository;
 
 @Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -42,8 +38,6 @@ void it_should_be_able_to_get_accountuser_by_id() {
 
 	String existingId = AccountUserFixtures.randomOneViaCommand(
 	commandGateway,repository,
-        accountDataRepository,
-        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

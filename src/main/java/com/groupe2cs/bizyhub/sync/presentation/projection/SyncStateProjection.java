@@ -26,24 +26,43 @@ public class SyncStateProjection {
 private final SyncStateRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(SyncStateCreatedEvent event) {
 try {
-SyncState entity = SyncState.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.entityTable(event.getEntityTable() == null ? null : event.getEntityTable().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- 		.lastSyncAt(event.getLastSyncAt() == null ? null : event.getLastSyncAt().value())
- 		.lastCursor(event.getLastCursor() == null ? null : event.getLastCursor().value())
- .build();
+SyncState entity = SyncState.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getEntityTable() !=null  && hasId(event.getEntityTable().value()) ) {
+            entity.setEntityTable( event.getEntityTable().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getLastSyncAt() !=null  && hasId(event.getLastSyncAt().value()) ) {
+            entity.setLastSyncAt( event.getLastSyncAt().value());
+        }
+ 		if(event.getLastCursor() !=null  && hasId(event.getLastCursor().value()) ) {
+            entity.setLastCursor( event.getLastCursor().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -67,25 +86,25 @@ SyncState entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("SyncState not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getEntityTable() != null) {
+	if(event.getEntityTable() != null  && hasId(event.getEntityTable().value())) {
 		entity.setEntityTable(event.getEntityTable().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-	if(event.getLastSyncAt() != null) {
+	if(event.getLastSyncAt() != null  && hasId(event.getLastSyncAt().value())) {
 		entity.setLastSyncAt(event.getLastSyncAt().value());
     }
-	if(event.getLastCursor() != null) {
+	if(event.getLastCursor() != null  && hasId(event.getLastCursor().value())) {
 		entity.setLastCursor(event.getLastCursor().value());
     }
 

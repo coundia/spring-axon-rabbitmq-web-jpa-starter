@@ -32,10 +32,7 @@ this.productVariant = productVariant;
 
 public static StockLevelProductVariant create(String productVariant) {
 
-if (productVariant == null || productVariant.isBlank()) {
-throw new StockLevelProductVariantNotValid("ProductVariant is invalid");
-}
-return new StockLevelProductVariant(productVariant);
+	return new StockLevelProductVariant(productVariant);
 }
 
 public String value() {

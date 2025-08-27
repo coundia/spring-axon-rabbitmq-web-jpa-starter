@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.transactions.domain.exception.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 
 
 public class TransactionUserAggregateTests extends BaseUnitTests {

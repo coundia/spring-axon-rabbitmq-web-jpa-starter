@@ -1,5 +1,8 @@
 package com.groupe2cs.bizyhub.chats.presentation.controller;
 
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.chats.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.chats.infrastructure.entity.*;
@@ -7,9 +10,6 @@ import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.chats.infrastructure.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -29,8 +29,6 @@ public class ChatSyncControllerTests extends BaseIntegrationTests {
 private ChatRepository Repository;
 
     @Autowired
-    private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-    @Autowired
     private FileManagerRepository filesDataRepository ;
     @Autowired
     private UserRepository createdByDataRepository ;
@@ -49,7 +47,7 @@ private ChatRepository Repository;
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
-.account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
+.account(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
 		.type("CREATE")
 		.build()
@@ -82,7 +80,7 @@ private ChatRepository Repository;
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
-.account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
+.account(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
 			.type("UPDATE")
 			.build()

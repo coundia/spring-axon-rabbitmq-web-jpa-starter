@@ -26,26 +26,49 @@ public class CategoryProjection {
 private final CategoryRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(CategoryCreatedEvent event) {
 try {
-Category entity = Category.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.code(event.getCode() == null ? null : event.getCode().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.description(event.getDescription() == null ? null : event.getDescription().value())
- 		.typeEntry(event.getTypeEntry() == null ? null : event.getTypeEntry().value())
- 		.version(event.getVersion() == null ? null : event.getVersion().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- .build();
+Category entity = Category.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getCode() !=null  && hasId(event.getCode().value()) ) {
+            entity.setCode( event.getCode().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getDescription() !=null  && hasId(event.getDescription().value()) ) {
+            entity.setDescription( event.getDescription().value());
+        }
+ 		if(event.getTypeEntry() !=null  && hasId(event.getTypeEntry().value()) ) {
+            entity.setTypeEntry( event.getTypeEntry().value());
+        }
+ 		if(event.getVersion() !=null  && hasId(event.getVersion().value()) ) {
+            entity.setVersion( event.getVersion().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -69,31 +92,31 @@ Category entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Category not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getCode() != null) {
+	if(event.getCode() != null  && hasId(event.getCode().value())) {
 		entity.setCode(event.getCode().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getDescription() != null) {
+	if(event.getDescription() != null  && hasId(event.getDescription().value())) {
 		entity.setDescription(event.getDescription().value());
     }
-	if(event.getTypeEntry() != null) {
+	if(event.getTypeEntry() != null  && hasId(event.getTypeEntry().value())) {
 		entity.setTypeEntry(event.getTypeEntry().value());
     }
-	if(event.getVersion() != null) {
+	if(event.getVersion() != null  && hasId(event.getVersion().value())) {
 		entity.setVersion(event.getVersion().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
 

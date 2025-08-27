@@ -27,10 +27,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -43,8 +39,8 @@ void it_should_be_able_to_add_transactionuser() {
 		requestDTO.setName(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
-		requestDTO.setTransaction(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value());
-		requestDTO.setUser(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value());
+		requestDTO.setTransaction(UUID.randomUUID().toString());
+		requestDTO.setUser(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setUsername(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());

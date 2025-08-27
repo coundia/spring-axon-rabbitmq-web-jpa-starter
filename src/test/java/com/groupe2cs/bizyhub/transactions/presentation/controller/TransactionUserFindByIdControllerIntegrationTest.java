@@ -29,10 +29,6 @@ private CommandGateway commandGateway;
 private TransactionUserRepository repository;
 
 @Autowired
-private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -42,8 +38,6 @@ void it_should_be_able_to_get_transactionuser_by_id() {
 
 	String existingId = TransactionUserFixtures.randomOneViaCommand(
 	commandGateway,repository,
-        transactionDataRepository,
-        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

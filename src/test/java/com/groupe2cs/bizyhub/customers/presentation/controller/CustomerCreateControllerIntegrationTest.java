@@ -27,8 +27,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -44,13 +42,13 @@ void it_should_be_able_to_add_customer() {
 		requestDTO.setFirstName(UUID.randomUUID().toString());
 		requestDTO.setLastName(UUID.randomUUID().toString());
 		requestDTO.setFullName(UUID.randomUUID().toString());
-		requestDTO.setBalance(1420.81);
-		requestDTO.setBalanceDebt(8493.84);
+		requestDTO.setBalance(8179.76);
+		requestDTO.setBalanceDebt(7491.77);
 		requestDTO.setPhone(UUID.randomUUID().toString());
 		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setNotes(UUID.randomUUID().toString());
 		requestDTO.setStatus(UUID.randomUUID().toString());
-		requestDTO.setCompany(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value());
+		requestDTO.setCompany(UUID.randomUUID().toString());
 		requestDTO.setAddressLine1(UUID.randomUUID().toString());
 		requestDTO.setAddressLine2(UUID.randomUUID().toString());
 		requestDTO.setCity(UUID.randomUUID().toString());
@@ -58,7 +56,7 @@ void it_should_be_able_to_add_customer() {
 		requestDTO.setCountry(UUID.randomUUID().toString());
 		requestDTO.setPostalCode(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setIsActive(false);
+		requestDTO.setIsActive(true);
 
  		String uri = "/v1/commands/customer";
 		ResponseEntity<CustomerResponse> response = this.postForEntity(uri, requestDTO, CustomerResponse.class);

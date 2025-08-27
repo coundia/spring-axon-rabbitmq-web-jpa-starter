@@ -33,8 +33,6 @@ public class DebtUpdateControllerIntegrationTest extends BaseIntegrationTests {
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -44,7 +42,6 @@ public class DebtUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
         String existingId = DebtFixtures.randomOneViaCommand(
             commandGateway, debtRepository,
-        customerDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -52,7 +49,6 @@ public class DebtUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
         CreateDebtCommand updated = DebtFixtures.randomOneViaCommand(
             commandGatewayUpdate, debtRepository,
-        customerDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -66,12 +62,12 @@ public class DebtUpdateControllerIntegrationTest extends BaseIntegrationTests {
         body.add("localId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("notes", UUID.randomUUID().toString());
-        body.add("balance", 2877.74);
-        body.add("balanceDebt", 4534.25);
+        body.add("balance", 3400.07);
+        body.add("balanceDebt", 8898.81);
         body.add("dueDate", java.time.Instant.now().plusSeconds(3600));
         body.add("statuses", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("customer", updated.getCustomer().value());
+        body.add("customer", UUID.randomUUID().toString());
         body.add("isActive", true);
 
         HttpHeaders multipartHeaders = new HttpHeaders();

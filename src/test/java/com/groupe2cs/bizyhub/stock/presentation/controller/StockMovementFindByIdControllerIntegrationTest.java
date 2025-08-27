@@ -29,10 +29,6 @@ private CommandGateway commandGateway;
 private StockMovementRepository repository;
 
 @Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -42,8 +38,6 @@ void it_should_be_able_to_get_stockmovement_by_id() {
 
 	String existingId = StockMovementFixtures.randomOneViaCommand(
 	commandGateway,repository,
-        companyDataRepository,
-        productVariantDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

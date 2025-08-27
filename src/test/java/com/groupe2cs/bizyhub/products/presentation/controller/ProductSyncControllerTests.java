@@ -1,5 +1,7 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
 
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
@@ -8,8 +10,6 @@ import com.groupe2cs.bizyhub.products.application.dto.*;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -29,10 +29,6 @@ public class ProductSyncControllerTests extends BaseIntegrationTests {
 private ProductRepository Repository;
 
     @Autowired
-    private com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository ;
-    @Autowired
-    private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
-    @Autowired
     private UserRepository createdByDataRepository ;
     @Autowired
     private TenantRepository tenantDataRepository ;
@@ -48,12 +44,12 @@ private ProductRepository Repository;
 .name(UUID.randomUUID().toString())
 .description(UUID.randomUUID().toString())
 .barcode(UUID.randomUUID().toString())
-.unit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value())
+.unit(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
-.defaultPrice(6581.18)
+.category(UUID.randomUUID().toString())
+.defaultPrice(4134.28)
 .statuses(UUID.randomUUID().toString())
-.purchasePrice(467.11)
+.purchasePrice(1413.75)
 		.type("CREATE")
 		.build()
 		))
@@ -84,12 +80,12 @@ private ProductRepository Repository;
 .name(UUID.randomUUID().toString())
 .description(UUID.randomUUID().toString())
 .barcode(UUID.randomUUID().toString())
-.unit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value())
+.unit(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.category(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value())
-.defaultPrice(6581.18)
+.category(UUID.randomUUID().toString())
+.defaultPrice(4134.28)
 .statuses(UUID.randomUUID().toString())
-.purchasePrice(467.11)
+.purchasePrice(1413.75)
 			.type("UPDATE")
 			.build()
 			))

@@ -41,8 +41,6 @@ public class TransactionUserFixtures {
 	public static List<CreateTransactionUserCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		TransactionUserRepository repository,
-        com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository,
-        com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -53,8 +51,6 @@ public class TransactionUserFixtures {
 			CreateTransactionUserCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            transactionDataRepository,
-            userDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -70,8 +66,6 @@ public class TransactionUserFixtures {
 		public static CreateTransactionUserCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		TransactionUserRepository  repository,
-        com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository,
-        com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
@@ -80,8 +74,8 @@ public class TransactionUserFixtures {
 				.name(TransactionUserName.create(UUID.randomUUID().toString()))
 				.remoteId(TransactionUserRemoteId.create(UUID.randomUUID().toString()))
 				.localId(TransactionUserLocalId.create(UUID.randomUUID().toString()))
-				.transaction(TransactionUserTransaction.create(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value()))
-				.user(TransactionUserUser.create(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value()))
+				.transaction(TransactionUserTransaction.create(UUID.randomUUID().toString()))
+				.user(TransactionUserUser.create(UUID.randomUUID().toString()))
 				.syncAt(TransactionUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.username(TransactionUserUsername.create(UUID.randomUUID().toString()))
 				.details(TransactionUserDetails.create(UUID.randomUUID().toString()))
@@ -106,6 +100,8 @@ public class TransactionUserFixtures {
         .name(TransactionUserName.create(UUID.randomUUID().toString()))
         .remoteId(TransactionUserRemoteId.create(UUID.randomUUID().toString()))
         .localId(TransactionUserLocalId.create(UUID.randomUUID().toString()))
+        .transaction(TransactionUserTransaction.create(UUID.randomUUID().toString()))
+        .user(TransactionUserUser.create(UUID.randomUUID().toString()))
         .syncAt(TransactionUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .username(TransactionUserUsername.create(UUID.randomUUID().toString()))
         .details(TransactionUserDetails.create(UUID.randomUUID().toString()))

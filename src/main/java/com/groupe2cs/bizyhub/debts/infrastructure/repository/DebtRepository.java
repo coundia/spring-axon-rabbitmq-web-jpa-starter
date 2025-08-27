@@ -112,13 +112,13 @@ public interface DebtRepository extends JpaRepository<Debt, String> {
          List<Debt> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
 
 
-        @Query("SELECT e FROM Debt e WHERE LOWER(e.customer.id) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Debt> findByCustomerIdAndCreatedById(String customer, String createdById);
-        @Query("SELECT e FROM Debt e WHERE LOWER(e.customer.id) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Debt> findByCustomerIdAndTenantName(String customer, String tenantName);
+        @Query("SELECT e FROM Debt e WHERE LOWER(e.customer) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Debt> findByCustomerAndCreatedById(String customer, String createdById);
+        @Query("SELECT e FROM Debt e WHERE LOWER(e.customer) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Debt> findByCustomerAndTenantName(String customer, String tenantName);
 
-        @Query("SELECT e FROM Debt e WHERE LOWER(e.customer.id) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Debt> findByCustomerIdAndTenantId(String customer, String tenantId);
+        @Query("SELECT e FROM Debt e WHERE LOWER(e.customer) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Debt> findByCustomerAndTenantId(String customer, String tenantId);
         @Query("SELECT e FROM Debt e WHERE e.isActive = :isActive AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Debt> findByIsActiveAndCreatedById(Boolean isActive, String createdById);
         @Query("SELECT e FROM Debt e WHERE e.isActive = :isActive AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

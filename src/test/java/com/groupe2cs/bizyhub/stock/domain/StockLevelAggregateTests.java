@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.stock.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.stock.domain.exception.*;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
 import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.stock.domain.exception.*;
 
 
 public class StockLevelAggregateTests extends BaseUnitTests {
@@ -16,8 +16,8 @@ void it_should_create_stockLevel_with_valid_values() {
 	StockLevelId id = StockLevelId.create(UUID.randomUUID().toString());
 	StockLevelRemoteId remoteId = StockLevelRemoteId.create(UUID.randomUUID().toString());
 	StockLevelLocalId localId = StockLevelLocalId.create(UUID.randomUUID().toString());
-	StockLevelStockOnHand stockOnHand = StockLevelStockOnHand.create(86);
-	StockLevelStockAllocated stockAllocated = StockLevelStockAllocated.create(54);
+	StockLevelStockOnHand stockOnHand = StockLevelStockOnHand.create(70);
+	StockLevelStockAllocated stockAllocated = StockLevelStockAllocated.create(60);
 	StockLevelProductVariant productVariant = StockLevelProductVariant.create(UUID.randomUUID().toString());
 	StockLevelSyncAt syncAt = StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	StockLevelCompany company = StockLevelCompany.create(UUID.randomUUID().toString());
@@ -41,16 +41,6 @@ void it_should_create_stockLevel_with_valid_values() {
 		void it_should_throw_when_id_is_invalid() {
 		StockLevelIdNotValid error = assertThrows(StockLevelIdNotValid.class, () -> StockLevelId.create(""));
 		assertThat(error.getMessage()).isEqualTo("Id is invalid");
-		}
-		@Test
-		void it_should_throw_when_productVariant_is_invalid() {
-		StockLevelProductVariantNotValid error = assertThrows(StockLevelProductVariantNotValid.class, () -> StockLevelProductVariant.create(""));
-		assertThat(error.getMessage()).isEqualTo("ProductVariant is invalid");
-		}
-		@Test
-		void it_should_throw_when_company_is_invalid() {
-		StockLevelCompanyNotValid error = assertThrows(StockLevelCompanyNotValid.class, () -> StockLevelCompany.create(""));
-		assertThat(error.getMessage()).isEqualTo("Company is invalid");
 		}
 
 }

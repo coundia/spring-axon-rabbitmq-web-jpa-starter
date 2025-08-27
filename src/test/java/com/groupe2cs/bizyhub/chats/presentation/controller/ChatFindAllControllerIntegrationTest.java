@@ -39,8 +39,6 @@ private CommandGateway commandGateway;
 private ChatRepository chatRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
 private FileManagerRepository filesDataRepository ;
 @Autowired
 private UserRepository createdByDataRepository ;
@@ -53,7 +51,6 @@ void it_should_return_only_user_chats_for_normal_user() throws Exception {
 List<CreateChatCommand> userCommands =
 ChatFixtures.randomManyViaCommand(
 commandGateway,chatRepository,
-accountDataRepository,
 filesDataRepository,
 createdByDataRepository,
 tenantDataRepository,
@@ -90,7 +87,6 @@ void it_should_return_all_chats_for_admin() throws Exception {
     ChatFixtures.randomManyViaCommand(
         commandGateway,
         chatRepository,
-         accountDataRepository,
          filesDataRepository,
          createdByDataRepository,
          tenantDataRepository,
@@ -104,7 +100,6 @@ void it_should_return_all_chats_for_admin() throws Exception {
 List<CreateChatCommand> adminCommands =
 ChatFixtures.randomManyViaCommand(
 commandGateway,chatRepository,
-        accountDataRepository,
         filesDataRepository,
         createdByDataRepository,
         tenantDataRepository,

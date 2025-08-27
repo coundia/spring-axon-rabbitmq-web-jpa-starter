@@ -26,21 +26,34 @@ public class RefreshTokenProjection {
 private final RefreshTokenRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(RefreshTokenCreatedEvent event) {
 try {
-RefreshToken entity = RefreshToken.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.token(event.getToken() == null ? null : event.getToken().value())
- 		.username(event.getUsername() == null ? null : event.getUsername().value())
- 		.expiration(event.getExpiration() == null ? null : event.getExpiration().value())
- .build();
+RefreshToken entity = RefreshToken.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getToken() !=null  && hasId(event.getToken().value()) ) {
+            entity.setToken( event.getToken().value());
+        }
+ 		if(event.getUsername() !=null  && hasId(event.getUsername().value()) ) {
+            entity.setUsername( event.getUsername().value());
+        }
+ 		if(event.getExpiration() !=null  && hasId(event.getExpiration().value()) ) {
+            entity.setExpiration( event.getExpiration().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -64,16 +77,16 @@ RefreshToken entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("RefreshToken not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getToken() != null) {
+	if(event.getToken() != null  && hasId(event.getToken().value())) {
 		entity.setToken(event.getToken().value());
     }
-	if(event.getUsername() != null) {
+	if(event.getUsername() != null  && hasId(event.getUsername().value())) {
 		entity.setUsername(event.getUsername().value());
     }
-	if(event.getExpiration() != null) {
+	if(event.getExpiration() != null  && hasId(event.getExpiration().value())) {
 		entity.setExpiration(event.getExpiration().value());
     }
 

@@ -26,37 +26,82 @@ public class CompanyProjection {
 private final CompanyRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(CompanyCreatedEvent event) {
 try {
-Company entity = Company.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.code(event.getCode() == null ? null : event.getCode().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.description(event.getDescription() == null ? null : event.getDescription().value())
- 		.phone(event.getPhone() == null ? null : event.getPhone().value())
- 		.email(event.getEmail() == null ? null : event.getEmail().value())
- 		.website(event.getWebsite() == null ? null : event.getWebsite().value())
- 		.taxId(event.getTaxId() == null ? null : event.getTaxId().value())
- 		.currency(event.getCurrency() == null ? null : event.getCurrency().value())
- 		.addressLine1(event.getAddressLine1() == null ? null : event.getAddressLine1().value())
- 		.addressLine2(event.getAddressLine2() == null ? null : event.getAddressLine2().value())
- 		.city(event.getCity() == null ? null : event.getCity().value())
- 		.region(event.getRegion() == null ? null : event.getRegion().value())
- 		.country(event.getCountry() == null ? null : event.getCountry().value())
- 		.postalCode(event.getPostalCode() == null ? null : event.getPostalCode().value())
- 		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- 		.isDefault(event.getIsDefault() == null ? null : event.getIsDefault().value())
- .build();
+Company entity = Company.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getCode() !=null  && hasId(event.getCode().value()) ) {
+            entity.setCode( event.getCode().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 		if(event.getDescription() !=null  && hasId(event.getDescription().value()) ) {
+            entity.setDescription( event.getDescription().value());
+        }
+ 		if(event.getPhone() !=null  && hasId(event.getPhone().value()) ) {
+            entity.setPhone( event.getPhone().value());
+        }
+ 		if(event.getEmail() !=null  && hasId(event.getEmail().value()) ) {
+            entity.setEmail( event.getEmail().value());
+        }
+ 		if(event.getWebsite() !=null  && hasId(event.getWebsite().value()) ) {
+            entity.setWebsite( event.getWebsite().value());
+        }
+ 		if(event.getTaxId() !=null  && hasId(event.getTaxId().value()) ) {
+            entity.setTaxId( event.getTaxId().value());
+        }
+ 		if(event.getCurrency() !=null  && hasId(event.getCurrency().value()) ) {
+            entity.setCurrency( event.getCurrency().value());
+        }
+ 		if(event.getAddressLine1() !=null  && hasId(event.getAddressLine1().value()) ) {
+            entity.setAddressLine1( event.getAddressLine1().value());
+        }
+ 		if(event.getAddressLine2() !=null  && hasId(event.getAddressLine2().value()) ) {
+            entity.setAddressLine2( event.getAddressLine2().value());
+        }
+ 		if(event.getCity() !=null  && hasId(event.getCity().value()) ) {
+            entity.setCity( event.getCity().value());
+        }
+ 		if(event.getRegion() !=null  && hasId(event.getRegion().value()) ) {
+            entity.setRegion( event.getRegion().value());
+        }
+ 		if(event.getCountry() !=null  && hasId(event.getCountry().value()) ) {
+            entity.setCountry( event.getCountry().value());
+        }
+ 		if(event.getPostalCode() !=null  && hasId(event.getPostalCode().value()) ) {
+            entity.setPostalCode( event.getPostalCode().value());
+        }
+ 		if(event.getIsActive() !=null  && hasId(event.getIsActive().value()) ) {
+            entity.setIsActive( event.getIsActive().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getIsDefault() !=null  && hasId(event.getIsDefault().value()) ) {
+            entity.setIsDefault( event.getIsDefault().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -80,64 +125,64 @@ Company entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Company not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getCode() != null) {
+	if(event.getCode() != null  && hasId(event.getCode().value())) {
 		entity.setCode(event.getCode().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
-	if(event.getDescription() != null) {
+	if(event.getDescription() != null  && hasId(event.getDescription().value())) {
 		entity.setDescription(event.getDescription().value());
     }
-	if(event.getPhone() != null) {
+	if(event.getPhone() != null  && hasId(event.getPhone().value())) {
 		entity.setPhone(event.getPhone().value());
     }
-	if(event.getEmail() != null) {
+	if(event.getEmail() != null  && hasId(event.getEmail().value())) {
 		entity.setEmail(event.getEmail().value());
     }
-	if(event.getWebsite() != null) {
+	if(event.getWebsite() != null  && hasId(event.getWebsite().value())) {
 		entity.setWebsite(event.getWebsite().value());
     }
-	if(event.getTaxId() != null) {
+	if(event.getTaxId() != null  && hasId(event.getTaxId().value())) {
 		entity.setTaxId(event.getTaxId().value());
     }
-	if(event.getCurrency() != null) {
+	if(event.getCurrency() != null  && hasId(event.getCurrency().value())) {
 		entity.setCurrency(event.getCurrency().value());
     }
-	if(event.getAddressLine1() != null) {
+	if(event.getAddressLine1() != null  && hasId(event.getAddressLine1().value())) {
 		entity.setAddressLine1(event.getAddressLine1().value());
     }
-	if(event.getAddressLine2() != null) {
+	if(event.getAddressLine2() != null  && hasId(event.getAddressLine2().value())) {
 		entity.setAddressLine2(event.getAddressLine2().value());
     }
-	if(event.getCity() != null) {
+	if(event.getCity() != null  && hasId(event.getCity().value())) {
 		entity.setCity(event.getCity().value());
     }
-	if(event.getRegion() != null) {
+	if(event.getRegion() != null  && hasId(event.getRegion().value())) {
 		entity.setRegion(event.getRegion().value());
     }
-	if(event.getCountry() != null) {
+	if(event.getCountry() != null  && hasId(event.getCountry().value())) {
 		entity.setCountry(event.getCountry().value());
     }
-	if(event.getPostalCode() != null) {
+	if(event.getPostalCode() != null  && hasId(event.getPostalCode().value())) {
 		entity.setPostalCode(event.getPostalCode().value());
     }
-	if(event.getIsActive() != null) {
+	if(event.getIsActive() != null  && hasId(event.getIsActive().value())) {
 		entity.setIsActive(event.getIsActive().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-	if(event.getIsDefault() != null) {
+	if(event.getIsDefault() != null  && hasId(event.getIsDefault().value())) {
 		entity.setIsDefault(event.getIsDefault().value());
     }
 

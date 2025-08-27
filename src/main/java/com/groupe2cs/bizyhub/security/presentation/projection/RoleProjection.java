@@ -26,19 +26,28 @@ public class RoleProjection {
 private final RoleRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(RoleCreatedEvent event) {
 try {
-Role entity = Role.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- .build();
+Role entity = Role.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -62,10 +71,10 @@ Role entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Role not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
 

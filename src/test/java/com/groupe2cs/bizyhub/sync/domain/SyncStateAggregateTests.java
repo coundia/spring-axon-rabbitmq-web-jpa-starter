@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.sync.domain;
 
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.sync.domain.exception.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 
 
 public class SyncStateAggregateTests extends BaseUnitTests {

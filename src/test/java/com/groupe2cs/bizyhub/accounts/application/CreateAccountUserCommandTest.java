@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateAccountUserCommand command = new CreateAccountUserCommand(
- AccountUserId.create(UUID.randomUUID().toString()) ,  AccountUserName.create(UUID.randomUUID().toString()) ,  AccountUserAccount.create(UUID.randomUUID().toString()) ,  AccountUserUser.create(UUID.randomUUID().toString()) ,  AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountUserUsername.create(UUID.randomUUID().toString()) ,  AccountUserDetails.create(UUID.randomUUID().toString()) ,  AccountUserRemoteId.create(UUID.randomUUID().toString()) ,  AccountUserLocalId.create(UUID.randomUUID().toString()) ,  AccountUserIsActive.create(false) ,  AccountUserCreatedBy.create(UUID.randomUUID().toString()) ,  AccountUserTenant.create(UUID.randomUUID().toString()) 
+ AccountUserId.create(UUID.randomUUID().toString()) ,  AccountUserAccount.create(UUID.randomUUID().toString()) ,  AccountUserUser.create(UUID.randomUUID().toString()) ,  AccountUserPhone.create(UUID.randomUUID().toString()) ,  AccountUserRole.create(UUID.randomUUID().toString()) ,  AccountUserStatus.create(UUID.randomUUID().toString()) ,  AccountUserInvitedBy.create(UUID.randomUUID().toString()) ,  AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountUserAcceptedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountUserRevokedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  AccountUserMessage.create(UUID.randomUUID().toString()) ,  AccountUserRemoteId.create(UUID.randomUUID().toString()) ,  AccountUserLocalId.create(UUID.randomUUID().toString()) ,  AccountUserIsActive.create(false) ,  AccountUserCreatedBy.create(UUID.randomUUID().toString()) ,  AccountUserTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -36,18 +36,26 @@ verify(commandGateway, times(1)).send(commandCaptor.capture());
 CreateAccountUserCommand sentCommand = commandCaptor.getValue();
 assertThat(sentCommand.getId().value()).isEqualTo(
 command.getId().value());
-assertThat(sentCommand.getName().value()).isEqualTo(
-command.getName().value());
 assertThat(sentCommand.getAccount().value()).isEqualTo(
 command.getAccount().value());
 assertThat(sentCommand.getUser().value()).isEqualTo(
 command.getUser().value());
+assertThat(sentCommand.getPhone().value()).isEqualTo(
+command.getPhone().value());
+assertThat(sentCommand.getRole().value()).isEqualTo(
+command.getRole().value());
+assertThat(sentCommand.getStatus().value()).isEqualTo(
+command.getStatus().value());
+assertThat(sentCommand.getInvitedBy().value()).isEqualTo(
+command.getInvitedBy().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(
 command.getSyncAt().value());
-assertThat(sentCommand.getUsername().value()).isEqualTo(
-command.getUsername().value());
-assertThat(sentCommand.getDetails().value()).isEqualTo(
-command.getDetails().value());
+assertThat(sentCommand.getAcceptedAt().value()).isEqualTo(
+command.getAcceptedAt().value());
+assertThat(sentCommand.getRevokedAt().value()).isEqualTo(
+command.getRevokedAt().value());
+assertThat(sentCommand.getMessage().value()).isEqualTo(
+command.getMessage().value());
 assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
 assertThat(sentCommand.getLocalId().value()).isEqualTo(

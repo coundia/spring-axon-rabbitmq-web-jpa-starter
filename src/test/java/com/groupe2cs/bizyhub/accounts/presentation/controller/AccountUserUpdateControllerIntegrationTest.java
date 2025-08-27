@@ -33,10 +33,6 @@ public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationT
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository;
-    @Autowired
-    private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -46,8 +42,6 @@ public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationT
 
         String existingId = AccountUserFixtures.randomOneViaCommand(
             commandGateway, accountuserRepository,
-        accountDataRepository,
-        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -55,8 +49,6 @@ public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationT
 
         CreateAccountUserCommand updated = AccountUserFixtures.randomOneViaCommand(
             commandGatewayUpdate, accountuserRepository,
-        accountDataRepository,
-        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -66,15 +58,19 @@ public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationT
         AccountUserFixtures.byIdWaitExist(accountuserRepository, updated.getId().value());
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("name", UUID.randomUUID().toString());
-        body.add("account", updated.getAccount().value());
-        body.add("user", updated.getUser().value());
+        body.add("account", UUID.randomUUID().toString());
+        body.add("user", UUID.randomUUID().toString());
+        body.add("phone", UUID.randomUUID().toString());
+        body.add("role", UUID.randomUUID().toString());
+        body.add("status", UUID.randomUUID().toString());
+        body.add("invitedBy", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("username", UUID.randomUUID().toString());
-        body.add("details", UUID.randomUUID().toString());
+        body.add("acceptedAt", java.time.Instant.now().plusSeconds(3600));
+        body.add("revokedAt", java.time.Instant.now().plusSeconds(3600));
+        body.add("message", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("isActive", true);
+        body.add("isActive", false);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

@@ -26,23 +26,40 @@ public class TenantProjection {
 private final TenantRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(TenantCreatedEvent event) {
 try {
-Tenant entity = Tenant.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.description(event.getDescription() == null ? null : event.getDescription().value())
- 		.domain(event.getDomain() == null ? null : event.getDomain().value())
- 		.language(event.getLanguage() == null ? null : event.getLanguage().value())
- 		.active(event.getActive() == null ? null : event.getActive().value())
- .build();
+Tenant entity = Tenant.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 		if(event.getDescription() !=null  && hasId(event.getDescription().value()) ) {
+            entity.setDescription( event.getDescription().value());
+        }
+ 		if(event.getDomain() !=null  && hasId(event.getDomain().value()) ) {
+            entity.setDomain( event.getDomain().value());
+        }
+ 		if(event.getLanguage() !=null  && hasId(event.getLanguage().value()) ) {
+            entity.setLanguage( event.getLanguage().value());
+        }
+ 		if(event.getActive() !=null  && hasId(event.getActive().value()) ) {
+            entity.setActive( event.getActive().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -66,22 +83,22 @@ Tenant entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Tenant not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
-	if(event.getDescription() != null) {
+	if(event.getDescription() != null  && hasId(event.getDescription().value())) {
 		entity.setDescription(event.getDescription().value());
     }
-	if(event.getDomain() != null) {
+	if(event.getDomain() != null  && hasId(event.getDomain().value())) {
 		entity.setDomain(event.getDomain().value());
     }
-	if(event.getLanguage() != null) {
+	if(event.getLanguage() != null  && hasId(event.getLanguage().value())) {
 		entity.setLanguage(event.getLanguage().value());
     }
-	if(event.getActive() != null) {
+	if(event.getActive() != null  && hasId(event.getActive().value())) {
 		entity.setActive(event.getActive().value());
     }
 

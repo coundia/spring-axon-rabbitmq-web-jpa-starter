@@ -26,25 +26,25 @@ public class ChangeLogDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "c59c1600-0e0d-4d11-8c05-23b83de65034")
+		@Schema(description = "", example = "9854128b-d40f-4b91-8042-8f2c069a8976")
 		private String entityTable;
-		@Schema(description = "", example = "10e0db17-d4d7-4dd4-9a32-6d53ab2db58d")
+		@Schema(description = "", example = "da11ebf9-bf72-400a-a913-0877ae8e0686")
 		private String entityId;
-		@Schema(description = "", example = "9218f7cf-6841-46af-bcd0-d595187ff1dd")
+		@Schema(description = "", example = "c0f1cf61-9f9c-4463-95e6-6cca3812bb78")
 		private String remoteId;
-		@Schema(description = "", example = "bab3d3c7-c273-48e1-8a87-e73b87f66d47")
+		@Schema(description = "", example = "dbe6c9b4-b0b3-4c89-a116-f30b5ba7966c")
 		private String localId;
-		@Schema(description = "", example = "8f6119fa-b88d-4843-9329-9346560cdd69")
+		@Schema(description = "", example = "ef6a0ce7-5a20-4da6-9ed6-a456a2feea91")
 		private String operation;
-		@Schema(description = "", example = "6f4f1026-3fa5-416d-922d-c62aa1c74d6e")
+		@Schema(description = "", example = "fe33d4ab-598d-4df4-a694-9bed383ec7b9")
 		private String payload;
-		@Schema(description = "", example = "eb813512-06a1-43d0-969b-aa2e4e8085e0")
+		@Schema(description = "", example = "99bdb1f9-1c9e-466e-9007-a2084646f49b")
 		private String status;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "69")
+		@Schema(description = "", example = "63")
 		private Integer attempts;
-		@Schema(description = "", example = "f19cab72-a2cc-4782-a967-622f1d7a6b24")
+		@Schema(description = "", example = "f9b6dd3d-21ae-4903-8940-6f52fb4a6a30")
 		private String error;
 
 }

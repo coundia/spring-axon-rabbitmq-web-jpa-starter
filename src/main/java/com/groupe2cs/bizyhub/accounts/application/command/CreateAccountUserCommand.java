@@ -25,12 +25,16 @@ public class CreateAccountUserCommand implements Serializable {
 @TargetAggregateIdentifier
 	@Builder.Default
 	private AccountUserId id = AccountUserId.create(UUID.randomUUID().toString());
- 	private AccountUserName name;
  	private AccountUserAccount account;
  	private AccountUserUser user;
+ 	private AccountUserPhone phone;
+ 	private AccountUserRole role;
+ 	private AccountUserStatus status;
+ 	private AccountUserInvitedBy invitedBy;
  	private AccountUserSyncAt syncAt;
- 	private AccountUserUsername username;
- 	private AccountUserDetails details;
+ 	private AccountUserAcceptedAt acceptedAt;
+ 	private AccountUserRevokedAt revokedAt;
+ 	private AccountUserMessage message;
  	private AccountUserRemoteId remoteId;
  	private AccountUserLocalId localId;
  	private AccountUserIsActive isActive;
@@ -38,12 +42,16 @@ public class CreateAccountUserCommand implements Serializable {
  	private AccountUserTenant tenant;
 	public CreateAccountUserCommand(
  
-   AccountUserName name , 
    AccountUserAccount account , 
    AccountUserUser user , 
+   AccountUserPhone phone , 
+   AccountUserRole role , 
+   AccountUserStatus status , 
+   AccountUserInvitedBy invitedBy , 
    AccountUserSyncAt syncAt , 
-   AccountUserUsername username , 
-   AccountUserDetails details , 
+   AccountUserAcceptedAt acceptedAt , 
+   AccountUserRevokedAt revokedAt , 
+   AccountUserMessage message , 
    AccountUserRemoteId remoteId , 
    AccountUserLocalId localId , 
    AccountUserIsActive isActive , 
@@ -52,12 +60,16 @@ public class CreateAccountUserCommand implements Serializable {
 		){
 			this.id = AccountUserId.create(UUID.randomUUID().toString());
  
-  this.name = name ; 
   this.account = account ; 
   this.user = user ; 
+  this.phone = phone ; 
+  this.role = role ; 
+  this.status = status ; 
+  this.invitedBy = invitedBy ; 
   this.syncAt = syncAt ; 
-  this.username = username ; 
-  this.details = details ; 
+  this.acceptedAt = acceptedAt ; 
+  this.revokedAt = revokedAt ; 
+  this.message = message ; 
   this.remoteId = remoteId ; 
   this.localId = localId ; 
   this.isActive = isActive ; 

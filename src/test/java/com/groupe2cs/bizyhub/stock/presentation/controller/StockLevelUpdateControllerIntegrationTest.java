@@ -33,10 +33,6 @@ public class StockLevelUpdateControllerIntegrationTest extends BaseIntegrationTe
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository;
-    @Autowired
-    private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -46,8 +42,6 @@ public class StockLevelUpdateControllerIntegrationTest extends BaseIntegrationTe
 
         String existingId = StockLevelFixtures.randomOneViaCommand(
             commandGateway, stocklevelRepository,
-        productVariantDataRepository,
-        companyDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -55,8 +49,6 @@ public class StockLevelUpdateControllerIntegrationTest extends BaseIntegrationTe
 
         CreateStockLevelCommand updated = StockLevelFixtures.randomOneViaCommand(
             commandGatewayUpdate, stocklevelRepository,
-        productVariantDataRepository,
-        companyDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -68,11 +60,11 @@ public class StockLevelUpdateControllerIntegrationTest extends BaseIntegrationTe
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("stockOnHand", 99);
-        body.add("stockAllocated", 64);
-        body.add("productVariant", updated.getProductVariant().value());
+        body.add("stockOnHand", 42);
+        body.add("stockAllocated", 95);
+        body.add("productVariant", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("company", updated.getCompany().value());
+        body.add("company", UUID.randomUUID().toString());
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

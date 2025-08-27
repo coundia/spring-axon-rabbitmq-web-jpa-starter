@@ -43,7 +43,7 @@ void it_should_be_able_to_add_setting() {
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setIsActive(false);
+		requestDTO.setIsActive(true);
 
  		String uri = "/v1/commands/setting";
 		ResponseEntity<SettingResponse> response = this.postForEntity(uri, requestDTO, SettingResponse.class);

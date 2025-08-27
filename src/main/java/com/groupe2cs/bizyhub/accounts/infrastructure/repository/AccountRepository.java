@@ -173,15 +173,6 @@ public interface AccountRepository extends JpaRepository<Account, String> {
         @Query("SELECT e FROM Account e WHERE LOWER(e.tenant.id) LIKE LOWER(CONCAT('%', :tenant, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Account> findByTenantIdAndTenantId(String tenant, String tenantId);
 
-    @Query("""
-    SELECT DISTINCT s FROM Account s
-    LEFT JOIN AccountUser su ON su.account = s
-    WHERE s.tenant.id = :tenantId AND (s.createdBy.id = :userId OR su.user.id = :userId)
-    ORDER BY s.updatedAtAudit DESC, s.createdAtAudit  DESC
-    """)
-	Page<Account> findAllOwnedOrShared(@Param("userId") String userId, @Param("tenantId") String tenantId, Pageable pageable);
-
-
 
 
 

@@ -27,12 +27,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -42,16 +36,16 @@ void it_should_be_able_to_add_transactionitem() {
 
 		TransactionItemRequest requestDTO = new TransactionItemRequest();
 
-		requestDTO.setTransaction(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value());
-		requestDTO.setProduct(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value());
+		requestDTO.setTransaction(UUID.randomUUID().toString());
+		requestDTO.setProduct(UUID.randomUUID().toString());
 		requestDTO.setLabel(UUID.randomUUID().toString());
-		requestDTO.setQuantity(78);
-		requestDTO.setUnit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value());
+		requestDTO.setQuantity(17);
+		requestDTO.setUnit(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setUnitPrice(9533.36);
-		requestDTO.setTotal(8051.06);
+		requestDTO.setUnitPrice(9117.65);
+		requestDTO.setTotal(2108.71);
 		requestDTO.setNotes(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/transactionItem";

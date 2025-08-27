@@ -115,9 +115,13 @@ public class Customer   extends AbstractAuditableEntity  {
 	)
 
 	private String status ;
-	@ManyToOne
-	@JoinColumn(name = "company_id", nullable = true)
-	private com.groupe2cs.bizyhub.companies.infrastructure.entity.Company company;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String company ;
 
 	@Column(nullable = true, 
 		unique = false

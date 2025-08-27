@@ -26,25 +26,46 @@ public class StockLevelProjection {
 private final StockLevelRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(StockLevelCreatedEvent event) {
 try {
-StockLevel entity = StockLevel.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.stockOnHand(event.getStockOnHand() == null ? null : event.getStockOnHand().value())
- 		.stockAllocated(event.getStockAllocated() == null ? null : event.getStockAllocated().value())
-  		.productVariant( event.getProductVariant() == null ? null : new com.groupe2cs.bizyhub.products.infrastructure.entity.Product(event.getProductVariant().value()))
-		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
-  		.company( event.getCompany() == null ? null : new com.groupe2cs.bizyhub.companies.infrastructure.entity.Company(event.getCompany().value()))
-.build();
+StockLevel entity = StockLevel.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getStockOnHand() !=null  && hasId(event.getStockOnHand().value()) ) {
+            entity.setStockOnHand( event.getStockOnHand().value());
+        }
+ 		if(event.getStockAllocated() !=null  && hasId(event.getStockAllocated().value()) ) {
+            entity.setStockAllocated( event.getStockAllocated().value());
+        }
+ 		if(event.getProductVariant() !=null  && hasId(event.getProductVariant().value()) ) {
+            entity.setProductVariant( event.getProductVariant().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getCompany() !=null  && hasId(event.getCompany().value()) ) {
+            entity.setCompany( event.getCompany().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -68,32 +89,30 @@ StockLevel entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("StockLevel not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getStockOnHand() != null) {
+	if(event.getStockOnHand() != null  && hasId(event.getStockOnHand().value())) {
 		entity.setStockOnHand(event.getStockOnHand().value());
     }
-	if(event.getStockAllocated() != null) {
+	if(event.getStockAllocated() != null  && hasId(event.getStockAllocated().value())) {
 		entity.setStockAllocated(event.getStockAllocated().value());
     }
-
-     if(event.getProductVariant() != null) {
-		  entity.setProductVariant(new com.groupe2cs.bizyhub.products.infrastructure.entity.Product(event.getProductVariant().value()));
-	  }
-	if(event.getSyncAt() != null) {
+	if(event.getProductVariant() != null  && hasId(event.getProductVariant().value())) {
+		entity.setProductVariant(event.getProductVariant().value());
+    }
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-
-     if(event.getCompany() != null) {
-		  entity.setCompany(new com.groupe2cs.bizyhub.companies.infrastructure.entity.Company(event.getCompany().value()));
-	  }
+	if(event.getCompany() != null  && hasId(event.getCompany().value())) {
+		entity.setCompany(event.getCompany().value());
+    }
 
 if(event.getCreatedBy() !=null){
 	entity.setCreatedBy( new User(event.getCreatedBy().value()));

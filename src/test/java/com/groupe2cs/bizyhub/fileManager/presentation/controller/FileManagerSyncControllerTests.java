@@ -1,5 +1,7 @@
 package com.groupe2cs.bizyhub.fileManager.presentation.controller;
 
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.fileManager.infrastructure.repository.*;
@@ -8,8 +10,6 @@ import com.groupe2cs.bizyhub.fileManager.application.dto.*;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -44,10 +44,10 @@ private FileManagerRepository Repository;
 .objectName(UUID.randomUUID().toString())
 .originalName(UUID.randomUUID().toString())
 .mimeType(UUID.randomUUID().toString())
-.size(17979L)
+.size(67568L)
 .path(UUID.randomUUID().toString())
 .uri(UUID.randomUUID().toString())
-.isPublic(true)
+.isPublic(false)
 		.type("CREATE")
 		.build()
 		))
@@ -78,10 +78,10 @@ private FileManagerRepository Repository;
 .objectName(UUID.randomUUID().toString())
 .originalName(UUID.randomUUID().toString())
 .mimeType(UUID.randomUUID().toString())
-.size(17979L)
+.size(67568L)
 .path(UUID.randomUUID().toString())
 .uri(UUID.randomUUID().toString())
-.isPublic(true)
+.isPublic(false)
 			.type("UPDATE")
 			.build()
 			))

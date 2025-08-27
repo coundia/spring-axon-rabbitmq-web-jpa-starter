@@ -39,10 +39,6 @@ private CommandGateway commandGateway;
 private StockLevelRepository stockLevelRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -53,8 +49,6 @@ void it_should_return_only_user_stockLevels_for_normal_user() throws Exception {
 List<CreateStockLevelCommand> userCommands =
 StockLevelFixtures.randomManyViaCommand(
 commandGateway,stockLevelRepository,
-productVariantDataRepository,
-companyDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -90,8 +84,6 @@ void it_should_return_all_stockLevels_for_admin() throws Exception {
     StockLevelFixtures.randomManyViaCommand(
         commandGateway,
         stockLevelRepository,
-         productVariantDataRepository,
-         companyDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -104,8 +96,6 @@ void it_should_return_all_stockLevels_for_admin() throws Exception {
 List<CreateStockLevelCommand> adminCommands =
 StockLevelFixtures.randomManyViaCommand(
 commandGateway,stockLevelRepository,
-        productVariantDataRepository,
-        companyDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));

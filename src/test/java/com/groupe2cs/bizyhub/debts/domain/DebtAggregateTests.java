@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.debts.domain;
 
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.debts.domain.exception.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 
 
 public class DebtAggregateTests extends BaseUnitTests {
@@ -18,8 +18,8 @@ void it_should_create_debt_with_valid_values() {
 	DebtLocalId localId = DebtLocalId.create(UUID.randomUUID().toString());
 	DebtCode code = DebtCode.create(UUID.randomUUID().toString());
 	DebtNotes notes = DebtNotes.create(UUID.randomUUID().toString());
-	DebtBalance balance = DebtBalance.create(2641.05);
-	DebtBalanceDebt balanceDebt = DebtBalanceDebt.create(7389.22);
+	DebtBalance balance = DebtBalance.create(8492.75);
+	DebtBalanceDebt balanceDebt = DebtBalanceDebt.create(4538.51);
 	DebtDueDate dueDate = DebtDueDate.create(java.time.Instant.now().plusSeconds(3600));
 	DebtStatuses statuses = DebtStatuses.create(UUID.randomUUID().toString());
 	DebtSyncAt syncAt = DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600));

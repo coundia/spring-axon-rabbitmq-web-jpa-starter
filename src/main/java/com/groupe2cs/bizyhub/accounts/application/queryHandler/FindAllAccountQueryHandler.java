@@ -41,8 +41,8 @@ if(metaRequest.isAdmin()) {
  log.info("Admin user, fetching all Accounts");
 	pages = repository.findAllByTenantId( metaRequest.getTenantId(),pageable);
 }else{
-log.info("User, fetching own and shared Sales");
-pages = repository.findAllOwnedOrShared(metaRequest.getUserId(), metaRequest.getTenantId(), pageable);
+log.info("User, fetching own  ");
+pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
 }
 
 List<AccountResponse> responses = pages.stream()

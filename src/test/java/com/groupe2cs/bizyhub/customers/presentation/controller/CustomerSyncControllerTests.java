@@ -1,5 +1,7 @@
 package com.groupe2cs.bizyhub.customers.presentation.controller;
 
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.customers.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.customers.application.dto.*;
@@ -8,8 +10,6 @@ import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.customers.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -29,8 +29,6 @@ public class CustomerSyncControllerTests extends BaseIntegrationTests {
 private CustomerRepository Repository;
 
     @Autowired
-    private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-    @Autowired
     private UserRepository createdByDataRepository ;
     @Autowired
     private TenantRepository tenantDataRepository ;
@@ -46,13 +44,13 @@ private CustomerRepository Repository;
 .firstName(UUID.randomUUID().toString())
 .lastName(UUID.randomUUID().toString())
 .fullName(UUID.randomUUID().toString())
-.balance(4183.27)
-.balanceDebt(8529.8)
+.balance(9675.37)
+.balanceDebt(6815.06)
 .phone(UUID.randomUUID().toString())
 .email(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
 .status(UUID.randomUUID().toString())
-.company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())
+.company(UUID.randomUUID().toString())
 .addressLine1(UUID.randomUUID().toString())
 .addressLine2(UUID.randomUUID().toString())
 .city(UUID.randomUUID().toString())
@@ -60,7 +58,7 @@ private CustomerRepository Repository;
 .country(UUID.randomUUID().toString())
 .postalCode(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.isActive(false)
+.isActive(true)
 		.type("CREATE")
 		.build()
 		))
@@ -91,13 +89,13 @@ private CustomerRepository Repository;
 .firstName(UUID.randomUUID().toString())
 .lastName(UUID.randomUUID().toString())
 .fullName(UUID.randomUUID().toString())
-.balance(4183.27)
-.balanceDebt(8529.8)
+.balance(9675.37)
+.balanceDebt(6815.06)
 .phone(UUID.randomUUID().toString())
 .email(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
 .status(UUID.randomUUID().toString())
-.company(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value())
+.company(UUID.randomUUID().toString())
 .addressLine1(UUID.randomUUID().toString())
 .addressLine2(UUID.randomUUID().toString())
 .city(UUID.randomUUID().toString())
@@ -105,7 +103,7 @@ private CustomerRepository Repository;
 .country(UUID.randomUUID().toString())
 .postalCode(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.isActive(false)
+.isActive(true)
 			.type("UPDATE")
 			.build()
 			))

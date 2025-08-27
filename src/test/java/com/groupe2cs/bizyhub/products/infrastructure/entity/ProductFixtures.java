@@ -41,8 +41,6 @@ public class ProductFixtures {
 	public static List<CreateProductCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		ProductRepository repository,
-        com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository,
-        com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -53,8 +51,6 @@ public class ProductFixtures {
 			CreateProductCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            unitDataRepository,
-            categoryDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -70,8 +66,6 @@ public class ProductFixtures {
 		public static CreateProductCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		ProductRepository  repository,
-        com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository,
-        com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
@@ -83,12 +77,12 @@ public class ProductFixtures {
 				.name(ProductName.create(UUID.randomUUID().toString()))
 				.description(ProductDescription.create(UUID.randomUUID().toString()))
 				.barcode(ProductBarcode.create(UUID.randomUUID().toString()))
-				.unit(ProductUnit.create(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value()))
+				.unit(ProductUnit.create(UUID.randomUUID().toString()))
 				.syncAt(ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.category(ProductCategory.create(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value()))
-				.defaultPrice(ProductDefaultPrice.create(4832.44))
+				.category(ProductCategory.create(UUID.randomUUID().toString()))
+				.defaultPrice(ProductDefaultPrice.create(526.58))
 				.statuses(ProductStatuses.create(UUID.randomUUID().toString()))
-				.purchasePrice(ProductPurchasePrice.create(94.19))
+				.purchasePrice(ProductPurchasePrice.create(8798.65))
 			.build();
 
 		command.setCreatedBy(ProductCreatedBy.create(user.getId()));
@@ -112,10 +106,12 @@ public class ProductFixtures {
         .name(ProductName.create(UUID.randomUUID().toString()))
         .description(ProductDescription.create(UUID.randomUUID().toString()))
         .barcode(ProductBarcode.create(UUID.randomUUID().toString()))
+        .unit(ProductUnit.create(UUID.randomUUID().toString()))
         .syncAt(ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .defaultPrice(ProductDefaultPrice.create(4832.44))
+        .category(ProductCategory.create(UUID.randomUUID().toString()))
+        .defaultPrice(ProductDefaultPrice.create(526.58))
         .statuses(ProductStatuses.create(UUID.randomUUID().toString()))
-        .purchasePrice(ProductPurchasePrice.create(94.19))
+        .purchasePrice(ProductPurchasePrice.create(8798.65))
         .build();
 
 		command.setCreatedBy(ProductCreatedBy.create(user.getId()));

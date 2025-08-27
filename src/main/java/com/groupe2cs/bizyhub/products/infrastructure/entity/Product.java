@@ -73,9 +73,13 @@ public class Product   extends AbstractAuditableEntity  {
 	)
 
 	private String barcode ;
-	@ManyToOne
-	@JoinColumn(name = "unit_id", nullable = true)
-	private com.groupe2cs.bizyhub.units.infrastructure.entity.Unit unit;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String unit ;
 
 	@Column(nullable = true, 
 		unique = false
@@ -83,9 +87,13 @@ public class Product   extends AbstractAuditableEntity  {
 	)
 	@Builder.Default
 	private java.time.Instant syncAt  = java.time.Instant.now() ;
-	@ManyToOne
-	@JoinColumn(name = "category_id", nullable = true)
-	private com.groupe2cs.bizyhub.categories.infrastructure.entity.Category category;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String category ;
 
 	@Column(nullable = false, 
 		unique = false

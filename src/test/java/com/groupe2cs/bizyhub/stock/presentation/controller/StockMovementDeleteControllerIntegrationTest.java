@@ -30,10 +30,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -41,8 +37,6 @@ private TenantRepository tenantDataRepository ;
 @Test
 void it_should_be_able_to_delete_stockmovement() {
 	String existingId = StockMovementFixtures.randomOneViaCommand(commandGateway, stockmovementRepository,
-        companyDataRepository,
-        productVariantDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	getCurrentUser()).getId().value();

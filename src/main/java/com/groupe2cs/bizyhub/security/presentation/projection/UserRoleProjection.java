@@ -26,20 +26,33 @@ public class UserRoleProjection {
 private final UserRoleRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(UserRoleCreatedEvent event) {
 try {
-UserRole entity = UserRole.builder()
-		.id(event.getId() == null ? null : event.getId().value())
-  		.user( event.getUser() == null ? null : new User(event.getUser().value()))
- 		.role( event.getRole() == null ? null : new Role(event.getRole().value()))
-.build();
+UserRole entity = UserRole.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+  		if(event.getUser() !=null  && hasId(event.getUser().value())){
+            entity.setUser( new User(event.getUser().value()));
+        }
 
-entity.setId(event.getId().value());
+ 		if(event.getRole() !=null  && hasId(event.getRole().value())){
+            entity.setRole( new Role(event.getRole().value()));
+        }
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+
+
+    entity.setId(event.getId().value());
+
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -63,15 +76,15 @@ UserRole entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("UserRole not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
 
-     if(event.getUser() != null) {
+     if(event.getUser() != null  && hasId(event.getUser().value())) {
 		  entity.setUser(new User(event.getUser().value()));
 	  }
 
-     if(event.getRole() != null) {
+     if(event.getRole() != null  && hasId(event.getRole().value())) {
 		  entity.setRole(new Role(event.getRole().value()));
 	  }
 

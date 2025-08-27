@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.stock.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.stock.application.command.*;
 import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
 import com.groupe2cs.bizyhub.stock.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;

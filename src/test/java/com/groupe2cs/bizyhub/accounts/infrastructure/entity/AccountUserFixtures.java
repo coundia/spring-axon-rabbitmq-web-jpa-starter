@@ -41,8 +41,6 @@ public class AccountUserFixtures {
 	public static List<CreateAccountUserCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		AccountUserRepository repository,
-        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
-        com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -53,8 +51,6 @@ public class AccountUserFixtures {
 			CreateAccountUserCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            accountDataRepository,
-            userDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -70,19 +66,21 @@ public class AccountUserFixtures {
 		public static CreateAccountUserCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		AccountUserRepository  repository,
-        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
-        com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
 
 			CreateAccountUserCommand command = CreateAccountUserCommand.builder()
-				.name(AccountUserName.create(UUID.randomUUID().toString()))
-				.account(AccountUserAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
-				.user(AccountUserUser.create(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value()))
+				.account(AccountUserAccount.create(UUID.randomUUID().toString()))
+				.user(AccountUserUser.create(UUID.randomUUID().toString()))
+				.phone(AccountUserPhone.create(UUID.randomUUID().toString()))
+				.role(AccountUserRole.create(UUID.randomUUID().toString()))
+				.status(AccountUserStatus.create(UUID.randomUUID().toString()))
+				.invitedBy(AccountUserInvitedBy.create(UUID.randomUUID().toString()))
 				.syncAt(AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.username(AccountUserUsername.create(UUID.randomUUID().toString()))
-				.details(AccountUserDetails.create(UUID.randomUUID().toString()))
+				.acceptedAt(AccountUserAcceptedAt.create(java.time.Instant.now().plusSeconds(3600)))
+				.revokedAt(AccountUserRevokedAt.create(java.time.Instant.now().plusSeconds(3600)))
+				.message(AccountUserMessage.create(UUID.randomUUID().toString()))
 				.remoteId(AccountUserRemoteId.create(UUID.randomUUID().toString()))
 				.localId(AccountUserLocalId.create(UUID.randomUUID().toString()))
 				.isActive(AccountUserIsActive.create(true))
@@ -103,10 +101,16 @@ public class AccountUserFixtures {
         ) {
 
         CreateAccountUserCommand command = CreateAccountUserCommand.builder()
-        .name(AccountUserName.create(UUID.randomUUID().toString()))
+        .account(AccountUserAccount.create(UUID.randomUUID().toString()))
+        .user(AccountUserUser.create(UUID.randomUUID().toString()))
+        .phone(AccountUserPhone.create(UUID.randomUUID().toString()))
+        .role(AccountUserRole.create(UUID.randomUUID().toString()))
+        .status(AccountUserStatus.create(UUID.randomUUID().toString()))
+        .invitedBy(AccountUserInvitedBy.create(UUID.randomUUID().toString()))
         .syncAt(AccountUserSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .username(AccountUserUsername.create(UUID.randomUUID().toString()))
-        .details(AccountUserDetails.create(UUID.randomUUID().toString()))
+        .acceptedAt(AccountUserAcceptedAt.create(java.time.Instant.now().plusSeconds(3600)))
+        .revokedAt(AccountUserRevokedAt.create(java.time.Instant.now().plusSeconds(3600)))
+        .message(AccountUserMessage.create(UUID.randomUUID().toString()))
         .remoteId(AccountUserRemoteId.create(UUID.randomUUID().toString()))
         .localId(AccountUserLocalId.create(UUID.randomUUID().toString()))
         .isActive(AccountUserIsActive.create(true))

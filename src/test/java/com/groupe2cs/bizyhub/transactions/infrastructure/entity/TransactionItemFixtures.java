@@ -41,9 +41,6 @@ public class TransactionItemFixtures {
 	public static List<CreateTransactionItemCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		TransactionItemRepository repository,
-        com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository,
-        com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository,
-        com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -54,9 +51,6 @@ public class TransactionItemFixtures {
 			CreateTransactionItemCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            transactionDataRepository,
-            productDataRepository,
-            unitDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -72,24 +66,21 @@ public class TransactionItemFixtures {
 		public static CreateTransactionItemCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		TransactionItemRepository  repository,
-        com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository,
-        com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository,
-        com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
 
 			CreateTransactionItemCommand command = CreateTransactionItemCommand.builder()
-				.transaction(TransactionItemTransaction.create(com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionFixtures.randomOneViaCommand(commandGateway,transactionDataRepository, user).getId().value()))
-				.product(TransactionItemProduct.create(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productDataRepository, user).getId().value()))
+				.transaction(TransactionItemTransaction.create(UUID.randomUUID().toString()))
+				.product(TransactionItemProduct.create(UUID.randomUUID().toString()))
 				.label(TransactionItemLabel.create(UUID.randomUUID().toString()))
-				.quantity(TransactionItemQuantity.create(41))
-				.unit(TransactionItemUnit.create(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value()))
+				.quantity(TransactionItemQuantity.create(62))
+				.unit(TransactionItemUnit.create(UUID.randomUUID().toString()))
 				.remoteId(TransactionItemRemoteId.create(UUID.randomUUID().toString()))
 				.localId(TransactionItemLocalId.create(UUID.randomUUID().toString()))
 				.syncAt(TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.unitPrice(TransactionItemUnitPrice.create(1352.77))
-				.total(TransactionItemTotal.create(1934.68))
+				.unitPrice(TransactionItemUnitPrice.create(8574.71))
+				.total(TransactionItemTotal.create(7982.96))
 				.notes(TransactionItemNotes.create(UUID.randomUUID().toString()))
 			.build();
 
@@ -108,13 +99,16 @@ public class TransactionItemFixtures {
         ) {
 
         CreateTransactionItemCommand command = CreateTransactionItemCommand.builder()
+        .transaction(TransactionItemTransaction.create(UUID.randomUUID().toString()))
+        .product(TransactionItemProduct.create(UUID.randomUUID().toString()))
         .label(TransactionItemLabel.create(UUID.randomUUID().toString()))
-        .quantity(TransactionItemQuantity.create(41))
+        .quantity(TransactionItemQuantity.create(62))
+        .unit(TransactionItemUnit.create(UUID.randomUUID().toString()))
         .remoteId(TransactionItemRemoteId.create(UUID.randomUUID().toString()))
         .localId(TransactionItemLocalId.create(UUID.randomUUID().toString()))
         .syncAt(TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .unitPrice(TransactionItemUnitPrice.create(1352.77))
-        .total(TransactionItemTotal.create(1934.68))
+        .unitPrice(TransactionItemUnitPrice.create(8574.71))
+        .total(TransactionItemTotal.create(7982.96))
         .notes(TransactionItemNotes.create(UUID.randomUUID().toString()))
         .build();
 

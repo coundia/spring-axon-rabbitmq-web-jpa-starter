@@ -44,7 +44,7 @@ void it_should_be_able_to_add_changelog() {
 		requestDTO.setPayload(UUID.randomUUID().toString());
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setAttempts(28);
+		requestDTO.setAttempts(51);
 		requestDTO.setError(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/changeLog";

@@ -39,16 +39,6 @@ private CommandGateway commandGateway;
 private TransactionRepository transactionRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.debts.infrastructure.repository.DebtRepository debtDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -59,11 +49,6 @@ void it_should_return_only_user_transactions_for_normal_user() throws Exception 
 List<CreateTransactionCommand> userCommands =
 TransactionFixtures.randomManyViaCommand(
 commandGateway,transactionRepository,
-accountDataRepository,
-categoryDataRepository,
-companyDataRepository,
-customerDataRepository,
-debtDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -99,11 +84,6 @@ void it_should_return_all_transactions_for_admin() throws Exception {
     TransactionFixtures.randomManyViaCommand(
         commandGateway,
         transactionRepository,
-         accountDataRepository,
-         categoryDataRepository,
-         companyDataRepository,
-         customerDataRepository,
-         debtDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -116,11 +96,6 @@ void it_should_return_all_transactions_for_admin() throws Exception {
 List<CreateTransactionCommand> adminCommands =
 TransactionFixtures.randomManyViaCommand(
 commandGateway,transactionRepository,
-        accountDataRepository,
-        categoryDataRepository,
-        companyDataRepository,
-        customerDataRepository,
-        debtDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));

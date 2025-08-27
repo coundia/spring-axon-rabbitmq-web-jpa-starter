@@ -33,10 +33,6 @@ public class TransactionUserUpdateControllerIntegrationTest extends BaseIntegrat
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository;
-    @Autowired
-    private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -46,8 +42,6 @@ public class TransactionUserUpdateControllerIntegrationTest extends BaseIntegrat
 
         String existingId = TransactionUserFixtures.randomOneViaCommand(
             commandGateway, transactionuserRepository,
-        transactionDataRepository,
-        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -55,8 +49,6 @@ public class TransactionUserUpdateControllerIntegrationTest extends BaseIntegrat
 
         CreateTransactionUserCommand updated = TransactionUserFixtures.randomOneViaCommand(
             commandGatewayUpdate, transactionuserRepository,
-        transactionDataRepository,
-        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -69,8 +61,8 @@ public class TransactionUserUpdateControllerIntegrationTest extends BaseIntegrat
         body.add("name", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("transaction", updated.getTransaction().value());
-        body.add("user", updated.getUser().value());
+        body.add("transaction", UUID.randomUUID().toString());
+        body.add("user", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("username", UUID.randomUUID().toString());
         body.add("details", UUID.randomUUID().toString());

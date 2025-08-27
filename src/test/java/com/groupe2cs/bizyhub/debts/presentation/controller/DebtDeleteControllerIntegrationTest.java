@@ -30,8 +30,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -39,7 +37,6 @@ private TenantRepository tenantDataRepository ;
 @Test
 void it_should_be_able_to_delete_debt() {
 	String existingId = DebtFixtures.randomOneViaCommand(commandGateway, debtRepository,
-        customerDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	getCurrentUser()).getId().value();

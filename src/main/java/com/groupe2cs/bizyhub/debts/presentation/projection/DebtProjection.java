@@ -26,29 +26,58 @@ public class DebtProjection {
 private final DebtRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(DebtCreatedEvent event) {
 try {
-Debt entity = Debt.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.code(event.getCode() == null ? null : event.getCode().value())
- 		.notes(event.getNotes() == null ? null : event.getNotes().value())
- 		.balance(event.getBalance() == null ? null : event.getBalance().value())
- 		.balanceDebt(event.getBalanceDebt() == null ? null : event.getBalanceDebt().value())
- 		.dueDate(event.getDueDate() == null ? null : event.getDueDate().value())
- 		.statuses(event.getStatuses() == null ? null : event.getStatuses().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
-  		.customer( event.getCustomer() == null ? null : new com.groupe2cs.bizyhub.customers.infrastructure.entity.Customer(event.getCustomer().value()))
-		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
- .build();
+Debt entity = Debt.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getCode() !=null  && hasId(event.getCode().value()) ) {
+            entity.setCode( event.getCode().value());
+        }
+ 		if(event.getNotes() !=null  && hasId(event.getNotes().value()) ) {
+            entity.setNotes( event.getNotes().value());
+        }
+ 		if(event.getBalance() !=null  && hasId(event.getBalance().value()) ) {
+            entity.setBalance( event.getBalance().value());
+        }
+ 		if(event.getBalanceDebt() !=null  && hasId(event.getBalanceDebt().value()) ) {
+            entity.setBalanceDebt( event.getBalanceDebt().value());
+        }
+ 		if(event.getDueDate() !=null  && hasId(event.getDueDate().value()) ) {
+            entity.setDueDate( event.getDueDate().value());
+        }
+ 		if(event.getStatuses() !=null  && hasId(event.getStatuses().value()) ) {
+            entity.setStatuses( event.getStatuses().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getCustomer() !=null  && hasId(event.getCustomer().value()) ) {
+            entity.setCustomer( event.getCustomer().value());
+        }
+ 		if(event.getIsActive() !=null  && hasId(event.getIsActive().value()) ) {
+            entity.setIsActive( event.getIsActive().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -72,41 +101,40 @@ Debt entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Debt not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getCode() != null) {
+	if(event.getCode() != null  && hasId(event.getCode().value())) {
 		entity.setCode(event.getCode().value());
     }
-	if(event.getNotes() != null) {
+	if(event.getNotes() != null  && hasId(event.getNotes().value())) {
 		entity.setNotes(event.getNotes().value());
     }
-	if(event.getBalance() != null) {
+	if(event.getBalance() != null  && hasId(event.getBalance().value())) {
 		entity.setBalance(event.getBalance().value());
     }
-	if(event.getBalanceDebt() != null) {
+	if(event.getBalanceDebt() != null  && hasId(event.getBalanceDebt().value())) {
 		entity.setBalanceDebt(event.getBalanceDebt().value());
     }
-	if(event.getDueDate() != null) {
+	if(event.getDueDate() != null  && hasId(event.getDueDate().value())) {
 		entity.setDueDate(event.getDueDate().value());
     }
-	if(event.getStatuses() != null) {
+	if(event.getStatuses() != null  && hasId(event.getStatuses().value())) {
 		entity.setStatuses(event.getStatuses().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-
-     if(event.getCustomer() != null) {
-		  entity.setCustomer(new com.groupe2cs.bizyhub.customers.infrastructure.entity.Customer(event.getCustomer().value()));
-	  }
-	if(event.getIsActive() != null) {
+	if(event.getCustomer() != null  && hasId(event.getCustomer().value())) {
+		entity.setCustomer(event.getCustomer().value());
+    }
+	if(event.getIsActive() != null  && hasId(event.getIsActive().value())) {
 		entity.setIsActive(event.getIsActive().value());
     }
 

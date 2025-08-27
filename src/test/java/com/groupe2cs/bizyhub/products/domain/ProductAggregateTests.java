@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.products.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.products.domain.exception.*;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.products.domain.valueObject.*;
 import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.products.domain.exception.*;
 
 
 public class ProductAggregateTests extends BaseUnitTests {
@@ -23,9 +23,9 @@ void it_should_create_product_with_valid_values() {
 	ProductUnit unit = ProductUnit.create(UUID.randomUUID().toString());
 	ProductSyncAt syncAt = ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	ProductCategory category = ProductCategory.create(UUID.randomUUID().toString());
-	ProductDefaultPrice defaultPrice = ProductDefaultPrice.create(802.16);
+	ProductDefaultPrice defaultPrice = ProductDefaultPrice.create(8230.57);
 	ProductStatuses statuses = ProductStatuses.create(UUID.randomUUID().toString());
-	ProductPurchasePrice purchasePrice = ProductPurchasePrice.create(3611.8);
+	ProductPurchasePrice purchasePrice = ProductPurchasePrice.create(349.61);
 	ProductCreatedBy createdBy = ProductCreatedBy.create(UUID.randomUUID().toString());
 	ProductTenant tenant = ProductTenant.create(UUID.randomUUID().toString());
 	ProductAggregate aggregateProductAggregate = new ProductAggregate(id, remoteId, localId, code, name, description, barcode, unit, syncAt, category, defaultPrice, statuses, purchasePrice, createdBy, tenant);

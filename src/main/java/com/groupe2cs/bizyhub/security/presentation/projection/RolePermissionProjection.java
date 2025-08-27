@@ -26,20 +26,33 @@ public class RolePermissionProjection {
 private final RolePermissionRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(RolePermissionCreatedEvent event) {
 try {
-RolePermission entity = RolePermission.builder()
-		.id(event.getId() == null ? null : event.getId().value())
-  		.role( event.getRole() == null ? null : new Role(event.getRole().value()))
- 		.permission( event.getPermission() == null ? null : new Permission(event.getPermission().value()))
-.build();
+RolePermission entity = RolePermission.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+  		if(event.getRole() !=null  && hasId(event.getRole().value())){
+            entity.setRole( new Role(event.getRole().value()));
+        }
 
-entity.setId(event.getId().value());
+ 		if(event.getPermission() !=null  && hasId(event.getPermission().value())){
+            entity.setPermission( new Permission(event.getPermission().value()));
+        }
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+
+
+    entity.setId(event.getId().value());
+
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -63,15 +76,15 @@ RolePermission entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("RolePermission not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
 
-     if(event.getRole() != null) {
+     if(event.getRole() != null  && hasId(event.getRole().value())) {
 		  entity.setRole(new Role(event.getRole().value()));
 	  }
 
-     if(event.getPermission() != null) {
+     if(event.getPermission() != null  && hasId(event.getPermission().value())) {
 		  entity.setPermission(new Permission(event.getPermission().value()));
 	  }
 

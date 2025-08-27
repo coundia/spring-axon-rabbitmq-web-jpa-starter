@@ -80,9 +80,13 @@ public class Chat   extends AbstractAuditableEntity  {
 	)
 
 	private String localId ;
-	@ManyToOne
-	@JoinColumn(name = "account_id", nullable = true)
-	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String account ;
 
 	@Column(nullable = true, 
 		unique = false

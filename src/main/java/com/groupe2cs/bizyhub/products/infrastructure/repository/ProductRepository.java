@@ -71,13 +71,13 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
         @Query("SELECT e FROM Product e WHERE LOWER(e.barcode) LIKE LOWER(CONCAT('%', :barcode, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Product> findByBarcodeAndTenantId(String barcode, String tenantId);
-        @Query("SELECT e FROM Product e WHERE LOWER(e.unit.id) LIKE LOWER(CONCAT('%', :unit, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Product> findByUnitIdAndCreatedById(String unit, String createdById);
-        @Query("SELECT e FROM Product e WHERE LOWER(e.unit.id) LIKE LOWER(CONCAT('%', :unit, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Product> findByUnitIdAndTenantName(String unit, String tenantName);
+        @Query("SELECT e FROM Product e WHERE LOWER(e.unit) LIKE LOWER(CONCAT('%', :unit, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Product> findByUnitAndCreatedById(String unit, String createdById);
+        @Query("SELECT e FROM Product e WHERE LOWER(e.unit) LIKE LOWER(CONCAT('%', :unit, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Product> findByUnitAndTenantName(String unit, String tenantName);
 
-        @Query("SELECT e FROM Product e WHERE LOWER(e.unit.id) LIKE LOWER(CONCAT('%', :unit, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Product> findByUnitIdAndTenantId(String unit, String tenantId);
+        @Query("SELECT e FROM Product e WHERE LOWER(e.unit) LIKE LOWER(CONCAT('%', :unit, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Product> findByUnitAndTenantId(String unit, String tenantId);
         @Query("""
         SELECT e FROM Product e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -95,13 +95,13 @@ public interface ProductRepository extends JpaRepository<Product, String> {
          List<Product> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
 
 
-        @Query("SELECT e FROM Product e WHERE LOWER(e.category.id) LIKE LOWER(CONCAT('%', :category, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Product> findByCategoryIdAndCreatedById(String category, String createdById);
-        @Query("SELECT e FROM Product e WHERE LOWER(e.category.id) LIKE LOWER(CONCAT('%', :category, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Product> findByCategoryIdAndTenantName(String category, String tenantName);
+        @Query("SELECT e FROM Product e WHERE LOWER(e.category) LIKE LOWER(CONCAT('%', :category, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Product> findByCategoryAndCreatedById(String category, String createdById);
+        @Query("SELECT e FROM Product e WHERE LOWER(e.category) LIKE LOWER(CONCAT('%', :category, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Product> findByCategoryAndTenantName(String category, String tenantName);
 
-        @Query("SELECT e FROM Product e WHERE LOWER(e.category.id) LIKE LOWER(CONCAT('%', :category, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Product> findByCategoryIdAndTenantId(String category, String tenantId);
+        @Query("SELECT e FROM Product e WHERE LOWER(e.category) LIKE LOWER(CONCAT('%', :category, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Product> findByCategoryAndTenantId(String category, String tenantId);
         @Query("SELECT e FROM Product e WHERE e.defaultPrice = :defaultPrice AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Product> findByDefaultPriceAndCreatedById(Double defaultPrice, String createdById);
         @Query("SELECT e FROM Product e WHERE e.defaultPrice = :defaultPrice AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

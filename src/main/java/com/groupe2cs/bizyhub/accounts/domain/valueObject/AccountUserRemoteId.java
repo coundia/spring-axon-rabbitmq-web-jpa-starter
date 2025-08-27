@@ -2,12 +2,16 @@ package com.groupe2cs.bizyhub.accounts.domain.valueObject;
 
 import java.util.Objects;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserIdNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserNameNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserAccountNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUserNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserPhoneNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserRoleNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserStatusNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserInvitedByNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserSyncAtNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUsernameNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserDetailsNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserAcceptedAtNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserRevokedAtNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserMessageNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserRemoteIdNotValid;
 
 import java.io.Serializable;

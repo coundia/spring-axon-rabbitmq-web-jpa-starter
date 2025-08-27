@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain;
 
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.transactions.domain.exception.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 
 
 public class TransactionItemAggregateTests extends BaseUnitTests {
@@ -17,13 +17,13 @@ void it_should_create_transactionItem_with_valid_values() {
 	TransactionItemTransaction transaction = TransactionItemTransaction.create(UUID.randomUUID().toString());
 	TransactionItemProduct product = TransactionItemProduct.create(UUID.randomUUID().toString());
 	TransactionItemLabel label = TransactionItemLabel.create(UUID.randomUUID().toString());
-	TransactionItemQuantity quantity = TransactionItemQuantity.create(98);
+	TransactionItemQuantity quantity = TransactionItemQuantity.create(2);
 	TransactionItemUnit unit = TransactionItemUnit.create(UUID.randomUUID().toString());
 	TransactionItemRemoteId remoteId = TransactionItemRemoteId.create(UUID.randomUUID().toString());
 	TransactionItemLocalId localId = TransactionItemLocalId.create(UUID.randomUUID().toString());
 	TransactionItemSyncAt syncAt = TransactionItemSyncAt.create(java.time.Instant.now().plusSeconds(3600));
-	TransactionItemUnitPrice unitPrice = TransactionItemUnitPrice.create(9301.72);
-	TransactionItemTotal total = TransactionItemTotal.create(5068.54);
+	TransactionItemUnitPrice unitPrice = TransactionItemUnitPrice.create(6831.92);
+	TransactionItemTotal total = TransactionItemTotal.create(1974.48);
 	TransactionItemNotes notes = TransactionItemNotes.create(UUID.randomUUID().toString());
 	TransactionItemCreatedBy createdBy = TransactionItemCreatedBy.create(UUID.randomUUID().toString());
 	TransactionItemTenant tenant = TransactionItemTenant.create(UUID.randomUUID().toString());
@@ -49,11 +49,6 @@ void it_should_create_transactionItem_with_valid_values() {
 		void it_should_throw_when_id_is_invalid() {
 		TransactionItemIdNotValid error = assertThrows(TransactionItemIdNotValid.class, () -> TransactionItemId.create(""));
 		assertThat(error.getMessage()).isEqualTo("Id is invalid");
-		}
-		@Test
-		void it_should_throw_when_transaction_is_invalid() {
-		TransactionItemTransactionNotValid error = assertThrows(TransactionItemTransactionNotValid.class, () -> TransactionItemTransaction.create(""));
-		assertThat(error.getMessage()).isEqualTo("Transaction is invalid");
 		}
 		@Test
 		void it_should_throw_when_quantity_is_invalid() {

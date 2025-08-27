@@ -26,27 +26,64 @@ public class AccountUserProjection {
 private final AccountUserRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(AccountUserCreatedEvent event) {
 try {
-AccountUser entity = AccountUser.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.name(event.getName() == null ? null : event.getName().value())
-  		.account( event.getAccount() == null ? null : new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()))
- 		.user( event.getUser() == null ? null : new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUser().value()))
-		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- 		.username(event.getUsername() == null ? null : event.getUsername().value())
- 		.details(event.getDetails() == null ? null : event.getDetails().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
- .build();
+AccountUser entity = AccountUser.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
+ 		if(event.getUser() !=null  && hasId(event.getUser().value()) ) {
+            entity.setUser( event.getUser().value());
+        }
+ 		if(event.getPhone() !=null  && hasId(event.getPhone().value()) ) {
+            entity.setPhone( event.getPhone().value());
+        }
+ 		if(event.getRole() !=null  && hasId(event.getRole().value()) ) {
+            entity.setRole( event.getRole().value());
+        }
+ 		if(event.getStatus() !=null  && hasId(event.getStatus().value()) ) {
+            entity.setStatus( event.getStatus().value());
+        }
+ 		if(event.getInvitedBy() !=null  && hasId(event.getInvitedBy().value()) ) {
+            entity.setInvitedBy( event.getInvitedBy().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getAcceptedAt() !=null  && hasId(event.getAcceptedAt().value()) ) {
+            entity.setAcceptedAt( event.getAcceptedAt().value());
+        }
+ 		if(event.getRevokedAt() !=null  && hasId(event.getRevokedAt().value()) ) {
+            entity.setRevokedAt( event.getRevokedAt().value());
+        }
+ 		if(event.getMessage() !=null  && hasId(event.getMessage().value()) ) {
+            entity.setMessage( event.getMessage().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getIsActive() !=null  && hasId(event.getIsActive().value()) ) {
+            entity.setIsActive( event.getIsActive().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -70,36 +107,46 @@ AccountUser entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("AccountUser not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getName() != null) {
-		entity.setName(event.getName().value());
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
-
-     if(event.getAccount() != null) {
-		  entity.setAccount(new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()));
-	  }
-
-     if(event.getUser() != null) {
-		  entity.setUser(new com.groupe2cs.bizyhub.security.infrastructure.entity.User(event.getUser().value()));
-	  }
-	if(event.getSyncAt() != null) {
+	if(event.getUser() != null  && hasId(event.getUser().value())) {
+		entity.setUser(event.getUser().value());
+    }
+	if(event.getPhone() != null  && hasId(event.getPhone().value())) {
+		entity.setPhone(event.getPhone().value());
+    }
+	if(event.getRole() != null  && hasId(event.getRole().value())) {
+		entity.setRole(event.getRole().value());
+    }
+	if(event.getStatus() != null  && hasId(event.getStatus().value())) {
+		entity.setStatus(event.getStatus().value());
+    }
+	if(event.getInvitedBy() != null  && hasId(event.getInvitedBy().value())) {
+		entity.setInvitedBy(event.getInvitedBy().value());
+    }
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-	if(event.getUsername() != null) {
-		entity.setUsername(event.getUsername().value());
+	if(event.getAcceptedAt() != null  && hasId(event.getAcceptedAt().value())) {
+		entity.setAcceptedAt(event.getAcceptedAt().value());
     }
-	if(event.getDetails() != null) {
-		entity.setDetails(event.getDetails().value());
+	if(event.getRevokedAt() != null  && hasId(event.getRevokedAt().value())) {
+		entity.setRevokedAt(event.getRevokedAt().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getMessage() != null  && hasId(event.getMessage().value())) {
+		entity.setMessage(event.getMessage().value());
+    }
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getIsActive() != null) {
+	if(event.getIsActive() != null  && hasId(event.getIsActive().value())) {
 		entity.setIsActive(event.getIsActive().value());
     }
 

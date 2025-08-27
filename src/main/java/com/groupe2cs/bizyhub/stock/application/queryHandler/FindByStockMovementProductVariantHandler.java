@@ -29,9 +29,9 @@ public List<StockMovementResponse> handle(FindByStockMovementProductVariantQuery
 	 String value = query.getProductVariant().value();
 
 	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByProductVariantIdAndTenantId(value, metaRequest.getTenantId());
+	    entities = repository.findByProductVariantAndTenantId(value, metaRequest.getTenantId());
 	 }else{
-	    entities = repository.findByProductVariantIdAndCreatedById(value, metaRequest.getUserId());
+	    entities = repository.findByProductVariantAndCreatedById(value, metaRequest.getUserId());
 	 }
 
  	return entities.stream()

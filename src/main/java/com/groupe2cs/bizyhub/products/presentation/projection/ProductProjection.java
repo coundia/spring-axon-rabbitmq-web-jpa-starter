@@ -26,30 +26,61 @@ public class ProductProjection {
 private final ProductRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(ProductCreatedEvent event) {
 try {
-Product entity = Product.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.code(event.getCode() == null ? null : event.getCode().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.description(event.getDescription() == null ? null : event.getDescription().value())
- 		.barcode(event.getBarcode() == null ? null : event.getBarcode().value())
-  		.unit( event.getUnit() == null ? null : new com.groupe2cs.bizyhub.units.infrastructure.entity.Unit(event.getUnit().value()))
-		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
-  		.category( event.getCategory() == null ? null : new com.groupe2cs.bizyhub.categories.infrastructure.entity.Category(event.getCategory().value()))
-		.defaultPrice(event.getDefaultPrice() == null ? null : event.getDefaultPrice().value())
- 		.statuses(event.getStatuses() == null ? null : event.getStatuses().value())
- 		.purchasePrice(event.getPurchasePrice() == null ? null : event.getPurchasePrice().value())
- .build();
+Product entity = Product.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getCode() !=null  && hasId(event.getCode().value()) ) {
+            entity.setCode( event.getCode().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 		if(event.getDescription() !=null  && hasId(event.getDescription().value()) ) {
+            entity.setDescription( event.getDescription().value());
+        }
+ 		if(event.getBarcode() !=null  && hasId(event.getBarcode().value()) ) {
+            entity.setBarcode( event.getBarcode().value());
+        }
+ 		if(event.getUnit() !=null  && hasId(event.getUnit().value()) ) {
+            entity.setUnit( event.getUnit().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getCategory() !=null  && hasId(event.getCategory().value()) ) {
+            entity.setCategory( event.getCategory().value());
+        }
+ 		if(event.getDefaultPrice() !=null  && hasId(event.getDefaultPrice().value()) ) {
+            entity.setDefaultPrice( event.getDefaultPrice().value());
+        }
+ 		if(event.getStatuses() !=null  && hasId(event.getStatuses().value()) ) {
+            entity.setStatuses( event.getStatuses().value());
+        }
+ 		if(event.getPurchasePrice() !=null  && hasId(event.getPurchasePrice().value()) ) {
+            entity.setPurchasePrice( event.getPurchasePrice().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -73,45 +104,43 @@ Product entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Product not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getCode() != null) {
+	if(event.getCode() != null  && hasId(event.getCode().value())) {
 		entity.setCode(event.getCode().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
-	if(event.getDescription() != null) {
+	if(event.getDescription() != null  && hasId(event.getDescription().value())) {
 		entity.setDescription(event.getDescription().value());
     }
-	if(event.getBarcode() != null) {
+	if(event.getBarcode() != null  && hasId(event.getBarcode().value())) {
 		entity.setBarcode(event.getBarcode().value());
     }
-
-     if(event.getUnit() != null) {
-		  entity.setUnit(new com.groupe2cs.bizyhub.units.infrastructure.entity.Unit(event.getUnit().value()));
-	  }
-	if(event.getSyncAt() != null) {
+	if(event.getUnit() != null  && hasId(event.getUnit().value())) {
+		entity.setUnit(event.getUnit().value());
+    }
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-
-     if(event.getCategory() != null) {
-		  entity.setCategory(new com.groupe2cs.bizyhub.categories.infrastructure.entity.Category(event.getCategory().value()));
-	  }
-	if(event.getDefaultPrice() != null) {
+	if(event.getCategory() != null  && hasId(event.getCategory().value())) {
+		entity.setCategory(event.getCategory().value());
+    }
+	if(event.getDefaultPrice() != null  && hasId(event.getDefaultPrice().value())) {
 		entity.setDefaultPrice(event.getDefaultPrice().value());
     }
-	if(event.getStatuses() != null) {
+	if(event.getStatuses() != null  && hasId(event.getStatuses().value())) {
 		entity.setStatuses(event.getStatuses().value());
     }
-	if(event.getPurchasePrice() != null) {
+	if(event.getPurchasePrice() != null  && hasId(event.getPurchasePrice().value())) {
 		entity.setPurchasePrice(event.getPurchasePrice().value());
     }
 

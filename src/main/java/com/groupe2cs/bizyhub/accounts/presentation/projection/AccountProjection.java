@@ -26,35 +26,76 @@ public class AccountProjection {
 private final AccountRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(AccountCreatedEvent event) {
 try {
-Account entity = Account.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.code(event.getCode() == null ? null : event.getCode().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.status(event.getStatus() == null ? null : event.getStatus().value())
- 		.currency(event.getCurrency() == null ? null : event.getCurrency().value())
- 		.typeAccount(event.getTypeAccount() == null ? null : event.getTypeAccount().value())
- 		.balance(event.getBalance() == null ? null : event.getBalance().value())
- 		.balancePrev(event.getBalancePrev() == null ? null : event.getBalancePrev().value())
- 		.balanceBlocked(event.getBalanceBlocked() == null ? null : event.getBalanceBlocked().value())
- 		.balanceInit(event.getBalanceInit() == null ? null : event.getBalanceInit().value())
- 		.balanceGoal(event.getBalanceGoal() == null ? null : event.getBalanceGoal().value())
- 		.balanceLimit(event.getBalanceLimit() == null ? null : event.getBalanceLimit().value())
- 		.description(event.getDescription() == null ? null : event.getDescription().value())
- 		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
- 		.isDefault(event.getIsDefault() == null ? null : event.getIsDefault().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- .build();
+Account entity = Account.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getCode() !=null  && hasId(event.getCode().value()) ) {
+            entity.setCode( event.getCode().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 		if(event.getStatus() !=null  && hasId(event.getStatus().value()) ) {
+            entity.setStatus( event.getStatus().value());
+        }
+ 		if(event.getCurrency() !=null  && hasId(event.getCurrency().value()) ) {
+            entity.setCurrency( event.getCurrency().value());
+        }
+ 		if(event.getTypeAccount() !=null  && hasId(event.getTypeAccount().value()) ) {
+            entity.setTypeAccount( event.getTypeAccount().value());
+        }
+ 		if(event.getBalance() !=null  && hasId(event.getBalance().value()) ) {
+            entity.setBalance( event.getBalance().value());
+        }
+ 		if(event.getBalancePrev() !=null  && hasId(event.getBalancePrev().value()) ) {
+            entity.setBalancePrev( event.getBalancePrev().value());
+        }
+ 		if(event.getBalanceBlocked() !=null  && hasId(event.getBalanceBlocked().value()) ) {
+            entity.setBalanceBlocked( event.getBalanceBlocked().value());
+        }
+ 		if(event.getBalanceInit() !=null  && hasId(event.getBalanceInit().value()) ) {
+            entity.setBalanceInit( event.getBalanceInit().value());
+        }
+ 		if(event.getBalanceGoal() !=null  && hasId(event.getBalanceGoal().value()) ) {
+            entity.setBalanceGoal( event.getBalanceGoal().value());
+        }
+ 		if(event.getBalanceLimit() !=null  && hasId(event.getBalanceLimit().value()) ) {
+            entity.setBalanceLimit( event.getBalanceLimit().value());
+        }
+ 		if(event.getDescription() !=null  && hasId(event.getDescription().value()) ) {
+            entity.setDescription( event.getDescription().value());
+        }
+ 		if(event.getIsActive() !=null  && hasId(event.getIsActive().value()) ) {
+            entity.setIsActive( event.getIsActive().value());
+        }
+ 		if(event.getIsDefault() !=null  && hasId(event.getIsDefault().value()) ) {
+            entity.setIsDefault( event.getIsDefault().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -78,58 +119,58 @@ Account entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Account not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getCode() != null) {
+	if(event.getCode() != null  && hasId(event.getCode().value())) {
 		entity.setCode(event.getCode().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
-	if(event.getStatus() != null) {
+	if(event.getStatus() != null  && hasId(event.getStatus().value())) {
 		entity.setStatus(event.getStatus().value());
     }
-	if(event.getCurrency() != null) {
+	if(event.getCurrency() != null  && hasId(event.getCurrency().value())) {
 		entity.setCurrency(event.getCurrency().value());
     }
-	if(event.getTypeAccount() != null) {
+	if(event.getTypeAccount() != null  && hasId(event.getTypeAccount().value())) {
 		entity.setTypeAccount(event.getTypeAccount().value());
     }
-	if(event.getBalance() != null) {
+	if(event.getBalance() != null  && hasId(event.getBalance().value())) {
 		entity.setBalance(event.getBalance().value());
     }
-	if(event.getBalancePrev() != null) {
+	if(event.getBalancePrev() != null  && hasId(event.getBalancePrev().value())) {
 		entity.setBalancePrev(event.getBalancePrev().value());
     }
-	if(event.getBalanceBlocked() != null) {
+	if(event.getBalanceBlocked() != null  && hasId(event.getBalanceBlocked().value())) {
 		entity.setBalanceBlocked(event.getBalanceBlocked().value());
     }
-	if(event.getBalanceInit() != null) {
+	if(event.getBalanceInit() != null  && hasId(event.getBalanceInit().value())) {
 		entity.setBalanceInit(event.getBalanceInit().value());
     }
-	if(event.getBalanceGoal() != null) {
+	if(event.getBalanceGoal() != null  && hasId(event.getBalanceGoal().value())) {
 		entity.setBalanceGoal(event.getBalanceGoal().value());
     }
-	if(event.getBalanceLimit() != null) {
+	if(event.getBalanceLimit() != null  && hasId(event.getBalanceLimit().value())) {
 		entity.setBalanceLimit(event.getBalanceLimit().value());
     }
-	if(event.getDescription() != null) {
+	if(event.getDescription() != null  && hasId(event.getDescription().value())) {
 		entity.setDescription(event.getDescription().value());
     }
-	if(event.getIsActive() != null) {
+	if(event.getIsActive() != null  && hasId(event.getIsActive().value())) {
 		entity.setIsActive(event.getIsActive().value());
     }
-	if(event.getIsDefault() != null) {
+	if(event.getIsDefault() != null  && hasId(event.getIsDefault().value())) {
 		entity.setIsDefault(event.getIsDefault().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
 

@@ -24,12 +24,16 @@ public class AccountUserAggregate {
 
 @AggregateIdentifier
 private AccountUserId id;
-private AccountUserName name;
 private AccountUserAccount account;
 private AccountUserUser user;
+private AccountUserPhone phone;
+private AccountUserRole role;
+private AccountUserStatus status;
+private AccountUserInvitedBy invitedBy;
 private AccountUserSyncAt syncAt;
-private AccountUserUsername username;
-private AccountUserDetails details;
+private AccountUserAcceptedAt acceptedAt;
+private AccountUserRevokedAt revokedAt;
+private AccountUserMessage message;
 private AccountUserRemoteId remoteId;
 private AccountUserLocalId localId;
 private AccountUserIsActive isActive;
@@ -41,12 +45,16 @@ private AccountUserTenant tenant;
 public AccountUserAggregate(CreateAccountUserCommand command) {
 apply(new AccountUserCreatedEvent(
 		command.getId(),
-		command.getName(),
 		command.getAccount(),
 		command.getUser(),
+		command.getPhone(),
+		command.getRole(),
+		command.getStatus(),
+		command.getInvitedBy(),
 		command.getSyncAt(),
-		command.getUsername(),
-		command.getDetails(),
+		command.getAcceptedAt(),
+		command.getRevokedAt(),
+		command.getMessage(),
 		command.getRemoteId(),
 		command.getLocalId(),
 		command.getIsActive(),
@@ -66,12 +74,16 @@ public void handle(DeleteAccountUserCommand command) {
 public void handle(UpdateAccountUserCommand command) {
 apply(new AccountUserUpdatedEvent(
 		command.getId(),
-		command.getName(),
 		command.getAccount(),
 		command.getUser(),
+		command.getPhone(),
+		command.getRole(),
+		command.getStatus(),
+		command.getInvitedBy(),
 		command.getSyncAt(),
-		command.getUsername(),
-		command.getDetails(),
+		command.getAcceptedAt(),
+		command.getRevokedAt(),
+		command.getMessage(),
 		command.getRemoteId(),
 		command.getLocalId(),
 		command.getIsActive(),
@@ -83,12 +95,16 @@ apply(new AccountUserUpdatedEvent(
 @EventSourcingHandler
 public void on(AccountUserCreatedEvent event) {
 	this.id = event.getId();
-	this.name = event.getName();
 	this.account = event.getAccount();
 	this.user = event.getUser();
+	this.phone = event.getPhone();
+	this.role = event.getRole();
+	this.status = event.getStatus();
+	this.invitedBy = event.getInvitedBy();
 	this.syncAt = event.getSyncAt();
-	this.username = event.getUsername();
-	this.details = event.getDetails();
+	this.acceptedAt = event.getAcceptedAt();
+	this.revokedAt = event.getRevokedAt();
+	this.message = event.getMessage();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
 	this.isActive = event.getIsActive();
@@ -104,12 +120,16 @@ this.id = event.getId();
 @EventSourcingHandler
 public void on(AccountUserUpdatedEvent event) {
 this.id = event.getId();
-	this.name = event.getName();
 	this.account = event.getAccount();
 	this.user = event.getUser();
+	this.phone = event.getPhone();
+	this.role = event.getRole();
+	this.status = event.getStatus();
+	this.invitedBy = event.getInvitedBy();
 	this.syncAt = event.getSyncAt();
-	this.username = event.getUsername();
-	this.details = event.getDetails();
+	this.acceptedAt = event.getAcceptedAt();
+	this.revokedAt = event.getRevokedAt();
+	this.message = event.getMessage();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
 	this.isActive = event.getIsActive();

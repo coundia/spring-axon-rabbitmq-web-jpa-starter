@@ -41,7 +41,6 @@ public class CustomerFixtures {
 	public static List<CreateCustomerCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		CustomerRepository repository,
-        com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -52,7 +51,6 @@ public class CustomerFixtures {
 			CreateCustomerCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            companyDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -68,7 +66,6 @@ public class CustomerFixtures {
 		public static CreateCustomerCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		CustomerRepository  repository,
-        com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
@@ -80,13 +77,13 @@ public class CustomerFixtures {
 				.firstName(CustomerFirstName.create(UUID.randomUUID().toString()))
 				.lastName(CustomerLastName.create(UUID.randomUUID().toString()))
 				.fullName(CustomerFullName.create(UUID.randomUUID().toString()))
-				.balance(CustomerBalance.create(2380.93))
-				.balanceDebt(CustomerBalanceDebt.create(6454.69))
+				.balance(CustomerBalance.create(1577.25))
+				.balanceDebt(CustomerBalanceDebt.create(1170.27))
 				.phone(CustomerPhone.create(UUID.randomUUID().toString()))
 				.email(CustomerEmail.create(UUID.randomUUID().toString()))
 				.notes(CustomerNotes.create(UUID.randomUUID().toString()))
 				.status(CustomerStatus.create(UUID.randomUUID().toString()))
-				.company(CustomerCompany.create(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value()))
+				.company(CustomerCompany.create(UUID.randomUUID().toString()))
 				.addressLine1(CustomerAddressLine1.create(UUID.randomUUID().toString()))
 				.addressLine2(CustomerAddressLine2.create(UUID.randomUUID().toString()))
 				.city(CustomerCity.create(UUID.randomUUID().toString()))
@@ -94,7 +91,7 @@ public class CustomerFixtures {
 				.country(CustomerCountry.create(UUID.randomUUID().toString()))
 				.postalCode(CustomerPostalCode.create(UUID.randomUUID().toString()))
 				.syncAt(CustomerSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.isActive(CustomerIsActive.create(true))
+				.isActive(CustomerIsActive.create(false))
 			.build();
 
 		command.setCreatedBy(CustomerCreatedBy.create(user.getId()));
@@ -118,12 +115,13 @@ public class CustomerFixtures {
         .firstName(CustomerFirstName.create(UUID.randomUUID().toString()))
         .lastName(CustomerLastName.create(UUID.randomUUID().toString()))
         .fullName(CustomerFullName.create(UUID.randomUUID().toString()))
-        .balance(CustomerBalance.create(2380.93))
-        .balanceDebt(CustomerBalanceDebt.create(6454.69))
+        .balance(CustomerBalance.create(1577.25))
+        .balanceDebt(CustomerBalanceDebt.create(1170.27))
         .phone(CustomerPhone.create(UUID.randomUUID().toString()))
         .email(CustomerEmail.create(UUID.randomUUID().toString()))
         .notes(CustomerNotes.create(UUID.randomUUID().toString()))
         .status(CustomerStatus.create(UUID.randomUUID().toString()))
+        .company(CustomerCompany.create(UUID.randomUUID().toString()))
         .addressLine1(CustomerAddressLine1.create(UUID.randomUUID().toString()))
         .addressLine2(CustomerAddressLine2.create(UUID.randomUUID().toString()))
         .city(CustomerCity.create(UUID.randomUUID().toString()))
@@ -131,7 +129,7 @@ public class CustomerFixtures {
         .country(CustomerCountry.create(UUID.randomUUID().toString()))
         .postalCode(CustomerPostalCode.create(UUID.randomUUID().toString()))
         .syncAt(CustomerSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .isActive(CustomerIsActive.create(true))
+        .isActive(CustomerIsActive.create(false))
         .build();
 
 		command.setCreatedBy(CustomerCreatedBy.create(user.getId()));

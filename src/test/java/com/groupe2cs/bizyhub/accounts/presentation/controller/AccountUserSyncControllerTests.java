@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -29,10 +29,6 @@ public class AccountUserSyncControllerTests extends BaseIntegrationTests {
 private AccountUserRepository Repository;
 
     @Autowired
-    private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-    @Autowired
-    private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
-    @Autowired
     private UserRepository createdByDataRepository ;
     @Autowired
     private TenantRepository tenantDataRepository ;
@@ -42,15 +38,19 @@ private AccountUserRepository Repository;
 		AccountUserSyncRequest requestDTO = AccountUserSyncRequest.builder()
 		.deltas(List.of(
 		AccountUserDeltaDto.builder()
-.name(UUID.randomUUID().toString())
-.account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
-.user(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value())
+.account(UUID.randomUUID().toString())
+.user(UUID.randomUUID().toString())
+.phone(UUID.randomUUID().toString())
+.role(UUID.randomUUID().toString())
+.status(UUID.randomUUID().toString())
+.invitedBy(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.username(UUID.randomUUID().toString())
-.details(UUID.randomUUID().toString())
+.acceptedAt(java.time.Instant.now().plusSeconds(3600))
+.revokedAt(java.time.Instant.now().plusSeconds(3600))
+.message(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 		.type("CREATE")
 		.build()
 		))
@@ -75,15 +75,19 @@ private AccountUserRepository Repository;
 			.deltas(List.of(
 			AccountUserDeltaDto.builder()
 			.id(existingId)
-.name(UUID.randomUUID().toString())
-.account(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value())
-.user(com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures.randomOneViaCommand(commandGateway,userDataRepository, user).getId().value())
+.account(UUID.randomUUID().toString())
+.user(UUID.randomUUID().toString())
+.phone(UUID.randomUUID().toString())
+.role(UUID.randomUUID().toString())
+.status(UUID.randomUUID().toString())
+.invitedBy(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.username(UUID.randomUUID().toString())
-.details(UUID.randomUUID().toString())
+.acceptedAt(java.time.Instant.now().plusSeconds(3600))
+.revokedAt(java.time.Instant.now().plusSeconds(3600))
+.message(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 			.type("UPDATE")
 			.build()
 			))

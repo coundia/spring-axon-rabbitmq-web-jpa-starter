@@ -109,13 +109,13 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
 
         @Query("SELECT e FROM Transaction e WHERE LOWER(e.entityId) LIKE LOWER(CONCAT('%', :entityId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Transaction> findByEntityIdAndTenantId(String entityId, String tenantId);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByAccountIdAndCreatedById(String account, String createdById);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByAccountIdAndTenantName(String account, String tenantName);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByAccountAndCreatedById(String account, String createdById);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByAccountAndTenantName(String account, String tenantName);
 
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.account.id) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Transaction> findByAccountIdAndTenantId(String account, String tenantId);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Transaction> findByAccountAndTenantId(String account, String tenantId);
         @Query("""
         SELECT e FROM Transaction e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -133,34 +133,34 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
          List<Transaction> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
 
 
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.category.id) LIKE LOWER(CONCAT('%', :category, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByCategoryIdAndCreatedById(String category, String createdById);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.category.id) LIKE LOWER(CONCAT('%', :category, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByCategoryIdAndTenantName(String category, String tenantName);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.category) LIKE LOWER(CONCAT('%', :category, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByCategoryAndCreatedById(String category, String createdById);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.category) LIKE LOWER(CONCAT('%', :category, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByCategoryAndTenantName(String category, String tenantName);
 
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.category.id) LIKE LOWER(CONCAT('%', :category, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Transaction> findByCategoryIdAndTenantId(String category, String tenantId);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByCompanyIdAndCreatedById(String company, String createdById);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByCompanyIdAndTenantName(String company, String tenantName);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.category) LIKE LOWER(CONCAT('%', :category, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Transaction> findByCategoryAndTenantId(String category, String tenantId);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByCompanyAndCreatedById(String company, String createdById);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByCompanyAndTenantName(String company, String tenantName);
 
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Transaction> findByCompanyIdAndTenantId(String company, String tenantId);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.customer.id) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByCustomerIdAndCreatedById(String customer, String createdById);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.customer.id) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByCustomerIdAndTenantName(String customer, String tenantName);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Transaction> findByCompanyAndTenantId(String company, String tenantId);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.customer) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByCustomerAndCreatedById(String customer, String createdById);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.customer) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByCustomerAndTenantName(String customer, String tenantName);
 
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.customer.id) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Transaction> findByCustomerIdAndTenantId(String customer, String tenantId);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.debt.id) LIKE LOWER(CONCAT('%', :debt, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByDebtIdAndCreatedById(String debt, String createdById);
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.debt.id) LIKE LOWER(CONCAT('%', :debt, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Transaction> findByDebtIdAndTenantName(String debt, String tenantName);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.customer) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Transaction> findByCustomerAndTenantId(String customer, String tenantId);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.debt) LIKE LOWER(CONCAT('%', :debt, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByDebtAndCreatedById(String debt, String createdById);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.debt) LIKE LOWER(CONCAT('%', :debt, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Transaction> findByDebtAndTenantName(String debt, String tenantName);
 
-        @Query("SELECT e FROM Transaction e WHERE LOWER(e.debt.id) LIKE LOWER(CONCAT('%', :debt, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Transaction> findByDebtIdAndTenantId(String debt, String tenantId);
+        @Query("SELECT e FROM Transaction e WHERE LOWER(e.debt) LIKE LOWER(CONCAT('%', :debt, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Transaction> findByDebtAndTenantId(String debt, String tenantId);
         @Query("SELECT e FROM Transaction e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Transaction> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
         @Query("SELECT e FROM Transaction e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

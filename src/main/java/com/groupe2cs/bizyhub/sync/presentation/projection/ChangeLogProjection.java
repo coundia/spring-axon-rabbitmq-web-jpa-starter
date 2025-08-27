@@ -26,28 +26,55 @@ public class ChangeLogProjection {
 private final ChangeLogRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(ChangeLogCreatedEvent event) {
 try {
-ChangeLog entity = ChangeLog.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.entityTable(event.getEntityTable() == null ? null : event.getEntityTable().value())
- 		.entityId(event.getEntityId() == null ? null : event.getEntityId().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.operation(event.getOperation() == null ? null : event.getOperation().value())
- 		.payload(event.getPayload() == null ? null : event.getPayload().value())
- 		.status(event.getStatus() == null ? null : event.getStatus().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- 		.attempts(event.getAttempts() == null ? null : event.getAttempts().value())
- 		.error(event.getError() == null ? null : event.getError().value())
- .build();
+ChangeLog entity = ChangeLog.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getEntityTable() !=null  && hasId(event.getEntityTable().value()) ) {
+            entity.setEntityTable( event.getEntityTable().value());
+        }
+ 		if(event.getEntityId() !=null  && hasId(event.getEntityId().value()) ) {
+            entity.setEntityId( event.getEntityId().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getOperation() !=null  && hasId(event.getOperation().value()) ) {
+            entity.setOperation( event.getOperation().value());
+        }
+ 		if(event.getPayload() !=null  && hasId(event.getPayload().value()) ) {
+            entity.setPayload( event.getPayload().value());
+        }
+ 		if(event.getStatus() !=null  && hasId(event.getStatus().value()) ) {
+            entity.setStatus( event.getStatus().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getAttempts() !=null  && hasId(event.getAttempts().value()) ) {
+            entity.setAttempts( event.getAttempts().value());
+        }
+ 		if(event.getError() !=null  && hasId(event.getError().value()) ) {
+            entity.setError( event.getError().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -71,37 +98,37 @@ ChangeLog entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("ChangeLog not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getEntityTable() != null) {
+	if(event.getEntityTable() != null  && hasId(event.getEntityTable().value())) {
 		entity.setEntityTable(event.getEntityTable().value());
     }
-	if(event.getEntityId() != null) {
+	if(event.getEntityId() != null  && hasId(event.getEntityId().value())) {
 		entity.setEntityId(event.getEntityId().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getOperation() != null) {
+	if(event.getOperation() != null  && hasId(event.getOperation().value())) {
 		entity.setOperation(event.getOperation().value());
     }
-	if(event.getPayload() != null) {
+	if(event.getPayload() != null  && hasId(event.getPayload().value())) {
 		entity.setPayload(event.getPayload().value());
     }
-	if(event.getStatus() != null) {
+	if(event.getStatus() != null  && hasId(event.getStatus().value())) {
 		entity.setStatus(event.getStatus().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-	if(event.getAttempts() != null) {
+	if(event.getAttempts() != null  && hasId(event.getAttempts().value())) {
 		entity.setAttempts(event.getAttempts().value());
     }
-	if(event.getError() != null) {
+	if(event.getError() != null  && hasId(event.getError().value())) {
 		entity.setError(event.getError().value());
     }
 

@@ -29,9 +29,9 @@ public List<AccountUserResponse> handle(FindByAccountUserUserQuery query) {
 	 String value = query.getUser().value();
 
 	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByUserIdAndTenantId(value, metaRequest.getTenantId());
+	    entities = repository.findByUserAndTenantId(value, metaRequest.getTenantId());
 	 }else{
-	    entities = repository.findByUserIdAndCreatedById(value, metaRequest.getUserId());
+	    entities = repository.findByUserAndCreatedById(value, metaRequest.getUserId());
 	 }
 
  	return entities.stream()

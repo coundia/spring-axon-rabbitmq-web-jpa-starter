@@ -27,8 +27,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -42,13 +40,13 @@ void it_should_be_able_to_add_debt() {
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setNotes(UUID.randomUUID().toString());
-		requestDTO.setBalance(3856.33);
-		requestDTO.setBalanceDebt(1393.19);
+		requestDTO.setBalance(4604.94);
+		requestDTO.setBalanceDebt(2486.17);
 		requestDTO.setDueDate(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setStatuses(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setCustomer(com.groupe2cs.bizyhub.customers.infrastructure.entity.CustomerFixtures.randomOneViaCommand(commandGateway,customerDataRepository, user).getId().value());
-		requestDTO.setIsActive(false);
+		requestDTO.setCustomer(UUID.randomUUID().toString());
+		requestDTO.setIsActive(true);
 
  		String uri = "/v1/commands/debt";
 		ResponseEntity<DebtResponse> response = this.postForEntity(uri, requestDTO, DebtResponse.class);

@@ -27,16 +27,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.debts.infrastructure.repository.DebtRepository debtDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -50,18 +40,18 @@ void it_should_be_able_to_add_transaction() {
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setDescription(UUID.randomUUID().toString());
-		requestDTO.setAmount(8054.15);
+		requestDTO.setAmount(489.11);
 		requestDTO.setTypeEntry(UUID.randomUUID().toString());
 		requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setEntityName(UUID.randomUUID().toString());
 		requestDTO.setEntityId(UUID.randomUUID().toString());
-		requestDTO.setAccount(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value());
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value());
-		requestDTO.setCompany(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value());
-		requestDTO.setCustomer(com.groupe2cs.bizyhub.customers.infrastructure.entity.CustomerFixtures.randomOneViaCommand(commandGateway,customerDataRepository, user).getId().value());
-		requestDTO.setDebt(com.groupe2cs.bizyhub.debts.infrastructure.entity.DebtFixtures.randomOneViaCommand(commandGateway,debtDataRepository, user).getId().value());
+		requestDTO.setCategory(UUID.randomUUID().toString());
+		requestDTO.setCompany(UUID.randomUUID().toString());
+		requestDTO.setCustomer(UUID.randomUUID().toString());
+		requestDTO.setDebt(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/transaction";
 		ResponseEntity<TransactionResponse> response = this.postForEntity(uri, requestDTO, TransactionResponse.class);

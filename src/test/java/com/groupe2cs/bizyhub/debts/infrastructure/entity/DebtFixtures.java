@@ -41,7 +41,6 @@ public class DebtFixtures {
 	public static List<CreateDebtCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		DebtRepository repository,
-        com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -52,7 +51,6 @@ public class DebtFixtures {
 			CreateDebtCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            customerDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -68,7 +66,6 @@ public class DebtFixtures {
 		public static CreateDebtCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		DebtRepository  repository,
-        com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
@@ -78,13 +75,13 @@ public class DebtFixtures {
 				.localId(DebtLocalId.create(UUID.randomUUID().toString()))
 				.code(DebtCode.create(UUID.randomUUID().toString()))
 				.notes(DebtNotes.create(UUID.randomUUID().toString()))
-				.balance(DebtBalance.create(5212.36))
-				.balanceDebt(DebtBalanceDebt.create(5623.32))
+				.balance(DebtBalance.create(1396.23))
+				.balanceDebt(DebtBalanceDebt.create(8526.41))
 				.dueDate(DebtDueDate.create(java.time.Instant.now().plusSeconds(3600)))
 				.statuses(DebtStatuses.create(UUID.randomUUID().toString()))
 				.syncAt(DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.customer(DebtCustomer.create(com.groupe2cs.bizyhub.customers.infrastructure.entity.CustomerFixtures.randomOneViaCommand(commandGateway,customerDataRepository, user).getId().value()))
-				.isActive(DebtIsActive.create(true))
+				.customer(DebtCustomer.create(UUID.randomUUID().toString()))
+				.isActive(DebtIsActive.create(false))
 			.build();
 
 		command.setCreatedBy(DebtCreatedBy.create(user.getId()));
@@ -106,12 +103,13 @@ public class DebtFixtures {
         .localId(DebtLocalId.create(UUID.randomUUID().toString()))
         .code(DebtCode.create(UUID.randomUUID().toString()))
         .notes(DebtNotes.create(UUID.randomUUID().toString()))
-        .balance(DebtBalance.create(5212.36))
-        .balanceDebt(DebtBalanceDebt.create(5623.32))
+        .balance(DebtBalance.create(1396.23))
+        .balanceDebt(DebtBalanceDebt.create(8526.41))
         .dueDate(DebtDueDate.create(java.time.Instant.now().plusSeconds(3600)))
         .statuses(DebtStatuses.create(UUID.randomUUID().toString()))
         .syncAt(DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .isActive(DebtIsActive.create(true))
+        .customer(DebtCustomer.create(UUID.randomUUID().toString()))
+        .isActive(DebtIsActive.create(false))
         .build();
 
 		command.setCreatedBy(DebtCreatedBy.create(user.getId()));

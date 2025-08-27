@@ -27,10 +27,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -41,12 +37,12 @@ void it_should_be_able_to_add_stockmovement() {
 		StockMovementRequest requestDTO = new StockMovementRequest();
 
 		requestDTO.setTypeStockMovement(UUID.randomUUID().toString());
-		requestDTO.setQuantity(10);
+		requestDTO.setQuantity(48);
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
-		requestDTO.setCompany(com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures.randomOneViaCommand(commandGateway,companyDataRepository, user).getId().value());
+		requestDTO.setCompany(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setProductVariant(com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures.randomOneViaCommand(commandGateway,productVariantDataRepository, user).getId().value());
+		requestDTO.setProductVariant(UUID.randomUUID().toString());
 		requestDTO.setOrderLineId(UUID.randomUUID().toString());
 		requestDTO.setDiscriminator(UUID.randomUUID().toString());
 

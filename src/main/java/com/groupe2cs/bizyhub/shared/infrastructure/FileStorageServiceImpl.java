@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.shared.infrastructure;
 
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerRequest;
+import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerCreateApplicationService;
+import java.nio.file.Path;
+import org.springframework.stereotype.Service;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.UUID;
-import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerRequest;
-import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerCreateApplicationService;
-import java.nio.file.Path;
-import org.springframework.stereotype.Service;
 
 import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerRequest;
 import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerCreateApplicationService;

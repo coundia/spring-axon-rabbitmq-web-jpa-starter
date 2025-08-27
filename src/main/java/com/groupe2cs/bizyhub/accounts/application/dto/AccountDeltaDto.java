@@ -26,37 +26,37 @@ public class AccountDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "0e9fc24c-4760-4e25-af06-081ebf554a93")
+		@Schema(description = "", example = "908518e3-c3fb-400b-b414-57781957f25c")
 		private String code;
-		@Schema(description = "", example = "4a57d7bb-f868-410f-988b-1f9c2478c0ed")
+		@Schema(description = "", example = "363e0e65-02f8-4c00-b0b6-4b2058671fd1")
 		private String name;
-		@Schema(description = "", example = "816cdfdb-1fca-4630-b41c-6c0b0173e38f")
+		@Schema(description = "", example = "09684a61-94f9-4c42-9c0b-4b6f7c6a0b84")
 		private String status;
-		@Schema(description = "", example = "1a746c2d-96e4-426f-be00-6965866e070e")
+		@Schema(description = "", example = "fde6c5e2-08b4-4873-bebb-e3c50ccfd51f")
 		private String currency;
-		@Schema(description = "", example = "c625ad75-e2ed-4c0f-8036-b6651d04804a")
+		@Schema(description = "", example = "e1cc1677-6851-4115-a2a8-6a10d93b2767")
 		private String typeAccount;
-		@Schema(description = "", example = "2941.58")
+		@Schema(description = "", example = "4963.43")
 		private Double balance;
-		@Schema(description = "", example = "6152.26")
+		@Schema(description = "", example = "1105.28")
 		private Double balancePrev;
-		@Schema(description = "", example = "2657.26")
+		@Schema(description = "", example = "5611.94")
 		private Double balanceBlocked;
-		@Schema(description = "", example = "8244.43")
+		@Schema(description = "", example = "679.7")
 		private Double balanceInit;
-		@Schema(description = "", example = "7927.14")
+		@Schema(description = "", example = "4434.34")
 		private Double balanceGoal;
-		@Schema(description = "", example = "3151.7")
+		@Schema(description = "", example = "6873.66")
 		private Double balanceLimit;
-		@Schema(description = "", example = "51738911-d0bc-4b87-ad3f-8cd0dd99a0f5")
+		@Schema(description = "", example = "7a5cf610-da3b-43a5-bd2f-cda36d41ae02")
 		private String description;
 		@Schema(description = "", example = "true")
 		private Boolean isActive;
 		@Schema(description = "", example = "false")
 		private Boolean isDefault;
-		@Schema(description = "", example = "669ed0ab-1967-4859-85f6-a46e62a6d4b2")
+		@Schema(description = "", example = "6fbd6803-4317-4169-9e95-7da892061dbb")
 		private String remoteId;
-		@Schema(description = "", example = "5400beeb-9ac8-491a-a943-714a8e68c16a")
+		@Schema(description = "", example = "370ffa35-b33c-48fe-8e97-b7c7f66b055c")
 		private String localId;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;

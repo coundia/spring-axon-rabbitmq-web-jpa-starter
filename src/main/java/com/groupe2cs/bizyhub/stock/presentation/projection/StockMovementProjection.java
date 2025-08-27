@@ -26,27 +26,52 @@ public class StockMovementProjection {
 private final StockMovementRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(StockMovementCreatedEvent event) {
 try {
-StockMovement entity = StockMovement.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.typeStockMovement(event.getTypeStockMovement() == null ? null : event.getTypeStockMovement().value())
- 		.quantity(event.getQuantity() == null ? null : event.getQuantity().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
-  		.company( event.getCompany() == null ? null : new com.groupe2cs.bizyhub.companies.infrastructure.entity.Company(event.getCompany().value()))
-		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
-  		.productVariant( event.getProductVariant() == null ? null : new com.groupe2cs.bizyhub.products.infrastructure.entity.Product(event.getProductVariant().value()))
-		.orderLineId(event.getOrderLineId() == null ? null : event.getOrderLineId().value())
- 		.discriminator(event.getDiscriminator() == null ? null : event.getDiscriminator().value())
- .build();
+StockMovement entity = StockMovement.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getTypeStockMovement() !=null  && hasId(event.getTypeStockMovement().value()) ) {
+            entity.setTypeStockMovement( event.getTypeStockMovement().value());
+        }
+ 		if(event.getQuantity() !=null  && hasId(event.getQuantity().value()) ) {
+            entity.setQuantity( event.getQuantity().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getCompany() !=null  && hasId(event.getCompany().value()) ) {
+            entity.setCompany( event.getCompany().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getProductVariant() !=null  && hasId(event.getProductVariant().value()) ) {
+            entity.setProductVariant( event.getProductVariant().value());
+        }
+ 		if(event.getOrderLineId() !=null  && hasId(event.getOrderLineId().value()) ) {
+            entity.setOrderLineId( event.getOrderLineId().value());
+        }
+ 		if(event.getDiscriminator() !=null  && hasId(event.getDiscriminator().value()) ) {
+            entity.setDiscriminator( event.getDiscriminator().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -70,36 +95,34 @@ StockMovement entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("StockMovement not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getTypeStockMovement() != null) {
+	if(event.getTypeStockMovement() != null  && hasId(event.getTypeStockMovement().value())) {
 		entity.setTypeStockMovement(event.getTypeStockMovement().value());
     }
-	if(event.getQuantity() != null) {
+	if(event.getQuantity() != null  && hasId(event.getQuantity().value())) {
 		entity.setQuantity(event.getQuantity().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-
-     if(event.getCompany() != null) {
-		  entity.setCompany(new com.groupe2cs.bizyhub.companies.infrastructure.entity.Company(event.getCompany().value()));
-	  }
-	if(event.getSyncAt() != null) {
+	if(event.getCompany() != null  && hasId(event.getCompany().value())) {
+		entity.setCompany(event.getCompany().value());
+    }
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-
-     if(event.getProductVariant() != null) {
-		  entity.setProductVariant(new com.groupe2cs.bizyhub.products.infrastructure.entity.Product(event.getProductVariant().value()));
-	  }
-	if(event.getOrderLineId() != null) {
+	if(event.getProductVariant() != null  && hasId(event.getProductVariant().value())) {
+		entity.setProductVariant(event.getProductVariant().value());
+    }
+	if(event.getOrderLineId() != null  && hasId(event.getOrderLineId().value())) {
 		entity.setOrderLineId(event.getOrderLineId().value());
     }
-	if(event.getDiscriminator() != null) {
+	if(event.getDiscriminator() != null  && hasId(event.getDiscriminator().value())) {
 		entity.setDiscriminator(event.getDiscriminator().value());
     }
 

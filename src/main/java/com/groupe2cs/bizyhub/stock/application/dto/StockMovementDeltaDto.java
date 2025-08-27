@@ -26,23 +26,23 @@ public class StockMovementDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "58bdecf8-030c-4c48-b960-e86728849b84")
+		@Schema(description = "", example = "55b52e76-6a23-42a0-90ee-fbdc212c1a55")
 		private String typeStockMovement;
-		@Schema(description = "", example = "10")
+		@Schema(description = "", example = "30")
 		private Integer quantity;
-		@Schema(description = "", example = "2857684d-b057-4364-b356-c1b46f159eda")
+		@Schema(description = "", example = "ca655dac-3e0f-4ccb-bc3b-996fc52f2bfe")
 		private String remoteId;
-		@Schema(description = "", example = "bb216c0e-5005-46a1-8da8-f11ca4fc4bba")
+		@Schema(description = "", example = "7fce1511-a7b4-4e7f-b2b4-3602d104fe2d")
 		private String localId;
-		@Schema(description = "", example = "c5de355a-d1b1-45a7-9978-b1ff04bfb393")
+		@Schema(description = "", example = "524ccf9c-abd2-4c74-8580-dd6112528500")
 		private String company;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "b222c89b-d9b6-4e65-aac6-1131d3b1f2f6")
+		@Schema(description = "", example = "890c8bf7-5b9b-4600-b807-530bdb0a5da3")
 		private String productVariant;
-		@Schema(description = "", example = "be7ad36a-bf8b-496a-8876-c92286ea6ecd")
+		@Schema(description = "", example = "6295031f-53ae-42aa-8e8f-1190ae65959c")
 		private String orderLineId;
-		@Schema(description = "", example = "2fa5382e-f1dc-4115-aaa2-d25a525aedb8")
+		@Schema(description = "", example = "9277dd8b-0533-419e-b6aa-bd92f5d6c3cb")
 		private String discriminator;
 
 }

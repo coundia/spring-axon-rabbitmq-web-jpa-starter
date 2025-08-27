@@ -94,9 +94,13 @@ public class Debt   extends AbstractAuditableEntity  {
 	)
 	@Builder.Default
 	private java.time.Instant syncAt  = java.time.Instant.now() ;
-	@ManyToOne
-	@JoinColumn(name = "customer_id", nullable = true)
-	private com.groupe2cs.bizyhub.customers.infrastructure.entity.Customer customer;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String customer ;
 
 	@Column(nullable = true, 
 		unique = false

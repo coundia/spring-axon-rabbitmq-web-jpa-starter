@@ -1,5 +1,8 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.shared.application.*;
@@ -7,9 +10,6 @@ import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,15 +43,15 @@ private AccountRepository Repository;
 .status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
 .typeAccount(UUID.randomUUID().toString())
-.balance(5479.88)
-.balancePrev(7785.05)
-.balanceBlocked(6251.14)
-.balanceInit(3168.7)
-.balanceGoal(3413.33)
-.balanceLimit(8243.93)
+.balance(8322.13)
+.balancePrev(9069.43)
+.balanceBlocked(8909.48)
+.balanceInit(5955.1)
+.balanceGoal(8109.47)
+.balanceLimit(3294.35)
 .description(UUID.randomUUID().toString())
-.isActive(true)
-.isDefault(true)
+.isActive(false)
+.isDefault(false)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
@@ -84,15 +84,15 @@ private AccountRepository Repository;
 .status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
 .typeAccount(UUID.randomUUID().toString())
-.balance(5479.88)
-.balancePrev(7785.05)
-.balanceBlocked(6251.14)
-.balanceInit(3168.7)
-.balanceGoal(3413.33)
-.balanceLimit(8243.93)
+.balance(8322.13)
+.balancePrev(9069.43)
+.balanceBlocked(8909.48)
+.balanceInit(5955.1)
+.balanceGoal(8109.47)
+.balanceLimit(3294.35)
 .description(UUID.randomUUID().toString())
-.isActive(true)
-.isDefault(true)
+.isActive(false)
+.isDefault(false)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))

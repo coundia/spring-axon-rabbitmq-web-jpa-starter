@@ -39,10 +39,6 @@ private CommandGateway commandGateway;
 private TransactionUserRepository transactionUserRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -53,8 +49,6 @@ void it_should_return_only_user_transactionUsers_for_normal_user() throws Except
 List<CreateTransactionUserCommand> userCommands =
 TransactionUserFixtures.randomManyViaCommand(
 commandGateway,transactionUserRepository,
-transactionDataRepository,
-userDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -90,8 +84,6 @@ void it_should_return_all_transactionUsers_for_admin() throws Exception {
     TransactionUserFixtures.randomManyViaCommand(
         commandGateway,
         transactionUserRepository,
-         transactionDataRepository,
-         userDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -104,8 +96,6 @@ void it_should_return_all_transactionUsers_for_admin() throws Exception {
 List<CreateTransactionUserCommand> adminCommands =
 TransactionUserFixtures.randomManyViaCommand(
 commandGateway,transactionUserRepository,
-        transactionDataRepository,
-        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));

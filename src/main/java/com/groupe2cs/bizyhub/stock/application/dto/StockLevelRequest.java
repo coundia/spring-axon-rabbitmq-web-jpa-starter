@@ -19,19 +19,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "StockLevelRequest", description = "Request payload for StockLevel operations")
 public class StockLevelRequest implements Serializable {
 
-	@Schema(description = "", example = "963b3b3c-ca45-4f3e-8538-0b431a1f4ba8")
+	@Schema(description = "", example = "1a6c9ac0-d269-4350-a42b-76390576c7f5")
 	private String remoteId;
-	@Schema(description = "", example = "6a48a74e-5092-4b8d-bf51-3008a84cade0")
+	@Schema(description = "", example = "e5e36bdd-7f80-41b4-ad9c-31baa3cf1071")
 	private String localId;
-	@Schema(description = "", example = "47")
+	@Schema(description = "", example = "83")
 	private Integer stockOnHand;
-	@Schema(description = "", example = "70")
+	@Schema(description = "", example = "87")
 	private Integer stockAllocated;
-	@Schema(description = "", example = "c28f4e94-b3e9-48bf-b042-30bb00789475")
+	@Schema(description = "", example = "d7ed8243-5335-4a9e-8d1d-f35202a0d944")
 	private String productVariant;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "b3a4b6f6-6ee2-4809-a5a4-b5393931291a")
+	@Schema(description = "", example = "ec610af3-776d-451d-8bd0-b03fcc24a939")
 	private String company;
 
 }

@@ -113,13 +113,13 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 
         @Query("SELECT e FROM Customer e WHERE LOWER(e.status) LIKE LOWER(CONCAT('%', :status, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Customer> findByStatusAndTenantId(String status, String tenantId);
-        @Query("SELECT e FROM Customer e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Customer> findByCompanyIdAndCreatedById(String company, String createdById);
-        @Query("SELECT e FROM Customer e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<Customer> findByCompanyIdAndTenantName(String company, String tenantName);
+        @Query("SELECT e FROM Customer e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Customer> findByCompanyAndCreatedById(String company, String createdById);
+        @Query("SELECT e FROM Customer e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Customer> findByCompanyAndTenantName(String company, String tenantName);
 
-        @Query("SELECT e FROM Customer e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<Customer> findByCompanyIdAndTenantId(String company, String tenantId);
+        @Query("SELECT e FROM Customer e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Customer> findByCompanyAndTenantId(String company, String tenantId);
         @Query("SELECT e FROM Customer e WHERE LOWER(e.addressLine1) LIKE LOWER(CONCAT('%', :addressLine1, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Customer> findByAddressLine1AndCreatedById(String addressLine1, String createdById);
         @Query("SELECT e FROM Customer e WHERE LOWER(e.addressLine1) LIKE LOWER(CONCAT('%', :addressLine1, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

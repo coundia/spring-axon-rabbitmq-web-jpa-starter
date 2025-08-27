@@ -26,27 +26,52 @@ public class ChatProjection {
 private final ChatRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(ChatCreatedEvent event) {
 try {
-Chat entity = Chat.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.messages(event.getMessages() == null ? null : event.getMessages().value())
- 		.responsesJson(event.getResponsesJson() == null ? null : event.getResponsesJson().value())
- 		.responses(event.getResponses() == null ? null : event.getResponses().value())
- 		.state(event.getState() == null ? null : event.getState().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
-  		.account( event.getAccount() == null ? null : new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()))
-		.dateTransaction(event.getDateTransaction() == null ? null : event.getDateTransaction().value())
- .build();
+Chat entity = Chat.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getMessages() !=null  && hasId(event.getMessages().value()) ) {
+            entity.setMessages( event.getMessages().value());
+        }
+ 		if(event.getResponsesJson() !=null  && hasId(event.getResponsesJson().value()) ) {
+            entity.setResponsesJson( event.getResponsesJson().value());
+        }
+ 		if(event.getResponses() !=null  && hasId(event.getResponses().value()) ) {
+            entity.setResponses( event.getResponses().value());
+        }
+ 		if(event.getState() !=null  && hasId(event.getState().value()) ) {
+            entity.setState( event.getState().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
+ 		if(event.getDateTransaction() !=null  && hasId(event.getDateTransaction().value()) ) {
+            entity.setDateTransaction( event.getDateTransaction().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -70,35 +95,34 @@ Chat entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Chat not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getMessages() != null) {
+	if(event.getMessages() != null  && hasId(event.getMessages().value())) {
 		entity.setMessages(event.getMessages().value());
     }
-	if(event.getResponsesJson() != null) {
+	if(event.getResponsesJson() != null  && hasId(event.getResponsesJson().value())) {
 		entity.setResponsesJson(event.getResponsesJson().value());
     }
-	if(event.getResponses() != null) {
+	if(event.getResponses() != null  && hasId(event.getResponses().value())) {
 		entity.setResponses(event.getResponses().value());
     }
-	if(event.getState() != null) {
+	if(event.getState() != null  && hasId(event.getState().value())) {
 		entity.setState(event.getState().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-
-     if(event.getAccount() != null) {
-		  entity.setAccount(new com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account(event.getAccount().value()));
-	  }
-	if(event.getDateTransaction() != null) {
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
+    }
+	if(event.getDateTransaction() != null  && hasId(event.getDateTransaction().value())) {
 		entity.setDateTransaction(event.getDateTransaction().value());
     }
 

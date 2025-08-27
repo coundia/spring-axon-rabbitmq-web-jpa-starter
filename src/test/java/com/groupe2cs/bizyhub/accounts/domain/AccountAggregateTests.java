@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.accounts.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.accounts.domain.exception.*;
 import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.UUID;
 
 
 public class AccountAggregateTests extends BaseUnitTests {
@@ -19,15 +19,15 @@ void it_should_create_account_with_valid_values() {
 	AccountStatus status = AccountStatus.create(UUID.randomUUID().toString());
 	AccountCurrency currency = AccountCurrency.create(UUID.randomUUID().toString());
 	AccountTypeAccount typeAccount = AccountTypeAccount.create(UUID.randomUUID().toString());
-	AccountBalance balance = AccountBalance.create(8492.52);
-	AccountBalancePrev balancePrev = AccountBalancePrev.create(3136.16);
-	AccountBalanceBlocked balanceBlocked = AccountBalanceBlocked.create(1637.25);
-	AccountBalanceInit balanceInit = AccountBalanceInit.create(4999.62);
-	AccountBalanceGoal balanceGoal = AccountBalanceGoal.create(5276.36);
-	AccountBalanceLimit balanceLimit = AccountBalanceLimit.create(8613.02);
+	AccountBalance balance = AccountBalance.create(8302.05);
+	AccountBalancePrev balancePrev = AccountBalancePrev.create(8320.34);
+	AccountBalanceBlocked balanceBlocked = AccountBalanceBlocked.create(2486.49);
+	AccountBalanceInit balanceInit = AccountBalanceInit.create(8443.77);
+	AccountBalanceGoal balanceGoal = AccountBalanceGoal.create(65.93);
+	AccountBalanceLimit balanceLimit = AccountBalanceLimit.create(1969.42);
 	AccountDescription description = AccountDescription.create(UUID.randomUUID().toString());
 	AccountIsActive isActive = AccountIsActive.create(true);
-	AccountIsDefault isDefault = AccountIsDefault.create(false);
+	AccountIsDefault isDefault = AccountIsDefault.create(true);
 	AccountRemoteId remoteId = AccountRemoteId.create(UUID.randomUUID().toString());
 	AccountLocalId localId = AccountLocalId.create(UUID.randomUUID().toString());
 	AccountSyncAt syncAt = AccountSyncAt.create(java.time.Instant.now().plusSeconds(3600));

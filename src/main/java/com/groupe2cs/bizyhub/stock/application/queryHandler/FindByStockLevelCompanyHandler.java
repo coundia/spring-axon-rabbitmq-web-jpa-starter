@@ -29,9 +29,9 @@ public List<StockLevelResponse> handle(FindByStockLevelCompanyQuery query) {
 	 String value = query.getCompany().value();
 
 	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByCompanyIdAndTenantId(value, metaRequest.getTenantId());
+	    entities = repository.findByCompanyAndTenantId(value, metaRequest.getTenantId());
 	 }else{
-	    entities = repository.findByCompanyIdAndCreatedById(value, metaRequest.getUserId());
+	    entities = repository.findByCompanyAndCreatedById(value, metaRequest.getUserId());
 	 }
 
  	return entities.stream()

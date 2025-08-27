@@ -41,7 +41,6 @@ public class ChatFixtures {
 	public static List<CreateChatCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		ChatRepository repository,
-        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
         FileManagerRepository filesDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
@@ -53,7 +52,6 @@ public class ChatFixtures {
 			CreateChatCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            accountDataRepository,
             filesDataRepository,
             createdByDataRepository,
             tenantDataRepository,
@@ -70,7 +68,6 @@ public class ChatFixtures {
 		public static CreateChatCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		ChatRepository  repository,
-        com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository,
         FileManagerRepository filesDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
@@ -86,7 +83,7 @@ public class ChatFixtures {
 				.syncAt(ChatSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.remoteId(ChatRemoteId.create(UUID.randomUUID().toString()))
 				.localId(ChatLocalId.create(UUID.randomUUID().toString()))
-				.account(ChatAccount.create(com.groupe2cs.bizyhub.accounts.infrastructure.entity.AccountFixtures.randomOneViaCommand(commandGateway,accountDataRepository, user).getId().value()))
+				.account(ChatAccount.create(UUID.randomUUID().toString()))
 				.dateTransaction(ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
 					.files(ChatFiles.create(fileName))
 			.build();
@@ -115,6 +112,7 @@ public class ChatFixtures {
         .syncAt(ChatSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .remoteId(ChatRemoteId.create(UUID.randomUUID().toString()))
         .localId(ChatLocalId.create(UUID.randomUUID().toString()))
+        .account(ChatAccount.create(UUID.randomUUID().toString()))
         .dateTransaction(ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
         .files(ChatFiles.create(fileName))
         .build();

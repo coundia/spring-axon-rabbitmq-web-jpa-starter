@@ -29,8 +29,6 @@ private CommandGateway commandGateway;
 private DebtRepository repository;
 
 @Autowired
-private com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository customerDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -40,7 +38,6 @@ void it_should_be_able_to_get_debt_by_id() {
 
 	String existingId = DebtFixtures.randomOneViaCommand(
 	commandGateway,repository,
-        customerDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

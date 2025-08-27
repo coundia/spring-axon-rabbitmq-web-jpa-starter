@@ -34,10 +34,7 @@ this.company = company;
 
 public static StockLevelCompany create(String company) {
 
-if (company == null || company.isBlank()) {
-throw new StockLevelCompanyNotValid("Company is invalid");
-}
-return new StockLevelCompany(company);
+	return new StockLevelCompany(company);
 }
 
 public String value() {

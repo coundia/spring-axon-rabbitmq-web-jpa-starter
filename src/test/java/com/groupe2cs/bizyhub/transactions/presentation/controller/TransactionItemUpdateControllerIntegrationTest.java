@@ -33,12 +33,6 @@ public class TransactionItemUpdateControllerIntegrationTest extends BaseIntegrat
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository;
-    @Autowired
-    private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository;
-    @Autowired
-    private com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -48,9 +42,6 @@ public class TransactionItemUpdateControllerIntegrationTest extends BaseIntegrat
 
         String existingId = TransactionItemFixtures.randomOneViaCommand(
             commandGateway, transactionitemRepository,
-        transactionDataRepository,
-        productDataRepository,
-        unitDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -58,9 +49,6 @@ public class TransactionItemUpdateControllerIntegrationTest extends BaseIntegrat
 
         CreateTransactionItemCommand updated = TransactionItemFixtures.randomOneViaCommand(
             commandGatewayUpdate, transactionitemRepository,
-        transactionDataRepository,
-        productDataRepository,
-        unitDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -70,16 +58,16 @@ public class TransactionItemUpdateControllerIntegrationTest extends BaseIntegrat
         TransactionItemFixtures.byIdWaitExist(transactionitemRepository, updated.getId().value());
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("transaction", updated.getTransaction().value());
-        body.add("product", updated.getProduct().value());
+        body.add("transaction", UUID.randomUUID().toString());
+        body.add("product", UUID.randomUUID().toString());
         body.add("label", UUID.randomUUID().toString());
-        body.add("quantity", 41);
-        body.add("unit", updated.getUnit().value());
+        body.add("quantity", 88);
+        body.add("unit", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("unitPrice", 4009.92);
-        body.add("total", 9852.15);
+        body.add("unitPrice", 4886.91);
+        body.add("total", 7389.1);
         body.add("notes", UUID.randomUUID().toString());
 
         HttpHeaders multipartHeaders = new HttpHeaders();

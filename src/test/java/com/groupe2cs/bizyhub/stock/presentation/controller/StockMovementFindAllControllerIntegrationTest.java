@@ -39,10 +39,6 @@ private CommandGateway commandGateway;
 private StockMovementRepository stockMovementRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -53,8 +49,6 @@ void it_should_return_only_user_stockMovements_for_normal_user() throws Exceptio
 List<CreateStockMovementCommand> userCommands =
 StockMovementFixtures.randomManyViaCommand(
 commandGateway,stockMovementRepository,
-companyDataRepository,
-productVariantDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -90,8 +84,6 @@ void it_should_return_all_stockMovements_for_admin() throws Exception {
     StockMovementFixtures.randomManyViaCommand(
         commandGateway,
         stockMovementRepository,
-         companyDataRepository,
-         productVariantDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -104,8 +96,6 @@ void it_should_return_all_stockMovements_for_admin() throws Exception {
 List<CreateStockMovementCommand> adminCommands =
 StockMovementFixtures.randomManyViaCommand(
 commandGateway,stockMovementRepository,
-        companyDataRepository,
-        productVariantDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));

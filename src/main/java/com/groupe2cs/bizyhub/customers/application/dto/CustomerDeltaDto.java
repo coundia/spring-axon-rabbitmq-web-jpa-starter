@@ -26,43 +26,43 @@ public class CustomerDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "0b3c1ac0-9d45-44e0-a80f-91bd900aa240")
+		@Schema(description = "", example = "d57d9dc6-e1e0-4bc9-96de-542318697fa2")
 		private String remoteId;
-		@Schema(description = "", example = "6b152002-b5db-4b7c-972f-1fcaaadaf829")
+		@Schema(description = "", example = "271aec59-e06b-4d4d-beb4-fc7b1435cc68")
 		private String localId;
-		@Schema(description = "", example = "6b69d70f-830a-430d-9cb9-aa59429f6030")
+		@Schema(description = "", example = "a468c862-2c93-489c-9054-962f0538a5d8")
 		private String code;
-		@Schema(description = "", example = "426bee0c-8425-4643-92b4-6eda6f7a42b1")
+		@Schema(description = "", example = "80c10423-11eb-4b5f-add1-3e2008a2b3b7")
 		private String firstName;
-		@Schema(description = "", example = "b02ea011-375a-40b7-b2f0-02a410c8000e")
+		@Schema(description = "", example = "739763e4-e846-479a-8f3c-9508efde3b26")
 		private String lastName;
-		@Schema(description = "", example = "5ebd4c10-53fa-4a48-9b15-e9408eed249e")
+		@Schema(description = "", example = "7a720ad3-b62d-45a0-af97-01eb5e4f85bd")
 		private String fullName;
-		@Schema(description = "", example = "1108.22")
+		@Schema(description = "", example = "7484.65")
 		private Double balance;
-		@Schema(description = "", example = "7753.76")
+		@Schema(description = "", example = "8390.7")
 		private Double balanceDebt;
-		@Schema(description = "", example = "e658c3c6-da72-4bd3-867a-f4e2be5832f4")
+		@Schema(description = "", example = "cd886b38-bdc3-4faa-9a63-35e940603056")
 		private String phone;
-		@Schema(description = "", example = "bae05241-dd8a-4442-abda-d23ce43f7ccf")
+		@Schema(description = "", example = "f82a821c-2f13-427d-8f34-fe72447adc66")
 		private String email;
-		@Schema(description = "", example = "6a7daa78-34c3-4547-bff5-ab21d2b61295")
+		@Schema(description = "", example = "38f4d99c-51f3-48ad-a079-429373ea78b1")
 		private String notes;
-		@Schema(description = "", example = "f6abb9ec-ea70-4cb6-a6e7-f24366acc062")
+		@Schema(description = "", example = "77238733-bf23-46ff-93ad-e48edf40ee03")
 		private String status;
-		@Schema(description = "", example = "a95bd8f2-b1c6-4a15-985c-f7201c2c7cdf")
+		@Schema(description = "", example = "00c6eb6e-899a-4746-a5dc-d231561a0084")
 		private String company;
-		@Schema(description = "", example = "c7ea33b7-f340-4277-9974-7413b51a94bd")
+		@Schema(description = "", example = "4826eee7-8ea0-461c-9012-d1b9a2224277")
 		private String addressLine1;
-		@Schema(description = "", example = "00e0baae-4d2c-4bf5-8096-2284f0f72d6c")
+		@Schema(description = "", example = "49b11668-a47b-4bea-9ea6-6ed6cf037b8c")
 		private String addressLine2;
-		@Schema(description = "", example = "d9c06dbf-a8bc-4b54-ac5e-5cdfdac442e3")
+		@Schema(description = "", example = "f64f6ad6-8f96-4551-8567-b36985524633")
 		private String city;
-		@Schema(description = "", example = "40bf55f2-640f-4b05-8e78-383177ae3e24")
+		@Schema(description = "", example = "6b47f149-3c24-4118-ae79-118d806b7113")
 		private String region;
-		@Schema(description = "", example = "d6e7afb2-ed2f-4550-8769-e7015e92850b")
+		@Schema(description = "", example = "019630cd-bd09-40f5-873a-ccb8bebe5ced")
 		private String country;
-		@Schema(description = "", example = "5e19fe97-7997-4d9b-9ab2-d080fe2bf766")
+		@Schema(description = "", example = "6008273e-c72e-4b8e-9908-bc6a6cb8db8b")
 		private String postalCode;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;

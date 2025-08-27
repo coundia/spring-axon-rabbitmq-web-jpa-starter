@@ -39,8 +39,6 @@ private CommandGateway commandGateway;
 private CustomerRepository customerRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -51,7 +49,6 @@ void it_should_return_only_user_customers_for_normal_user() throws Exception {
 List<CreateCustomerCommand> userCommands =
 CustomerFixtures.randomManyViaCommand(
 commandGateway,customerRepository,
-companyDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -87,7 +84,6 @@ void it_should_return_all_customers_for_admin() throws Exception {
     CustomerFixtures.randomManyViaCommand(
         commandGateway,
         customerRepository,
-         companyDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -100,7 +96,6 @@ void it_should_return_all_customers_for_admin() throws Exception {
 List<CreateCustomerCommand> adminCommands =
 CustomerFixtures.randomManyViaCommand(
 commandGateway,customerRepository,
-        companyDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));

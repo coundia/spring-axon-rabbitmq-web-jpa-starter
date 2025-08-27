@@ -32,10 +32,7 @@ this.company = company;
 
 public static StockMovementCompany create(String company) {
 
-if (company == null || company.isBlank()) {
-throw new StockMovementCompanyNotValid("Company is invalid");
-}
-return new StockMovementCompany(company);
+	return new StockMovementCompany(company);
 }
 
 public String value() {

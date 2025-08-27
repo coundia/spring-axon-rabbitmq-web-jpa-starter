@@ -19,17 +19,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "UnitRequest", description = "Request payload for Unit operations")
 public class UnitRequest implements Serializable {
 
-	@Schema(description = "", example = "12c3d8dc-1219-4a8c-b7f9-01608cbe5270")
+	@Schema(description = "", example = "6063b22c-fc64-47cf-876d-d5ad300ccaaf")
 	private String remoteId;
-	@Schema(description = "", example = "c627ff07-5130-43b4-a316-ba5d32c4b973")
+	@Schema(description = "", example = "fa50cb63-1e4b-4a9d-be66-4380121a2911")
 	private String localId;
-	@Schema(description = "", example = "3238a971-a911-4c73-bc59-0757387f44ff")
+	@Schema(description = "", example = "ca9625b9-74db-4f4a-b16b-8c1c22ff076a")
 	private String code;
-	@Schema(description = "", example = "384da136-072d-4f88-8464-ef7c0646937d")
+	@Schema(description = "", example = "d2532c3b-94dd-4329-809c-2cfef44e2370")
 	private String name;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "378e02a0-5f26-4a2c-9077-3f79a347d9a7")
+	@Schema(description = "", example = "3069ad3e-5444-47da-8079-f84d55a46985")
 	private String description;
 
 }

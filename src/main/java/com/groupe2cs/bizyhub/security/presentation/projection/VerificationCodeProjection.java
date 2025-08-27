@@ -26,27 +26,52 @@ public class VerificationCodeProjection {
 private final VerificationCodeRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(VerificationCodeCreatedEvent event) {
 try {
-VerificationCode entity = VerificationCode.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.notes(event.getNotes() == null ? null : event.getNotes().value())
- 		.token(event.getToken() == null ? null : event.getToken().value())
- 		.username(event.getUsername() == null ? null : event.getUsername().value())
- 		.phone(event.getPhone() == null ? null : event.getPhone().value())
- 		.email(event.getEmail() == null ? null : event.getEmail().value())
- 		.code(event.getCode() == null ? null : event.getCode().value())
- 		.status(event.getStatus() == null ? null : event.getStatus().value())
- 		.source(event.getSource() == null ? null : event.getSource().value())
- 		.expiration(event.getExpiration() == null ? null : event.getExpiration().value())
- .build();
+VerificationCode entity = VerificationCode.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getNotes() !=null  && hasId(event.getNotes().value()) ) {
+            entity.setNotes( event.getNotes().value());
+        }
+ 		if(event.getToken() !=null  && hasId(event.getToken().value()) ) {
+            entity.setToken( event.getToken().value());
+        }
+ 		if(event.getUsername() !=null  && hasId(event.getUsername().value()) ) {
+            entity.setUsername( event.getUsername().value());
+        }
+ 		if(event.getPhone() !=null  && hasId(event.getPhone().value()) ) {
+            entity.setPhone( event.getPhone().value());
+        }
+ 		if(event.getEmail() !=null  && hasId(event.getEmail().value()) ) {
+            entity.setEmail( event.getEmail().value());
+        }
+ 		if(event.getCode() !=null  && hasId(event.getCode().value()) ) {
+            entity.setCode( event.getCode().value());
+        }
+ 		if(event.getStatus() !=null  && hasId(event.getStatus().value()) ) {
+            entity.setStatus( event.getStatus().value());
+        }
+ 		if(event.getSource() !=null  && hasId(event.getSource().value()) ) {
+            entity.setSource( event.getSource().value());
+        }
+ 		if(event.getExpiration() !=null  && hasId(event.getExpiration().value()) ) {
+            entity.setExpiration( event.getExpiration().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -70,34 +95,34 @@ VerificationCode entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("VerificationCode not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getNotes() != null) {
+	if(event.getNotes() != null  && hasId(event.getNotes().value())) {
 		entity.setNotes(event.getNotes().value());
     }
-	if(event.getToken() != null) {
+	if(event.getToken() != null  && hasId(event.getToken().value())) {
 		entity.setToken(event.getToken().value());
     }
-	if(event.getUsername() != null) {
+	if(event.getUsername() != null  && hasId(event.getUsername().value())) {
 		entity.setUsername(event.getUsername().value());
     }
-	if(event.getPhone() != null) {
+	if(event.getPhone() != null  && hasId(event.getPhone().value())) {
 		entity.setPhone(event.getPhone().value());
     }
-	if(event.getEmail() != null) {
+	if(event.getEmail() != null  && hasId(event.getEmail().value())) {
 		entity.setEmail(event.getEmail().value());
     }
-	if(event.getCode() != null) {
+	if(event.getCode() != null  && hasId(event.getCode().value())) {
 		entity.setCode(event.getCode().value());
     }
-	if(event.getStatus() != null) {
+	if(event.getStatus() != null  && hasId(event.getStatus().value())) {
 		entity.setStatus(event.getStatus().value());
     }
-	if(event.getSource() != null) {
+	if(event.getSource() != null  && hasId(event.getSource().value())) {
 		entity.setSource(event.getSource().value());
     }
-	if(event.getExpiration() != null) {
+	if(event.getExpiration() != null  && hasId(event.getExpiration().value())) {
 		entity.setExpiration(event.getExpiration().value());
     }
 

@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.customers.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.customers.domain.exception.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.UUID;
 import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.customers.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class CustomerAggregateTests extends BaseUnitTests {
@@ -20,8 +20,8 @@ void it_should_create_customer_with_valid_values() {
 	CustomerFirstName firstName = CustomerFirstName.create(UUID.randomUUID().toString());
 	CustomerLastName lastName = CustomerLastName.create(UUID.randomUUID().toString());
 	CustomerFullName fullName = CustomerFullName.create(UUID.randomUUID().toString());
-	CustomerBalance balance = CustomerBalance.create(5849.66);
-	CustomerBalanceDebt balanceDebt = CustomerBalanceDebt.create(4497.41);
+	CustomerBalance balance = CustomerBalance.create(9408.24);
+	CustomerBalanceDebt balanceDebt = CustomerBalanceDebt.create(2655.47);
 	CustomerPhone phone = CustomerPhone.create(UUID.randomUUID().toString());
 	CustomerEmail email = CustomerEmail.create(UUID.randomUUID().toString());
 	CustomerNotes notes = CustomerNotes.create(UUID.randomUUID().toString());
@@ -34,7 +34,7 @@ void it_should_create_customer_with_valid_values() {
 	CustomerCountry country = CustomerCountry.create(UUID.randomUUID().toString());
 	CustomerPostalCode postalCode = CustomerPostalCode.create(UUID.randomUUID().toString());
 	CustomerSyncAt syncAt = CustomerSyncAt.create(java.time.Instant.now().plusSeconds(3600));
-	CustomerIsActive isActive = CustomerIsActive.create(true);
+	CustomerIsActive isActive = CustomerIsActive.create(false);
 	CustomerCreatedBy createdBy = CustomerCreatedBy.create(UUID.randomUUID().toString());
 	CustomerTenant tenant = CustomerTenant.create(UUID.randomUUID().toString());
 	CustomerAggregate aggregateCustomerAggregate = new CustomerAggregate(id, remoteId, localId, code, firstName, lastName, fullName, balance, balanceDebt, phone, email, notes, status, company, addressLine1, addressLine2, city, region, country, postalCode, syncAt, isActive, createdBy, tenant);

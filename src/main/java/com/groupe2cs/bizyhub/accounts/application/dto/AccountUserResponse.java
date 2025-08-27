@@ -22,17 +22,25 @@ public class AccountUserResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String id;
 	@Schema(description = "", example = "")
-	private String name;
-	@Schema(description = "", example = "")
 	private String account;
 	@Schema(description = "", example = "")
 	private String user;
 	@Schema(description = "", example = "")
+	private String phone;
+	@Schema(description = "", example = "")
+	private String role;
+	@Schema(description = "", example = "")
+	private String status;
+	@Schema(description = "", example = "")
+	private String invitedBy;
+	@Schema(description = "", example = "")
 	private java.time.Instant syncAt;
 	@Schema(description = "", example = "")
-	private String username;
+	private java.time.Instant acceptedAt;
 	@Schema(description = "", example = "")
-	private String details;
+	private java.time.Instant revokedAt;
+	@Schema(description = "", example = "")
+	private String message;
 	@Schema(description = "", example = "")
 	private String remoteId;
 	@Schema(description = "", example = "")

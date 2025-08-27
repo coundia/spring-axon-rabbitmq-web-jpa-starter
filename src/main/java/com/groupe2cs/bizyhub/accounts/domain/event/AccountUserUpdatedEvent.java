@@ -18,12 +18,16 @@ import java.util.*;
 public class AccountUserUpdatedEvent implements Serializable {
 
 	private AccountUserId id;
-	private AccountUserName name;
 	private AccountUserAccount account;
 	private AccountUserUser user;
+	private AccountUserPhone phone;
+	private AccountUserRole role;
+	private AccountUserStatus status;
+	private AccountUserInvitedBy invitedBy;
 	private AccountUserSyncAt syncAt;
-	private AccountUserUsername username;
-	private AccountUserDetails details;
+	private AccountUserAcceptedAt acceptedAt;
+	private AccountUserRevokedAt revokedAt;
+	private AccountUserMessage message;
 	private AccountUserRemoteId remoteId;
 	private AccountUserLocalId localId;
 	private AccountUserIsActive isActive;

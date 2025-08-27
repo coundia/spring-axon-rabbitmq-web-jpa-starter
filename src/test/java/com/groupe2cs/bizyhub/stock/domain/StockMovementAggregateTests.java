@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.stock.domain;
 
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.stock.domain.exception.*;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
 import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.stock.domain.exception.*;
 
 
 public class StockMovementAggregateTests extends BaseUnitTests {
@@ -15,7 +15,7 @@ public class StockMovementAggregateTests extends BaseUnitTests {
 void it_should_create_stockMovement_with_valid_values() {
 	StockMovementId id = StockMovementId.create(UUID.randomUUID().toString());
 	StockMovementTypeStockMovement typeStockMovement = StockMovementTypeStockMovement.create(UUID.randomUUID().toString());
-	StockMovementQuantity quantity = StockMovementQuantity.create(73);
+	StockMovementQuantity quantity = StockMovementQuantity.create(19);
 	StockMovementRemoteId remoteId = StockMovementRemoteId.create(UUID.randomUUID().toString());
 	StockMovementLocalId localId = StockMovementLocalId.create(UUID.randomUUID().toString());
 	StockMovementCompany company = StockMovementCompany.create(UUID.randomUUID().toString());
@@ -55,16 +55,6 @@ void it_should_create_stockMovement_with_valid_values() {
 		void it_should_throw_when_quantity_is_invalid() {
 		StockMovementQuantityNotValid error = assertThrows(StockMovementQuantityNotValid.class, () -> StockMovementQuantity.create(-1));
 		assertThat(error.getMessage()).isEqualTo("Quantity is invalid");
-		}
-		@Test
-		void it_should_throw_when_company_is_invalid() {
-		StockMovementCompanyNotValid error = assertThrows(StockMovementCompanyNotValid.class, () -> StockMovementCompany.create(""));
-		assertThat(error.getMessage()).isEqualTo("Company is invalid");
-		}
-		@Test
-		void it_should_throw_when_productVariant_is_invalid() {
-		StockMovementProductVariantNotValid error = assertThrows(StockMovementProductVariantNotValid.class, () -> StockMovementProductVariant.create(""));
-		assertThat(error.getMessage()).isEqualTo("ProductVariant is invalid");
 		}
 
 }

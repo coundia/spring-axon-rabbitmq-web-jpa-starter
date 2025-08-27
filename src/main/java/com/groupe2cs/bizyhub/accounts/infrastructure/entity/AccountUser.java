@@ -32,18 +32,47 @@ public class AccountUser   extends AbstractAuditableEntity  {
 	private String id;
 
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
 		unique = false
 
 	)
 
-	private String name ;
-	@ManyToOne
-	@JoinColumn(name = "account_id", nullable = true)
-	private com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account account;
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = true)
-	private com.groupe2cs.bizyhub.security.infrastructure.entity.User user;
+	private String account ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String user ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String phone ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String role ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String status ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String invitedBy ;
 
 	@Column(nullable = true, 
 		unique = false
@@ -57,14 +86,21 @@ public class AccountUser   extends AbstractAuditableEntity  {
 
 	)
 
-	private String username ;
+	private java.time.Instant acceptedAt ;
 
 	@Column(nullable = true, 
 		unique = false
 
 	)
 
-	private String details ;
+	private java.time.Instant revokedAt ;
+
+	@Column(nullable = true, 		columnDefinition = "Text",
+		unique = false
+
+	)
+
+	private String message ;
 
 	@Column(nullable = true, 
 		unique = false
@@ -100,12 +136,16 @@ public class AccountUser   extends AbstractAuditableEntity  {
  	public String toString() {
 		return "AccountUser{" +
 		"id='" + id + '\'' +
-			", name=" + name +
 			", account=" + account +
 			", user=" + user +
+			", phone=" + phone +
+			", role=" + role +
+			", status=" + status +
+			", invitedBy=" + invitedBy +
 			", syncAt=" + syncAt +
-			", username=" + username +
-			", details=" + details +
+			", acceptedAt=" + acceptedAt +
+			", revokedAt=" + revokedAt +
+			", message=" + message +
 			", remoteId=" + remoteId +
 			", localId=" + localId +
 			", isActive=" + isActive +

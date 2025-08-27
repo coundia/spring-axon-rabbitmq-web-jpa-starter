@@ -39,10 +39,6 @@ private CommandGateway commandGateway;
 private AccountUserRepository accountUserRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository userDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -53,8 +49,6 @@ void it_should_return_only_user_accountUsers_for_normal_user() throws Exception 
 List<CreateAccountUserCommand> userCommands =
 AccountUserFixtures.randomManyViaCommand(
 commandGateway,accountUserRepository,
-accountDataRepository,
-userDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -90,8 +84,6 @@ void it_should_return_all_accountUsers_for_admin() throws Exception {
     AccountUserFixtures.randomManyViaCommand(
         commandGateway,
         accountUserRepository,
-         accountDataRepository,
-         userDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -104,8 +96,6 @@ void it_should_return_all_accountUsers_for_admin() throws Exception {
 List<CreateAccountUserCommand> adminCommands =
 AccountUserFixtures.randomManyViaCommand(
 commandGateway,accountUserRepository,
-        accountDataRepository,
-        userDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));

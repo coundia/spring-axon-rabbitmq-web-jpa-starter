@@ -52,9 +52,9 @@ void it_should_be_able_to_add_company() {
 		requestDTO.setRegion(UUID.randomUUID().toString());
 		requestDTO.setCountry(UUID.randomUUID().toString());
 		requestDTO.setPostalCode(UUID.randomUUID().toString());
-		requestDTO.setIsActive(false);
+		requestDTO.setIsActive(true);
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setIsDefault(false);
+		requestDTO.setIsDefault(true);
 
  		String uri = "/v1/commands/company";
 		ResponseEntity<CompanyResponse> response = this.postForEntity(uri, requestDTO, CompanyResponse.class);

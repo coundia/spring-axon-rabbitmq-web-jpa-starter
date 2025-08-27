@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.companies.domain;
 
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import com.groupe2cs.bizyhub.shared.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.companies.domain.exception.*;
 import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 
 
 public class CompanyAggregateTests extends BaseUnitTests {
@@ -30,7 +30,7 @@ void it_should_create_company_with_valid_values() {
 	CompanyRegion region = CompanyRegion.create(UUID.randomUUID().toString());
 	CompanyCountry country = CompanyCountry.create(UUID.randomUUID().toString());
 	CompanyPostalCode postalCode = CompanyPostalCode.create(UUID.randomUUID().toString());
-	CompanyIsActive isActive = CompanyIsActive.create(true);
+	CompanyIsActive isActive = CompanyIsActive.create(false);
 	CompanySyncAt syncAt = CompanySyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	CompanyIsDefault isDefault = CompanyIsDefault.create(true);
 	CompanyCreatedBy createdBy = CompanyCreatedBy.create(UUID.randomUUID().toString());

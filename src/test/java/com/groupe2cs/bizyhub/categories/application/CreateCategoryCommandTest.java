@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateCategoryCommand command = new CreateCategoryCommand(
- CategoryId.create(UUID.randomUUID().toString()) ,  CategoryCode.create(UUID.randomUUID().toString()) ,  CategoryName.create(UUID.randomUUID().toString()) ,  CategoryRemoteId.create(UUID.randomUUID().toString()) ,  CategoryLocalId.create(UUID.randomUUID().toString()) ,  CategoryDescription.create(UUID.randomUUID().toString()) ,  CategoryTypeEntry.create(UUID.randomUUID().toString()) ,  CategoryVersion.create(21) ,  CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  CategoryCreatedBy.create(UUID.randomUUID().toString()) ,  CategoryTenant.create(UUID.randomUUID().toString()) 
+ CategoryId.create(UUID.randomUUID().toString()) ,  CategoryCode.create(UUID.randomUUID().toString()) ,  CategoryName.create(UUID.randomUUID().toString()) ,  CategoryRemoteId.create(UUID.randomUUID().toString()) ,  CategoryLocalId.create(UUID.randomUUID().toString()) ,  CategoryDescription.create(UUID.randomUUID().toString()) ,  CategoryTypeEntry.create(UUID.randomUUID().toString()) ,  CategoryVersion.create(61) ,  CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  CategoryCreatedBy.create(UUID.randomUUID().toString()) ,  CategoryTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

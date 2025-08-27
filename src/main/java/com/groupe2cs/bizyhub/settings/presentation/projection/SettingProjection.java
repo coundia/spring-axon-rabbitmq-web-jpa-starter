@@ -26,26 +26,49 @@ public class SettingProjection {
 private final SettingRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(SettingCreatedEvent event) {
 try {
-Setting entity = Setting.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.value(event.getValue() == null ? null : event.getValue().value())
- 		.locale(event.getLocale() == null ? null : event.getLocale().value())
- 		.remoteId(event.getRemoteId() == null ? null : event.getRemoteId().value())
- 		.localId(event.getLocalId() == null ? null : event.getLocalId().value())
- 		.details(event.getDetails() == null ? null : event.getDetails().value())
- 		.syncAt(event.getSyncAt() == null ? null : event.getSyncAt().value())
- 		.isActive(event.getIsActive() == null ? null : event.getIsActive().value())
- .build();
+Setting entity = Setting.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 		if(event.getValue() !=null  && hasId(event.getValue().value()) ) {
+            entity.setValue( event.getValue().value());
+        }
+ 		if(event.getLocale() !=null  && hasId(event.getLocale().value()) ) {
+            entity.setLocale( event.getLocale().value());
+        }
+ 		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
+            entity.setRemoteId( event.getRemoteId().value());
+        }
+ 		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
+            entity.setLocalId( event.getLocalId().value());
+        }
+ 		if(event.getDetails() !=null  && hasId(event.getDetails().value()) ) {
+            entity.setDetails( event.getDetails().value());
+        }
+ 		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
+            entity.setSyncAt( event.getSyncAt().value());
+        }
+ 		if(event.getIsActive() !=null  && hasId(event.getIsActive().value()) ) {
+            entity.setIsActive( event.getIsActive().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -69,31 +92,31 @@ Setting entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("Setting not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
-	if(event.getValue() != null) {
+	if(event.getValue() != null  && hasId(event.getValue().value())) {
 		entity.setValue(event.getValue().value());
     }
-	if(event.getLocale() != null) {
+	if(event.getLocale() != null  && hasId(event.getLocale().value())) {
 		entity.setLocale(event.getLocale().value());
     }
-	if(event.getRemoteId() != null) {
+	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
     }
-	if(event.getLocalId() != null) {
+	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
     }
-	if(event.getDetails() != null) {
+	if(event.getDetails() != null  && hasId(event.getDetails().value())) {
 		entity.setDetails(event.getDetails().value());
     }
-	if(event.getSyncAt() != null) {
+	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());
     }
-	if(event.getIsActive() != null) {
+	if(event.getIsActive() != null  && hasId(event.getIsActive().value())) {
 		entity.setIsActive(event.getIsActive().value());
     }
 

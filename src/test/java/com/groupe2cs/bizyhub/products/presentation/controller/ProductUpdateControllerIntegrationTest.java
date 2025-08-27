@@ -33,10 +33,6 @@ public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository;
-    @Autowired
-    private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -46,8 +42,6 @@ public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests
 
         String existingId = ProductFixtures.randomOneViaCommand(
             commandGateway, productRepository,
-        unitDataRepository,
-        categoryDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -55,8 +49,6 @@ public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests
 
         CreateProductCommand updated = ProductFixtures.randomOneViaCommand(
             commandGatewayUpdate, productRepository,
-        unitDataRepository,
-        categoryDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -72,12 +64,12 @@ public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests
         body.add("name", UUID.randomUUID().toString());
         body.add("description", UUID.randomUUID().toString());
         body.add("barcode", UUID.randomUUID().toString());
-        body.add("unit", updated.getUnit().value());
+        body.add("unit", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("category", updated.getCategory().value());
-        body.add("defaultPrice", 7824.83);
+        body.add("category", UUID.randomUUID().toString());
+        body.add("defaultPrice", 4849.55);
         body.add("statuses", UUID.randomUUID().toString());
-        body.add("purchasePrice", 8581.82);
+        body.add("purchasePrice", 3244.13);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

@@ -59,9 +59,13 @@ public class StockLevel   extends AbstractAuditableEntity  {
 	)
 
 	private Integer stockAllocated ;
-	@ManyToOne
-	@JoinColumn(name = "productVariant_id", nullable = false)
-	private com.groupe2cs.bizyhub.products.infrastructure.entity.Product productVariant;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String productVariant ;
 
 	@Column(nullable = true, 
 		unique = false
@@ -69,9 +73,13 @@ public class StockLevel   extends AbstractAuditableEntity  {
 	)
 	@Builder.Default
 	private java.time.Instant syncAt  = java.time.Instant.now() ;
-	@ManyToOne
-	@JoinColumn(name = "company_id", nullable = false)
-	private com.groupe2cs.bizyhub.companies.infrastructure.entity.Company company;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String company ;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;

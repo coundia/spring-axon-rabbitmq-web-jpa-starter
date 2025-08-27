@@ -27,10 +27,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -46,12 +42,12 @@ void it_should_be_able_to_add_product() {
 		requestDTO.setName(UUID.randomUUID().toString());
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setBarcode(UUID.randomUUID().toString());
-		requestDTO.setUnit(com.groupe2cs.bizyhub.units.infrastructure.entity.UnitFixtures.randomOneViaCommand(commandGateway,unitDataRepository, user).getId().value());
+		requestDTO.setUnit(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setCategory(com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures.randomOneViaCommand(commandGateway,categoryDataRepository, user).getId().value());
-		requestDTO.setDefaultPrice(8938.02);
+		requestDTO.setCategory(UUID.randomUUID().toString());
+		requestDTO.setDefaultPrice(4408.18);
 		requestDTO.setStatuses(UUID.randomUUID().toString());
-		requestDTO.setPurchasePrice(6066.27);
+		requestDTO.setPurchasePrice(2699.71);
 
  		String uri = "/v1/commands/product";
 		ResponseEntity<ProductResponse> response = this.postForEntity(uri, requestDTO, ProductResponse.class);

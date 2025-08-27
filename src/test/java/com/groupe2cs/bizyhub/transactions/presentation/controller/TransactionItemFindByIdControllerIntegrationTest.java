@@ -29,12 +29,6 @@ private CommandGateway commandGateway;
 private TransactionItemRepository repository;
 
 @Autowired
-private com.groupe2cs.bizyhub.transactions.infrastructure.repository.TransactionRepository transactionDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -44,9 +38,6 @@ void it_should_be_able_to_get_transactionitem_by_id() {
 
 	String existingId = TransactionItemFixtures.randomOneViaCommand(
 	commandGateway,repository,
-        transactionDataRepository,
-        productDataRepository,
-        unitDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

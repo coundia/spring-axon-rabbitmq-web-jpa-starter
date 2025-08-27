@@ -57,13 +57,13 @@ public interface StockLevelRepository extends JpaRepository<StockLevel, String> 
 
         @Query("SELECT e FROM StockLevel e WHERE e.stockAllocated = :stockAllocated AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<StockLevel> findByStockAllocatedAndTenantId(Integer stockAllocated, String tenantId);
-        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.productVariant.id) LIKE LOWER(CONCAT('%', :productVariant, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<StockLevel> findByProductVariantIdAndCreatedById(String productVariant, String createdById);
-        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.productVariant.id) LIKE LOWER(CONCAT('%', :productVariant, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<StockLevel> findByProductVariantIdAndTenantName(String productVariant, String tenantName);
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.productVariant) LIKE LOWER(CONCAT('%', :productVariant, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<StockLevel> findByProductVariantAndCreatedById(String productVariant, String createdById);
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.productVariant) LIKE LOWER(CONCAT('%', :productVariant, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<StockLevel> findByProductVariantAndTenantName(String productVariant, String tenantName);
 
-        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.productVariant.id) LIKE LOWER(CONCAT('%', :productVariant, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<StockLevel> findByProductVariantIdAndTenantId(String productVariant, String tenantId);
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.productVariant) LIKE LOWER(CONCAT('%', :productVariant, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<StockLevel> findByProductVariantAndTenantId(String productVariant, String tenantId);
         @Query("""
         SELECT e FROM StockLevel e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -81,13 +81,13 @@ public interface StockLevelRepository extends JpaRepository<StockLevel, String> 
          List<StockLevel> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
 
 
-        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<StockLevel> findByCompanyIdAndCreatedById(String company, String createdById);
-        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<StockLevel> findByCompanyIdAndTenantName(String company, String tenantName);
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<StockLevel> findByCompanyAndCreatedById(String company, String createdById);
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<StockLevel> findByCompanyAndTenantName(String company, String tenantName);
 
-        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.company.id) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<StockLevel> findByCompanyIdAndTenantId(String company, String tenantId);
+        @Query("SELECT e FROM StockLevel e WHERE LOWER(e.company) LIKE LOWER(CONCAT('%', :company, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<StockLevel> findByCompanyAndTenantId(String company, String tenantId);
         @Query("SELECT e FROM StockLevel e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<StockLevel> findByCreatedByIdAndCreatedById(String createdBy, String createdById);
         @Query("SELECT e FROM StockLevel e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

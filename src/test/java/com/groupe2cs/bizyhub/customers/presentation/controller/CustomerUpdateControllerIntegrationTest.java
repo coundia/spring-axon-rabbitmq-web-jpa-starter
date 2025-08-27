@@ -33,8 +33,6 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -44,7 +42,6 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
 
         String existingId = CustomerFixtures.randomOneViaCommand(
             commandGateway, customerRepository,
-        companyDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -52,7 +49,6 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
 
         CreateCustomerCommand updated = CustomerFixtures.randomOneViaCommand(
             commandGatewayUpdate, customerRepository,
-        companyDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -68,13 +64,13 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
         body.add("firstName", UUID.randomUUID().toString());
         body.add("lastName", UUID.randomUUID().toString());
         body.add("fullName", UUID.randomUUID().toString());
-        body.add("balance", 2699.97);
-        body.add("balanceDebt", 2224.15);
+        body.add("balance", 2413.92);
+        body.add("balanceDebt", 9194.66);
         body.add("phone", UUID.randomUUID().toString());
         body.add("email", UUID.randomUUID().toString());
         body.add("notes", UUID.randomUUID().toString());
         body.add("status", UUID.randomUUID().toString());
-        body.add("company", updated.getCompany().value());
+        body.add("company", UUID.randomUUID().toString());
         body.add("addressLine1", UUID.randomUUID().toString());
         body.add("addressLine2", UUID.randomUUID().toString());
         body.add("city", UUID.randomUUID().toString());

@@ -26,22 +26,37 @@ public class ApiKeyProjection {
 private final ApiKeyRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(ApiKeyCreatedEvent event) {
 try {
-ApiKey entity = ApiKey.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.appKey(event.getAppKey() == null ? null : event.getAppKey().value())
- 		.username(event.getUsername() == null ? null : event.getUsername().value())
- 		.active(event.getActive() == null ? null : event.getActive().value())
- 		.expiration(event.getExpiration() == null ? null : event.getExpiration().value())
- .build();
+ApiKey entity = ApiKey.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getAppKey() !=null  && hasId(event.getAppKey().value()) ) {
+            entity.setAppKey( event.getAppKey().value());
+        }
+ 		if(event.getUsername() !=null  && hasId(event.getUsername().value()) ) {
+            entity.setUsername( event.getUsername().value());
+        }
+ 		if(event.getActive() !=null  && hasId(event.getActive().value()) ) {
+            entity.setActive( event.getActive().value());
+        }
+ 		if(event.getExpiration() !=null  && hasId(event.getExpiration().value()) ) {
+            entity.setExpiration( event.getExpiration().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -65,19 +80,19 @@ ApiKey entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("ApiKey not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getAppKey() != null) {
+	if(event.getAppKey() != null  && hasId(event.getAppKey().value())) {
 		entity.setAppKey(event.getAppKey().value());
     }
-	if(event.getUsername() != null) {
+	if(event.getUsername() != null  && hasId(event.getUsername().value())) {
 		entity.setUsername(event.getUsername().value());
     }
-	if(event.getActive() != null) {
+	if(event.getActive() != null  && hasId(event.getActive().value())) {
 		entity.setActive(event.getActive().value());
     }
-	if(event.getExpiration() != null) {
+	if(event.getExpiration() != null  && hasId(event.getExpiration().value())) {
 		entity.setExpiration(event.getExpiration().value());
     }
 

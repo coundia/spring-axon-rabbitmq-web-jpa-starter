@@ -33,10 +33,6 @@ public class StockMovementUpdateControllerIntegrationTest extends BaseIntegratio
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository companyDataRepository;
-    @Autowired
-    private com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository productVariantDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -46,8 +42,6 @@ public class StockMovementUpdateControllerIntegrationTest extends BaseIntegratio
 
         String existingId = StockMovementFixtures.randomOneViaCommand(
             commandGateway, stockmovementRepository,
-        companyDataRepository,
-        productVariantDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -55,8 +49,6 @@ public class StockMovementUpdateControllerIntegrationTest extends BaseIntegratio
 
         CreateStockMovementCommand updated = StockMovementFixtures.randomOneViaCommand(
             commandGatewayUpdate, stockmovementRepository,
-        companyDataRepository,
-        productVariantDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -67,12 +59,12 @@ public class StockMovementUpdateControllerIntegrationTest extends BaseIntegratio
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("typeStockMovement", UUID.randomUUID().toString());
-        body.add("quantity", 64);
+        body.add("quantity", 15);
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("company", updated.getCompany().value());
+        body.add("company", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("productVariant", updated.getProductVariant().value());
+        body.add("productVariant", UUID.randomUUID().toString());
         body.add("orderLineId", UUID.randomUUID().toString());
         body.add("discriminator", UUID.randomUUID().toString());
 

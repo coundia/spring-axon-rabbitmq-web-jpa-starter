@@ -42,10 +42,10 @@ void it_should_be_able_to_add_user() {
 		requestDTO.setLastName(UUID.randomUUID().toString());
 		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setTelephone(UUID.randomUUID().toString());
-		requestDTO.setLimitPerDay(4);
+		requestDTO.setLimitPerDay(27);
 		requestDTO.setIsPremium(false);
 		requestDTO.setEnabled(false);
-		requestDTO.setIsBan(true);
+		requestDTO.setIsBan(false);
 		requestDTO.setMessage(UUID.randomUUID().toString());
 
  		String uri = "/v1/admin/commands/user";

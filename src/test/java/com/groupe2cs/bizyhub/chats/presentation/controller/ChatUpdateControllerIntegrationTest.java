@@ -33,8 +33,6 @@ public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository accountDataRepository;
-    @Autowired
     private FileManagerRepository filesDataRepository;
     @Autowired
     private UserRepository createdByDataRepository;
@@ -46,7 +44,6 @@ public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
         String existingId = ChatFixtures.randomOneViaCommand(
             commandGateway, chatRepository,
-        accountDataRepository,
         filesDataRepository,
         createdByDataRepository,
         tenantDataRepository,
@@ -55,7 +52,6 @@ public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
         CreateChatCommand updated = ChatFixtures.randomOneViaCommand(
             commandGatewayUpdate, chatRepository,
-        accountDataRepository,
         filesDataRepository,
         createdByDataRepository,
         tenantDataRepository,
@@ -73,7 +69,7 @@ public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("account", updated.getAccount().value());
+        body.add("account", UUID.randomUUID().toString());
         body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
 
         HttpHeaders multipartHeaders = new HttpHeaders();

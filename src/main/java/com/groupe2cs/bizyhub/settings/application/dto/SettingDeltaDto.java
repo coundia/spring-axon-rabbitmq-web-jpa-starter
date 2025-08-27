@@ -26,17 +26,17 @@ public class SettingDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "f488434e-113d-40a8-9e31-e676a6837734")
+		@Schema(description = "", example = "8037d4bb-28b4-4361-bfc0-fe730c8b5beb")
 		private String name;
-		@Schema(description = "", example = "650f0dc3-fc63-42d6-8397-435127abbeac")
+		@Schema(description = "", example = "65119cd0-b3d8-4fb0-b921-a712fbeda859")
 		private String value;
-		@Schema(description = "", example = "1a2721e0-e971-4af9-80f3-ca166d131d0d")
+		@Schema(description = "", example = "a28b312d-2fb0-405f-b43e-bf59431b71d1")
 		private String locale;
-		@Schema(description = "", example = "93af327c-b52e-4264-ad60-b496bd5d5676")
+		@Schema(description = "", example = "524b6d79-f291-4ecd-bb18-4cd505a58181")
 		private String remoteId;
-		@Schema(description = "", example = "def31ccf-20f5-49a6-af90-d2ce53f88cee")
+		@Schema(description = "", example = "ec52b540-3c5e-4e8a-be39-35c4178aec7d")
 		private String localId;
-		@Schema(description = "", example = "f2acd514-9f0d-4071-b209-1f54e8c318c5")
+		@Schema(description = "", example = "2626ed28-8843-4cbf-b75c-d1e734810834")
 		private String details;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;

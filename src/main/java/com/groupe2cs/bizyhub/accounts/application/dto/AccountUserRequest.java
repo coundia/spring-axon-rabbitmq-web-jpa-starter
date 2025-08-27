@@ -19,21 +19,29 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "AccountUserRequest", description = "Request payload for AccountUser operations")
 public class AccountUserRequest implements Serializable {
 
-	@Schema(description = "", example = "66a226a8-ac70-4774-8e5c-0204ad4f89d6")
-	private String name;
-	@Schema(description = "", example = "8044f2ba-e233-4a9c-bffe-7b97c4c59f50")
+	@Schema(description = "", example = "3486908a-501d-4481-be04-a44d02e9a17f")
 	private String account;
-	@Schema(description = "", example = "05e5b107-bc59-4b1a-9e76-cad0833bad81")
+	@Schema(description = "", example = "33881a13-d7b6-4d27-8094-c36b76aca619")
 	private String user;
+	@Schema(description = "", example = "d89bc096-3614-4f6b-9a18-f67610c66087")
+	private String phone;
+	@Schema(description = "", example = "99da806d-db0d-438b-b64f-7a7bc43e9947")
+	private String role;
+	@Schema(description = "", example = "0af2d7f4-1d51-4ae2-9c42-ad399249bda0")
+	private String status;
+	@Schema(description = "", example = "50b83eee-7d8f-4570-b392-9918f88239a5")
+	private String invitedBy;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "bae998ea-a342-4563-9236-c78826031a3e")
-	private String username;
-	@Schema(description = "", example = "54398424-d1b4-495d-b9e2-9fb77d9714c5")
-	private String details;
-	@Schema(description = "", example = "f8b1632e-8c1a-4c70-8b9d-53d9df73f042")
+	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+	private java.time.Instant acceptedAt;
+	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+	private java.time.Instant revokedAt;
+	@Schema(description = "", example = "42cb140e-78ba-4670-adf1-2dde42d6080e")
+	private String message;
+	@Schema(description = "", example = "593003d2-afcf-4153-8058-e46f8e87030f")
 	private String remoteId;
-	@Schema(description = "", example = "bd5a08ed-935e-4441-bd9b-659f6b4d0a8f")
+	@Schema(description = "", example = "cdc88408-ff2f-4e35-a67e-d71332fa50ed")
 	private String localId;
 	@Schema(description = "", example = "false")
 	private Boolean isActive;

@@ -26,28 +26,55 @@ public class FileManagerProjection {
 private final FileManagerRepository repository;
 
 
+private static boolean hasId(Object s) {
+    return s != null ;
+}
+
+
 @EventHandler
 public void on(FileManagerCreatedEvent event) {
 try {
-FileManager entity = FileManager.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.details(event.getDetails() == null ? null : event.getDetails().value())
- 		.objectId(event.getObjectId() == null ? null : event.getObjectId().value())
- 		.objectName(event.getObjectName() == null ? null : event.getObjectName().value())
- 		.originalName(event.getOriginalName() == null ? null : event.getOriginalName().value())
- 		.mimeType(event.getMimeType() == null ? null : event.getMimeType().value())
- 		.size(event.getSize() == null ? null : event.getSize().value())
- 		.path(event.getPath() == null ? null : event.getPath().value())
- 		.uri(event.getUri() == null ? null : event.getUri().value())
- 		.isPublic(event.getIsPublic() == null ? null : event.getIsPublic().value())
- .build();
+FileManager entity = FileManager.builder().build();
+		if(event.getId() !=null  && hasId(event.getId().value()) ) {
+            entity.setId( event.getId().value());
+        }
+ 		if(event.getName() !=null  && hasId(event.getName().value()) ) {
+            entity.setName( event.getName().value());
+        }
+ 		if(event.getDetails() !=null  && hasId(event.getDetails().value()) ) {
+            entity.setDetails( event.getDetails().value());
+        }
+ 		if(event.getObjectId() !=null  && hasId(event.getObjectId().value()) ) {
+            entity.setObjectId( event.getObjectId().value());
+        }
+ 		if(event.getObjectName() !=null  && hasId(event.getObjectName().value()) ) {
+            entity.setObjectName( event.getObjectName().value());
+        }
+ 		if(event.getOriginalName() !=null  && hasId(event.getOriginalName().value()) ) {
+            entity.setOriginalName( event.getOriginalName().value());
+        }
+ 		if(event.getMimeType() !=null  && hasId(event.getMimeType().value()) ) {
+            entity.setMimeType( event.getMimeType().value());
+        }
+ 		if(event.getSize() !=null  && hasId(event.getSize().value()) ) {
+            entity.setSize( event.getSize().value());
+        }
+ 		if(event.getPath() !=null  && hasId(event.getPath().value()) ) {
+            entity.setPath( event.getPath().value());
+        }
+ 		if(event.getUri() !=null  && hasId(event.getUri().value()) ) {
+            entity.setUri( event.getUri().value());
+        }
+ 		if(event.getIsPublic() !=null  && hasId(event.getIsPublic().value()) ) {
+            entity.setIsPublic( event.getIsPublic().value());
+        }
+ 
 
-entity.setId(event.getId().value());
+    entity.setId(event.getId().value());
 
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
+    if(event.getCreatedBy() !=null){
+        entity.setCreatedBy( new User(event.getCreatedBy().value()));
+    }
 	if(event.getTenant() != null) {
 	entity.setTenant(new Tenant(event.getTenant().value()));
 	}
@@ -71,37 +98,37 @@ FileManager entity = repository.findById(event.getId().value())
 .orElseThrow(() -> new RuntimeException("FileManager not found"));
 
 
-	if(event.getId() != null) {
+	if(event.getId() != null  && hasId(event.getId().value())) {
 		entity.setId(event.getId().value());
     }
-	if(event.getName() != null) {
+	if(event.getName() != null  && hasId(event.getName().value())) {
 		entity.setName(event.getName().value());
     }
-	if(event.getDetails() != null) {
+	if(event.getDetails() != null  && hasId(event.getDetails().value())) {
 		entity.setDetails(event.getDetails().value());
     }
-	if(event.getObjectId() != null) {
+	if(event.getObjectId() != null  && hasId(event.getObjectId().value())) {
 		entity.setObjectId(event.getObjectId().value());
     }
-	if(event.getObjectName() != null) {
+	if(event.getObjectName() != null  && hasId(event.getObjectName().value())) {
 		entity.setObjectName(event.getObjectName().value());
     }
-	if(event.getOriginalName() != null) {
+	if(event.getOriginalName() != null  && hasId(event.getOriginalName().value())) {
 		entity.setOriginalName(event.getOriginalName().value());
     }
-	if(event.getMimeType() != null) {
+	if(event.getMimeType() != null  && hasId(event.getMimeType().value())) {
 		entity.setMimeType(event.getMimeType().value());
     }
-	if(event.getSize() != null) {
+	if(event.getSize() != null  && hasId(event.getSize().value())) {
 		entity.setSize(event.getSize().value());
     }
-	if(event.getPath() != null) {
+	if(event.getPath() != null  && hasId(event.getPath().value())) {
 		entity.setPath(event.getPath().value());
     }
-	if(event.getUri() != null) {
+	if(event.getUri() != null  && hasId(event.getUri().value())) {
 		entity.setUri(event.getUri().value());
     }
-	if(event.getIsPublic() != null) {
+	if(event.getIsPublic() != null  && hasId(event.getIsPublic().value())) {
 		entity.setIsPublic(event.getIsPublic().value());
     }
 

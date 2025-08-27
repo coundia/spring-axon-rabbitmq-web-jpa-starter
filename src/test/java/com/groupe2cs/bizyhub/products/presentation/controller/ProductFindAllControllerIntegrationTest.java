@@ -39,10 +39,6 @@ private CommandGateway commandGateway;
 private ProductRepository productRepository;
 
 @Autowired
-private com.groupe2cs.bizyhub.units.infrastructure.repository.UnitRepository unitDataRepository ;
-@Autowired
-private com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository categoryDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -53,8 +49,6 @@ void it_should_return_only_user_products_for_normal_user() throws Exception {
 List<CreateProductCommand> userCommands =
 ProductFixtures.randomManyViaCommand(
 commandGateway,productRepository,
-unitDataRepository,
-categoryDataRepository,
 createdByDataRepository,
 tenantDataRepository,
  3, login("user", "user"));
@@ -90,8 +84,6 @@ void it_should_return_all_products_for_admin() throws Exception {
     ProductFixtures.randomManyViaCommand(
         commandGateway,
         productRepository,
-         unitDataRepository,
-         categoryDataRepository,
          createdByDataRepository,
          tenantDataRepository,
          5, login("user", "user")
@@ -104,8 +96,6 @@ void it_should_return_all_products_for_admin() throws Exception {
 List<CreateProductCommand> adminCommands =
 ProductFixtures.randomManyViaCommand(
 commandGateway,productRepository,
-        unitDataRepository,
-        categoryDataRepository,
         createdByDataRepository,
         tenantDataRepository,
  5, login("admin", "admin"));
