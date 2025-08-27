@@ -76,6 +76,5 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
        List<PasswordReset> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
-
-
+	List<PasswordReset> findByToken(String token);
 }
