@@ -20,9 +20,9 @@ void it_should_create_user_with_valid_values() {
 	UserLastName lastName = UserLastName.create(UUID.randomUUID().toString());
 	UserEmail email = UserEmail.create(UUID.randomUUID().toString());
 	UserTelephone telephone = UserTelephone.create(UUID.randomUUID().toString());
-	UserLimitPerDay limitPerDay = UserLimitPerDay.create(7);
-	UserIsPremium isPremium = UserIsPremium.create(false);
-	UserEnabled enabled = UserEnabled.create(true);
+	UserLimitPerDay limitPerDay = UserLimitPerDay.create(12);
+	UserIsPremium isPremium = UserIsPremium.create(true);
+	UserEnabled enabled = UserEnabled.create(false);
 	UserIsBan isBan = UserIsBan.create(true);
 	UserMessage message = UserMessage.create(UUID.randomUUID().toString());
 	UserCreatedBy createdBy = UserCreatedBy.create(UUID.randomUUID().toString());

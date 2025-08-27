@@ -97,10 +97,6 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
        List<AccountUser> findByTenantIdAndTenantId(String tenant, String tenantId);
 
 
-	List<AccountUser> findByPhoneAndTenantId(String phone, String tenantId);
-
-    List<AccountUser> findByPhoneAndCreatedById(String phone, String createdById);
-
     List<AccountUser> findByStatusAndTenantId(String status, String tenantId);
 
     List<AccountUser> findByStatusAndCreatedById(String status, String createdById);
@@ -124,4 +120,16 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
     List<AccountUser> findByMessageAndTenantId(String message, String tenantId);
 
     List<AccountUser> findByMessageAndCreatedById(String message, String createdById);
+
+    List<AccountUser> findByIdentityAndTenantId(String identity, String tenantId);
+
+    List<AccountUser> findByIdentityAndCreatedById(String identity, String createdById);
+
+    List<AccountUser> findByPhoneAndTenantId(String phone, String tenantId);
+
+    List<AccountUser> findByPhoneAndCreatedById(String phone, String createdById);
+
+    List<AccountUser> findByEmailAndTenantId(String email, String tenantId);
+
+    List<AccountUser> findByEmailAndCreatedById(String email, String createdById);
 }

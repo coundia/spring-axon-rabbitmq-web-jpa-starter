@@ -38,7 +38,9 @@ void it_should_be_able_to_add_accountuser() {
 
 		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setUser(UUID.randomUUID().toString());
+		requestDTO.setIdentity(UUID.randomUUID().toString());
 		requestDTO.setPhone(UUID.randomUUID().toString());
+		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setRole(UUID.randomUUID().toString());
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setInvitedBy(UUID.randomUUID().toString());
@@ -48,7 +50,7 @@ void it_should_be_able_to_add_accountuser() {
 		requestDTO.setMessage(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
-		requestDTO.setIsActive(true);
+		requestDTO.setIsActive(false);
 
  		String uri = "/v1/commands/accountUser";
 		ResponseEntity<AccountUserResponse> response = this.postForEntity(uri, requestDTO, AccountUserResponse.class);
@@ -57,7 +59,9 @@ void it_should_be_able_to_add_accountuser() {
 		assertThat(response.getBody().getId()).isNotNull();
 		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getUser()).isEqualTo(requestDTO.getUser());
+		assertThat(response.getBody().getIdentity()).isEqualTo(requestDTO.getIdentity());
 		assertThat(response.getBody().getPhone()).isEqualTo(requestDTO.getPhone());
+		assertThat(response.getBody().getEmail()).isEqualTo(requestDTO.getEmail());
 		assertThat(response.getBody().getRole()).isEqualTo(requestDTO.getRole());
 		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());
 		assertThat(response.getBody().getInvitedBy()).isEqualTo(requestDTO.getInvitedBy());

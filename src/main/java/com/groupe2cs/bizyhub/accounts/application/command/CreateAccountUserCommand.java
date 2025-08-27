@@ -27,7 +27,9 @@ public class CreateAccountUserCommand implements Serializable {
 	private AccountUserId id = AccountUserId.create(UUID.randomUUID().toString());
  	private AccountUserAccount account;
  	private AccountUserUser user;
+ 	private AccountUserIdentity identity;
  	private AccountUserPhone phone;
+ 	private AccountUserEmail email;
  	private AccountUserRole role;
  	private AccountUserStatus status;
  	private AccountUserInvitedBy invitedBy;
@@ -44,7 +46,9 @@ public class CreateAccountUserCommand implements Serializable {
  
    AccountUserAccount account , 
    AccountUserUser user , 
+   AccountUserIdentity identity , 
    AccountUserPhone phone , 
+   AccountUserEmail email , 
    AccountUserRole role , 
    AccountUserStatus status , 
    AccountUserInvitedBy invitedBy , 
@@ -62,7 +66,9 @@ public class CreateAccountUserCommand implements Serializable {
  
   this.account = account ; 
   this.user = user ; 
+  this.identity = identity ; 
   this.phone = phone ; 
+  this.email = email ; 
   this.role = role ; 
   this.status = status ; 
   this.invitedBy = invitedBy ; 

@@ -44,8 +44,14 @@ AccountUser entity = AccountUser.builder().build();
  		if(event.getUser() !=null  && hasId(event.getUser().value()) ) {
             entity.setUser( event.getUser().value());
         }
+ 		if(event.getIdentity() !=null  && hasId(event.getIdentity().value()) ) {
+            entity.setIdentity( event.getIdentity().value());
+        }
  		if(event.getPhone() !=null  && hasId(event.getPhone().value()) ) {
             entity.setPhone( event.getPhone().value());
+        }
+ 		if(event.getEmail() !=null  && hasId(event.getEmail().value()) ) {
+            entity.setEmail( event.getEmail().value());
         }
  		if(event.getRole() !=null  && hasId(event.getRole().value()) ) {
             entity.setRole( event.getRole().value());
@@ -116,8 +122,14 @@ AccountUser entity = repository.findById(event.getId().value())
 	if(event.getUser() != null  && hasId(event.getUser().value())) {
 		entity.setUser(event.getUser().value());
     }
+	if(event.getIdentity() != null  && hasId(event.getIdentity().value())) {
+		entity.setIdentity(event.getIdentity().value());
+    }
 	if(event.getPhone() != null  && hasId(event.getPhone().value())) {
 		entity.setPhone(event.getPhone().value());
+    }
+	if(event.getEmail() != null  && hasId(event.getEmail().value())) {
+		entity.setEmail(event.getEmail().value());
     }
 	if(event.getRole() != null  && hasId(event.getRole().value())) {
 		entity.setRole(event.getRole().value());

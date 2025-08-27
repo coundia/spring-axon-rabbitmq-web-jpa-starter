@@ -26,7 +26,9 @@ public class AccountUserAggregate {
 private AccountUserId id;
 private AccountUserAccount account;
 private AccountUserUser user;
+private AccountUserIdentity identity;
 private AccountUserPhone phone;
+private AccountUserEmail email;
 private AccountUserRole role;
 private AccountUserStatus status;
 private AccountUserInvitedBy invitedBy;
@@ -47,7 +49,9 @@ apply(new AccountUserCreatedEvent(
 		command.getId(),
 		command.getAccount(),
 		command.getUser(),
+		command.getIdentity(),
 		command.getPhone(),
+		command.getEmail(),
 		command.getRole(),
 		command.getStatus(),
 		command.getInvitedBy(),
@@ -76,7 +80,9 @@ apply(new AccountUserUpdatedEvent(
 		command.getId(),
 		command.getAccount(),
 		command.getUser(),
+		command.getIdentity(),
 		command.getPhone(),
+		command.getEmail(),
 		command.getRole(),
 		command.getStatus(),
 		command.getInvitedBy(),
@@ -97,7 +103,9 @@ public void on(AccountUserCreatedEvent event) {
 	this.id = event.getId();
 	this.account = event.getAccount();
 	this.user = event.getUser();
+	this.identity = event.getIdentity();
 	this.phone = event.getPhone();
+	this.email = event.getEmail();
 	this.role = event.getRole();
 	this.status = event.getStatus();
 	this.invitedBy = event.getInvitedBy();
@@ -122,7 +130,9 @@ public void on(AccountUserUpdatedEvent event) {
 this.id = event.getId();
 	this.account = event.getAccount();
 	this.user = event.getUser();
+	this.identity = event.getIdentity();
 	this.phone = event.getPhone();
+	this.email = event.getEmail();
 	this.role = event.getRole();
 	this.status = event.getStatus();
 	this.invitedBy = event.getInvitedBy();

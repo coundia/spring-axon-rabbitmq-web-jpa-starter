@@ -16,7 +16,9 @@ void it_should_create_accountUser_with_valid_values() {
 	AccountUserId id = AccountUserId.create(UUID.randomUUID().toString());
 	AccountUserAccount account = AccountUserAccount.create(UUID.randomUUID().toString());
 	AccountUserUser user = AccountUserUser.create(UUID.randomUUID().toString());
+	AccountUserIdentity identity = AccountUserIdentity.create(UUID.randomUUID().toString());
 	AccountUserPhone phone = AccountUserPhone.create(UUID.randomUUID().toString());
+	AccountUserEmail email = AccountUserEmail.create(UUID.randomUUID().toString());
 	AccountUserRole role = AccountUserRole.create(UUID.randomUUID().toString());
 	AccountUserStatus status = AccountUserStatus.create(UUID.randomUUID().toString());
 	AccountUserInvitedBy invitedBy = AccountUserInvitedBy.create(UUID.randomUUID().toString());
@@ -29,12 +31,14 @@ void it_should_create_accountUser_with_valid_values() {
 	AccountUserIsActive isActive = AccountUserIsActive.create(false);
 	AccountUserCreatedBy createdBy = AccountUserCreatedBy.create(UUID.randomUUID().toString());
 	AccountUserTenant tenant = AccountUserTenant.create(UUID.randomUUID().toString());
-	AccountUserAggregate aggregateAccountUserAggregate = new AccountUserAggregate(id, account, user, phone, role, status, invitedBy, syncAt, acceptedAt, revokedAt, message, remoteId, localId, isActive, createdBy, tenant);
+	AccountUserAggregate aggregateAccountUserAggregate = new AccountUserAggregate(id, account, user, identity, phone, email, role, status, invitedBy, syncAt, acceptedAt, revokedAt, message, remoteId, localId, isActive, createdBy, tenant);
 	assertThat(aggregateAccountUserAggregate.getId()).isNotNull();
 	assertThat(aggregateAccountUserAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateAccountUserAggregate.getAccount()).isEqualTo(account);
 	assertThat(aggregateAccountUserAggregate.getUser()).isEqualTo(user);
+	assertThat(aggregateAccountUserAggregate.getIdentity()).isEqualTo(identity);
 	assertThat(aggregateAccountUserAggregate.getPhone()).isEqualTo(phone);
+	assertThat(aggregateAccountUserAggregate.getEmail()).isEqualTo(email);
 	assertThat(aggregateAccountUserAggregate.getRole()).isEqualTo(role);
 	assertThat(aggregateAccountUserAggregate.getStatus()).isEqualTo(status);
 	assertThat(aggregateAccountUserAggregate.getInvitedBy()).isEqualTo(invitedBy);

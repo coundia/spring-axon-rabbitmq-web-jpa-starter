@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserAccountNotVali
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserUserNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserIdentityNotValid;
 import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserPhoneNotValid;
+import com.groupe2cs.bizyhub.accounts.domain.exception.AccountUserEmailNotValid;
 
 import java.io.Serializable;
 import lombok.Getter;
@@ -21,37 +22,37 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Builder
-public class AccountUserPhone implements Serializable {
+public class AccountUserEmail implements Serializable {
 
-private String phone;
+private String email;
 
-public AccountUserPhone(String phone) {
-this.phone = phone;
+public AccountUserEmail(String email) {
+this.email = email;
 }
 
-public static AccountUserPhone create(String phone) {
+public static AccountUserEmail create(String email) {
 
-	return new AccountUserPhone(phone);
+	return new AccountUserEmail(email);
 }
 
 public String value() {
-return this.phone;
+return this.email;
 }
 
 @Override
 public boolean equals(Object o) {
 if (this == o) return true;
-if (!(o instanceof AccountUserPhone that)) return false;
-return this.phone.equals(that.phone);
+if (!(o instanceof AccountUserEmail that)) return false;
+return this.email.equals(that.email);
 }
 
 @Override
 public int hashCode() {
-return java.util.Objects.hash(phone);
+return java.util.Objects.hash(email);
 }
 
 @Override
 public String toString() {
-return String.valueOf(phone);
+return String.valueOf(email);
 }
 }

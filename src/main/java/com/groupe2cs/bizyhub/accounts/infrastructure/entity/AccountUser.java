@@ -51,7 +51,21 @@ public class AccountUser   extends AbstractAuditableEntity  {
 
 	)
 
+	private String identity ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String phone ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String email ;
 
 	@Column(nullable = true, 
 		unique = false
@@ -138,7 +152,9 @@ public class AccountUser   extends AbstractAuditableEntity  {
 		"id='" + id + '\'' +
 			", account=" + account +
 			", user=" + user +
+			", identity=" + identity +
 			", phone=" + phone +
+			", email=" + email +
 			", role=" + role +
 			", status=" + status +
 			", invitedBy=" + invitedBy +

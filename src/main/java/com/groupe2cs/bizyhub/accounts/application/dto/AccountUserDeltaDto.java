@@ -26,17 +26,21 @@ public class AccountUserDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "c3422d07-a4dd-4dd6-bdfe-9613f206609c")
+		@Schema(description = "", example = "e3cac8ea-d462-4158-8282-581c61e78039")
 		private String account;
-		@Schema(description = "", example = "70842ca7-de2a-41f1-8dd4-a251322993dc")
+		@Schema(description = "", example = "e2845eaf-1c92-4562-9731-6bfb2cde6ea3")
 		private String user;
-		@Schema(description = "", example = "aca662a5-7e82-4f11-a6e8-07e114aaf0af")
+		@Schema(description = "", example = "8b1251fc-feca-4315-a8ec-35e038c12aaa")
+		private String identity;
+		@Schema(description = "", example = "b276650e-31de-4acf-94cd-23430f5012a5")
 		private String phone;
-		@Schema(description = "", example = "ceedc9b2-de8f-4dc0-a84a-267693c8514e")
+		@Schema(description = "", example = "cf5b7ef8-947f-4822-a43d-16e2e204cbd1")
+		private String email;
+		@Schema(description = "", example = "4b13cedd-9f35-4931-ae5a-2528d38abd11")
 		private String role;
-		@Schema(description = "", example = "89fdbede-c059-46d4-8d2c-2cc2b4b39b15")
+		@Schema(description = "", example = "5c35b2e0-7b17-4670-b347-33c819f5410e")
 		private String status;
-		@Schema(description = "", example = "b5ba99ad-f362-4f3a-a3d5-5db50bce60b2")
+		@Schema(description = "", example = "6ad4b05e-cc41-46a9-8b42-448156edc355")
 		private String invitedBy;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
@@ -44,13 +48,13 @@ public class AccountUserDeltaDto implements Serializable {
 		private java.time.Instant acceptedAt;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant revokedAt;
-		@Schema(description = "", example = "8befd560-c0c8-4773-8d3c-4a557b0968d7")
+		@Schema(description = "", example = "0b63d3af-f93c-48dc-b3d9-8a99eed2132f")
 		private String message;
-		@Schema(description = "", example = "73a95e1c-128b-41dc-8971-0e2fd53ad0e3")
+		@Schema(description = "", example = "6c0245fc-ddfa-4a03-b6e7-f060a8efba7b")
 		private String remoteId;
-		@Schema(description = "", example = "04e264bf-8feb-49ab-8388-327763befb32")
+		@Schema(description = "", example = "d1803166-19f6-4ff8-8e99-9009fe4ff472")
 		private String localId;
-		@Schema(description = "", example = "false")
+		@Schema(description = "", example = "true")
 		private Boolean isActive;
 
 }

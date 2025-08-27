@@ -33,6 +33,8 @@ public class AccountUserDeletedEvent implements Serializable {
 	
 	
 	
+	
+	
 
 private AccountUserId id;
 

@@ -58,12 +58,32 @@ public List<AccountUserResponse> findByAccountUserUser(
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountUserResponse.class));
 	return future.join();
 }
+public List<AccountUserResponse> findByAccountUserIdentity(
+	AccountUserIdentity value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountUserIdentityQuery query = new FindByAccountUserIdentityQuery(value,metaRequest);
+	CompletableFuture<List<AccountUserResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountUserResponse.class));
+	return future.join();
+}
 public List<AccountUserResponse> findByAccountUserPhone(
 	AccountUserPhone value,
 	MetaRequest metaRequest
 	) {
 
 	FindByAccountUserPhoneQuery query = new FindByAccountUserPhoneQuery(value,metaRequest);
+	CompletableFuture<List<AccountUserResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountUserResponse.class));
+	return future.join();
+}
+public List<AccountUserResponse> findByAccountUserEmail(
+	AccountUserEmail value,
+	MetaRequest metaRequest
+	) {
+
+	FindByAccountUserEmailQuery query = new FindByAccountUserEmailQuery(value,metaRequest);
 	CompletableFuture<List<AccountUserResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(AccountUserResponse.class));
 	return future.join();

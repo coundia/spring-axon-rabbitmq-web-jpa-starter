@@ -60,7 +60,9 @@ public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationT
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("account", UUID.randomUUID().toString());
         body.add("user", UUID.randomUUID().toString());
+        body.add("identity", UUID.randomUUID().toString());
         body.add("phone", UUID.randomUUID().toString());
+        body.add("email", UUID.randomUUID().toString());
         body.add("role", UUID.randomUUID().toString());
         body.add("status", UUID.randomUUID().toString());
         body.add("invitedBy", UUID.randomUUID().toString());
@@ -70,7 +72,7 @@ public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationT
         body.add("message", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("isActive", false);
+        body.add("isActive", true);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

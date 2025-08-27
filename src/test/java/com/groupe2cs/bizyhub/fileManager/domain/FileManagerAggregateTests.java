@@ -20,10 +20,10 @@ void it_should_create_fileManager_with_valid_values() {
 	FileManagerObjectName objectName = FileManagerObjectName.create(UUID.randomUUID().toString());
 	FileManagerOriginalName originalName = FileManagerOriginalName.create(UUID.randomUUID().toString());
 	FileManagerMimeType mimeType = FileManagerMimeType.create(UUID.randomUUID().toString());
-	FileManagerSize size = FileManagerSize.create(37218L);
+	FileManagerSize size = FileManagerSize.create(18207L);
 	FileManagerPath path = FileManagerPath.create(UUID.randomUUID().toString());
 	FileManagerUri uri = FileManagerUri.create(UUID.randomUUID().toString());
-	FileManagerIsPublic isPublic = FileManagerIsPublic.create(false);
+	FileManagerIsPublic isPublic = FileManagerIsPublic.create(true);
 	FileManagerCreatedBy createdBy = FileManagerCreatedBy.create(UUID.randomUUID().toString());
 	FileManagerTenant tenant = FileManagerTenant.create(UUID.randomUUID().toString());
 	FileManagerAggregate aggregateFileManagerAggregate = new FileManagerAggregate(id, name, details, objectId, objectName, originalName, mimeType, size, path, uri, isPublic, createdBy, tenant);

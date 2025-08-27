@@ -26,7 +26,11 @@ public class AccountUserResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String user;
 	@Schema(description = "", example = "")
+	private String identity;
+	@Schema(description = "", example = "")
 	private String phone;
+	@Schema(description = "", example = "")
+	private String email;
 	@Schema(description = "", example = "")
 	private String role;
 	@Schema(description = "", example = "")

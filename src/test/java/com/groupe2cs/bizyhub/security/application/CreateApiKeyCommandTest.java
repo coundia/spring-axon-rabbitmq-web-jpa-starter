@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateApiKeyCommand command = new CreateApiKeyCommand(
- ApiKeyId.create(UUID.randomUUID().toString()) ,  ApiKeyAppKey.create(UUID.randomUUID().toString()) ,  ApiKeyUsername.create(UUID.randomUUID().toString()) ,  ApiKeyActive.create(false) ,  ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)) ,  ApiKeyCreatedBy.create(UUID.randomUUID().toString()) ,  ApiKeyTenant.create(UUID.randomUUID().toString()) 
+ ApiKeyId.create(UUID.randomUUID().toString()) ,  ApiKeyAppKey.create(UUID.randomUUID().toString()) ,  ApiKeyUsername.create(UUID.randomUUID().toString()) ,  ApiKeyActive.create(true) ,  ApiKeyCreatedAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ApiKeyExpiration.create(java.time.Instant.now().plusSeconds(3600)) ,  ApiKeyCreatedBy.create(UUID.randomUUID().toString()) ,  ApiKeyTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

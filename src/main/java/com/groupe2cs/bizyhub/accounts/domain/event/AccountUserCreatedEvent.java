@@ -20,7 +20,9 @@ public class AccountUserCreatedEvent implements Serializable {
 	private AccountUserId id;
 	private AccountUserAccount account;
 	private AccountUserUser user;
+	private AccountUserIdentity identity;
 	private AccountUserPhone phone;
+	private AccountUserEmail email;
 	private AccountUserRole role;
 	private AccountUserStatus status;
 	private AccountUserInvitedBy invitedBy;
