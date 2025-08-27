@@ -119,7 +119,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
         @Query("""
         SELECT e FROM Transaction e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
+        AND e.createdBy.id = :createdById OR EXISTS (
+                                                       SELECT 1
+                                                       FROM AccountUser au
+                                                       WHERE au.identity = e.createdBy.username
+                                                     )
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<Transaction> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);

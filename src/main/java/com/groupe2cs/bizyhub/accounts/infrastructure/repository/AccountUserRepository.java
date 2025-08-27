@@ -43,10 +43,23 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, String
 
         @Query("SELECT e FROM AccountUser e WHERE LOWER(e.user) LIKE LOWER(CONCAT('%', :user, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<AccountUser> findByUserAndTenantId(String user, String tenantId);
+
         @Query("""
         SELECT e FROM AccountUser e
-        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC)
+        .toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+          AND (
+                 e.createdBy.id = :createdById
+                 OR EXISTS (
+                      SELECT 1 FROM User u
+                      WHERE u.id = :createdById
+                        AND (
+                              (e.identity IS NOT NULL AND u.username  = e.identity)
+                           OR (e.email    IS NOT NULL AND u.email     = e.email)
+                           OR (e.phone    IS NOT NULL AND u.telephone = e.phone)
+                        )
+                 )
+            )
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<AccountUser> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);

@@ -141,10 +141,24 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
         @Query("SELECT e FROM Account e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Account> findByLocalIdAndTenantId(String localId, String tenantId);
+
         @Query("""
         SELECT e FROM Account e
-        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC)
+        .toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+            AND (
+                 e.createdBy.id = :createdById
+                 OR EXISTS (
+                      SELECT 1
+                      FROM AccountUser au, User u
+                      WHERE au.account = e.localId
+                        AND (
+                              (au.identity IS NOT NULL AND au.identity = u.username)
+                           OR (au.email    IS NOT NULL AND au.email    = u.email)
+                           OR (au.phone    IS NOT NULL AND au.phone    = u.telephone)
+                        )
+                 )
+            )
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<Account> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
@@ -152,7 +166,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
          @Query("""
         SELECT e FROM Account e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.tenant.id = :tenantId
+        AND e.tenant.id = :tenantId   
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<Account> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
