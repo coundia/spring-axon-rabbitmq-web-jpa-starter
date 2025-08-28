@@ -27,6 +27,7 @@ private SyncStateId id;
 private SyncStateEntityTable entityTable;
 private SyncStateRemoteId remoteId;
 private SyncStateLocalId localId;
+private SyncStateAccount account;
 private SyncStateSyncAt syncAt;
 private SyncStateLastSyncAt lastSyncAt;
 private SyncStateLastCursor lastCursor;
@@ -41,6 +42,7 @@ apply(new SyncStateCreatedEvent(
 		command.getEntityTable(),
 		command.getRemoteId(),
 		command.getLocalId(),
+		command.getAccount(),
 		command.getSyncAt(),
 		command.getLastSyncAt(),
 		command.getLastCursor(),
@@ -63,6 +65,7 @@ apply(new SyncStateUpdatedEvent(
 		command.getEntityTable(),
 		command.getRemoteId(),
 		command.getLocalId(),
+		command.getAccount(),
 		command.getSyncAt(),
 		command.getLastSyncAt(),
 		command.getLastCursor(),
@@ -77,6 +80,7 @@ public void on(SyncStateCreatedEvent event) {
 	this.entityTable = event.getEntityTable();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
+	this.account = event.getAccount();
 	this.syncAt = event.getSyncAt();
 	this.lastSyncAt = event.getLastSyncAt();
 	this.lastCursor = event.getLastCursor();
@@ -95,6 +99,7 @@ this.id = event.getId();
 	this.entityTable = event.getEntityTable();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
+	this.account = event.getAccount();
 	this.syncAt = event.getSyncAt();
 	this.lastSyncAt = event.getLastSyncAt();
 	this.lastCursor = event.getLastCursor();

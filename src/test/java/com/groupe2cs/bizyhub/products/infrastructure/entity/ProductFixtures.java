@@ -80,9 +80,10 @@ public class ProductFixtures {
 				.unit(ProductUnit.create(UUID.randomUUID().toString()))
 				.syncAt(ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.category(ProductCategory.create(UUID.randomUUID().toString()))
-				.defaultPrice(ProductDefaultPrice.create(526.58))
+				.account(ProductAccount.create(UUID.randomUUID().toString()))
+				.defaultPrice(ProductDefaultPrice.create(9319.47))
 				.statuses(ProductStatuses.create(UUID.randomUUID().toString()))
-				.purchasePrice(ProductPurchasePrice.create(8798.65))
+				.purchasePrice(ProductPurchasePrice.create(2450.58))
 			.build();
 
 		command.setCreatedBy(ProductCreatedBy.create(user.getId()));
@@ -109,9 +110,10 @@ public class ProductFixtures {
         .unit(ProductUnit.create(UUID.randomUUID().toString()))
         .syncAt(ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .category(ProductCategory.create(UUID.randomUUID().toString()))
-        .defaultPrice(ProductDefaultPrice.create(526.58))
+        .account(ProductAccount.create(UUID.randomUUID().toString()))
+        .defaultPrice(ProductDefaultPrice.create(9319.47))
         .statuses(ProductStatuses.create(UUID.randomUUID().toString()))
-        .purchasePrice(ProductPurchasePrice.create(8798.65))
+        .purchasePrice(ProductPurchasePrice.create(2450.58))
         .build();
 
 		command.setCreatedBy(ProductCreatedBy.create(user.getId()));

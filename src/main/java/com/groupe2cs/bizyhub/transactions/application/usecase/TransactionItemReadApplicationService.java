@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import com.groupe2cs.bizyhub.transactions.application.query.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.transactions.application.mapper.*;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.transactions.application.query.*;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -84,6 +84,16 @@ public List<TransactionItemResponse> findByTransactionItemUnit(
 	) {
 
 	FindByTransactionItemUnitQuery query = new FindByTransactionItemUnitQuery(value,metaRequest);
+	CompletableFuture<List<TransactionItemResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionItemResponse.class));
+	return future.join();
+}
+public List<TransactionItemResponse> findByTransactionItemAccount(
+	TransactionItemAccount value,
+	MetaRequest metaRequest
+	) {
+
+	FindByTransactionItemAccountQuery query = new FindByTransactionItemAccountQuery(value,metaRequest);
 	CompletableFuture<List<TransactionItemResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TransactionItemResponse.class));
 	return future.join();

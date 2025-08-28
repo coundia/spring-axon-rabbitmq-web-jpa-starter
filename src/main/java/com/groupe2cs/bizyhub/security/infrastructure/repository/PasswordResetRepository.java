@@ -50,7 +50,6 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<PasswordReset> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
-
          @Query("""
         SELECT e FROM PasswordReset e
         WHERE e.expiration >= :#{#expiration.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -58,6 +57,7 @@ public interface PasswordResetRepository extends JpaRepository<PasswordReset, St
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<PasswordReset> findByExpirationAndTenantId(java.time.Instant expiration, String tenantId);
+
 
 
         @Query("SELECT e FROM PasswordReset e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

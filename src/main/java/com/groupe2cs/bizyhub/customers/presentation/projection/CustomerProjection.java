@@ -74,6 +74,9 @@ Customer entity = Customer.builder().build();
  		if(event.getStatus() !=null  && hasId(event.getStatus().value()) ) {
             entity.setStatus( event.getStatus().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getCompany() !=null  && hasId(event.getCompany().value()) ) {
             entity.setCompany( event.getCompany().value());
         }
@@ -169,6 +172,9 @@ Customer entity = repository.findById(event.getId().value())
     }
 	if(event.getStatus() != null  && hasId(event.getStatus().value())) {
 		entity.setStatus(event.getStatus().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getCompany() != null  && hasId(event.getCompany().value())) {
 		entity.setCompany(event.getCompany().value());

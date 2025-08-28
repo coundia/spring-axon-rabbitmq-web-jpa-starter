@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
 
 import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.mapper.*;
-import com.groupe2cs.bizyhub.chats.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.chats.application.query.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.chats.application.command.*;
+import com.groupe2cs.bizyhub.chats.application.mapper.*;
 import java.util.List;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -20,45 +20,22 @@ public class ChatUpdateApplicationService {
 private final FileStorageService fileStorageService;
 private final CommandGateway commandGateway;
 
-public ChatResponse updateChat(
-ChatId id, List<MultipartFile> filesMultipartFile, 
-		String messages,
-		String responsesJson,
-		String responses,
-		String state,
-		java.time.Instant syncAt,
-		String remoteId,
-		String localId,
-		String account,
-		java.time.Instant dateTransaction
-,
+
+public ChatResponse updateChat(ChatId id,ChatRequest request,
 MetaRequest metaRequest
-) {
+){
 
 UpdateChatCommand command = ChatMapper.toUpdateCommand(
-    id,
-    new ChatMessages(messages),
-     new ChatResponsesJson(responsesJson),
-     new ChatResponses(responses),
-     new ChatState(state),
-     new ChatSyncAt(syncAt),
-     new ChatRemoteId(remoteId),
-     new ChatLocalId(localId),
-     new ChatAccount(account),
-     new ChatDateTransaction(dateTransaction)  
+id,
+request
 );
 
-    command.setCreatedBy(ChatCreatedBy.create(metaRequest.getUserId()));
-    command.setTenant(ChatTenant.create(metaRequest.getTenantId()));
+command.setCreatedBy(ChatCreatedBy.create(metaRequest.getUserId()));
+command.setTenant(ChatTenant.create(metaRequest.getTenantId()));
 
-    commandGateway.sendAndWait(command);
+commandGateway.sendAndWait(command);
 
-    metaRequest.setObjectId(command.getId().value());
-    metaRequest.setObjectName("chat");
-    fileStorageService.storeFile(filesMultipartFile, metaRequest);
-
-    return ChatMapper.toResponse(command);
+return ChatMapper.toResponse(command);
 }
-
 
 }

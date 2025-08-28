@@ -28,11 +28,11 @@ public List<ChangeLogResponse> handle(FindByChangeLogEntityIdQuery query) {
 	 List<ChangeLog> entities = null;
 	 String value = query.getEntityId().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByEntityIdAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByEntityIdAndCreatedById(value, metaRequest.getUserId());
-	 }
+//	 if(metaRequest.isAdmin()) {
+//	    entities = repository.findByEntityIdAndTenantId(value, metaRequest.getTenantId());
+//	 }else{
+//	    entities = repository.findByEntityIdAndCreatedById(value, metaRequest.getUserId());
+//	 }
 
  	return entities.stream()
 	.map(ChangeLogMapper::toResponse)

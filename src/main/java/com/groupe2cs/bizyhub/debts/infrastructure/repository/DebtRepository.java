@@ -78,7 +78,6 @@ public interface DebtRepository extends JpaRepository<Debt, String> {
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<Debt> findByDueDateAndCreatedById(java.time.Instant dueDate, String createdById);
-
          @Query("""
         SELECT e FROM Debt e
         WHERE e.dueDate >= :#{#dueDate.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -88,6 +87,7 @@ public interface DebtRepository extends JpaRepository<Debt, String> {
          List<Debt> findByDueDateAndTenantId(java.time.Instant dueDate, String tenantId);
 
 
+
         @Query("SELECT e FROM Debt e WHERE LOWER(e.statuses) LIKE LOWER(CONCAT('%', :statuses, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Debt> findByStatusesAndCreatedById(String statuses, String createdById);
         @Query("SELECT e FROM Debt e WHERE LOWER(e.statuses) LIKE LOWER(CONCAT('%', :statuses, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -95,14 +95,13 @@ public interface DebtRepository extends JpaRepository<Debt, String> {
 
         @Query("SELECT e FROM Debt e WHERE LOWER(e.statuses) LIKE LOWER(CONCAT('%', :statuses, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Debt> findByStatusesAndTenantId(String statuses, String tenantId);
-        @Query("""
-        SELECT e FROM Debt e
-        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Debt> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+        @Query("SELECT e FROM Debt e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Debt> findByAccountAndCreatedById(String account, String createdById);
+        @Query("SELECT e FROM Debt e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Debt> findByAccountAndTenantName(String account, String tenantName);
 
+        @Query("SELECT e FROM Debt e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Debt> findByAccountAndTenantId(String account, String tenantId);
          @Query("""
         SELECT e FROM Debt e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -110,6 +109,7 @@ public interface DebtRepository extends JpaRepository<Debt, String> {
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<Debt> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
 
 
         @Query("SELECT e FROM Debt e WHERE LOWER(e.customer) LIKE LOWER(CONCAT('%', :customer, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -141,6 +141,46 @@ public interface DebtRepository extends JpaRepository<Debt, String> {
         @Query("SELECT e FROM Debt e WHERE LOWER(e.tenant.id) LIKE LOWER(CONCAT('%', :tenant, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Debt> findByTenantIdAndTenantId(String tenant, String tenantId);
 
+
+	@Query("""
+        SELECT e FROM Debt  e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+         AND (
+                 e.createdBy.id = :createdById
+                 OR EXISTS (
+                      SELECT 1
+                      FROM AccountUser au, User u
+                      WHERE au.account = e.account
+                        AND (
+                              (au.identity IS NOT NULL AND au.identity = u.username)
+                           OR (au.email    IS NOT NULL AND au.email    = u.email)
+                           OR (au.phone    IS NOT NULL AND au.phone    = u.telephone)
+                        )
+                 )
+            )
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Debt> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+            select case when count(e)>0 then true else false end
+                 from Debt  e
+                     where e.id=:id
+                        and (
+                            e.createdBy.id = :userId
+                            or exists (
+                                select 1
+                                    from AccountUser au, User u
+                                    where au.account = e.account
+                                    and (
+                                    (au.identity is not null and au.identity = u.username)
+                                        or (au.email is not null and au.email = u.email)
+                                        or (au.phone is not null and au.phone = u.telephone)
+                                    )
+                        )
+            )
+            """)
+    boolean isOwner( @Param("id") String id,@Param("userId") String userId);
 
 
 

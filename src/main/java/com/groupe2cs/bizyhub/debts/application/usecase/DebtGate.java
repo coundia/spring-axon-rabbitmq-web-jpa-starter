@@ -86,6 +86,8 @@ public class DebtGate {
 			return false;
 		}
 		Debt entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Debt {}: {}", userId, objectId, result);
 		return result;

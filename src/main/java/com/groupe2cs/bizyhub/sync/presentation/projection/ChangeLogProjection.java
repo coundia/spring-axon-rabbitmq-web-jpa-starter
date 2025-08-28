@@ -41,8 +41,8 @@ ChangeLog entity = ChangeLog.builder().build();
  		if(event.getEntityTable() !=null  && hasId(event.getEntityTable().value()) ) {
             entity.setEntityTable( event.getEntityTable().value());
         }
- 		if(event.getEntityId() !=null  && hasId(event.getEntityId().value()) ) {
-            entity.setEntityId( event.getEntityId().value());
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
         }
  		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
             entity.setRemoteId( event.getRemoteId().value());
@@ -104,8 +104,8 @@ ChangeLog entity = repository.findById(event.getId().value())
 	if(event.getEntityTable() != null  && hasId(event.getEntityTable().value())) {
 		entity.setEntityTable(event.getEntityTable().value());
     }
-	if(event.getEntityId() != null  && hasId(event.getEntityId().value())) {
-		entity.setEntityId(event.getEntityId().value());
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());

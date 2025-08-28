@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.categories.domain.exception.CategoryCodeNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryNameNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryRemoteIdNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryLocalIdNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryAccountNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryDescriptionNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryTypeEntryNotValid;
 

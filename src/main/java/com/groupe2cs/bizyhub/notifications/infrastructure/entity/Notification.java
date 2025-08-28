@@ -72,6 +72,13 @@ public class Notification   extends AbstractAuditableEntity  {
 
 	)
 
+	private String account ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String localId ;
 
 	@Column(nullable = true, 
@@ -113,6 +120,7 @@ public class Notification   extends AbstractAuditableEntity  {
 			", message=" + message +
 			", status=" + status +
 			", remoteId=" + remoteId +
+			", account=" + account +
 			", localId=" + localId +
 			", syncAt=" + syncAt +
 			", reserved=" + reserved +

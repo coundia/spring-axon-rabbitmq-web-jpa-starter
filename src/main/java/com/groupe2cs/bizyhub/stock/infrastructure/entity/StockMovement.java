@@ -65,6 +65,13 @@ public class StockMovement   extends AbstractAuditableEntity  {
 
 	)
 
+	private String account ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String company ;
 
 	@Column(nullable = true, 
@@ -112,6 +119,7 @@ public class StockMovement   extends AbstractAuditableEntity  {
 			", quantity=" + quantity +
 			", remoteId=" + remoteId +
 			", localId=" + localId +
+			", account=" + account +
 			", company=" + company +
 			", syncAt=" + syncAt +
 			", productVariant=" + productVariant +

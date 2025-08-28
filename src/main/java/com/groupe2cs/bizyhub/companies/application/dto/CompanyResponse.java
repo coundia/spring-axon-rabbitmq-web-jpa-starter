@@ -52,6 +52,8 @@ public class CompanyResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String country;
 	@Schema(description = "", example = "")
+	private String account;
+	@Schema(description = "", example = "")
 	private String postalCode;
 	@Schema(description = "", example = "")
 	private Boolean isActive;

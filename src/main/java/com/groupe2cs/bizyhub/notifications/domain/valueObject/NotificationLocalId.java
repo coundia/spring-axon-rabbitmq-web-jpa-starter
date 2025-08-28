@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationTitleNot
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationMessageNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationStatusNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationRemoteIdNotValid;
+import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationAccountNotValid;
 import com.groupe2cs.bizyhub.notifications.domain.exception.NotificationLocalIdNotValid;
 
 import java.io.Serializable;

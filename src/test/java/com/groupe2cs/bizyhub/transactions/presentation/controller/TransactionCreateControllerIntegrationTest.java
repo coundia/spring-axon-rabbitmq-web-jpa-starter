@@ -40,7 +40,7 @@ void it_should_be_able_to_add_transaction() {
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setDescription(UUID.randomUUID().toString());
-		requestDTO.setAmount(489.11);
+		requestDTO.setAmount(3518.42);
 		requestDTO.setTypeEntry(UUID.randomUUID().toString());
 		requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setStatus(UUID.randomUUID().toString());

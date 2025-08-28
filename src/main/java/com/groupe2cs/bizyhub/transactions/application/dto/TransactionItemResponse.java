@@ -32,6 +32,8 @@ public class TransactionItemResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String unit;
 	@Schema(description = "", example = "")
+	private String account;
+	@Schema(description = "", example = "")
 	private String remoteId;
 	@Schema(description = "", example = "")
 	private String localId;

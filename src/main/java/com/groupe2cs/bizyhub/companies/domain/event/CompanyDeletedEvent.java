@@ -39,6 +39,7 @@ public class CompanyDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private CompanyId id;
 

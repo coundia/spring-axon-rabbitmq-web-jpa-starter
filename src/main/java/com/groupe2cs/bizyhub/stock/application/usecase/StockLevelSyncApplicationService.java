@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.stock.application.usecase;
 import com.groupe2cs.bizyhub.stock.application.command.*;
-import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.stock.application.dto.*;
+import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -28,6 +28,7 @@ public class StockLevelSyncApplicationService {
 								.localId(StockLevelLocalId.create(d.getLocalId()))
 								.stockOnHand(StockLevelStockOnHand.create(d.getStockOnHand()))
 								.stockAllocated(StockLevelStockAllocated.create(d.getStockAllocated()))
+								.account(StockLevelAccount.create(d.getAccount()))
 								.productVariant(StockLevelProductVariant.create(d.getProductVariant()))
 								.syncAt(StockLevelSyncAt.create(d.getSyncAt()))
 								.company(StockLevelCompany.create(d.getCompany()))
@@ -56,6 +57,7 @@ public class StockLevelSyncApplicationService {
 							.localId(StockLevelLocalId.create(d.getLocalId()))
 							.stockOnHand(StockLevelStockOnHand.create(d.getStockOnHand()))
 							.stockAllocated(StockLevelStockAllocated.create(d.getStockAllocated()))
+							.account(StockLevelAccount.create(d.getAccount()))
 							.productVariant(StockLevelProductVariant.create(d.getProductVariant()))
 							.syncAt(StockLevelSyncAt.create(d.getSyncAt()))
 							.company(StockLevelCompany.create(d.getCompany()))

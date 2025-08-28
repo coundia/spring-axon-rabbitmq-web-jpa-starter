@@ -27,6 +27,7 @@ public class ProductUpdatedEvent implements Serializable {
 	private ProductUnit unit;
 	private ProductSyncAt syncAt;
 	private ProductCategory category;
+	private ProductAccount account;
 	private ProductDefaultPrice defaultPrice;
 	private ProductStatuses statuses;
 	private ProductPurchasePrice purchasePrice;

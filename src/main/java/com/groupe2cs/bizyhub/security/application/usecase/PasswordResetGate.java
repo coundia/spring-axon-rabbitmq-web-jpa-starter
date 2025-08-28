@@ -86,6 +86,8 @@ public class PasswordResetGate {
 			return false;
 		}
 		PasswordReset entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on PasswordReset {}: {}", userId, objectId, result);
 		return result;

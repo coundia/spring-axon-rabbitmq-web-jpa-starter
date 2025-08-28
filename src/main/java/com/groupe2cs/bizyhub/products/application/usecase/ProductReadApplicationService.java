@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.products.application.mapper.*;
-import com.groupe2cs.bizyhub.products.application.query.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.products.application.query.*;
+import com.groupe2cs.bizyhub.products.application.mapper.*;
+import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -124,6 +124,16 @@ public List<ProductResponse> findByProductCategory(
 	) {
 
 	FindByProductCategoryQuery query = new FindByProductCategoryQuery(value,metaRequest);
+	CompletableFuture<List<ProductResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ProductResponse.class));
+	return future.join();
+}
+public List<ProductResponse> findByProductAccount(
+	ProductAccount value,
+	MetaRequest metaRequest
+	) {
+
+	FindByProductAccountQuery query = new FindByProductAccountQuery(value,metaRequest);
 	CompletableFuture<List<ProductResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(ProductResponse.class));
 	return future.join();

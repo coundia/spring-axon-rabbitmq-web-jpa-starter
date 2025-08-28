@@ -57,7 +57,6 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<ApiKey> findByCreatedAtAndCreatedById(java.time.Instant createdAt, String createdById);
-
          @Query("""
         SELECT e FROM ApiKey e
         WHERE e.createdAt >= :#{#createdAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -67,6 +66,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
          List<ApiKey> findByCreatedAtAndTenantId(java.time.Instant createdAt, String tenantId);
 
 
+
         @Query("""
         SELECT e FROM ApiKey e
         WHERE e.expiration >= :#{#expiration.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -74,7 +74,6 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<ApiKey> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
-
          @Query("""
         SELECT e FROM ApiKey e
         WHERE e.expiration >= :#{#expiration.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -82,6 +81,7 @@ public interface ApiKeyRepository extends JpaRepository<ApiKey, String> {
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<ApiKey> findByExpirationAndTenantId(java.time.Instant expiration, String tenantId);
+
 
 
         @Query("SELECT e FROM ApiKey e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

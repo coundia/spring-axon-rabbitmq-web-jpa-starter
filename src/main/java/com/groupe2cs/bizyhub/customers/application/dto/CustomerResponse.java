@@ -46,6 +46,8 @@ public class CustomerResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String status;
 	@Schema(description = "", example = "")
+	private String account;
+	@Schema(description = "", example = "")
 	private String company;
 	@Schema(description = "", example = "")
 	private String addressLine1;

@@ -121,6 +121,13 @@ public class Customer   extends AbstractAuditableEntity  {
 
 	)
 
+	private String account ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String company ;
 
 	@Column(nullable = true, 
@@ -204,6 +211,7 @@ public class Customer   extends AbstractAuditableEntity  {
 			", email=" + email +
 			", notes=" + notes +
 			", status=" + status +
+			", account=" + account +
 			", company=" + company +
 			", addressLine1=" + addressLine1 +
 			", addressLine2=" + addressLine2 +

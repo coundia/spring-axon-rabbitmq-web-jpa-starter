@@ -86,6 +86,8 @@ public class ChatGate {
 			return false;
 		}
 		Chat entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Chat {}: {}", userId, objectId, result);
 		return result;

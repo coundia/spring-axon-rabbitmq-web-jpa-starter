@@ -32,6 +32,8 @@ public class SettingResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String localId;
 	@Schema(description = "", example = "")
+	private String account;
+	@Schema(description = "", example = "")
 	private String details;
 	@Schema(description = "", example = "")
 	private java.time.Instant syncAt;

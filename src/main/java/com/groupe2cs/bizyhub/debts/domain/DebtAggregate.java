@@ -32,6 +32,7 @@ private DebtBalance balance;
 private DebtBalanceDebt balanceDebt;
 private DebtDueDate dueDate;
 private DebtStatuses statuses;
+private DebtAccount account;
 private DebtSyncAt syncAt;
 private DebtCustomer customer;
 private DebtIsActive isActive;
@@ -51,6 +52,7 @@ apply(new DebtCreatedEvent(
 		command.getBalanceDebt(),
 		command.getDueDate(),
 		command.getStatuses(),
+		command.getAccount(),
 		command.getSyncAt(),
 		command.getCustomer(),
 		command.getIsActive(),
@@ -78,6 +80,7 @@ apply(new DebtUpdatedEvent(
 		command.getBalanceDebt(),
 		command.getDueDate(),
 		command.getStatuses(),
+		command.getAccount(),
 		command.getSyncAt(),
 		command.getCustomer(),
 		command.getIsActive(),
@@ -97,6 +100,7 @@ public void on(DebtCreatedEvent event) {
 	this.balanceDebt = event.getBalanceDebt();
 	this.dueDate = event.getDueDate();
 	this.statuses = event.getStatuses();
+	this.account = event.getAccount();
 	this.syncAt = event.getSyncAt();
 	this.customer = event.getCustomer();
 	this.isActive = event.getIsActive();
@@ -120,6 +124,7 @@ this.id = event.getId();
 	this.balanceDebt = event.getBalanceDebt();
 	this.dueDate = event.getDueDate();
 	this.statuses = event.getStatuses();
+	this.account = event.getAccount();
 	this.syncAt = event.getSyncAt();
 	this.customer = event.getCustomer();
 	this.isActive = event.getIsActive();

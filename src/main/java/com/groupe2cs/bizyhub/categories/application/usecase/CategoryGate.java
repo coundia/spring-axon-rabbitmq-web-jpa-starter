@@ -86,6 +86,8 @@ public class CategoryGate {
 			return false;
 		}
 		Category entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Category {}: {}", userId, objectId, result);
 		return result;

@@ -26,19 +26,21 @@ public class CategoryDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "2ad82320-413c-4868-81e5-5cf4325d9719")
+		@Schema(description = "", example = "88d437f2-2443-455e-890c-4e5e459f1560")
 		private String code;
-		@Schema(description = "", example = "3fdb3b78-e34e-4e1c-b4aa-a0cba69d5106")
+		@Schema(description = "", example = "94e63651-de0a-44e8-9677-6b2eb0a51650")
 		private String name;
-		@Schema(description = "", example = "2d67d945-7c75-4d9f-8880-d8838706317c")
+		@Schema(description = "", example = "4f78b034-63dd-49a3-8dd8-9daebf3194f8")
 		private String remoteId;
-		@Schema(description = "", example = "278c0059-6c66-426e-ab17-f9e288aeeb25")
+		@Schema(description = "", example = "fc8f32d1-82ca-4484-b55b-f66c4f3f689d")
 		private String localId;
-		@Schema(description = "", example = "8db9b374-311d-443f-a114-0096b15c3114")
+		@Schema(description = "", example = "83df2ccb-2e0a-4577-ac7f-9a89cb36febe")
+		private String account;
+		@Schema(description = "", example = "1fd059f2-8b2f-4ddb-a662-056e37de30d0")
 		private String description;
-		@Schema(description = "", example = "adbbc5c7-7412-4085-8d1b-09fb26bd1706")
+		@Schema(description = "", example = "08d5b49d-8032-4af4-9d9c-7478dda3fba6")
 		private String typeEntry;
-		@Schema(description = "", example = "66")
+		@Schema(description = "", example = "41")
 		private Integer version;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;

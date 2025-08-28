@@ -42,10 +42,10 @@ void it_should_be_able_to_add_filemanager() {
 		requestDTO.setObjectName(UUID.randomUUID().toString());
 		requestDTO.setOriginalName(UUID.randomUUID().toString());
 		requestDTO.setMimeType(UUID.randomUUID().toString());
-		requestDTO.setSize(51606L);
+		requestDTO.setSize(29367L);
 		requestDTO.setPath(UUID.randomUUID().toString());
 		requestDTO.setUri(UUID.randomUUID().toString());
-		requestDTO.setIsPublic(false);
+		requestDTO.setIsPublic(true);
 
  		String uri = "/v1/commands/fileManager";
 		ResponseEntity<FileManagerResponse> response = this.postForEntity(uri, requestDTO, FileManagerResponse.class);

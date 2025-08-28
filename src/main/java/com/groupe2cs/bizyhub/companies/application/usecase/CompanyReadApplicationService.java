@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.companies.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-import com.groupe2cs.bizyhub.companies.application.query.*;
-import com.groupe2cs.bizyhub.companies.application.dto.*;
-import com.groupe2cs.bizyhub.companies.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.companies.application.mapper.*;
+import com.groupe2cs.bizyhub.companies.application.dto.*;
+import com.groupe2cs.bizyhub.companies.application.query.*;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -184,6 +184,16 @@ public List<CompanyResponse> findByCompanyCountry(
 	) {
 
 	FindByCompanyCountryQuery query = new FindByCompanyCountryQuery(value,metaRequest);
+	CompletableFuture<List<CompanyResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CompanyResponse.class));
+	return future.join();
+}
+public List<CompanyResponse> findByCompanyAccount(
+	CompanyAccount value,
+	MetaRequest metaRequest
+	) {
+
+	FindByCompanyAccountQuery query = new FindByCompanyAccountQuery(value,metaRequest);
 	CompletableFuture<List<CompanyResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CompanyResponse.class));
 	return future.join();

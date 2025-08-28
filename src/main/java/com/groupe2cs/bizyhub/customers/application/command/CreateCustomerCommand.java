@@ -37,6 +37,7 @@ public class CreateCustomerCommand implements Serializable {
  	private CustomerEmail email;
  	private CustomerNotes notes;
  	private CustomerStatus status;
+ 	private CustomerAccount account;
  	private CustomerCompany company;
  	private CustomerAddressLine1 addressLine1;
  	private CustomerAddressLine2 addressLine2;
@@ -62,6 +63,7 @@ public class CreateCustomerCommand implements Serializable {
    CustomerEmail email , 
    CustomerNotes notes , 
    CustomerStatus status , 
+   CustomerAccount account , 
    CustomerCompany company , 
    CustomerAddressLine1 addressLine1 , 
    CustomerAddressLine2 addressLine2 , 
@@ -88,6 +90,7 @@ public class CreateCustomerCommand implements Serializable {
   this.email = email ; 
   this.notes = notes ; 
   this.status = status ; 
+  this.account = account ; 
   this.company = company ; 
   this.addressLine1 = addressLine1 ; 
   this.addressLine2 = addressLine2 ; 

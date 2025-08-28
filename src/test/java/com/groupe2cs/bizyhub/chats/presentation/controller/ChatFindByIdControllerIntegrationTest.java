@@ -29,8 +29,6 @@ private CommandGateway commandGateway;
 private ChatRepository repository;
 
 @Autowired
-private FileManagerRepository filesDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -40,7 +38,6 @@ void it_should_be_able_to_get_chat_by_id() {
 
 	String existingId = ChatFixtures.randomOneViaCommand(
 	commandGateway,repository,
-        filesDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	 getCurrentUser()).getId().value();

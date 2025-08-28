@@ -64,6 +64,13 @@ public interface TransactionItemRepository extends JpaRepository<TransactionItem
 
         @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.unit) LIKE LOWER(CONCAT('%', :unit, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<TransactionItem> findByUnitAndTenantId(String unit, String tenantId);
+        @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<TransactionItem> findByAccountAndCreatedById(String account, String createdById);
+        @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<TransactionItem> findByAccountAndTenantName(String account, String tenantName);
+
+        @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<TransactionItem> findByAccountAndTenantId(String account, String tenantId);
         @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<TransactionItem> findByRemoteIdAndCreatedById(String remoteId, String createdById);
         @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -78,14 +85,6 @@ public interface TransactionItemRepository extends JpaRepository<TransactionItem
 
         @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<TransactionItem> findByLocalIdAndTenantId(String localId, String tenantId);
-        @Query("""
-        SELECT e FROM TransactionItem e
-        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<TransactionItem> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
-
          @Query("""
         SELECT e FROM TransactionItem e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -93,6 +92,7 @@ public interface TransactionItemRepository extends JpaRepository<TransactionItem
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<TransactionItem> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
 
 
         @Query("SELECT e FROM TransactionItem e WHERE e.unitPrice = :unitPrice AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -131,6 +131,46 @@ public interface TransactionItemRepository extends JpaRepository<TransactionItem
         @Query("SELECT e FROM TransactionItem e WHERE LOWER(e.tenant.id) LIKE LOWER(CONCAT('%', :tenant, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<TransactionItem> findByTenantIdAndTenantId(String tenant, String tenantId);
 
+
+	@Query("""
+        SELECT e FROM TransactionItem  e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+         AND (
+                 e.createdBy.id = :createdById
+                 OR EXISTS (
+                      SELECT 1
+                      FROM AccountUser au, User u
+                      WHERE au.account = e.account
+                        AND (
+                              (au.identity IS NOT NULL AND au.identity = u.username)
+                           OR (au.email    IS NOT NULL AND au.email    = u.email)
+                           OR (au.phone    IS NOT NULL AND au.phone    = u.telephone)
+                        )
+                 )
+            )
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<TransactionItem> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+            select case when count(e)>0 then true else false end
+                 from TransactionItem  e
+                     where e.id=:id
+                        and (
+                            e.createdBy.id = :userId
+                            or exists (
+                                select 1
+                                    from AccountUser au, User u
+                                    where au.account = e.account
+                                    and (
+                                    (au.identity is not null and au.identity = u.username)
+                                        or (au.email is not null and au.email = u.email)
+                                        or (au.phone is not null and au.phone = u.telephone)
+                                    )
+                        )
+            )
+            """)
+    boolean isOwner( @Param("id") String id,@Param("userId") String userId);
 
 
 

@@ -30,6 +30,7 @@ public class CreateTransactionItemCommand implements Serializable {
  	private TransactionItemLabel label;
  	private TransactionItemQuantity quantity;
  	private TransactionItemUnit unit;
+ 	private TransactionItemAccount account;
  	private TransactionItemRemoteId remoteId;
  	private TransactionItemLocalId localId;
  	private TransactionItemSyncAt syncAt;
@@ -45,6 +46,7 @@ public class CreateTransactionItemCommand implements Serializable {
    TransactionItemLabel label , 
    TransactionItemQuantity quantity , 
    TransactionItemUnit unit , 
+   TransactionItemAccount account , 
    TransactionItemRemoteId remoteId , 
    TransactionItemLocalId localId , 
    TransactionItemSyncAt syncAt , 
@@ -61,6 +63,7 @@ public class CreateTransactionItemCommand implements Serializable {
   this.label = label ; 
   this.quantity = quantity ; 
   this.unit = unit ; 
+  this.account = account ; 
   this.remoteId = remoteId ; 
   this.localId = localId ; 
   this.syncAt = syncAt ; 

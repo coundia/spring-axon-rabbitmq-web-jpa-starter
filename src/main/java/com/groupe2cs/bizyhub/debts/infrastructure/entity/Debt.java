@@ -92,6 +92,13 @@ public class Debt   extends AbstractAuditableEntity  {
 		unique = false
 
 	)
+
+	private String account ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
 	@Builder.Default
 	private java.time.Instant syncAt  = java.time.Instant.now() ;
 
@@ -130,6 +137,7 @@ public class Debt   extends AbstractAuditableEntity  {
 			", balanceDebt=" + balanceDebt +
 			", dueDate=" + dueDate +
 			", statuses=" + statuses +
+			", account=" + account +
 			", syncAt=" + syncAt +
 			", customer=" + customer +
 			", isActive=" + isActive +

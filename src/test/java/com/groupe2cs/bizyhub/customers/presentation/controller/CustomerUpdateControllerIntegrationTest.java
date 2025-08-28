@@ -64,12 +64,13 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
         body.add("firstName", UUID.randomUUID().toString());
         body.add("lastName", UUID.randomUUID().toString());
         body.add("fullName", UUID.randomUUID().toString());
-        body.add("balance", 2413.92);
-        body.add("balanceDebt", 9194.66);
+        body.add("balance", 3897.31);
+        body.add("balanceDebt", 4879.17);
         body.add("phone", UUID.randomUUID().toString());
         body.add("email", UUID.randomUUID().toString());
         body.add("notes", UUID.randomUUID().toString());
         body.add("status", UUID.randomUUID().toString());
+        body.add("account", UUID.randomUUID().toString());
         body.add("company", UUID.randomUUID().toString());
         body.add("addressLine1", UUID.randomUUID().toString());
         body.add("addressLine2", UUID.randomUUID().toString());
@@ -78,7 +79,7 @@ public class CustomerUpdateControllerIntegrationTest extends BaseIntegrationTest
         body.add("country", UUID.randomUUID().toString());
         body.add("postalCode", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("isActive", false);
+        body.add("isActive", true);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

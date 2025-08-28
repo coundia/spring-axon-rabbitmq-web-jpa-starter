@@ -28,6 +28,7 @@ private StockLevelRemoteId remoteId;
 private StockLevelLocalId localId;
 private StockLevelStockOnHand stockOnHand;
 private StockLevelStockAllocated stockAllocated;
+private StockLevelAccount account;
 private StockLevelProductVariant productVariant;
 private StockLevelSyncAt syncAt;
 private StockLevelCompany company;
@@ -43,6 +44,7 @@ apply(new StockLevelCreatedEvent(
 		command.getLocalId(),
 		command.getStockOnHand(),
 		command.getStockAllocated(),
+		command.getAccount(),
 		command.getProductVariant(),
 		command.getSyncAt(),
 		command.getCompany(),
@@ -66,6 +68,7 @@ apply(new StockLevelUpdatedEvent(
 		command.getLocalId(),
 		command.getStockOnHand(),
 		command.getStockAllocated(),
+		command.getAccount(),
 		command.getProductVariant(),
 		command.getSyncAt(),
 		command.getCompany(),
@@ -81,6 +84,7 @@ public void on(StockLevelCreatedEvent event) {
 	this.localId = event.getLocalId();
 	this.stockOnHand = event.getStockOnHand();
 	this.stockAllocated = event.getStockAllocated();
+	this.account = event.getAccount();
 	this.productVariant = event.getProductVariant();
 	this.syncAt = event.getSyncAt();
 	this.company = event.getCompany();
@@ -100,6 +104,7 @@ this.id = event.getId();
 	this.localId = event.getLocalId();
 	this.stockOnHand = event.getStockOnHand();
 	this.stockAllocated = event.getStockAllocated();
+	this.account = event.getAccount();
 	this.productVariant = event.getProductVariant();
 	this.syncAt = event.getSyncAt();
 	this.company = event.getCompany();

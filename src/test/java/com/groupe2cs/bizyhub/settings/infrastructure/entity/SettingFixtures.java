@@ -76,9 +76,10 @@ public class SettingFixtures {
 				.locale(SettingLocale.create(UUID.randomUUID().toString()))
 				.remoteId(SettingRemoteId.create(UUID.randomUUID().toString()))
 				.localId(SettingLocalId.create(UUID.randomUUID().toString()))
+				.account(SettingAccount.create(UUID.randomUUID().toString()))
 				.details(SettingDetails.create(UUID.randomUUID().toString()))
 				.syncAt(SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.isActive(SettingIsActive.create(true))
+				.isActive(SettingIsActive.create(false))
 			.build();
 
 		command.setCreatedBy(SettingCreatedBy.create(user.getId()));
@@ -101,9 +102,10 @@ public class SettingFixtures {
         .locale(SettingLocale.create(UUID.randomUUID().toString()))
         .remoteId(SettingRemoteId.create(UUID.randomUUID().toString()))
         .localId(SettingLocalId.create(UUID.randomUUID().toString()))
+        .account(SettingAccount.create(UUID.randomUUID().toString()))
         .details(SettingDetails.create(UUID.randomUUID().toString()))
         .syncAt(SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .isActive(SettingIsActive.create(true))
+        .isActive(SettingIsActive.create(false))
         .build();
 
 		command.setCreatedBy(SettingCreatedBy.create(user.getId()));

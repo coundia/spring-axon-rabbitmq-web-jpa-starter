@@ -50,6 +50,9 @@ Category entity = Category.builder().build();
  		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
             entity.setLocalId( event.getLocalId().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getDescription() !=null  && hasId(event.getDescription().value()) ) {
             entity.setDescription( event.getDescription().value());
         }
@@ -106,6 +109,9 @@ Category entity = repository.findById(event.getId().value())
     }
 	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getDescription() != null  && hasId(event.getDescription().value())) {
 		entity.setDescription(event.getDescription().value());

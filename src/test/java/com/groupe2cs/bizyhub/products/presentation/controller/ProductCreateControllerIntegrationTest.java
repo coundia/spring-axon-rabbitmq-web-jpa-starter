@@ -45,9 +45,10 @@ void it_should_be_able_to_add_product() {
 		requestDTO.setUnit(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setCategory(UUID.randomUUID().toString());
-		requestDTO.setDefaultPrice(4408.18);
+		requestDTO.setAccount(UUID.randomUUID().toString());
+		requestDTO.setDefaultPrice(5888.25);
 		requestDTO.setStatuses(UUID.randomUUID().toString());
-		requestDTO.setPurchasePrice(2699.71);
+		requestDTO.setPurchasePrice(299.38);
 
  		String uri = "/v1/commands/product";
 		ResponseEntity<ProductResponse> response = this.postForEntity(uri, requestDTO, ProductResponse.class);
@@ -63,6 +64,7 @@ void it_should_be_able_to_add_product() {
 		assertThat(response.getBody().getUnit()).isEqualTo(requestDTO.getUnit());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getCategory()).isEqualTo(requestDTO.getCategory());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getDefaultPrice()).isEqualTo(requestDTO.getDefaultPrice());
 		assertThat(response.getBody().getStatuses()).isEqualTo(requestDTO.getStatuses());
 		assertThat(response.getBody().getPurchasePrice()).isEqualTo(requestDTO.getPurchasePrice());

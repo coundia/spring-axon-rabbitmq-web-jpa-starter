@@ -40,6 +40,8 @@ public class ProductResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String category;
 	@Schema(description = "", example = "")
+	private String account;
+	@Schema(description = "", example = "")
 	private Double defaultPrice;
 	@Schema(description = "", example = "")
 	private String statuses;

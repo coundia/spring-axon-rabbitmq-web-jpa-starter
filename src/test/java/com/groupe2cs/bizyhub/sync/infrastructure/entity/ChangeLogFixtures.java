@@ -72,14 +72,14 @@ public class ChangeLogFixtures {
 
 			CreateChangeLogCommand command = CreateChangeLogCommand.builder()
 				.entityTable(ChangeLogEntityTable.create(UUID.randomUUID().toString()))
-				.entityId(ChangeLogEntityId.create(UUID.randomUUID().toString()))
+				.account(ChangeLogAccount.create(UUID.randomUUID().toString()))
 				.remoteId(ChangeLogRemoteId.create(UUID.randomUUID().toString()))
 				.localId(ChangeLogLocalId.create(UUID.randomUUID().toString()))
 				.operation(ChangeLogOperation.create(UUID.randomUUID().toString()))
 				.payload(ChangeLogPayload.create(UUID.randomUUID().toString()))
 				.status(ChangeLogStatus.create(UUID.randomUUID().toString()))
 				.syncAt(ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.attempts(ChangeLogAttempts.create(70))
+				.attempts(ChangeLogAttempts.create(69))
 				.error(ChangeLogError.create(UUID.randomUUID().toString()))
 			.build();
 
@@ -99,14 +99,14 @@ public class ChangeLogFixtures {
 
         CreateChangeLogCommand command = CreateChangeLogCommand.builder()
         .entityTable(ChangeLogEntityTable.create(UUID.randomUUID().toString()))
-        .entityId(ChangeLogEntityId.create(UUID.randomUUID().toString()))
+        .account(ChangeLogAccount.create(UUID.randomUUID().toString()))
         .remoteId(ChangeLogRemoteId.create(UUID.randomUUID().toString()))
         .localId(ChangeLogLocalId.create(UUID.randomUUID().toString()))
         .operation(ChangeLogOperation.create(UUID.randomUUID().toString()))
         .payload(ChangeLogPayload.create(UUID.randomUUID().toString()))
         .status(ChangeLogStatus.create(UUID.randomUUID().toString()))
         .syncAt(ChangeLogSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .attempts(ChangeLogAttempts.create(70))
+        .attempts(ChangeLogAttempts.create(69))
         .error(ChangeLogError.create(UUID.randomUUID().toString()))
         .build();
 

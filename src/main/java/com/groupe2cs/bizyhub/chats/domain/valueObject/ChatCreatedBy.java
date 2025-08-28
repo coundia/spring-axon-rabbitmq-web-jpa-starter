@@ -10,7 +10,6 @@ import com.groupe2cs.bizyhub.chats.domain.exception.ChatSyncAtNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatRemoteIdNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatLocalIdNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatAccountNotValid;
-import com.groupe2cs.bizyhub.chats.domain.exception.ChatFilesNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatDateTransactionNotValid;
 import com.groupe2cs.bizyhub.chats.domain.exception.ChatCreatedByNotValid;
 

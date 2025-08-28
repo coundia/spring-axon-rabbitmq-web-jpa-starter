@@ -47,6 +47,9 @@ SyncState entity = SyncState.builder().build();
  		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
             entity.setLocalId( event.getLocalId().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
             entity.setSyncAt( event.getSyncAt().value());
         }
@@ -97,6 +100,9 @@ SyncState entity = repository.findById(event.getId().value())
     }
 	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());

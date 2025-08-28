@@ -27,6 +27,7 @@ public class UpdateSyncStateCommand implements Serializable {
  	private SyncStateEntityTable entityTable;
  	private SyncStateRemoteId remoteId;
  	private SyncStateLocalId localId;
+ 	private SyncStateAccount account;
  	private SyncStateSyncAt syncAt;
  	private SyncStateLastSyncAt lastSyncAt;
  	private SyncStateLastCursor lastCursor;

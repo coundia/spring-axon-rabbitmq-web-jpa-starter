@@ -86,6 +86,8 @@ public class TransactionItemGate {
 			return false;
 		}
 		TransactionItem entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on TransactionItem {}: {}", userId, objectId, result);
 		return result;

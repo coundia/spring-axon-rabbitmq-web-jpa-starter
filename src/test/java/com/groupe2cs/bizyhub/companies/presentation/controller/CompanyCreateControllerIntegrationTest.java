@@ -51,8 +51,9 @@ void it_should_be_able_to_add_company() {
 		requestDTO.setCity(UUID.randomUUID().toString());
 		requestDTO.setRegion(UUID.randomUUID().toString());
 		requestDTO.setCountry(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setPostalCode(UUID.randomUUID().toString());
-		requestDTO.setIsActive(true);
+		requestDTO.setIsActive(false);
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setIsDefault(true);
 
@@ -76,6 +77,7 @@ void it_should_be_able_to_add_company() {
 		assertThat(response.getBody().getCity()).isEqualTo(requestDTO.getCity());
 		assertThat(response.getBody().getRegion()).isEqualTo(requestDTO.getRegion());
 		assertThat(response.getBody().getCountry()).isEqualTo(requestDTO.getCountry());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getPostalCode()).isEqualTo(requestDTO.getPostalCode());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());

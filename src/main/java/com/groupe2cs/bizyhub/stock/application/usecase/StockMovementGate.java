@@ -3,8 +3,8 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
 import com.groupe2cs.bizyhub.stock.infrastructure.entity.StockMovement;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -86,6 +86,8 @@ public class StockMovementGate {
 			return false;
 		}
 		StockMovement entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on StockMovement {}: {}", userId, objectId, result);
 		return result;

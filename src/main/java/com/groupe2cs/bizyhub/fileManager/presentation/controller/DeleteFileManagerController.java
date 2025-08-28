@@ -28,6 +28,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 
 
+@PreAuthorize("@fileManagerGate.canDelete(authentication, #id)")
 @RestController
 @RequestMapping("/api/v1/commands/fileManager")
 @Tag(name = "FileManager commands", description = "Endpoints for managing fileManagers")

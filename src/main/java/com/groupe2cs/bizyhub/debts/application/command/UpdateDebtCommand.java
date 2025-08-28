@@ -32,6 +32,7 @@ public class UpdateDebtCommand implements Serializable {
  	private DebtBalanceDebt balanceDebt;
  	private DebtDueDate dueDate;
  	private DebtStatuses statuses;
+ 	private DebtAccount account;
  	private DebtSyncAt syncAt;
  	private DebtCustomer customer;
  	private DebtIsActive isActive;

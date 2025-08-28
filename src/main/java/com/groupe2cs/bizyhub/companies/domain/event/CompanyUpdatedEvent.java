@@ -33,6 +33,7 @@ public class CompanyUpdatedEvent implements Serializable {
 	private CompanyCity city;
 	private CompanyRegion region;
 	private CompanyCountry country;
+	private CompanyAccount account;
 	private CompanyPostalCode postalCode;
 	private CompanyIsActive isActive;
 	private CompanySyncAt syncAt;

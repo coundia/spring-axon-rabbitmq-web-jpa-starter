@@ -39,6 +39,7 @@ private CompanyAddressLine2 addressLine2;
 private CompanyCity city;
 private CompanyRegion region;
 private CompanyCountry country;
+private CompanyAccount account;
 private CompanyPostalCode postalCode;
 private CompanyIsActive isActive;
 private CompanySyncAt syncAt;
@@ -66,6 +67,7 @@ apply(new CompanyCreatedEvent(
 		command.getCity(),
 		command.getRegion(),
 		command.getCountry(),
+		command.getAccount(),
 		command.getPostalCode(),
 		command.getIsActive(),
 		command.getSyncAt(),
@@ -101,6 +103,7 @@ apply(new CompanyUpdatedEvent(
 		command.getCity(),
 		command.getRegion(),
 		command.getCountry(),
+		command.getAccount(),
 		command.getPostalCode(),
 		command.getIsActive(),
 		command.getSyncAt(),
@@ -128,6 +131,7 @@ public void on(CompanyCreatedEvent event) {
 	this.city = event.getCity();
 	this.region = event.getRegion();
 	this.country = event.getCountry();
+	this.account = event.getAccount();
 	this.postalCode = event.getPostalCode();
 	this.isActive = event.getIsActive();
 	this.syncAt = event.getSyncAt();
@@ -159,6 +163,7 @@ this.id = event.getId();
 	this.city = event.getCity();
 	this.region = event.getRegion();
 	this.country = event.getCountry();
+	this.account = event.getAccount();
 	this.postalCode = event.getPostalCode();
 	this.isActive = event.getIsActive();
 	this.syncAt = event.getSyncAt();

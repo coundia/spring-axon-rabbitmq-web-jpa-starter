@@ -17,6 +17,7 @@ import com.groupe2cs.bizyhub.companies.domain.exception.CompanyAddressLine2NotVa
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyCityNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyRegionNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyCountryNotValid;
+import com.groupe2cs.bizyhub.companies.domain.exception.CompanyAccountNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyPostalCodeNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIsActiveNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanySyncAtNotValid;

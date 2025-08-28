@@ -65,6 +65,13 @@ public class Category   extends AbstractAuditableEntity  {
 
 	)
 
+	private String account ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String description ;
 
 	@Column(nullable = true, 
@@ -105,6 +112,7 @@ public class Category   extends AbstractAuditableEntity  {
 			", name=" + name +
 			", remoteId=" + remoteId +
 			", localId=" + localId +
+			", account=" + account +
 			", description=" + description +
 			", typeEntry=" + typeEntry +
 			", version=" + version +

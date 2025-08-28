@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateDebtCommand command = new CreateDebtCommand(
- DebtId.create(UUID.randomUUID().toString()) ,  DebtRemoteId.create(UUID.randomUUID().toString()) ,  DebtLocalId.create(UUID.randomUUID().toString()) ,  DebtCode.create(UUID.randomUUID().toString()) ,  DebtNotes.create(UUID.randomUUID().toString()) ,  DebtBalance.create(3656.17) ,  DebtBalanceDebt.create(4761.44) ,  DebtDueDate.create(java.time.Instant.now().plusSeconds(3600)) ,  DebtStatuses.create(UUID.randomUUID().toString()) ,  DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  DebtCustomer.create(UUID.randomUUID().toString()) ,  DebtIsActive.create(false) ,  DebtCreatedBy.create(UUID.randomUUID().toString()) ,  DebtTenant.create(UUID.randomUUID().toString()) 
+ DebtId.create(UUID.randomUUID().toString()) ,  DebtRemoteId.create(UUID.randomUUID().toString()) ,  DebtLocalId.create(UUID.randomUUID().toString()) ,  DebtCode.create(UUID.randomUUID().toString()) ,  DebtNotes.create(UUID.randomUUID().toString()) ,  DebtBalance.create(6521.33) ,  DebtBalanceDebt.create(4388.44) ,  DebtDueDate.create(java.time.Instant.now().plusSeconds(3600)) ,  DebtStatuses.create(UUID.randomUUID().toString()) ,  DebtAccount.create(UUID.randomUUID().toString()) ,  DebtSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  DebtCustomer.create(UUID.randomUUID().toString()) ,  DebtIsActive.create(false) ,  DebtCreatedBy.create(UUID.randomUUID().toString()) ,  DebtTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -52,6 +52,8 @@ assertThat(sentCommand.getDueDate().value()).isEqualTo(
 command.getDueDate().value());
 assertThat(sentCommand.getStatuses().value()).isEqualTo(
 command.getStatuses().value());
+assertThat(sentCommand.getAccount().value()).isEqualTo(
+command.getAccount().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(
 command.getSyncAt().value());
 assertThat(sentCommand.getCustomer().value()).isEqualTo(

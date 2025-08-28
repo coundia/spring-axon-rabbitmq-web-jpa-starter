@@ -142,6 +142,13 @@ public class Company   extends AbstractAuditableEntity  {
 
 	)
 
+	private String account ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String postalCode ;
 
 	@Column(nullable = true, 
@@ -193,6 +200,7 @@ public class Company   extends AbstractAuditableEntity  {
 			", city=" + city +
 			", region=" + region +
 			", country=" + country +
+			", account=" + account +
 			", postalCode=" + postalCode +
 			", isActive=" + isActive +
 			", syncAt=" + syncAt +

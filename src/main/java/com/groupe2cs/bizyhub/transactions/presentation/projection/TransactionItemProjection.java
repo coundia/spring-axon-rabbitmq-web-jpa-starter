@@ -53,6 +53,9 @@ TransactionItem entity = TransactionItem.builder().build();
  		if(event.getUnit() !=null  && hasId(event.getUnit().value()) ) {
             entity.setUnit( event.getUnit().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
             entity.setRemoteId( event.getRemoteId().value());
         }
@@ -118,6 +121,9 @@ TransactionItem entity = repository.findById(event.getId().value())
     }
 	if(event.getUnit() != null  && hasId(event.getUnit().value())) {
 		entity.setUnit(event.getUnit().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());

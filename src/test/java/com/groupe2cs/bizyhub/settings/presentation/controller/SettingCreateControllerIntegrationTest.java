@@ -41,6 +41,7 @@ void it_should_be_able_to_add_setting() {
 		requestDTO.setLocale(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setDetails(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setIsActive(true);
@@ -55,6 +56,7 @@ void it_should_be_able_to_add_setting() {
 		assertThat(response.getBody().getLocale()).isEqualTo(requestDTO.getLocale());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
 		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getDetails()).isEqualTo(requestDTO.getDetails());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());

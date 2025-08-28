@@ -83,6 +83,9 @@ Company entity = Company.builder().build();
  		if(event.getCountry() !=null  && hasId(event.getCountry().value()) ) {
             entity.setCountry( event.getCountry().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getPostalCode() !=null  && hasId(event.getPostalCode().value()) ) {
             entity.setPostalCode( event.getPostalCode().value());
         }
@@ -172,6 +175,9 @@ Company entity = repository.findById(event.getId().value())
     }
 	if(event.getCountry() != null  && hasId(event.getCountry().value())) {
 		entity.setCountry(event.getCountry().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getPostalCode() != null  && hasId(event.getPostalCode().value())) {
 		entity.setPostalCode(event.getPostalCode().value());

@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.products.domain;
 
-import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.shared.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.UUID;
 import com.groupe2cs.bizyhub.products.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.shared.*;
+import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
 
 
 public class ProductAggregateTests extends BaseUnitTests {
@@ -23,12 +23,13 @@ void it_should_create_product_with_valid_values() {
 	ProductUnit unit = ProductUnit.create(UUID.randomUUID().toString());
 	ProductSyncAt syncAt = ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	ProductCategory category = ProductCategory.create(UUID.randomUUID().toString());
-	ProductDefaultPrice defaultPrice = ProductDefaultPrice.create(8230.57);
+	ProductAccount account = ProductAccount.create(UUID.randomUUID().toString());
+	ProductDefaultPrice defaultPrice = ProductDefaultPrice.create(1598.93);
 	ProductStatuses statuses = ProductStatuses.create(UUID.randomUUID().toString());
-	ProductPurchasePrice purchasePrice = ProductPurchasePrice.create(349.61);
+	ProductPurchasePrice purchasePrice = ProductPurchasePrice.create(6860.46);
 	ProductCreatedBy createdBy = ProductCreatedBy.create(UUID.randomUUID().toString());
 	ProductTenant tenant = ProductTenant.create(UUID.randomUUID().toString());
-	ProductAggregate aggregateProductAggregate = new ProductAggregate(id, remoteId, localId, code, name, description, barcode, unit, syncAt, category, defaultPrice, statuses, purchasePrice, createdBy, tenant);
+	ProductAggregate aggregateProductAggregate = new ProductAggregate(id, remoteId, localId, code, name, description, barcode, unit, syncAt, category, account, defaultPrice, statuses, purchasePrice, createdBy, tenant);
 	assertThat(aggregateProductAggregate.getId()).isNotNull();
 	assertThat(aggregateProductAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateProductAggregate.getRemoteId()).isEqualTo(remoteId);
@@ -40,6 +41,7 @@ void it_should_create_product_with_valid_values() {
 	assertThat(aggregateProductAggregate.getUnit()).isEqualTo(unit);
 	assertThat(aggregateProductAggregate.getSyncAt()).isEqualTo(syncAt);
 	assertThat(aggregateProductAggregate.getCategory()).isEqualTo(category);
+	assertThat(aggregateProductAggregate.getAccount()).isEqualTo(account);
 	assertThat(aggregateProductAggregate.getDefaultPrice()).isEqualTo(defaultPrice);
 	assertThat(aggregateProductAggregate.getStatuses()).isEqualTo(statuses);
 	assertThat(aggregateProductAggregate.getPurchasePrice()).isEqualTo(purchasePrice);

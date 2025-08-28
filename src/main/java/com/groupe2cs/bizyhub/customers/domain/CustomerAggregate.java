@@ -36,6 +36,7 @@ private CustomerPhone phone;
 private CustomerEmail email;
 private CustomerNotes notes;
 private CustomerStatus status;
+private CustomerAccount account;
 private CustomerCompany company;
 private CustomerAddressLine1 addressLine1;
 private CustomerAddressLine2 addressLine2;
@@ -65,6 +66,7 @@ apply(new CustomerCreatedEvent(
 		command.getEmail(),
 		command.getNotes(),
 		command.getStatus(),
+		command.getAccount(),
 		command.getCompany(),
 		command.getAddressLine1(),
 		command.getAddressLine2(),
@@ -102,6 +104,7 @@ apply(new CustomerUpdatedEvent(
 		command.getEmail(),
 		command.getNotes(),
 		command.getStatus(),
+		command.getAccount(),
 		command.getCompany(),
 		command.getAddressLine1(),
 		command.getAddressLine2(),
@@ -131,6 +134,7 @@ public void on(CustomerCreatedEvent event) {
 	this.email = event.getEmail();
 	this.notes = event.getNotes();
 	this.status = event.getStatus();
+	this.account = event.getAccount();
 	this.company = event.getCompany();
 	this.addressLine1 = event.getAddressLine1();
 	this.addressLine2 = event.getAddressLine2();
@@ -164,6 +168,7 @@ this.id = event.getId();
 	this.email = event.getEmail();
 	this.notes = event.getNotes();
 	this.status = event.getStatus();
+	this.account = event.getAccount();
 	this.company = event.getCompany();
 	this.addressLine1 = event.getAddressLine1();
 	this.addressLine2 = event.getAddressLine2();

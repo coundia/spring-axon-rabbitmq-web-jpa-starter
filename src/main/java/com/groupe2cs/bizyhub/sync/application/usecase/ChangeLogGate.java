@@ -86,6 +86,8 @@ public class ChangeLogGate {
 			return false;
 		}
 		ChangeLog entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on ChangeLog {}: {}", userId, objectId, result);
 		return result;

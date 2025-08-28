@@ -19,17 +19,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "SyncStateRequest", description = "Request payload for SyncState operations")
 public class SyncStateRequest implements Serializable {
 
-	@Schema(description = "", example = "06ef4566-9306-415d-af07-a8718cc71ddc")
+	@Schema(description = "", example = "22beef5d-efee-4ea1-be76-ac7ac509f96d")
 	private String entityTable;
-	@Schema(description = "", example = "fac4b4c2-ac7b-468f-9b1c-a49566c2250d")
+	@Schema(description = "", example = "28e7af78-45cc-428f-b77a-32f09932e326")
 	private String remoteId;
-	@Schema(description = "", example = "871e9e28-700d-421e-b714-147478abf599")
+	@Schema(description = "", example = "eed5f92a-8f16-4b31-b227-66f3958d0ab2")
 	private String localId;
+	@Schema(description = "", example = "b83a0d58-8691-4cb0-b1f4-6cfb96edf96a")
+	private String account;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant lastSyncAt;
-	@Schema(description = "", example = "ef6da4d6-59c3-4538-a72a-d9cc57c094c4")
+	@Schema(description = "", example = "66442137-1f3d-4777-8bec-51832b0f5d07")
 	private String lastCursor;
 
 }

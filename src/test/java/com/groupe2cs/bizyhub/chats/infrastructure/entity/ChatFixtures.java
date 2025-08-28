@@ -41,7 +41,6 @@ public class ChatFixtures {
 	public static List<CreateChatCommand> randomManyViaCommand(
 		CommandGateway commandGateway,
 		ChatRepository repository,
-        FileManagerRepository filesDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		int count,
@@ -52,7 +51,6 @@ public class ChatFixtures {
 			CreateChatCommand command = randomOneViaCommand(
 			commandGateway,
 			 repository,
-            filesDataRepository,
             createdByDataRepository,
             tenantDataRepository,
 			 user);
@@ -68,12 +66,9 @@ public class ChatFixtures {
 		public static CreateChatCommand randomOneViaCommand(
 		CommandGateway commandGateway,
 		ChatRepository  repository,
-        FileManagerRepository filesDataRepository,
         UserRepository createdByDataRepository,
         TenantRepository tenantDataRepository,
 		 User user) {
-				MockMultipartFile files = new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
-				String fileName = files.getName();
 
 			CreateChatCommand command = CreateChatCommand.builder()
 				.messages(ChatMessages.create(UUID.randomUUID().toString()))
@@ -85,7 +80,6 @@ public class ChatFixtures {
 				.localId(ChatLocalId.create(UUID.randomUUID().toString()))
 				.account(ChatAccount.create(UUID.randomUUID().toString()))
 				.dateTransaction(ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
-					.files(ChatFiles.create(fileName))
 			.build();
 
 		command.setCreatedBy(ChatCreatedBy.create(user.getId()));
@@ -101,8 +95,6 @@ public class ChatFixtures {
         ChatRepository  repository,
         User user
         ) {
-        MockMultipartFile files = new MockMultipartFile("fake", "fake.txt", "text/plain", "Hello".getBytes());
-        String fileName = files.getName();
 
         CreateChatCommand command = CreateChatCommand.builder()
         .messages(ChatMessages.create(UUID.randomUUID().toString()))
@@ -114,7 +106,6 @@ public class ChatFixtures {
         .localId(ChatLocalId.create(UUID.randomUUID().toString()))
         .account(ChatAccount.create(UUID.randomUUID().toString()))
         .dateTransaction(ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600)))
-        .files(ChatFiles.create(fileName))
         .build();
 
 		command.setCreatedBy(ChatCreatedBy.create(user.getId()));

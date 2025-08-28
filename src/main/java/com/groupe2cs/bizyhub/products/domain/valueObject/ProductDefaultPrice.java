@@ -11,6 +11,7 @@ import com.groupe2cs.bizyhub.products.domain.exception.ProductBarcodeNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductUnitNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductSyncAtNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductCategoryNotValid;
+import com.groupe2cs.bizyhub.products.domain.exception.ProductAccountNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductDefaultPriceNotValid;
 
 import java.io.Serializable;

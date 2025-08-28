@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.debts.application.usecase;
 
-import com.groupe2cs.bizyhub.debts.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.debts.application.dto.*;
-import com.groupe2cs.bizyhub.debts.application.query.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.debts.application.query.*;
+import com.groupe2cs.bizyhub.debts.application.dto.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.debts.application.mapper.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -114,6 +114,16 @@ public List<DebtResponse> findByDebtStatuses(
 	) {
 
 	FindByDebtStatusesQuery query = new FindByDebtStatusesQuery(value,metaRequest);
+	CompletableFuture<List<DebtResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(DebtResponse.class));
+	return future.join();
+}
+public List<DebtResponse> findByDebtAccount(
+	DebtAccount value,
+	MetaRequest metaRequest
+	) {
+
+	FindByDebtAccountQuery query = new FindByDebtAccountQuery(value,metaRequest);
 	CompletableFuture<List<DebtResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(DebtResponse.class));
 	return future.join();

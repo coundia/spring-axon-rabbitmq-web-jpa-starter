@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.stock.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
-import com.groupe2cs.bizyhub.stock.application.query.*;
-import com.groupe2cs.bizyhub.stock.application.mapper.*;
-import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import com.groupe2cs.bizyhub.stock.application.mapper.*;
+import com.groupe2cs.bizyhub.stock.application.query.*;
+import com.groupe2cs.bizyhub.stock.application.dto.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +74,16 @@ public List<StockLevelResponse> findByStockLevelStockAllocated(
 	) {
 
 	FindByStockLevelStockAllocatedQuery query = new FindByStockLevelStockAllocatedQuery(value,metaRequest);
+	CompletableFuture<List<StockLevelResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(StockLevelResponse.class));
+	return future.join();
+}
+public List<StockLevelResponse> findByStockLevelAccount(
+	StockLevelAccount value,
+	MetaRequest metaRequest
+	) {
+
+	FindByStockLevelAccountQuery query = new FindByStockLevelAccountQuery(value,metaRequest);
 	CompletableFuture<List<StockLevelResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(StockLevelResponse.class));
 	return future.join();

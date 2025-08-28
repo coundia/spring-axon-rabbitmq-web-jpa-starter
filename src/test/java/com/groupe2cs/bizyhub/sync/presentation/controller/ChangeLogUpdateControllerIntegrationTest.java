@@ -59,14 +59,14 @@ public class ChangeLogUpdateControllerIntegrationTest extends BaseIntegrationTes
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("entityTable", UUID.randomUUID().toString());
-        body.add("entityId", UUID.randomUUID().toString());
+        body.add("account", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
         body.add("operation", UUID.randomUUID().toString());
         body.add("payload", UUID.randomUUID().toString());
         body.add("status", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("attempts", 77);
+        body.add("attempts", 24);
         body.add("error", UUID.randomUUID().toString());
 
         HttpHeaders multipartHeaders = new HttpHeaders();

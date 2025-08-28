@@ -22,6 +22,7 @@ public class StockLevelUpdatedEvent implements Serializable {
 	private StockLevelLocalId localId;
 	private StockLevelStockOnHand stockOnHand;
 	private StockLevelStockAllocated stockAllocated;
+	private StockLevelAccount account;
 	private StockLevelProductVariant productVariant;
 	private StockLevelSyncAt syncAt;
 	private StockLevelCompany company;

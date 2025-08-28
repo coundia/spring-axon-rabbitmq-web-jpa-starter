@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
-import com.groupe2cs.bizyhub.products.application.command.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.products.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -33,6 +33,7 @@ public class ProductSyncApplicationService {
 								.unit(ProductUnit.create(d.getUnit()))
 								.syncAt(ProductSyncAt.create(d.getSyncAt()))
 								.category(ProductCategory.create(d.getCategory()))
+								.account(ProductAccount.create(d.getAccount()))
 								.defaultPrice(ProductDefaultPrice.create(d.getDefaultPrice()))
 								.statuses(ProductStatuses.create(d.getStatuses()))
 								.purchasePrice(ProductPurchasePrice.create(d.getPurchasePrice()))
@@ -66,6 +67,7 @@ public class ProductSyncApplicationService {
 							.unit(ProductUnit.create(d.getUnit()))
 							.syncAt(ProductSyncAt.create(d.getSyncAt()))
 							.category(ProductCategory.create(d.getCategory()))
+							.account(ProductAccount.create(d.getAccount()))
 							.defaultPrice(ProductDefaultPrice.create(d.getDefaultPrice()))
 							.statuses(ProductStatuses.create(d.getStatuses()))
 							.purchasePrice(ProductPurchasePrice.create(d.getPurchasePrice()))

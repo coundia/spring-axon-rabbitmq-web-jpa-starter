@@ -36,13 +36,13 @@ public interface ChangeLogRepository extends JpaRepository<ChangeLog, String> {
 
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.entityTable) LIKE LOWER(CONCAT('%', :entityTable, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<ChangeLog> findByEntityTableAndTenantId(String entityTable, String tenantId);
-        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.entityId) LIKE LOWER(CONCAT('%', :entityId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<ChangeLog> findByEntityIdAndCreatedById(String entityId, String createdById);
-        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.entityId) LIKE LOWER(CONCAT('%', :entityId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-        List<ChangeLog> findByEntityIdAndTenantName(String entityId, String tenantName);
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<ChangeLog> findByAccountAndCreatedById(String account, String createdById);
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<ChangeLog> findByAccountAndTenantName(String account, String tenantName);
 
-        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.entityId) LIKE LOWER(CONCAT('%', :entityId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
-       List<ChangeLog> findByEntityIdAndTenantId(String entityId, String tenantId);
+        @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<ChangeLog> findByAccountAndTenantId(String account, String tenantId);
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<ChangeLog> findByRemoteIdAndCreatedById(String remoteId, String createdById);
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.remoteId) LIKE LOWER(CONCAT('%', :remoteId, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -78,14 +78,6 @@ public interface ChangeLogRepository extends JpaRepository<ChangeLog, String> {
 
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.status) LIKE LOWER(CONCAT('%', :status, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<ChangeLog> findByStatusAndTenantId(String status, String tenantId);
-        @Query("""
-        SELECT e FROM ChangeLog e
-        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<ChangeLog> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
-
          @Query("""
         SELECT e FROM ChangeLog e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -93,6 +85,7 @@ public interface ChangeLogRepository extends JpaRepository<ChangeLog, String> {
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<ChangeLog> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
 
 
         @Query("SELECT e FROM ChangeLog e WHERE e.attempts = :attempts AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -124,6 +117,46 @@ public interface ChangeLogRepository extends JpaRepository<ChangeLog, String> {
         @Query("SELECT e FROM ChangeLog e WHERE LOWER(e.tenant.id) LIKE LOWER(CONCAT('%', :tenant, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<ChangeLog> findByTenantIdAndTenantId(String tenant, String tenantId);
 
+
+	@Query("""
+        SELECT e FROM ChangeLog  e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+         AND (
+                 e.createdBy.id = :createdById
+                 OR EXISTS (
+                      SELECT 1
+                      FROM AccountUser au, User u
+                      WHERE au.account = e.account
+                        AND (
+                              (au.identity IS NOT NULL AND au.identity = u.username)
+                           OR (au.email    IS NOT NULL AND au.email    = u.email)
+                           OR (au.phone    IS NOT NULL AND au.phone    = u.telephone)
+                        )
+                 )
+            )
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<ChangeLog> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+            select case when count(e)>0 then true else false end
+                 from ChangeLog  e
+                     where e.id=:id
+                        and (
+                            e.createdBy.id = :userId
+                            or exists (
+                                select 1
+                                    from AccountUser au, User u
+                                    where au.account = e.account
+                                    and (
+                                    (au.identity is not null and au.identity = u.username)
+                                        or (au.email is not null and au.email = u.email)
+                                        or (au.phone is not null and au.phone = u.telephone)
+                                    )
+                        )
+            )
+            """)
+    boolean isOwner( @Param("id") String id,@Param("userId") String userId);
 
 
 

@@ -40,6 +40,7 @@ public class CreateCompanyCommand implements Serializable {
  	private CompanyCity city;
  	private CompanyRegion region;
  	private CompanyCountry country;
+ 	private CompanyAccount account;
  	private CompanyPostalCode postalCode;
  	private CompanyIsActive isActive;
  	private CompanySyncAt syncAt;
@@ -63,6 +64,7 @@ public class CreateCompanyCommand implements Serializable {
    CompanyCity city , 
    CompanyRegion region , 
    CompanyCountry country , 
+   CompanyAccount account , 
    CompanyPostalCode postalCode , 
    CompanyIsActive isActive , 
    CompanySyncAt syncAt , 
@@ -87,6 +89,7 @@ public class CreateCompanyCommand implements Serializable {
   this.city = city ; 
   this.region = region ; 
   this.country = country ; 
+  this.account = account ; 
   this.postalCode = postalCode ; 
   this.isActive = isActive ; 
   this.syncAt = syncAt ; 

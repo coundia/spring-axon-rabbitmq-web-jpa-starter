@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.notifications.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.notifications.application.query.*;
-import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
-import com.groupe2cs.bizyhub.notifications.application.dto.*;
-import com.groupe2cs.bizyhub.notifications.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.notifications.application.mapper.*;
+import com.groupe2cs.bizyhub.notifications.application.dto.*;
+import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
+import com.groupe2cs.bizyhub.notifications.application.query.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -84,6 +84,16 @@ public List<NotificationResponse> findByNotificationRemoteId(
 	) {
 
 	FindByNotificationRemoteIdQuery query = new FindByNotificationRemoteIdQuery(value,metaRequest);
+	CompletableFuture<List<NotificationResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(NotificationResponse.class));
+	return future.join();
+}
+public List<NotificationResponse> findByNotificationAccount(
+	NotificationAccount value,
+	MetaRequest metaRequest
+	) {
+
+	FindByNotificationAccountQuery query = new FindByNotificationAccountQuery(value,metaRequest);
 	CompletableFuture<List<NotificationResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(NotificationResponse.class));
 	return future.join();

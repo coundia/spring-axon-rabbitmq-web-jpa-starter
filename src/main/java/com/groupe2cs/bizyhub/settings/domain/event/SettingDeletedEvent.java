@@ -28,6 +28,7 @@ public class SettingDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private SettingId id;
 

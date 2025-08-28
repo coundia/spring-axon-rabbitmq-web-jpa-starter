@@ -40,9 +40,10 @@ void it_should_be_able_to_add_category() {
 		requestDTO.setName(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setTypeEntry(UUID.randomUUID().toString());
-		requestDTO.setVersion(48);
+		requestDTO.setVersion(43);
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 
  		String uri = "/v1/commands/category";
@@ -54,6 +55,7 @@ void it_should_be_able_to_add_category() {
 		assertThat(response.getBody().getName()).isEqualTo(requestDTO.getName());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
 		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getDescription()).isEqualTo(requestDTO.getDescription());
 		assertThat(response.getBody().getTypeEntry()).isEqualTo(requestDTO.getTypeEntry());
 		assertThat(response.getBody().getVersion()).isEqualTo(requestDTO.getVersion());

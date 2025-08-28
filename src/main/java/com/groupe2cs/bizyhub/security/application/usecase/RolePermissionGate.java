@@ -86,6 +86,8 @@ public class RolePermissionGate {
 			return false;
 		}
 		RolePermission entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on RolePermission {}: {}", userId, objectId, result);
 		return result;

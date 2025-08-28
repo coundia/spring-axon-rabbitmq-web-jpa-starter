@@ -30,6 +30,8 @@ public class StockLevelResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private Integer stockAllocated;
 	@Schema(description = "", example = "")
+	private String account;
+	@Schema(description = "", example = "")
 	private String productVariant;
 	@Schema(description = "", example = "")
 	private java.time.Instant syncAt;

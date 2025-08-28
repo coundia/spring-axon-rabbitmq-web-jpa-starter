@@ -14,7 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Date;
-import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -33,7 +32,6 @@ private ChatSyncAt syncAt;
 private ChatRemoteId remoteId;
 private ChatLocalId localId;
 private ChatAccount account;
-private ChatFiles files;
 private ChatDateTransaction dateTransaction;
 private ChatCreatedBy createdBy;
 private ChatTenant tenant;
@@ -51,7 +49,6 @@ apply(new ChatCreatedEvent(
 		command.getRemoteId(),
 		command.getLocalId(),
 		command.getAccount(),
-		command.getFiles(),
 		command.getDateTransaction(),
 		command.getCreatedBy(),
 		command.getTenant()
@@ -77,7 +74,6 @@ apply(new ChatUpdatedEvent(
 		command.getRemoteId(),
 		command.getLocalId(),
 		command.getAccount(),
-		command.getFiles(),
 		command.getDateTransaction(),
 		command.getCreatedBy(),
 		command.getTenant()
@@ -95,7 +91,6 @@ public void on(ChatCreatedEvent event) {
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
 	this.account = event.getAccount();
-	this.files = event.getFiles();
 	this.dateTransaction = event.getDateTransaction();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();
@@ -117,7 +112,6 @@ this.id = event.getId();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
 	this.account = event.getAccount();
-	this.files = event.getFiles();
 	this.dateTransaction = event.getDateTransaction();
 	this.createdBy = event.getCreatedBy();
 	this.tenant = event.getTenant();

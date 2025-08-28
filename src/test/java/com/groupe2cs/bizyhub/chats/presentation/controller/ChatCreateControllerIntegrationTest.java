@@ -1,5 +1,4 @@
 package com.groupe2cs.bizyhub.chats.presentation.controller;
-
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.chats.application.dto.*;
 import com.groupe2cs.bizyhub.chats.infrastructure.entity.*;
@@ -14,77 +13,52 @@ import com.groupe2cs.bizyhub.chats.application.command.*;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import java.nio.charset.StandardCharsets;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChatCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-    @Autowired
-    private CommandGateway commandGateway;
+@Autowired
+private CommandGateway commandGateway;
 
-    @Autowired
-    private FileManagerRepository filesDataRepository;
-    @Autowired
-    private UserRepository createdByDataRepository;
-    @Autowired
-    private TenantRepository tenantDataRepository;
 
-    @Test
-    void it_should_be_able_to_add_chat() {
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
 
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("messages", UUID.randomUUID().toString());
-        body.add("responsesJson", UUID.randomUUID().toString());
-        body.add("responses", UUID.randomUUID().toString());
-        body.add("state", UUID.randomUUID().toString());
-        body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("remoteId", UUID.randomUUID().toString());
-        body.add("localId", UUID.randomUUID().toString());
-        body.add("account", UUID.randomUUID().toString());
-        body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
-        body.add("files", new ByteArrayResource("dummy content".getBytes(StandardCharsets.UTF_8)) {
-            @Override
-            public String getFilename() {
-                return "test.txt";
-            }
-        });
+@Test
+void it_should_be_able_to_add_chat() {
 
-        HttpHeaders multipartHeaders = new HttpHeaders();
-        multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
+		ChatRequest requestDTO = new ChatRequest();
 
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
+		requestDTO.setMessages(UUID.randomUUID().toString());
+		requestDTO.setResponsesJson(UUID.randomUUID().toString());
+		requestDTO.setResponses(UUID.randomUUID().toString());
+		requestDTO.setState(UUID.randomUUID().toString());
+		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
+		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
+		requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
 
-        String uri = "/api/v1/commands/chat";
-        ResponseEntity<ChatResponse> response =
-            testRestTemplate.postForEntity(uri, requestEntity, ChatResponse.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getId()).isNotNull();
-
-        assertThat(response.getBody().getMessages().toString())
-            .isEqualTo(body.getFirst("messages").toString());
-        assertThat(response.getBody().getResponsesJson().toString())
-            .isEqualTo(body.getFirst("responsesJson").toString());
-        assertThat(response.getBody().getResponses().toString())
-            .isEqualTo(body.getFirst("responses").toString());
-        assertThat(response.getBody().getState().toString())
-            .isEqualTo(body.getFirst("state").toString());
-        assertThat(response.getBody().getSyncAt().toString())
-            .isEqualTo(body.getFirst("syncAt").toString());
-        assertThat(response.getBody().getRemoteId().toString())
-            .isEqualTo(body.getFirst("remoteId").toString());
-        assertThat(response.getBody().getLocalId().toString())
-            .isEqualTo(body.getFirst("localId").toString());
-        assertThat(response.getBody().getAccount().toString())
-            .isEqualTo(body.getFirst("account").toString());
-        assertThat(response.getBody().getDateTransaction().toString())
-            .isEqualTo(body.getFirst("dateTransaction").toString());
-    }
+ 		String uri = "/v1/commands/chat";
+		ResponseEntity<ChatResponse> response = this.postForEntity(uri, requestDTO, ChatResponse.class);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+		assertThat(response.getBody()).isNotNull();
+		assertThat(response.getBody().getId()).isNotNull();
+		assertThat(response.getBody().getMessages()).isEqualTo(requestDTO.getMessages());
+		assertThat(response.getBody().getResponsesJson()).isEqualTo(requestDTO.getResponsesJson());
+		assertThat(response.getBody().getResponses()).isEqualTo(requestDTO.getResponses());
+		assertThat(response.getBody().getState()).isEqualTo(requestDTO.getState());
+		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
+		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
+		assertThat(response.getBody().getDateTransaction()).isEqualTo(requestDTO.getDateTransaction());
+	}
 }

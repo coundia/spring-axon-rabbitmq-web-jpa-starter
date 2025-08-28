@@ -26,7 +26,7 @@ public class CreateChangeLogCommand implements Serializable {
 	@Builder.Default
 	private ChangeLogId id = ChangeLogId.create(UUID.randomUUID().toString());
  	private ChangeLogEntityTable entityTable;
- 	private ChangeLogEntityId entityId;
+ 	private ChangeLogAccount account;
  	private ChangeLogRemoteId remoteId;
  	private ChangeLogLocalId localId;
  	private ChangeLogOperation operation;
@@ -40,7 +40,7 @@ public class CreateChangeLogCommand implements Serializable {
 	public CreateChangeLogCommand(
  
    ChangeLogEntityTable entityTable , 
-   ChangeLogEntityId entityId , 
+   ChangeLogAccount account , 
    ChangeLogRemoteId remoteId , 
    ChangeLogLocalId localId , 
    ChangeLogOperation operation , 
@@ -55,7 +55,7 @@ public class CreateChangeLogCommand implements Serializable {
 			this.id = ChangeLogId.create(UUID.randomUUID().toString());
  
   this.entityTable = entityTable ; 
-  this.entityId = entityId ; 
+  this.account = account ; 
   this.remoteId = remoteId ; 
   this.localId = localId ; 
   this.operation = operation ; 

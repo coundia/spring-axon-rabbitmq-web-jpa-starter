@@ -50,6 +50,9 @@ StockMovement entity = StockMovement.builder().build();
  		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
             entity.setLocalId( event.getLocalId().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getCompany() !=null  && hasId(event.getCompany().value()) ) {
             entity.setCompany( event.getCompany().value());
         }
@@ -109,6 +112,9 @@ StockMovement entity = repository.findById(event.getId().value())
     }
 	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getCompany() != null  && hasId(event.getCompany().value())) {
 		entity.setCompany(event.getCompany().value());

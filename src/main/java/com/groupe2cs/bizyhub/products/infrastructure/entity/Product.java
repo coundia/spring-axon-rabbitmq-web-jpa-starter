@@ -95,6 +95,13 @@ public class Product   extends AbstractAuditableEntity  {
 
 	private String category ;
 
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
+	private String account ;
+
 	@Column(nullable = false, 
 		unique = false
 
@@ -138,6 +145,7 @@ public class Product   extends AbstractAuditableEntity  {
 			", unit=" + unit +
 			", syncAt=" + syncAt +
 			", category=" + category +
+			", account=" + account +
 			", defaultPrice=" + defaultPrice +
 			", statuses=" + statuses +
 			", purchasePrice=" + purchasePrice +

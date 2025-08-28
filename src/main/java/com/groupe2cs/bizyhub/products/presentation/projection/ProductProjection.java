@@ -65,6 +65,9 @@ Product entity = Product.builder().build();
  		if(event.getCategory() !=null  && hasId(event.getCategory().value()) ) {
             entity.setCategory( event.getCategory().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getDefaultPrice() !=null  && hasId(event.getDefaultPrice().value()) ) {
             entity.setDefaultPrice( event.getDefaultPrice().value());
         }
@@ -133,6 +136,9 @@ Product entity = repository.findById(event.getId().value())
     }
 	if(event.getCategory() != null  && hasId(event.getCategory().value())) {
 		entity.setCategory(event.getCategory().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getDefaultPrice() != null  && hasId(event.getDefaultPrice().value())) {
 		entity.setDefaultPrice(event.getDefaultPrice().value());

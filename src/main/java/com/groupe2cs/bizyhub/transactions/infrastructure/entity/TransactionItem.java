@@ -72,6 +72,13 @@ public class TransactionItem   extends AbstractAuditableEntity  {
 
 	)
 
+	private String account ;
+
+	@Column(nullable = true, 
+		unique = false
+
+	)
+
 	private String remoteId ;
 
 	@Column(nullable = true, 
@@ -127,6 +134,7 @@ public class TransactionItem   extends AbstractAuditableEntity  {
 			", label=" + label +
 			", quantity=" + quantity +
 			", unit=" + unit +
+			", account=" + account +
 			", remoteId=" + remoteId +
 			", localId=" + localId +
 			", syncAt=" + syncAt +

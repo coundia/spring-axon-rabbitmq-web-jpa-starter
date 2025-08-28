@@ -25,6 +25,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 
 
+@PreAuthorize("@fileManagerGate.canList(authentication)")
 @RestController
 @RequestMapping("/api/v1/queries/fileManagers")
 @Tag(name = "FileManager Queries", description = "Endpoints for listing paginated fileManagers")

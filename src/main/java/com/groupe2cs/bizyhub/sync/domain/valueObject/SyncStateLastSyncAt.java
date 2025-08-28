@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.sync.domain.exception.SyncStateIdNotValid;
 import com.groupe2cs.bizyhub.sync.domain.exception.SyncStateEntityTableNotValid;
 import com.groupe2cs.bizyhub.sync.domain.exception.SyncStateRemoteIdNotValid;
 import com.groupe2cs.bizyhub.sync.domain.exception.SyncStateLocalIdNotValid;
+import com.groupe2cs.bizyhub.sync.domain.exception.SyncStateAccountNotValid;
 import com.groupe2cs.bizyhub.sync.domain.exception.SyncStateSyncAtNotValid;
 import com.groupe2cs.bizyhub.sync.domain.exception.SyncStateLastSyncAtNotValid;
 

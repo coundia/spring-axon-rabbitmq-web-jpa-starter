@@ -19,7 +19,7 @@ public class ChangeLogUpdatedEvent implements Serializable {
 
 	private ChangeLogId id;
 	private ChangeLogEntityTable entityTable;
-	private ChangeLogEntityId entityId;
+	private ChangeLogAccount account;
 	private ChangeLogRemoteId remoteId;
 	private ChangeLogLocalId localId;
 	private ChangeLogOperation operation;

@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementTypeStockMoveme
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementQuantityNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementRemoteIdNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementLocalIdNotValid;
+import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementAccountNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementCompanyNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementSyncAtNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockMovementProductVariantNotValid;

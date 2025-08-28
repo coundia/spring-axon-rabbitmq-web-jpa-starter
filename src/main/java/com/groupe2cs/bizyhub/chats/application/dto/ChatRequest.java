@@ -19,21 +19,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "ChatRequest", description = "Request payload for Chat operations")
 public class ChatRequest implements Serializable {
 
-	@Schema(description = "", example = "c5ce2cec-5e4f-4eb9-a10c-0189d1ad4372")
+	@Schema(description = "", example = "53929db2-8a89-42ba-8cb5-b57d73337f08")
 	private String messages;
-	@Schema(description = "", example = "66fd0aa2-6bab-4d53-865c-ead6f75789b9")
+	@Schema(description = "", example = "11e49a25-a9bd-4c59-8075-c9113eda05ca")
 	private String responsesJson;
-	@Schema(description = "", example = "62ef8c21-24b9-4cf2-91dc-147ea34be714")
+	@Schema(description = "", example = "d664386f-8bcb-4424-813f-2f8e26775cc3")
 	private String responses;
-	@Schema(description = "", example = "520770c8-39a5-450a-9154-a5929f574b62")
+	@Schema(description = "", example = "bcef136c-525d-49c2-9dfe-1f40366f0919")
 	private String state;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "83c072e7-8db6-4383-8f23-4228ad32e5a6")
+	@Schema(description = "", example = "754c8060-8c40-42df-adf7-d80acd7f2563")
 	private String remoteId;
-	@Schema(description = "", example = "7e1b7155-a823-4c97-ae7d-62b55db1e0f4")
+	@Schema(description = "", example = "e90e038b-06cc-47be-af43-0555fcbc212d")
 	private String localId;
-	@Schema(description = "", example = "6c16bb45-fcc2-4cfb-a19f-8691db21eddb")
+	@Schema(description = "", example = "377b2ef4-9c42-45e5-8551-4a16aa78ce78")
 	private String account;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant dateTransaction;

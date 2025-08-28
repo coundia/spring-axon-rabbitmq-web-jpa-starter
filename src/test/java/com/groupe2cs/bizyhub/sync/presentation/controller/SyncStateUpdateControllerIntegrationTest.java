@@ -61,6 +61,7 @@ public class SyncStateUpdateControllerIntegrationTest extends BaseIntegrationTes
         body.add("entityTable", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
+        body.add("account", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("lastSyncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("lastCursor", UUID.randomUUID().toString());

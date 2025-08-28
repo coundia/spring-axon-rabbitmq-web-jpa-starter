@@ -19,27 +19,29 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "TransactionItemRequest", description = "Request payload for TransactionItem operations")
 public class TransactionItemRequest implements Serializable {
 
-	@Schema(description = "", example = "b79841d0-af0f-4d92-848c-13f5ff21bb69")
+	@Schema(description = "", example = "a54b08c5-119f-478d-bf72-db84886ba566")
 	private String transaction;
-	@Schema(description = "", example = "031e7ecf-7884-4de3-a69f-be00a4387f45")
+	@Schema(description = "", example = "4f3d2d73-5c7f-4291-b9e9-82f03564b982")
 	private String product;
-	@Schema(description = "", example = "ca4703c6-c209-4690-99eb-f9f635c30de3")
+	@Schema(description = "", example = "906fe416-aff8-4e3d-a83b-97ce3d6a74f1")
 	private String label;
-	@Schema(description = "", example = "78")
+	@Schema(description = "", example = "46")
 	private Integer quantity;
-	@Schema(description = "", example = "8474d487-1c39-44ef-a7a2-e1bae6a0053c")
+	@Schema(description = "", example = "c4d3a7da-3563-4e46-b28f-aa915c1f96cc")
 	private String unit;
-	@Schema(description = "", example = "48cba7b0-45b9-43e3-969a-42c69273ea4b")
+	@Schema(description = "", example = "862114d3-337c-4f64-82ca-0fbe396b1ed3")
+	private String account;
+	@Schema(description = "", example = "16060674-75bf-4165-8b81-789b83ec9b07")
 	private String remoteId;
-	@Schema(description = "", example = "f4a17551-35bc-4e75-8798-bf3f77e503f9")
+	@Schema(description = "", example = "3e38f002-de43-48cd-99ed-099a3df7d47c")
 	private String localId;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "5277.17")
+	@Schema(description = "", example = "8070.51")
 	private Double unitPrice;
-	@Schema(description = "", example = "7298.49")
+	@Schema(description = "", example = "4991.69")
 	private Double total;
-	@Schema(description = "", example = "f2efafba-3855-46a8-acae-36d9fe3af378")
+	@Schema(description = "", example = "cbc9bf24-2dcc-40f0-b6d3-8d95bbb10a3b")
 	private String notes;
 
 }

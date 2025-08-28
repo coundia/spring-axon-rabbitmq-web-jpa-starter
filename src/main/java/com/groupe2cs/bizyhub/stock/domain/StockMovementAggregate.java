@@ -28,6 +28,7 @@ private StockMovementTypeStockMovement typeStockMovement;
 private StockMovementQuantity quantity;
 private StockMovementRemoteId remoteId;
 private StockMovementLocalId localId;
+private StockMovementAccount account;
 private StockMovementCompany company;
 private StockMovementSyncAt syncAt;
 private StockMovementProductVariant productVariant;
@@ -45,6 +46,7 @@ apply(new StockMovementCreatedEvent(
 		command.getQuantity(),
 		command.getRemoteId(),
 		command.getLocalId(),
+		command.getAccount(),
 		command.getCompany(),
 		command.getSyncAt(),
 		command.getProductVariant(),
@@ -70,6 +72,7 @@ apply(new StockMovementUpdatedEvent(
 		command.getQuantity(),
 		command.getRemoteId(),
 		command.getLocalId(),
+		command.getAccount(),
 		command.getCompany(),
 		command.getSyncAt(),
 		command.getProductVariant(),
@@ -87,6 +90,7 @@ public void on(StockMovementCreatedEvent event) {
 	this.quantity = event.getQuantity();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
+	this.account = event.getAccount();
 	this.company = event.getCompany();
 	this.syncAt = event.getSyncAt();
 	this.productVariant = event.getProductVariant();
@@ -108,6 +112,7 @@ this.id = event.getId();
 	this.quantity = event.getQuantity();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
+	this.account = event.getAccount();
 	this.company = event.getCompany();
 	this.syncAt = event.getSyncAt();
 	this.productVariant = event.getProductVariant();

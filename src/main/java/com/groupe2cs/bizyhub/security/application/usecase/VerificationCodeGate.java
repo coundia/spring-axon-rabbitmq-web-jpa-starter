@@ -86,6 +86,8 @@ public class VerificationCodeGate {
 			return false;
 		}
 		VerificationCode entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on VerificationCode {}: {}", userId, objectId, result);
 		return result;

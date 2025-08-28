@@ -22,6 +22,7 @@ public class CategoryCreatedEvent implements Serializable {
 	private CategoryName name;
 	private CategoryRemoteId remoteId;
 	private CategoryLocalId localId;
+	private CategoryAccount account;
 	private CategoryDescription description;
 	private CategoryTypeEntry typeEntry;
 	private CategoryVersion version;

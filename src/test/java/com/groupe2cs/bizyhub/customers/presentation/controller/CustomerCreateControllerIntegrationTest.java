@@ -42,12 +42,13 @@ void it_should_be_able_to_add_customer() {
 		requestDTO.setFirstName(UUID.randomUUID().toString());
 		requestDTO.setLastName(UUID.randomUUID().toString());
 		requestDTO.setFullName(UUID.randomUUID().toString());
-		requestDTO.setBalance(8179.76);
-		requestDTO.setBalanceDebt(7491.77);
+		requestDTO.setBalance(5802.62);
+		requestDTO.setBalanceDebt(9540.14);
 		requestDTO.setPhone(UUID.randomUUID().toString());
 		requestDTO.setEmail(UUID.randomUUID().toString());
 		requestDTO.setNotes(UUID.randomUUID().toString());
 		requestDTO.setStatus(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setCompany(UUID.randomUUID().toString());
 		requestDTO.setAddressLine1(UUID.randomUUID().toString());
 		requestDTO.setAddressLine2(UUID.randomUUID().toString());
@@ -75,6 +76,7 @@ void it_should_be_able_to_add_customer() {
 		assertThat(response.getBody().getEmail()).isEqualTo(requestDTO.getEmail());
 		assertThat(response.getBody().getNotes()).isEqualTo(requestDTO.getNotes());
 		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getCompany()).isEqualTo(requestDTO.getCompany());
 		assertThat(response.getBody().getAddressLine1()).isEqualTo(requestDTO.getAddressLine1());
 		assertThat(response.getBody().getAddressLine2()).isEqualTo(requestDTO.getAddressLine2());

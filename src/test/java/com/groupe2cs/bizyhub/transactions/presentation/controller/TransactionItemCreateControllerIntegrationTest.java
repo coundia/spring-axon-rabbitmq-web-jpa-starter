@@ -39,13 +39,14 @@ void it_should_be_able_to_add_transactionitem() {
 		requestDTO.setTransaction(UUID.randomUUID().toString());
 		requestDTO.setProduct(UUID.randomUUID().toString());
 		requestDTO.setLabel(UUID.randomUUID().toString());
-		requestDTO.setQuantity(17);
+		requestDTO.setQuantity(26);
 		requestDTO.setUnit(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setUnitPrice(9117.65);
-		requestDTO.setTotal(2108.71);
+		requestDTO.setUnitPrice(1893.57);
+		requestDTO.setTotal(5060.91);
 		requestDTO.setNotes(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/transactionItem";
@@ -58,6 +59,7 @@ void it_should_be_able_to_add_transactionitem() {
 		assertThat(response.getBody().getLabel()).isEqualTo(requestDTO.getLabel());
 		assertThat(response.getBody().getQuantity()).isEqualTo(requestDTO.getQuantity());
 		assertThat(response.getBody().getUnit()).isEqualTo(requestDTO.getUnit());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
 		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());

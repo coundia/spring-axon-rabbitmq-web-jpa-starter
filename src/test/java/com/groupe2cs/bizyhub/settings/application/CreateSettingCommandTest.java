@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateSettingCommand command = new CreateSettingCommand(
- SettingId.create(UUID.randomUUID().toString()) ,  SettingName.create(UUID.randomUUID().toString()) ,  SettingValue.create(UUID.randomUUID().toString()) ,  SettingLocale.create(UUID.randomUUID().toString()) ,  SettingRemoteId.create(UUID.randomUUID().toString()) ,  SettingLocalId.create(UUID.randomUUID().toString()) ,  SettingDetails.create(UUID.randomUUID().toString()) ,  SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SettingIsActive.create(true) ,  SettingCreatedBy.create(UUID.randomUUID().toString()) ,  SettingTenant.create(UUID.randomUUID().toString()) 
+ SettingId.create(UUID.randomUUID().toString()) ,  SettingName.create(UUID.randomUUID().toString()) ,  SettingValue.create(UUID.randomUUID().toString()) ,  SettingLocale.create(UUID.randomUUID().toString()) ,  SettingRemoteId.create(UUID.randomUUID().toString()) ,  SettingLocalId.create(UUID.randomUUID().toString()) ,  SettingAccount.create(UUID.randomUUID().toString()) ,  SettingDetails.create(UUID.randomUUID().toString()) ,  SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SettingIsActive.create(false) ,  SettingCreatedBy.create(UUID.randomUUID().toString()) ,  SettingTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -46,6 +46,8 @@ assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
 assertThat(sentCommand.getLocalId().value()).isEqualTo(
 command.getLocalId().value());
+assertThat(sentCommand.getAccount().value()).isEqualTo(
+command.getAccount().value());
 assertThat(sentCommand.getDetails().value()).isEqualTo(
 command.getDetails().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(

@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.accounts.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,14 +43,14 @@ private AccountRepository Repository;
 .status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
 .typeAccount(UUID.randomUUID().toString())
-.balance(8322.13)
-.balancePrev(9069.43)
-.balanceBlocked(8909.48)
-.balanceInit(5955.1)
-.balanceGoal(8109.47)
-.balanceLimit(3294.35)
+.balance(674.89)
+.balancePrev(1556.2)
+.balanceBlocked(1849.25)
+.balanceInit(1239.22)
+.balanceGoal(8583.72)
+.balanceLimit(6435.25)
 .description(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 .isDefault(false)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
@@ -84,14 +84,14 @@ private AccountRepository Repository;
 .status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
 .typeAccount(UUID.randomUUID().toString())
-.balance(8322.13)
-.balancePrev(9069.43)
-.balanceBlocked(8909.48)
-.balanceInit(5955.1)
-.balanceGoal(8109.47)
-.balanceLimit(3294.35)
+.balance(674.89)
+.balancePrev(1556.2)
+.balanceBlocked(1849.25)
+.balanceInit(1239.22)
+.balanceGoal(8583.72)
+.balanceLimit(6435.25)
 .description(UUID.randomUUID().toString())
-.isActive(false)
+.isActive(true)
 .isDefault(false)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())

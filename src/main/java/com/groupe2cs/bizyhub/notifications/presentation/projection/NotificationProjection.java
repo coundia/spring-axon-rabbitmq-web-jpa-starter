@@ -53,6 +53,9 @@ Notification entity = Notification.builder().build();
  		if(event.getRemoteId() !=null  && hasId(event.getRemoteId().value()) ) {
             entity.setRemoteId( event.getRemoteId().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getLocalId() !=null  && hasId(event.getLocalId().value()) ) {
             entity.setLocalId( event.getLocalId().value());
         }
@@ -112,6 +115,9 @@ Notification entity = repository.findById(event.getId().value())
     }
 	if(event.getRemoteId() != null  && hasId(event.getRemoteId().value())) {
 		entity.setRemoteId(event.getRemoteId().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getLocalId() != null  && hasId(event.getLocalId().value())) {
 		entity.setLocalId(event.getLocalId().value());

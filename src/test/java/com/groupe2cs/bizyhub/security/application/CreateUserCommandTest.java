@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateUserCommand command = new CreateUserCommand(
- UserId.create(UUID.randomUUID().toString()) ,  UserUsername.create(UUID.randomUUID().toString()) ,  UserPassword.create(UUID.randomUUID().toString()) ,  UserFirstName.create(UUID.randomUUID().toString()) ,  UserLastName.create(UUID.randomUUID().toString()) ,  UserEmail.create(UUID.randomUUID().toString()) ,  UserTelephone.create(UUID.randomUUID().toString()) ,  UserLimitPerDay.create(87) ,  UserIsPremium.create(false) ,  UserEnabled.create(false) ,  UserIsBan.create(true) ,  UserMessage.create(UUID.randomUUID().toString()) ,  UserCreatedBy.create(UUID.randomUUID().toString()) ,  UserTenant.create(UUID.randomUUID().toString()) 
+ UserId.create(UUID.randomUUID().toString()) ,  UserUsername.create(UUID.randomUUID().toString()) ,  UserPassword.create(UUID.randomUUID().toString()) ,  UserFirstName.create(UUID.randomUUID().toString()) ,  UserLastName.create(UUID.randomUUID().toString()) ,  UserEmail.create(UUID.randomUUID().toString()) ,  UserTelephone.create(UUID.randomUUID().toString()) ,  UserLimitPerDay.create(98) ,  UserIsPremium.create(true) ,  UserEnabled.create(true) ,  UserIsBan.create(false) ,  UserMessage.create(UUID.randomUUID().toString()) ,  UserCreatedBy.create(UUID.randomUUID().toString()) ,  UserTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 

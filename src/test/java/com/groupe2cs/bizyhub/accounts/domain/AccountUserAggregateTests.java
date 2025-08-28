@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.accounts.domain;
 
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.accounts.domain.exception.*;
-import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.shared.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.shared.*;
+import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 
 
 public class AccountUserAggregateTests extends BaseUnitTests {

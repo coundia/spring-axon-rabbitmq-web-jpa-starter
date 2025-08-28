@@ -26,23 +26,23 @@ public class FileManagerDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "d7474f98-e948-4352-aef2-e49c184b0220")
+		@Schema(description = "", example = "8dabd165-c481-400f-9070-7644b2087a86")
 		private String name;
-		@Schema(description = "", example = "b0759579-300c-4032-ae64-6df5212fa62f")
+		@Schema(description = "", example = "48658689-b14f-44fe-89ee-998519f3629f")
 		private String details;
-		@Schema(description = "", example = "602a9c73-75c1-4bd7-b5f7-f439c76c3e4c")
+		@Schema(description = "", example = "4b6b41ce-f507-4274-9e9b-8d3713d638d1")
 		private String objectId;
-		@Schema(description = "", example = "7ce804cc-939c-47ad-ac61-ae9a9b1b817a")
+		@Schema(description = "", example = "9edcde9e-b6d8-46f2-9326-909a6786678d")
 		private String objectName;
-		@Schema(description = "", example = "21a10213-e563-43c5-957f-9ac4eccad9e1")
+		@Schema(description = "", example = "598b2aee-48da-4a80-a2fa-01b6dd8afe0f")
 		private String originalName;
-		@Schema(description = "", example = "0beef19b-bbe3-40f1-8cd3-cfdcc7788409")
+		@Schema(description = "", example = "3889e15f-42c1-4632-a2b0-eeea429e7650")
 		private String mimeType;
-		@Schema(description = "", example = "16354L")
+		@Schema(description = "", example = "51864L")
 		private Long size;
-		@Schema(description = "", example = "22b863e4-2885-4536-9e54-4f8e19f21077")
+		@Schema(description = "", example = "aca80e50-0765-4909-87ed-43b47f72f46c")
 		private String path;
-		@Schema(description = "", example = "e1557981-f15b-448a-8cbb-987ed220c8f1")
+		@Schema(description = "", example = "fdd0dbd1-000f-4283-b4c0-ca1dcd9046a3")
 		private String uri;
 		@Schema(description = "", example = "false")
 		private Boolean isPublic;

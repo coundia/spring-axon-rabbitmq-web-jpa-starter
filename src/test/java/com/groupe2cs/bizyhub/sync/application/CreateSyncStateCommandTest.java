@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateSyncStateCommand command = new CreateSyncStateCommand(
- SyncStateId.create(UUID.randomUUID().toString()) ,  SyncStateEntityTable.create(UUID.randomUUID().toString()) ,  SyncStateRemoteId.create(UUID.randomUUID().toString()) ,  SyncStateLocalId.create(UUID.randomUUID().toString()) ,  SyncStateSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SyncStateLastSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SyncStateLastCursor.create(UUID.randomUUID().toString()) ,  SyncStateCreatedBy.create(UUID.randomUUID().toString()) ,  SyncStateTenant.create(UUID.randomUUID().toString()) 
+ SyncStateId.create(UUID.randomUUID().toString()) ,  SyncStateEntityTable.create(UUID.randomUUID().toString()) ,  SyncStateRemoteId.create(UUID.randomUUID().toString()) ,  SyncStateLocalId.create(UUID.randomUUID().toString()) ,  SyncStateAccount.create(UUID.randomUUID().toString()) ,  SyncStateSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SyncStateLastSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  SyncStateLastCursor.create(UUID.randomUUID().toString()) ,  SyncStateCreatedBy.create(UUID.randomUUID().toString()) ,  SyncStateTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -42,6 +42,8 @@ assertThat(sentCommand.getRemoteId().value()).isEqualTo(
 command.getRemoteId().value());
 assertThat(sentCommand.getLocalId().value()).isEqualTo(
 command.getLocalId().value());
+assertThat(sentCommand.getAccount().value()).isEqualTo(
+command.getAccount().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(
 command.getSyncAt().value());
 assertThat(sentCommand.getLastSyncAt().value()).isEqualTo(

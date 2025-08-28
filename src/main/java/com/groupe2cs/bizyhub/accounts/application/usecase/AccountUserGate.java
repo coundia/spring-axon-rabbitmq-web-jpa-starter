@@ -86,6 +86,8 @@ public class AccountUserGate {
 			return false;
 		}
 		AccountUser entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on AccountUser {}: {}", userId, objectId, result);
 		return result;

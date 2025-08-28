@@ -64,10 +64,10 @@ public class FileManagerUpdateControllerIntegrationTest extends BaseIntegrationT
         body.add("objectName", UUID.randomUUID().toString());
         body.add("originalName", UUID.randomUUID().toString());
         body.add("mimeType", UUID.randomUUID().toString());
-        body.add("size", 44168L);
+        body.add("size", 54745L);
         body.add("path", UUID.randomUUID().toString());
         body.add("uri", UUID.randomUUID().toString());
-        body.add("isPublic", false);
+        body.add("isPublic", true);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

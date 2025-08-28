@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.settings.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.settings.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.settings.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.settings.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.settings.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -43,6 +43,7 @@ private SettingRepository Repository;
 .locale(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
+.account(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .isActive(false)
@@ -75,6 +76,7 @@ private SettingRepository Repository;
 .locale(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
+.account(UUID.randomUUID().toString())
 .details(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .isActive(false)

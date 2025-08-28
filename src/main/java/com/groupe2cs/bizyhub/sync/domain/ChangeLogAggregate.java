@@ -25,7 +25,7 @@ public class ChangeLogAggregate {
 @AggregateIdentifier
 private ChangeLogId id;
 private ChangeLogEntityTable entityTable;
-private ChangeLogEntityId entityId;
+private ChangeLogAccount account;
 private ChangeLogRemoteId remoteId;
 private ChangeLogLocalId localId;
 private ChangeLogOperation operation;
@@ -43,7 +43,7 @@ public ChangeLogAggregate(CreateChangeLogCommand command) {
 apply(new ChangeLogCreatedEvent(
 		command.getId(),
 		command.getEntityTable(),
-		command.getEntityId(),
+		command.getAccount(),
 		command.getRemoteId(),
 		command.getLocalId(),
 		command.getOperation(),
@@ -69,7 +69,7 @@ public void handle(UpdateChangeLogCommand command) {
 apply(new ChangeLogUpdatedEvent(
 		command.getId(),
 		command.getEntityTable(),
-		command.getEntityId(),
+		command.getAccount(),
 		command.getRemoteId(),
 		command.getLocalId(),
 		command.getOperation(),
@@ -87,7 +87,7 @@ apply(new ChangeLogUpdatedEvent(
 public void on(ChangeLogCreatedEvent event) {
 	this.id = event.getId();
 	this.entityTable = event.getEntityTable();
-	this.entityId = event.getEntityId();
+	this.account = event.getAccount();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
 	this.operation = event.getOperation();
@@ -109,7 +109,7 @@ this.id = event.getId();
 public void on(ChangeLogUpdatedEvent event) {
 this.id = event.getId();
 	this.entityTable = event.getEntityTable();
-	this.entityId = event.getEntityId();
+	this.account = event.getAccount();
 	this.remoteId = event.getRemoteId();
 	this.localId = event.getLocalId();
 	this.operation = event.getOperation();

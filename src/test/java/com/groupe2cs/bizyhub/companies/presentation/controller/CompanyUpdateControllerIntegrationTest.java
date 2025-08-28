@@ -73,10 +73,11 @@ public class CompanyUpdateControllerIntegrationTest extends BaseIntegrationTests
         body.add("city", UUID.randomUUID().toString());
         body.add("region", UUID.randomUUID().toString());
         body.add("country", UUID.randomUUID().toString());
+        body.add("account", UUID.randomUUID().toString());
         body.add("postalCode", UUID.randomUUID().toString());
         body.add("isActive", false);
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("isDefault", true);
+        body.add("isDefault", false);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

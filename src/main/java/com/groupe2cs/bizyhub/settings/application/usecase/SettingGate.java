@@ -86,6 +86,8 @@ public class SettingGate {
 			return false;
 		}
 		Setting entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Setting {}: {}", userId, objectId, result);
 		return result;

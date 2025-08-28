@@ -33,6 +33,7 @@ private ProductBarcode barcode;
 private ProductUnit unit;
 private ProductSyncAt syncAt;
 private ProductCategory category;
+private ProductAccount account;
 private ProductDefaultPrice defaultPrice;
 private ProductStatuses statuses;
 private ProductPurchasePrice purchasePrice;
@@ -53,6 +54,7 @@ apply(new ProductCreatedEvent(
 		command.getUnit(),
 		command.getSyncAt(),
 		command.getCategory(),
+		command.getAccount(),
 		command.getDefaultPrice(),
 		command.getStatuses(),
 		command.getPurchasePrice(),
@@ -81,6 +83,7 @@ apply(new ProductUpdatedEvent(
 		command.getUnit(),
 		command.getSyncAt(),
 		command.getCategory(),
+		command.getAccount(),
 		command.getDefaultPrice(),
 		command.getStatuses(),
 		command.getPurchasePrice(),
@@ -101,6 +104,7 @@ public void on(ProductCreatedEvent event) {
 	this.unit = event.getUnit();
 	this.syncAt = event.getSyncAt();
 	this.category = event.getCategory();
+	this.account = event.getAccount();
 	this.defaultPrice = event.getDefaultPrice();
 	this.statuses = event.getStatuses();
 	this.purchasePrice = event.getPurchasePrice();
@@ -125,6 +129,7 @@ this.id = event.getId();
 	this.unit = event.getUnit();
 	this.syncAt = event.getSyncAt();
 	this.category = event.getCategory();
+	this.account = event.getAccount();
 	this.defaultPrice = event.getDefaultPrice();
 	this.statuses = event.getStatuses();
 	this.purchasePrice = event.getPurchasePrice();

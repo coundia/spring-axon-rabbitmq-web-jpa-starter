@@ -86,6 +86,8 @@ public class PermissionGate {
 			return false;
 		}
 		Permission entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Permission {}: {}", userId, objectId, result);
 		return result;

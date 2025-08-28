@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelRemoteIdNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelLocalIdNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelStockOnHandNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelStockAllocatedNotValid;
+import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelAccountNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelProductVariantNotValid;
 import com.groupe2cs.bizyhub.stock.domain.exception.StockLevelSyncAtNotValid;
 

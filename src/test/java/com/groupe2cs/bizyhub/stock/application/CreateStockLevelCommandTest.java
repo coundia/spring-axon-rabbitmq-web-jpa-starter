@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateStockLevelCommand command = new CreateStockLevelCommand(
- StockLevelId.create(UUID.randomUUID().toString()) ,  StockLevelRemoteId.create(UUID.randomUUID().toString()) ,  StockLevelLocalId.create(UUID.randomUUID().toString()) ,  StockLevelStockOnHand.create(21) ,  StockLevelStockAllocated.create(84) ,  StockLevelProductVariant.create(UUID.randomUUID().toString()) ,  StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  StockLevelCompany.create(UUID.randomUUID().toString()) ,  StockLevelCreatedBy.create(UUID.randomUUID().toString()) ,  StockLevelTenant.create(UUID.randomUUID().toString()) 
+ StockLevelId.create(UUID.randomUUID().toString()) ,  StockLevelRemoteId.create(UUID.randomUUID().toString()) ,  StockLevelLocalId.create(UUID.randomUUID().toString()) ,  StockLevelStockOnHand.create(28) ,  StockLevelStockAllocated.create(33) ,  StockLevelAccount.create(UUID.randomUUID().toString()) ,  StockLevelProductVariant.create(UUID.randomUUID().toString()) ,  StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  StockLevelCompany.create(UUID.randomUUID().toString()) ,  StockLevelCreatedBy.create(UUID.randomUUID().toString()) ,  StockLevelTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -44,6 +44,8 @@ assertThat(sentCommand.getStockOnHand().value()).isEqualTo(
 command.getStockOnHand().value());
 assertThat(sentCommand.getStockAllocated().value()).isEqualTo(
 command.getStockAllocated().value());
+assertThat(sentCommand.getAccount().value()).isEqualTo(
+command.getAccount().value());
 assertThat(sentCommand.getProductVariant().value()).isEqualTo(
 command.getProductVariant().value());
 assertThat(sentCommand.getSyncAt().value()).isEqualTo(

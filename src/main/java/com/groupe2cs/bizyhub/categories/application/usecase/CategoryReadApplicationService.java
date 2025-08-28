@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.categories.application.usecase;
 
-import com.groupe2cs.bizyhub.categories.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.categories.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.categories.application.query.*;
 import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import com.groupe2cs.bizyhub.categories.application.query.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.categories.application.dto.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.categories.application.mapper.*;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +74,16 @@ public List<CategoryResponse> findByCategoryLocalId(
 	) {
 
 	FindByCategoryLocalIdQuery query = new FindByCategoryLocalIdQuery(value,metaRequest);
+	CompletableFuture<List<CategoryResponse>> future = queryGateway.query(query,
+	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
+	return future.join();
+}
+public List<CategoryResponse> findByCategoryAccount(
+	CategoryAccount value,
+	MetaRequest metaRequest
+	) {
+
+	FindByCategoryAccountQuery query = new FindByCategoryAccountQuery(value,metaRequest);
 	CompletableFuture<List<CategoryResponse>> future = queryGateway.query(query,
 	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(CategoryResponse.class));
 	return future.join();

@@ -86,6 +86,8 @@ public class ApiKeyGate {
 			return false;
 		}
 		ApiKey entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on ApiKey {}: {}", userId, objectId, result);
 		return result;

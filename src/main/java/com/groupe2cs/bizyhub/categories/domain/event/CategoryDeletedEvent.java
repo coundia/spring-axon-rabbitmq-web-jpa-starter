@@ -28,6 +28,7 @@ public class CategoryDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private CategoryId id;
 

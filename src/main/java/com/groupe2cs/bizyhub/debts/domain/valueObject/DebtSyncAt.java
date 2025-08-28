@@ -10,6 +10,7 @@ import com.groupe2cs.bizyhub.debts.domain.exception.DebtBalanceNotValid;
 import com.groupe2cs.bizyhub.debts.domain.exception.DebtBalanceDebtNotValid;
 import com.groupe2cs.bizyhub.debts.domain.exception.DebtDueDateNotValid;
 import com.groupe2cs.bizyhub.debts.domain.exception.DebtStatusesNotValid;
+import com.groupe2cs.bizyhub.debts.domain.exception.DebtAccountNotValid;
 import com.groupe2cs.bizyhub.debts.domain.exception.DebtSyncAtNotValid;
 
 import java.io.Serializable;

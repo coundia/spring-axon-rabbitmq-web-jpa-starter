@@ -72,9 +72,10 @@ public class StockMovementFixtures {
 
 			CreateStockMovementCommand command = CreateStockMovementCommand.builder()
 				.typeStockMovement(StockMovementTypeStockMovement.create(UUID.randomUUID().toString()))
-				.quantity(StockMovementQuantity.create(15))
+				.quantity(StockMovementQuantity.create(99))
 				.remoteId(StockMovementRemoteId.create(UUID.randomUUID().toString()))
 				.localId(StockMovementLocalId.create(UUID.randomUUID().toString()))
+				.account(StockMovementAccount.create(UUID.randomUUID().toString()))
 				.company(StockMovementCompany.create(UUID.randomUUID().toString()))
 				.syncAt(StockMovementSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.productVariant(StockMovementProductVariant.create(UUID.randomUUID().toString()))
@@ -98,9 +99,10 @@ public class StockMovementFixtures {
 
         CreateStockMovementCommand command = CreateStockMovementCommand.builder()
         .typeStockMovement(StockMovementTypeStockMovement.create(UUID.randomUUID().toString()))
-        .quantity(StockMovementQuantity.create(15))
+        .quantity(StockMovementQuantity.create(99))
         .remoteId(StockMovementRemoteId.create(UUID.randomUUID().toString()))
         .localId(StockMovementLocalId.create(UUID.randomUUID().toString()))
+        .account(StockMovementAccount.create(UUID.randomUUID().toString()))
         .company(StockMovementCompany.create(UUID.randomUUID().toString()))
         .syncAt(StockMovementSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .productVariant(StockMovementProductVariant.create(UUID.randomUUID().toString()))

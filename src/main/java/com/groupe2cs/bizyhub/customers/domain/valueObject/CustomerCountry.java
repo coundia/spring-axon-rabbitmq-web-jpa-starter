@@ -14,6 +14,7 @@ import com.groupe2cs.bizyhub.customers.domain.exception.CustomerPhoneNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerEmailNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerNotesNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerStatusNotValid;
+import com.groupe2cs.bizyhub.customers.domain.exception.CustomerAccountNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerCompanyNotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerAddressLine1NotValid;
 import com.groupe2cs.bizyhub.customers.domain.exception.CustomerAddressLine2NotValid;

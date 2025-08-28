@@ -41,8 +41,11 @@ if(metaRequest.isAdmin()) {
  log.info("Admin user, fetching all PasswordResets");
 	pages = repository.findAllByTenantId( metaRequest.getTenantId(),pageable);
 }else{
+
 log.info("User, fetching own  ");
 pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
+
+
 }
 
 List<PasswordResetResponse> responses = pages.stream()

@@ -71,23 +71,21 @@ return CreateChatCommand.builder()
 .build();
 }
 
-
-	public static UpdateChatCommand toUpdateCommand(
-	ChatId id, ChatMessages messages, ChatResponsesJson responsesJson, ChatResponses responses, ChatState state, ChatSyncAt syncAt, ChatRemoteId remoteId, ChatLocalId localId, ChatAccount account, ChatDateTransaction dateTransaction
-	) {
+	public static UpdateChatCommand toUpdateCommand(ChatId id, ChatRequest request) {
 	return UpdateChatCommand.builder()
-		.id(id)
-		.messages(messages)
-		.responsesJson(responsesJson)
-		.responses(responses)
-		.state(state)
-		.syncAt(syncAt)
-		.remoteId(remoteId)
-		.localId(localId)
-		.account(account)
-		.dateTransaction(dateTransaction)
+	.id(id)
+		.messages(ChatMessages.create(request.getMessages()))
+		.responsesJson(ChatResponsesJson.create(request.getResponsesJson()))
+		.responses(ChatResponses.create(request.getResponses()))
+		.state(ChatState.create(request.getState()))
+		.syncAt(ChatSyncAt.create(request.getSyncAt()))
+		.remoteId(ChatRemoteId.create(request.getRemoteId()))
+		.localId(ChatLocalId.create(request.getLocalId()))
+		.account(ChatAccount.create(request.getAccount()))
+		.dateTransaction(ChatDateTransaction.create(request.getDateTransaction()))
 	.build();
 	}
+
 
 public static DeleteChatCommand toDeleteCommand(ChatId id) {
 return DeleteChatCommand.builder()

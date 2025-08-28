@@ -33,8 +33,6 @@ public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
     private CommandGateway commandGatewayUpdate;
 
     @Autowired
-    private FileManagerRepository filesDataRepository;
-    @Autowired
     private UserRepository createdByDataRepository;
     @Autowired
     private TenantRepository tenantDataRepository;
@@ -44,7 +42,6 @@ public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
         String existingId = ChatFixtures.randomOneViaCommand(
             commandGateway, chatRepository,
-        filesDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()
@@ -52,7 +49,6 @@ public class ChatUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
         CreateChatCommand updated = ChatFixtures.randomOneViaCommand(
             commandGatewayUpdate, chatRepository,
-        filesDataRepository,
         createdByDataRepository,
         tenantDataRepository,
             getCurrentUser()

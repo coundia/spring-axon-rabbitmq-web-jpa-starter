@@ -33,6 +33,7 @@ public class CreateDebtCommand implements Serializable {
  	private DebtBalanceDebt balanceDebt;
  	private DebtDueDate dueDate;
  	private DebtStatuses statuses;
+ 	private DebtAccount account;
  	private DebtSyncAt syncAt;
  	private DebtCustomer customer;
  	private DebtIsActive isActive;
@@ -48,6 +49,7 @@ public class CreateDebtCommand implements Serializable {
    DebtBalanceDebt balanceDebt , 
    DebtDueDate dueDate , 
    DebtStatuses statuses , 
+   DebtAccount account , 
    DebtSyncAt syncAt , 
    DebtCustomer customer , 
    DebtIsActive isActive , 
@@ -64,6 +66,7 @@ public class CreateDebtCommand implements Serializable {
   this.balanceDebt = balanceDebt ; 
   this.dueDate = dueDate ; 
   this.statuses = statuses ; 
+  this.account = account ; 
   this.syncAt = syncAt ; 
   this.customer = customer ; 
   this.isActive = isActive ; 

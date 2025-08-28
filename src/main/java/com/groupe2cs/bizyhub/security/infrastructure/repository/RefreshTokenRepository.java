@@ -50,7 +50,6 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<RefreshToken> findByExpirationAndCreatedById(java.time.Instant expiration, String createdById);
-
          @Query("""
         SELECT e FROM RefreshToken e
         WHERE e.expiration >= :#{#expiration.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -58,6 +57,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Stri
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<RefreshToken> findByExpirationAndTenantId(java.time.Instant expiration, String tenantId);
+
 
 
         @Query("SELECT e FROM RefreshToken e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")

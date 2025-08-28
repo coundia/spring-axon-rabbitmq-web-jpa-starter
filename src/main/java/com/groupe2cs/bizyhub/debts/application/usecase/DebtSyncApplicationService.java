@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.debts.application.usecase;
-import com.groupe2cs.bizyhub.debts.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
-import com.groupe2cs.bizyhub.debts.application.command.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.debts.application.command.*;
+import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.debts.application.dto.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -32,6 +32,7 @@ public class DebtSyncApplicationService {
 								.balanceDebt(DebtBalanceDebt.create(d.getBalanceDebt()))
 								.dueDate(DebtDueDate.create(d.getDueDate()))
 								.statuses(DebtStatuses.create(d.getStatuses()))
+								.account(DebtAccount.create(d.getAccount()))
 								.syncAt(DebtSyncAt.create(d.getSyncAt()))
 								.customer(DebtCustomer.create(d.getCustomer()))
 								.isActive(DebtIsActive.create(d.getIsActive()))
@@ -64,6 +65,7 @@ public class DebtSyncApplicationService {
 							.balanceDebt(DebtBalanceDebt.create(d.getBalanceDebt()))
 							.dueDate(DebtDueDate.create(d.getDueDate()))
 							.statuses(DebtStatuses.create(d.getStatuses()))
+							.account(DebtAccount.create(d.getAccount()))
 							.syncAt(DebtSyncAt.create(d.getSyncAt()))
 							.customer(DebtCustomer.create(d.getCustomer()))
 							.isActive(DebtIsActive.create(d.getIsActive()))

@@ -86,6 +86,8 @@ public class ProductGate {
 			return false;
 		}
 		Product entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Product {}: {}", userId, objectId, result);
 		return result;

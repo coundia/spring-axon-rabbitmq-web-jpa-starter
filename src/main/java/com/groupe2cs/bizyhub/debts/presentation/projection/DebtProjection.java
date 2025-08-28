@@ -62,6 +62,9 @@ Debt entity = Debt.builder().build();
  		if(event.getStatuses() !=null  && hasId(event.getStatuses().value()) ) {
             entity.setStatuses( event.getStatuses().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getSyncAt() !=null  && hasId(event.getSyncAt().value()) ) {
             entity.setSyncAt( event.getSyncAt().value());
         }
@@ -127,6 +130,9 @@ Debt entity = repository.findById(event.getId().value())
     }
 	if(event.getStatuses() != null  && hasId(event.getStatuses().value())) {
 		entity.setStatuses(event.getStatuses().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getSyncAt() != null  && hasId(event.getSyncAt().value())) {
 		entity.setSyncAt(event.getSyncAt().value());

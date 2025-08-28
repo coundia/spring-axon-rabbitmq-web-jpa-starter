@@ -86,6 +86,8 @@ public class RoleGate {
 			return false;
 		}
 		Role entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Role {}: {}", userId, objectId, result);
 		return result;

@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.customers.domain;
 
-import java.util.UUID;
 import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.customers.domain.exception.*;
+import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.customers.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.*;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class CustomerAggregateTests extends BaseUnitTests {
@@ -20,12 +20,13 @@ void it_should_create_customer_with_valid_values() {
 	CustomerFirstName firstName = CustomerFirstName.create(UUID.randomUUID().toString());
 	CustomerLastName lastName = CustomerLastName.create(UUID.randomUUID().toString());
 	CustomerFullName fullName = CustomerFullName.create(UUID.randomUUID().toString());
-	CustomerBalance balance = CustomerBalance.create(9408.24);
-	CustomerBalanceDebt balanceDebt = CustomerBalanceDebt.create(2655.47);
+	CustomerBalance balance = CustomerBalance.create(3301.88);
+	CustomerBalanceDebt balanceDebt = CustomerBalanceDebt.create(5812.38);
 	CustomerPhone phone = CustomerPhone.create(UUID.randomUUID().toString());
 	CustomerEmail email = CustomerEmail.create(UUID.randomUUID().toString());
 	CustomerNotes notes = CustomerNotes.create(UUID.randomUUID().toString());
 	CustomerStatus status = CustomerStatus.create(UUID.randomUUID().toString());
+	CustomerAccount account = CustomerAccount.create(UUID.randomUUID().toString());
 	CustomerCompany company = CustomerCompany.create(UUID.randomUUID().toString());
 	CustomerAddressLine1 addressLine1 = CustomerAddressLine1.create(UUID.randomUUID().toString());
 	CustomerAddressLine2 addressLine2 = CustomerAddressLine2.create(UUID.randomUUID().toString());
@@ -37,7 +38,7 @@ void it_should_create_customer_with_valid_values() {
 	CustomerIsActive isActive = CustomerIsActive.create(false);
 	CustomerCreatedBy createdBy = CustomerCreatedBy.create(UUID.randomUUID().toString());
 	CustomerTenant tenant = CustomerTenant.create(UUID.randomUUID().toString());
-	CustomerAggregate aggregateCustomerAggregate = new CustomerAggregate(id, remoteId, localId, code, firstName, lastName, fullName, balance, balanceDebt, phone, email, notes, status, company, addressLine1, addressLine2, city, region, country, postalCode, syncAt, isActive, createdBy, tenant);
+	CustomerAggregate aggregateCustomerAggregate = new CustomerAggregate(id, remoteId, localId, code, firstName, lastName, fullName, balance, balanceDebt, phone, email, notes, status, account, company, addressLine1, addressLine2, city, region, country, postalCode, syncAt, isActive, createdBy, tenant);
 	assertThat(aggregateCustomerAggregate.getId()).isNotNull();
 	assertThat(aggregateCustomerAggregate.getId()).isEqualTo(id);
 	assertThat(aggregateCustomerAggregate.getRemoteId()).isEqualTo(remoteId);
@@ -52,6 +53,7 @@ void it_should_create_customer_with_valid_values() {
 	assertThat(aggregateCustomerAggregate.getEmail()).isEqualTo(email);
 	assertThat(aggregateCustomerAggregate.getNotes()).isEqualTo(notes);
 	assertThat(aggregateCustomerAggregate.getStatus()).isEqualTo(status);
+	assertThat(aggregateCustomerAggregate.getAccount()).isEqualTo(account);
 	assertThat(aggregateCustomerAggregate.getCompany()).isEqualTo(company);
 	assertThat(aggregateCustomerAggregate.getAddressLine1()).isEqualTo(addressLine1);
 	assertThat(aggregateCustomerAggregate.getAddressLine2()).isEqualTo(addressLine2);

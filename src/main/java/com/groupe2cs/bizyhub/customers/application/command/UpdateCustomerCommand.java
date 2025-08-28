@@ -36,6 +36,7 @@ public class UpdateCustomerCommand implements Serializable {
  	private CustomerEmail email;
  	private CustomerNotes notes;
  	private CustomerStatus status;
+ 	private CustomerAccount account;
  	private CustomerCompany company;
  	private CustomerAddressLine1 addressLine1;
  	private CustomerAddressLine2 addressLine2;

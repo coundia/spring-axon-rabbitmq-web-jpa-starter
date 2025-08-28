@@ -34,6 +34,7 @@ public class CreateProductCommand implements Serializable {
  	private ProductUnit unit;
  	private ProductSyncAt syncAt;
  	private ProductCategory category;
+ 	private ProductAccount account;
  	private ProductDefaultPrice defaultPrice;
  	private ProductStatuses statuses;
  	private ProductPurchasePrice purchasePrice;
@@ -50,6 +51,7 @@ public class CreateProductCommand implements Serializable {
    ProductUnit unit , 
    ProductSyncAt syncAt , 
    ProductCategory category , 
+   ProductAccount account , 
    ProductDefaultPrice defaultPrice , 
    ProductStatuses statuses , 
    ProductPurchasePrice purchasePrice , 
@@ -67,6 +69,7 @@ public class CreateProductCommand implements Serializable {
   this.unit = unit ; 
   this.syncAt = syncAt ; 
   this.category = category ; 
+  this.account = account ; 
   this.defaultPrice = defaultPrice ; 
   this.statuses = statuses ; 
   this.purchasePrice = purchasePrice ; 

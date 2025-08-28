@@ -32,6 +32,7 @@ public class ProductDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private ProductId id;
 

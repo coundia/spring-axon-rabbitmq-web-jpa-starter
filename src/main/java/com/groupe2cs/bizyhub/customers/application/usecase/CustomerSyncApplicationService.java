@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.customers.application.usecase;
 import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
-import com.groupe2cs.bizyhub.customers.application.command.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.customers.application.dto.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.customers.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.customers.application.command.*;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -36,6 +36,7 @@ public class CustomerSyncApplicationService {
 								.email(CustomerEmail.create(d.getEmail()))
 								.notes(CustomerNotes.create(d.getNotes()))
 								.status(CustomerStatus.create(d.getStatus()))
+								.account(CustomerAccount.create(d.getAccount()))
 								.company(CustomerCompany.create(d.getCompany()))
 								.addressLine1(CustomerAddressLine1.create(d.getAddressLine1()))
 								.addressLine2(CustomerAddressLine2.create(d.getAddressLine2()))
@@ -78,6 +79,7 @@ public class CustomerSyncApplicationService {
 							.email(CustomerEmail.create(d.getEmail()))
 							.notes(CustomerNotes.create(d.getNotes()))
 							.status(CustomerStatus.create(d.getStatus()))
+							.account(CustomerAccount.create(d.getAccount()))
 							.company(CustomerCompany.create(d.getCompany()))
 							.addressLine1(CustomerAddressLine1.create(d.getAddressLine1()))
 							.addressLine2(CustomerAddressLine2.create(d.getAddressLine2()))

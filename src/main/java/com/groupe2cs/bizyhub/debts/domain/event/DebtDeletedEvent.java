@@ -31,6 +31,7 @@ public class DebtDeletedEvent implements Serializable {
 	
 	
 	
+	
 
 private DebtId id;
 

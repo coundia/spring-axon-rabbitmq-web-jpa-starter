@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.settings.domain.exception.SettingValueNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingLocaleNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingRemoteIdNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingLocalIdNotValid;
+import com.groupe2cs.bizyhub.settings.domain.exception.SettingAccountNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingDetailsNotValid;
 import com.groupe2cs.bizyhub.settings.domain.exception.SettingSyncAtNotValid;
 

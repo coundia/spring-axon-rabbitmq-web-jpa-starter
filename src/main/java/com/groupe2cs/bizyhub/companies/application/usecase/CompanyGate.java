@@ -1,6 +1,6 @@
 package com.groupe2cs.bizyhub.companies.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.companies.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.companies.infrastructure.entity.Company;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
@@ -86,6 +86,8 @@ public class CompanyGate {
 			return false;
 		}
 		Company entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Company {}: {}", userId, objectId, result);
 		return result;

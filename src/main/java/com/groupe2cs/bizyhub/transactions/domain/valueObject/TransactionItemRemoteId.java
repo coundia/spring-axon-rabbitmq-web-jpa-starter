@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemProduc
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemLabelNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemQuantityNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemUnitNotValid;
+import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemAccountNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionItemRemoteIdNotValid;
 
 import java.io.Serializable;

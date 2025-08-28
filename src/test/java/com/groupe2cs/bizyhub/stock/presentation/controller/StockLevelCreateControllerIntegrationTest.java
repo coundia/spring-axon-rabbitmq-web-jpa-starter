@@ -38,8 +38,9 @@ void it_should_be_able_to_add_stocklevel() {
 
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
-		requestDTO.setStockOnHand(17);
-		requestDTO.setStockAllocated(28);
+		requestDTO.setStockOnHand(93);
+		requestDTO.setStockAllocated(40);
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setProductVariant(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setCompany(UUID.randomUUID().toString());
@@ -53,6 +54,7 @@ void it_should_be_able_to_add_stocklevel() {
 		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
 		assertThat(response.getBody().getStockOnHand()).isEqualTo(requestDTO.getStockOnHand());
 		assertThat(response.getBody().getStockAllocated()).isEqualTo(requestDTO.getStockAllocated());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getProductVariant()).isEqualTo(requestDTO.getProductVariant());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getCompany()).isEqualTo(requestDTO.getCompany());

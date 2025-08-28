@@ -50,6 +50,9 @@ StockLevel entity = StockLevel.builder().build();
  		if(event.getStockAllocated() !=null  && hasId(event.getStockAllocated().value()) ) {
             entity.setStockAllocated( event.getStockAllocated().value());
         }
+ 		if(event.getAccount() !=null  && hasId(event.getAccount().value()) ) {
+            entity.setAccount( event.getAccount().value());
+        }
  		if(event.getProductVariant() !=null  && hasId(event.getProductVariant().value()) ) {
             entity.setProductVariant( event.getProductVariant().value());
         }
@@ -103,6 +106,9 @@ StockLevel entity = repository.findById(event.getId().value())
     }
 	if(event.getStockAllocated() != null  && hasId(event.getStockAllocated().value())) {
 		entity.setStockAllocated(event.getStockAllocated().value());
+    }
+	if(event.getAccount() != null  && hasId(event.getAccount().value())) {
+		entity.setAccount(event.getAccount().value());
     }
 	if(event.getProductVariant() != null  && hasId(event.getProductVariant().value())) {
 		entity.setProductVariant(event.getProductVariant().value());

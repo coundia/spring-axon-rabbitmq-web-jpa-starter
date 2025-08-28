@@ -72,7 +72,7 @@ public class AccountUserUpdateControllerIntegrationTest extends BaseIntegrationT
         body.add("message", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
-        body.add("isActive", true);
+        body.add("isActive", false);
 
         HttpHeaders multipartHeaders = new HttpHeaders();
         multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

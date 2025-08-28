@@ -37,9 +37,10 @@ void it_should_be_able_to_add_stockmovement() {
 		StockMovementRequest requestDTO = new StockMovementRequest();
 
 		requestDTO.setTypeStockMovement(UUID.randomUUID().toString());
-		requestDTO.setQuantity(48);
+		requestDTO.setQuantity(63);
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setCompany(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setProductVariant(UUID.randomUUID().toString());
@@ -55,6 +56,7 @@ void it_should_be_able_to_add_stockmovement() {
 		assertThat(response.getBody().getQuantity()).isEqualTo(requestDTO.getQuantity());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
 		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getCompany()).isEqualTo(requestDTO.getCompany());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getProductVariant()).isEqualTo(requestDTO.getProductVariant());

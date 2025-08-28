@@ -57,6 +57,13 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
         @Query("SELECT e FROM Category e WHERE LOWER(e.localId) LIKE LOWER(CONCAT('%', :localId, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Category> findByLocalIdAndTenantId(String localId, String tenantId);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByAccountAndCreatedById(String account, String createdById);
+        @Query("SELECT e FROM Category e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+        List<Category> findByAccountAndTenantName(String account, String tenantName);
+
+        @Query("SELECT e FROM Category e WHERE LOWER(e.account) LIKE LOWER(CONCAT('%', :account, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
+       List<Category> findByAccountAndTenantId(String account, String tenantId);
         @Query("SELECT e FROM Category e WHERE LOWER(e.description) LIKE LOWER(CONCAT('%', :description, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
         List<Category> findByDescriptionAndCreatedById(String description, String createdById);
         @Query("SELECT e FROM Category e WHERE LOWER(e.description) LIKE LOWER(CONCAT('%', :description, '%')) AND e.tenant.name = :tenantName ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -78,14 +85,6 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
         @Query("SELECT e FROM Category e WHERE e.version = :version AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Category> findByVersionAndTenantId(Integer version, String tenantId);
-        @Query("""
-        SELECT e FROM Category e
-        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-        AND e.createdBy.id = :createdById
-        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-        """)
-         List<Category> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
-
          @Query("""
         SELECT e FROM Category e
         WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
@@ -93,6 +92,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
         ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
         """)
          List<Category> findBySyncAtAndTenantId(java.time.Instant syncAt, String tenantId);
+
 
 
         @Query("SELECT e FROM Category e WHERE LOWER(e.createdBy.id) LIKE LOWER(CONCAT('%', :createdBy, '%')) AND e.createdBy.id = :createdById ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
@@ -110,6 +110,46 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
         @Query("SELECT e FROM Category e WHERE LOWER(e.tenant.id) LIKE LOWER(CONCAT('%', :tenant, '%')) AND e.tenant.id = :tenantId ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC")
        List<Category> findByTenantIdAndTenantId(String tenant, String tenantId);
 
+
+	@Query("""
+        SELECT e FROM Category  e
+        WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC).toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+         AND (
+                 e.createdBy.id = :createdById
+                 OR EXISTS (
+                      SELECT 1
+                      FROM AccountUser au, User u
+                      WHERE au.account = e.account
+                        AND (
+                              (au.identity IS NOT NULL AND au.identity = u.username)
+                           OR (au.email    IS NOT NULL AND au.email    = u.email)
+                           OR (au.phone    IS NOT NULL AND au.phone    = u.telephone)
+                        )
+                 )
+            )
+        ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
+        """)
+         List<Category> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+
+         @Query("""
+            select case when count(e)>0 then true else false end
+                 from Category  e
+                     where e.id=:id
+                        and (
+                            e.createdBy.id = :userId
+                            or exists (
+                                select 1
+                                    from AccountUser au, User u
+                                    where au.account = e.account
+                                    and (
+                                    (au.identity is not null and au.identity = u.username)
+                                        or (au.email is not null and au.email = u.email)
+                                        or (au.phone is not null and au.phone = u.telephone)
+                                    )
+                        )
+            )
+            """)
+    boolean isOwner( @Param("id") String id,@Param("userId") String userId);
 
 
 

@@ -39,6 +39,7 @@ void it_should_be_able_to_add_syncstate() {
 		requestDTO.setEntityTable(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setLastSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setLastCursor(UUID.randomUUID().toString());
@@ -51,6 +52,7 @@ void it_should_be_able_to_add_syncstate() {
 		assertThat(response.getBody().getEntityTable()).isEqualTo(requestDTO.getEntityTable());
 		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
 		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getLastSyncAt()).isEqualTo(requestDTO.getLastSyncAt());
 		assertThat(response.getBody().getLastCursor()).isEqualTo(requestDTO.getLastCursor());

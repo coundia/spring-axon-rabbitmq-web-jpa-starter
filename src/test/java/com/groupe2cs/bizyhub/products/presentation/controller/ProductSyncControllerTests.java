@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -47,9 +47,10 @@ private ProductRepository Repository;
 .unit(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .category(UUID.randomUUID().toString())
-.defaultPrice(4134.28)
+.account(UUID.randomUUID().toString())
+.defaultPrice(8858.4)
 .statuses(UUID.randomUUID().toString())
-.purchasePrice(1413.75)
+.purchasePrice(1957.17)
 		.type("CREATE")
 		.build()
 		))
@@ -83,9 +84,10 @@ private ProductRepository Repository;
 .unit(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
 .category(UUID.randomUUID().toString())
-.defaultPrice(4134.28)
+.account(UUID.randomUUID().toString())
+.defaultPrice(8858.4)
 .statuses(UUID.randomUUID().toString())
-.purchasePrice(1413.75)
+.purchasePrice(1957.17)
 			.type("UPDATE")
 			.build()
 			))

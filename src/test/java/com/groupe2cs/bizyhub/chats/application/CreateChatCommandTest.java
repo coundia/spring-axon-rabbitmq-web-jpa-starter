@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateChatCommand command = new CreateChatCommand(
- ChatId.create(UUID.randomUUID().toString()) ,  ChatMessages.create(UUID.randomUUID().toString()) ,  ChatResponsesJson.create(UUID.randomUUID().toString()) ,  ChatResponses.create(UUID.randomUUID().toString()) ,  ChatState.create(UUID.randomUUID().toString()) ,  ChatSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ChatRemoteId.create(UUID.randomUUID().toString()) ,  ChatLocalId.create(UUID.randomUUID().toString()) ,  ChatAccount.create(UUID.randomUUID().toString()) ,  ChatFiles.create(UUID.randomUUID().toString()) ,  ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  ChatCreatedBy.create(UUID.randomUUID().toString()) ,  ChatTenant.create(UUID.randomUUID().toString()) 
+ ChatId.create(UUID.randomUUID().toString()) ,  ChatMessages.create(UUID.randomUUID().toString()) ,  ChatResponsesJson.create(UUID.randomUUID().toString()) ,  ChatResponses.create(UUID.randomUUID().toString()) ,  ChatState.create(UUID.randomUUID().toString()) ,  ChatSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ChatRemoteId.create(UUID.randomUUID().toString()) ,  ChatLocalId.create(UUID.randomUUID().toString()) ,  ChatAccount.create(UUID.randomUUID().toString()) ,  ChatDateTransaction.create(java.time.Instant.now().plusSeconds(3600)) ,  ChatCreatedBy.create(UUID.randomUUID().toString()) ,  ChatTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -52,8 +52,6 @@ assertThat(sentCommand.getLocalId().value()).isEqualTo(
 command.getLocalId().value());
 assertThat(sentCommand.getAccount().value()).isEqualTo(
 command.getAccount().value());
-assertThat(sentCommand.getFiles().value()).isEqualTo(
-command.getFiles().value());
 assertThat(sentCommand.getDateTransaction().value()).isEqualTo(
 command.getDateTransaction().value());
 assertThat(sentCommand.getCreatedBy().value()).isEqualTo(

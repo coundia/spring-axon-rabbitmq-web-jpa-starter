@@ -26,27 +26,29 @@ public class TransactionItemDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "1d6e2f50-66be-4dda-b118-269ab7d2c760")
+		@Schema(description = "", example = "74fd3fef-56db-4814-84c1-49f012d4742d")
 		private String transaction;
-		@Schema(description = "", example = "b163fafb-fed1-405e-99e8-d5e974605450")
+		@Schema(description = "", example = "027270cf-48d5-4caf-913b-580f2fc805f5")
 		private String product;
-		@Schema(description = "", example = "1a338df4-f22d-4655-a501-1b0100f7d359")
+		@Schema(description = "", example = "b9fb79bd-34b0-4bd0-97df-040e5041bbca")
 		private String label;
-		@Schema(description = "", example = "92")
+		@Schema(description = "", example = "36")
 		private Integer quantity;
-		@Schema(description = "", example = "bd06ce1d-a793-414e-8f0e-2d59d73edcab")
+		@Schema(description = "", example = "609a7e5e-9753-43c9-b45f-adec654d1d83")
 		private String unit;
-		@Schema(description = "", example = "83908f5f-3509-4f13-90c9-8fa100481816")
+		@Schema(description = "", example = "6acc3274-223a-49e5-9ab4-8e20e41f3792")
+		private String account;
+		@Schema(description = "", example = "153eac33-0144-4f1c-846b-32b677d9a189")
 		private String remoteId;
-		@Schema(description = "", example = "72d2ef3a-6610-4348-82bc-f539d0d670b3")
+		@Schema(description = "", example = "4f1285c5-f1c3-4489-8edc-926e627c692e")
 		private String localId;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "2403.94")
+		@Schema(description = "", example = "580.81")
 		private Double unitPrice;
-		@Schema(description = "", example = "3129.49")
+		@Schema(description = "", example = "8356.8")
 		private Double total;
-		@Schema(description = "", example = "8844dfba-3fd6-4704-95c7-6a910e48c657")
+		@Schema(description = "", example = "52c7af21-50fa-4e47-8dd2-2f9bf5444087")
 		private String notes;
 
 }

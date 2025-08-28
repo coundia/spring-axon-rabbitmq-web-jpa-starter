@@ -39,12 +39,12 @@ public class ChangeLog   extends AbstractAuditableEntity  {
 
 	private String entityTable ;
 
-	@Column(nullable = false, 
+	@Column(nullable = true, 
 		unique = false
 
 	)
 
-	private String entityId ;
+	private String account ;
 
 	@Column(nullable = true, 
 		unique = false
@@ -116,7 +116,7 @@ public class ChangeLog   extends AbstractAuditableEntity  {
 		return "ChangeLog{" +
 		"id='" + id + '\'' +
 			", entityTable=" + entityTable +
-			", entityId=" + entityId +
+			", account=" + account +
 			", remoteId=" + remoteId +
 			", localId=" + localId +
 			", operation=" + operation +

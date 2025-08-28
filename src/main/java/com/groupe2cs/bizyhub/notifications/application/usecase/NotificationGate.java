@@ -86,6 +86,8 @@ public class NotificationGate {
 			return false;
 		}
 		Notification entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Notification {}: {}", userId, objectId, result);
 		return result;

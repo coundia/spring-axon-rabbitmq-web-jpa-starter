@@ -86,6 +86,8 @@ public class FileManagerGate {
 			return false;
 		}
 		FileManager entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on FileManager {}: {}", userId, objectId, result);
 		return result;

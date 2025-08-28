@@ -26,7 +26,7 @@ private CommandGateway commandGateway;
 @Test
 void it_should_send_command_to_command_gateway() {
 CreateProductCommand command = new CreateProductCommand(
- ProductId.create(UUID.randomUUID().toString()) ,  ProductRemoteId.create(UUID.randomUUID().toString()) ,  ProductLocalId.create(UUID.randomUUID().toString()) ,  ProductCode.create(UUID.randomUUID().toString()) ,  ProductName.create(UUID.randomUUID().toString()) ,  ProductDescription.create(UUID.randomUUID().toString()) ,  ProductBarcode.create(UUID.randomUUID().toString()) ,  ProductUnit.create(UUID.randomUUID().toString()) ,  ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ProductCategory.create(UUID.randomUUID().toString()) ,  ProductDefaultPrice.create(2060.92) ,  ProductStatuses.create(UUID.randomUUID().toString()) ,  ProductPurchasePrice.create(440.78) ,  ProductCreatedBy.create(UUID.randomUUID().toString()) ,  ProductTenant.create(UUID.randomUUID().toString()) 
+ ProductId.create(UUID.randomUUID().toString()) ,  ProductRemoteId.create(UUID.randomUUID().toString()) ,  ProductLocalId.create(UUID.randomUUID().toString()) ,  ProductCode.create(UUID.randomUUID().toString()) ,  ProductName.create(UUID.randomUUID().toString()) ,  ProductDescription.create(UUID.randomUUID().toString()) ,  ProductBarcode.create(UUID.randomUUID().toString()) ,  ProductUnit.create(UUID.randomUUID().toString()) ,  ProductSyncAt.create(java.time.Instant.now().plusSeconds(3600)) ,  ProductCategory.create(UUID.randomUUID().toString()) ,  ProductAccount.create(UUID.randomUUID().toString()) ,  ProductDefaultPrice.create(7429.73) ,  ProductStatuses.create(UUID.randomUUID().toString()) ,  ProductPurchasePrice.create(6523.29) ,  ProductCreatedBy.create(UUID.randomUUID().toString()) ,  ProductTenant.create(UUID.randomUUID().toString()) 
 );
 commandGateway.send(command);
 
@@ -54,6 +54,8 @@ assertThat(sentCommand.getSyncAt().value()).isEqualTo(
 command.getSyncAt().value());
 assertThat(sentCommand.getCategory().value()).isEqualTo(
 command.getCategory().value());
+assertThat(sentCommand.getAccount().value()).isEqualTo(
+command.getAccount().value());
 assertThat(sentCommand.getDefaultPrice().value()).isEqualTo(
 command.getDefaultPrice().value());
 assertThat(sentCommand.getStatuses().value()).isEqualTo(

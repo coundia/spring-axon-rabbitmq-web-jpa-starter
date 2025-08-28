@@ -30,8 +30,6 @@ private CommandGateway commandGateway;
 
 
 @Autowired
-private FileManagerRepository filesDataRepository ;
-@Autowired
 private UserRepository createdByDataRepository ;
 @Autowired
 private TenantRepository tenantDataRepository ;
@@ -39,7 +37,6 @@ private TenantRepository tenantDataRepository ;
 @Test
 void it_should_be_able_to_delete_chat() {
 	String existingId = ChatFixtures.randomOneViaCommand(commandGateway, chatRepository,
-        filesDataRepository,
         createdByDataRepository,
         tenantDataRepository,
 	getCurrentUser()).getId().value();
