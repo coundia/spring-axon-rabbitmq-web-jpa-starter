@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.products.application.command.*;
 
+import com.groupe2cs.bizyhub.products.application.command.CreateProductCommand;
+import com.groupe2cs.bizyhub.products.application.command.DeleteProductCommand;
+import com.groupe2cs.bizyhub.products.application.command.UpdateProductCommand;
+import com.groupe2cs.bizyhub.products.application.dto.ProductSyncRequest;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,20 +24,20 @@ public class ProductSyncApplicationService {
 
 
 					CreateProductCommand command = CreateProductCommand.builder()
-								.remoteId(ProductRemoteId.create(d.getRemoteId()))
-								.localId(ProductLocalId.create(d.getLocalId()))
-								.code(ProductCode.create(d.getCode()))
-								.name(ProductName.create(d.getName()))
-								.description(ProductDescription.create(d.getDescription()))
-								.barcode(ProductBarcode.create(d.getBarcode()))
-								.unit(ProductUnit.create(d.getUnit()))
-								.syncAt(ProductSyncAt.create(d.getSyncAt()))
-								.category(ProductCategory.create(d.getCategory()))
-								.account(ProductAccount.create(d.getAccount()))
-								.defaultPrice(ProductDefaultPrice.create(d.getDefaultPrice()))
-								.statuses(ProductStatuses.create(d.getStatuses()))
-								.purchasePrice(ProductPurchasePrice.create(d.getPurchasePrice()))
-						.build();
+							.remoteId(ProductRemoteId.create(d.getRemoteId()))
+							.localId(ProductLocalId.create(d.getLocalId()))
+							.code(ProductCode.create(d.getCode()))
+							.name(ProductName.create(d.getName()))
+							.description(ProductDescription.create(d.getDescription()))
+							.barcode(ProductBarcode.create(d.getBarcode()))
+							.unit(ProductUnit.create(d.getUnit()))
+							.syncAt(ProductSyncAt.create(d.getSyncAt()))
+							.category(ProductCategory.create(d.getCategory()))
+							.account(ProductAccount.create(d.getAccount()))
+							.defaultPrice(ProductDefaultPrice.create(d.getDefaultPrice()))
+							.statuses(ProductStatuses.create(d.getStatuses()))
+							.purchasePrice(ProductPurchasePrice.create(d.getPurchasePrice()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -71,7 +71,7 @@ public class ProductSyncApplicationService {
 							.defaultPrice(ProductDefaultPrice.create(d.getDefaultPrice()))
 							.statuses(ProductStatuses.create(d.getStatuses()))
 							.purchasePrice(ProductPurchasePrice.create(d.getPurchasePrice()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -83,8 +83,8 @@ public class ProductSyncApplicationService {
 					}
 
 					DeleteProductCommand delete = DeleteProductCommand.builder()
-						.id(ProductId.create(d.getId()))
-						.build();
+							.id(ProductId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

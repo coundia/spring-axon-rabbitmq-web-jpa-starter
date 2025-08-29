@@ -1,7 +1,6 @@
 package com.groupe2cs.bizyhub.shared.presentation.status;
 
-	import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
-	import com.groupe2cs.bizyhub.shared.BaseUnitTests;
+import com.groupe2cs.bizyhub.shared.BaseUnitTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;

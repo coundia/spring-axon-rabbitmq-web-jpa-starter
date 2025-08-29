@@ -1,29 +1,11 @@
 package com.groupe2cs.bizyhub.transactions.domain.valueObject;
 
-import java.util.Objects;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionRemoteIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionLocalIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionCodeNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionDescriptionNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAmountNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionTypeEntryNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionDateTransactionNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionStatusNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionEntityNameNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionEntityIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAccountNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionSyncAtNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -31,35 +13,35 @@ import java.util.*;
 @Builder
 public class TransactionSyncAt implements Serializable {
 
-private java.time.Instant syncAt;
+	private java.time.Instant syncAt;
 
-public TransactionSyncAt(java.time.Instant syncAt) {
-this.syncAt = syncAt;
-}
+	public TransactionSyncAt(java.time.Instant syncAt) {
+		this.syncAt = syncAt;
+	}
 
-public static TransactionSyncAt create(java.time.Instant syncAt) {
+	public static TransactionSyncAt create(java.time.Instant syncAt) {
 
-	return new TransactionSyncAt(syncAt);
-}
+		return new TransactionSyncAt(syncAt);
+	}
 
-public java.time.Instant value() {
-return this.syncAt;
-}
+	public java.time.Instant value() {
+		return this.syncAt;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof TransactionSyncAt that)) return false;
-return this.syncAt.equals(that.syncAt);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TransactionSyncAt that)) return false;
+		return this.syncAt.equals(that.syncAt);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(syncAt);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(syncAt);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(syncAt);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(syncAt);
+	}
 }

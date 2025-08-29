@@ -1,50 +1,46 @@
 package com.groupe2cs.bizyhub.customers.application.queryHandler;
 
-import com.groupe2cs.bizyhub.customers.application.mapper.*;
-import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
-import com.groupe2cs.bizyhub.customers.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.customers.application.dto.*;
-import com.groupe2cs.bizyhub.customers.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.customers.application.query.*;
-import com.groupe2cs.bizyhub.customers.domain.exception.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.customers.application.dto.CustomerResponse;
+import com.groupe2cs.bizyhub.customers.application.mapper.CustomerMapper;
+import com.groupe2cs.bizyhub.customers.application.query.FindByCustomerIdQuery;
+import com.groupe2cs.bizyhub.customers.infrastructure.entity.Customer;
+import com.groupe2cs.bizyhub.customers.infrastructure.repository.CustomerRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
-
+import org.springframework.stereotype.Component;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByCustomerIdHandler {
 
-private final CustomerRepository repository;
+	private final CustomerRepository repository;
 
-@QueryHandler
+	@QueryHandler
 
- public CustomerResponse handle(FindByCustomerIdQuery query) {
+	public CustomerResponse handle(FindByCustomerIdQuery query) {
 
-    MetaRequest metaRequest = query.getMetaRequest();
-    Customer entity = null;
+		MetaRequest metaRequest = query.getMetaRequest();
+		Customer entity = null;
 
-	String value = query.getId().value();
+		String value = query.getId().value();
 
-	if(metaRequest.isAdmin()) {
-	    entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }else{
-	    entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }
+		if (metaRequest.isAdmin()) {
+			entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		} else {
+			entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		}
 
-    if (entity == null) {
-        return null;
-    }
+		if (entity == null) {
+			return null;
+		}
 		return CustomerMapper.toResponse(entity);
 	}
 

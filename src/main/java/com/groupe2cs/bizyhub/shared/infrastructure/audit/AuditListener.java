@@ -2,8 +2,9 @@ package com.groupe2cs.bizyhub.shared.infrastructure.audit;
 
 
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.PreRemove;
+import jakarta.persistence.PreUpdate;
+
 import java.time.Instant;
 
 public class AuditListener {

@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.companies.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.companies.application.dto.*;
-import com.groupe2cs.bizyhub.companies.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
 
+import com.groupe2cs.bizyhub.companies.application.command.CreateCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.command.DeleteCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.command.UpdateCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.dto.CompanySyncRequest;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,27 +24,27 @@ public class CompanySyncApplicationService {
 
 
 					CreateCompanyCommand command = CreateCompanyCommand.builder()
-								.remoteId(CompanyRemoteId.create(d.getRemoteId()))
-								.localId(CompanyLocalId.create(d.getLocalId()))
-								.code(CompanyCode.create(d.getCode()))
-								.name(CompanyName.create(d.getName()))
-								.description(CompanyDescription.create(d.getDescription()))
-								.phone(CompanyPhone.create(d.getPhone()))
-								.email(CompanyEmail.create(d.getEmail()))
-								.website(CompanyWebsite.create(d.getWebsite()))
-								.taxId(CompanyTaxId.create(d.getTaxId()))
-								.currency(CompanyCurrency.create(d.getCurrency()))
-								.addressLine1(CompanyAddressLine1.create(d.getAddressLine1()))
-								.addressLine2(CompanyAddressLine2.create(d.getAddressLine2()))
-								.city(CompanyCity.create(d.getCity()))
-								.region(CompanyRegion.create(d.getRegion()))
-								.country(CompanyCountry.create(d.getCountry()))
-								.account(CompanyAccount.create(d.getAccount()))
-								.postalCode(CompanyPostalCode.create(d.getPostalCode()))
-								.isActive(CompanyIsActive.create(d.getIsActive()))
-								.syncAt(CompanySyncAt.create(d.getSyncAt()))
-								.isDefault(CompanyIsDefault.create(d.getIsDefault()))
-						.build();
+							.remoteId(CompanyRemoteId.create(d.getRemoteId()))
+							.localId(CompanyLocalId.create(d.getLocalId()))
+							.code(CompanyCode.create(d.getCode()))
+							.name(CompanyName.create(d.getName()))
+							.description(CompanyDescription.create(d.getDescription()))
+							.phone(CompanyPhone.create(d.getPhone()))
+							.email(CompanyEmail.create(d.getEmail()))
+							.website(CompanyWebsite.create(d.getWebsite()))
+							.taxId(CompanyTaxId.create(d.getTaxId()))
+							.currency(CompanyCurrency.create(d.getCurrency()))
+							.addressLine1(CompanyAddressLine1.create(d.getAddressLine1()))
+							.addressLine2(CompanyAddressLine2.create(d.getAddressLine2()))
+							.city(CompanyCity.create(d.getCity()))
+							.region(CompanyRegion.create(d.getRegion()))
+							.country(CompanyCountry.create(d.getCountry()))
+							.account(CompanyAccount.create(d.getAccount()))
+							.postalCode(CompanyPostalCode.create(d.getPostalCode()))
+							.isActive(CompanyIsActive.create(d.getIsActive()))
+							.syncAt(CompanySyncAt.create(d.getSyncAt()))
+							.isDefault(CompanyIsDefault.create(d.getIsDefault()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -85,7 +85,7 @@ public class CompanySyncApplicationService {
 							.isActive(CompanyIsActive.create(d.getIsActive()))
 							.syncAt(CompanySyncAt.create(d.getSyncAt()))
 							.isDefault(CompanyIsDefault.create(d.getIsDefault()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -97,8 +97,8 @@ public class CompanySyncApplicationService {
 					}
 
 					DeleteCompanyCommand delete = DeleteCompanyCommand.builder()
-						.id(CompanyId.create(d.getId()))
-						.build();
+							.id(CompanyId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

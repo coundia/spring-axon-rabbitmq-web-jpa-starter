@@ -1,25 +1,19 @@
 package com.groupe2cs.bizyhub.units.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.units.application.dto.*;
-import com.groupe2cs.bizyhub.units.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.units.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.units.application.command.*;
-import java.util.UUID;
-
+import com.groupe2cs.bizyhub.units.application.dto.*;
 import com.groupe2cs.bizyhub.units.domain.valueObject.*;
+import com.groupe2cs.bizyhub.units.infrastructure.repository.*;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.mock.web.MockMultipartFile;
+
 import static org.awaitility.Awaitility.await;
 
 public class UnitFixtures {
@@ -39,21 +33,21 @@ public class UnitFixtures {
 	}
 
 	public static List<CreateUnitCommand> randomManyViaCommand(
-		CommandGateway commandGateway,
-		UnitRepository repository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		int count,
-		User user
+			CommandGateway commandGateway,
+			UnitRepository repository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			int count,
+			User user
 	) {
 		List<CreateUnitCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateUnitCommand command = randomOneViaCommand(
-			commandGateway,
-			 repository,
-            createdByDataRepository,
-            tenantDataRepository,
-			 user);
+					commandGateway,
+					repository,
+					createdByDataRepository,
+					tenantDataRepository,
+					user);
 			items.add(command);
 		}
 		return items;
@@ -63,21 +57,21 @@ public class UnitFixtures {
 		repository.deleteAll();
 	}
 
-		public static CreateUnitCommand randomOneViaCommand(
-		CommandGateway commandGateway,
-		UnitRepository  repository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		 User user) {
+	public static CreateUnitCommand randomOneViaCommand(
+			CommandGateway commandGateway,
+			UnitRepository repository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			User user) {
 
-			CreateUnitCommand command = CreateUnitCommand.builder()
+		CreateUnitCommand command = CreateUnitCommand.builder()
 				.remoteId(UnitRemoteId.create(UUID.randomUUID().toString()))
 				.localId(UnitLocalId.create(UUID.randomUUID().toString()))
 				.code(UnitCode.create(UUID.randomUUID().toString()))
 				.name(UnitName.create(UUID.randomUUID().toString()))
 				.syncAt(UnitSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.description(UnitDescription.create(UUID.randomUUID().toString()))
-			.build();
+				.build();
 
 		command.setCreatedBy(UnitCreatedBy.create(user.getId()));
 		command.setTenant(UnitTenant.create(user.getTenant().getId()));
@@ -88,19 +82,19 @@ public class UnitFixtures {
 
 
 	public static CreateUnitCommand randomOneViaCommand(
-        CommandGateway commandGateway,
-        UnitRepository  repository,
-        User user
-        ) {
+			CommandGateway commandGateway,
+			UnitRepository repository,
+			User user
+	) {
 
-        CreateUnitCommand command = CreateUnitCommand.builder()
-        .remoteId(UnitRemoteId.create(UUID.randomUUID().toString()))
-        .localId(UnitLocalId.create(UUID.randomUUID().toString()))
-        .code(UnitCode.create(UUID.randomUUID().toString()))
-        .name(UnitName.create(UUID.randomUUID().toString()))
-        .syncAt(UnitSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .description(UnitDescription.create(UUID.randomUUID().toString()))
-        .build();
+		CreateUnitCommand command = CreateUnitCommand.builder()
+				.remoteId(UnitRemoteId.create(UUID.randomUUID().toString()))
+				.localId(UnitLocalId.create(UUID.randomUUID().toString()))
+				.code(UnitCode.create(UUID.randomUUID().toString()))
+				.name(UnitName.create(UUID.randomUUID().toString()))
+				.syncAt(UnitSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
+				.description(UnitDescription.create(UUID.randomUUID().toString()))
+				.build();
 
 		command.setCreatedBy(UnitCreatedBy.create(user.getId()));
 		command.setTenant(UnitTenant.create(user.getTenant().getId()));

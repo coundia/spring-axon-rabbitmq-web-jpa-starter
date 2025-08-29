@@ -1,8 +1,11 @@
 package com.groupe2cs.bizyhub.customers.application.query;
 
-import com.groupe2cs.bizyhub.customers.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import lombok.*;
+import com.groupe2cs.bizyhub.customers.domain.valueObject.CustomerBalance;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @RequiredArgsConstructor
 @Getter
@@ -10,7 +13,7 @@ import lombok.*;
 @Builder
 public class FindByCustomerBalanceQuery {
 
-	private final CustomerBalance  balance;
+	private final CustomerBalance balance;
 	private final MetaRequest metaRequest;
 
 }

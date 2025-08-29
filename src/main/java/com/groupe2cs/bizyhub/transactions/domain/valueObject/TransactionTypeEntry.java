@@ -1,23 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain.valueObject;
 
-import java.util.Objects;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionRemoteIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionLocalIdNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionCodeNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionDescriptionNotValid;
-import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionAmountNotValid;
 import com.groupe2cs.bizyhub.transactions.domain.exception.TransactionTypeEntryNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -25,38 +14,38 @@ import java.util.*;
 @Builder
 public class TransactionTypeEntry implements Serializable {
 
-private String typeEntry;
+	private String typeEntry;
 
-public TransactionTypeEntry(String typeEntry) {
-this.typeEntry = typeEntry;
-}
+	public TransactionTypeEntry(String typeEntry) {
+		this.typeEntry = typeEntry;
+	}
 
-public static TransactionTypeEntry create(String typeEntry) {
+	public static TransactionTypeEntry create(String typeEntry) {
 
-if (typeEntry == null || typeEntry.isBlank()) {
-throw new TransactionTypeEntryNotValid("TypeEntry is invalid");
-}
-return new TransactionTypeEntry(typeEntry);
-}
+		if (typeEntry == null || typeEntry.isBlank()) {
+			throw new TransactionTypeEntryNotValid("TypeEntry is invalid");
+		}
+		return new TransactionTypeEntry(typeEntry);
+	}
 
-public String value() {
-return this.typeEntry;
-}
+	public String value() {
+		return this.typeEntry;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof TransactionTypeEntry that)) return false;
-return this.typeEntry.equals(that.typeEntry);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TransactionTypeEntry that)) return false;
+		return this.typeEntry.equals(that.typeEntry);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(typeEntry);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(typeEntry);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(typeEntry);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(typeEntry);
+	}
 }

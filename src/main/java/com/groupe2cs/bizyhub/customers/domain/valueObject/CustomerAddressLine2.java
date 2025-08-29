@@ -1,33 +1,11 @@
 package com.groupe2cs.bizyhub.customers.domain.valueObject;
 
-import java.util.Objects;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerIdNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerRemoteIdNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerLocalIdNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerCodeNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerFirstNameNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerLastNameNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerFullNameNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerBalanceNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerBalanceDebtNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerPhoneNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerEmailNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerNotesNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerStatusNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerAccountNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerCompanyNotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerAddressLine1NotValid;
-import com.groupe2cs.bizyhub.customers.domain.exception.CustomerAddressLine2NotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -35,35 +13,35 @@ import java.util.*;
 @Builder
 public class CustomerAddressLine2 implements Serializable {
 
-private String addressLine2;
+	private String addressLine2;
 
-public CustomerAddressLine2(String addressLine2) {
-this.addressLine2 = addressLine2;
-}
+	public CustomerAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
 
-public static CustomerAddressLine2 create(String addressLine2) {
+	public static CustomerAddressLine2 create(String addressLine2) {
 
-	return new CustomerAddressLine2(addressLine2);
-}
+		return new CustomerAddressLine2(addressLine2);
+	}
 
-public String value() {
-return this.addressLine2;
-}
+	public String value() {
+		return this.addressLine2;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof CustomerAddressLine2 that)) return false;
-return this.addressLine2.equals(that.addressLine2);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CustomerAddressLine2 that)) return false;
+		return this.addressLine2.equals(that.addressLine2);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(addressLine2);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(addressLine2);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(addressLine2);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(addressLine2);
+	}
 }

@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionItemCommand;
+import com.groupe2cs.bizyhub.transactions.application.command.DeleteTransactionItemCommand;
+import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionItemCommand;
+import com.groupe2cs.bizyhub.transactions.application.dto.TransactionItemSyncRequest;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,19 +24,19 @@ public class TransactionItemSyncApplicationService {
 
 
 					CreateTransactionItemCommand command = CreateTransactionItemCommand.builder()
-								.transaction(TransactionItemTransaction.create(d.getTransaction()))
-								.product(TransactionItemProduct.create(d.getProduct()))
-								.label(TransactionItemLabel.create(d.getLabel()))
-								.quantity(TransactionItemQuantity.create(d.getQuantity()))
-								.unit(TransactionItemUnit.create(d.getUnit()))
-								.account(TransactionItemAccount.create(d.getAccount()))
-								.remoteId(TransactionItemRemoteId.create(d.getRemoteId()))
-								.localId(TransactionItemLocalId.create(d.getLocalId()))
-								.syncAt(TransactionItemSyncAt.create(d.getSyncAt()))
-								.unitPrice(TransactionItemUnitPrice.create(d.getUnitPrice()))
-								.total(TransactionItemTotal.create(d.getTotal()))
-								.notes(TransactionItemNotes.create(d.getNotes()))
-						.build();
+							.transaction(TransactionItemTransaction.create(d.getTransaction()))
+							.product(TransactionItemProduct.create(d.getProduct()))
+							.label(TransactionItemLabel.create(d.getLabel()))
+							.quantity(TransactionItemQuantity.create(d.getQuantity()))
+							.unit(TransactionItemUnit.create(d.getUnit()))
+							.account(TransactionItemAccount.create(d.getAccount()))
+							.remoteId(TransactionItemRemoteId.create(d.getRemoteId()))
+							.localId(TransactionItemLocalId.create(d.getLocalId()))
+							.syncAt(TransactionItemSyncAt.create(d.getSyncAt()))
+							.unitPrice(TransactionItemUnitPrice.create(d.getUnitPrice()))
+							.total(TransactionItemTotal.create(d.getTotal()))
+							.notes(TransactionItemNotes.create(d.getNotes()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -69,7 +69,7 @@ public class TransactionItemSyncApplicationService {
 							.unitPrice(TransactionItemUnitPrice.create(d.getUnitPrice()))
 							.total(TransactionItemTotal.create(d.getTotal()))
 							.notes(TransactionItemNotes.create(d.getNotes()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -81,8 +81,8 @@ public class TransactionItemSyncApplicationService {
 					}
 
 					DeleteTransactionItemCommand delete = DeleteTransactionItemCommand.builder()
-						.id(TransactionItemId.create(d.getId()))
-						.build();
+							.id(TransactionItemId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

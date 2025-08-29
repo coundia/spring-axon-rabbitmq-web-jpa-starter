@@ -1,16 +1,12 @@
 package com.groupe2cs.bizyhub.debts.application.dto;
 
-import com.groupe2cs.bizyhub.debts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.debts.infrastructure.entity.Debt;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import org.springframework.data.domain.Page;
+
 import java.io.Serializable;
 import java.util.List;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.domain.Page;
 
 @Getter
 @Setter
@@ -20,8 +16,8 @@ import org.springframework.data.domain.Page;
 @Schema(name = "DebtPagedResponse", description = "Paginated response for Debt results")
 public class DebtPagedResponse implements Serializable {
 
-@Schema(description = "List of paginated Debt items")
-private List<DebtResponse> content;
+	@Schema(description = "List of paginated Debt items")
+	private List<DebtResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -37,11 +33,11 @@ private List<DebtResponse> content;
 
 	public static DebtPagedResponse from(Page<Debt> page, List<DebtResponse> content) {
 		return DebtPagedResponse.builder()
-		.content(content)
-		.page(page.getNumber())
-		.size(page.getSize())
-		.totalElements(page.getTotalElements())
-		.totalPages(page.getTotalPages())
-		.build();
-		}
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

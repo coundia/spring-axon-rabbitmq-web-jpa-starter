@@ -1,38 +1,33 @@
 package com.groupe2cs.bizyhub.stock.presentation.controller;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
-import com.groupe2cs.bizyhub.stock.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.stock.application.command.*;
-import java.util.UUID;
 
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.stock.application.dto.StockMovementRequest;
+import com.groupe2cs.bizyhub.stock.application.dto.StockMovementResponse;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StockMovementCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_add_stockmovement() {
+	@Test
+	void it_should_be_able_to_add_stockmovement() {
 
 		StockMovementRequest requestDTO = new StockMovementRequest();
 
@@ -47,8 +42,10 @@ void it_should_be_able_to_add_stockmovement() {
 		requestDTO.setOrderLineId(UUID.randomUUID().toString());
 		requestDTO.setDiscriminator(UUID.randomUUID().toString());
 
- 		String uri = "/v1/commands/stockMovement";
-		ResponseEntity<StockMovementResponse> response = this.postForEntity(uri, requestDTO, StockMovementResponse.class);
+		String uri = "/v1/commands/stockMovement";
+		ResponseEntity<StockMovementResponse>
+				response =
+				this.postForEntity(uri, requestDTO, StockMovementResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getBody().getId()).isNotNull();

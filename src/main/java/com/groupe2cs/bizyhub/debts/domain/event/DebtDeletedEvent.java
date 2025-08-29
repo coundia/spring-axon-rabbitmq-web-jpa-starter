@@ -1,15 +1,12 @@
 package com.groupe2cs.bizyhub.debts.domain.event;
 
-	import com.groupe2cs.bizyhub.debts.domain.valueObject.*;
-
-import java.io.Serializable;
+import com.groupe2cs.bizyhub.debts.domain.valueObject.DebtId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.*;
-import java.util.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -17,22 +14,7 @@ import java.util.*;
 @NoArgsConstructor
 public class DebtDeletedEvent implements Serializable {
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-private DebtId id;
+	private DebtId id;
 
 }

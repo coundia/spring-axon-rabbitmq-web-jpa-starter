@@ -1,26 +1,12 @@
 package com.groupe2cs.bizyhub.sync.domain.valueObject;
 
-import java.util.Objects;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogIdNotValid;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogEntityTableNotValid;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogAccountNotValid;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogRemoteIdNotValid;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogLocalIdNotValid;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogOperationNotValid;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogPayloadNotValid;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogStatusNotValid;
-import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogSyncAtNotValid;
 import com.groupe2cs.bizyhub.sync.domain.exception.ChangeLogAttemptsNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -28,38 +14,38 @@ import java.util.*;
 @Builder
 public class ChangeLogAttempts implements Serializable {
 
-private Integer attempts;
+	private Integer attempts;
 
-public ChangeLogAttempts(Integer attempts) {
-this.attempts = attempts;
-}
+	public ChangeLogAttempts(Integer attempts) {
+		this.attempts = attempts;
+	}
 
-public static ChangeLogAttempts create(Integer attempts) {
+	public static ChangeLogAttempts create(Integer attempts) {
 
-if (attempts < 0) {
-throw new ChangeLogAttemptsNotValid("Attempts is invalid");
-}
-return new ChangeLogAttempts(attempts);
-}
+		if (attempts < 0) {
+			throw new ChangeLogAttemptsNotValid("Attempts is invalid");
+		}
+		return new ChangeLogAttempts(attempts);
+	}
 
-public Integer value() {
-return this.attempts;
-}
+	public Integer value() {
+		return this.attempts;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof ChangeLogAttempts that)) return false;
-return this.attempts.equals(that.attempts);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ChangeLogAttempts that)) return false;
+		return this.attempts.equals(that.attempts);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(attempts);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(attempts);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(attempts);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(attempts);
+	}
 }

@@ -1,8 +1,6 @@
 package com.groupe2cs.bizyhub.security.presentation.projection;
 
 import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeCreatedEvent;
-import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeDeletedEvent;
-import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeUpdatedEvent;
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

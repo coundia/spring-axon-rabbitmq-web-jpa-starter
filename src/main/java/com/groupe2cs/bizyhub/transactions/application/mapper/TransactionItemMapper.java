@@ -1,110 +1,112 @@
 package com.groupe2cs.bizyhub.transactions.application.mapper;
 
-	import com.groupe2cs.bizyhub.transactions.application.dto.*;
-	import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-	import com.groupe2cs.bizyhub.transactions.domain.*;
-	import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.transactions.application.command.*;
+import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionItemCommand;
+import com.groupe2cs.bizyhub.transactions.application.command.DeleteTransactionItemCommand;
+import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionItemCommand;
+import com.groupe2cs.bizyhub.transactions.application.dto.TransactionItemRequest;
+import com.groupe2cs.bizyhub.transactions.application.dto.TransactionItemResponse;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.TransactionItem;
 
 public class TransactionItemMapper {
 
-public static TransactionItemResponse toResponse(TransactionItem entity) {
-return TransactionItemResponse.builder()
-		.id(entity.getId())
-		.transaction(entity.getTransaction())
-		.product(entity.getProduct())
-		.label(entity.getLabel())
-		.quantity(entity.getQuantity())
-		.unit(entity.getUnit())
-		.account(entity.getAccount())
-		.remoteId(entity.getRemoteId())
-		.localId(entity.getLocalId())
-		.syncAt(entity.getSyncAt())
-		.unitPrice(entity.getUnitPrice())
-		.total(entity.getTotal())
-		.notes(entity.getNotes())
-    .createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername(): null)
-    .tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
-.build();
-}
+	public static TransactionItemResponse toResponse(TransactionItem entity) {
+		return TransactionItemResponse.builder()
+				.id(entity.getId())
+				.transaction(entity.getTransaction())
+				.product(entity.getProduct())
+				.label(entity.getLabel())
+				.quantity(entity.getQuantity())
+				.unit(entity.getUnit())
+				.account(entity.getAccount())
+				.remoteId(entity.getRemoteId())
+				.localId(entity.getLocalId())
+				.syncAt(entity.getSyncAt())
+				.unitPrice(entity.getUnitPrice())
+				.total(entity.getTotal())
+				.notes(entity.getNotes())
+				.createdBy(entity.getCreatedBy() != null ? entity.getCreatedBy().getUsername() : null)
+				.tenant(entity.getTenant() != null ? entity.getTenant().getId() : null)
+				.build();
+	}
 
-public static TransactionItemResponse toResponse(CreateTransactionItemCommand command) {
-return TransactionItemResponse.builder()
-	.id(command.getId().value())
-	.transaction(command.getTransaction().value())
-	.product(command.getProduct().value())
-	.label(command.getLabel().value())
-	.quantity(command.getQuantity().value())
-	.unit(command.getUnit().value())
-	.account(command.getAccount().value())
-	.remoteId(command.getRemoteId().value())
-	.localId(command.getLocalId().value())
-	.syncAt(command.getSyncAt().value())
-	.unitPrice(command.getUnitPrice().value())
-	.total(command.getTotal().value())
-	.notes(command.getNotes().value())
-.build();
-}
+	public static TransactionItemResponse toResponse(CreateTransactionItemCommand command) {
+		return TransactionItemResponse.builder()
+				.id(command.getId().value())
+				.transaction(command.getTransaction().value())
+				.product(command.getProduct().value())
+				.label(command.getLabel().value())
+				.quantity(command.getQuantity().value())
+				.unit(command.getUnit().value())
+				.account(command.getAccount().value())
+				.remoteId(command.getRemoteId().value())
+				.localId(command.getLocalId().value())
+				.syncAt(command.getSyncAt().value())
+				.unitPrice(command.getUnitPrice().value())
+				.total(command.getTotal().value())
+				.notes(command.getNotes().value())
+				.build();
+	}
 
-public static TransactionItemResponse toResponse(UpdateTransactionItemCommand command) {
-return TransactionItemResponse.builder()
-	.id(command.getId().value())
-	.transaction(command.getTransaction().value())
-	.product(command.getProduct().value())
-	.label(command.getLabel().value())
-	.quantity(command.getQuantity().value())
-	.unit(command.getUnit().value())
-	.account(command.getAccount().value())
-	.remoteId(command.getRemoteId().value())
-	.localId(command.getLocalId().value())
-	.syncAt(command.getSyncAt().value())
-	.unitPrice(command.getUnitPrice().value())
-	.total(command.getTotal().value())
-	.notes(command.getNotes().value())
-.build();
-}
+	public static TransactionItemResponse toResponse(UpdateTransactionItemCommand command) {
+		return TransactionItemResponse.builder()
+				.id(command.getId().value())
+				.transaction(command.getTransaction().value())
+				.product(command.getProduct().value())
+				.label(command.getLabel().value())
+				.quantity(command.getQuantity().value())
+				.unit(command.getUnit().value())
+				.account(command.getAccount().value())
+				.remoteId(command.getRemoteId().value())
+				.localId(command.getLocalId().value())
+				.syncAt(command.getSyncAt().value())
+				.unitPrice(command.getUnitPrice().value())
+				.total(command.getTotal().value())
+				.notes(command.getNotes().value())
+				.build();
+	}
 
-public static CreateTransactionItemCommand toCommand(
-TransactionItemRequest request
-) {
-return CreateTransactionItemCommand.builder()
-	.transaction(TransactionItemTransaction.create(request.getTransaction()))
-	.product(TransactionItemProduct.create(request.getProduct()))
-	.label(TransactionItemLabel.create(request.getLabel()))
-	.quantity(TransactionItemQuantity.create(request.getQuantity()))
-	.unit(TransactionItemUnit.create(request.getUnit()))
-	.account(TransactionItemAccount.create(request.getAccount()))
-	.remoteId(TransactionItemRemoteId.create(request.getRemoteId()))
-	.localId(TransactionItemLocalId.create(request.getLocalId()))
-	.syncAt(TransactionItemSyncAt.create(request.getSyncAt()))
-	.unitPrice(TransactionItemUnitPrice.create(request.getUnitPrice()))
-	.total(TransactionItemTotal.create(request.getTotal()))
-	.notes(TransactionItemNotes.create(request.getNotes()))
-.build();
-}
+	public static CreateTransactionItemCommand toCommand(
+			TransactionItemRequest request
+	) {
+		return CreateTransactionItemCommand.builder()
+				.transaction(TransactionItemTransaction.create(request.getTransaction()))
+				.product(TransactionItemProduct.create(request.getProduct()))
+				.label(TransactionItemLabel.create(request.getLabel()))
+				.quantity(TransactionItemQuantity.create(request.getQuantity()))
+				.unit(TransactionItemUnit.create(request.getUnit()))
+				.account(TransactionItemAccount.create(request.getAccount()))
+				.remoteId(TransactionItemRemoteId.create(request.getRemoteId()))
+				.localId(TransactionItemLocalId.create(request.getLocalId()))
+				.syncAt(TransactionItemSyncAt.create(request.getSyncAt()))
+				.unitPrice(TransactionItemUnitPrice.create(request.getUnitPrice()))
+				.total(TransactionItemTotal.create(request.getTotal()))
+				.notes(TransactionItemNotes.create(request.getNotes()))
+				.build();
+	}
 
 	public static UpdateTransactionItemCommand toUpdateCommand(TransactionItemId id, TransactionItemRequest request) {
-	return UpdateTransactionItemCommand.builder()
-	.id(id)
-		.transaction(TransactionItemTransaction.create(request.getTransaction()))
-		.product(TransactionItemProduct.create(request.getProduct()))
-		.label(TransactionItemLabel.create(request.getLabel()))
-		.quantity(TransactionItemQuantity.create(request.getQuantity()))
-		.unit(TransactionItemUnit.create(request.getUnit()))
-		.account(TransactionItemAccount.create(request.getAccount()))
-		.remoteId(TransactionItemRemoteId.create(request.getRemoteId()))
-		.localId(TransactionItemLocalId.create(request.getLocalId()))
-		.syncAt(TransactionItemSyncAt.create(request.getSyncAt()))
-		.unitPrice(TransactionItemUnitPrice.create(request.getUnitPrice()))
-		.total(TransactionItemTotal.create(request.getTotal()))
-		.notes(TransactionItemNotes.create(request.getNotes()))
-	.build();
+		return UpdateTransactionItemCommand.builder()
+				.id(id)
+				.transaction(TransactionItemTransaction.create(request.getTransaction()))
+				.product(TransactionItemProduct.create(request.getProduct()))
+				.label(TransactionItemLabel.create(request.getLabel()))
+				.quantity(TransactionItemQuantity.create(request.getQuantity()))
+				.unit(TransactionItemUnit.create(request.getUnit()))
+				.account(TransactionItemAccount.create(request.getAccount()))
+				.remoteId(TransactionItemRemoteId.create(request.getRemoteId()))
+				.localId(TransactionItemLocalId.create(request.getLocalId()))
+				.syncAt(TransactionItemSyncAt.create(request.getSyncAt()))
+				.unitPrice(TransactionItemUnitPrice.create(request.getUnitPrice()))
+				.total(TransactionItemTotal.create(request.getTotal()))
+				.notes(TransactionItemNotes.create(request.getNotes()))
+				.build();
 	}
 
 
-public static DeleteTransactionItemCommand toDeleteCommand(TransactionItemId id) {
-return DeleteTransactionItemCommand.builder()
-.id(id)
-.build();
-}
+	public static DeleteTransactionItemCommand toDeleteCommand(TransactionItemId id) {
+		return DeleteTransactionItemCommand.builder()
+				.id(id)
+				.build();
+	}
 }

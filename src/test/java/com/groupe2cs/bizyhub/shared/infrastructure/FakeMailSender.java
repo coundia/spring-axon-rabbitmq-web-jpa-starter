@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 @Profile("test")
 public class FakeMailSender implements MailSender {
-@Override
-public void send(String from, String to, String subject, String content) {
-log.info("FAKE MAIL → from: {}, To: {}, Subject: {}, Content: {}", from, to, subject, content);
-}
+	@Override
+	public void send(String from, String to, String subject, String content) {
+		log.info("FAKE MAIL → from: {}, To: {}, Subject: {}, Content: {}", from, to, subject, content);
+	}
 
-@Override
-public boolean isValidEmail(String email) {
-return true;
-}
+	@Override
+	public boolean isValidEmail(String email) {
+		return true;
+	}
 }

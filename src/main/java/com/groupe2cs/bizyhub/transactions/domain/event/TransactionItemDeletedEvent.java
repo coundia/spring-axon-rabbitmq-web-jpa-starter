@@ -1,15 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain.event;
 
-	import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-
-import java.io.Serializable;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionItemId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.*;
-import java.util.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -17,22 +14,7 @@ import java.util.*;
 @NoArgsConstructor
 public class TransactionItemDeletedEvent implements Serializable {
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-private TransactionItemId id;
+	private TransactionItemId id;
 
 }

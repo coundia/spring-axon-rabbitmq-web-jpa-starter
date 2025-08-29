@@ -1,10 +1,8 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
-import com.groupe2cs.bizyhub.chats.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+
 import com.groupe2cs.bizyhub.chats.infrastructure.entity.Chat;
-import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
+import com.groupe2cs.bizyhub.chats.infrastructure.repository.ChatRepository;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -87,10 +85,10 @@ public class ChatGate {
 		}
 		Chat entity = opt.get();
 
-		boolean  ok = repository.isOwner( entity.getId(), userId);
+		boolean ok = repository.isOwner(entity.getId(), userId);
 		if (ok) {
 			log.info("It is owner granted: userId {} is shared user of Account {}", userId, objectId);
-			 return true;
+			return true;
 		}
 
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());

@@ -1,38 +1,33 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.products.application.command.*;
-import java.util.UUID;
 
+import com.groupe2cs.bizyhub.products.application.dto.ProductRequest;
+import com.groupe2cs.bizyhub.products.application.dto.ProductResponse;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_add_product() {
+	@Test
+	void it_should_be_able_to_add_product() {
 
 		ProductRequest requestDTO = new ProductRequest();
 
@@ -50,7 +45,7 @@ void it_should_be_able_to_add_product() {
 		requestDTO.setStatuses(UUID.randomUUID().toString());
 		requestDTO.setPurchasePrice(4224.77);
 
- 		String uri = "/v1/commands/product";
+		String uri = "/v1/commands/product";
 		ResponseEntity<ProductResponse> response = this.postForEntity(uri, requestDTO, ProductResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();

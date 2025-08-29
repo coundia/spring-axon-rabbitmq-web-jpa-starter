@@ -1,15 +1,12 @@
 package com.groupe2cs.bizyhub.accounts.domain.event;
 
-	import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
-
-import java.io.Serializable;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.*;
-import java.util.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -37,7 +34,6 @@ public class AccountUpdatedEvent implements Serializable {
 	private AccountSyncAt syncAt;
 	private AccountCreatedBy createdBy;
 	private AccountTenant tenant;
-
 
 
 }

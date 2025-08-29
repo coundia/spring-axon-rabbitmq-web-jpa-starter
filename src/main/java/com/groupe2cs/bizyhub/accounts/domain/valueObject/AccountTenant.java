@@ -1,36 +1,11 @@
 package com.groupe2cs.bizyhub.accounts.domain.valueObject;
 
-import java.util.Objects;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIdNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCodeNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountNameNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountStatusNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCurrencyNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountTypeAccountNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalancePrevNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceBlockedNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceInitNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceGoalNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountBalanceLimitNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountDescriptionNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIsActiveNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountIsDefaultNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountRemoteIdNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountLocalIdNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountSyncAtNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountCreatedByNotValid;
-import com.groupe2cs.bizyhub.accounts.domain.exception.AccountTenantNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -38,35 +13,35 @@ import java.util.*;
 @Builder
 public class AccountTenant implements Serializable {
 
-private String tenant;
+	private String tenant;
 
-public AccountTenant(String tenant) {
-this.tenant = tenant;
-}
+	public AccountTenant(String tenant) {
+		this.tenant = tenant;
+	}
 
-public static AccountTenant create(String tenant) {
+	public static AccountTenant create(String tenant) {
 
-	return new AccountTenant(tenant);
-}
+		return new AccountTenant(tenant);
+	}
 
-public String value() {
-return this.tenant;
-}
+	public String value() {
+		return this.tenant;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof AccountTenant that)) return false;
-return this.tenant.equals(that.tenant);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof AccountTenant that)) return false;
+		return this.tenant.equals(that.tenant);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(tenant);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(tenant);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(tenant);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(tenant);
+	}
 }

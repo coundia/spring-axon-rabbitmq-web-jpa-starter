@@ -1,24 +1,24 @@
 package com.groupe2cs.bizyhub.products.presentation.controller;
 
+import com.groupe2cs.bizyhub.products.application.dto.ProductDeltaDto;
+import com.groupe2cs.bizyhub.products.application.dto.ProductSyncRequest;
+import com.groupe2cs.bizyhub.products.infrastructure.entity.ProductFixtures;
+import com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.UUID;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductSyncControllerTests extends BaseIntegrationTests {
 
@@ -26,116 +26,120 @@ public class ProductSyncControllerTests extends BaseIntegrationTests {
 	private CommandGateway commandGateway;
 
 	@Autowired
-private ProductRepository Repository;
+	private ProductRepository Repository;
 
-    @Autowired
-    private UserRepository createdByDataRepository ;
-    @Autowired
-    private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
 	@Test
 	void it_should_initiate_sync_of_products() {
 		ProductSyncRequest requestDTO = ProductSyncRequest.builder()
-		.deltas(List.of(
-		ProductDeltaDto.builder()
-.remoteId(UUID.randomUUID().toString())
-.localId(UUID.randomUUID().toString())
-.code(UUID.randomUUID().toString())
-.name(UUID.randomUUID().toString())
-.description(UUID.randomUUID().toString())
-.barcode(UUID.randomUUID().toString())
-.unit(UUID.randomUUID().toString())
-.syncAt(java.time.Instant.now().plusSeconds(3600))
-.category(UUID.randomUUID().toString())
-.account(UUID.randomUUID().toString())
-.defaultPrice(6090.04)
-.statuses(UUID.randomUUID().toString())
-.purchasePrice(7337.83)
-		.type("CREATE")
-		.build()
-		))
-		.build();
+				.deltas(List.of(
+						ProductDeltaDto.builder()
+								.remoteId(UUID.randomUUID().toString())
+								.localId(UUID.randomUUID().toString())
+								.code(UUID.randomUUID().toString())
+								.name(UUID.randomUUID().toString())
+								.description(UUID.randomUUID().toString())
+								.barcode(UUID.randomUUID().toString())
+								.unit(UUID.randomUUID().toString())
+								.syncAt(java.time.Instant.now().plusSeconds(3600))
+								.category(UUID.randomUUID().toString())
+								.account(UUID.randomUUID().toString())
+								.defaultPrice(6090.04)
+								.statuses(UUID.randomUUID().toString())
+								.purchasePrice(7337.83)
+								.type("CREATE")
+								.build()
+				))
+				.build();
 
-	String uri = "/api/v1/commands/product/sync";
-	HttpEntity<ProductSyncRequest> request = new HttpEntity<>(requestDTO, headers);
+		String uri = "/api/v1/commands/product/sync";
+		HttpEntity<ProductSyncRequest> request = new HttpEntity<>(requestDTO, headers);
 		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
-			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-			assertThat(response.getBody()).isNotNull();
-			assertThat(response.getBody().getCode()).isEqualTo(1);
-			assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
-			}
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isNotNull();
+		assertThat(response.getBody().getCode()).isEqualTo(1);
+		assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
+	}
 
-			@Test
-			void it_should_initiate_update_of_products() {
+	@Test
+	void it_should_initiate_update_of_products() {
 
-			String existingId = ProductFixtures.randomOneViaCommand(commandGateway,Repository, getCurrentUser()).getId().value();
+		String
+				existingId =
+				ProductFixtures.randomOneViaCommand(commandGateway, Repository, getCurrentUser()).getId().value();
 
-			ProductSyncRequest requestDTO = ProductSyncRequest.builder()
-			.deltas(List.of(
-			ProductDeltaDto.builder()
-			.id(existingId)
-.remoteId(UUID.randomUUID().toString())
-.localId(UUID.randomUUID().toString())
-.code(UUID.randomUUID().toString())
-.name(UUID.randomUUID().toString())
-.description(UUID.randomUUID().toString())
-.barcode(UUID.randomUUID().toString())
-.unit(UUID.randomUUID().toString())
-.syncAt(java.time.Instant.now().plusSeconds(3600))
-.category(UUID.randomUUID().toString())
-.account(UUID.randomUUID().toString())
-.defaultPrice(6090.04)
-.statuses(UUID.randomUUID().toString())
-.purchasePrice(7337.83)
-			.type("UPDATE")
-			.build()
-			))
-			.build();
+		ProductSyncRequest requestDTO = ProductSyncRequest.builder()
+				.deltas(List.of(
+						ProductDeltaDto.builder()
+								.id(existingId)
+								.remoteId(UUID.randomUUID().toString())
+								.localId(UUID.randomUUID().toString())
+								.code(UUID.randomUUID().toString())
+								.name(UUID.randomUUID().toString())
+								.description(UUID.randomUUID().toString())
+								.barcode(UUID.randomUUID().toString())
+								.unit(UUID.randomUUID().toString())
+								.syncAt(java.time.Instant.now().plusSeconds(3600))
+								.category(UUID.randomUUID().toString())
+								.account(UUID.randomUUID().toString())
+								.defaultPrice(6090.04)
+								.statuses(UUID.randomUUID().toString())
+								.purchasePrice(7337.83)
+								.type("UPDATE")
+								.build()
+				))
+				.build();
 
-			String uri = "/api/v1/commands/product/sync";
-			HttpEntity<ProductSyncRequest> request = new HttpEntity<>(requestDTO, headers);
-				ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
+		String uri = "/api/v1/commands/product/sync";
+		HttpEntity<ProductSyncRequest> request = new HttpEntity<>(requestDTO, headers);
+		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
-					assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-					assertThat(response.getBody().getCode()).isEqualTo(1);
-					assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
-					}
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody().getCode()).isEqualTo(1);
+		assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
+	}
 
-					@Test
-					void it_should_initiate_delete_of_products() {
-					String existingId = ProductFixtures.randomOneViaCommand(commandGateway,Repository, getCurrentUser()).getId().value();
-					ProductSyncRequest requestDTO = ProductSyncRequest.builder()
-					.deltas(List.of(
-					ProductDeltaDto.builder()
-					.id(existingId)
-					.type("DELETE")
-					.build()
-					))
-					.build();
+	@Test
+	void it_should_initiate_delete_of_products() {
+		String
+				existingId =
+				ProductFixtures.randomOneViaCommand(commandGateway, Repository, getCurrentUser()).getId().value();
+		ProductSyncRequest requestDTO = ProductSyncRequest.builder()
+				.deltas(List.of(
+						ProductDeltaDto.builder()
+								.id(existingId)
+								.type("DELETE")
+								.build()
+				))
+				.build();
 
-					String uri = "/api/v1/commands/product/sync";
-					HttpEntity<ProductSyncRequest> request = new HttpEntity<>(requestDTO, headers);
-						ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
+		String uri = "/api/v1/commands/product/sync";
+		HttpEntity<ProductSyncRequest> request = new HttpEntity<>(requestDTO, headers);
+		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
-							assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-							assertThat(response.getBody().getCode()).isEqualTo(1);
-							assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
-							}
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody().getCode()).isEqualTo(1);
+		assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
+	}
 
-							@Test
-							void it_should_handle_empty_delta_list() {
+	@Test
+	void it_should_handle_empty_delta_list() {
 
-							ProductSyncRequest requestDTO = ProductSyncRequest.builder()
-							.deltas(List.of())
-							.build();
+		ProductSyncRequest requestDTO = ProductSyncRequest.builder()
+				.deltas(List.of())
+				.build();
 
-							String uri = "/api/v1/commands/product/sync";
-							HttpEntity<ProductSyncRequest> request = new HttpEntity<>(requestDTO, headers);
-								ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
+		String uri = "/api/v1/commands/product/sync";
+		HttpEntity<ProductSyncRequest> request = new HttpEntity<>(requestDTO, headers);
+		ResponseEntity<ApiResponseDto> response = testRestTemplate.postForEntity(uri, request, ApiResponseDto.class);
 
-									assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-									assertThat(response.getBody().getCode()).isEqualTo(1);
-									assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
-				}
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody().getCode()).isEqualTo(1);
+		assertThat(response.getBody().getMessage()).isEqualTo("Sync in progress");
+	}
 }

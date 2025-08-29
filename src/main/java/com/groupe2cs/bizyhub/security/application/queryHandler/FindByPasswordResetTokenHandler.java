@@ -27,7 +27,7 @@ public class FindByPasswordResetTokenHandler {
 		String value = query.getToken().value();
 
 		//if (metaRequest.isAdmin()) {
-			entities = repository.findByToken(value);
+		entities = repository.findByToken(value);
 		/*} else {
 			entities = repository.findByTokenAndCreatedById(value, metaRequest.getUserId());
 		}*/

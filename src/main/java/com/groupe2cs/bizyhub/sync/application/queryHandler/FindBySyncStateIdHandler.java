@@ -1,50 +1,46 @@
 package com.groupe2cs.bizyhub.sync.application.queryHandler;
 
-import com.groupe2cs.bizyhub.sync.application.mapper.*;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sync.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.sync.application.dto.*;
-import com.groupe2cs.bizyhub.sync.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.sync.application.query.*;
-import com.groupe2cs.bizyhub.sync.domain.exception.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.sync.application.dto.SyncStateResponse;
+import com.groupe2cs.bizyhub.sync.application.mapper.SyncStateMapper;
+import com.groupe2cs.bizyhub.sync.application.query.FindBySyncStateIdQuery;
+import com.groupe2cs.bizyhub.sync.infrastructure.entity.SyncState;
+import com.groupe2cs.bizyhub.sync.infrastructure.repository.SyncStateRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import java.util.List;
 import org.axonframework.queryhandling.QueryHandler;
-
+import org.springframework.stereotype.Component;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindBySyncStateIdHandler {
 
-private final SyncStateRepository repository;
+	private final SyncStateRepository repository;
 
-@QueryHandler
+	@QueryHandler
 
- public SyncStateResponse handle(FindBySyncStateIdQuery query) {
+	public SyncStateResponse handle(FindBySyncStateIdQuery query) {
 
-    MetaRequest metaRequest = query.getMetaRequest();
-    SyncState entity = null;
+		MetaRequest metaRequest = query.getMetaRequest();
+		SyncState entity = null;
 
-	String value = query.getId().value();
+		String value = query.getId().value();
 
-	if(metaRequest.isAdmin()) {
-	    entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }else{
-	    entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }
+		if (metaRequest.isAdmin()) {
+			entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		} else {
+			entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		}
 
-    if (entity == null) {
-        return null;
-    }
+		if (entity == null) {
+			return null;
+		}
 		return SyncStateMapper.toResponse(entity);
 	}
 

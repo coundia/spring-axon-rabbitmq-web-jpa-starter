@@ -1,41 +1,41 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
 
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.application.query.*;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.transactions.application.mapper.*;
-import java.util.List;
+import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
+import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionCommand;
+import com.groupe2cs.bizyhub.transactions.application.dto.TransactionRequest;
+import com.groupe2cs.bizyhub.transactions.application.dto.TransactionResponse;
+import com.groupe2cs.bizyhub.transactions.application.mapper.TransactionMapper;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionCreatedBy;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionId;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.TransactionTenant;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class TransactionUpdateApplicationService {
 
-private final FileStorageService fileStorageService;
-private final CommandGateway commandGateway;
+	private final FileStorageService fileStorageService;
+	private final CommandGateway commandGateway;
 
 
-public TransactionResponse updateTransaction(TransactionId id,TransactionRequest request,
-MetaRequest metaRequest
-){
+	public TransactionResponse updateTransaction(TransactionId id, TransactionRequest request,
+												 MetaRequest metaRequest
+	) {
 
-UpdateTransactionCommand command = TransactionMapper.toUpdateCommand(
-id,
-request
-);
+		UpdateTransactionCommand command = TransactionMapper.toUpdateCommand(
+				id,
+				request
+		);
 
-command.setCreatedBy(TransactionCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(TransactionCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(TransactionTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
+		commandGateway.sendAndWait(command);
 
-return TransactionMapper.toResponse(command);
-}
+		return TransactionMapper.toResponse(command);
+	}
 
 }

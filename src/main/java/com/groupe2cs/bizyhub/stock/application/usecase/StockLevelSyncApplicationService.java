@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.stock.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.stock.application.command.*;
-import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.stock.application.command.CreateStockLevelCommand;
+import com.groupe2cs.bizyhub.stock.application.command.DeleteStockLevelCommand;
+import com.groupe2cs.bizyhub.stock.application.command.UpdateStockLevelCommand;
+import com.groupe2cs.bizyhub.stock.application.dto.StockLevelSyncRequest;
+import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,15 +24,15 @@ public class StockLevelSyncApplicationService {
 
 
 					CreateStockLevelCommand command = CreateStockLevelCommand.builder()
-								.remoteId(StockLevelRemoteId.create(d.getRemoteId()))
-								.localId(StockLevelLocalId.create(d.getLocalId()))
-								.stockOnHand(StockLevelStockOnHand.create(d.getStockOnHand()))
-								.stockAllocated(StockLevelStockAllocated.create(d.getStockAllocated()))
-								.account(StockLevelAccount.create(d.getAccount()))
-								.productVariant(StockLevelProductVariant.create(d.getProductVariant()))
-								.syncAt(StockLevelSyncAt.create(d.getSyncAt()))
-								.company(StockLevelCompany.create(d.getCompany()))
-						.build();
+							.remoteId(StockLevelRemoteId.create(d.getRemoteId()))
+							.localId(StockLevelLocalId.create(d.getLocalId()))
+							.stockOnHand(StockLevelStockOnHand.create(d.getStockOnHand()))
+							.stockAllocated(StockLevelStockAllocated.create(d.getStockAllocated()))
+							.account(StockLevelAccount.create(d.getAccount()))
+							.productVariant(StockLevelProductVariant.create(d.getProductVariant()))
+							.syncAt(StockLevelSyncAt.create(d.getSyncAt()))
+							.company(StockLevelCompany.create(d.getCompany()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -61,7 +61,7 @@ public class StockLevelSyncApplicationService {
 							.productVariant(StockLevelProductVariant.create(d.getProductVariant()))
 							.syncAt(StockLevelSyncAt.create(d.getSyncAt()))
 							.company(StockLevelCompany.create(d.getCompany()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -73,8 +73,8 @@ public class StockLevelSyncApplicationService {
 					}
 
 					DeleteStockLevelCommand delete = DeleteStockLevelCommand.builder()
-						.id(StockLevelId.create(d.getId()))
-						.build();
+							.id(StockLevelId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

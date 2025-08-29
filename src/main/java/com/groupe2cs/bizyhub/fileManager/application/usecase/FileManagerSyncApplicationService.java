@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.fileManager.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
-import com.groupe2cs.bizyhub.fileManager.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.fileManager.application.command.*;
 
+import com.groupe2cs.bizyhub.fileManager.application.command.CreateFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.application.command.DeleteFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.application.command.UpdateFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerSyncRequest;
+import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,17 +24,17 @@ public class FileManagerSyncApplicationService {
 
 
 					CreateFileManagerCommand command = CreateFileManagerCommand.builder()
-								.name(FileManagerName.create(d.getName()))
-								.details(FileManagerDetails.create(d.getDetails()))
-								.objectId(FileManagerObjectId.create(d.getObjectId()))
-								.objectName(FileManagerObjectName.create(d.getObjectName()))
-								.originalName(FileManagerOriginalName.create(d.getOriginalName()))
-								.mimeType(FileManagerMimeType.create(d.getMimeType()))
-								.size(FileManagerSize.create(d.getSize()))
-								.path(FileManagerPath.create(d.getPath()))
-								.uri(FileManagerUri.create(d.getUri()))
-								.isPublic(FileManagerIsPublic.create(d.getIsPublic()))
-						.build();
+							.name(FileManagerName.create(d.getName()))
+							.details(FileManagerDetails.create(d.getDetails()))
+							.objectId(FileManagerObjectId.create(d.getObjectId()))
+							.objectName(FileManagerObjectName.create(d.getObjectName()))
+							.originalName(FileManagerOriginalName.create(d.getOriginalName()))
+							.mimeType(FileManagerMimeType.create(d.getMimeType()))
+							.size(FileManagerSize.create(d.getSize()))
+							.path(FileManagerPath.create(d.getPath()))
+							.uri(FileManagerUri.create(d.getUri()))
+							.isPublic(FileManagerIsPublic.create(d.getIsPublic()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -65,7 +65,7 @@ public class FileManagerSyncApplicationService {
 							.path(FileManagerPath.create(d.getPath()))
 							.uri(FileManagerUri.create(d.getUri()))
 							.isPublic(FileManagerIsPublic.create(d.getIsPublic()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -77,8 +77,8 @@ public class FileManagerSyncApplicationService {
 					}
 
 					DeleteFileManagerCommand delete = DeleteFileManagerCommand.builder()
-						.id(FileManagerId.create(d.getId()))
-						.build();
+							.id(FileManagerId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

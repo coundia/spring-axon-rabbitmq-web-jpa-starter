@@ -1,20 +1,11 @@
 package com.groupe2cs.bizyhub.security.domain.valueObject;
 
-import java.util.Objects;
-import com.groupe2cs.bizyhub.security.domain.exception.RoleIdNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.RoleNameNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.RoleCreatedByNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.RoleTenantNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -22,35 +13,35 @@ import java.util.*;
 @Builder
 public class RoleTenant implements Serializable {
 
-private String tenant;
+	private String tenant;
 
-public RoleTenant(String tenant) {
-this.tenant = tenant;
-}
+	public RoleTenant(String tenant) {
+		this.tenant = tenant;
+	}
 
-public static RoleTenant create(String tenant) {
+	public static RoleTenant create(String tenant) {
 
-	return new RoleTenant(tenant);
-}
+		return new RoleTenant(tenant);
+	}
 
-public String value() {
-return this.tenant;
-}
+	public String value() {
+		return this.tenant;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof RoleTenant that)) return false;
-return this.tenant.equals(that.tenant);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof RoleTenant that)) return false;
+		return this.tenant.equals(that.tenant);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(tenant);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(tenant);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(tenant);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(tenant);
+	}
 }

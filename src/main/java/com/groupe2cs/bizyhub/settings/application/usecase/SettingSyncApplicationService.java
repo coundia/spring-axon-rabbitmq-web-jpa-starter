@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.settings.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.settings.application.dto.*;
-import com.groupe2cs.bizyhub.settings.application.command.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
 
+import com.groupe2cs.bizyhub.settings.application.command.CreateSettingCommand;
+import com.groupe2cs.bizyhub.settings.application.command.DeleteSettingCommand;
+import com.groupe2cs.bizyhub.settings.application.command.UpdateSettingCommand;
+import com.groupe2cs.bizyhub.settings.application.dto.SettingSyncRequest;
+import com.groupe2cs.bizyhub.settings.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,16 +24,16 @@ public class SettingSyncApplicationService {
 
 
 					CreateSettingCommand command = CreateSettingCommand.builder()
-								.name(SettingName.create(d.getName()))
-								.value(SettingValue.create(d.getValue()))
-								.locale(SettingLocale.create(d.getLocale()))
-								.remoteId(SettingRemoteId.create(d.getRemoteId()))
-								.localId(SettingLocalId.create(d.getLocalId()))
-								.account(SettingAccount.create(d.getAccount()))
-								.details(SettingDetails.create(d.getDetails()))
-								.syncAt(SettingSyncAt.create(d.getSyncAt()))
-								.isActive(SettingIsActive.create(d.getIsActive()))
-						.build();
+							.name(SettingName.create(d.getName()))
+							.value(SettingValue.create(d.getValue()))
+							.locale(SettingLocale.create(d.getLocale()))
+							.remoteId(SettingRemoteId.create(d.getRemoteId()))
+							.localId(SettingLocalId.create(d.getLocalId()))
+							.account(SettingAccount.create(d.getAccount()))
+							.details(SettingDetails.create(d.getDetails()))
+							.syncAt(SettingSyncAt.create(d.getSyncAt()))
+							.isActive(SettingIsActive.create(d.getIsActive()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -63,7 +63,7 @@ public class SettingSyncApplicationService {
 							.details(SettingDetails.create(d.getDetails()))
 							.syncAt(SettingSyncAt.create(d.getSyncAt()))
 							.isActive(SettingIsActive.create(d.getIsActive()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -75,8 +75,8 @@ public class SettingSyncApplicationService {
 					}
 
 					DeleteSettingCommand delete = DeleteSettingCommand.builder()
-						.id(SettingId.create(d.getId()))
-						.build();
+							.id(SettingId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

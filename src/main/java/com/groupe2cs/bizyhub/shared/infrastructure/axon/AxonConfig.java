@@ -12,25 +12,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AxonConfig {
 
-		public AxonConfig(EventProcessingConfigurer configurer) {
-			// Handle any exceptions in @EventHandler methods by logging without retry
-			configurer.registerDefaultListenerInvocationErrorHandler(
-			componentName -> new LoggingErrorHandler()
+	public AxonConfig(EventProcessingConfigurer configurer) {
+		// Handle any exceptions in @EventHandler methods by logging without retry
+		configurer.registerDefaultListenerInvocationErrorHandler(
+				componentName -> new LoggingErrorHandler()
 		);
 
 		// Catch any errors in the processing pipelines (tracking, subscribing, replay)
 		// and log them as skipped events to prevent infinite retries
 		configurer.registerDefaultErrorHandler(
-		configuration -> new ErrorHandler() {
-		@Override
-		public void handleError(ErrorContext errorContext) {
-		log.error("Skipping failed event [{}]: {}",
-		errorContext.toString(),
-		errorContext.error().getMessage()
-		);
-		}
-		}
+				configuration -> new ErrorHandler() {
+					@Override
+					public void handleError(ErrorContext errorContext) {
+						log.error("Skipping failed event [{}]: {}",
+								errorContext.toString(),
+								errorContext.error().getMessage()
+						);
+					}
+				}
 		);
 
-		}
+	}
 }

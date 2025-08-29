@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.sync.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sync.application.dto.*;
-import com.groupe2cs.bizyhub.sync.application.command.*;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.sync.application.command.CreateSyncStateCommand;
+import com.groupe2cs.bizyhub.sync.application.command.DeleteSyncStateCommand;
+import com.groupe2cs.bizyhub.sync.application.command.UpdateSyncStateCommand;
+import com.groupe2cs.bizyhub.sync.application.dto.SyncStateSyncRequest;
+import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,14 +24,14 @@ public class SyncStateSyncApplicationService {
 
 
 					CreateSyncStateCommand command = CreateSyncStateCommand.builder()
-								.entityTable(SyncStateEntityTable.create(d.getEntityTable()))
-								.remoteId(SyncStateRemoteId.create(d.getRemoteId()))
-								.localId(SyncStateLocalId.create(d.getLocalId()))
-								.account(SyncStateAccount.create(d.getAccount()))
-								.syncAt(SyncStateSyncAt.create(d.getSyncAt()))
-								.lastSyncAt(SyncStateLastSyncAt.create(d.getLastSyncAt()))
-								.lastCursor(SyncStateLastCursor.create(d.getLastCursor()))
-						.build();
+							.entityTable(SyncStateEntityTable.create(d.getEntityTable()))
+							.remoteId(SyncStateRemoteId.create(d.getRemoteId()))
+							.localId(SyncStateLocalId.create(d.getLocalId()))
+							.account(SyncStateAccount.create(d.getAccount()))
+							.syncAt(SyncStateSyncAt.create(d.getSyncAt()))
+							.lastSyncAt(SyncStateLastSyncAt.create(d.getLastSyncAt()))
+							.lastCursor(SyncStateLastCursor.create(d.getLastCursor()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -59,7 +59,7 @@ public class SyncStateSyncApplicationService {
 							.syncAt(SyncStateSyncAt.create(d.getSyncAt()))
 							.lastSyncAt(SyncStateLastSyncAt.create(d.getLastSyncAt()))
 							.lastCursor(SyncStateLastCursor.create(d.getLastCursor()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -71,8 +71,8 @@ public class SyncStateSyncApplicationService {
 					}
 
 					DeleteSyncStateCommand delete = DeleteSyncStateCommand.builder()
-						.id(SyncStateId.create(d.getId()))
-						.build();
+							.id(SyncStateId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

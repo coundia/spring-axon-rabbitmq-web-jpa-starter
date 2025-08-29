@@ -62,7 +62,10 @@ public class AuthVerificationCodeController {
 			request.setCode(code);
 			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
 			User user = userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
-				User u = User.builder().id(UUID.randomUUID().toString()).username(username).password(passwordEncoder.encode(code)).tenant(new Tenant(tenantId)).build();
+				User
+						u =
+						User.builder().id(UUID.randomUUID().toString()).username(username)
+								.password(passwordEncoder.encode(code)).tenant(new Tenant(tenantId)).build();
 				return userRepository.save(u);
 			});
 			metaRequest.setUserId(user.getId());
@@ -85,22 +88,30 @@ public class AuthVerificationCodeController {
 			String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
 			String username = request.getUsername();
 			String code = request.getCode();
-			VerificationCode v = verificationCodeRepository.findTopByTenantIdAndUsernameAndCodeAndStatusAndExpirationAfter(
-					tenantId, username, code, STATUS_NEW, Instant.now()
-			).orElse(null);
+			VerificationCode
+					v =
+					verificationCodeRepository.findTopByTenantIdAndUsernameAndCodeAndStatusAndExpirationAfter(
+							tenantId, username, code, STATUS_NEW, Instant.now()
+					).orElse(null);
 			if (v == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 			v.setStatus(STATUS_USED);
 			verificationCodeRepository.save(v);
 			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
 			User user = userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
-				User u = User.builder().id(UUID.randomUUID().toString()).username(username).password(passwordEncoder.encode(code)).tenant(new Tenant(tenantId)).build();
+				User
+						u =
+						User.builder().id(UUID.randomUUID().toString()).username(username)
+								.password(passwordEncoder.encode(code)).tenant(new Tenant(tenantId)).build();
 				return userRepository.save(u);
 			});
 			UserPrincipal userPrincipal = new UserPrincipal(user);
-			Authentication authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
+			Authentication
+					authentication =
+					new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
 			String token = jwtService.generateToken(authentication, metaRequest);
 			return ResponseEntity.status(HttpStatus.CREATED).body(
-					AuthResponseDto.builder().code(1).token(token).tenant(tenantId).username(username).message("Login successful").build()
+					AuthResponseDto.builder().code(1).token(token).tenant(tenantId).username(username)
+							.message("Login successful").build()
 			);
 		} catch (Exception ex) {
 			log.error("check-code failed: {}", ex.getMessage());

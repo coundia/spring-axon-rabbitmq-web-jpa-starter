@@ -1,10 +1,8 @@
 package com.groupe2cs.bizyhub.sync.application.usecase;
-import com.groupe2cs.bizyhub.sync.infrastructure.entity.ChangeLog;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
+
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
-import com.groupe2cs.bizyhub.sync.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.sync.infrastructure.entity.ChangeLog;
+import com.groupe2cs.bizyhub.sync.infrastructure.repository.ChangeLogRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -61,14 +59,20 @@ public class ChangeLogGate {
 	public boolean canEdit(Authentication auth, String objectId) {
 		log.debug("canEdit called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canEdit result for user {} on ChangeLog {}: {}", auth != null ? auth.getName() : null, objectId, result);
+		log.info("canEdit result for user {} on ChangeLog {}: {}",
+				auth != null ? auth.getName() : null,
+				objectId,
+				result);
 		return result;
 	}
 
 	public boolean canDelete(Authentication auth, String objectId) {
 		log.debug("canDelete called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canDelete result for user {} on ChangeLog {}: {}", auth != null ? auth.getName() : null, objectId, result);
+		log.info("canDelete result for user {} on ChangeLog {}: {}",
+				auth != null ? auth.getName() : null,
+				objectId,
+				result);
 		return result;
 	}
 
@@ -87,10 +91,10 @@ public class ChangeLogGate {
 		}
 		ChangeLog entity = opt.get();
 
-		boolean  ok = repository.isOwner( entity.getId(), userId);
+		boolean ok = repository.isOwner(entity.getId(), userId);
 		if (ok) {
 			log.info("It is owner granted: userId {} is shared user of Account {}", userId, objectId);
-			 return true;
+			return true;
 		}
 
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());

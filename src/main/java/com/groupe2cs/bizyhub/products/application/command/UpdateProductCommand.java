@@ -1,20 +1,10 @@
 package com.groupe2cs.bizyhub.products.application.command;
 
 import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import lombok.*;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-import java.util.Date;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
-import java.util.UUID;
-
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -22,23 +12,23 @@ import java.util.*;
 @NoArgsConstructor
 @Builder
 public class UpdateProductCommand implements Serializable {
-@TargetAggregateIdentifier
+	@TargetAggregateIdentifier
 	private ProductId id;
- 	private ProductRemoteId remoteId;
- 	private ProductLocalId localId;
- 	private ProductCode code;
- 	private ProductName name;
- 	private ProductDescription description;
- 	private ProductBarcode barcode;
- 	private ProductUnit unit;
- 	private ProductSyncAt syncAt;
- 	private ProductCategory category;
- 	private ProductAccount account;
- 	private ProductDefaultPrice defaultPrice;
- 	private ProductStatuses statuses;
- 	private ProductPurchasePrice purchasePrice;
- 	private ProductCreatedBy createdBy;
- 	private ProductTenant tenant;
+	private ProductRemoteId remoteId;
+	private ProductLocalId localId;
+	private ProductCode code;
+	private ProductName name;
+	private ProductDescription description;
+	private ProductBarcode barcode;
+	private ProductUnit unit;
+	private ProductSyncAt syncAt;
+	private ProductCategory category;
+	private ProductAccount account;
+	private ProductDefaultPrice defaultPrice;
+	private ProductStatuses statuses;
+	private ProductPurchasePrice purchasePrice;
+	private ProductCreatedBy createdBy;
+	private ProductTenant tenant;
 
 
 }

@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.stock.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.stock.application.command.*;
-import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.stock.application.command.CreateStockMovementCommand;
+import com.groupe2cs.bizyhub.stock.application.command.DeleteStockMovementCommand;
+import com.groupe2cs.bizyhub.stock.application.command.UpdateStockMovementCommand;
+import com.groupe2cs.bizyhub.stock.application.dto.StockMovementSyncRequest;
+import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,17 +24,17 @@ public class StockMovementSyncApplicationService {
 
 
 					CreateStockMovementCommand command = CreateStockMovementCommand.builder()
-								.typeStockMovement(StockMovementTypeStockMovement.create(d.getTypeStockMovement()))
-								.quantity(StockMovementQuantity.create(d.getQuantity()))
-								.remoteId(StockMovementRemoteId.create(d.getRemoteId()))
-								.localId(StockMovementLocalId.create(d.getLocalId()))
-								.account(StockMovementAccount.create(d.getAccount()))
-								.company(StockMovementCompany.create(d.getCompany()))
-								.syncAt(StockMovementSyncAt.create(d.getSyncAt()))
-								.productVariant(StockMovementProductVariant.create(d.getProductVariant()))
-								.orderLineId(StockMovementOrderLineId.create(d.getOrderLineId()))
-								.discriminator(StockMovementDiscriminator.create(d.getDiscriminator()))
-						.build();
+							.typeStockMovement(StockMovementTypeStockMovement.create(d.getTypeStockMovement()))
+							.quantity(StockMovementQuantity.create(d.getQuantity()))
+							.remoteId(StockMovementRemoteId.create(d.getRemoteId()))
+							.localId(StockMovementLocalId.create(d.getLocalId()))
+							.account(StockMovementAccount.create(d.getAccount()))
+							.company(StockMovementCompany.create(d.getCompany()))
+							.syncAt(StockMovementSyncAt.create(d.getSyncAt()))
+							.productVariant(StockMovementProductVariant.create(d.getProductVariant()))
+							.orderLineId(StockMovementOrderLineId.create(d.getOrderLineId()))
+							.discriminator(StockMovementDiscriminator.create(d.getDiscriminator()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -65,7 +65,7 @@ public class StockMovementSyncApplicationService {
 							.productVariant(StockMovementProductVariant.create(d.getProductVariant()))
 							.orderLineId(StockMovementOrderLineId.create(d.getOrderLineId()))
 							.discriminator(StockMovementDiscriminator.create(d.getDiscriminator()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -77,8 +77,8 @@ public class StockMovementSyncApplicationService {
 					}
 
 					DeleteStockMovementCommand delete = DeleteStockMovementCommand.builder()
-						.id(StockMovementId.create(d.getId()))
-						.build();
+							.id(StockMovementId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

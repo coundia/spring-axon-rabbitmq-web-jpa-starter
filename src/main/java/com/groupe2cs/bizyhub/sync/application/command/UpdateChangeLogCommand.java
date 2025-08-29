@@ -1,20 +1,10 @@
 package com.groupe2cs.bizyhub.sync.application.command;
 
 import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
+import lombok.*;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-import java.util.Date;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
-import java.util.UUID;
-
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -22,20 +12,20 @@ import java.util.*;
 @NoArgsConstructor
 @Builder
 public class UpdateChangeLogCommand implements Serializable {
-@TargetAggregateIdentifier
+	@TargetAggregateIdentifier
 	private ChangeLogId id;
- 	private ChangeLogEntityTable entityTable;
- 	private ChangeLogAccount account;
- 	private ChangeLogRemoteId remoteId;
- 	private ChangeLogLocalId localId;
- 	private ChangeLogOperation operation;
- 	private ChangeLogPayload payload;
- 	private ChangeLogStatus status;
- 	private ChangeLogSyncAt syncAt;
- 	private ChangeLogAttempts attempts;
- 	private ChangeLogError error;
- 	private ChangeLogCreatedBy createdBy;
- 	private ChangeLogTenant tenant;
+	private ChangeLogEntityTable entityTable;
+	private ChangeLogAccount account;
+	private ChangeLogRemoteId remoteId;
+	private ChangeLogLocalId localId;
+	private ChangeLogOperation operation;
+	private ChangeLogPayload payload;
+	private ChangeLogStatus status;
+	private ChangeLogSyncAt syncAt;
+	private ChangeLogAttempts attempts;
+	private ChangeLogError error;
+	private ChangeLogCreatedBy createdBy;
+	private ChangeLogTenant tenant;
 
 
 }

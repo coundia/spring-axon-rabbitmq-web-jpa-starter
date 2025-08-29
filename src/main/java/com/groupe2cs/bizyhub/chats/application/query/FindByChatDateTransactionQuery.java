@@ -1,8 +1,11 @@
 package com.groupe2cs.bizyhub.chats.application.query;
 
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import lombok.*;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatDateTransaction;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @RequiredArgsConstructor
 @Getter
@@ -10,7 +13,7 @@ import lombok.*;
 @Builder
 public class FindByChatDateTransactionQuery {
 
-	private final ChatDateTransaction  dateTransaction;
+	private final ChatDateTransaction dateTransaction;
 	private final MetaRequest metaRequest;
 
 }

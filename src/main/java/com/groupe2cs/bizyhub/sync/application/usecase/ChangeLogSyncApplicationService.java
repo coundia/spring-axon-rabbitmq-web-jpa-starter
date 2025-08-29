@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.sync.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
-import com.groupe2cs.bizyhub.sync.application.dto.*;
-import com.groupe2cs.bizyhub.sync.application.command.*;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.sync.application.command.CreateChangeLogCommand;
+import com.groupe2cs.bizyhub.sync.application.command.DeleteChangeLogCommand;
+import com.groupe2cs.bizyhub.sync.application.command.UpdateChangeLogCommand;
+import com.groupe2cs.bizyhub.sync.application.dto.ChangeLogSyncRequest;
+import com.groupe2cs.bizyhub.sync.domain.valueObject.*;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,17 +24,17 @@ public class ChangeLogSyncApplicationService {
 
 
 					CreateChangeLogCommand command = CreateChangeLogCommand.builder()
-								.entityTable(ChangeLogEntityTable.create(d.getEntityTable()))
-								.account(ChangeLogAccount.create(d.getAccount()))
-								.remoteId(ChangeLogRemoteId.create(d.getRemoteId()))
-								.localId(ChangeLogLocalId.create(d.getLocalId()))
-								.operation(ChangeLogOperation.create(d.getOperation()))
-								.payload(ChangeLogPayload.create(d.getPayload()))
-								.status(ChangeLogStatus.create(d.getStatus()))
-								.syncAt(ChangeLogSyncAt.create(d.getSyncAt()))
-								.attempts(ChangeLogAttempts.create(d.getAttempts()))
-								.error(ChangeLogError.create(d.getError()))
-						.build();
+							.entityTable(ChangeLogEntityTable.create(d.getEntityTable()))
+							.account(ChangeLogAccount.create(d.getAccount()))
+							.remoteId(ChangeLogRemoteId.create(d.getRemoteId()))
+							.localId(ChangeLogLocalId.create(d.getLocalId()))
+							.operation(ChangeLogOperation.create(d.getOperation()))
+							.payload(ChangeLogPayload.create(d.getPayload()))
+							.status(ChangeLogStatus.create(d.getStatus()))
+							.syncAt(ChangeLogSyncAt.create(d.getSyncAt()))
+							.attempts(ChangeLogAttempts.create(d.getAttempts()))
+							.error(ChangeLogError.create(d.getError()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -65,7 +65,7 @@ public class ChangeLogSyncApplicationService {
 							.syncAt(ChangeLogSyncAt.create(d.getSyncAt()))
 							.attempts(ChangeLogAttempts.create(d.getAttempts()))
 							.error(ChangeLogError.create(d.getError()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -77,8 +77,8 @@ public class ChangeLogSyncApplicationService {
 					}
 
 					DeleteChangeLogCommand delete = DeleteChangeLogCommand.builder()
-						.id(ChangeLogId.create(d.getId()))
-						.build();
+							.id(ChangeLogId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}
