@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.stock.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.stock.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.stock.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.stock.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -40,8 +40,8 @@ private StockLevelRepository Repository;
 		StockLevelDeltaDto.builder()
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
-.stockOnHand(89)
-.stockAllocated(79)
+.stockOnHand(31)
+.stockAllocated(90)
 .account(UUID.randomUUID().toString())
 .productVariant(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
@@ -72,8 +72,8 @@ private StockLevelRepository Repository;
 			.id(existingId)
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
-.stockOnHand(89)
-.stockAllocated(79)
+.stockOnHand(31)
+.stockAllocated(90)
 .account(UUID.randomUUID().toString())
 .productVariant(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))

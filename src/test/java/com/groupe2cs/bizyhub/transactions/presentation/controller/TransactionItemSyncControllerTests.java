@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
@@ -41,14 +41,14 @@ private TransactionItemRepository Repository;
 .transaction(UUID.randomUUID().toString())
 .product(UUID.randomUUID().toString())
 .label(UUID.randomUUID().toString())
-.quantity(80)
+.quantity(52)
 .unit(UUID.randomUUID().toString())
 .account(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.unitPrice(183.24)
-.total(1003.38)
+.unitPrice(5485.87)
+.total(7071.75)
 .notes(UUID.randomUUID().toString())
 		.type("CREATE")
 		.build()
@@ -77,14 +77,14 @@ private TransactionItemRepository Repository;
 .transaction(UUID.randomUUID().toString())
 .product(UUID.randomUUID().toString())
 .label(UUID.randomUUID().toString())
-.quantity(80)
+.quantity(52)
 .unit(UUID.randomUUID().toString())
 .account(UUID.randomUUID().toString())
 .remoteId(UUID.randomUUID().toString())
 .localId(UUID.randomUUID().toString())
 .syncAt(java.time.Instant.now().plusSeconds(3600))
-.unitPrice(183.24)
-.total(1003.38)
+.unitPrice(5485.87)
+.total(7071.75)
 .notes(UUID.randomUUID().toString())
 			.type("UPDATE")
 			.build()

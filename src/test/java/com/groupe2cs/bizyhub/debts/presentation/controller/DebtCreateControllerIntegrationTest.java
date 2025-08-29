@@ -40,14 +40,14 @@ void it_should_be_able_to_add_debt() {
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setCode(UUID.randomUUID().toString());
 		requestDTO.setNotes(UUID.randomUUID().toString());
-		requestDTO.setBalance(5153.57);
-		requestDTO.setBalanceDebt(7769.31);
+		requestDTO.setBalance(7299.9);
+		requestDTO.setBalanceDebt(6058.37);
 		requestDTO.setDueDate(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setStatuses(UUID.randomUUID().toString());
 		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setCustomer(UUID.randomUUID().toString());
-		requestDTO.setIsActive(false);
+		requestDTO.setIsActive(true);
 
  		String uri = "/v1/commands/debt";
 		ResponseEntity<DebtResponse> response = this.postForEntity(uri, requestDTO, DebtResponse.class);

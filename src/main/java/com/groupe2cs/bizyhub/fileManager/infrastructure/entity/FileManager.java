@@ -25,7 +25,7 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Builder
 @Entity
 @EntityListeners(AuditListener.class)
-@Table(name = "file_manager")
+@Table(name = "file_managers")
 public class FileManager   extends AbstractAuditableEntity  {
 
 	@Id
@@ -39,7 +39,7 @@ public class FileManager   extends AbstractAuditableEntity  {
 
 	private String name ;
 
-	@Column(nullable = true, 		columnDefinition = "Text",
+	@Column(nullable = true, 
 		unique = false
 
 	)

@@ -19,29 +19,29 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "DebtRequest", description = "Request payload for Debt operations")
 public class DebtRequest implements Serializable {
 
-	@Schema(description = "", example = "5d74dc0e-a301-4bb5-9bde-a50291d21309")
+	@Schema(description = "", example = "044db40c-9d2e-4ff1-b2b4-5f72c4ed263a")
 	private String remoteId;
-	@Schema(description = "", example = "833c28e1-404d-4bf8-94fa-262257b5c14b")
+	@Schema(description = "", example = "eec3e8e4-c553-4258-bc1d-789eeff32788")
 	private String localId;
-	@Schema(description = "", example = "05e40ff9-227c-42de-b634-15b4fdca9b40")
+	@Schema(description = "", example = "90d48d62-45fe-45f2-af2f-4700cee4e48a")
 	private String code;
-	@Schema(description = "", example = "4762b24a-3ca0-4d97-b2d0-9069b3e6be58")
+	@Schema(description = "", example = "61b0b650-0504-4eb4-9d65-8779a2dabcfa")
 	private String notes;
-	@Schema(description = "", example = "4103.49")
+	@Schema(description = "", example = "8183.46")
 	private Double balance;
-	@Schema(description = "", example = "2449.58")
+	@Schema(description = "", example = "6057.53")
 	private Double balanceDebt;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant dueDate;
-	@Schema(description = "", example = "a054e273-5335-4235-8db9-c5c9b924a797")
+	@Schema(description = "", example = "f59bf16c-1e8c-4b16-a534-5b1a3ffbe307")
 	private String statuses;
-	@Schema(description = "", example = "210aba98-15b8-4fc4-b3a4-5e41a7713dc0")
+	@Schema(description = "", example = "d5e7acc2-7574-4ecb-be1e-3bb2990c5cb3")
 	private String account;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "612a0a6f-4278-4482-8f3f-9c32efcf7c05")
+	@Schema(description = "", example = "2305cb80-33db-4650-b0ba-b9ae5cb5c48d")
 	private String customer;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isActive;
 
 }

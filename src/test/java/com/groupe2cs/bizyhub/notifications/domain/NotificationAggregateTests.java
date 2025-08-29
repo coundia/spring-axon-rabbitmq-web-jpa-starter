@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.notifications.domain;
 
-import com.groupe2cs.bizyhub.notifications.domain.exception.*;
-import java.util.UUID;
-import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
+import java.util.UUID;
+import com.groupe2cs.bizyhub.notifications.domain.exception.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class NotificationAggregateTests extends BaseUnitTests {

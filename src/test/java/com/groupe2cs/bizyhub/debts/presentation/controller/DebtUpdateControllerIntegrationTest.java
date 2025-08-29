@@ -62,8 +62,8 @@ public class DebtUpdateControllerIntegrationTest extends BaseIntegrationTests {
         body.add("localId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("notes", UUID.randomUUID().toString());
-        body.add("balance", 9825.26);
-        body.add("balanceDebt", 3384.93);
+        body.add("balance", 2241.66);
+        body.add("balanceDebt", 6078.97);
         body.add("dueDate", java.time.Instant.now().plusSeconds(3600));
         body.add("statuses", UUID.randomUUID().toString());
         body.add("account", UUID.randomUUID().toString());

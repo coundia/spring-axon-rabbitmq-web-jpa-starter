@@ -79,7 +79,7 @@ public class SettingFixtures {
 				.account(SettingAccount.create(UUID.randomUUID().toString()))
 				.details(SettingDetails.create(UUID.randomUUID().toString()))
 				.syncAt(SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.isActive(SettingIsActive.create(false))
+				.isActive(SettingIsActive.create(true))
 			.build();
 
 		command.setCreatedBy(SettingCreatedBy.create(user.getId()));
@@ -105,7 +105,7 @@ public class SettingFixtures {
         .account(SettingAccount.create(UUID.randomUUID().toString()))
         .details(SettingDetails.create(UUID.randomUUID().toString()))
         .syncAt(SettingSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .isActive(SettingIsActive.create(false))
+        .isActive(SettingIsActive.create(true))
         .build();
 
 		command.setCreatedBy(SettingCreatedBy.create(user.getId()));

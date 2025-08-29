@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.debts.presentation.controller;
 
-	import com.groupe2cs.bizyhub.shared.application.dto.*;
-	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
-	import com.groupe2cs.bizyhub.shared.application.*;
 	import com.groupe2cs.bizyhub.debts.application.usecase.*;
+	import com.groupe2cs.bizyhub.shared.application.*;
+	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+	import com.groupe2cs.bizyhub.shared.application.dto.*;
 	import com.groupe2cs.bizyhub.debts.application.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

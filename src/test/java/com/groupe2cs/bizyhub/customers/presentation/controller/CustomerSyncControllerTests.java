@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.customers.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.customers.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.customers.application.dto.*;
-import com.groupe2cs.bizyhub.customers.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.customers.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.customers.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.customers.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -44,8 +44,8 @@ private CustomerRepository Repository;
 .firstName(UUID.randomUUID().toString())
 .lastName(UUID.randomUUID().toString())
 .fullName(UUID.randomUUID().toString())
-.balance(5878.39)
-.balanceDebt(4858.49)
+.balance(9778.99)
+.balanceDebt(4320.87)
 .phone(UUID.randomUUID().toString())
 .email(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
@@ -90,8 +90,8 @@ private CustomerRepository Repository;
 .firstName(UUID.randomUUID().toString())
 .lastName(UUID.randomUUID().toString())
 .fullName(UUID.randomUUID().toString())
-.balance(5878.39)
-.balanceDebt(4858.49)
+.balance(9778.99)
+.balanceDebt(4320.87)
 .phone(UUID.randomUUID().toString())
 .email(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())

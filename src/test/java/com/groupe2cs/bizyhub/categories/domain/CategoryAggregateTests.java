@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.categories.domain;
 
-import java.util.UUID;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.categories.domain.exception.*;
-import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class CategoryAggregateTests extends BaseUnitTests {
@@ -21,7 +21,7 @@ void it_should_create_category_with_valid_values() {
 	CategoryAccount account = CategoryAccount.create(UUID.randomUUID().toString());
 	CategoryDescription description = CategoryDescription.create(UUID.randomUUID().toString());
 	CategoryTypeEntry typeEntry = CategoryTypeEntry.create(UUID.randomUUID().toString());
-	CategoryVersion version = CategoryVersion.create(40);
+	CategoryVersion version = CategoryVersion.create(49);
 	CategorySyncAt syncAt = CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600));
 	CategoryCreatedBy createdBy = CategoryCreatedBy.create(UUID.randomUUID().toString());
 	CategoryTenant tenant = CategoryTenant.create(UUID.randomUUID().toString());

@@ -88,7 +88,7 @@ public class CompanyFixtures {
 				.country(CompanyCountry.create(UUID.randomUUID().toString()))
 				.account(CompanyAccount.create(UUID.randomUUID().toString()))
 				.postalCode(CompanyPostalCode.create(UUID.randomUUID().toString()))
-				.isActive(CompanyIsActive.create(false))
+				.isActive(CompanyIsActive.create(true))
 				.syncAt(CompanySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
 				.isDefault(CompanyIsDefault.create(true))
 			.build();
@@ -125,7 +125,7 @@ public class CompanyFixtures {
         .country(CompanyCountry.create(UUID.randomUUID().toString()))
         .account(CompanyAccount.create(UUID.randomUUID().toString()))
         .postalCode(CompanyPostalCode.create(UUID.randomUUID().toString()))
-        .isActive(CompanyIsActive.create(false))
+        .isActive(CompanyIsActive.create(true))
         .syncAt(CompanySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
         .isDefault(CompanyIsDefault.create(true))
         .build();

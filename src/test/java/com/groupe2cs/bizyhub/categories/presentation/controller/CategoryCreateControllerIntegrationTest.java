@@ -43,7 +43,7 @@ void it_should_be_able_to_add_category() {
 		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setTypeEntry(UUID.randomUUID().toString());
-		requestDTO.setVersion(43);
+		requestDTO.setVersion(96);
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 
  		String uri = "/v1/commands/category";

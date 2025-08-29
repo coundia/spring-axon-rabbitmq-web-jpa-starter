@@ -77,8 +77,8 @@ public class CustomerFixtures {
 				.firstName(CustomerFirstName.create(UUID.randomUUID().toString()))
 				.lastName(CustomerLastName.create(UUID.randomUUID().toString()))
 				.fullName(CustomerFullName.create(UUID.randomUUID().toString()))
-				.balance(CustomerBalance.create(7160.8))
-				.balanceDebt(CustomerBalanceDebt.create(7831.18))
+				.balance(CustomerBalance.create(8331.41))
+				.balanceDebt(CustomerBalanceDebt.create(9319.53))
 				.phone(CustomerPhone.create(UUID.randomUUID().toString()))
 				.email(CustomerEmail.create(UUID.randomUUID().toString()))
 				.notes(CustomerNotes.create(UUID.randomUUID().toString()))
@@ -92,7 +92,7 @@ public class CustomerFixtures {
 				.country(CustomerCountry.create(UUID.randomUUID().toString()))
 				.postalCode(CustomerPostalCode.create(UUID.randomUUID().toString()))
 				.syncAt(CustomerSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.isActive(CustomerIsActive.create(true))
+				.isActive(CustomerIsActive.create(false))
 			.build();
 
 		command.setCreatedBy(CustomerCreatedBy.create(user.getId()));
@@ -116,8 +116,8 @@ public class CustomerFixtures {
         .firstName(CustomerFirstName.create(UUID.randomUUID().toString()))
         .lastName(CustomerLastName.create(UUID.randomUUID().toString()))
         .fullName(CustomerFullName.create(UUID.randomUUID().toString()))
-        .balance(CustomerBalance.create(7160.8))
-        .balanceDebt(CustomerBalanceDebt.create(7831.18))
+        .balance(CustomerBalance.create(8331.41))
+        .balanceDebt(CustomerBalanceDebt.create(9319.53))
         .phone(CustomerPhone.create(UUID.randomUUID().toString()))
         .email(CustomerEmail.create(UUID.randomUUID().toString()))
         .notes(CustomerNotes.create(UUID.randomUUID().toString()))
@@ -131,7 +131,7 @@ public class CustomerFixtures {
         .country(CustomerCountry.create(UUID.randomUUID().toString()))
         .postalCode(CustomerPostalCode.create(UUID.randomUUID().toString()))
         .syncAt(CustomerSyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-        .isActive(CustomerIsActive.create(true))
+        .isActive(CustomerIsActive.create(false))
         .build();
 
 		command.setCreatedBy(CustomerCreatedBy.create(user.getId()));

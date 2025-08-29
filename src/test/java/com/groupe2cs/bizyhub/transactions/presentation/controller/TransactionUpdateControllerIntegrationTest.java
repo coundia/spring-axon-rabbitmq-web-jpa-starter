@@ -62,7 +62,7 @@ public class TransactionUpdateControllerIntegrationTest extends BaseIntegrationT
         body.add("localId", UUID.randomUUID().toString());
         body.add("code", UUID.randomUUID().toString());
         body.add("description", UUID.randomUUID().toString());
-        body.add("amount", 4217.78);
+        body.add("amount", 4154.1);
         body.add("typeEntry", UUID.randomUUID().toString());
         body.add("dateTransaction", java.time.Instant.now().plusSeconds(3600));
         body.add("status", UUID.randomUUID().toString());

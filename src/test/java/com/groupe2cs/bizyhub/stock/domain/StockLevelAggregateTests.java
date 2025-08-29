@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.stock.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import java.util.UUID;
-import com.groupe2cs.bizyhub.stock.domain.exception.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.stock.domain.exception.*;
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import org.junit.jupiter.api.Test;
 
 
 public class StockLevelAggregateTests extends BaseUnitTests {
@@ -16,8 +16,8 @@ void it_should_create_stockLevel_with_valid_values() {
 	StockLevelId id = StockLevelId.create(UUID.randomUUID().toString());
 	StockLevelRemoteId remoteId = StockLevelRemoteId.create(UUID.randomUUID().toString());
 	StockLevelLocalId localId = StockLevelLocalId.create(UUID.randomUUID().toString());
-	StockLevelStockOnHand stockOnHand = StockLevelStockOnHand.create(73);
-	StockLevelStockAllocated stockAllocated = StockLevelStockAllocated.create(99);
+	StockLevelStockOnHand stockOnHand = StockLevelStockOnHand.create(31);
+	StockLevelStockAllocated stockAllocated = StockLevelStockAllocated.create(98);
 	StockLevelAccount account = StockLevelAccount.create(UUID.randomUUID().toString());
 	StockLevelProductVariant productVariant = StockLevelProductVariant.create(UUID.randomUUID().toString());
 	StockLevelSyncAt syncAt = StockLevelSyncAt.create(java.time.Instant.now().plusSeconds(3600));

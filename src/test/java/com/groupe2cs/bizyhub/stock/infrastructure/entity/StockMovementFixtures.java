@@ -72,7 +72,7 @@ public class StockMovementFixtures {
 
 			CreateStockMovementCommand command = CreateStockMovementCommand.builder()
 				.typeStockMovement(StockMovementTypeStockMovement.create(UUID.randomUUID().toString()))
-				.quantity(StockMovementQuantity.create(99))
+				.quantity(StockMovementQuantity.create(23))
 				.remoteId(StockMovementRemoteId.create(UUID.randomUUID().toString()))
 				.localId(StockMovementLocalId.create(UUID.randomUUID().toString()))
 				.account(StockMovementAccount.create(UUID.randomUUID().toString()))
@@ -99,7 +99,7 @@ public class StockMovementFixtures {
 
         CreateStockMovementCommand command = CreateStockMovementCommand.builder()
         .typeStockMovement(StockMovementTypeStockMovement.create(UUID.randomUUID().toString()))
-        .quantity(StockMovementQuantity.create(99))
+        .quantity(StockMovementQuantity.create(23))
         .remoteId(StockMovementRemoteId.create(UUID.randomUUID().toString()))
         .localId(StockMovementLocalId.create(UUID.randomUUID().toString()))
         .account(StockMovementAccount.create(UUID.randomUUID().toString()))

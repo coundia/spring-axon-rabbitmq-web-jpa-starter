@@ -87,6 +87,11 @@ public class TransactionItemGate {
 		}
 		TransactionItem entity = opt.get();
 
+		boolean  ok = repository.isOwner( entity.getId(), userId);
+		if (ok) {
+			log.info("It is owner granted: userId {} is shared user of Account {}", userId, objectId);
+			 return true;
+		}
 
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on TransactionItem {}: {}", userId, objectId, result);

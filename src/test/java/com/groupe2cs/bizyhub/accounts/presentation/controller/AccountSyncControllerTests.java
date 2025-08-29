@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.accounts.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.accounts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.accounts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.accounts.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
@@ -43,12 +43,12 @@ private AccountRepository Repository;
 .status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
 .typeAccount(UUID.randomUUID().toString())
-.balance(674.89)
-.balancePrev(1556.2)
-.balanceBlocked(1849.25)
-.balanceInit(1239.22)
-.balanceGoal(8583.72)
-.balanceLimit(6435.25)
+.balance(1611.59)
+.balancePrev(8416.43)
+.balanceBlocked(4869.64)
+.balanceInit(4414.05)
+.balanceGoal(3241.36)
+.balanceLimit(3224.41)
 .description(UUID.randomUUID().toString())
 .isActive(true)
 .isDefault(false)
@@ -84,12 +84,12 @@ private AccountRepository Repository;
 .status(UUID.randomUUID().toString())
 .currency(UUID.randomUUID().toString())
 .typeAccount(UUID.randomUUID().toString())
-.balance(674.89)
-.balancePrev(1556.2)
-.balanceBlocked(1849.25)
-.balanceInit(1239.22)
-.balanceGoal(8583.72)
-.balanceLimit(6435.25)
+.balance(1611.59)
+.balancePrev(8416.43)
+.balanceBlocked(4869.64)
+.balanceInit(4414.05)
+.balanceGoal(3241.36)
+.balanceLimit(3224.41)
 .description(UUID.randomUUID().toString())
 .isActive(true)
 .isDefault(false)

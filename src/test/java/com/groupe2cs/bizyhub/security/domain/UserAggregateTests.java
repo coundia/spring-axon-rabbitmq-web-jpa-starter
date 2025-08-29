@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.security.domain;
 
-import java.util.UUID;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.security.domain.exception.*;
-import org.junit.jupiter.api.Test;
+import com.groupe2cs.bizyhub.shared.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 
 public class UserAggregateTests extends BaseUnitTests {
@@ -20,9 +20,9 @@ void it_should_create_user_with_valid_values() {
 	UserLastName lastName = UserLastName.create(UUID.randomUUID().toString());
 	UserEmail email = UserEmail.create(UUID.randomUUID().toString());
 	UserTelephone telephone = UserTelephone.create(UUID.randomUUID().toString());
-	UserLimitPerDay limitPerDay = UserLimitPerDay.create(73);
+	UserLimitPerDay limitPerDay = UserLimitPerDay.create(5);
 	UserIsPremium isPremium = UserIsPremium.create(true);
-	UserEnabled enabled = UserEnabled.create(false);
+	UserEnabled enabled = UserEnabled.create(true);
 	UserIsBan isBan = UserIsBan.create(false);
 	UserMessage message = UserMessage.create(UUID.randomUUID().toString());
 	UserCreatedBy createdBy = UserCreatedBy.create(UUID.randomUUID().toString());

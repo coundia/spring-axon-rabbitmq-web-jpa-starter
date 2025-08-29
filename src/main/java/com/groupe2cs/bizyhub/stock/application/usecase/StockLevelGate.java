@@ -3,8 +3,8 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
 import com.groupe2cs.bizyhub.stock.infrastructure.entity.StockLevel;
-import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.stock.infrastructure.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -87,6 +87,11 @@ public class StockLevelGate {
 		}
 		StockLevel entity = opt.get();
 
+		boolean  ok = repository.isOwner( entity.getId(), userId);
+		if (ok) {
+			log.info("It is owner granted: userId {} is shared user of Account {}", userId, objectId);
+			 return true;
+		}
 
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on StockLevel {}: {}", userId, objectId, result);

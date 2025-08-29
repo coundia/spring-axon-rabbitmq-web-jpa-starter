@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
 
-import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.query.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.chats.application.command.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.chats.application.query.*;
+import com.groupe2cs.bizyhub.chats.application.dto.*;
 import com.groupe2cs.bizyhub.chats.application.mapper.*;
 import java.util.List;
 import org.axonframework.commandhandling.gateway.CommandGateway;

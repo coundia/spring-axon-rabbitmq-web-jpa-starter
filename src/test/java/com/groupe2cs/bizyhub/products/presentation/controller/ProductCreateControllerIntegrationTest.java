@@ -46,9 +46,9 @@ void it_should_be_able_to_add_product() {
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setCategory(UUID.randomUUID().toString());
 		requestDTO.setAccount(UUID.randomUUID().toString());
-		requestDTO.setDefaultPrice(5888.25);
+		requestDTO.setDefaultPrice(4824.97);
 		requestDTO.setStatuses(UUID.randomUUID().toString());
-		requestDTO.setPurchasePrice(299.38);
+		requestDTO.setPurchasePrice(4224.77);
 
  		String uri = "/v1/commands/product";
 		ResponseEntity<ProductResponse> response = this.postForEntity(uri, requestDTO, ProductResponse.class);

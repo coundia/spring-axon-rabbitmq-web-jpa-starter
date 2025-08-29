@@ -1,12 +1,12 @@
 package com.groupe2cs.bizyhub.stock.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import java.util.UUID;
-import com.groupe2cs.bizyhub.stock.domain.exception.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.groupe2cs.bizyhub.shared.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.groupe2cs.bizyhub.stock.domain.exception.*;
+import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
 import com.groupe2cs.bizyhub.stock.domain.valueObject.*;
+import org.junit.jupiter.api.Test;
 
 
 public class StockMovementAggregateTests extends BaseUnitTests {
@@ -15,7 +15,7 @@ public class StockMovementAggregateTests extends BaseUnitTests {
 void it_should_create_stockMovement_with_valid_values() {
 	StockMovementId id = StockMovementId.create(UUID.randomUUID().toString());
 	StockMovementTypeStockMovement typeStockMovement = StockMovementTypeStockMovement.create(UUID.randomUUID().toString());
-	StockMovementQuantity quantity = StockMovementQuantity.create(25);
+	StockMovementQuantity quantity = StockMovementQuantity.create(93);
 	StockMovementRemoteId remoteId = StockMovementRemoteId.create(UUID.randomUUID().toString());
 	StockMovementLocalId localId = StockMovementLocalId.create(UUID.randomUUID().toString());
 	StockMovementAccount account = StockMovementAccount.create(UUID.randomUUID().toString());

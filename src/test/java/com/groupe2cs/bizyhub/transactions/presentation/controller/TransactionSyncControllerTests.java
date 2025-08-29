@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.transactions.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.transactions.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.transactions.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.transactions.infrastructure.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
@@ -42,7 +42,7 @@ private TransactionRepository Repository;
 .localId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .description(UUID.randomUUID().toString())
-.amount(8796.43)
+.amount(9456.37)
 .typeEntry(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
 .status(UUID.randomUUID().toString())
@@ -82,7 +82,7 @@ private TransactionRepository Repository;
 .localId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .description(UUID.randomUUID().toString())
-.amount(8796.43)
+.amount(9456.37)
 .typeEntry(UUID.randomUUID().toString())
 .dateTransaction(java.time.Instant.now().plusSeconds(3600))
 .status(UUID.randomUUID().toString())

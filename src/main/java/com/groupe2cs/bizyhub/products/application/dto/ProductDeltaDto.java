@@ -26,31 +26,31 @@ public class ProductDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "168a722a-d620-4a01-aca9-f9c420f47c2b")
+		@Schema(description = "", example = "33cf362f-e4e0-410c-ad0d-42df9a8927fa")
 		private String remoteId;
-		@Schema(description = "", example = "7f318707-982c-44de-96a2-1b8dad597963")
+		@Schema(description = "", example = "61861630-2100-4c5e-8cdf-82dd0cc7fa22")
 		private String localId;
-		@Schema(description = "", example = "6ad2d2b3-a287-4a5e-aa4f-9e58af545dca")
+		@Schema(description = "", example = "73983cb6-9174-4171-acb8-e5c790e5c038")
 		private String code;
-		@Schema(description = "", example = "73a8f6d4-ee56-4a06-96c1-319c5f00b5a3")
+		@Schema(description = "", example = "fdc5306d-a183-431c-9e7a-22e0a5245a7f")
 		private String name;
-		@Schema(description = "", example = "efdf31b7-e9b3-4d02-be73-b6dd56615f8d")
+		@Schema(description = "", example = "f7ddb3c3-e292-4041-830c-f5f6c924a626")
 		private String description;
-		@Schema(description = "", example = "c94eed96-ffdd-4672-9e96-7d2e3cc012cb")
+		@Schema(description = "", example = "7a630fe2-b68c-4045-9c00-bd84088fc540")
 		private String barcode;
-		@Schema(description = "", example = "e6ff0c7a-4492-4906-a100-3fb7c13f971c")
+		@Schema(description = "", example = "7288ca09-0792-4186-911b-8f6df46576ed")
 		private String unit;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "6688f8c7-306f-44ec-b997-3d07d7454a44")
+		@Schema(description = "", example = "4d062c2d-a9f0-416b-ac7a-10512b487a46")
 		private String category;
-		@Schema(description = "", example = "1ab4eec2-d4bf-4e8d-9439-ec84f19d9c6d")
+		@Schema(description = "", example = "71e060ce-4931-4e1d-8b40-fe6b0a7afe2c")
 		private String account;
-		@Schema(description = "", example = "4245.51")
+		@Schema(description = "", example = "6572.03")
 		private Double defaultPrice;
-		@Schema(description = "", example = "2d0edac2-8e68-4f3a-a3c3-1319d1ce8dba")
+		@Schema(description = "", example = "392e2136-313b-4276-8c17-e05e64a9be38")
 		private String statuses;
-		@Schema(description = "", example = "8752.75")
+		@Schema(description = "", example = "6467.56")
 		private Double purchasePrice;
 
 }

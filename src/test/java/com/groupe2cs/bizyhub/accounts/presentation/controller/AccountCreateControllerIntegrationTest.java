@@ -41,12 +41,12 @@ void it_should_be_able_to_add_account() {
 		requestDTO.setStatus(UUID.randomUUID().toString());
 		requestDTO.setCurrency(UUID.randomUUID().toString());
 		requestDTO.setTypeAccount(UUID.randomUUID().toString());
-		requestDTO.setBalance(3417.95);
-		requestDTO.setBalancePrev(4206.34);
-		requestDTO.setBalanceBlocked(2740.49);
-		requestDTO.setBalanceInit(7291.42);
-		requestDTO.setBalanceGoal(3214.43);
-		requestDTO.setBalanceLimit(116.17);
+		requestDTO.setBalance(7209.07);
+		requestDTO.setBalancePrev(3440.92);
+		requestDTO.setBalanceBlocked(3355.26);
+		requestDTO.setBalanceInit(291.32);
+		requestDTO.setBalanceGoal(5366.23);
+		requestDTO.setBalanceLimit(4494.36);
 		requestDTO.setDescription(UUID.randomUUID().toString());
 		requestDTO.setIsActive(false);
 		requestDTO.setIsDefault(false);

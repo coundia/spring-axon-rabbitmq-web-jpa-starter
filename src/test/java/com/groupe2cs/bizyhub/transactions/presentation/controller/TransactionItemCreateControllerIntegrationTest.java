@@ -39,14 +39,14 @@ void it_should_be_able_to_add_transactionitem() {
 		requestDTO.setTransaction(UUID.randomUUID().toString());
 		requestDTO.setProduct(UUID.randomUUID().toString());
 		requestDTO.setLabel(UUID.randomUUID().toString());
-		requestDTO.setQuantity(26);
+		requestDTO.setQuantity(83);
 		requestDTO.setUnit(UUID.randomUUID().toString());
 		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
-		requestDTO.setUnitPrice(1893.57);
-		requestDTO.setTotal(5060.91);
+		requestDTO.setUnitPrice(5496.59);
+		requestDTO.setTotal(2772.58);
 		requestDTO.setNotes(UUID.randomUUID().toString());
 
  		String uri = "/v1/commands/transactionItem";

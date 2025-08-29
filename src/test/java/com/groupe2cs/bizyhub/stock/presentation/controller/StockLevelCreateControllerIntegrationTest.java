@@ -38,8 +38,8 @@ void it_should_be_able_to_add_stocklevel() {
 
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
-		requestDTO.setStockOnHand(93);
-		requestDTO.setStockAllocated(40);
+		requestDTO.setStockOnHand(12);
+		requestDTO.setStockAllocated(81);
 		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setProductVariant(UUID.randomUUID().toString());
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));

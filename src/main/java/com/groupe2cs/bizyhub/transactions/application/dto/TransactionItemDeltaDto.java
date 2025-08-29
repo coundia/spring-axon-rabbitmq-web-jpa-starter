@@ -26,29 +26,29 @@ public class TransactionItemDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "74fd3fef-56db-4814-84c1-49f012d4742d")
+		@Schema(description = "", example = "36423e8b-c775-4eef-ab2f-722becf598fe")
 		private String transaction;
-		@Schema(description = "", example = "027270cf-48d5-4caf-913b-580f2fc805f5")
+		@Schema(description = "", example = "c10da60f-f6d0-4172-9a70-1e87138d1fe2")
 		private String product;
-		@Schema(description = "", example = "b9fb79bd-34b0-4bd0-97df-040e5041bbca")
+		@Schema(description = "", example = "599b120c-b4df-40a0-9305-61bc248108b9")
 		private String label;
-		@Schema(description = "", example = "36")
+		@Schema(description = "", example = "65")
 		private Integer quantity;
-		@Schema(description = "", example = "609a7e5e-9753-43c9-b45f-adec654d1d83")
+		@Schema(description = "", example = "01fdbfc3-310f-4335-938d-8d6b0c0f7513")
 		private String unit;
-		@Schema(description = "", example = "6acc3274-223a-49e5-9ab4-8e20e41f3792")
+		@Schema(description = "", example = "67ff8581-c03f-4202-9e74-62fbf53755cd")
 		private String account;
-		@Schema(description = "", example = "153eac33-0144-4f1c-846b-32b677d9a189")
+		@Schema(description = "", example = "9275a98f-edac-45aa-a172-6d805dc9c6c7")
 		private String remoteId;
-		@Schema(description = "", example = "4f1285c5-f1c3-4489-8edc-926e627c692e")
+		@Schema(description = "", example = "b11ecca0-ab87-417a-8f1f-e1010eab19ae")
 		private String localId;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant syncAt;
-		@Schema(description = "", example = "580.81")
+		@Schema(description = "", example = "8054.97")
 		private Double unitPrice;
-		@Schema(description = "", example = "8356.8")
+		@Schema(description = "", example = "8976.19")
 		private Double total;
-		@Schema(description = "", example = "52c7af21-50fa-4e47-8dd2-2f9bf5444087")
+		@Schema(description = "", example = "52beadd9-6b75-4163-b85d-7abd3cef3b35")
 		private String notes;
 
 }

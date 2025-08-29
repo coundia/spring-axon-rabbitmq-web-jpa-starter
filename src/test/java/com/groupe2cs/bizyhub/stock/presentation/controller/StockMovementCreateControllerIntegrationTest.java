@@ -37,7 +37,7 @@ void it_should_be_able_to_add_stockmovement() {
 		StockMovementRequest requestDTO = new StockMovementRequest();
 
 		requestDTO.setTypeStockMovement(UUID.randomUUID().toString());
-		requestDTO.setQuantity(63);
+		requestDTO.setQuantity(83);
 		requestDTO.setRemoteId(UUID.randomUUID().toString());
 		requestDTO.setLocalId(UUID.randomUUID().toString());
 		requestDTO.setAccount(UUID.randomUUID().toString());

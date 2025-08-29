@@ -61,14 +61,14 @@ public class TransactionItemUpdateControllerIntegrationTest extends BaseIntegrat
         body.add("transaction", UUID.randomUUID().toString());
         body.add("product", UUID.randomUUID().toString());
         body.add("label", UUID.randomUUID().toString());
-        body.add("quantity", 61);
+        body.add("quantity", 38);
         body.add("unit", UUID.randomUUID().toString());
         body.add("account", UUID.randomUUID().toString());
         body.add("remoteId", UUID.randomUUID().toString());
         body.add("localId", UUID.randomUUID().toString());
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("unitPrice", 9595.27);
-        body.add("total", 6761.73);
+        body.add("unitPrice", 6235.84);
+        body.add("total", 5069.82);
         body.add("notes", UUID.randomUUID().toString());
 
         HttpHeaders multipartHeaders = new HttpHeaders();

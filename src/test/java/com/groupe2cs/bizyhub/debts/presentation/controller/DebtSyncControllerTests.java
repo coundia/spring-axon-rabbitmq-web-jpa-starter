@@ -1,15 +1,15 @@
 package com.groupe2cs.bizyhub.debts.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.debts.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.debts.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.debts.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.debts.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.shared.application.*;
+import com.groupe2cs.bizyhub.debts.application.dto.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.debts.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -42,8 +42,8 @@ private DebtRepository Repository;
 .localId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
-.balance(984.61)
-.balanceDebt(7094.11)
+.balance(6558.45)
+.balanceDebt(9671.98)
 .dueDate(java.time.Instant.now().plusSeconds(3600))
 .statuses(UUID.randomUUID().toString())
 .account(UUID.randomUUID().toString())
@@ -78,8 +78,8 @@ private DebtRepository Repository;
 .localId(UUID.randomUUID().toString())
 .code(UUID.randomUUID().toString())
 .notes(UUID.randomUUID().toString())
-.balance(984.61)
-.balanceDebt(7094.11)
+.balance(6558.45)
+.balanceDebt(9671.98)
 .dueDate(java.time.Instant.now().plusSeconds(3600))
 .statuses(UUID.randomUUID().toString())
 .account(UUID.randomUUID().toString())

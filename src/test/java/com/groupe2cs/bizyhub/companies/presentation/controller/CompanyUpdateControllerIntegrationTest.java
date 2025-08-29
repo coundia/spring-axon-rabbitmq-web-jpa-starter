@@ -75,7 +75,7 @@ public class CompanyUpdateControllerIntegrationTest extends BaseIntegrationTests
         body.add("country", UUID.randomUUID().toString());
         body.add("account", UUID.randomUUID().toString());
         body.add("postalCode", UUID.randomUUID().toString());
-        body.add("isActive", false);
+        body.add("isActive", true);
         body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
         body.add("isDefault", false);
 

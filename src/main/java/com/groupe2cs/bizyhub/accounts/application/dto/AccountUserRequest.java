@@ -19,21 +19,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "AccountUserRequest", description = "Request payload for AccountUser operations")
 public class AccountUserRequest implements Serializable {
 
-	@Schema(description = "", example = "5dc220f6-684c-497d-aed9-816c2e68c09d")
+	@Schema(description = "", example = "c11aba62-d81f-4e6c-af08-119626d198f0")
 	private String account;
-	@Schema(description = "", example = "72a094c2-609b-4a17-b8fb-5e9ae3295906")
+	@Schema(description = "", example = "329ea18d-f669-4831-95cc-a1b95493406f")
 	private String user;
-	@Schema(description = "", example = "4daa1c31-7efd-424d-bcd2-5d8b3d4744bf")
+	@Schema(description = "", example = "cb90e888-e14f-4b22-a403-e5208ce36346")
 	private String identity;
-	@Schema(description = "", example = "9d82dd5c-6047-445a-bbf7-63c818fc3cbd")
+	@Schema(description = "", example = "1491524e-672c-43f8-b229-5e90f024bd42")
 	private String phone;
-	@Schema(description = "", example = "851019f3-a1e8-43b8-8769-55c544fe0ef4")
+	@Schema(description = "", example = "9c7ffeb7-43bb-49c9-ae91-42b129252352")
 	private String email;
-	@Schema(description = "", example = "fd3f98ab-7103-4dd8-bb86-2996a2c20a61")
+	@Schema(description = "", example = "701cfa04-3771-4db3-bbb7-cf4ea41b2125")
 	private String role;
-	@Schema(description = "", example = "2e3f591f-52f0-44a7-a223-9a007e84dd05")
+	@Schema(description = "", example = "0bf6615a-aef3-42df-9455-a6a4ef17c1b0")
 	private String status;
-	@Schema(description = "", example = "9ec3aefd-4b2b-4702-8a88-14b43d51d93a")
+	@Schema(description = "", example = "fe8d37e1-2443-4e55-afda-36c7bc5ca2fa")
 	private String invitedBy;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
@@ -41,11 +41,11 @@ public class AccountUserRequest implements Serializable {
 	private java.time.Instant acceptedAt;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant revokedAt;
-	@Schema(description = "", example = "1ec7c753-09a9-49ee-863f-0ae4e790b6b2")
+	@Schema(description = "", example = "a7c5333b-c28c-4a62-a02a-0e6aa1da9800")
 	private String message;
-	@Schema(description = "", example = "8fea4efd-33b1-4200-8932-55bf22071481")
+	@Schema(description = "", example = "1933503f-75cd-44f1-994d-666313043bd2")
 	private String remoteId;
-	@Schema(description = "", example = "f814f1ad-4529-4865-9e82-07d18780fd29")
+	@Schema(description = "", example = "3f966813-278f-4fe7-9018-3cab0107fb4d")
 	private String localId;
 	@Schema(description = "", example = "false")
 	private Boolean isActive;
