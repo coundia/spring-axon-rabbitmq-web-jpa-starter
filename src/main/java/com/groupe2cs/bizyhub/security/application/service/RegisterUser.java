@@ -34,7 +34,7 @@ if (tenantId == null) {
 if (userRepository.findByUsernameAndTenantId(request.getUsername(),tenantId).stream()
         .findFirst().isPresent()) {
 	log.error("User with username {} already exists in tenant {}", request.getUsername(), tenantId);
-	throw new IllegalArgumentException("Username “admin” already exists in tenant");
+	throw new IllegalArgumentException("Username  already exists in tenant");
 }
 
 User user = User.builder()
