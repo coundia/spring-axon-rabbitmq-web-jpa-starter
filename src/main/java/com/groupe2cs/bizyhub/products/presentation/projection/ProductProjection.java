@@ -1,19 +1,19 @@
 package com.groupe2cs.bizyhub.products.presentation.projection;
 
-import com.groupe2cs.bizyhub.products.domain.event.ProductCreatedEvent;
-import com.groupe2cs.bizyhub.products.domain.event.ProductDeletedEvent;
-import com.groupe2cs.bizyhub.products.domain.event.ProductUpdatedEvent;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.Product;
-import com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository;
+import com.groupe2cs.bizyhub.products.domain.event.*;
+import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.axonframework.config.ProcessingGroup;
+import org.axonframework.eventhandling.EventHandler;
+
 import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.config.ProcessingGroup;
 import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @AllowReplay(value = false)
 @Slf4j
@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductProjection {
 
 	private final ProductRepository repository;
+	private final ProductImageRepository productImageRepository;
 
 
 	private static boolean hasId(Object s) {
@@ -53,8 +54,29 @@ public class ProductProjection {
 			if (event.getDescription() != null && hasId(event.getDescription().value())) {
 				entity.setDescription(event.getDescription().value());
 			}
+			if (event.getStatus() != null && hasId(event.getStatus().value())) {
+				entity.setStatus(event.getStatus().value());
+			}
+			if (event.getIsPublic() != null && hasId(event.getIsPublic().value())) {
+				entity.setIsPublic(event.getIsPublic().value());
+			}
+			if (event.getHasSold() != null && hasId(event.getHasSold().value())) {
+				entity.setHasSold(event.getHasSold().value());
+			}
+			if (event.getHasPrice() != null && hasId(event.getHasPrice().value())) {
+				entity.setHasPrice(event.getHasPrice().value());
+			}
+			if (event.getLevel() != null && hasId(event.getLevel().value())) {
+				entity.setLevel(event.getLevel().value());
+			}
+			if (event.getQuantity() != null && hasId(event.getQuantity().value())) {
+				entity.setQuantity(event.getQuantity().value());
+			}
 			if (event.getBarcode() != null && hasId(event.getBarcode().value())) {
 				entity.setBarcode(event.getBarcode().value());
+			}
+			if (event.getCompany() != null && hasId(event.getCompany().value())) {
+				entity.setCompany(event.getCompany().value());
 			}
 			if (event.getUnit() != null && hasId(event.getUnit().value())) {
 				entity.setUnit(event.getUnit().value());
@@ -86,6 +108,11 @@ public class ProductProjection {
 			}
 			if (event.getTenant() != null) {
 				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
+
+			if (event.getRemoteId().value() == null) {
+				entity.setRemoteId(event.getId().value());
 			}
 
 
@@ -125,8 +152,29 @@ public class ProductProjection {
 			if (event.getDescription() != null && hasId(event.getDescription().value())) {
 				entity.setDescription(event.getDescription().value());
 			}
+			if (event.getStatus() != null && hasId(event.getStatus().value())) {
+				entity.setStatus(event.getStatus().value());
+			}
+			if (event.getIsPublic() != null && hasId(event.getIsPublic().value())) {
+				entity.setIsPublic(event.getIsPublic().value());
+			}
+			if (event.getHasSold() != null && hasId(event.getHasSold().value())) {
+				entity.setHasSold(event.getHasSold().value());
+			}
+			if (event.getHasPrice() != null && hasId(event.getHasPrice().value())) {
+				entity.setHasPrice(event.getHasPrice().value());
+			}
+			if (event.getLevel() != null && hasId(event.getLevel().value())) {
+				entity.setLevel(event.getLevel().value());
+			}
+			if (event.getQuantity() != null && hasId(event.getQuantity().value())) {
+				entity.setQuantity(event.getQuantity().value());
+			}
 			if (event.getBarcode() != null && hasId(event.getBarcode().value())) {
 				entity.setBarcode(event.getBarcode().value());
+			}
+			if (event.getCompany() != null && hasId(event.getCompany().value())) {
+				entity.setCompany(event.getCompany().value());
 			}
 			if (event.getUnit() != null && hasId(event.getUnit().value())) {
 				entity.setUnit(event.getUnit().value());
@@ -174,6 +222,7 @@ public class ProductProjection {
 	public void on(ProductDeletedEvent event) {
 		try {
 
+			productImageRepository.deleteByProductId(event.getId().value());
 
 			repository.deleteById(event.getId().value());
 			log.info("Product deleted successfully: {}", event.getId().value());

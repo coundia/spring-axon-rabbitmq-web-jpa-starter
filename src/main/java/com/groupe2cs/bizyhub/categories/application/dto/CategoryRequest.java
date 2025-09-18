@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.categories.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,21 +19,25 @@ import java.io.Serializable;
 @Schema(name = "CategoryRequest", description = "Request payload for Category operations")
 public class CategoryRequest implements Serializable {
 
-	@Schema(description = "", example = "5c817514-15f7-4739-be4e-36cf9c673808")
+	@Schema(description = "", example = "ae172336-6770-458c-a68c-5fa9668d5f95")
 	private String code;
-	@Schema(description = "", example = "450f2a6d-0818-4a45-8963-e9e797e6abce")
+	@Schema(description = "", example = "e06cdfda-ea66-4eca-8cf8-66e56c4fa7e9")
 	private String name;
-	@Schema(description = "", example = "d512c29d-cafb-41ab-bfde-6386c1cc6b8f")
+	@Schema(description = "", example = "6947f2dd-88af-4a31-b7e0-41d6409eedee")
 	private String remoteId;
-	@Schema(description = "", example = "562178f8-7cda-4993-bda1-67bdc28c3d72")
+	@Schema(description = "", example = "4dd225eb-c379-4192-ade5-b6626654fc97")
 	private String localId;
-	@Schema(description = "", example = "b6263e31-2c02-4f6c-aa58-87192ece0c93")
+	@Schema(description = "", example = "5b6e3c18-c1fe-43ae-9914-b16a4b827880")
 	private String account;
-	@Schema(description = "", example = "aa803dcc-9e29-4a5a-b56f-39a37b63d9ad")
+	@Schema(description = "", example = "50c46870-7ea8-4aa0-843c-43b0aaec3556")
+	private String status;
+	@Schema(description = "", example = "false")
+	private Boolean isPublic;
+	@Schema(description = "", example = "a7424cb5-96e2-492e-ba76-c0b327f2692d")
 	private String description;
-	@Schema(description = "", example = "86e86bdc-05d6-4508-a052-8d9ebdca16da")
+	@Schema(description = "", example = "ee201365-7c61-42bf-a61a-faa1fe4c7f8f")
 	private String typeEntry;
-	@Schema(description = "", example = "9")
+	@Schema(description = "", example = "3")
 	private Integer version;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;

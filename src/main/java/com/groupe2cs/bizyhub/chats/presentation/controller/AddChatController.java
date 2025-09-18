@@ -3,6 +3,7 @@ package com.groupe2cs.bizyhub.chats.presentation.controller;
 import com.groupe2cs.bizyhub.chats.application.dto.ChatRequest;
 import com.groupe2cs.bizyhub.chats.application.dto.ChatResponse;
 import com.groupe2cs.bizyhub.chats.application.usecase.ChatCreateApplicationService;
+import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,7 +55,7 @@ public class AddChatController {
 			@ApiResponse(responseCode = "500", description = "Internal server error",
 					content = @Content(schema = @Schema()))
 	})
-	public ResponseEntity<ChatResponse> addChat(@Valid @RequestBody ChatRequest request,
+	public ResponseEntity<?> addChat(@Valid @RequestBody ChatRequest request,
 												@AuthenticationPrincipal Jwt jwt) {
 		try {
 
@@ -73,7 +74,12 @@ public class AddChatController {
 		} catch (Exception ex) {
 			//e.printStackTrace();
 			log.error("Failed to create chat: {}", ex.getMessage());
-			return ResponseEntity.status(500).build();
+			return ResponseEntity.internalServerError().body(
+					ApiResponseDto.builder()
+							.code(0)
+							.message(ex.getMessage())
+							.build()
+			);
 		}
 	}
 }

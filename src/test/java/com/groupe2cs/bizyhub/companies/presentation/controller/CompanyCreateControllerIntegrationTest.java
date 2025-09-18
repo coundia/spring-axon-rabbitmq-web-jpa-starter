@@ -1,33 +1,38 @@
 package com.groupe2cs.bizyhub.companies.presentation.controller;
-
-import com.groupe2cs.bizyhub.companies.application.dto.CompanyRequest;
-import com.groupe2cs.bizyhub.companies.application.dto.CompanyResponse;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.companies.application.dto.*;
+import com.groupe2cs.bizyhub.companies.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.companies.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
+import com.groupe2cs.bizyhub.companies.application.command.*;
 import java.util.UUID;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CompanyCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-	@Autowired
-	private CommandGateway commandGateway;
+@Autowired
+private CommandGateway commandGateway;
 
 
-	@Autowired
-	private UserRepository createdByDataRepository;
-	@Autowired
-	private TenantRepository tenantDataRepository;
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
 
-	@Test
-	void it_should_be_able_to_add_company() {
+@Test
+void it_should_be_able_to_add_company() {
 
 		CompanyRequest requestDTO = new CompanyRequest();
 
@@ -49,10 +54,12 @@ public class CompanyCreateControllerIntegrationTest extends BaseIntegrationTests
 		requestDTO.setAccount(UUID.randomUUID().toString());
 		requestDTO.setPostalCode(UUID.randomUUID().toString());
 		requestDTO.setIsActive(true);
+		requestDTO.setStatus(UUID.randomUUID().toString());
+		requestDTO.setIsPublic(true);
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setIsDefault(true);
 
-		String uri = "/v1/commands/company";
+ 		String uri = "/v1/commands/company";
 		ResponseEntity<CompanyResponse> response = this.postForEntity(uri, requestDTO, CompanyResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
@@ -75,6 +82,8 @@ public class CompanyCreateControllerIntegrationTest extends BaseIntegrationTests
 		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
 		assertThat(response.getBody().getPostalCode()).isEqualTo(requestDTO.getPostalCode());
 		assertThat(response.getBody().getIsActive()).isEqualTo(requestDTO.getIsActive());
+		assertThat(response.getBody().getStatus()).isEqualTo(requestDTO.getStatus());
+		assertThat(response.getBody().getIsPublic()).isEqualTo(requestDTO.getIsPublic());
 		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
 		assertThat(response.getBody().getIsDefault()).isEqualTo(requestDTO.getIsDefault());
 	}

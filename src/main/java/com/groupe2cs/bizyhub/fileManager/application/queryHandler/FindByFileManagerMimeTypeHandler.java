@@ -1,40 +1,42 @@
 package com.groupe2cs.bizyhub.fileManager.application.queryHandler;
 
-import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerResponse;
-import com.groupe2cs.bizyhub.fileManager.application.mapper.FileManagerMapper;
-import com.groupe2cs.bizyhub.fileManager.application.query.FindByFileManagerMimeTypeQuery;
-import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.FileManager;
-import com.groupe2cs.bizyhub.fileManager.infrastructure.repository.FileManagerRepository;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.fileManager.application.mapper.*;
+import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.fileManager.application.dto.*;
+import com.groupe2cs.bizyhub.fileManager.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.fileManager.application.query.*;
+import com.groupe2cs.bizyhub.fileManager.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
+import org.axonframework.queryhandling.QueryHandler;
+
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByFileManagerMimeTypeHandler {
 
-	private final FileManagerRepository repository;
+private final FileManagerRepository repository;
 
-	@QueryHandler
-	public List<FileManagerResponse> handle(FindByFileManagerMimeTypeQuery query) {
+@QueryHandler
+public List<FileManagerResponse> handle(FindByFileManagerMimeTypeQuery query) {
 
-		MetaRequest metaRequest = query.getMetaRequest();
-		List<FileManager> entities = null;
-		String value = query.getMimeType().value();
+	 MetaRequest metaRequest = query.getMetaRequest();
+	 List<FileManager> entities = null;
+	 String value = query.getMimeType().value();
 
-		if (metaRequest.isAdmin()) {
-			entities = repository.findByMimeTypeAndTenantId(value, metaRequest.getTenantId());
-		} else {
-			entities = repository.findByMimeTypeAndCreatedById(value, metaRequest.getUserId());
-		}
+	 if(metaRequest.isAdmin()) {
+	    entities = repository.findByMimeTypeAndTenantId(value, metaRequest.getTenantId());
+	 }else{
+	    entities = repository.findByMimeTypeAndCreatedById(value, metaRequest.getUserId());
+	 }
 
-		return entities.stream()
-				.map(FileManagerMapper::toResponse)
-				.toList();
+ 	return entities.stream()
+	.map(FileManagerMapper::toResponse)
+	.toList();
 	}
 
 

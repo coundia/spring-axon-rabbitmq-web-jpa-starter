@@ -2,6 +2,7 @@ package com.groupe2cs.bizyhub.chats.application.usecase;
 
 import com.groupe2cs.bizyhub.chats.application.command.DeleteChatCommand;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatId;
+import com.groupe2cs.bizyhub.shared.application.UserValidationService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -12,9 +13,10 @@ import org.springframework.stereotype.Service;
 public class ChatDeleteApplicationService {
 
 	private final CommandGateway commandGateway;
+	private final UserValidationService userValidationService;
 
 	public void deleteChat(ChatId idVo, MetaRequest metaRequest) {
-
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
 		DeleteChatCommand command = new DeleteChatCommand(idVo);
 		commandGateway.sendAndWait(command);
 	}

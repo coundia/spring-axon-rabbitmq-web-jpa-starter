@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.products.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,31 +19,45 @@ import java.io.Serializable;
 @Schema(name = "ProductRequest", description = "Request payload for Product operations")
 public class ProductRequest implements Serializable {
 
-	@Schema(description = "", example = "2116ca14-74c4-4777-b9ba-0a528fa4bf5b")
+	@Schema(description = "", example = "c8c9e630-9a14-49fe-9eb5-7918dc81af49")
 	private String remoteId;
-	@Schema(description = "", example = "e61ffc5f-42e2-405b-acc7-7d67f147fb92")
+	@Schema(description = "", example = "e00b2591-b1dd-483f-b5d4-a0de73cd129b")
 	private String localId;
-	@Schema(description = "", example = "660adf1b-f703-4a77-8b69-c8ce2bc904e2")
+	@Schema(description = "", example = "749e1af5-b72f-476b-ac02-723793b85871")
 	private String code;
-	@Schema(description = "", example = "b3cd999d-e9a0-44ba-a452-cfce49e9d441")
+	@Schema(description = "", example = "d21c06f2-ca8c-4750-854d-d49acf756097")
 	private String name;
-	@Schema(description = "", example = "aec0d79b-67a0-43bd-87cd-20b8796d3f98")
+	@Schema(description = "", example = "4b952ace-4975-405d-8a82-522d5f53df0f")
 	private String description;
-	@Schema(description = "", example = "22de6707-aff1-4bef-ab69-dd3cb8362f0d")
+	@Schema(description = "", example = "905b9381-8d25-414c-88e9-bda02e887617")
+	private String status;
+	@Schema(description = "", example = "true")
+	private Boolean isPublic;
+	@Schema(description = "", example = "false")
+	private Boolean hasSold;
+	@Schema(description = "", example = "false")
+	private Boolean hasPrice;
+	@Schema(description = "", example = "396f8583-b36e-4af8-97f1-8ca6b79ea0db")
+	private String level;
+	@Schema(description = "", example = "36")
+	private Integer quantity;
+	@Schema(description = "", example = "f475905c-9e7a-4bc6-b16b-0ecc1648265e")
 	private String barcode;
-	@Schema(description = "", example = "1ccf42ce-221f-4a84-9166-0a1838501d82")
+	@Schema(description = "", example = "2739e91d-82b0-414a-875b-e76721dc040a")
+	private String company;
+	@Schema(description = "", example = "6bfff013-d84c-4c35-8034-cc6a1bd3eeea")
 	private String unit;
 	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 	private java.time.Instant syncAt;
-	@Schema(description = "", example = "d285021e-fa78-4b02-96c2-a95932cdc254")
+	@Schema(description = "", example = "8350e8a8-262b-4984-a351-f8ac0e9aec78")
 	private String category;
-	@Schema(description = "", example = "8fda1f06-bda2-4572-a1ae-88d2c8f91ac0")
+	@Schema(description = "", example = "e75ba3c1-bbf2-4855-9c59-24ee2eb58aef")
 	private String account;
-	@Schema(description = "", example = "9449.71")
+	@Schema(description = "", example = "5823.36")
 	private Double defaultPrice;
-	@Schema(description = "", example = "2129b015-7220-44a8-915a-b72f16a8484f")
+	@Schema(description = "", example = "f1c8a8a8-c964-41f8-adb5-4307055ecfab")
 	private String statuses;
-	@Schema(description = "", example = "5582.31")
+	@Schema(description = "", example = "2843.67")
 	private Double purchasePrice;
 
 }

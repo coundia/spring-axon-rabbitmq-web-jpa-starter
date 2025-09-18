@@ -25,12 +25,12 @@ public class MetaRequest implements Serializable {
 	private String objectName;
 	private Boolean isPublic = false;
 
-	public Boolean isAdmin() {
+	public Boolean isAdmin(){
 		return this.isAdmin != null && this.isAdmin;
 	}
 
 	public Boolean getIsPublic() {
-		if (isPublic == null) {
+		if (isPublic == null){
 			return false;
 		}
 		return isPublic;

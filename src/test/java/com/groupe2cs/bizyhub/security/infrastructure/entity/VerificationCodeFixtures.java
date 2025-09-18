@@ -1,17 +1,25 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.security.application.command.CreateVerificationCodeCommand;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.VerificationCodeRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import com.groupe2cs.bizyhub.security.application.command.*;
+import java.util.UUID;
 
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.mock.web.MockMultipartFile;
 import static org.awaitility.Awaitility.await;
 
 public class VerificationCodeFixtures {
@@ -31,21 +39,21 @@ public class VerificationCodeFixtures {
 	}
 
 	public static List<CreateVerificationCodeCommand> randomManyViaCommand(
-			CommandGateway commandGateway,
-			VerificationCodeRepository repository,
-			UserRepository createdByDataRepository,
-			TenantRepository tenantDataRepository,
-			int count,
-			User user
+		CommandGateway commandGateway,
+		VerificationCodeRepository repository,
+        UserRepository createdByDataRepository,
+        TenantRepository tenantDataRepository,
+		int count,
+		User user
 	) {
 		List<CreateVerificationCodeCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateVerificationCodeCommand command = randomOneViaCommand(
-					commandGateway,
-					repository,
-					createdByDataRepository,
-					tenantDataRepository,
-					user);
+			commandGateway,
+			 repository,
+        createdByDataRepository,
+        tenantDataRepository,
+			 user);
 			items.add(command);
 		}
 		return items;
@@ -55,14 +63,14 @@ public class VerificationCodeFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateVerificationCodeCommand randomOneViaCommand(
-			CommandGateway commandGateway,
-			VerificationCodeRepository repository,
-			UserRepository createdByDataRepository,
-			TenantRepository tenantDataRepository,
-			User user) {
+		public static CreateVerificationCodeCommand randomOneViaCommand(
+		CommandGateway commandGateway,
+		VerificationCodeRepository  repository,
+        UserRepository createdByDataRepository,
+        TenantRepository tenantDataRepository,
+		 User user) {
 
-		CreateVerificationCodeCommand command = CreateVerificationCodeCommand.builder()
+			CreateVerificationCodeCommand command = CreateVerificationCodeCommand.builder()
 				.notes(VerificationCodeNotes.create(UUID.randomUUID().toString()))
 				.token(VerificationCodeToken.create(UUID.randomUUID().toString()))
 				.username(VerificationCodeUsername.create(UUID.randomUUID().toString()))
@@ -72,7 +80,7 @@ public class VerificationCodeFixtures {
 				.status(VerificationCodeStatus.create(UUID.randomUUID().toString()))
 				.source(VerificationCodeSource.create(UUID.randomUUID().toString()))
 				.expiration(VerificationCodeExpiration.create(java.time.Instant.now().plusSeconds(3600)))
-				.build();
+			.build();
 
 		command.setCreatedBy(VerificationCodeCreatedBy.create(user.getId()));
 		command.setTenant(VerificationCodeTenant.create(user.getTenant().getId()));
@@ -83,22 +91,22 @@ public class VerificationCodeFixtures {
 
 
 	public static CreateVerificationCodeCommand randomOneViaCommand(
-			CommandGateway commandGateway,
-			VerificationCodeRepository repository,
-			User user
-	) {
+        CommandGateway commandGateway,
+        VerificationCodeRepository  repository,
+        User user
+        ) {
 
-		CreateVerificationCodeCommand command = CreateVerificationCodeCommand.builder()
-				.notes(VerificationCodeNotes.create(UUID.randomUUID().toString()))
-				.token(VerificationCodeToken.create(UUID.randomUUID().toString()))
-				.username(VerificationCodeUsername.create(UUID.randomUUID().toString()))
-				.phone(VerificationCodePhone.create(UUID.randomUUID().toString()))
-				.email(VerificationCodeEmail.create(UUID.randomUUID().toString()))
-				.code(VerificationCodeCode.create(UUID.randomUUID().toString()))
-				.status(VerificationCodeStatus.create(UUID.randomUUID().toString()))
-				.source(VerificationCodeSource.create(UUID.randomUUID().toString()))
-				.expiration(VerificationCodeExpiration.create(java.time.Instant.now().plusSeconds(3600)))
-				.build();
+        CreateVerificationCodeCommand command = CreateVerificationCodeCommand.builder()
+        .notes(VerificationCodeNotes.create(UUID.randomUUID().toString()))
+        .token(VerificationCodeToken.create(UUID.randomUUID().toString()))
+        .username(VerificationCodeUsername.create(UUID.randomUUID().toString()))
+        .phone(VerificationCodePhone.create(UUID.randomUUID().toString()))
+        .email(VerificationCodeEmail.create(UUID.randomUUID().toString()))
+        .code(VerificationCodeCode.create(UUID.randomUUID().toString()))
+        .status(VerificationCodeStatus.create(UUID.randomUUID().toString()))
+        .source(VerificationCodeSource.create(UUID.randomUUID().toString()))
+        .expiration(VerificationCodeExpiration.create(java.time.Instant.now().plusSeconds(3600)))
+        .build();
 
 		command.setCreatedBy(VerificationCodeCreatedBy.create(user.getId()));
 		command.setTenant(VerificationCodeTenant.create(user.getTenant().getId()));

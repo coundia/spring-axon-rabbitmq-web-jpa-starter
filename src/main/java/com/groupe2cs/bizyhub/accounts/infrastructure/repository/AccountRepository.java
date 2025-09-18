@@ -171,25 +171,23 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 	List<Account> findByLocalIdAndTenantId(String localId, String tenantId);
 
 	@Query("""
-			SELECT e FROM Account e
-			WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC)
-			.toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-			 AND (
-			         e.createdBy.id = :createdById
-			         OR EXISTS (
-			              SELECT 1
-			              FROM AccountUser au, User u
-			              WHERE au.account = e.localId
-			                AND (
-			                      (au.identity IS NOT NULL AND au.identity = u.username)
-			                   OR (au.email    IS NOT NULL AND au.email    = u.email)
-			                   OR (au.phone    IS NOT NULL AND au.phone    = u.telephone)
-			                )
-			         )
-			    )
-			ORDER BY e.updatedAtAudit DESC, e.createdAtAudit  DESC
-			""")
-	List<Account> findBySyncAtAndCreatedById(java.time.Instant syncAt, String createdById);
+    SELECT e FROM Account e
+    WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC)
+    .toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
+      AND e.createdBy.id <> :userId
+      AND EXISTS (
+            SELECT 1
+            FROM AccountUser au JOIN User u ON (
+                    (au.identity IS NOT NULL AND au.identity = u.username)
+                 OR (au.email    IS NOT NULL AND au.email    = u.email)
+                 OR (au.phone    IS NOT NULL AND au.phone    = u.telephone)
+            )
+            WHERE au.account = e.localId
+              AND u.id = :userId
+      )
+    ORDER BY e.updatedAtAudit DESC, e.createdAtAudit DESC
+    """)
+	List<Account> findBySyncAtAndCreatedById(java.time.Instant syncAt, String userId);
 
 	@Query("""
 			SELECT e FROM Account e

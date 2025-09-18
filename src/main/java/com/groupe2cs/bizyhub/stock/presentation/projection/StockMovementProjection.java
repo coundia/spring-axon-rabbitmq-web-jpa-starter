@@ -78,7 +78,13 @@ public class StockMovementProjection {
 			if (event.getTenant() != null) {
 				entity.setTenant(new Tenant(event.getTenant().value()));
 			}
+			if(event.getRemoteId().value() == null) {
+				entity.setRemoteId(event.getId().value());
+			}
 
+			if(event.getRemoteId().value() == null) {
+				entity.setRemoteId(event.getId().value());
+			}
 
 			repository.save(entity);
 

@@ -7,6 +7,7 @@ import com.groupe2cs.bizyhub.chats.application.mapper.ChatMapper;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatCreatedBy;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatId;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatTenant;
+import com.groupe2cs.bizyhub.shared.application.UserValidationService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +20,13 @@ public class ChatUpdateApplicationService {
 
 	private final FileStorageService fileStorageService;
 	private final CommandGateway commandGateway;
-
+	private final UserValidationService userValidationService;
 
 	public ChatResponse updateChat(ChatId id, ChatRequest request,
 								   MetaRequest metaRequest
 	) {
+
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
 
 		UpdateChatCommand command = ChatMapper.toUpdateCommand(
 				id,

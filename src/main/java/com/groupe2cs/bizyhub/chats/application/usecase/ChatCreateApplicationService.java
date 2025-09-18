@@ -6,6 +6,7 @@ import com.groupe2cs.bizyhub.chats.application.dto.ChatResponse;
 import com.groupe2cs.bizyhub.chats.application.mapper.ChatMapper;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatCreatedBy;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatTenant;
+import com.groupe2cs.bizyhub.shared.application.UserValidationService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -15,10 +16,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ChatCreateApplicationService {
 	private final CommandGateway commandGateway;
+	private final UserValidationService userValidationService;
+
 
 	public ChatResponse createChat(ChatRequest request,
 								   MetaRequest metaRequest
 	) {
+
+		//userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
 
 		CreateChatCommand command = ChatMapper.toCommand(
 				request

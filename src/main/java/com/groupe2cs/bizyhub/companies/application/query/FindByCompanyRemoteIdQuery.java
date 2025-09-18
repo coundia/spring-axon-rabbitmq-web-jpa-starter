@@ -1,11 +1,8 @@
 package com.groupe2cs.bizyhub.companies.application.query;
 
-import com.groupe2cs.bizyhub.companies.domain.valueObject.CompanyRemoteId;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.*;
+import lombok.*;
 
 @RequiredArgsConstructor
 @Getter
@@ -13,7 +10,7 @@ import lombok.Setter;
 @Builder
 public class FindByCompanyRemoteIdQuery {
 
-	private final CompanyRemoteId remoteId;
+	private final CompanyRemoteId  remoteId;
 	private final MetaRequest metaRequest;
 
 }

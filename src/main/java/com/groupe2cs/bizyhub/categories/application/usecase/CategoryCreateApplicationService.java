@@ -1,35 +1,36 @@
 package com.groupe2cs.bizyhub.categories.application.usecase;
 
-import com.groupe2cs.bizyhub.categories.application.command.CreateCategoryCommand;
-import com.groupe2cs.bizyhub.categories.application.dto.CategoryRequest;
-import com.groupe2cs.bizyhub.categories.application.dto.CategoryResponse;
-import com.groupe2cs.bizyhub.categories.application.mapper.CategoryMapper;
-import com.groupe2cs.bizyhub.categories.domain.valueObject.CategoryCreatedBy;
-import com.groupe2cs.bizyhub.categories.domain.valueObject.CategoryTenant;
+import com.groupe2cs.bizyhub.categories.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.UserValidationService;
+import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.categories.application.mapper.*;
+import com.groupe2cs.bizyhub.categories.application.command.*;
+import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class CategoryCreateApplicationService {
-	private final CommandGateway commandGateway;
+private final CommandGateway commandGateway;
+	private final UserValidationService userValidationService;
+public CategoryResponse createCategory(CategoryRequest request,
+MetaRequest metaRequest
+){
+	userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+CreateCategoryCommand command = CategoryMapper.toCommand(
+request
+);
 
-	public CategoryResponse createCategory(CategoryRequest request,
-										   MetaRequest metaRequest
-	) {
+command.setCreatedBy(CategoryCreatedBy.create(metaRequest.getUserId()));
+command.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
 
-		CreateCategoryCommand command = CategoryMapper.toCommand(
-				request
-		);
-
-		command.setCreatedBy(CategoryCreatedBy.create(metaRequest.getUserId()));
-		command.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
-
-		commandGateway.sendAndWait(command);
-		return CategoryMapper.toResponse(command);
-	}
+commandGateway.sendAndWait(command);
+return CategoryMapper.toResponse(command);
+}
 
 
 }

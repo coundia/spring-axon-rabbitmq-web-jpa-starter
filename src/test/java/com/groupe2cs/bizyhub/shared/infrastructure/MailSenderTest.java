@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.shared.infrastructure;
 
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
+
 import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.mail.javamail.JavaMailSender;

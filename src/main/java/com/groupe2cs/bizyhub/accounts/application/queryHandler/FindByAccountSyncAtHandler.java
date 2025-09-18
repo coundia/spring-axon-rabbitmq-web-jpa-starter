@@ -7,12 +7,14 @@ import com.groupe2cs.bizyhub.accounts.infrastructure.entity.Account;
 import com.groupe2cs.bizyhub.accounts.infrastructure.repository.AccountRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class FindByAccountSyncAtHandler {
@@ -27,8 +29,11 @@ public class FindByAccountSyncAtHandler {
 		java.time.Instant value = query.getSyncAt().value();
 
 		if (metaRequest.isAdmin()) {
+			log.info("findBySyncAtAndTenantId isAdmin Tenant ID: {}", metaRequest.getTenantId());
 			entities = repository.findBySyncAtAndTenantId(value, metaRequest.getTenantId());
 		} else {
+
+			log.info("findBySyncAtAndCreatedById not admin User ID: {}", metaRequest.getUserId());
 			entities = repository.findBySyncAtAndCreatedById(value, metaRequest.getUserId());
 		}
 

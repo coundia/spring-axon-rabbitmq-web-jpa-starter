@@ -60,14 +60,11 @@ public class AuthVerificationCodeController {
 			});
 			String code = codeGenerator.numeric(4);
 			request.setCode(code);
+
 			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
-			User user = userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
-				User
-						u =
-						User.builder().id(UUID.randomUUID().toString()).username(username)
-								.password(passwordEncoder.encode(code)).tenant(new Tenant(tenantId)).build();
-				return userRepository.save(u);
-			});
+
+			User user = _changePassword(username, tenantId, code);
+
 			metaRequest.setUserId(user.getId());
 			request.setStatus(STATUS_NEW);
 			request.setExpiration(Instant.now().plusSeconds(8600));
@@ -109,6 +106,10 @@ public class AuthVerificationCodeController {
 					authentication =
 					new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
 			String token = jwtService.generateToken(authentication, metaRequest);
+
+			//reset password
+			  _changePassword(username, tenantId, UUID.randomUUID().toString());
+
 			return ResponseEntity.status(HttpStatus.CREATED).body(
 					AuthResponseDto.builder().code(1).token(token).tenant(tenantId).username(username)
 							.message("Login successful").build()
@@ -117,5 +118,15 @@ public class AuthVerificationCodeController {
 			log.error("check-code failed: {}", ex.getMessage());
 			return ResponseEntity.status(500).build();
 		}
+	}
+
+	private User _changePassword(String username, String tenantId, String newPassword) {
+		return userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
+			User
+					u =
+					User.builder().id(UUID.randomUUID().toString()).username(username)
+							.password(passwordEncoder.encode(newPassword)).tenant(new Tenant(tenantId)).build();
+			return userRepository.save(u);
+		});
 	}
 }

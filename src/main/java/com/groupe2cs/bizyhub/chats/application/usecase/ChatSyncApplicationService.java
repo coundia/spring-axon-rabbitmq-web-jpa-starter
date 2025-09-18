@@ -5,6 +5,7 @@ import com.groupe2cs.bizyhub.chats.application.command.DeleteChatCommand;
 import com.groupe2cs.bizyhub.chats.application.command.UpdateChatCommand;
 import com.groupe2cs.bizyhub.chats.application.dto.ChatSyncRequest;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.UserValidationService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -16,8 +17,12 @@ public class ChatSyncApplicationService {
 
 	private final ChatGate gateService;
 	private final CommandGateway commandGateway;
+	private final UserValidationService userValidationService;
 
 	public void syncChat(ChatSyncRequest request, MetaRequest metaRequest) {
+
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
 				case "CREATE" -> {

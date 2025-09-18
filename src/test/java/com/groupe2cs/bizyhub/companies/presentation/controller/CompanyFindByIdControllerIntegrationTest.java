@@ -1,48 +1,54 @@
 package com.groupe2cs.bizyhub.companies.presentation.controller;
 
-import com.groupe2cs.bizyhub.companies.application.dto.CompanyResponse;
-import com.groupe2cs.bizyhub.companies.infrastructure.entity.CompanyFixtures;
-import com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.companies.application.dto.*;
+import com.groupe2cs.bizyhub.companies.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.companies.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import com.groupe2cs.bizyhub.companies.application.command.*;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.http.HttpStatus;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 
 public class CompanyFindByIdControllerIntegrationTest extends BaseIntegrationTests {
 
-	@Autowired
-	private CommandGateway commandGateway;
+@Autowired
+private CommandGateway commandGateway;
 
-	@Autowired
-	private CompanyRepository repository;
+@Autowired
+private CompanyRepository repository;
 
-	@Autowired
-	private UserRepository createdByDataRepository;
-	@Autowired
-	private TenantRepository tenantDataRepository;
+@Autowired
+private UserRepository createdByDataRepository ;
+@Autowired
+private TenantRepository tenantDataRepository ;
 
-	@Test
-	void it_should_be_able_to_get_company_by_id() {
+@Test
+void it_should_be_able_to_get_company_by_id() {
 
-		String existingId = CompanyFixtures.randomOneViaCommand(
-				commandGateway, repository,
-				createdByDataRepository,
-				tenantDataRepository,
-				getCurrentUser()).getId().value();
+	String existingId = CompanyFixtures.randomOneViaCommand(
+	commandGateway,repository,
+        createdByDataRepository,
+        tenantDataRepository,
+	 getCurrentUser()).getId().value();
 
-		CompanyFixtures.byIdWaitExist(repository, existingId);
+	 CompanyFixtures.byIdWaitExist(repository, existingId);
 
-		String uri = "/v1/queries/company/id?id=" + existingId;
-		ResponseEntity<CompanyResponse> response = this.getForEntity(uri, CompanyResponse.class);
+	String uri = "/v1/queries/company/id?id=" + existingId;
+	ResponseEntity<CompanyResponse> response = this.getForEntity(uri, CompanyResponse.class);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody()).isNotNull();
-		assertThat(response.getBody().getId()).isEqualTo(existingId);
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+	assertThat(response.getBody()).isNotNull();
+	assertThat(response.getBody().getId()).isEqualTo(existingId);
 	}
 }

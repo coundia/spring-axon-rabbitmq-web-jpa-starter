@@ -1,9 +1,14 @@
 package com.groupe2cs.bizyhub.categories.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.ToString;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -14,30 +19,34 @@ import java.io.Serializable;
 @Schema(name = "CategoryDeltaDto", description = "Delta DTO for category changes")
 public class CategoryDeltaDto implements Serializable {
 
-	@Schema(description = "Identifier of the category", example = "uuid")
-	private String id;
+    @Schema(description = "Identifier of the category", example = "uuid")
+    private String id;
 
-	@Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
+    @Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
 	@Builder.Default
-	private String type = "CREATE";
+    private String type = "CREATE";
 
-	@Schema(description = "", example = "593e061b-03a2-486a-9544-2ddc6942e86d")
-	private String code;
-	@Schema(description = "", example = "53aeb967-df3c-498a-b50b-82b532991e99")
-	private String name;
-	@Schema(description = "", example = "2b1ffd70-f4a8-426d-a98f-c7dc191c6b29")
-	private String remoteId;
-	@Schema(description = "", example = "0180481a-f0c2-4e19-af15-74b61182421f")
-	private String localId;
-	@Schema(description = "", example = "131398ef-9885-48ba-af79-456ee859b350")
-	private String account;
-	@Schema(description = "", example = "1770cf7e-8c1f-44b4-b555-4753a5770881")
-	private String description;
-	@Schema(description = "", example = "ba890ea9-e59b-456a-8ac3-3427a51c7754")
-	private String typeEntry;
-	@Schema(description = "", example = "94")
-	private Integer version;
-	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
-	private java.time.Instant syncAt;
+		@Schema(description = "", example = "a03cfc72-fc5c-49d8-8838-5a0fe4ad1d8c")
+		private String code;
+		@Schema(description = "", example = "5a66e3e4-5566-4456-a8ea-9257368436fc")
+		private String name;
+		@Schema(description = "", example = "c343c783-4651-470e-a508-de3bb4e3e23c")
+		private String remoteId;
+		@Schema(description = "", example = "aeb1d5ef-f681-4564-bdb4-df22a0fb9999")
+		private String localId;
+		@Schema(description = "", example = "4d450b6a-5817-42a5-9c26-fbe4ef201a2b")
+		private String account;
+		@Schema(description = "", example = "74fb614a-9eca-4012-8559-69d7e3a0eb62")
+		private String status;
+		@Schema(description = "", example = "false")
+		private Boolean isPublic;
+		@Schema(description = "", example = "f33e59ce-b700-4406-a658-d0bf27267ac7")
+		private String description;
+		@Schema(description = "", example = "4940814b-b88f-4fc7-9d8b-f66e4072b7ce")
+		private String typeEntry;
+		@Schema(description = "", example = "70")
+		private Integer version;
+		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+		private java.time.Instant syncAt;
 
 }

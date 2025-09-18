@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.fileManager.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+import java.util.UUID;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -13,25 +19,25 @@ import java.io.Serializable;
 @Schema(name = "FileManagerRequest", description = "Request payload for FileManager operations")
 public class FileManagerRequest implements Serializable {
 
-	@Schema(description = "", example = "4276a4b5-5abe-4ab3-a298-e9fd72e595bc")
+	@Schema(description = "", example = "64d74eff-89fc-462d-9b5d-3ea876c6d2e6")
 	private String name;
-	@Schema(description = "", example = "b48c2061-ee3b-4ac8-9ed6-0b4524c1c46e")
+	@Schema(description = "", example = "6160cfef-a1bc-4a83-a15b-fc37ff60a958")
 	private String details;
-	@Schema(description = "", example = "5a249e28-7e1c-404f-bd5f-f151799170ee")
+	@Schema(description = "", example = "76d419dd-f7f5-41d9-8687-97379f3fcbf9")
 	private String objectId;
-	@Schema(description = "", example = "2060ee47-36b1-4a76-a163-11ac6c6c5cb0")
+	@Schema(description = "", example = "791cf8d7-7332-4824-84b1-89f4d92ac1aa")
 	private String objectName;
-	@Schema(description = "", example = "e32e8837-14be-48be-b5da-f46b077e4567")
+	@Schema(description = "", example = "8638eeb1-5644-482f-8371-816ab8ec1f75")
 	private String originalName;
-	@Schema(description = "", example = "f47db819-6bc4-4ebd-abd7-792348330c42")
+	@Schema(description = "", example = "badd41ab-ee1f-41d9-b58f-1ecb7b241b79")
 	private String mimeType;
-	@Schema(description = "", example = "95531L")
+	@Schema(description = "", example = "25039L")
 	private Long size;
-	@Schema(description = "", example = "f310f4c7-d7cd-4cb2-85b6-8759fc15df27")
+	@Schema(description = "", example = "b6eed62b-826f-41fd-bef8-fbdf37e25675")
 	private String path;
-	@Schema(description = "", example = "778b0213-1753-4b30-aedb-2ad5147901ef")
+	@Schema(description = "", example = "2cc3a549-4de5-4bcb-939d-ad8942594269")
 	private String uri;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isPublic;
 
 }

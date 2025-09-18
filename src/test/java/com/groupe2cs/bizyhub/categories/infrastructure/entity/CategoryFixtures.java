@@ -1,18 +1,25 @@
 package com.groupe2cs.bizyhub.categories.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.categories.application.command.CreateCategoryCommand;
-import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
-import com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository;
+import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.categories.application.dto.*;
+import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.categories.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import com.groupe2cs.bizyhub.categories.application.command.*;
+import java.util.UUID;
 
+import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.mock.web.MockMultipartFile;
 import static org.awaitility.Awaitility.await;
 
 public class CategoryFixtures {
@@ -32,21 +39,21 @@ public class CategoryFixtures {
 	}
 
 	public static List<CreateCategoryCommand> randomManyViaCommand(
-			CommandGateway commandGateway,
-			CategoryRepository repository,
-			UserRepository createdByDataRepository,
-			TenantRepository tenantDataRepository,
-			int count,
-			User user
+		CommandGateway commandGateway,
+		CategoryRepository repository,
+        UserRepository createdByDataRepository,
+        TenantRepository tenantDataRepository,
+		int count,
+		User user
 	) {
 		List<CreateCategoryCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateCategoryCommand command = randomOneViaCommand(
-					commandGateway,
-					repository,
-					createdByDataRepository,
-					tenantDataRepository,
-					user);
+			commandGateway,
+			 repository,
+        createdByDataRepository,
+        tenantDataRepository,
+			 user);
 			items.add(command);
 		}
 		return items;
@@ -56,24 +63,26 @@ public class CategoryFixtures {
 		repository.deleteAll();
 	}
 
-	public static CreateCategoryCommand randomOneViaCommand(
-			CommandGateway commandGateway,
-			CategoryRepository repository,
-			UserRepository createdByDataRepository,
-			TenantRepository tenantDataRepository,
-			User user) {
+		public static CreateCategoryCommand randomOneViaCommand(
+		CommandGateway commandGateway,
+		CategoryRepository  repository,
+        UserRepository createdByDataRepository,
+        TenantRepository tenantDataRepository,
+		 User user) {
 
-		CreateCategoryCommand command = CreateCategoryCommand.builder()
+			CreateCategoryCommand command = CreateCategoryCommand.builder()
 				.code(CategoryCode.create(UUID.randomUUID().toString()))
 				.name(CategoryName.create(UUID.randomUUID().toString()))
 				.remoteId(CategoryRemoteId.create(UUID.randomUUID().toString()))
 				.localId(CategoryLocalId.create(UUID.randomUUID().toString()))
 				.account(CategoryAccount.create(UUID.randomUUID().toString()))
+				.status(CategoryStatus.create(UUID.randomUUID().toString()))
+				.isPublic(CategoryIsPublic.create(true))
 				.description(CategoryDescription.create(UUID.randomUUID().toString()))
 				.typeEntry(CategoryTypeEntry.create(UUID.randomUUID().toString()))
-				.version(CategoryVersion.create(58))
+				.version(CategoryVersion.create(96))
 				.syncAt(CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.build();
+			.build();
 
 		command.setCreatedBy(CategoryCreatedBy.create(user.getId()));
 		command.setTenant(CategoryTenant.create(user.getTenant().getId()));
@@ -84,22 +93,24 @@ public class CategoryFixtures {
 
 
 	public static CreateCategoryCommand randomOneViaCommand(
-			CommandGateway commandGateway,
-			CategoryRepository repository,
-			User user
-	) {
+        CommandGateway commandGateway,
+        CategoryRepository  repository,
+        User user
+        ) {
 
-		CreateCategoryCommand command = CreateCategoryCommand.builder()
-				.code(CategoryCode.create(UUID.randomUUID().toString()))
-				.name(CategoryName.create(UUID.randomUUID().toString()))
-				.remoteId(CategoryRemoteId.create(UUID.randomUUID().toString()))
-				.localId(CategoryLocalId.create(UUID.randomUUID().toString()))
-				.account(CategoryAccount.create(UUID.randomUUID().toString()))
-				.description(CategoryDescription.create(UUID.randomUUID().toString()))
-				.typeEntry(CategoryTypeEntry.create(UUID.randomUUID().toString()))
-				.version(CategoryVersion.create(58))
-				.syncAt(CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
-				.build();
+        CreateCategoryCommand command = CreateCategoryCommand.builder()
+        .code(CategoryCode.create(UUID.randomUUID().toString()))
+        .name(CategoryName.create(UUID.randomUUID().toString()))
+        .remoteId(CategoryRemoteId.create(UUID.randomUUID().toString()))
+        .localId(CategoryLocalId.create(UUID.randomUUID().toString()))
+        .account(CategoryAccount.create(UUID.randomUUID().toString()))
+        .status(CategoryStatus.create(UUID.randomUUID().toString()))
+        .isPublic(CategoryIsPublic.create(true))
+        .description(CategoryDescription.create(UUID.randomUUID().toString()))
+        .typeEntry(CategoryTypeEntry.create(UUID.randomUUID().toString()))
+        .version(CategoryVersion.create(96))
+        .syncAt(CategorySyncAt.create(java.time.Instant.now().plusSeconds(3600)))
+        .build();
 
 		command.setCreatedBy(CategoryCreatedBy.create(user.getId()));
 		command.setTenant(CategoryTenant.create(user.getTenant().getId()));

@@ -1,9 +1,14 @@
 package com.groupe2cs.bizyhub.products.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.ToString;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -14,38 +19,52 @@ import java.io.Serializable;
 @Schema(name = "ProductDeltaDto", description = "Delta DTO for product changes")
 public class ProductDeltaDto implements Serializable {
 
-	@Schema(description = "Identifier of the product", example = "uuid")
-	private String id;
+    @Schema(description = "Identifier of the product", example = "uuid")
+    private String id;
 
-	@Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
+    @Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
 	@Builder.Default
-	private String type = "CREATE";
+    private String type = "CREATE";
 
-	@Schema(description = "", example = "33cf362f-e4e0-410c-ad0d-42df9a8927fa")
-	private String remoteId;
-	@Schema(description = "", example = "61861630-2100-4c5e-8cdf-82dd0cc7fa22")
-	private String localId;
-	@Schema(description = "", example = "73983cb6-9174-4171-acb8-e5c790e5c038")
-	private String code;
-	@Schema(description = "", example = "fdc5306d-a183-431c-9e7a-22e0a5245a7f")
-	private String name;
-	@Schema(description = "", example = "f7ddb3c3-e292-4041-830c-f5f6c924a626")
-	private String description;
-	@Schema(description = "", example = "7a630fe2-b68c-4045-9c00-bd84088fc540")
-	private String barcode;
-	@Schema(description = "", example = "7288ca09-0792-4186-911b-8f6df46576ed")
-	private String unit;
-	@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
-	private java.time.Instant syncAt;
-	@Schema(description = "", example = "4d062c2d-a9f0-416b-ac7a-10512b487a46")
-	private String category;
-	@Schema(description = "", example = "71e060ce-4931-4e1d-8b40-fe6b0a7afe2c")
-	private String account;
-	@Schema(description = "", example = "6572.03")
-	private Double defaultPrice;
-	@Schema(description = "", example = "392e2136-313b-4276-8c17-e05e64a9be38")
-	private String statuses;
-	@Schema(description = "", example = "6467.56")
-	private Double purchasePrice;
+		@Schema(description = "", example = "d021fa3a-8a89-449a-a3e2-e05b88ca104a")
+		private String remoteId;
+		@Schema(description = "", example = "b2478295-df78-46a2-bb38-a6e4e003d542")
+		private String localId;
+		@Schema(description = "", example = "35df3f95-dc8f-4f07-8dad-532686b96073")
+		private String code;
+		@Schema(description = "", example = "8edbd483-82c5-42f2-88e9-e67df17305fd")
+		private String name;
+		@Schema(description = "", example = "a2dfbb82-7a1b-4cc2-af8a-0d39c6e1e427")
+		private String description;
+		@Schema(description = "", example = "cda1ead2-b0a4-44ad-b023-b97931c9bdee")
+		private String status;
+		@Schema(description = "", example = "false")
+		private Boolean isPublic;
+		@Schema(description = "", example = "true")
+		private Boolean hasSold;
+		@Schema(description = "", example = "true")
+		private Boolean hasPrice;
+		@Schema(description = "", example = "f44ac59a-9d14-44cd-b130-5e28f898fcfc")
+		private String level;
+		@Schema(description = "", example = "69")
+		private Integer quantity;
+		@Schema(description = "", example = "af5437e0-c351-4353-b914-093644578f9c")
+		private String barcode;
+		@Schema(description = "", example = "f72cd590-a380-4aef-936f-cb4fc743f506")
+		private String company;
+		@Schema(description = "", example = "9bc67166-4182-4765-a0b6-7cce7c7a5e41")
+		private String unit;
+		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
+		private java.time.Instant syncAt;
+		@Schema(description = "", example = "4fdf7490-2072-46a7-9016-3b0b029357df")
+		private String category;
+		@Schema(description = "", example = "f896f3ed-da2e-4235-9353-6750f55d1872")
+		private String account;
+		@Schema(description = "", example = "7090.55")
+		private Double defaultPrice;
+		@Schema(description = "", example = "e2a7aa3d-eda0-4aca-a078-366f05d6a8bd")
+		private String statuses;
+		@Schema(description = "", example = "4400.43")
+		private Double purchasePrice;
 
 }

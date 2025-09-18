@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.products.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -26,7 +32,21 @@ public class ProductResponse implements Serializable {
 	@Schema(description = "", example = "")
 	private String description;
 	@Schema(description = "", example = "")
+	private String status;
+	@Schema(description = "", example = "")
+	private Boolean isPublic;
+	@Schema(description = "", example = "")
+	private Boolean hasSold;
+	@Schema(description = "", example = "")
+	private Boolean hasPrice;
+	@Schema(description = "", example = "")
+	private String level;
+	@Schema(description = "", example = "")
+	private Integer quantity;
+	@Schema(description = "", example = "")
 	private String barcode;
+	@Schema(description = "", example = "")
+	private String company;
 	@Schema(description = "", example = "")
 	private String unit;
 	@Schema(description = "", example = "")

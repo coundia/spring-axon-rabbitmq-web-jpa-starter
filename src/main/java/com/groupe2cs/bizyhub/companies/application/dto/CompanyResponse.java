@@ -1,9 +1,15 @@
 package com.groupe2cs.bizyhub.companies.application.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
+import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
+import com.groupe2cs.bizyhub.companies.infrastructure.entity.*;
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -51,6 +57,10 @@ public class CompanyResponse implements Serializable {
 	private String postalCode;
 	@Schema(description = "", example = "")
 	private Boolean isActive;
+	@Schema(description = "", example = "")
+	private String status;
+	@Schema(description = "", example = "")
+	private Boolean isPublic;
 	@Schema(description = "", example = "")
 	private java.time.Instant syncAt;
 	@Schema(description = "", example = "")

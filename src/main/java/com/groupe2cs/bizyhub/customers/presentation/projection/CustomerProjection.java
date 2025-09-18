@@ -115,6 +115,11 @@ public class CustomerProjection {
 				entity.setTenant(new Tenant(event.getTenant().value()));
 			}
 
+			if(event.getRemoteId().value() == null) {
+				entity.setRemoteId(event.getId().value());
+			}
+
+
 
 			repository.save(entity);
 
