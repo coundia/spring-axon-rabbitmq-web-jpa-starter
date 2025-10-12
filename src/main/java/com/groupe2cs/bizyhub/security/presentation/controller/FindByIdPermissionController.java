@@ -40,43 +40,43 @@ import org.springframework.security.core.Authentication;
 @Slf4j
 public class FindByIdPermissionController {
 
-private final PermissionReadApplicationService applicationService;
+	private final PermissionReadApplicationService applicationService;
 
-public FindByIdPermissionController(PermissionReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/id")
-@Operation(
-summary = "Find permission by id",
-description = "Returns a single permissions that match the given id"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = PermissionResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<PermissionResponse> findById(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the id to filter by", required = true)
-	@RequestParam String id
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByPermissionId(PermissionId
-	.create(id) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find permission by id: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindByIdPermissionController(PermissionReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/id")
+	@Operation(
+			summary = "Find permission by id",
+			description = "Returns a single permissions that match the given id"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = PermissionResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<PermissionResponse> findById(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the id to filter by", required = true)
+			@RequestParam String id
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByPermissionId(PermissionId
+					.create(id), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find permission by id: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

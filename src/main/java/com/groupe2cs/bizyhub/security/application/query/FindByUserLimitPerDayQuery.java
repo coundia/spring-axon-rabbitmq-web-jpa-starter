@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserLimitPerDayQuery {
 
-	private final UserLimitPerDay  limitPerDay;
+	private final UserLimitPerDay limitPerDay;
 	private final MetaRequest metaRequest;
 
 }

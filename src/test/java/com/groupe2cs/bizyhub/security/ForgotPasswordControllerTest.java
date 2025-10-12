@@ -1,12 +1,14 @@
 package com.groupe2cs.bizyhub.security;
 
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.security.application.service.*;
-	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
-	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-	import com.groupe2cs.bizyhub.security.application.dto.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.application.service.*;
+
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
+
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.config.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,126 +34,122 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class ForgotPasswordControllerTest {
 
-@Autowired
-private MockMvc mockMvc;
+	private final String username = "admin";
+	private final String password = "admin";
+	@Autowired
+	private MockMvc mockMvc;
+	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
+	private PasswordResetRepository tokenRepository;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private PasswordEncoder encoder;
 
-@Autowired
-private ObjectMapper objectMapper;
+	private void createUser() {
+		if (userRepository.findByUsernameAndTenantName(username, DEFAULT_TENANT).isEmpty()) {
+			User user = User.builder()
+					.id(UUID.randomUUID().toString())
+					.username(username)
+					.password(encoder.encode(password))
+					.build();
+			userRepository.save(user);
+			TestTransaction.flagForCommit();
+			TestTransaction.end();
+			TestTransaction.start();
+		}
+	}
 
-@Autowired
-private PasswordResetRepository tokenRepository;
+	private String createValidToken() {
+		String uuid = UUID.randomUUID().toString();
+		tokenRepository.save(PasswordReset.builder()
+				.id(uuid)
+				.token(uuid)
+				.username(username)
+				.expiration(Instant.now().plusSeconds(3600))
+				.build());
+		TestTransaction.flagForCommit();
+		TestTransaction.end();
+		TestTransaction.start();
+		return uuid;
+	}
 
-@Autowired
-private UserRepository userRepository;
+	private String createExpiredToken() {
+		String uuid = UUID.randomUUID().toString();
+		tokenRepository.save(PasswordReset.builder()
+				.id(uuid)
+				.token(uuid)
+				.username(username)
+				.expiration(Instant.now().minusSeconds(60))
+				.build());
+		TestTransaction.flagForCommit();
+		TestTransaction.end();
+		TestTransaction.start();
+		return uuid;
+	}
 
-@Autowired
-private PasswordEncoder encoder;
+	@Test
+	void it_should_generate_reset_token() throws Exception {
+		createUser();
 
-private final String username = "admin";
-private final String password = "admin";
+		ForgotPasswordRequestDto dto = ForgotPasswordRequestDto.builder()
+				.username(username)
+				.build();
 
-private void createUser() {
-if (userRepository.findByUsernameAndTenantName(username,DEFAULT_TENANT).isEmpty()) {
-User user = User.builder()
-.id(UUID.randomUUID().toString())
-.username(username)
-.password(encoder.encode(password))
-.build();
-userRepository.save(user);
-TestTransaction.flagForCommit();
-TestTransaction.end();
-TestTransaction.start();
-}
-}
+		mockMvc.perform(post("/api/auth/forgot-password")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(dto)))
+				.andExpect(status().isOk());
+	}
 
-private String createValidToken() {
-String uuid = UUID.randomUUID().toString();
-tokenRepository.save(PasswordReset.builder()
-.id(uuid)
-.token(uuid)
-.username(username)
-.expiration(Instant.now().plusSeconds(3600))
-.build());
-TestTransaction.flagForCommit();
-TestTransaction.end();
-TestTransaction.start();
-return uuid;
-}
-
-private String createExpiredToken() {
-String uuid = UUID.randomUUID().toString();
-tokenRepository.save(PasswordReset.builder()
-.id(uuid)
-.token(uuid)
-.username(username)
-.expiration(Instant.now().minusSeconds(60))
-.build());
-TestTransaction.flagForCommit();
-TestTransaction.end();
-TestTransaction.start();
-return uuid;
-}
-
-@Test
-void it_should_generate_reset_token() throws Exception {
-createUser();
-
-ForgotPasswordRequestDto dto = ForgotPasswordRequestDto.builder()
-.username(username)
-.build();
-
-mockMvc.perform(post("/api/auth/forgot-password")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(dto)))
-.andExpect(status().isOk());
-}
-//todo check why this test is failing
+	//todo check why this test is failing
 //@Test
-void it_should_reset_password_with_valid_token() throws Exception {
-createUser();
-String token = createValidToken();
+	void it_should_reset_password_with_valid_token() throws Exception {
+		createUser();
+		String token = createValidToken();
 
-ResetPasswordDto dto = ResetPasswordDto.builder()
-.token(token)
-.newPassword("newpass")
-.build();
+		ResetPasswordDto dto = ResetPasswordDto.builder()
+				.token(token)
+				.newPassword("newpass")
+				.build();
 
-mockMvc.perform(post("/api/auth/reset-password")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(dto)))
-.andExpect(status().isOk());
+		mockMvc.perform(post("/api/auth/reset-password")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(dto)))
+				.andExpect(status().isOk());
 
-var user = userRepository.findByUsernameAndTenantName(username,DEFAULT_TENANT).stream()
-        .findFirst().orElseThrow();
-assertThat(encoder.matches("newpass", user.getPassword())).isTrue();
-}
+		var user = userRepository.findByUsernameAndTenantName(username, DEFAULT_TENANT).stream()
+				.findFirst().orElseThrow();
+		assertThat(encoder.matches("newpass", user.getPassword())).isTrue();
+	}
 
-@Test
-void it_should_fail_reset_if_token_invalid() throws Exception {
-ResetPasswordDto dto = ResetPasswordDto.builder()
-.token("invalid")
-.newPassword("xxx")
-.build();
+	@Test
+	void it_should_fail_reset_if_token_invalid() throws Exception {
+		ResetPasswordDto dto = ResetPasswordDto.builder()
+				.token("invalid")
+				.newPassword("xxx")
+				.build();
 
-mockMvc.perform(post("/api/auth/reset-password")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(dto)))
-.andExpect(status().isBadRequest());
-}
+		mockMvc.perform(post("/api/auth/reset-password")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(dto)))
+				.andExpect(status().isBadRequest());
+	}
 
-@Test
-void it_should_fail_reset_if_token_expired() throws Exception {
-createUser();
-String token = createExpiredToken();
+	@Test
+	void it_should_fail_reset_if_token_expired() throws Exception {
+		createUser();
+		String token = createExpiredToken();
 
-ResetPasswordDto dto = ResetPasswordDto.builder()
-.token(token)
-.newPassword("newpass")
-.build();
+		ResetPasswordDto dto = ResetPasswordDto.builder()
+				.token(token)
+				.newPassword("newpass")
+				.build();
 
-mockMvc.perform(post("/api/auth/reset-password")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(dto)))
-.andExpect(status().isBadRequest());
-}
+		mockMvc.perform(post("/api/auth/reset-password")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(dto)))
+				.andExpect(status().isBadRequest());
+	}
 }

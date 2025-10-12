@@ -101,10 +101,9 @@ public class AccountProjection {
 			}
 
 
-			if(event.getRemoteId().value() == null) {
+			if (event.getRemoteId().value() == null) {
 				entity.setRemoteId(event.getId().value());
 			}
-
 
 
 			repository.save(entity);

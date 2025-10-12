@@ -33,48 +33,48 @@ import org.springframework.security.core.Authentication;
 
 public class AddRoleController {
 
-private final RoleCreateApplicationService applicationService;
+	private final RoleCreateApplicationService applicationService;
 
-public AddRoleController(RoleCreateApplicationService applicationService) {
-	this.applicationService = applicationService;
-}
-
-@PostMapping
-@Operation(
-summary = "Create a new role",
-description = "Creates a new role and returns the created entity",
-requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-description = "Role request payload",
-required = true,
-content = @Content(schema = @Schema(implementation = RoleRequest.class))
-)
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "201", description = "Successfully created",
-content = @Content(schema = @Schema(implementation = RoleResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content(schema = @Schema()))
-})
-public ResponseEntity<RoleResponse> addRole(@Valid @RequestBody RoleRequest request,
-	@AuthenticationPrincipal Jwt jwt) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-		.build();
-
-		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	RoleResponse response =  applicationService.createRole(
-			request,
-			metaRequest
-	);
-
-	return ResponseEntity.status(HttpStatus.CREATED).body(response);
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to create role: {}", ex.getMessage());
-	return ResponseEntity.status(500).build();
+	public AddRoleController(RoleCreateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
-}
+
+	@PostMapping
+	@Operation(
+			summary = "Create a new role",
+			description = "Creates a new role and returns the created entity",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+					description = "Role request payload",
+					required = true,
+					content = @Content(schema = @Schema(implementation = RoleRequest.class))
+			)
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Successfully created",
+					content = @Content(schema = @Schema(implementation = RoleResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<RoleResponse> addRole(@Valid @RequestBody RoleRequest request,
+												@AuthenticationPrincipal Jwt jwt) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			RoleResponse response = applicationService.createRole(
+					request,
+					metaRequest
+			);
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception ex) {
+			//e.printStackTrace();
+			log.error("Failed to create role: {}", ex.getMessage());
+			return ResponseEntity.status(500).build();
+		}
+	}
 }

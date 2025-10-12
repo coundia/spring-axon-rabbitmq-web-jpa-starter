@@ -8,7 +8,9 @@ import com.groupe2cs.bizyhub.shared.application.UserValidationService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.categories.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+
 import java.util.List;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,25 +20,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoryUpdateApplicationService {
 
-private final FileStorageService fileStorageService;
-private final CommandGateway commandGateway;
+	private final FileStorageService fileStorageService;
+	private final CommandGateway commandGateway;
 	private final UserValidationService userValidationService;
 
-public CategoryResponse updateCategory(CategoryId id,CategoryRequest request,
-MetaRequest metaRequest
-){
-	userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
-UpdateCategoryCommand command = CategoryMapper.toUpdateCommand(
-id,
-request
-);
+	public CategoryResponse updateCategory(CategoryId id, CategoryRequest request,
+										   MetaRequest metaRequest
+	) {
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
+		UpdateCategoryCommand command = CategoryMapper.toUpdateCommand(
+				id,
+				request
+		);
 
-command.setCreatedBy(CategoryCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(CategoryCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(CategoryTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
+		commandGateway.sendAndWait(command);
 
-return CategoryMapper.toResponse(command);
-}
+		return CategoryMapper.toResponse(command);
+	}
 
 }

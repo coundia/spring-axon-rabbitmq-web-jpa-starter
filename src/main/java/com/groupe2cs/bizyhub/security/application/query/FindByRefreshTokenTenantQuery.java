@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByRefreshTokenTenantQuery {
 
-	private final RefreshTokenTenant  tenant;
+	private final RefreshTokenTenant tenant;
 	private final MetaRequest metaRequest;
 
 }

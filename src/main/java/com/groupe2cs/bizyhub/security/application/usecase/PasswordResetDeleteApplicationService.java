@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PasswordResetDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deletePasswordReset(PasswordResetId idVo, MetaRequest metaRequest) {
+	public void deletePasswordReset(PasswordResetId idVo, MetaRequest metaRequest) {
 
-DeletePasswordResetCommand command = new DeletePasswordResetCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeletePasswordResetCommand command = new DeletePasswordResetCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

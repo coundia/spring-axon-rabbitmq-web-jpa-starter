@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.security.presentation.projection;
 
-	import com.groupe2cs.bizyhub.security.domain.event.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-	import org.axonframework.eventhandling.EventHandler;
+import com.groupe2cs.bizyhub.security.domain.event.*;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import org.axonframework.eventhandling.EventHandler;
 
 import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
@@ -23,39 +23,38 @@ import lombok.RequiredArgsConstructor;
 @ProcessingGroup("UserRole")
 public class UserRoleProjection {
 
-private final UserRoleRepository repository;
+	private final UserRoleRepository repository;
 
 
-private static boolean hasId(Object s) {
-    return s != null ;
-}
-
-
-@EventHandler
-public void on(UserRoleCreatedEvent event) {
-try {
-UserRole entity = UserRole.builder().build();
-		if(event.getId() !=null  && hasId(event.getId().value()) ) {
-            entity.setId( event.getId().value());
-        }
-  		if(event.getUser() !=null  && hasId(event.getUser().value())){
-            entity.setUser( new User(event.getUser().value()));
-        }
-
- 		if(event.getRole() !=null  && hasId(event.getRole().value())){
-            entity.setRole( new Role(event.getRole().value()));
-        }
-
-
-
-    entity.setId(event.getId().value());
-
-    if(event.getCreatedBy() !=null){
-        entity.setCreatedBy( new User(event.getCreatedBy().value()));
-    }
-	if(event.getTenant() != null) {
-	entity.setTenant(new Tenant(event.getTenant().value()));
+	private static boolean hasId(Object s) {
+		return s != null;
 	}
+
+
+	@EventHandler
+	public void on(UserRoleCreatedEvent event) {
+		try {
+			UserRole entity = UserRole.builder().build();
+			if (event.getId() != null && hasId(event.getId().value())) {
+				entity.setId(event.getId().value());
+			}
+			if (event.getUser() != null && hasId(event.getUser().value())) {
+				entity.setUser(new User(event.getUser().value()));
+			}
+
+			if (event.getRole() != null && hasId(event.getRole().value())) {
+				entity.setRole(new Role(event.getRole().value()));
+			}
+
+
+			entity.setId(event.getId().value());
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
 /*
 	if(event.getRemoteId().value() == null) {
@@ -63,65 +62,66 @@ UserRole entity = UserRole.builder().build();
 	}
 	*/
 
-repository.save(entity);
+			repository.save(entity);
 
 
-log.info("UserRole inserted: {}", entity);
+			log.info("UserRole inserted: {}", entity);
 
-} catch (Exception e) {
-log.error("Error saving UserRole: {}", e.getMessage(), e);
-throw e;
-}
-}
+		} catch (Exception e) {
+			log.error("Error saving UserRole: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
 
-@EventHandler
-public void on(UserRoleUpdatedEvent event) {
-try {
-UserRole entity = repository.findById(event.getId().value())
-.orElseThrow(() -> new RuntimeException("UserRole not found"));
-
-
-	if(event.getId() != null  && hasId(event.getId().value())) {
-		entity.setId(event.getId().value());
-    }
-
-     if(event.getUser() != null  && hasId(event.getUser().value())) {
-		  entity.setUser(new User(event.getUser().value()));
-	  }
-
-     if(event.getRole() != null  && hasId(event.getRole().value())) {
-		  entity.setRole(new Role(event.getRole().value()));
-	  }
-
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
-
-if(entity.getTenant() == null && event.getTenant() != null) {
-	log.info("Tenant is null on entity, it will be,  updated with tenant ID: {}", event.getTenant().value());
-	entity.setTenant(new Tenant(event.getTenant().value()));
-}
-
-repository.save(entity);
+	@EventHandler
+	public void on(UserRoleUpdatedEvent event) {
+		try {
+			UserRole entity = repository.findById(event.getId().value())
+					.orElseThrow(() -> new RuntimeException("UserRole not found"));
 
 
-log.info("UserRole updated successfully: {}", event.getId().value());
-} catch (Exception e) {
-log.error("Error updating UserRole: {}", e.getMessage(), e);
-throw e;
-}
-}
+			if (event.getId() != null && hasId(event.getId().value())) {
+				entity.setId(event.getId().value());
+			}
 
-@EventHandler
-public void on(UserRoleDeletedEvent event) {
-try {
+			if (event.getUser() != null && hasId(event.getUser().value())) {
+				entity.setUser(new User(event.getUser().value()));
+			}
+
+			if (event.getRole() != null && hasId(event.getRole().value())) {
+				entity.setRole(new Role(event.getRole().value()));
+			}
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+			if (entity.getTenant() == null && event.getTenant() != null) {
+				log.info("Tenant is null on entity, it will be,  updated with tenant ID: {}",
+						event.getTenant().value());
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
+			repository.save(entity);
 
 
-repository.deleteById(event.getId().value());
-log.info("UserRole deleted successfully: {}", event.getId().value());
-} catch (Exception e) {
-log.error("Error deleting UserRole: {}", e.getMessage(), e);
-throw e;
-}
-}
+			log.info("UserRole updated successfully: {}", event.getId().value());
+		} catch (Exception e) {
+			log.error("Error updating UserRole: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
+
+	@EventHandler
+	public void on(UserRoleDeletedEvent event) {
+		try {
+
+
+			repository.deleteById(event.getId().value());
+			log.info("UserRole deleted successfully: {}", event.getId().value());
+		} catch (Exception e) {
+			log.error("Error deleting UserRole: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
 }

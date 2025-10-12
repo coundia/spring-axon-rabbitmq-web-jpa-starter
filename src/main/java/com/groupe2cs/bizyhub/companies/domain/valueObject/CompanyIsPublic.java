@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.companies.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyRemoteIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyLocalIdNotValid;
@@ -24,6 +25,7 @@ import com.groupe2cs.bizyhub.companies.domain.exception.CompanyStatusNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIsPublicNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -39,35 +41,35 @@ import java.util.*;
 @Builder
 public class CompanyIsPublic implements Serializable {
 
-private Boolean isPublic;
+	private Boolean isPublic;
 
-public CompanyIsPublic(Boolean isPublic) {
-this.isPublic = isPublic;
-}
+	public CompanyIsPublic(Boolean isPublic) {
+		this.isPublic = isPublic;
+	}
 
-public static CompanyIsPublic create(Boolean isPublic) {
+	public static CompanyIsPublic create(Boolean isPublic) {
 
-	return new CompanyIsPublic(isPublic);
-}
+		return new CompanyIsPublic(isPublic);
+	}
 
-public Boolean value() {
-return this.isPublic;
-}
+	public Boolean value() {
+		return this.isPublic;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof CompanyIsPublic that)) return false;
-return this.isPublic.equals(that.isPublic);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CompanyIsPublic that)) return false;
+		return this.isPublic.equals(that.isPublic);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(isPublic);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(isPublic);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(isPublic);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(isPublic);
+	}
 }

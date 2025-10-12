@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -15,6 +16,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderBuyerNameNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderAddressNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -30,35 +32,35 @@ import java.util.*;
 @Builder
 public class OrderAddress implements Serializable {
 
-private String address;
+	private String address;
 
-public OrderAddress(String address) {
-this.address = address;
-}
+	public OrderAddress(String address) {
+		this.address = address;
+	}
 
-public static OrderAddress create(String address) {
+	public static OrderAddress create(String address) {
 
-	return new OrderAddress(address);
-}
+		return new OrderAddress(address);
+	}
 
-public String value() {
-return this.address;
-}
+	public String value() {
+		return this.address;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderAddress that)) return false;
-return this.address.equals(that.address);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderAddress that)) return false;
+		return this.address.equals(that.address);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(address);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(address);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(address);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(address);
+	}
 }

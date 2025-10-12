@@ -33,48 +33,48 @@ import org.springframework.security.core.Authentication;
 
 public class AddProductController {
 
-private final ProductCreateApplicationService applicationService;
+	private final ProductCreateApplicationService applicationService;
 
-public AddProductController(ProductCreateApplicationService applicationService) {
-	this.applicationService = applicationService;
-}
-
-@PostMapping
-@Operation(
-summary = "Create a new product",
-description = "Creates a new product and returns the created entity",
-requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-description = "Product request payload",
-required = true,
-content = @Content(schema = @Schema(implementation = ProductRequest.class))
-)
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "201", description = "Successfully created",
-content = @Content(schema = @Schema(implementation = ProductResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content(schema = @Schema()))
-})
-public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductRequest request,
-	@AuthenticationPrincipal Jwt jwt) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-		.build();
-
-		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	ProductResponse response =  applicationService.createProduct(
-			request,
-			metaRequest
-	);
-
-	return ResponseEntity.status(HttpStatus.CREATED).body(response);
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to create product: {}", ex.getMessage());
-	return ResponseEntity.status(500).build();
+	public AddProductController(ProductCreateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
-}
+
+	@PostMapping
+	@Operation(
+			summary = "Create a new product",
+			description = "Creates a new product and returns the created entity",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+					description = "Product request payload",
+					required = true,
+					content = @Content(schema = @Schema(implementation = ProductRequest.class))
+			)
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Successfully created",
+					content = @Content(schema = @Schema(implementation = ProductResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductRequest request,
+													  @AuthenticationPrincipal Jwt jwt) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			ProductResponse response = applicationService.createProduct(
+					request,
+					metaRequest
+			);
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception ex) {
+			//e.printStackTrace();
+			log.error("Failed to create product: {}", ex.getMessage());
+			return ResponseEntity.status(500).build();
+		}
+	}
 }

@@ -48,10 +48,16 @@ public class ProductImageControllerIntegrationTest extends BaseIntegrationTests 
 		HttpEntity<String> productPart = new HttpEntity<>(productJson, productHeaders);
 
 		ByteArrayResource file1 = new ByteArrayResource("fake-image-content-1".getBytes(StandardCharsets.UTF_8)) {
-			@Override public String getFilename() { return "image1.txt"; }
+			@Override
+			public String getFilename() {
+				return "image1.txt";
+			}
 		};
 		ByteArrayResource file2 = new ByteArrayResource("fake-image-content-2".getBytes(StandardCharsets.UTF_8)) {
-			@Override public String getFilename() { return "image2.txt"; }
+			@Override
+			public String getFilename() {
+				return "image2.txt";
+			}
 		};
 
 		HttpHeaders fileHeaders = new HttpHeaders();
@@ -91,7 +97,8 @@ public class ProductImageControllerIntegrationTest extends BaseIntegrationTests 
 				getBaseUrl() + "/v1/marketplace?page=0&size=50",
 				HttpMethod.GET,
 				authGet,
-				new ParameterizedTypeReference<>() {}
+				new ParameterizedTypeReference<>() {
+				}
 		);
 
 		assertThat(listResp.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -123,9 +130,21 @@ public class ProductImageControllerIntegrationTest extends BaseIntegrationTests 
 	public static class ProductWithImagesResponse {
 		private ProductResponse product;
 		private List<ProductImageResponse> images;
-		public ProductResponse getProduct() { return product; }
-		public void setProduct(ProductResponse product) { this.product = product; }
-		public List<ProductImageResponse> getImages() { return images; }
-		public void setImages(List<ProductImageResponse> images) { this.images = images; }
+
+		public ProductResponse getProduct() {
+			return product;
+		}
+
+		public void setProduct(ProductResponse product) {
+			this.product = product;
+		}
+
+		public List<ProductImageResponse> getImages() {
+			return images;
+		}
+
+		public void setImages(List<ProductImageResponse> images) {
+			this.images = images;
+		}
 	}
 }

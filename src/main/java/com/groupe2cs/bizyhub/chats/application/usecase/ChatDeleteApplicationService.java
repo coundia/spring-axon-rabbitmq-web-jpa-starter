@@ -16,7 +16,7 @@ public class ChatDeleteApplicationService {
 	private final UserValidationService userValidationService;
 
 	public void deleteChat(ChatId idVo, MetaRequest metaRequest) {
-		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 		DeleteChatCommand command = new DeleteChatCommand(idVo);
 		commandGateway.sendAndWait(command);
 	}

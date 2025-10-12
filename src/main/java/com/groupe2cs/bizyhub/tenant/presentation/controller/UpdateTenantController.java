@@ -30,46 +30,47 @@ import jakarta.validation.Valid;
 @Slf4j
 public class UpdateTenantController {
 
-private final TenantUpdateApplicationService applicationService;
+	private final TenantUpdateApplicationService applicationService;
 
-public UpdateTenantController(TenantUpdateApplicationService  applicationService) {
-this.applicationService = applicationService;
-}
-
-@Operation(summary = "Update a new tenant")
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Tenant Updated",
-content = @Content(mediaType = "application/json",
-schema = @Schema(implementation = TenantResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content)
-})
-@PutMapping(value="{id}",  consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<TenantResponse> updateTenant(
-	@Valid @PathVariable String id,
-	@RequestBody TenantRequest request,
-	@AuthenticationPrincipal Jwt jwt
-	) { {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-
-    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	TenantResponse response = applicationService.updateTenant(TenantId.create(id),
-	request,
-	metaRequest
-	);
-
-	return ResponseEntity.ok(response);
-
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to Update tenant: {}", ex.getMessage(), ex);
-	return ResponseEntity.internalServerError().build();
+	public UpdateTenantController(TenantUpdateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@Operation(summary = "Update a new tenant")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Tenant Updated",
+					content = @Content(mediaType = "application/json",
+							schema = @Schema(implementation = TenantResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content)
+	})
+	@PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TenantResponse> updateTenant(
+			@Valid @PathVariable String id,
+			@RequestBody TenantRequest request,
+			@AuthenticationPrincipal Jwt jwt
+	) {
+		{
+			try {
+
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+				metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+				TenantResponse response = applicationService.updateTenant(TenantId.create(id),
+						request,
+						metaRequest
+				);
+
+				return ResponseEntity.ok(response);
+
+			} catch (Exception ex) {
+				//e.printStackTrace();
+				log.error("Failed to Update tenant: {}", ex.getMessage(), ex);
+				return ResponseEntity.internalServerError().build();
+			}
+		}
 	}
-}
 }

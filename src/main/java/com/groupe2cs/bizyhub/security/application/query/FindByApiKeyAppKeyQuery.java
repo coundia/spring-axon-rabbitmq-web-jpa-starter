@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByApiKeyAppKeyQuery {
 
-	private final ApiKeyAppKey  appKey;
+	private final ApiKeyAppKey appKey;
 	private final MetaRequest metaRequest;
 
 }

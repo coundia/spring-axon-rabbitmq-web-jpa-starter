@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class VerificationCodeDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deleteVerificationCode(VerificationCodeId idVo, MetaRequest metaRequest) {
+	public void deleteVerificationCode(VerificationCodeId idVo, MetaRequest metaRequest) {
 
-DeleteVerificationCodeCommand command = new DeleteVerificationCodeCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteVerificationCodeCommand command = new DeleteVerificationCodeCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

@@ -26,67 +26,68 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Entity
 @EntityListeners(AuditListener.class)
 @Table(name = "api_keys")
-public class ApiKey   extends AbstractAuditableEntity  {
+public class ApiKey extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
 
-	@Column(nullable = false, 		columnDefinition = "TEXT",
-		unique = false
+	@Column(nullable = false, columnDefinition = "TEXT",
+			unique = false
 
 	)
 
-	private String appKey ;
+	private String appKey;
 
-	@Column(nullable = false, 
-		unique = false
-
-	)
-
-	private String username ;
-
-	@Column(nullable = false, 
-		unique = false
+	@Column(nullable = false,
+			unique = false
 
 	)
 
-	private Boolean active ;
+	private String username;
 
-	@Column(nullable = false, 
-		unique = false
-
-	)
-
-	private java.time.Instant createdAt ;
-
-	@Column(nullable = false, 
-		unique = false
+	@Column(nullable = false,
+			unique = false
 
 	)
 
-	private java.time.Instant expiration ;
+	private Boolean active;
+
+	@Column(nullable = false,
+			unique = false
+
+	)
+
+	private java.time.Instant createdAt;
+
+	@Column(nullable = false,
+			unique = false
+
+	)
+
+	private java.time.Instant expiration;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
+
 	public ApiKey(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "ApiKey{" +
-		"id='" + id + '\'' +
-			", appKey=" + appKey +
-			", username=" + username +
-			", active=" + active +
-			", createdAt=" + createdAt +
-			", expiration=" + expiration +
-			", createdBy=" + createdBy +
-			", tenant=" + tenant +
-		'}';
+				"id='" + id + '\'' +
+				", appKey=" + appKey +
+				", username=" + username +
+				", active=" + active +
+				", createdAt=" + createdAt +
+				", expiration=" + expiration +
+				", createdBy=" + createdBy +
+				", tenant=" + tenant +
+				'}';
 	}
 }

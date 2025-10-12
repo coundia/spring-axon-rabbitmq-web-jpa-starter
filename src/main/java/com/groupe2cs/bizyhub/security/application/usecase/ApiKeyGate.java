@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
+
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.ApiKey;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
@@ -68,7 +69,10 @@ public class ApiKeyGate {
 	public boolean canDelete(Authentication auth, String objectId) {
 		log.debug("canDelete called by user: {} for objectId: {}", auth != null ? auth.getName() : null, objectId);
 		boolean result = canRead(auth, objectId);
-		log.info("canDelete result for user {} on ApiKey {}: {}", auth != null ? auth.getName() : null, objectId, result);
+		log.info("canDelete result for user {} on ApiKey {}: {}",
+				auth != null ? auth.getName() : null,
+				objectId,
+				result);
 		return result;
 	}
 

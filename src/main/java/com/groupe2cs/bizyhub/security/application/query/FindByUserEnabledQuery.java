@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserEnabledQuery {
 
-	private final UserEnabled  enabled;
+	private final UserEnabled enabled;
 	private final MetaRequest metaRequest;
 
 }

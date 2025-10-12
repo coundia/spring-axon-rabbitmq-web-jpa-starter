@@ -11,6 +11,7 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -32,83 +33,83 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RoleFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private RoleRepository roleRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_return_only_user_roles_for_normal_user() throws Exception {
+	@Test
+	void it_should_return_only_user_roles_for_normal_user() throws Exception {
 
-List<CreateRoleCommand> userCommands =
-RoleFixtures.randomManyViaCommand(
-commandGateway,roleRepository,
-        createdByDataRepository,
-        tenantDataRepository,
- 3, login("user", "user"));
-userCommands.forEach(cmd ->
-RoleFixtures.byIdWaitExist(roleRepository, cmd.getId().value())
-);
+		List<CreateRoleCommand> userCommands =
+				RoleFixtures.randomManyViaCommand(
+						commandGateway, roleRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						3, login("user", "user"));
+		userCommands.forEach(cmd ->
+				RoleFixtures.byIdWaitExist(roleRepository, cmd.getId().value())
+		);
 
-login("user", "user");
-ResponseEntity<RolePagedResponse> response = this.getForEntity(
-"/v1/admin/queries/roles?page=0&limit=1000000",
-RolePagedResponse.class
-);
-assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+		login("user", "user");
+		ResponseEntity<RolePagedResponse> response = this.getForEntity(
+				"/v1/admin/queries/roles?page=0&limit=1000000",
+				RolePagedResponse.class
+		);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
 
-}
+	}
 
-@Test
-void it_should_return_all_roles_for_admin() throws Exception {
+	@Test
+	void it_should_return_all_roles_for_admin() throws Exception {
 
-    List<CreateRoleCommand> userCommands =
-    RoleFixtures.randomManyViaCommand(
-        commandGateway,
-        roleRepository,
-        createdByDataRepository,
-        tenantDataRepository,
-         5, login("user", "user")
-      );
-    userCommands.forEach(cmd ->
-    RoleFixtures.byIdWaitExist(roleRepository, cmd.getId().value())
-    );
+		List<CreateRoleCommand> userCommands =
+				RoleFixtures.randomManyViaCommand(
+						commandGateway,
+						roleRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						5, login("user", "user")
+				);
+		userCommands.forEach(cmd ->
+				RoleFixtures.byIdWaitExist(roleRepository, cmd.getId().value())
+		);
 
 
-List<CreateRoleCommand> adminCommands =
-RoleFixtures.randomManyViaCommand(
-commandGateway,roleRepository,
-        createdByDataRepository,
-        tenantDataRepository,
- 5, login("admin", "admin"));
-adminCommands.forEach(cmd ->
-RoleFixtures.byIdWaitExist(roleRepository, cmd.getId().value())
-);
+		List<CreateRoleCommand> adminCommands =
+				RoleFixtures.randomManyViaCommand(
+						commandGateway, roleRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						5, login("admin", "admin"));
+		adminCommands.forEach(cmd ->
+				RoleFixtures.byIdWaitExist(roleRepository, cmd.getId().value())
+		);
 
-login("admin", "admin");
-ResponseEntity<RolePagedResponse> response = this.getForEntity(
-"/v1/admin/queries/roles?page=0&limit=1000000",
-RolePagedResponse.class
-);
-assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-List<RoleResponse> content = response.getBody().getContent();
-assertThat(content).isNotEmpty();
+		login("admin", "admin");
+		ResponseEntity<RolePagedResponse> response = this.getForEntity(
+				"/v1/admin/queries/roles?page=0&limit=1000000",
+				RolePagedResponse.class
+		);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		List<RoleResponse> content = response.getBody().getContent();
+		assertThat(content).isNotEmpty();
 
-List<String> expectedIds = userCommands.stream()
-.map(cmd -> cmd.getId().value())
-.collect(Collectors.toList());
+		List<String> expectedIds = userCommands.stream()
+				.map(cmd -> cmd.getId().value())
+				.collect(Collectors.toList());
 
-List<String> actualIds = content.stream()
-.map(RoleResponse::getId)
-.collect(Collectors.toList());
+		List<String> actualIds = content.stream()
+				.map(RoleResponse::getId)
+				.collect(Collectors.toList());
 
-assertThat(actualIds).containsAll(expectedIds);
+		assertThat(actualIds).containsAll(expectedIds);
 
-}
+	}
 }

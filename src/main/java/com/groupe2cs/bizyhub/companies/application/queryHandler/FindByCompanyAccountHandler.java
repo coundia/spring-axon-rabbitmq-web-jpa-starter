@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.companies.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByCompanyAccountHandler {
 
-private final CompanyRepository repository;
+	private final CompanyRepository repository;
 
-@QueryHandler
-public List<CompanyResponse> handle(FindByCompanyAccountQuery query) {
+	@QueryHandler
+	public List<CompanyResponse> handle(FindByCompanyAccountQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<Company> entities = null;
-	 String value = query.getAccount().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<Company> entities = null;
+		String value = query.getAccount().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByAccountAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByAccountAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByAccountAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByAccountAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(CompanyMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(CompanyMapper::toResponse)
+				.toList();
 	}
 
 

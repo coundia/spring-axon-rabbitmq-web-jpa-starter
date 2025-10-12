@@ -2,6 +2,7 @@
 package com.groupe2cs.bizyhub.shared.application;
 
 import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.groupe2cs.bizyhub.shared.infrastructure.reponsitories.UserFinderRepository;
@@ -16,37 +17,6 @@ public class UserResolverService {
 
 	public UserResolverService(UserFinderRepository users) {
 		this.users = users;
-	}
-
-	@Transactional(readOnly = true)
-	public String resolveUserId(String identifiant, String telephone, String mail, String username) {
-		String tel = normalizePhone(firstNonBlank(telephone, guessPhone(identifiant)));
-		String email = firstNonBlank(mail, guessEmail(identifiant));
-		String user = firstNonBlank(username, guessUsername(identifiant));
-
-		Optional<User> match =
-				firstPresent(
-						() -> nonBlank(email) ? users.findByEmailIgnoreCase(email) : Optional.empty(),
-						() -> nonBlank(tel) ? users.findByTelephone(tel) : Optional.empty(),
-						() -> nonBlank(user) ? users.findByUsernameIgnoreCase(user) : Optional.empty(),
-						() -> nonBlank(identifiant) ? users.findByAny(identifiant) : Optional.empty()
-				);
-
-		return match.map(User::getId).orElseGet(this::ensureGuestId);
-	}
-
-	@Transactional
-	protected String ensureGuestId() {
-		return users.findByUsernameIgnoreCase(GUEST_USERNAME)
-				.map(User::getId)
-				.orElseGet(() -> {
-					User guest = new User();
-					guest.setUsername(GUEST_USERNAME);
-					guest.setEmail(null);
-					guest.setTelephone(null);
-					guest.setEnabled(true);
-					return users.save(guest).getId();
-				});
 	}
 
 	private static String firstNonBlank(String a, String b) {
@@ -96,6 +66,37 @@ public class UserResolverService {
 			if (v.isPresent()) return v;
 		}
 		return Optional.empty();
+	}
+
+	@Transactional(readOnly = true)
+	public String resolveUserId(String identifiant, String telephone, String mail, String username) {
+		String tel = normalizePhone(firstNonBlank(telephone, guessPhone(identifiant)));
+		String email = firstNonBlank(mail, guessEmail(identifiant));
+		String user = firstNonBlank(username, guessUsername(identifiant));
+
+		Optional<User> match =
+				firstPresent(
+						() -> nonBlank(email) ? users.findByEmailIgnoreCase(email) : Optional.empty(),
+						() -> nonBlank(tel) ? users.findByTelephone(tel) : Optional.empty(),
+						() -> nonBlank(user) ? users.findByUsernameIgnoreCase(user) : Optional.empty(),
+						() -> nonBlank(identifiant) ? users.findByAny(identifiant) : Optional.empty()
+				);
+
+		return match.map(User::getId).orElseGet(this::ensureGuestId);
+	}
+
+	@Transactional
+	protected String ensureGuestId() {
+		return users.findByUsernameIgnoreCase(GUEST_USERNAME)
+				.map(User::getId)
+				.orElseGet(() -> {
+					User guest = new User();
+					guest.setUsername(GUEST_USERNAME);
+					guest.setEmail(null);
+					guest.setTelephone(null);
+					guest.setEnabled(true);
+					return users.save(guest).getId();
+				});
 	}
 
 	@FunctionalInterface

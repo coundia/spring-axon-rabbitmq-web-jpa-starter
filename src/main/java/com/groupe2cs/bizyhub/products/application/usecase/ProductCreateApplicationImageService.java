@@ -24,7 +24,7 @@ public class ProductCreateApplicationImageService {
 
 	private final CommandGateway commandGateway;
 	private final ProductRepository productRepository;
-	private final UserValidationService  userValidationService;
+	private final UserValidationService userValidationService;
 
 	@Value("${app.projection.retry.attempts:60}")
 	private int retryAttempts;
@@ -35,7 +35,7 @@ public class ProductCreateApplicationImageService {
 	public ProductResponse createProduct(ProductRequest request, MetaRequest metaRequest) {
 
 		//should be premium user
-		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 
 		CreateProductCommand command = ProductMapper.toCommand(request);
 		command.setCreatedBy(ProductCreatedBy.create(metaRequest.getUserId()));
@@ -47,7 +47,7 @@ public class ProductCreateApplicationImageService {
 	public ProductResponse createProductSync(ProductRequest request, MetaRequest metaRequest) {
 
 		//should be premium user
-		 userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 
 		CreateProductCommand command = ProductMapper.toCommand(request);
 		command.setCreatedBy(ProductCreatedBy.create(metaRequest.getUserId()));

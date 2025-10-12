@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByRefreshTokenExpirationQuery {
 
-	private final RefreshTokenExpiration  expiration;
+	private final RefreshTokenExpiration expiration;
 	private final MetaRequest metaRequest;
 
 }

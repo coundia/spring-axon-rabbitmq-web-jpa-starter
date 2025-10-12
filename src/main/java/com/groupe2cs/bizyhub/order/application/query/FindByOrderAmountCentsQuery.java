@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByOrderAmountCentsQuery {
 
-	private final OrderAmountCents  amountCents;
+	private final OrderAmountCents amountCents;
 	private final MetaRequest metaRequest;
 
 }

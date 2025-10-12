@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByOrderDateCommandQuery {
 
-	private final OrderDateCommand  dateCommand;
+	private final OrderDateCommand dateCommand;
 	private final MetaRequest metaRequest;
 
 }

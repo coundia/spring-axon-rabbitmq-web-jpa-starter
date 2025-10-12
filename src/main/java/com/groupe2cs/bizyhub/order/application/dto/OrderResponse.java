@@ -2,8 +2,10 @@ package com.groupe2cs.bizyhub.order.application.dto;
 
 import com.groupe2cs.bizyhub.order.domain.valueObject.*;
 import com.groupe2cs.bizyhub.order.infrastructure.entity.*;
+
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.fileManager.application.dto;
 
 import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.*;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,8 +21,8 @@ import org.springframework.data.domain.Page;
 @Schema(name = "FileManagerPagedResponse", description = "Paginated response for FileManager results")
 public class FileManagerPagedResponse implements Serializable {
 
-@Schema(description = "List of paginated FileManager items")
-private List<FileManagerResponse> content;
+	@Schema(description = "List of paginated FileManager items")
+	private List<FileManagerResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -37,11 +38,11 @@ private List<FileManagerResponse> content;
 
 	public static FileManagerPagedResponse from(Page<FileManager> page, List<FileManagerResponse> content) {
 		return FileManagerPagedResponse.builder()
-		.content(content)
-		.page(page.getNumber())
-		.size(page.getSize())
-		.totalElements(page.getTotalElements())
-		.totalPages(page.getTotalPages())
-		.build();
-		}
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByPasswordResetExpirationQuery {
 
-	private final PasswordResetExpiration  expiration;
+	private final PasswordResetExpiration expiration;
 	private final MetaRequest metaRequest;
 
 }

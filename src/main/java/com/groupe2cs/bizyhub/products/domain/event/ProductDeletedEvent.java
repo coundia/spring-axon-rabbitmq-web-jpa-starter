@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.products.domain.event;
 
-	import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,30 +18,7 @@ import java.util.*;
 @NoArgsConstructor
 public class ProductDeletedEvent implements Serializable {
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-private ProductId id;
+	private ProductId id;
 
 }

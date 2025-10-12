@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.companies.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyRemoteIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyLocalIdNotValid;
@@ -9,6 +10,7 @@ import com.groupe2cs.bizyhub.companies.domain.exception.CompanyNameNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyDescriptionNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -24,35 +26,35 @@ import java.util.*;
 @Builder
 public class CompanyDescription implements Serializable {
 
-private String description;
+	private String description;
 
-public CompanyDescription(String description) {
-this.description = description;
-}
+	public CompanyDescription(String description) {
+		this.description = description;
+	}
 
-public static CompanyDescription create(String description) {
+	public static CompanyDescription create(String description) {
 
-	return new CompanyDescription(description);
-}
+		return new CompanyDescription(description);
+	}
 
-public String value() {
-return this.description;
-}
+	public String value() {
+		return this.description;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof CompanyDescription that)) return false;
-return this.description.equals(that.description);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CompanyDescription that)) return false;
+		return this.description.equals(that.description);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(description);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(description);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(description);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(description);
+	}
 }

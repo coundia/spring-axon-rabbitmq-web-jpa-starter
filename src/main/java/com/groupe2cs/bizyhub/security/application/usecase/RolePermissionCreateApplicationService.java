@@ -6,7 +6,9 @@ import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.security.application.command.*;
 import com.groupe2cs.bizyhub.security.application.mapper.*;
+
 import java.util.List;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +16,22 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class RolePermissionCreateApplicationService {
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public RolePermissionResponse createRolePermission(RolePermissionRequest request,
-MetaRequest metaRequest
-){
+	public RolePermissionResponse createRolePermission(RolePermissionRequest request,
+													   MetaRequest metaRequest
+	) {
 
-CreateRolePermissionCommand command = RolePermissionMapper.toCommand(
-request
-);
+		CreateRolePermissionCommand command = RolePermissionMapper.toCommand(
+				request
+		);
 
-command.setCreatedBy(RolePermissionCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(RolePermissionTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(RolePermissionCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(RolePermissionTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
-return RolePermissionMapper.toResponse(command);
-}
+		commandGateway.sendAndWait(command);
+		return RolePermissionMapper.toResponse(command);
+	}
 
 
 }

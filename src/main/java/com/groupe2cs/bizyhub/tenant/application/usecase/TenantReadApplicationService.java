@@ -17,96 +17,102 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class TenantReadApplicationService {
 
-private final QueryGateway queryGateway;
+	private final QueryGateway queryGateway;
 
 
-public TenantPagedResponse findAll(int page, int limit, MetaRequest metaRequest) {
+	public TenantPagedResponse findAll(int page, int limit, MetaRequest metaRequest) {
 
-	FindAllTenantQuery query = new FindAllTenantQuery(page, limit,metaRequest);
-	CompletableFuture<TenantPagedResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(TenantPagedResponse.class));
-	return future.join();
-}
-
-
-public TenantResponse findByTenantId(TenantId value, MetaRequest metaRequest) {
-
-	FindByTenantIdQuery query = new FindByTenantIdQuery(value,metaRequest);
-	CompletableFuture<TenantResponse> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(TenantResponse.class));
-	return future.join();
-}
+		FindAllTenantQuery query = new FindAllTenantQuery(page, limit, metaRequest);
+		CompletableFuture<TenantPagedResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(TenantPagedResponse.class));
+		return future.join();
+	}
 
 
-public List<TenantResponse> findByTenantName(
-	TenantName value,
-	MetaRequest metaRequest
+	public TenantResponse findByTenantId(TenantId value, MetaRequest metaRequest) {
+
+		FindByTenantIdQuery query = new FindByTenantIdQuery(value, metaRequest);
+		CompletableFuture<TenantResponse> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf(TenantResponse.class));
+		return future.join();
+	}
+
+
+	public List<TenantResponse> findByTenantName(
+			TenantName value,
+			MetaRequest metaRequest
 	) {
 
-	FindByTenantNameQuery query = new FindByTenantNameQuery(value,metaRequest);
-	CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
-	return future.join();
-}
-public List<TenantResponse> findByTenantDescription(
-	TenantDescription value,
-	MetaRequest metaRequest
+		FindByTenantNameQuery query = new FindByTenantNameQuery(value, metaRequest);
+		CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
+		return future.join();
+	}
+
+	public List<TenantResponse> findByTenantDescription(
+			TenantDescription value,
+			MetaRequest metaRequest
 	) {
 
-	FindByTenantDescriptionQuery query = new FindByTenantDescriptionQuery(value,metaRequest);
-	CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
-	return future.join();
-}
-public List<TenantResponse> findByTenantDomain(
-	TenantDomain value,
-	MetaRequest metaRequest
+		FindByTenantDescriptionQuery query = new FindByTenantDescriptionQuery(value, metaRequest);
+		CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
+		return future.join();
+	}
+
+	public List<TenantResponse> findByTenantDomain(
+			TenantDomain value,
+			MetaRequest metaRequest
 	) {
 
-	FindByTenantDomainQuery query = new FindByTenantDomainQuery(value,metaRequest);
-	CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
-	return future.join();
-}
-public List<TenantResponse> findByTenantLanguage(
-	TenantLanguage value,
-	MetaRequest metaRequest
+		FindByTenantDomainQuery query = new FindByTenantDomainQuery(value, metaRequest);
+		CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
+		return future.join();
+	}
+
+	public List<TenantResponse> findByTenantLanguage(
+			TenantLanguage value,
+			MetaRequest metaRequest
 	) {
 
-	FindByTenantLanguageQuery query = new FindByTenantLanguageQuery(value,metaRequest);
-	CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
-	return future.join();
-}
-public List<TenantResponse> findByTenantActive(
-	TenantActive value,
-	MetaRequest metaRequest
+		FindByTenantLanguageQuery query = new FindByTenantLanguageQuery(value, metaRequest);
+		CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
+		return future.join();
+	}
+
+	public List<TenantResponse> findByTenantActive(
+			TenantActive value,
+			MetaRequest metaRequest
 	) {
 
-	FindByTenantActiveQuery query = new FindByTenantActiveQuery(value,metaRequest);
-	CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
-	return future.join();
-}
-public List<TenantResponse> findByTenantTenant(
-	TenantTenant value,
-	MetaRequest metaRequest
+		FindByTenantActiveQuery query = new FindByTenantActiveQuery(value, metaRequest);
+		CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
+		return future.join();
+	}
+
+	public List<TenantResponse> findByTenantTenant(
+			TenantTenant value,
+			MetaRequest metaRequest
 	) {
 
-	FindByTenantTenantQuery query = new FindByTenantTenantQuery(value,metaRequest);
-	CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
-	return future.join();
-}
-public List<TenantResponse> findByTenantCreatedBy(
-	TenantCreatedBy value,
-	MetaRequest metaRequest
+		FindByTenantTenantQuery query = new FindByTenantTenantQuery(value, metaRequest);
+		CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
+		return future.join();
+	}
+
+	public List<TenantResponse> findByTenantCreatedBy(
+			TenantCreatedBy value,
+			MetaRequest metaRequest
 	) {
 
-	FindByTenantCreatedByQuery query = new FindByTenantCreatedByQuery(value,metaRequest);
-	CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
-	org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
-	return future.join();
-}
+		FindByTenantCreatedByQuery query = new FindByTenantCreatedByQuery(value, metaRequest);
+		CompletableFuture<List<TenantResponse>> future = queryGateway.query(query,
+				org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf(TenantResponse.class));
+		return future.join();
+	}
 
 }

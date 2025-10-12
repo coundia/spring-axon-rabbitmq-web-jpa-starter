@@ -33,48 +33,48 @@ import org.springframework.security.core.Authentication;
 
 public class AddApiKeyController {
 
-private final ApiKeyCreateApplicationService applicationService;
+	private final ApiKeyCreateApplicationService applicationService;
 
-public AddApiKeyController(ApiKeyCreateApplicationService applicationService) {
-	this.applicationService = applicationService;
-}
-
-@PostMapping
-@Operation(
-summary = "Create a new apiKey",
-description = "Creates a new apiKey and returns the created entity",
-requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-description = "ApiKey request payload",
-required = true,
-content = @Content(schema = @Schema(implementation = ApiKeyRequest.class))
-)
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "201", description = "Successfully created",
-content = @Content(schema = @Schema(implementation = ApiKeyResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content(schema = @Schema()))
-})
-public ResponseEntity<ApiKeyResponse> addApiKey(@Valid @RequestBody ApiKeyRequest request,
-	@AuthenticationPrincipal Jwt jwt) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-		.build();
-
-		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	ApiKeyResponse response =  applicationService.createApiKey(
-			request,
-			metaRequest
-	);
-
-	return ResponseEntity.status(HttpStatus.CREATED).body(response);
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to create apiKey: {}", ex.getMessage());
-	return ResponseEntity.status(500).build();
+	public AddApiKeyController(ApiKeyCreateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
-}
+
+	@PostMapping
+	@Operation(
+			summary = "Create a new apiKey",
+			description = "Creates a new apiKey and returns the created entity",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+					description = "ApiKey request payload",
+					required = true,
+					content = @Content(schema = @Schema(implementation = ApiKeyRequest.class))
+			)
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Successfully created",
+					content = @Content(schema = @Schema(implementation = ApiKeyResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<ApiKeyResponse> addApiKey(@Valid @RequestBody ApiKeyRequest request,
+													@AuthenticationPrincipal Jwt jwt) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			ApiKeyResponse response = applicationService.createApiKey(
+					request,
+					metaRequest
+			);
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception ex) {
+			//e.printStackTrace();
+			log.error("Failed to create apiKey: {}", ex.getMessage());
+			return ResponseEntity.status(500).build();
+		}
+	}
 }

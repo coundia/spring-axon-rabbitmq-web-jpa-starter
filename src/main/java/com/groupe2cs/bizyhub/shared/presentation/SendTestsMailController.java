@@ -17,34 +17,34 @@ import org.springframework.beans.factory.annotation.Value;
 @RequiredArgsConstructor
 public class SendTestsMailController {
 
-private final NotificationService notificationService;
+	private final NotificationService notificationService;
 
-@Value("${spring.mail.username:'noreply@pcoundia.com'}")
-private String from;
+	@Value("${spring.mail.username:'noreply@pcoundia.com'}")
+	private String from;
 
-@Operation(
-summary = "Send test mail",
-description = "Send a test email to the given address",
-parameters = {
-@Parameter(
-name = "to",
-description = "Recipient email address",
-required = true,
-examples = {
-@ExampleObject(name = "Example", value = "contact@pcoundia.com")
-}
-)
-}
-)
-@PostMapping
-public ResponseEntity<Void> sendTestMail(@RequestParam String to) {
-	notificationService.notifyByEmail(
-	from,
-	to,
-	"Test Email",
-	"<h1>This is a test email</h1><p>Sent from BizyHub</p>"
-	);
+	@Operation(
+			summary = "Send test mail",
+			description = "Send a test email to the given address",
+			parameters = {
+					@Parameter(
+							name = "to",
+							description = "Recipient email address",
+							required = true,
+							examples = {
+									@ExampleObject(name = "Example", value = "contact@pcoundia.com")
+							}
+					)
+			}
+	)
+	@PostMapping
+	public ResponseEntity<Void> sendTestMail(@RequestParam String to) {
+		notificationService.notifyByEmail(
+				from,
+				to,
+				"Test Email",
+				"<h1>This is a test email</h1><p>Sent from BizyHub</p>"
+		);
 
-	return ResponseEntity.ok().build();
+		return ResponseEntity.ok().build();
 	}
 }

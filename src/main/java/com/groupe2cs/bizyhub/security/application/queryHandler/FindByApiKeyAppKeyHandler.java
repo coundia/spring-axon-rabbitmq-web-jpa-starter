@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.security.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByApiKeyAppKeyHandler {
 
-private final ApiKeyRepository repository;
+	private final ApiKeyRepository repository;
 
-@QueryHandler
-public List<ApiKeyResponse> handle(FindByApiKeyAppKeyQuery query) {
+	@QueryHandler
+	public List<ApiKeyResponse> handle(FindByApiKeyAppKeyQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<ApiKey> entities = null;
-	 String value = query.getAppKey().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<ApiKey> entities = null;
+		String value = query.getAppKey().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByAppKeyAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByAppKeyAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByAppKeyAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByAppKeyAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(ApiKeyMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(ApiKeyMapper::toResponse)
+				.toList();
 	}
 
 

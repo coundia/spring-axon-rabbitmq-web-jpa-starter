@@ -17,22 +17,22 @@ public class SecurityExceptionHandler {
 
 	@ExceptionHandler(BadCredentialsException.class)
 	public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex) {
-	return buildResponse("Invalid credentials", HttpStatus.UNAUTHORIZED);
+		return buildResponse("Invalid credentials", HttpStatus.UNAUTHORIZED);
 	}
 
 	@ExceptionHandler(UsernameNotFoundException.class)
 	public ResponseEntity<?> handleUserNotFound(UsernameNotFoundException ex) {
-	return buildResponse("User not found", HttpStatus.NOT_FOUND);
+		return buildResponse("User not found", HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(AccessDeniedException.class)
 	public ResponseEntity<?> handleAccessDenied(AccessDeniedException ex) {
-	return buildResponse("Access denied", HttpStatus.FORBIDDEN);
+		return buildResponse("Access denied", HttpStatus.FORBIDDEN);
 	}
 
 	private ResponseEntity<Map<String, String>> buildResponse(String message, HttpStatus status) {
-	Map<String, String> body = new HashMap<>();
-	body.put("error", message);
-	return new ResponseEntity<>(body, status);
+		Map<String, String> body = new HashMap<>();
+		body.put("error", message);
+		return new ResponseEntity<>(body, status);
 	}
 }

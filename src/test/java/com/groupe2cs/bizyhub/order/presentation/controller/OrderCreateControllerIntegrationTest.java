@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.order.presentation.controller;
+
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.order.application.dto.*;
 import com.groupe2cs.bizyhub.order.infrastructure.entity.*;
@@ -10,6 +11,7 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.order.application.command.*;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -18,21 +20,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_add_order() {
+	@Test
+	void it_should_be_able_to_add_order() {
 
 		OrderRequest requestDTO = new OrderRequest();
 
@@ -56,7 +59,7 @@ void it_should_be_able_to_add_order() {
 		requestDTO.setQuantity(77);
 		requestDTO.setDateCommand(java.time.Instant.now().plusSeconds(3600));
 
- 		String uri = "/v1/commands/order";
+		String uri = "/v1/commands/order";
 		ResponseEntity<OrderResponse> response = this.postForEntity(uri, requestDTO, OrderResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();

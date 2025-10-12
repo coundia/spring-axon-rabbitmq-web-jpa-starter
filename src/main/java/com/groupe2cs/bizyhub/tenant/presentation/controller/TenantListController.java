@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,45 +34,45 @@ import org.springframework.security.core.Authentication;
 @Tag(name = "Tenant Queries", description = "Endpoints for listing paginated tenants")
 public class TenantListController {
 
-private final TenantReadApplicationService applicationService;
+	private final TenantReadApplicationService applicationService;
 
-public TenantListController(TenantReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
+	public TenantListController(TenantReadApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
 
-@GetMapping
-@Operation(
-summary = "List paginated tenants",
-description = "Returns a paginated list of tenants based on page and limit parameters"
-)
-@ApiResponses(value = {
-@ApiResponse(
-responseCode = "200",
-description = "Successfully retrieved list of tenants",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = TenantPagedResponse.class))
-),
-@ApiResponse(
-responseCode = "500",
-description = "Internal server error",
-content = @Content
-)
-})
-public TenantPagedResponse list(
-@AuthenticationPrincipal Jwt jwt,
-@Parameter(description = "Page number (zero-based index)", example = "0")
-@RequestParam(defaultValue = "0") int page,
+	@GetMapping
+	@Operation(
+			summary = "List paginated tenants",
+			description = "Returns a paginated list of tenants based on page and limit parameters"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(
+					responseCode = "200",
+					description = "Successfully retrieved list of tenants",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = TenantPagedResponse.class))
+			),
+			@ApiResponse(
+					responseCode = "500",
+					description = "Internal server error",
+					content = @Content
+			)
+	})
+	public TenantPagedResponse list(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Page number (zero-based index)", example = "0")
+			@RequestParam(defaultValue = "0") int page,
 
-@Parameter(description = "Number of items per page", example = "10")
-@RequestParam(defaultValue = "10") int limit
-) {
+			@Parameter(description = "Number of items per page", example = "10")
+			@RequestParam(defaultValue = "10") int limit
+	) {
 
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
+		MetaRequest metaRequest = MetaRequest.builder()
+				.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+				.build();
 
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
-	return applicationService.findAll(page,limit, metaRequest);
- }
+		return applicationService.findAll(page, limit, metaRequest);
+	}
 }

@@ -17,14 +17,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 	private final UserValidationService userValidationService;
 
-public void deleteProduct(ProductId idVo, MetaRequest metaRequest) {
+	public void deleteProduct(ProductId idVo, MetaRequest metaRequest) {
 
-	userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 
-DeleteProductCommand command = new DeleteProductCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteProductCommand command = new DeleteProductCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

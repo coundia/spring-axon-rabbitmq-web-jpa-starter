@@ -26,179 +26,180 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Entity
 @EntityListeners(AuditListener.class)
 @Table(name = "orders")
-public class Order   extends AbstractAuditableEntity  {
+public class Order extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String productId ;
+	private String productId;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String userId ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String identifiant ;
+	private String userId;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String telephone ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String mail ;
+	private String identifiant;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String ville ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String remoteId ;
+	private String telephone;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String localId ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String status ;
+	private String mail;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String buyerName ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String address ;
+	private String ville;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String notes ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String message ;
+	private String remoteId;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String typeOrder ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private String paymentMethod ;
+	private String localId;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String deliveryMethod ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private Double amountCents ;
+	private String status;
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private Integer quantity ;
+	private String buyerName;
 
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String address;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String notes;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String message;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String typeOrder;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String paymentMethod;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String deliveryMethod;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private Double amountCents;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private Integer quantity;
+
+	@Column(nullable = true,
+			unique = false
 
 	)
 	@Builder.Default
-	private java.time.Instant dateCommand  = java.time.Instant.now() ;
+	private java.time.Instant dateCommand = java.time.Instant.now();
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
+
 	public Order(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "Order{" +
-		"id='" + id + '\'' +
-			", productId=" + productId +
-			", userId=" + userId +
-			", identifiant=" + identifiant +
-			", telephone=" + telephone +
-			", mail=" + mail +
-			", ville=" + ville +
-			", remoteId=" + remoteId +
-			", localId=" + localId +
-			", status=" + status +
-			", buyerName=" + buyerName +
-			", address=" + address +
-			", notes=" + notes +
-			", message=" + message +
-			", typeOrder=" + typeOrder +
-			", paymentMethod=" + paymentMethod +
-			", deliveryMethod=" + deliveryMethod +
-			", amountCents=" + amountCents +
-			", quantity=" + quantity +
-			", dateCommand=" + dateCommand +
-			", createdBy=" + createdBy +
-			", tenant=" + tenant +
-		'}';
+				"id='" + id + '\'' +
+				", productId=" + productId +
+				", userId=" + userId +
+				", identifiant=" + identifiant +
+				", telephone=" + telephone +
+				", mail=" + mail +
+				", ville=" + ville +
+				", remoteId=" + remoteId +
+				", localId=" + localId +
+				", status=" + status +
+				", buyerName=" + buyerName +
+				", address=" + address +
+				", notes=" + notes +
+				", message=" + message +
+				", typeOrder=" + typeOrder +
+				", paymentMethod=" + paymentMethod +
+				", deliveryMethod=" + deliveryMethod +
+				", amountCents=" + amountCents +
+				", quantity=" + quantity +
+				", dateCommand=" + dateCommand +
+				", createdBy=" + createdBy +
+				", tenant=" + tenant +
+				'}';
 	}
 }

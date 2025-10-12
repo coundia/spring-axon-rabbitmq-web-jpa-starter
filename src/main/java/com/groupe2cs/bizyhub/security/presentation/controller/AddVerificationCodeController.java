@@ -33,48 +33,48 @@ import org.springframework.security.core.Authentication;
 
 public class AddVerificationCodeController {
 
-private final VerificationCodeCreateApplicationService applicationService;
+	private final VerificationCodeCreateApplicationService applicationService;
 
-public AddVerificationCodeController(VerificationCodeCreateApplicationService applicationService) {
-	this.applicationService = applicationService;
-}
-
-@PostMapping
-@Operation(
-summary = "Create a new verificationCode",
-description = "Creates a new verificationCode and returns the created entity",
-requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-description = "VerificationCode request payload",
-required = true,
-content = @Content(schema = @Schema(implementation = VerificationCodeRequest.class))
-)
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "201", description = "Successfully created",
-content = @Content(schema = @Schema(implementation = VerificationCodeResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content(schema = @Schema()))
-})
-public ResponseEntity<VerificationCodeResponse> addVerificationCode(@Valid @RequestBody VerificationCodeRequest request,
-	@AuthenticationPrincipal Jwt jwt) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-		.build();
-
-		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	VerificationCodeResponse response =  applicationService.createVerificationCode(
-			request,
-			metaRequest
-	);
-
-	return ResponseEntity.status(HttpStatus.CREATED).body(response);
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to create verificationCode: {}", ex.getMessage());
-	return ResponseEntity.status(500).build();
+	public AddVerificationCodeController(VerificationCodeCreateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
-}
+
+	@PostMapping
+	@Operation(
+			summary = "Create a new verificationCode",
+			description = "Creates a new verificationCode and returns the created entity",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+					description = "VerificationCode request payload",
+					required = true,
+					content = @Content(schema = @Schema(implementation = VerificationCodeRequest.class))
+			)
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Successfully created",
+					content = @Content(schema = @Schema(implementation = VerificationCodeResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<VerificationCodeResponse> addVerificationCode(@Valid @RequestBody VerificationCodeRequest request,
+																		@AuthenticationPrincipal Jwt jwt) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			VerificationCodeResponse response = applicationService.createVerificationCode(
+					request,
+					metaRequest
+			);
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception ex) {
+			//e.printStackTrace();
+			log.error("Failed to create verificationCode: {}", ex.getMessage());
+			return ResponseEntity.status(500).build();
+		}
+	}
 }

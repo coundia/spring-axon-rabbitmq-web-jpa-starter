@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -11,6 +12,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderVilleNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderRemoteIdNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -26,35 +28,35 @@ import java.util.*;
 @Builder
 public class OrderRemoteId implements Serializable {
 
-private String remoteId;
+	private String remoteId;
 
-public OrderRemoteId(String remoteId) {
-this.remoteId = remoteId;
-}
+	public OrderRemoteId(String remoteId) {
+		this.remoteId = remoteId;
+	}
 
-public static OrderRemoteId create(String remoteId) {
+	public static OrderRemoteId create(String remoteId) {
 
-	return new OrderRemoteId(remoteId);
-}
+		return new OrderRemoteId(remoteId);
+	}
 
-public String value() {
-return this.remoteId;
-}
+	public String value() {
+		return this.remoteId;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderRemoteId that)) return false;
-return this.remoteId.equals(that.remoteId);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderRemoteId that)) return false;
+		return this.remoteId.equals(that.remoteId);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(remoteId);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(remoteId);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(remoteId);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(remoteId);
+	}
 }

@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -24,6 +25,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderDateCommandNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderCreatedByNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -39,35 +41,35 @@ import java.util.*;
 @Builder
 public class OrderCreatedBy implements Serializable {
 
-private String createdBy;
+	private String createdBy;
 
-public OrderCreatedBy(String createdBy) {
-this.createdBy = createdBy;
-}
+	public OrderCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
-public static OrderCreatedBy create(String createdBy) {
+	public static OrderCreatedBy create(String createdBy) {
 
-	return new OrderCreatedBy(createdBy);
-}
+		return new OrderCreatedBy(createdBy);
+	}
 
-public String value() {
-return this.createdBy;
-}
+	public String value() {
+		return this.createdBy;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderCreatedBy that)) return false;
-return this.createdBy.equals(that.createdBy);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderCreatedBy that)) return false;
+		return this.createdBy.equals(that.createdBy);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(createdBy);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(createdBy);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(createdBy);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(createdBy);
+	}
 }

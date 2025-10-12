@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.products.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByProductDefaultPriceHandler {
 
-private final ProductRepository repository;
+	private final ProductRepository repository;
 
-@QueryHandler
-public List<ProductResponse> handle(FindByProductDefaultPriceQuery query) {
+	@QueryHandler
+	public List<ProductResponse> handle(FindByProductDefaultPriceQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<Product> entities = null;
-	 Double value = query.getDefaultPrice().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<Product> entities = null;
+		Double value = query.getDefaultPrice().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByDefaultPriceAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByDefaultPriceAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByDefaultPriceAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByDefaultPriceAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(ProductMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(ProductMapper::toResponse)
+				.toList();
 	}
 
 

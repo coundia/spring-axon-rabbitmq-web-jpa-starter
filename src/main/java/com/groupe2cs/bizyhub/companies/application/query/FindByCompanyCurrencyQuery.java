@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCompanyCurrencyQuery {
 
-	private final CompanyCurrency  currency;
+	private final CompanyCurrency currency;
 	private final MetaRequest metaRequest;
 
 }

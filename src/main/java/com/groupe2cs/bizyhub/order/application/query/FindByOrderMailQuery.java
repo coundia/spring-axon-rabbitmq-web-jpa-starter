@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByOrderMailQuery {
 
-	private final OrderMail  mail;
+	private final OrderMail mail;
 	private final MetaRequest metaRequest;
 
 }

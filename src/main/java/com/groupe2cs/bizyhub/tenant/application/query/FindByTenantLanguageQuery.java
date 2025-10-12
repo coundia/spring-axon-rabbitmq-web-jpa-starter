@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByTenantLanguageQuery {
 
-	private final TenantLanguage  language;
+	private final TenantLanguage language;
 	private final MetaRequest metaRequest;
 
 }

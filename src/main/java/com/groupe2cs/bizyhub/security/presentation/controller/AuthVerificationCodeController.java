@@ -108,7 +108,7 @@ public class AuthVerificationCodeController {
 			String token = jwtService.generateToken(authentication, metaRequest);
 
 			//reset password
-			  _changePassword(username, tenantId, UUID.randomUUID().toString());
+			_changePassword(username, tenantId, UUID.randomUUID().toString());
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(
 					AuthResponseDto.builder().code(1).token(token).tenant(tenantId).username(username)

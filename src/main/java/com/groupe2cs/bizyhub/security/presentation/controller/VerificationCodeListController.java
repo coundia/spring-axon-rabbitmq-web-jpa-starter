@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,45 +35,45 @@ import org.springframework.security.core.Authentication;
 @Tag(name = "VerificationCode Queries", description = "Endpoints for listing paginated verificationCodes")
 public class VerificationCodeListController {
 
-private final VerificationCodeReadApplicationService applicationService;
+	private final VerificationCodeReadApplicationService applicationService;
 
-public VerificationCodeListController(VerificationCodeReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
+	public VerificationCodeListController(VerificationCodeReadApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
 
-@GetMapping
-@Operation(
-summary = "List paginated verificationCodes",
-description = "Returns a paginated list of verificationCodes based on page and limit parameters"
-)
-@ApiResponses(value = {
-@ApiResponse(
-responseCode = "200",
-description = "Successfully retrieved list of verificationCodes",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = VerificationCodePagedResponse.class))
-),
-@ApiResponse(
-responseCode = "500",
-description = "Internal server error",
-content = @Content
-)
-})
-public VerificationCodePagedResponse list(
-@AuthenticationPrincipal Jwt jwt,
-@Parameter(description = "Page number (zero-based index)", example = "0")
-@RequestParam(defaultValue = "0") int page,
+	@GetMapping
+	@Operation(
+			summary = "List paginated verificationCodes",
+			description = "Returns a paginated list of verificationCodes based on page and limit parameters"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(
+					responseCode = "200",
+					description = "Successfully retrieved list of verificationCodes",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = VerificationCodePagedResponse.class))
+			),
+			@ApiResponse(
+					responseCode = "500",
+					description = "Internal server error",
+					content = @Content
+			)
+	})
+	public VerificationCodePagedResponse list(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Page number (zero-based index)", example = "0")
+			@RequestParam(defaultValue = "0") int page,
 
-@Parameter(description = "Number of items per page", example = "10")
-@RequestParam(defaultValue = "10") int limit
-) {
+			@Parameter(description = "Number of items per page", example = "10")
+			@RequestParam(defaultValue = "10") int limit
+	) {
 
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
+		MetaRequest metaRequest = MetaRequest.builder()
+				.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+				.build();
 
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
-	return applicationService.findAll(page,limit, metaRequest);
- }
+		return applicationService.findAll(page, limit, metaRequest);
+	}
 }

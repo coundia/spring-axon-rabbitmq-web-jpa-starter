@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.categories.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryIdNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryCodeNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryNameNotValid;
@@ -11,6 +12,7 @@ import com.groupe2cs.bizyhub.categories.domain.exception.CategoryStatusNotValid;
 import com.groupe2cs.bizyhub.categories.domain.exception.CategoryIsPublicNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -26,35 +28,35 @@ import java.util.*;
 @Builder
 public class CategoryIsPublic implements Serializable {
 
-private Boolean isPublic;
+	private Boolean isPublic;
 
-public CategoryIsPublic(Boolean isPublic) {
-this.isPublic = isPublic;
-}
+	public CategoryIsPublic(Boolean isPublic) {
+		this.isPublic = isPublic;
+	}
 
-public static CategoryIsPublic create(Boolean isPublic) {
+	public static CategoryIsPublic create(Boolean isPublic) {
 
-	return new CategoryIsPublic(isPublic);
-}
+		return new CategoryIsPublic(isPublic);
+	}
 
-public Boolean value() {
-return this.isPublic;
-}
+	public Boolean value() {
+		return this.isPublic;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof CategoryIsPublic that)) return false;
-return this.isPublic.equals(that.isPublic);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CategoryIsPublic that)) return false;
+		return this.isPublic.equals(that.isPublic);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(isPublic);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(isPublic);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(isPublic);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(isPublic);
+	}
 }

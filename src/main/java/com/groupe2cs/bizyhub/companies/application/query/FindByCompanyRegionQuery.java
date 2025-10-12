@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCompanyRegionQuery {
 
-	private final CompanyRegion  region;
+	private final CompanyRegion region;
 	private final MetaRequest metaRequest;
 
 }

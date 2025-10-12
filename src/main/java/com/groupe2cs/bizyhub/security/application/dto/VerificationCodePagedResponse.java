@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
 import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,8 +21,8 @@ import org.springframework.data.domain.Page;
 @Schema(name = "VerificationCodePagedResponse", description = "Paginated response for VerificationCode results")
 public class VerificationCodePagedResponse implements Serializable {
 
-@Schema(description = "List of paginated VerificationCode items")
-private List<VerificationCodeResponse> content;
+	@Schema(description = "List of paginated VerificationCode items")
+	private List<VerificationCodeResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -37,11 +38,11 @@ private List<VerificationCodeResponse> content;
 
 	public static VerificationCodePagedResponse from(Page<VerificationCode> page, List<VerificationCodeResponse> content) {
 		return VerificationCodePagedResponse.builder()
-		.content(content)
-		.page(page.getNumber())
-		.size(page.getSize())
-		.totalElements(page.getTotalElements())
-		.totalPages(page.getTotalPages())
-		.build();
-		}
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

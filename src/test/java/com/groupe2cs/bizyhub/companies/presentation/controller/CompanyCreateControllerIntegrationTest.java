@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.companies.presentation.controller;
+
 import com.groupe2cs.bizyhub.shared.*;
 import com.groupe2cs.bizyhub.companies.application.dto.*;
 import com.groupe2cs.bizyhub.companies.infrastructure.entity.*;
@@ -10,6 +11,7 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.companies.application.command.*;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -18,21 +20,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CompanyCreateControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_add_company() {
+	@Test
+	void it_should_be_able_to_add_company() {
 
 		CompanyRequest requestDTO = new CompanyRequest();
 
@@ -59,7 +62,7 @@ void it_should_be_able_to_add_company() {
 		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
 		requestDTO.setIsDefault(true);
 
- 		String uri = "/v1/commands/company";
+		String uri = "/v1/commands/company";
 		ResponseEntity<CompanyResponse> response = this.postForEntity(uri, requestDTO, CompanyResponse.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();

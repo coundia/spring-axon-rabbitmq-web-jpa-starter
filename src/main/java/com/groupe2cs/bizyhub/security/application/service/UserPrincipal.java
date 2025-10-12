@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.security.application.service;
+
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.IdentifiableUser;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
 
@@ -16,88 +17,88 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails, IdentifiableUser {
 
-private final User user;
+	private final User user;
 
-@Override
-public Collection<? extends GrantedAuthority> getAuthorities() {
-if (user == null || user.getUserRoles() == null) return Set.of();
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (user == null || user.getUserRoles() == null) return Set.of();
 
-return user.getUserRoles().stream()
-.map(UserRole::getRole)
-.filter(role -> role.getRolePermissions() != null)
-.flatMap(role -> role.getRolePermissions().stream())
-.map(rp -> new SimpleGrantedAuthority(rp.getPermission().getName()))
-.collect(Collectors.toSet());
-}
+		return user.getUserRoles().stream()
+				.map(UserRole::getRole)
+				.filter(role -> role.getRolePermissions() != null)
+				.flatMap(role -> role.getRolePermissions().stream())
+				.map(rp -> new SimpleGrantedAuthority(rp.getPermission().getName()))
+				.collect(Collectors.toSet());
+	}
 
-public Set<String> getRoles() {
-	if (user == null || user.getUserRoles() == null) return Set.of();
+	public Set<String> getRoles() {
+		if (user == null || user.getUserRoles() == null) return Set.of();
 
-	return user.getUserRoles().stream()
-	.map(UserRole::getRole)
-	.map(Role::getName)
-	.collect(Collectors.toSet());
+		return user.getUserRoles().stream()
+				.map(UserRole::getRole)
+				.map(Role::getName)
+				.collect(Collectors.toSet());
 	}
 
 	@Override
 	public String getPassword() {
-	return user != null ? user.getPassword() : null;
+		return user != null ? user.getPassword() : null;
 	}
 
 	@Override
 	public String getUsername() {
-	return user != null ? user.getUsername() : null;
+		return user != null ? user.getUsername() : null;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-	return true;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-	return true;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-	return true;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-	    if (user == null){
+		if (user == null) {
 
-		    return true;
-		    }
+			return true;
+		}
 
-		if(user.getEnabled() == null){
+		if (user.getEnabled() == null) {
 
-			 return true;
-			}
+			return true;
+		}
 
-	return user.getEnabled();
+		return user.getEnabled();
 	}
 
 	@Override
 	public String getId() {
 
 		if (user == null)
-		return null;
+			return null;
 
-	return user.getId();
+		return user.getId();
 	}
 
 	@Override
 	public String getTenantId() {
 
 		if (user == null)
-		return null;
-
-		if(user.getTenant() == null)
 			return null;
 
-	return user.getTenant().getId();
+		if (user.getTenant() == null)
+			return null;
+
+		return user.getTenant().getId();
 	}
 
 
@@ -145,7 +146,7 @@ public Set<String> getRoles() {
 	}
 
 
-     public Boolean isBan() {
+	public Boolean isBan() {
 		if (user == null || user.getIsBan() == null) return false;
 		return user.getIsBan();
 	}

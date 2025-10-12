@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByOrderVilleQuery {
 
-	private final OrderVille  ville;
+	private final OrderVille ville;
 	private final MetaRequest metaRequest;
 
 }

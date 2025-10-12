@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.application.dto;
 
 import com.groupe2cs.bizyhub.order.infrastructure.entity.*;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,8 +21,8 @@ import org.springframework.data.domain.Page;
 @Schema(name = "OrderPagedResponse", description = "Paginated response for Order results")
 public class OrderPagedResponse implements Serializable {
 
-@Schema(description = "List of paginated Order items")
-private List<OrderResponse> content;
+	@Schema(description = "List of paginated Order items")
+	private List<OrderResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -37,11 +38,11 @@ private List<OrderResponse> content;
 
 	public static OrderPagedResponse from(Page<Order> page, List<OrderResponse> content) {
 		return OrderPagedResponse.builder()
-		.content(content)
-		.page(page.getNumber())
-		.size(page.getSize())
-		.totalElements(page.getTotalElements())
-		.totalPages(page.getTotalPages())
-		.build();
-		}
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

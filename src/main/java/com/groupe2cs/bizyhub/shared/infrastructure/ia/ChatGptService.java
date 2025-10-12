@@ -55,6 +55,17 @@ public class ChatGptService implements IAService {
 	@Value("${openai.log.maxPreview:200}")
 	private int maxPreviewChars;
 
+	private static String preview(@Nullable String v, int max) {
+		if (v == null) return "null";
+		String s = v.replace("\n", " ").replace("\r", " ");
+		return s.length() > max ? s.substring(0, max) + "…" : s;
+	}
+
+	private static String safe(@Nullable String v) {
+		if (v == null) return "null";
+		return v.length() > 128 ? v.substring(0, 128) + "…" : v;
+	}
+
 	@PostConstruct
 	void init() {
 		// Interceptor pour tracer toutes les requêtes/réponses sortantes vers OpenAI
@@ -91,6 +102,8 @@ public class ChatGptService implements IAService {
 			log.warn("[ChatGptService] OpenAI API key is not configured (openai.api.key). Calls will fail.");
 		}
 	}
+
+	// ---------- helpers ----------
 
 	@Override
 	public String generateResponse(String prompt) {
@@ -207,19 +220,6 @@ public class ChatGptService implements IAService {
 		}
 	}
 
-	// ---------- helpers ----------
-
-	private static String preview(@Nullable String v, int max) {
-		if (v == null) return "null";
-		String s = v.replace("\n", " ").replace("\r", " ");
-		return s.length() > max ? s.substring(0, max) + "…" : s;
-	}
-
-	private static String safe(@Nullable String v) {
-		if (v == null) return "null";
-		return v.length() > 128 ? v.substring(0, 128) + "…" : v;
-	}
-
 	/**
 	 * Simple wrapper to re-expose the buffered body after logging.
 	 */
@@ -232,25 +232,45 @@ public class ChatGptService implements IAService {
 			this.body = body;
 		}
 
-		@Override public HttpStatusCode getStatusCode() {
-			try { return delegate.getStatusCode(); } catch (Exception e) { return HttpStatus.INTERNAL_SERVER_ERROR; }
+		@Override
+		public HttpStatusCode getStatusCode() {
+			try {
+				return delegate.getStatusCode();
+			} catch (Exception e) {
+				return HttpStatus.INTERNAL_SERVER_ERROR;
+			}
 		}
 
-		@Override public int getRawStatusCode() {
-			try { return delegate.getRawStatusCode(); } catch (Exception e) { return 500; }
+		@Override
+		public int getRawStatusCode() {
+			try {
+				return delegate.getRawStatusCode();
+			} catch (Exception e) {
+				return 500;
+			}
 		}
 
-		@Override public String getStatusText() {
-			try { return delegate.getStatusText(); } catch (Exception e) { return "ERROR"; }
+		@Override
+		public String getStatusText() {
+			try {
+				return delegate.getStatusText();
+			} catch (Exception e) {
+				return "ERROR";
+			}
 		}
 
-		@Override public void close() { delegate.close(); }
+		@Override
+		public void close() {
+			delegate.close();
+		}
 
-		@Override public InputStream getBody() {
+		@Override
+		public InputStream getBody() {
 			return new ByteArrayInputStream(body);
 		}
 
-		@Override public HttpHeaders getHeaders() {
+		@Override
+		public HttpHeaders getHeaders() {
 			return delegate.getHeaders();
 		}
 	}

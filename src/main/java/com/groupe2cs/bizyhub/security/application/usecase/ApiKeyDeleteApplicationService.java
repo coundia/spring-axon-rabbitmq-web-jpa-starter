@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ApiKeyDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deleteApiKey(ApiKeyId idVo, MetaRequest metaRequest) {
+	public void deleteApiKey(ApiKeyId idVo, MetaRequest metaRequest) {
 
-DeleteApiKeyCommand command = new DeleteApiKeyCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteApiKeyCommand command = new DeleteApiKeyCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

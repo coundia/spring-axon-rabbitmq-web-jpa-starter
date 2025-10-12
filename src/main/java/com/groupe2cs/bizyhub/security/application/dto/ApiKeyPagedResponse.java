@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
 import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,8 +21,8 @@ import org.springframework.data.domain.Page;
 @Schema(name = "ApiKeyPagedResponse", description = "Paginated response for ApiKey results")
 public class ApiKeyPagedResponse implements Serializable {
 
-@Schema(description = "List of paginated ApiKey items")
-private List<ApiKeyResponse> content;
+	@Schema(description = "List of paginated ApiKey items")
+	private List<ApiKeyResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -37,11 +38,11 @@ private List<ApiKeyResponse> content;
 
 	public static ApiKeyPagedResponse from(Page<ApiKey> page, List<ApiKeyResponse> content) {
 		return ApiKeyPagedResponse.builder()
-		.content(content)
-		.page(page.getNumber())
-		.size(page.getSize())
-		.totalElements(page.getTotalElements())
-		.totalPages(page.getTotalPages())
-		.build();
-		}
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

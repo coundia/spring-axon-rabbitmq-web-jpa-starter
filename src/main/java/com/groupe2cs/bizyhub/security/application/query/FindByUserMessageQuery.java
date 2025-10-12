@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserMessageQuery {
 
-	private final UserMessage  message;
+	private final UserMessage message;
 	private final MetaRequest metaRequest;
 
 }

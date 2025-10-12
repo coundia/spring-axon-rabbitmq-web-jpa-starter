@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByProductBarcodeQuery {
 
-	private final ProductBarcode  barcode;
+	private final ProductBarcode barcode;
 	private final MetaRequest metaRequest;
 
 }

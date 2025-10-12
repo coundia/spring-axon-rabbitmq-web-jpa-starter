@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByPasswordResetIdQuery {
 
-	private final PasswordResetId  id;
+	private final PasswordResetId id;
 	private final MetaRequest metaRequest;
 
 }

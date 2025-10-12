@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -19,6 +20,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderTypeOrderNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderPaymentMethodNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -34,35 +36,35 @@ import java.util.*;
 @Builder
 public class OrderPaymentMethod implements Serializable {
 
-private String paymentMethod;
+	private String paymentMethod;
 
-public OrderPaymentMethod(String paymentMethod) {
-this.paymentMethod = paymentMethod;
-}
+	public OrderPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
 
-public static OrderPaymentMethod create(String paymentMethod) {
+	public static OrderPaymentMethod create(String paymentMethod) {
 
-	return new OrderPaymentMethod(paymentMethod);
-}
+		return new OrderPaymentMethod(paymentMethod);
+	}
 
-public String value() {
-return this.paymentMethod;
-}
+	public String value() {
+		return this.paymentMethod;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderPaymentMethod that)) return false;
-return this.paymentMethod.equals(that.paymentMethod);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderPaymentMethod that)) return false;
+		return this.paymentMethod.equals(that.paymentMethod);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(paymentMethod);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(paymentMethod);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(paymentMethod);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(paymentMethod);
+	}
 }

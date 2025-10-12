@@ -68,7 +68,7 @@ public class UpdateProductController {
 			return ResponseEntity.internalServerError().body(
 					ApiResponseDto.builder()
 							.code(0)
-							.message( ex.getMessage())
+							.message(ex.getMessage())
 							.build()
 			);
 		}

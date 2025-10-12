@@ -26,7 +26,7 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Entity
 @EntityListeners(AuditListener.class)
 @Table(name = "user_roles")
-public class UserRole   extends AbstractAuditableEntity  {
+public class UserRole extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
@@ -43,18 +43,19 @@ public class UserRole   extends AbstractAuditableEntity  {
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
+
 	public UserRole(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "UserRole{" +
-		"id='" + id + '\'' +
-			", user=" + user +
-			", role=" + role +
-			", createdBy=" + createdBy +
-			", tenant=" + tenant +
-		'}';
+				"id='" + id + '\'' +
+				", user=" + user +
+				", role=" + role +
+				", createdBy=" + createdBy +
+				", tenant=" + tenant +
+				'}';
 	}
 }

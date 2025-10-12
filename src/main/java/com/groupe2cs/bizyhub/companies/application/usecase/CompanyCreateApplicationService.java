@@ -7,7 +7,9 @@ import com.groupe2cs.bizyhub.companies.application.dto.*;
 import com.groupe2cs.bizyhub.companies.application.command.*;
 import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+
 import java.util.List;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -15,23 +17,23 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CompanyCreateApplicationService {
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 	private final UserValidationService userValidationService;
 
-public CompanyResponse createCompany(CompanyRequest request,
-MetaRequest metaRequest
-){
-	userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
-CreateCompanyCommand command = CompanyMapper.toCommand(
-request
-);
+	public CompanyResponse createCompany(CompanyRequest request,
+										 MetaRequest metaRequest
+	) {
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
+		CreateCompanyCommand command = CompanyMapper.toCommand(
+				request
+		);
 
-command.setCreatedBy(CompanyCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(CompanyTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(CompanyCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(CompanyTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
-return CompanyMapper.toResponse(command);
-}
+		commandGateway.sendAndWait(command);
+		return CompanyMapper.toResponse(command);
+	}
 
 
 }

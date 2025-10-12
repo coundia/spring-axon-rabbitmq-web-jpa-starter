@@ -30,46 +30,47 @@ import jakarta.validation.Valid;
 @Slf4j
 public class UpdateFileManagerController {
 
-private final FileManagerUpdateApplicationService applicationService;
+	private final FileManagerUpdateApplicationService applicationService;
 
-public UpdateFileManagerController(FileManagerUpdateApplicationService  applicationService) {
-this.applicationService = applicationService;
-}
-
-@Operation(summary = "Update a new fileManager")
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "FileManager Updated",
-content = @Content(mediaType = "application/json",
-schema = @Schema(implementation = FileManagerResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content)
-})
-@PutMapping(value="{id}",  consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<FileManagerResponse> updateFileManager(
-	@Valid @PathVariable String id,
-	@RequestBody FileManagerRequest request,
-	@AuthenticationPrincipal Jwt jwt
-	) { {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-
-    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	FileManagerResponse response = applicationService.updateFileManager(FileManagerId.create(id),
-	request,
-	metaRequest
-	);
-
-	return ResponseEntity.ok(response);
-
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to Update fileManager: {}", ex.getMessage(), ex);
-	return ResponseEntity.internalServerError().build();
+	public UpdateFileManagerController(FileManagerUpdateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@Operation(summary = "Update a new fileManager")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "FileManager Updated",
+					content = @Content(mediaType = "application/json",
+							schema = @Schema(implementation = FileManagerResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content)
+	})
+	@PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FileManagerResponse> updateFileManager(
+			@Valid @PathVariable String id,
+			@RequestBody FileManagerRequest request,
+			@AuthenticationPrincipal Jwt jwt
+	) {
+		{
+			try {
+
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+				metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+				FileManagerResponse response = applicationService.updateFileManager(FileManagerId.create(id),
+						request,
+						metaRequest
+				);
+
+				return ResponseEntity.ok(response);
+
+			} catch (Exception ex) {
+				//e.printStackTrace();
+				log.error("Failed to Update fileManager: {}", ex.getMessage(), ex);
+				return ResponseEntity.internalServerError().build();
+			}
+		}
 	}
-}
 }

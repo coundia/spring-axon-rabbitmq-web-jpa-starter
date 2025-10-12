@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByOrderMessageQuery {
 
-	private final OrderMessage  message;
+	private final OrderMessage message;
 	private final MetaRequest metaRequest;
 
 }

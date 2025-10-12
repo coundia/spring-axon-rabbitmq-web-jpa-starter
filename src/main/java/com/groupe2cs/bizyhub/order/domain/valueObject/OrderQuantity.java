@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -22,6 +23,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderAmountCentsNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderQuantityNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -37,35 +39,35 @@ import java.util.*;
 @Builder
 public class OrderQuantity implements Serializable {
 
-private Integer quantity;
+	private Integer quantity;
 
-public OrderQuantity(Integer quantity) {
-this.quantity = quantity;
-}
+	public OrderQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
-public static OrderQuantity create(Integer quantity) {
+	public static OrderQuantity create(Integer quantity) {
 
-	return new OrderQuantity(quantity);
-}
+		return new OrderQuantity(quantity);
+	}
 
-public Integer value() {
-return this.quantity;
-}
+	public Integer value() {
+		return this.quantity;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderQuantity that)) return false;
-return this.quantity.equals(that.quantity);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderQuantity that)) return false;
+		return this.quantity.equals(that.quantity);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(quantity);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(quantity);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(quantity);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(quantity);
+	}
 }

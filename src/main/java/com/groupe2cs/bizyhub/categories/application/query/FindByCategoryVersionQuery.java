@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCategoryVersionQuery {
 
-	private final CategoryVersion  version;
+	private final CategoryVersion version;
 	private final MetaRequest metaRequest;
 
 }

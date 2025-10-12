@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserRoleDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deleteUserRole(UserRoleId idVo, MetaRequest metaRequest) {
+	public void deleteUserRole(UserRoleId idVo, MetaRequest metaRequest) {
 
-DeleteUserRoleCommand command = new DeleteUserRoleCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteUserRoleCommand command = new DeleteUserRoleCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

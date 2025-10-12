@@ -85,7 +85,7 @@ public class DebtProjection {
 				entity.setTenant(new Tenant(event.getTenant().value()));
 			}
 
-			if(event.getRemoteId().value() == null) {
+			if (event.getRemoteId().value() == null) {
 				entity.setRemoteId(event.getId().value());
 			}
 

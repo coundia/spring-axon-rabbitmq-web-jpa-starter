@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -25,6 +26,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderCreatedByNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderTenantNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -40,35 +42,35 @@ import java.util.*;
 @Builder
 public class OrderTenant implements Serializable {
 
-private String tenant;
+	private String tenant;
 
-public OrderTenant(String tenant) {
-this.tenant = tenant;
-}
+	public OrderTenant(String tenant) {
+		this.tenant = tenant;
+	}
 
-public static OrderTenant create(String tenant) {
+	public static OrderTenant create(String tenant) {
 
-	return new OrderTenant(tenant);
-}
+		return new OrderTenant(tenant);
+	}
 
-public String value() {
-return this.tenant;
-}
+	public String value() {
+		return this.tenant;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderTenant that)) return false;
-return this.tenant.equals(that.tenant);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderTenant that)) return false;
+		return this.tenant.equals(that.tenant);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(tenant);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(tenant);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(tenant);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(tenant);
+	}
 }

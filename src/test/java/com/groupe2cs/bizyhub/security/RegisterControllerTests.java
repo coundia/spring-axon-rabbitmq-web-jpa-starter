@@ -1,11 +1,14 @@
 package com.groupe2cs.bizyhub.security;
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.security.application.service.*;
-	import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
-	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-	import com.groupe2cs.bizyhub.security.application.dto.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.config.*;
+
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.application.service.*;
+
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
+
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.config.*;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,72 +33,72 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class RegisterControllerTests {
 
-@Autowired
-private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-@Autowired
-private ObjectMapper objectMapper;
+	@Autowired
+	private ObjectMapper objectMapper;
 
-@Autowired
-private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-@Autowired
-private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-private void createUser(String username, String password) {
-if (userRepository.findByUsernameAndTenantName(username,DEFAULT_TENANT).isEmpty()) {
-User user = User.builder()
-.id(UUID.randomUUID().toString())
-.username(username)
-.password(passwordEncoder.encode(password))
-.build();
-userRepository.save(user);
-TestTransaction.flagForCommit();
-TestTransaction.end();
-TestTransaction.start();
-}
-}
+	private void createUser(String username, String password) {
+		if (userRepository.findByUsernameAndTenantName(username, DEFAULT_TENANT).isEmpty()) {
+			User user = User.builder()
+					.id(UUID.randomUUID().toString())
+					.username(username)
+					.password(passwordEncoder.encode(password))
+					.build();
+			userRepository.save(user);
+			TestTransaction.flagForCommit();
+			TestTransaction.end();
+			TestTransaction.start();
+		}
+	}
 
-@Test
-void it_should_register_user_and_return_token() throws Exception {
-AuthRequestDto request = new AuthRequestDto();
-request.setUsername("newuser");
-request.setPassword("newpassword");
+	@Test
+	void it_should_register_user_and_return_token() throws Exception {
+		AuthRequestDto request = new AuthRequestDto();
+		request.setUsername("newuser");
+		request.setPassword("newpassword");
 
-String response = mockMvc.perform(post("/api/auth/register")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(request)))
-.andExpect(status().isOk())
-.andReturn().getResponse().getContentAsString();
+		String response = mockMvc.perform(post("/api/auth/register")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(request)))
+				.andExpect(status().isOk())
+				.andReturn().getResponse().getContentAsString();
 
-AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
-assertThat(dto.getToken()).isNotNull();
-assertThat(dto.getUsername()).isEqualTo("newuser");
-assertThat(dto.getCode()).isEqualTo(1);
-assertThat(dto.getMessage()).isEqualTo("Registration successful");
-assertThat(dto.getExpirationAt()).isNotNull();
-}
+		AuthResponseDto dto = objectMapper.readValue(response, AuthResponseDto.class);
+		assertThat(dto.getToken()).isNotNull();
+		assertThat(dto.getUsername()).isEqualTo("newuser");
+		assertThat(dto.getCode()).isEqualTo(1);
+		assertThat(dto.getMessage()).isEqualTo("Registration successful");
+		assertThat(dto.getExpirationAt()).isNotNull();
+	}
 
-@Test
-void it_should_not_register_user_if_username_exists() throws Exception {
-createUser("admin", "admin");
+	@Test
+	void it_should_not_register_user_if_username_exists() throws Exception {
+		createUser("admin", "admin");
 
-AuthRequestDto request = new AuthRequestDto();
-request.setUsername("admin");
-request.setPassword("admin");
+		AuthRequestDto request = new AuthRequestDto();
+		request.setUsername("admin");
+		request.setPassword("admin");
 
-mockMvc.perform(post("/api/auth/register")
-.contentType(MediaType.APPLICATION_JSON)
-.content(objectMapper.writeValueAsString(request)))
-.andExpect(status().isBadRequest());
-}
+		mockMvc.perform(post("/api/auth/register")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(request)))
+				.andExpect(status().isBadRequest());
+	}
 
-@Test
-void it_should_return_bad_request_when_input_invalid() throws Exception {
-mockMvc.perform(post("/api/auth/register")
-.contentType(MediaType.APPLICATION_JSON)
-.content("{}"))
-.andExpect(status().isBadRequest());
-}
+	@Test
+	void it_should_return_bad_request_when_input_invalid() throws Exception {
+		mockMvc.perform(post("/api/auth/register")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content("{}"))
+				.andExpect(status().isBadRequest());
+	}
 }
 

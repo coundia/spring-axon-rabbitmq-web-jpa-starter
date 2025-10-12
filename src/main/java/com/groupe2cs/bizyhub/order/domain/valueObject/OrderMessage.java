@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -17,6 +18,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderNotesNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderMessageNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -32,35 +34,35 @@ import java.util.*;
 @Builder
 public class OrderMessage implements Serializable {
 
-private String message;
+	private String message;
 
-public OrderMessage(String message) {
-this.message = message;
-}
+	public OrderMessage(String message) {
+		this.message = message;
+	}
 
-public static OrderMessage create(String message) {
+	public static OrderMessage create(String message) {
 
-	return new OrderMessage(message);
-}
+		return new OrderMessage(message);
+	}
 
-public String value() {
-return this.message;
-}
+	public String value() {
+		return this.message;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderMessage that)) return false;
-return this.message.equals(that.message);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderMessage that)) return false;
+		return this.message.equals(that.message);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(message);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(message);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(message);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(message);
+	}
 }

@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -18,6 +19,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderMessageNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderTypeOrderNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -33,35 +35,35 @@ import java.util.*;
 @Builder
 public class OrderTypeOrder implements Serializable {
 
-private String typeOrder;
+	private String typeOrder;
 
-public OrderTypeOrder(String typeOrder) {
-this.typeOrder = typeOrder;
-}
+	public OrderTypeOrder(String typeOrder) {
+		this.typeOrder = typeOrder;
+	}
 
-public static OrderTypeOrder create(String typeOrder) {
+	public static OrderTypeOrder create(String typeOrder) {
 
-	return new OrderTypeOrder(typeOrder);
-}
+		return new OrderTypeOrder(typeOrder);
+	}
 
-public String value() {
-return this.typeOrder;
-}
+	public String value() {
+		return this.typeOrder;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderTypeOrder that)) return false;
-return this.typeOrder.equals(that.typeOrder);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderTypeOrder that)) return false;
+		return this.typeOrder.equals(that.typeOrder);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(typeOrder);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(typeOrder);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(typeOrder);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(typeOrder);
+	}
 }

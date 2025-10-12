@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByProductHasSoldQuery {
 
-	private final ProductHasSold  hasSold;
+	private final ProductHasSold hasSold;
 	private final MetaRequest metaRequest;
 
 }

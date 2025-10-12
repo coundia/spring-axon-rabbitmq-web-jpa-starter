@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByFileManagerSizeQuery {
 
-	private final FileManagerSize  size;
+	private final FileManagerSize size;
 	private final MetaRequest metaRequest;
 
 }

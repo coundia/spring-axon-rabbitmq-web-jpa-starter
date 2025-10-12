@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserCreatedByQuery {
 
-	private final UserCreatedBy  createdBy;
+	private final UserCreatedBy createdBy;
 	private final MetaRequest metaRequest;
 
 }

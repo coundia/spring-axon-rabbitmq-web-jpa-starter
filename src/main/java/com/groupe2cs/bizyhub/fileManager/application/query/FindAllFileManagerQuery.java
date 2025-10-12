@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.fileManager.application.query;
+
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.*;
 
@@ -8,8 +9,8 @@ import lombok.*;
 @Builder
 public class FindAllFileManagerQuery {
 
-private final int page;
-private final int limit;
-private final MetaRequest metaRequest;
+	private final int page;
+	private final int limit;
+	private final MetaRequest metaRequest;
 
 }

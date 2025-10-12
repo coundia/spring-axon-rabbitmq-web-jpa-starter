@@ -8,13 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class NotificationService  {
+public class NotificationService {
 
-private final MailSender mailSender;
+	private final MailSender mailSender;
 
-	public void notifyByEmail(String from,String to, String subject, String content) {
+	public void notifyByEmail(String from, String to, String subject, String content) {
 
-		log.info("MAIL → From: {}, To: {}, Subject: {}, Content: {}",from, to, subject, content);
+		log.info("MAIL → From: {}, To: {}, Subject: {}, Content: {}", from, to, subject, content);
 		mailSender.send(from, to, subject, content);
 
 	}

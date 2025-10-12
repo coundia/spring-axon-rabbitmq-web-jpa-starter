@@ -26,7 +26,7 @@ public class ChatUpdateApplicationService {
 								   MetaRequest metaRequest
 	) {
 
-		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 
 		UpdateChatCommand command = ChatMapper.toUpdateCommand(
 				id,

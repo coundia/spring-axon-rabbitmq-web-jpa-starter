@@ -7,7 +7,9 @@ import com.groupe2cs.bizyhub.security.application.dto.*;
 import com.groupe2cs.bizyhub.security.application.query.*;
 import com.groupe2cs.bizyhub.security.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+
 import java.util.List;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,25 +19,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserUpdateApplicationService {
 
-private final FileStorageService fileStorageService;
-private final CommandGateway commandGateway;
+	private final FileStorageService fileStorageService;
+	private final CommandGateway commandGateway;
 
 
-public UserResponse updateUser(UserId id,UserRequest request,
-MetaRequest metaRequest
-){
+	public UserResponse updateUser(UserId id, UserRequest request,
+								   MetaRequest metaRequest
+	) {
 
-UpdateUserCommand command = UserMapper.toUpdateCommand(
-id,
-request
-);
+		UpdateUserCommand command = UserMapper.toUpdateCommand(
+				id,
+				request
+		);
 
-command.setCreatedBy(UserCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(UserTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(UserCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(UserTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
+		commandGateway.sendAndWait(command);
 
-return UserMapper.toResponse(command);
-}
+		return UserMapper.toResponse(command);
+	}
 
 }

@@ -6,7 +6,9 @@ import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.security.application.command.*;
 import com.groupe2cs.bizyhub.security.application.mapper.*;
+
 import java.util.List;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +16,22 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UserCreateApplicationService {
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public UserResponse createUser(UserRequest request,
-MetaRequest metaRequest
-){
+	public UserResponse createUser(UserRequest request,
+								   MetaRequest metaRequest
+	) {
 
-CreateUserCommand command = UserMapper.toCommand(
-request
-);
+		CreateUserCommand command = UserMapper.toCommand(
+				request
+		);
 
-command.setCreatedBy(UserCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(UserTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(UserCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(UserTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
-return UserMapper.toResponse(command);
-}
+		commandGateway.sendAndWait(command);
+		return UserMapper.toResponse(command);
+	}
 
 
 }

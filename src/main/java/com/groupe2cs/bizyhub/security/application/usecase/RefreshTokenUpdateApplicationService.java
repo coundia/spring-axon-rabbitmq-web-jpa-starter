@@ -7,7 +7,9 @@ import com.groupe2cs.bizyhub.security.application.dto.*;
 import com.groupe2cs.bizyhub.security.application.query.*;
 import com.groupe2cs.bizyhub.security.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+
 import java.util.List;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,25 +19,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RefreshTokenUpdateApplicationService {
 
-private final FileStorageService fileStorageService;
-private final CommandGateway commandGateway;
+	private final FileStorageService fileStorageService;
+	private final CommandGateway commandGateway;
 
 
-public RefreshTokenResponse updateRefreshToken(RefreshTokenId id,RefreshTokenRequest request,
-MetaRequest metaRequest
-){
+	public RefreshTokenResponse updateRefreshToken(RefreshTokenId id, RefreshTokenRequest request,
+												   MetaRequest metaRequest
+	) {
 
-UpdateRefreshTokenCommand command = RefreshTokenMapper.toUpdateCommand(
-id,
-request
-);
+		UpdateRefreshTokenCommand command = RefreshTokenMapper.toUpdateCommand(
+				id,
+				request
+		);
 
-command.setCreatedBy(RefreshTokenCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(RefreshTokenTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(RefreshTokenCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(RefreshTokenTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
+		commandGateway.sendAndWait(command);
 
-return RefreshTokenMapper.toResponse(command);
-}
+		return RefreshTokenMapper.toResponse(command);
+	}
 
 }

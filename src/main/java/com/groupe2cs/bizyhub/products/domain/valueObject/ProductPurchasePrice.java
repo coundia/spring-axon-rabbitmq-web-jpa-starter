@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.products.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.products.domain.exception.ProductIdNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductRemoteIdNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductLocalIdNotValid;
@@ -24,6 +25,7 @@ import com.groupe2cs.bizyhub.products.domain.exception.ProductStatusesNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductPurchasePriceNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -39,38 +41,38 @@ import java.util.*;
 @Builder
 public class ProductPurchasePrice implements Serializable {
 
-private Double purchasePrice;
+	private Double purchasePrice;
 
-public ProductPurchasePrice(Double purchasePrice) {
-this.purchasePrice = purchasePrice;
-}
+	public ProductPurchasePrice(Double purchasePrice) {
+		this.purchasePrice = purchasePrice;
+	}
 
-public static ProductPurchasePrice create(Double purchasePrice) {
+	public static ProductPurchasePrice create(Double purchasePrice) {
 
-if (purchasePrice == null) {
-throw new ProductPurchasePriceNotValid("PurchasePrice is invalid");
-}
-return new ProductPurchasePrice(purchasePrice);
-}
+		if (purchasePrice == null) {
+			throw new ProductPurchasePriceNotValid("PurchasePrice is invalid");
+		}
+		return new ProductPurchasePrice(purchasePrice);
+	}
 
-public Double value() {
-return this.purchasePrice;
-}
+	public Double value() {
+		return this.purchasePrice;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof ProductPurchasePrice that)) return false;
-return this.purchasePrice.equals(that.purchasePrice);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ProductPurchasePrice that)) return false;
+		return this.purchasePrice.equals(that.purchasePrice);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(purchasePrice);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(purchasePrice);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(purchasePrice);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(purchasePrice);
+	}
 }

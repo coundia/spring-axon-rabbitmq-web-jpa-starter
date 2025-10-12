@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.fileManager.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByFileManagerOriginalNameHandler {
 
-private final FileManagerRepository repository;
+	private final FileManagerRepository repository;
 
-@QueryHandler
-public List<FileManagerResponse> handle(FindByFileManagerOriginalNameQuery query) {
+	@QueryHandler
+	public List<FileManagerResponse> handle(FindByFileManagerOriginalNameQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<FileManager> entities = null;
-	 String value = query.getOriginalName().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<FileManager> entities = null;
+		String value = query.getOriginalName().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByOriginalNameAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByOriginalNameAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByOriginalNameAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByOriginalNameAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(FileManagerMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(FileManagerMapper::toResponse)
+				.toList();
 	}
 
 

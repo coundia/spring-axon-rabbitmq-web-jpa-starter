@@ -11,15 +11,19 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.fileManager.application.command.*;
+
 import java.util.UUID;
 
 import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.mock.web.MockMultipartFile;
+
 import static org.awaitility.Awaitility.await;
 
 public class FileManagerFixtures {
@@ -39,21 +43,21 @@ public class FileManagerFixtures {
 	}
 
 	public static List<CreateFileManagerCommand> randomManyViaCommand(
-		CommandGateway commandGateway,
-		FileManagerRepository repository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		int count,
-		User user
+			CommandGateway commandGateway,
+			FileManagerRepository repository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			int count,
+			User user
 	) {
 		List<CreateFileManagerCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateFileManagerCommand command = randomOneViaCommand(
-			commandGateway,
-			 repository,
-        createdByDataRepository,
-        tenantDataRepository,
-			 user);
+					commandGateway,
+					repository,
+					createdByDataRepository,
+					tenantDataRepository,
+					user);
 			items.add(command);
 		}
 		return items;
@@ -63,14 +67,14 @@ public class FileManagerFixtures {
 		repository.deleteAll();
 	}
 
-		public static CreateFileManagerCommand randomOneViaCommand(
-		CommandGateway commandGateway,
-		FileManagerRepository  repository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		 User user) {
+	public static CreateFileManagerCommand randomOneViaCommand(
+			CommandGateway commandGateway,
+			FileManagerRepository repository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			User user) {
 
-			CreateFileManagerCommand command = CreateFileManagerCommand.builder()
+		CreateFileManagerCommand command = CreateFileManagerCommand.builder()
 				.name(FileManagerName.create(UUID.randomUUID().toString()))
 				.details(FileManagerDetails.create(UUID.randomUUID().toString()))
 				.objectId(FileManagerObjectId.create(UUID.randomUUID().toString()))
@@ -81,7 +85,7 @@ public class FileManagerFixtures {
 				.path(FileManagerPath.create(UUID.randomUUID().toString()))
 				.uri(FileManagerUri.create(UUID.randomUUID().toString()))
 				.isPublic(FileManagerIsPublic.create(true))
-			.build();
+				.build();
 
 		command.setCreatedBy(FileManagerCreatedBy.create(user.getId()));
 		command.setTenant(FileManagerTenant.create(user.getTenant().getId()));
@@ -92,23 +96,23 @@ public class FileManagerFixtures {
 
 
 	public static CreateFileManagerCommand randomOneViaCommand(
-        CommandGateway commandGateway,
-        FileManagerRepository  repository,
-        User user
-        ) {
+			CommandGateway commandGateway,
+			FileManagerRepository repository,
+			User user
+	) {
 
-        CreateFileManagerCommand command = CreateFileManagerCommand.builder()
-        .name(FileManagerName.create(UUID.randomUUID().toString()))
-        .details(FileManagerDetails.create(UUID.randomUUID().toString()))
-        .objectId(FileManagerObjectId.create(UUID.randomUUID().toString()))
-        .objectName(FileManagerObjectName.create(UUID.randomUUID().toString()))
-        .originalName(FileManagerOriginalName.create(UUID.randomUUID().toString()))
-        .mimeType(FileManagerMimeType.create(UUID.randomUUID().toString()))
-        .size(FileManagerSize.create(78804L))
-        .path(FileManagerPath.create(UUID.randomUUID().toString()))
-        .uri(FileManagerUri.create(UUID.randomUUID().toString()))
-        .isPublic(FileManagerIsPublic.create(true))
-        .build();
+		CreateFileManagerCommand command = CreateFileManagerCommand.builder()
+				.name(FileManagerName.create(UUID.randomUUID().toString()))
+				.details(FileManagerDetails.create(UUID.randomUUID().toString()))
+				.objectId(FileManagerObjectId.create(UUID.randomUUID().toString()))
+				.objectName(FileManagerObjectName.create(UUID.randomUUID().toString()))
+				.originalName(FileManagerOriginalName.create(UUID.randomUUID().toString()))
+				.mimeType(FileManagerMimeType.create(UUID.randomUUID().toString()))
+				.size(FileManagerSize.create(78804L))
+				.path(FileManagerPath.create(UUID.randomUUID().toString()))
+				.uri(FileManagerUri.create(UUID.randomUUID().toString()))
+				.isPublic(FileManagerIsPublic.create(true))
+				.build();
 
 		command.setCreatedBy(FileManagerCreatedBy.create(user.getId()));
 		command.setTenant(FileManagerTenant.create(user.getTenant().getId()));

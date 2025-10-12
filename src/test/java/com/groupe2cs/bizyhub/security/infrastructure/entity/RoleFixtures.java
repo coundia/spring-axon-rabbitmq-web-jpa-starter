@@ -11,15 +11,19 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
+
 import java.util.UUID;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.mock.web.MockMultipartFile;
+
 import static org.awaitility.Awaitility.await;
 
 public class RoleFixtures {
@@ -39,21 +43,21 @@ public class RoleFixtures {
 	}
 
 	public static List<CreateRoleCommand> randomManyViaCommand(
-		CommandGateway commandGateway,
-		RoleRepository repository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		int count,
-		User user
+			CommandGateway commandGateway,
+			RoleRepository repository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			int count,
+			User user
 	) {
 		List<CreateRoleCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateRoleCommand command = randomOneViaCommand(
-			commandGateway,
-			 repository,
-        createdByDataRepository,
-        tenantDataRepository,
-			 user);
+					commandGateway,
+					repository,
+					createdByDataRepository,
+					tenantDataRepository,
+					user);
 			items.add(command);
 		}
 		return items;
@@ -63,16 +67,16 @@ public class RoleFixtures {
 		repository.deleteAll();
 	}
 
-		public static CreateRoleCommand randomOneViaCommand(
-		CommandGateway commandGateway,
-		RoleRepository  repository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		 User user) {
+	public static CreateRoleCommand randomOneViaCommand(
+			CommandGateway commandGateway,
+			RoleRepository repository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			User user) {
 
-			CreateRoleCommand command = CreateRoleCommand.builder()
+		CreateRoleCommand command = CreateRoleCommand.builder()
 				.name(RoleName.create(UUID.randomUUID().toString()))
-			.build();
+				.build();
 
 		command.setCreatedBy(RoleCreatedBy.create(user.getId()));
 		command.setTenant(RoleTenant.create(user.getTenant().getId()));
@@ -83,14 +87,14 @@ public class RoleFixtures {
 
 
 	public static CreateRoleCommand randomOneViaCommand(
-        CommandGateway commandGateway,
-        RoleRepository  repository,
-        User user
-        ) {
+			CommandGateway commandGateway,
+			RoleRepository repository,
+			User user
+	) {
 
-        CreateRoleCommand command = CreateRoleCommand.builder()
-        .name(RoleName.create(UUID.randomUUID().toString()))
-        .build();
+		CreateRoleCommand command = CreateRoleCommand.builder()
+				.name(RoleName.create(UUID.randomUUID().toString()))
+				.build();
 
 		command.setCreatedBy(RoleCreatedBy.create(user.getId()));
 		command.setTenant(RoleTenant.create(user.getTenant().getId()));

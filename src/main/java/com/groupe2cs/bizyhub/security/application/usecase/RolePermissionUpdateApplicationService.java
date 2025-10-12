@@ -7,7 +7,9 @@ import com.groupe2cs.bizyhub.security.application.dto.*;
 import com.groupe2cs.bizyhub.security.application.query.*;
 import com.groupe2cs.bizyhub.security.application.mapper.*;
 import com.groupe2cs.bizyhub.shared.infrastructure.*;
+
 import java.util.List;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,25 +19,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RolePermissionUpdateApplicationService {
 
-private final FileStorageService fileStorageService;
-private final CommandGateway commandGateway;
+	private final FileStorageService fileStorageService;
+	private final CommandGateway commandGateway;
 
 
-public RolePermissionResponse updateRolePermission(RolePermissionId id,RolePermissionRequest request,
-MetaRequest metaRequest
-){
+	public RolePermissionResponse updateRolePermission(RolePermissionId id, RolePermissionRequest request,
+													   MetaRequest metaRequest
+	) {
 
-UpdateRolePermissionCommand command = RolePermissionMapper.toUpdateCommand(
-id,
-request
-);
+		UpdateRolePermissionCommand command = RolePermissionMapper.toUpdateCommand(
+				id,
+				request
+		);
 
-command.setCreatedBy(RolePermissionCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(RolePermissionTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(RolePermissionCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(RolePermissionTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
+		commandGateway.sendAndWait(command);
 
-return RolePermissionMapper.toResponse(command);
-}
+		return RolePermissionMapper.toResponse(command);
+	}
 
 }

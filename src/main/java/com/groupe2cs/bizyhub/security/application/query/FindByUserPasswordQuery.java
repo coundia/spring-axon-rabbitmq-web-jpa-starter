@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserPasswordQuery {
 
-	private final UserPassword  password;
+	private final UserPassword password;
 	private final MetaRequest metaRequest;
 
 }

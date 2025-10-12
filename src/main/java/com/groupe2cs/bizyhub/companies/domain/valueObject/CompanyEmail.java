@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.companies.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyRemoteIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyLocalIdNotValid;
@@ -11,6 +12,7 @@ import com.groupe2cs.bizyhub.companies.domain.exception.CompanyPhoneNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyEmailNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -26,35 +28,35 @@ import java.util.*;
 @Builder
 public class CompanyEmail implements Serializable {
 
-private String email;
+	private String email;
 
-public CompanyEmail(String email) {
-this.email = email;
-}
+	public CompanyEmail(String email) {
+		this.email = email;
+	}
 
-public static CompanyEmail create(String email) {
+	public static CompanyEmail create(String email) {
 
-	return new CompanyEmail(email);
-}
+		return new CompanyEmail(email);
+	}
 
-public String value() {
-return this.email;
-}
+	public String value() {
+		return this.email;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof CompanyEmail that)) return false;
-return this.email.equals(that.email);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CompanyEmail that)) return false;
+		return this.email.equals(that.email);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(email);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(email);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(email);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(email);
+	}
 }

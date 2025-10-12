@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
+
 import com.groupe2cs.bizyhub.shared.application.UserValidationService;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.products.application.command.*;
@@ -9,6 +10,7 @@ import com.groupe2cs.bizyhub.products.application.dto.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+
 import java.time.Instant;
 
 @Service
@@ -21,7 +23,7 @@ public class ProductSyncApplicationService {
 
 	public void syncProduct(ProductSyncRequest request, MetaRequest metaRequest) {
 
-		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
@@ -29,27 +31,27 @@ public class ProductSyncApplicationService {
 
 
 					CreateProductCommand command = CreateProductCommand.builder()
-								.remoteId(ProductRemoteId.create(d.getRemoteId()))
-								.localId(ProductLocalId.create(d.getLocalId()))
-								.code(ProductCode.create(d.getCode()))
-								.name(ProductName.create(d.getName()))
-								.description(ProductDescription.create(d.getDescription()))
-								.status(ProductStatus.create(d.getStatus()))
-								.isPublic(ProductIsPublic.create(d.getIsPublic()))
-								.hasSold(ProductHasSold.create(d.getHasSold()))
-								.hasPrice(ProductHasPrice.create(d.getHasPrice()))
-								.level(ProductLevel.create(d.getLevel()))
-								.quantity(ProductQuantity.create(d.getQuantity()))
-								.barcode(ProductBarcode.create(d.getBarcode()))
-								.company(ProductCompany.create(d.getCompany()))
-								.unit(ProductUnit.create(d.getUnit()))
-								.syncAt(ProductSyncAt.create(d.getSyncAt()))
-								.category(ProductCategory.create(d.getCategory()))
-								.account(ProductAccount.create(d.getAccount()))
-								.defaultPrice(ProductDefaultPrice.create(d.getDefaultPrice()))
-								.statuses(ProductStatuses.create(d.getStatuses()))
-								.purchasePrice(ProductPurchasePrice.create(d.getPurchasePrice()))
-						.build();
+							.remoteId(ProductRemoteId.create(d.getRemoteId()))
+							.localId(ProductLocalId.create(d.getLocalId()))
+							.code(ProductCode.create(d.getCode()))
+							.name(ProductName.create(d.getName()))
+							.description(ProductDescription.create(d.getDescription()))
+							.status(ProductStatus.create(d.getStatus()))
+							.isPublic(ProductIsPublic.create(d.getIsPublic()))
+							.hasSold(ProductHasSold.create(d.getHasSold()))
+							.hasPrice(ProductHasPrice.create(d.getHasPrice()))
+							.level(ProductLevel.create(d.getLevel()))
+							.quantity(ProductQuantity.create(d.getQuantity()))
+							.barcode(ProductBarcode.create(d.getBarcode()))
+							.company(ProductCompany.create(d.getCompany()))
+							.unit(ProductUnit.create(d.getUnit()))
+							.syncAt(ProductSyncAt.create(d.getSyncAt()))
+							.category(ProductCategory.create(d.getCategory()))
+							.account(ProductAccount.create(d.getAccount()))
+							.defaultPrice(ProductDefaultPrice.create(d.getDefaultPrice()))
+							.statuses(ProductStatuses.create(d.getStatuses()))
+							.purchasePrice(ProductPurchasePrice.create(d.getPurchasePrice()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -90,7 +92,7 @@ public class ProductSyncApplicationService {
 							.defaultPrice(ProductDefaultPrice.create(d.getDefaultPrice()))
 							.statuses(ProductStatuses.create(d.getStatuses()))
 							.purchasePrice(ProductPurchasePrice.create(d.getPurchasePrice()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -102,8 +104,8 @@ public class ProductSyncApplicationService {
 					}
 
 					DeleteProductCommand delete = DeleteProductCommand.builder()
-						.id(ProductId.create(d.getId()))
-						.build();
+							.id(ProductId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

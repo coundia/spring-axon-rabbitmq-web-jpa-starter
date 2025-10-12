@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
-	import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,13 +18,12 @@ import java.util.*;
 @NoArgsConstructor
 public class PasswordResetCreatedEvent implements Serializable {
 
-    private PasswordResetId id;
-    private PasswordResetToken token;
-    private PasswordResetUsername username;
-    private PasswordResetExpiration expiration;
-    private PasswordResetCreatedBy createdBy;
-    private PasswordResetTenant tenant;
-
+	private PasswordResetId id;
+	private PasswordResetToken token;
+	private PasswordResetUsername username;
+	private PasswordResetExpiration expiration;
+	private PasswordResetCreatedBy createdBy;
+	private PasswordResetTenant tenant;
 
 
 }

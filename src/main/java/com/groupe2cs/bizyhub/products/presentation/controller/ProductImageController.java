@@ -36,6 +36,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,6 +49,25 @@ public class ProductImageController {
 	private final ProductImageService imageService;
 	private final ProductBisRepository productRepository;
 	private final ProductImageRepository productImageRepository;
+
+	private static String baseUrl() {
+		return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+	}
+
+	private static String absoluteInlineUrl(String productId, String imageId) {
+		return baseUrl() + "/api/public/products/" + productId + "/images/" + imageId;
+	}
+
+	private static ProductImageResponse imgWithAbsoluteUrl(String productId, String imageId, ProductImageResponse src) {
+		return ProductImageResponse.builder()
+				.id(src.getId())
+				.filename(src.getFilename())
+				.contentType(src.getContentType())
+				.size(src.getSize())
+				.createdAt(src.getCreatedAt())
+				.url(absoluteInlineUrl(productId, imageId))
+				.build();
+	}
 
 	@PreAuthorize("@productGate.canCreate(authentication)")
 	@PostMapping(
@@ -211,29 +231,11 @@ public class ProductImageController {
 			if (img.getContentType() != null) {
 				type = MediaType.parseMediaType(img.getContentType());
 			}
-		} catch (Exception ignored) { }
+		} catch (Exception ignored) {
+		}
 		return ResponseEntity.ok()
 				.contentType(type)
 				.body(file);
-	}
-
-	private static String baseUrl() {
-		return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-	}
-
-	private static String absoluteInlineUrl(String productId, String imageId) {
-		return baseUrl() + "/api/public/products/" + productId + "/images/" + imageId;
-	}
-
-	private static ProductImageResponse imgWithAbsoluteUrl(String productId, String imageId, ProductImageResponse src) {
-		return ProductImageResponse.builder()
-				.id(src.getId())
-				.filename(src.getFilename())
-				.contentType(src.getContentType())
-				.size(src.getSize())
-				.createdAt(src.getCreatedAt())
-				.url(absoluteInlineUrl(productId, imageId))
-				.build();
 	}
 
 	public static class CreateProductWithFilesSchema {

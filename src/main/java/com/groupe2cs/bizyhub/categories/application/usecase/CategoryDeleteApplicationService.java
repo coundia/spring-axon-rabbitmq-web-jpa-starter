@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoryDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deleteCategory(CategoryId idVo, MetaRequest metaRequest) {
+	public void deleteCategory(CategoryId idVo, MetaRequest metaRequest) {
 
-DeleteCategoryCommand command = new DeleteCategoryCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteCategoryCommand command = new DeleteCategoryCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

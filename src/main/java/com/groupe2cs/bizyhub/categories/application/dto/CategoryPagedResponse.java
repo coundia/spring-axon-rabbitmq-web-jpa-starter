@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.categories.application.dto;
 
 import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,8 +21,8 @@ import org.springframework.data.domain.Page;
 @Schema(name = "CategoryPagedResponse", description = "Paginated response for Category results")
 public class CategoryPagedResponse implements Serializable {
 
-@Schema(description = "List of paginated Category items")
-private List<CategoryResponse> content;
+	@Schema(description = "List of paginated Category items")
+	private List<CategoryResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -37,11 +38,11 @@ private List<CategoryResponse> content;
 
 	public static CategoryPagedResponse from(Page<Category> page, List<CategoryResponse> content) {
 		return CategoryPagedResponse.builder()
-		.content(content)
-		.page(page.getNumber())
-		.size(page.getSize())
-		.totalElements(page.getTotalElements())
-		.totalPages(page.getTotalPages())
-		.build();
-		}
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

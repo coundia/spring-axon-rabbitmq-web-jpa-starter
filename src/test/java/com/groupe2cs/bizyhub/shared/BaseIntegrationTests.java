@@ -20,8 +20,8 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import java.util.Map;
 
 @SpringBootTest(
-webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-properties = "spring.config.name=application-test"
+		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+		properties = "spring.config.name=application-test"
 )
 @Profile("test")
 @Slf4j
@@ -38,83 +38,82 @@ public class BaseIntegrationTests {
 
 	@Autowired
 	public TestRestTemplate testRestTemplate;
-
+	public HttpHeaders headers;
 	@Autowired
 	private JwtDecoder jwtDecoder;
 
-	public HttpHeaders headers;
-
 	@BeforeEach
 	void authenticate() {
-	login("admin", "admin");
+		login("admin", "admin");
 	}
 
 	public String getBaseUrl() {
-	String uri = "http://" + host + ":" + port + "/api";
-	return uri;
+		String uri = "http://" + host + ":" + port + "/api";
+		return uri;
 	}
 
 	public Map<String, Object> getTokenClaims() {
-	String token = headers.getFirst(HttpHeaders.AUTHORIZATION).replace("Bearer ", "");
-	Jwt jwt = jwtDecoder.decode(token);
-	log.info("Claims: {}", jwt.getClaims());
-	return jwt.getClaims();
+		String token = headers.getFirst(HttpHeaders.AUTHORIZATION).replace("Bearer ", "");
+		Jwt jwt = jwtDecoder.decode(token);
+		log.info("Claims: {}", jwt.getClaims());
+		return jwt.getClaims();
 	}
 
 	public String getUserId() {
 		return (String) getTokenClaims().get("userId");
 	}
+
 	public String getTenantId() {
 		return (String) getTokenClaims().get("tenantId");
 	}
 
 	public User getCurrentUser() {
-		return  user;
+		return user;
 	}
 
 	public ResponseEntity<String> get(String uri) {
-	log.info("Request URI: {}", getBaseUrl() + uri);
-	return testRestTemplate.exchange(getBaseUrl() + uri, HttpMethod.GET, new HttpEntity<>(headers), String.class);
+		log.info("Request URI: {}", getBaseUrl() + uri);
+		return testRestTemplate.exchange(getBaseUrl() + uri, HttpMethod.GET, new HttpEntity<>(headers), String.class);
 	}
 
 	public ResponseEntity<String> delete(String uri) {
-	log.info("Request URI: {}", getBaseUrl() + uri);
-	return testRestTemplate.exchange(getBaseUrl() + uri,
-	HttpMethod.DELETE,
-	new HttpEntity<>(headers),
-	String.class);
+		log.info("Request URI: {}", getBaseUrl() + uri);
+		return testRestTemplate.exchange(getBaseUrl() + uri,
+				HttpMethod.DELETE,
+				new HttpEntity<>(headers),
+				String.class);
 	}
 
 	public <T> ResponseEntity<T> postForEntity(String uri, Object request, Class<T> responseType) {
-	log.info("Request URI: {}", getBaseUrl() + uri);
-	return testRestTemplate.postForEntity(getBaseUrl() + uri, new HttpEntity<>(request, headers), responseType);
+		log.info("Request URI: {}", getBaseUrl() + uri);
+		return testRestTemplate.postForEntity(getBaseUrl() + uri, new HttpEntity<>(request, headers), responseType);
 	}
 
 	public <T> ResponseEntity<T> getForEntity(String uri, Class<T> responseType) {
-	log.info("Request URI: {}", getBaseUrl() + uri);
-	return testRestTemplate.exchange(getBaseUrl() + uri, HttpMethod.GET, new HttpEntity<>(headers), responseType);
+		log.info("Request URI: {}", getBaseUrl() + uri);
+		return testRestTemplate.exchange(getBaseUrl() + uri, HttpMethod.GET, new HttpEntity<>(headers), responseType);
 	}
 
 	public ResponseEntity<String> post(String uri, Object request) {
-	log.info("Request URI: {}", getBaseUrl() + uri);
-	return testRestTemplate.postForEntity(getBaseUrl() + uri, new HttpEntity<>(request, headers), String.class);
+		log.info("Request URI: {}", getBaseUrl() + uri);
+		return testRestTemplate.postForEntity(getBaseUrl() + uri, new HttpEntity<>(request, headers), String.class);
 	}
 
 	public ResponseEntity<String> put(String uri, Object request) {
 		log.info("Request URI: {}", getBaseUrl() + uri);
 		return testRestTemplate.exchange(getBaseUrl() + uri,
-		HttpMethod.PUT,
-		new HttpEntity<>(request, headers),
-		String.class);
+				HttpMethod.PUT,
+				new HttpEntity<>(request, headers),
+				String.class);
 	}
 
 	public HttpEntity<ByteArrayResource> createFile() {
 		byte[] content = "Fake PDF content".getBytes();
 		ByteArrayResource resource = new ByteArrayResource(content) {
-		@Override
-		public String getFilename() {
-		return "file.pdf";
-		}
+			@Override
+			public String getFilename() {
+				return "file.pdf";
+			}
 		};
 		HttpHeaders partHeaders = new HttpHeaders();
 		partHeaders.setContentType(MediaType.APPLICATION_PDF);
@@ -122,21 +121,21 @@ public class BaseIntegrationTests {
 		return new HttpEntity<>(resource, partHeaders);
 	}
 
-	public  User login(String login,String password) {
+	public User login(String login, String password) {
 
 		headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
 		AuthRequestDto authRequest = AuthRequestDto.builder()
-			.username(login)
-			.password(password)
-			.build();
+				.username(login)
+				.password(password)
+				.build();
 
 		ResponseEntity<AuthResponseDto> response = testRestTemplate.postForEntity(
-			getBaseUrl() + "/auth/login",
-			new HttpEntity<>(authRequest),
-			AuthResponseDto.class
-			);
+				getBaseUrl() + "/auth/login",
+				new HttpEntity<>(authRequest),
+				AuthResponseDto.class
+		);
 
 		if (response.getStatusCode().isError()) {
 			throw new RuntimeException("Failed to authenticate test user: " + response.getBody());
@@ -146,13 +145,13 @@ public class BaseIntegrationTests {
 		headers.setBearerAuth(token);
 
 		userId = getUserId();
-		user =  User.builder()
-		.id(userId)
-		.tenant(new Tenant(getTenantId()))
-		.username(login)
-		.password(password)
-		.build();
-	  return user;
+		user = User.builder()
+				.id(userId)
+				.tenant(new Tenant(getTenantId()))
+				.username(login)
+				.password(password)
+				.build();
+		return user;
 
 	}
 }

@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.products.application.dto;
 
 import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,8 +21,8 @@ import org.springframework.data.domain.Page;
 @Schema(name = "ProductPagedResponse", description = "Paginated response for Product results")
 public class ProductPagedResponse implements Serializable {
 
-@Schema(description = "List of paginated Product items")
-private List<ProductResponse> content;
+	@Schema(description = "List of paginated Product items")
+	private List<ProductResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -37,11 +38,11 @@ private List<ProductResponse> content;
 
 	public static ProductPagedResponse from(Page<Product> page, List<ProductResponse> content) {
 		return ProductPagedResponse.builder()
-		.content(content)
-		.page(page.getNumber())
-		.size(page.getSize())
-		.totalElements(page.getTotalElements())
-		.totalPages(page.getTotalPages())
-		.build();
-		}
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

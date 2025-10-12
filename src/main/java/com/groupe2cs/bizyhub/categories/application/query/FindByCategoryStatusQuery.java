@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCategoryStatusQuery {
 
-	private final CategoryStatus  status;
+	private final CategoryStatus status;
 	private final MetaRequest metaRequest;
 
 }

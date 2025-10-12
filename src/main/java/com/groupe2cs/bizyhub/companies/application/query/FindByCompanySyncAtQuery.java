@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCompanySyncAtQuery {
 
-	private final CompanySyncAt  syncAt;
+	private final CompanySyncAt syncAt;
 	private final MetaRequest metaRequest;
 
 }

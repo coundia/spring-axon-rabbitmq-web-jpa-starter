@@ -19,30 +19,30 @@ public class ForgotPasswordController {
 
 	private final PasswordResetService service;
 
-private final CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
+	private final CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
 
 
 	@PostMapping("/forgot-password")
 	public ResponseEntity<String> forgot(@RequestBody ForgotPasswordRequestDto dto) {
 
-	    MetaRequest metaRequest = new MetaRequest();
+		MetaRequest metaRequest = new MetaRequest();
 		metaRequest.setTenantId(currentTenantIdentifierResolver.resolveCurrentTenantIdentifier());
 
-			log.info("forgot-password: {}", dto.getUsername());
-			String token = service.createToken(dto.getUsername(),metaRequest);
-			log.info("Token: {}", token);
-			return ResponseEntity.ok("Token will be sent to your email.");
-		}
+		log.info("forgot-password: {}", dto.getUsername());
+		String token = service.createToken(dto.getUsername(), metaRequest);
+		log.info("Token: {}", token);
+		return ResponseEntity.ok("Token will be sent to your email.");
+	}
 
-		@PostMapping("/reset-password")
-		public ResponseEntity<String> reset(@RequestBody ResetPasswordDto dto) {
+	@PostMapping("/reset-password")
+	public ResponseEntity<String> reset(@RequestBody ResetPasswordDto dto) {
 
 		MetaRequest metaRequest = new MetaRequest();
 		metaRequest.setTenantId(currentTenantIdentifierResolver.resolveCurrentTenantIdentifier());
 
 		boolean success = service.resetPassword(dto.getToken(), dto.getNewPassword(), metaRequest);
-			return success
-			? ResponseEntity.ok("Password updated")
-			: ResponseEntity.badRequest().body("Invalid or expired token");
-			}
-	 }
+		return success
+				? ResponseEntity.ok("Password updated")
+				: ResponseEntity.badRequest().body("Invalid or expired token");
+	}
+}

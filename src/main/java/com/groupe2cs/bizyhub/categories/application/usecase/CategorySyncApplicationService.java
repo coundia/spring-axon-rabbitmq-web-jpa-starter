@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.categories.application.usecase;
+
 import com.groupe2cs.bizyhub.categories.application.dto.*;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.categories.application.command.*;
@@ -9,6 +10,7 @@ import com.groupe2cs.bizyhub.shared.application.dto.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+
 import java.time.Instant;
 
 @Service
@@ -18,10 +20,10 @@ public class CategorySyncApplicationService {
 	private final CategoryGate gateService;
 	private final CommandGateway commandGateway;
 	private final UserValidationService userValidationService;
-	
+
 	public void syncCategory(CategorySyncRequest request, MetaRequest metaRequest) {
 
-		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
@@ -29,18 +31,18 @@ public class CategorySyncApplicationService {
 
 
 					CreateCategoryCommand command = CreateCategoryCommand.builder()
-								.code(CategoryCode.create(d.getCode()))
-								.name(CategoryName.create(d.getName()))
-								.remoteId(CategoryRemoteId.create(d.getRemoteId()))
-								.localId(CategoryLocalId.create(d.getLocalId()))
-								.account(CategoryAccount.create(d.getAccount()))
-								.status(CategoryStatus.create(d.getStatus()))
-								.isPublic(CategoryIsPublic.create(d.getIsPublic()))
-								.description(CategoryDescription.create(d.getDescription()))
-								.typeEntry(CategoryTypeEntry.create(d.getTypeEntry()))
-								.version(CategoryVersion.create(d.getVersion()))
-								.syncAt(CategorySyncAt.create(d.getSyncAt()))
-						.build();
+							.code(CategoryCode.create(d.getCode()))
+							.name(CategoryName.create(d.getName()))
+							.remoteId(CategoryRemoteId.create(d.getRemoteId()))
+							.localId(CategoryLocalId.create(d.getLocalId()))
+							.account(CategoryAccount.create(d.getAccount()))
+							.status(CategoryStatus.create(d.getStatus()))
+							.isPublic(CategoryIsPublic.create(d.getIsPublic()))
+							.description(CategoryDescription.create(d.getDescription()))
+							.typeEntry(CategoryTypeEntry.create(d.getTypeEntry()))
+							.version(CategoryVersion.create(d.getVersion()))
+							.syncAt(CategorySyncAt.create(d.getSyncAt()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -72,7 +74,7 @@ public class CategorySyncApplicationService {
 							.typeEntry(CategoryTypeEntry.create(d.getTypeEntry()))
 							.version(CategoryVersion.create(d.getVersion()))
 							.syncAt(CategorySyncAt.create(d.getSyncAt()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -84,8 +86,8 @@ public class CategorySyncApplicationService {
 					}
 
 					DeleteCategoryCommand delete = DeleteCategoryCommand.builder()
-						.id(CategoryId.create(d.getId()))
-						.build();
+							.id(CategoryId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

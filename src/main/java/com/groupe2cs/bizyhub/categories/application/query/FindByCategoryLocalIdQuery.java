@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCategoryLocalIdQuery {
 
-	private final CategoryLocalId  localId;
+	private final CategoryLocalId localId;
 	private final MetaRequest metaRequest;
 
 }

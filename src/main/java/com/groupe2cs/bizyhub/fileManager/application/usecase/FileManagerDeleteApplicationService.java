@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FileManagerDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deleteFileManager(FileManagerId idVo, MetaRequest metaRequest) {
+	public void deleteFileManager(FileManagerId idVo, MetaRequest metaRequest) {
 
-DeleteFileManagerCommand command = new DeleteFileManagerCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteFileManagerCommand command = new DeleteFileManagerCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

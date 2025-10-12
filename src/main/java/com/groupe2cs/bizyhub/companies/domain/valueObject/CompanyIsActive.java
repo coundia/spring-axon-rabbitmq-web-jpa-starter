@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.companies.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyRemoteIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyLocalIdNotValid;
@@ -22,6 +23,7 @@ import com.groupe2cs.bizyhub.companies.domain.exception.CompanyPostalCodeNotVali
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIsActiveNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -37,35 +39,35 @@ import java.util.*;
 @Builder
 public class CompanyIsActive implements Serializable {
 
-private Boolean isActive;
+	private Boolean isActive;
 
-public CompanyIsActive(Boolean isActive) {
-this.isActive = isActive;
-}
+	public CompanyIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
 
-public static CompanyIsActive create(Boolean isActive) {
+	public static CompanyIsActive create(Boolean isActive) {
 
-	return new CompanyIsActive(isActive);
-}
+		return new CompanyIsActive(isActive);
+	}
 
-public Boolean value() {
-return this.isActive;
-}
+	public Boolean value() {
+		return this.isActive;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof CompanyIsActive that)) return false;
-return this.isActive.equals(that.isActive);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CompanyIsActive that)) return false;
+		return this.isActive.equals(that.isActive);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(isActive);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(isActive);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(isActive);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(isActive);
+	}
 }

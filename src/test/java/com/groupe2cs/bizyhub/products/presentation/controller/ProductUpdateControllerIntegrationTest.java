@@ -11,6 +11,7 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.products.application.command.*;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -19,79 +20,80 @@ import org.springframework.http.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductUpdateControllerIntegrationTest extends BaseIntegrationTests {
 
-    @Autowired
-    private ProductRepository productRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
-    @Autowired
-    private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-    @Autowired
-    private CommandGateway commandGatewayUpdate;
+	@Autowired
+	private CommandGateway commandGatewayUpdate;
 
-    @Autowired
-    private UserRepository createdByDataRepository;
-    @Autowired
-    private TenantRepository tenantDataRepository;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-    @Test
-    void it_should_be_able_to_update_product() {
+	@Test
+	void it_should_be_able_to_update_product() {
 
-        String existingId = ProductFixtures.randomOneViaCommand(
-            commandGateway, productRepository,
-        createdByDataRepository,
-        tenantDataRepository,
-            getCurrentUser()
-        ).getId().value();
+		String existingId = ProductFixtures.randomOneViaCommand(
+				commandGateway, productRepository,
+				createdByDataRepository,
+				tenantDataRepository,
+				getCurrentUser()
+		).getId().value();
 
-        CreateProductCommand updated = ProductFixtures.randomOneViaCommand(
-            commandGatewayUpdate, productRepository,
-        createdByDataRepository,
-        tenantDataRepository,
-            getCurrentUser()
-        );
+		CreateProductCommand updated = ProductFixtures.randomOneViaCommand(
+				commandGatewayUpdate, productRepository,
+				createdByDataRepository,
+				tenantDataRepository,
+				getCurrentUser()
+		);
 
-        ProductFixtures.byIdWaitExist(productRepository, existingId);
-        ProductFixtures.byIdWaitExist(productRepository, updated.getId().value());
+		ProductFixtures.byIdWaitExist(productRepository, existingId);
+		ProductFixtures.byIdWaitExist(productRepository, updated.getId().value());
 
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("remoteId", UUID.randomUUID().toString());
-        body.add("localId", UUID.randomUUID().toString());
-        body.add("code", UUID.randomUUID().toString());
-        body.add("name", UUID.randomUUID().toString());
-        body.add("description", UUID.randomUUID().toString());
-        body.add("status", UUID.randomUUID().toString());
-        body.add("isPublic", true);
-        body.add("hasSold", true);
-        body.add("hasPrice", true);
-        body.add("level", UUID.randomUUID().toString());
-        body.add("quantity", 31);
-        body.add("barcode", UUID.randomUUID().toString());
-        body.add("company", UUID.randomUUID().toString());
-        body.add("unit", UUID.randomUUID().toString());
-        body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
-        body.add("category", UUID.randomUUID().toString());
-        body.add("account", UUID.randomUUID().toString());
-        body.add("defaultPrice", 8892.93);
-        body.add("statuses", UUID.randomUUID().toString());
-        body.add("purchasePrice", 8026.72);
+		MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+		body.add("remoteId", UUID.randomUUID().toString());
+		body.add("localId", UUID.randomUUID().toString());
+		body.add("code", UUID.randomUUID().toString());
+		body.add("name", UUID.randomUUID().toString());
+		body.add("description", UUID.randomUUID().toString());
+		body.add("status", UUID.randomUUID().toString());
+		body.add("isPublic", true);
+		body.add("hasSold", true);
+		body.add("hasPrice", true);
+		body.add("level", UUID.randomUUID().toString());
+		body.add("quantity", 31);
+		body.add("barcode", UUID.randomUUID().toString());
+		body.add("company", UUID.randomUUID().toString());
+		body.add("unit", UUID.randomUUID().toString());
+		body.add("syncAt", java.time.Instant.now().plusSeconds(3600));
+		body.add("category", UUID.randomUUID().toString());
+		body.add("account", UUID.randomUUID().toString());
+		body.add("defaultPrice", 8892.93);
+		body.add("statuses", UUID.randomUUID().toString());
+		body.add("purchasePrice", 8026.72);
 
-        HttpHeaders multipartHeaders = new HttpHeaders();
-        multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
+		HttpHeaders multipartHeaders = new HttpHeaders();
+		multipartHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
+		HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, multipartHeaders);
 
-        String uri = "/api/v1/commands/product/" + existingId;
-        ResponseEntity<String> response = testRestTemplate.exchange(
-            uri,
-            HttpMethod.PUT,
-            requestEntity,
-            String.class
-        );
+		String uri = "/api/v1/commands/product/" + existingId;
+		ResponseEntity<String> response = testRestTemplate.exchange(
+				uri,
+				HttpMethod.PUT,
+				requestEntity,
+				String.class
+		);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-    }
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+	}
 }

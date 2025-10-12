@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserLastNameQuery {
 
-	private final UserLastName  lastName;
+	private final UserLastName lastName;
 	private final MetaRequest metaRequest;
 
 }

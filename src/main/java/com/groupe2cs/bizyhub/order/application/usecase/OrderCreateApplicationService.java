@@ -45,6 +45,41 @@ public class OrderCreateApplicationService {
 	@Value("${app.notifications.sales-to:}")
 	private String salesTo; // destinataire interne optionnel
 
+	private static String safe(String s) {
+		return s == null ? "" : s;
+	}
+
+	private static String safe(Object o) {
+		return o == null ? "" : String.valueOf(o);
+	}
+
+	/* ==================== Helpers ==================== */
+
+	private static long safeInt(Integer i) {
+		return i == null ? 0 : i;
+	}
+
+	private static Number safeNum(Number n) {
+		return n == null ? 0 : n;
+	}
+
+	private static long centsToXof(Number cents) {
+		if (cents == null) return 0;
+		try {
+			return cents.longValue() / 100L;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	// Protège minimalement contre l'injection HTML dans nos fragments interpolés
+	private static String escape(String v) {
+		if (v == null) return "";
+		return v.replace("&", "&amp;")
+				.replace("<", "&lt;")
+				.replace(">", "&gt;");
+	}
+
 	public OrderResponse createOrder(OrderRequest request, MetaRequest metaRequest) {
 		// 1) Construire & publier la commande
 		CreateOrderCommand command = OrderMapper.toCommand(request);
@@ -115,66 +150,66 @@ public class OrderCreateApplicationService {
 		// --- Corps HTML (mieux rendu sous Spring Mail)
 		final String html = isMessage
 				? """
-                   <div style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.5; color:#111;">
-                     <p>Bonjour <strong>%s</strong>,</p>
-                     <p>Un nouveau <strong>message d’intérêt</strong> a été enregistré pour votre boutique <strong>%s</strong>.</p>
-
-                     <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin:12px 0; width:100%%; max-width:640px;">
-                       <tbody>
-                         <tr>
-                           <td style="padding:6px 0; width:180px; color:#555;">Produit :</td>
-                           <td style="padding:6px 0;"><strong>%s</strong></td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Type :</td>
-                           <td style="padding:6px 0;">MESSAGE</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Identifiant :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Téléphone :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Email client :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Message :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                       </tbody>
-                     </table>
-
-                     <hr style="border:none; border-top:1px solid #eee; margin:12px 0;" />
-
-                     <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin:12px 0; width:100%%; max-width:640px;">
-                       <tbody>
-                         <tr>
-                           <td style="padding:6px 0; width:180px; color:#555;">Référence :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Montant affiché :</td>
-                           <td style="padding:6px 0;"><strong>%s XOF</strong></td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Quantité :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Locataire (tenant) :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                       </tbody>
-                     </table>
-
-                     <p style="color:#666; font-size:13px;">Prix unitaire (catalogue) : %s XOF</p>
-                     <p>Cordialement,<br/>BizyHub</p>
-                   </div>
-                   """.formatted(
+				<div style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.5; color:#111;">
+				  <p>Bonjour <strong>%s</strong>,</p>
+				  <p>Un nouveau <strong>message d’intérêt</strong> a été enregistré pour votre boutique <strong>%s</strong>.</p>
+				
+				  <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin:12px 0; width:100%%; max-width:640px;">
+				    <tbody>
+				      <tr>
+				        <td style="padding:6px 0; width:180px; color:#555;">Produit :</td>
+				        <td style="padding:6px 0;"><strong>%s</strong></td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Type :</td>
+				        <td style="padding:6px 0;">MESSAGE</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Identifiant :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Téléphone :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Email client :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Message :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				    </tbody>
+				  </table>
+				
+				  <hr style="border:none; border-top:1px solid #eee; margin:12px 0;" />
+				
+				  <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin:12px 0; width:100%%; max-width:640px;">
+				    <tbody>
+				      <tr>
+				        <td style="padding:6px 0; width:180px; color:#555;">Référence :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Montant affiché :</td>
+				        <td style="padding:6px 0;"><strong>%s XOF</strong></td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Quantité :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Locataire (tenant) :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				    </tbody>
+				  </table>
+				
+				  <p style="color:#666; font-size:13px;">Prix unitaire (catalogue) : %s XOF</p>
+				  <p>Cordialement,<br/>BizyHub</p>
+				</div>
+				""".formatted(
 				companyName,
 				companyName,
 				productName,
@@ -189,74 +224,74 @@ public class OrderCreateApplicationService {
 				productUnitXof != null ? productUnitXof.longValue() : 0L
 		)
 				: """
-                   <div style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.5; color:#111;">
-                     <p>Bonjour <strong>%s</strong>,</p>
-                     <p>Une nouvelle <strong>commande</strong> a été enregistrée pour votre boutique <strong>%s</strong>.</p>
-
-                     <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin:12px 0; width:100%%; max-width:640px;">
-                       <tbody>
-                         <tr>
-                           <td style="padding:6px 0; width:180px; color:#555;">Produit :</td>
-                           <td style="padding:6px 0;"><strong>%s</strong></td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Type :</td>
-                           <td style="padding:6px 0;">COMMANDE</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Identifiant :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Téléphone :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Email client :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Nom acheteur :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Adresse :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Notes :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                       </tbody>
-                     </table>
-
-                     <hr style="border:none; border-top:1px solid #eee; margin:12px 0;" />
-
-                     <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin:12px 0; width:100%%; max-width:640px;">
-                       <tbody>
-                         <tr>
-                           <td style="padding:6px 0; width:180px; color:#555;">Référence :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Montant payé :</td>
-                           <td style="padding:6px 0;"><strong>%s XOF</strong> </td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Quantité :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                         <tr>
-                           <td style="padding:6px 0; color:#555;">Locataire (tenant) :</td>
-                           <td style="padding:6px 0;">%s</td>
-                         </tr>
-                       </tbody>
-                     </table>
-
-                     <p style="color:#666; font-size:13px;">Prix unitaire (catalogue) : %s XOF</p>
-                     <p>Cordialement,<br/>BizyHub</p>
-                   </div>
-                   """.formatted(
+				<div style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.5; color:#111;">
+				  <p>Bonjour <strong>%s</strong>,</p>
+				  <p>Une nouvelle <strong>commande</strong> a été enregistrée pour votre boutique <strong>%s</strong>.</p>
+				
+				  <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin:12px 0; width:100%%; max-width:640px;">
+				    <tbody>
+				      <tr>
+				        <td style="padding:6px 0; width:180px; color:#555;">Produit :</td>
+				        <td style="padding:6px 0;"><strong>%s</strong></td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Type :</td>
+				        <td style="padding:6px 0;">COMMANDE</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Identifiant :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Téléphone :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Email client :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Nom acheteur :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Adresse :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Notes :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				    </tbody>
+				  </table>
+				
+				  <hr style="border:none; border-top:1px solid #eee; margin:12px 0;" />
+				
+				  <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin:12px 0; width:100%%; max-width:640px;">
+				    <tbody>
+				      <tr>
+				        <td style="padding:6px 0; width:180px; color:#555;">Référence :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Montant payé :</td>
+				        <td style="padding:6px 0;"><strong>%s XOF</strong> </td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Quantité :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				      <tr>
+				        <td style="padding:6px 0; color:#555;">Locataire (tenant) :</td>
+				        <td style="padding:6px 0;">%s</td>
+				      </tr>
+				    </tbody>
+				  </table>
+				
+				  <p style="color:#666; font-size:13px;">Prix unitaire (catalogue) : %s XOF</p>
+				  <p>Cordialement,<br/>BizyHub</p>
+				</div>
+				""".formatted(
 				companyName,
 				companyName,
 				productName,
@@ -295,35 +330,17 @@ public class OrderCreateApplicationService {
 		}
 	}
 
-	/* ==================== Helpers ==================== */
-
-	private static String safe(String s) { return s == null ? "" : s; }
-	private static String safe(Object o) { return o == null ? "" : String.valueOf(o); }
-	private static long safeInt(Integer i) { return i == null ? 0 : i; }
-	private static Number safeNum(Number n) { return n == null ? 0 : n; }
-
-	private static long centsToXof(Number cents) {
-		if (cents == null) return 0;
-		try { return cents.longValue() / 100L; } catch (Exception e) { return 0; }
-	}
-
-	// Protège minimalement contre l'injection HTML dans nos fragments interpolés
-	private static String escape(String v) {
-		if (v == null) return "";
-		return v.replace("&", "&amp;")
-				.replace("<", "&lt;")
-				.replace(">", "&gt;");
-	}
-
 	private void createTransactionAfterCreate(OrderRequest req, OrderResponse res, MetaRequest meta) {
 		final String productId = req.getProductId();
-		final Optional<Product> productOpt = StringUtils.hasText(productId) ? productReadRepository.findById(productId) : Optional.empty();
+		final Optional<Product>
+				productOpt =
+				StringUtils.hasText(productId) ? productReadRepository.findById(productId) : Optional.empty();
 		final String productName = productOpt.map(Product::getName).filter(StringUtils::hasText).orElse("Produit");
 		final String categoryId = productOpt.map(Product::getCategory).orElse(null);
 		final String companyId = productOpt.map(Product::getCompany).orElse(null);
 		final String accountId = productOpt.map(Product::getAccount).orElse(null);
 
-		if(req.getTypeOrder()!=null && req.getTypeOrder().equalsIgnoreCase("MESSAGE")) {
+		if (req.getTypeOrder() != null && req.getTypeOrder().equalsIgnoreCase("MESSAGE")) {
 			// Pas de transaction pour un simple message d’intérêt
 			log.warn("Skip transaction creation for MESSAGE type order");
 			return;
@@ -331,20 +348,28 @@ public class OrderCreateApplicationService {
 
 		final String createdById = productOpt.map(Product::getCreatedBy).map(u -> u.getId()).orElse(null);
 
-		final String codeVal = res != null && StringUtils.hasText(res.getId()) ? res.getId() : UUID.randomUUID().toString();
-		final Double amountXof = req.getAmountCents() != null ? req.getAmountCents()  : 0.0;
+		final String
+				codeVal =
+				res != null && StringUtils.hasText(res.getId()) ? res.getId() : UUID.randomUUID().toString();
+		final Double amountXof = req.getAmountCents() != null ? req.getAmountCents() : 0.0;
 		final java.time.Instant when = req.getDateCommand() != null ? req.getDateCommand() : java.time.Instant.now();
 		final String typeVal = StringUtils.hasText(req.getTypeOrder()) ? req.getTypeOrder() : "COMMAND";
-		  String descVal = (typeVal + " • " + productName + " • qty=" + (req.getQuantity() == null ? 1 : req.getQuantity())).trim();
+		String
+				descVal =
+				(typeVal +
+						" • " +
+						productName +
+						" • qty=" +
+						(req.getQuantity() == null ? 1 : req.getQuantity())).trim();
 
 		descVal = descVal + " • Client:  " + (StringUtils.hasText(req.getBuyerName()) ? req.getBuyerName() : "Anonyme");
 		descVal = descVal + " • Tel:  " + (StringUtils.hasText(req.getTelephone()) ? req.getTelephone() : "NC");
 		descVal = descVal + " • Email:  " + (StringUtils.hasText(req.getMail()) ? req.getMail() : "NC");
- 		descVal = descVal + " • Montant:  " + amountXof/100 + " XOF";
+		descVal = descVal + " • Montant:  " + amountXof / 100 + " XOF";
 
 		CreateTransactionCommand command = CreateTransactionCommand.builder()
 				//.remoteId(StringUtils.hasText(req.getRemoteId()) ? TransactionRemoteId.create(req.getRemoteId()) : null)
-				 .localId(StringUtils.hasText(req.getLocalId()) ? TransactionLocalId.create(req.getLocalId()) : null)
+				.localId(StringUtils.hasText(req.getLocalId()) ? TransactionLocalId.create(req.getLocalId()) : null)
 				.code(TransactionCode.create(codeVal))
 				.description(TransactionDescription.create(descVal))
 				.amount(TransactionAmount.create(amountXof))
@@ -352,7 +377,9 @@ public class OrderCreateApplicationService {
 				.dateTransaction(TransactionDateTransaction.create(when))
 				.status(TransactionStatus.create("INIT"))
 				.entityName(TransactionEntityName.create("orders"))
-				.entityId(TransactionEntityId.create(res != null && StringUtils.hasText(res.getId()) ? res.getId() : ""))
+				.entityId(TransactionEntityId.create(res != null && StringUtils.hasText(res.getId()) ?
+						res.getId() :
+						""))
 				//.account(StringUtils.hasText(accountId) ? TransactionAccount.create(accountId) : null)
 				.syncAt(TransactionSyncAt.create(java.time.Instant.now()))
 				.category(StringUtils.hasText(categoryId) ? TransactionCategory.create(categoryId) : null)

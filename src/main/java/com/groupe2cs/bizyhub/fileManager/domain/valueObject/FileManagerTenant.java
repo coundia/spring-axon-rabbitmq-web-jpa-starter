@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.fileManager.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerIdNotValid;
 import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerNameNotValid;
 import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerDetailsNotValid;
@@ -16,6 +17,7 @@ import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerCreatedByNo
 import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerTenantNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -31,35 +33,35 @@ import java.util.*;
 @Builder
 public class FileManagerTenant implements Serializable {
 
-private String tenant;
+	private String tenant;
 
-public FileManagerTenant(String tenant) {
-this.tenant = tenant;
-}
+	public FileManagerTenant(String tenant) {
+		this.tenant = tenant;
+	}
 
-public static FileManagerTenant create(String tenant) {
+	public static FileManagerTenant create(String tenant) {
 
-	return new FileManagerTenant(tenant);
-}
+		return new FileManagerTenant(tenant);
+	}
 
-public String value() {
-return this.tenant;
-}
+	public String value() {
+		return this.tenant;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof FileManagerTenant that)) return false;
-return this.tenant.equals(that.tenant);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof FileManagerTenant that)) return false;
+		return this.tenant.equals(that.tenant);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(tenant);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(tenant);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(tenant);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(tenant);
+	}
 }

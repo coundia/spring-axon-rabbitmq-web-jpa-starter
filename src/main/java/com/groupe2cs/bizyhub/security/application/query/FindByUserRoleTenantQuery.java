@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserRoleTenantQuery {
 
-	private final UserRoleTenant  tenant;
+	private final UserRoleTenant tenant;
 	private final MetaRequest metaRequest;
 
 }

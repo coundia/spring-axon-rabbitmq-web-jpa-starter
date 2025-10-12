@@ -40,43 +40,43 @@ import org.springframework.security.core.Authentication;
 @Slf4j
 public class FindBySyncAtProductController {
 
-private final ProductReadApplicationService applicationService;
+	private final ProductReadApplicationService applicationService;
 
-public FindBySyncAtProductController(ProductReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/syncAt")
-@Operation(
-summary = "Find product by syncAt",
-description = "Returns a list of products that match the given syncAt"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<List<ProductResponse>> findBySyncAt(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the syncAt to filter by", required = true)
-	@RequestParam java.time.Instant syncAt
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByProductSyncAt(ProductSyncAt
-	.create(syncAt) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find product by syncAt: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindBySyncAtProductController(ProductReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/syncAt")
+	@Operation(
+			summary = "Find product by syncAt",
+			description = "Returns a list of products that match the given syncAt"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<List<ProductResponse>> findBySyncAt(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the syncAt to filter by", required = true)
+			@RequestParam java.time.Instant syncAt
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByProductSyncAt(ProductSyncAt
+					.create(syncAt), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find product by syncAt: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

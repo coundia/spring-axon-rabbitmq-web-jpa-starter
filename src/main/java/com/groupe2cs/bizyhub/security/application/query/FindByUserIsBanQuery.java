@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserIsBanQuery {
 
-	private final UserIsBan  isBan;
+	private final UserIsBan isBan;
 	private final MetaRequest metaRequest;
 
 }

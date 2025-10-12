@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCompanyTaxIdQuery {
 
-	private final CompanyTaxId  taxId;
+	private final CompanyTaxId taxId;
 	private final MetaRequest metaRequest;
 
 }

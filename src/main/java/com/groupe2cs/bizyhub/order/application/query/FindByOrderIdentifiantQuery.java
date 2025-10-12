@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByOrderIdentifiantQuery {
 
-	private final OrderIdentifiant  identifiant;
+	private final OrderIdentifiant identifiant;
 	private final MetaRequest metaRequest;
 
 }

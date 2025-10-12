@@ -33,48 +33,48 @@ import org.springframework.security.core.Authentication;
 
 public class AddCompanyController {
 
-private final CompanyCreateApplicationService applicationService;
+	private final CompanyCreateApplicationService applicationService;
 
-public AddCompanyController(CompanyCreateApplicationService applicationService) {
-	this.applicationService = applicationService;
-}
-
-@PostMapping
-@Operation(
-summary = "Create a new company",
-description = "Creates a new company and returns the created entity",
-requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-description = "Company request payload",
-required = true,
-content = @Content(schema = @Schema(implementation = CompanyRequest.class))
-)
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "201", description = "Successfully created",
-content = @Content(schema = @Schema(implementation = CompanyResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content(schema = @Schema()))
-})
-public ResponseEntity<CompanyResponse> addCompany(@Valid @RequestBody CompanyRequest request,
-	@AuthenticationPrincipal Jwt jwt) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-		.build();
-
-		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	CompanyResponse response =  applicationService.createCompany(
-			request,
-			metaRequest
-	);
-
-	return ResponseEntity.status(HttpStatus.CREATED).body(response);
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to create company: {}", ex.getMessage());
-	return ResponseEntity.status(500).build();
+	public AddCompanyController(CompanyCreateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
-}
+
+	@PostMapping
+	@Operation(
+			summary = "Create a new company",
+			description = "Creates a new company and returns the created entity",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+					description = "Company request payload",
+					required = true,
+					content = @Content(schema = @Schema(implementation = CompanyRequest.class))
+			)
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Successfully created",
+					content = @Content(schema = @Schema(implementation = CompanyResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<CompanyResponse> addCompany(@Valid @RequestBody CompanyRequest request,
+													  @AuthenticationPrincipal Jwt jwt) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			CompanyResponse response = applicationService.createCompany(
+					request,
+					metaRequest
+			);
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception ex) {
+			//e.printStackTrace();
+			log.error("Failed to create company: {}", ex.getMessage());
+			return ResponseEntity.status(500).build();
+		}
+	}
 }

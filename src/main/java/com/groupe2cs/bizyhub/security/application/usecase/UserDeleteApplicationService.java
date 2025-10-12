@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deleteUser(UserId idVo, MetaRequest metaRequest) {
+	public void deleteUser(UserId idVo, MetaRequest metaRequest) {
 
-DeleteUserCommand command = new DeleteUserCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteUserCommand command = new DeleteUserCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

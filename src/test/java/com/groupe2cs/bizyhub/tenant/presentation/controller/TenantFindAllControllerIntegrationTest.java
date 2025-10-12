@@ -11,6 +11,7 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.tenant.application.command.*;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -32,83 +33,83 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TenantFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private TenantRepository tenantRepository;
+	@Autowired
+	private TenantRepository tenantRepository;
 
-@Autowired
-private TenantRepository tenantDataRepository ;
-@Autowired
-private UserRepository createdByDataRepository ;
+	@Autowired
+	private TenantRepository tenantDataRepository;
+	@Autowired
+	private UserRepository createdByDataRepository;
 
-@Test
-void it_should_return_only_user_tenants_for_normal_user() throws Exception {
+	@Test
+	void it_should_return_only_user_tenants_for_normal_user() throws Exception {
 
-List<CreateTenantCommand> userCommands =
-TenantFixtures.randomManyViaCommand(
-commandGateway,tenantRepository,
-        tenantDataRepository,
-        createdByDataRepository,
- 3, login("user", "user"));
-userCommands.forEach(cmd ->
-TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
-);
+		List<CreateTenantCommand> userCommands =
+				TenantFixtures.randomManyViaCommand(
+						commandGateway, tenantRepository,
+						tenantDataRepository,
+						createdByDataRepository,
+						3, login("user", "user"));
+		userCommands.forEach(cmd ->
+				TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
+		);
 
-login("user", "user");
-ResponseEntity<TenantPagedResponse> response = this.getForEntity(
-"/v1/admin/queries/tenants?page=0&limit=1000000",
-TenantPagedResponse.class
-);
-assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+		login("user", "user");
+		ResponseEntity<TenantPagedResponse> response = this.getForEntity(
+				"/v1/admin/queries/tenants?page=0&limit=1000000",
+				TenantPagedResponse.class
+		);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
 
-}
+	}
 
-@Test
-void it_should_return_all_tenants_for_admin() throws Exception {
+	@Test
+	void it_should_return_all_tenants_for_admin() throws Exception {
 
-    List<CreateTenantCommand> userCommands =
-    TenantFixtures.randomManyViaCommand(
-        commandGateway,
-        tenantRepository,
-        tenantDataRepository,
-        createdByDataRepository,
-         5, login("user", "user")
-      );
-    userCommands.forEach(cmd ->
-    TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
-    );
+		List<CreateTenantCommand> userCommands =
+				TenantFixtures.randomManyViaCommand(
+						commandGateway,
+						tenantRepository,
+						tenantDataRepository,
+						createdByDataRepository,
+						5, login("user", "user")
+				);
+		userCommands.forEach(cmd ->
+				TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
+		);
 
 
-List<CreateTenantCommand> adminCommands =
-TenantFixtures.randomManyViaCommand(
-commandGateway,tenantRepository,
-        tenantDataRepository,
-        createdByDataRepository,
- 5, login("admin", "admin"));
-adminCommands.forEach(cmd ->
-TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
-);
+		List<CreateTenantCommand> adminCommands =
+				TenantFixtures.randomManyViaCommand(
+						commandGateway, tenantRepository,
+						tenantDataRepository,
+						createdByDataRepository,
+						5, login("admin", "admin"));
+		adminCommands.forEach(cmd ->
+				TenantFixtures.byIdWaitExist(tenantRepository, cmd.getId().value())
+		);
 
-login("admin", "admin");
-ResponseEntity<TenantPagedResponse> response = this.getForEntity(
-"/v1/admin/queries/tenants?page=0&limit=1000000",
-TenantPagedResponse.class
-);
-assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-List<TenantResponse> content = response.getBody().getContent();
-assertThat(content).isNotEmpty();
+		login("admin", "admin");
+		ResponseEntity<TenantPagedResponse> response = this.getForEntity(
+				"/v1/admin/queries/tenants?page=0&limit=1000000",
+				TenantPagedResponse.class
+		);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		List<TenantResponse> content = response.getBody().getContent();
+		assertThat(content).isNotEmpty();
 
-List<String> expectedIds = userCommands.stream()
-.map(cmd -> cmd.getId().value())
-.collect(Collectors.toList());
+		List<String> expectedIds = userCommands.stream()
+				.map(cmd -> cmd.getId().value())
+				.collect(Collectors.toList());
 
-List<String> actualIds = content.stream()
-.map(TenantResponse::getId)
-.collect(Collectors.toList());
+		List<String> actualIds = content.stream()
+				.map(TenantResponse::getId)
+				.collect(Collectors.toList());
 
-assertThat(actualIds).containsAll(expectedIds);
+		assertThat(actualIds).containsAll(expectedIds);
 
-}
+	}
 }

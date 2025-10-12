@@ -10,41 +10,42 @@ import com.groupe2cs.bizyhub.security.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByPermissionIdHandler {
 
-private final PermissionRepository repository;
+	private final PermissionRepository repository;
 
-@QueryHandler
+	@QueryHandler
 
- public PermissionResponse handle(FindByPermissionIdQuery query) {
+	public PermissionResponse handle(FindByPermissionIdQuery query) {
 
-    MetaRequest metaRequest = query.getMetaRequest();
-    Permission entity = null;
+		MetaRequest metaRequest = query.getMetaRequest();
+		Permission entity = null;
 
-	String value = query.getId().value();
+		String value = query.getId().value();
 
-	if(metaRequest.isAdmin()) {
-	    entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }else{
-	    entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }
+		if (metaRequest.isAdmin()) {
+			entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		} else {
+			entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		}
 
-    if (entity == null) {
-        return null;
-    }
+		if (entity == null) {
+			return null;
+		}
 		return PermissionMapper.toResponse(entity);
 	}
 

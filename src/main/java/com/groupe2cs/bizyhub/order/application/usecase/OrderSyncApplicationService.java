@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.order.application.usecase;
+
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import com.groupe2cs.bizyhub.order.domain.valueObject.*;
 import com.groupe2cs.bizyhub.order.application.dto.*;
@@ -8,6 +9,7 @@ import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+
 import java.time.Instant;
 
 @Service
@@ -24,26 +26,26 @@ public class OrderSyncApplicationService {
 
 
 					CreateOrderCommand command = CreateOrderCommand.builder()
-								.productId(OrderProductId.create(d.getProductId()))
-								.userId(OrderUserId.create(d.getUserId()))
-								.identifiant(OrderIdentifiant.create(d.getIdentifiant()))
-								.telephone(OrderTelephone.create(d.getTelephone()))
-								.mail(OrderMail.create(d.getMail()))
-								.ville(OrderVille.create(d.getVille()))
-								.remoteId(OrderRemoteId.create(d.getRemoteId()))
-								.localId(OrderLocalId.create(d.getLocalId()))
-								.status(OrderStatus.create(d.getStatus()))
-								.buyerName(OrderBuyerName.create(d.getBuyerName()))
-								.address(OrderAddress.create(d.getAddress()))
-								.notes(OrderNotes.create(d.getNotes()))
-								.message(OrderMessage.create(d.getMessage()))
-								.typeOrder(OrderTypeOrder.create(d.getTypeOrder()))
-								.paymentMethod(OrderPaymentMethod.create(d.getPaymentMethod()))
-								.deliveryMethod(OrderDeliveryMethod.create(d.getDeliveryMethod()))
-								.amountCents(OrderAmountCents.create(d.getAmountCents()))
-								.quantity(OrderQuantity.create(d.getQuantity()))
-								.dateCommand(OrderDateCommand.create(d.getDateCommand()))
-						.build();
+							.productId(OrderProductId.create(d.getProductId()))
+							.userId(OrderUserId.create(d.getUserId()))
+							.identifiant(OrderIdentifiant.create(d.getIdentifiant()))
+							.telephone(OrderTelephone.create(d.getTelephone()))
+							.mail(OrderMail.create(d.getMail()))
+							.ville(OrderVille.create(d.getVille()))
+							.remoteId(OrderRemoteId.create(d.getRemoteId()))
+							.localId(OrderLocalId.create(d.getLocalId()))
+							.status(OrderStatus.create(d.getStatus()))
+							.buyerName(OrderBuyerName.create(d.getBuyerName()))
+							.address(OrderAddress.create(d.getAddress()))
+							.notes(OrderNotes.create(d.getNotes()))
+							.message(OrderMessage.create(d.getMessage()))
+							.typeOrder(OrderTypeOrder.create(d.getTypeOrder()))
+							.paymentMethod(OrderPaymentMethod.create(d.getPaymentMethod()))
+							.deliveryMethod(OrderDeliveryMethod.create(d.getDeliveryMethod()))
+							.amountCents(OrderAmountCents.create(d.getAmountCents()))
+							.quantity(OrderQuantity.create(d.getQuantity()))
+							.dateCommand(OrderDateCommand.create(d.getDateCommand()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -83,7 +85,7 @@ public class OrderSyncApplicationService {
 							.amountCents(OrderAmountCents.create(d.getAmountCents()))
 							.quantity(OrderQuantity.create(d.getQuantity()))
 							.dateCommand(OrderDateCommand.create(d.getDateCommand()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -95,8 +97,8 @@ public class OrderSyncApplicationService {
 					}
 
 					DeleteOrderCommand delete = DeleteOrderCommand.builder()
-						.id(OrderId.create(d.getId()))
-						.build();
+							.id(OrderId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

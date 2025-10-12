@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByPasswordResetTenantQuery {
 
-	private final PasswordResetTenant  tenant;
+	private final PasswordResetTenant tenant;
 	private final MetaRequest metaRequest;
 
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCompanyPostalCodeQuery {
 
-	private final CompanyPostalCode  postalCode;
+	private final CompanyPostalCode postalCode;
 	private final MetaRequest metaRequest;
 
 }

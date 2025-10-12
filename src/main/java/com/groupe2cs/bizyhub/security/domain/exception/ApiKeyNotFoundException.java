@@ -4,7 +4,7 @@ import com.groupe2cs.bizyhub.security.domain.valueObject.ApiKeyId;
 
 public class ApiKeyNotFoundException extends RuntimeException {
 
-public ApiKeyNotFoundException(String object, String value) {
-super("ApiKey with "+object+": '" + value + "' not found");
-}
+	public ApiKeyNotFoundException(String object, String value) {
+		super("ApiKey with " + object + ": '" + value + "' not found");
+	}
 }

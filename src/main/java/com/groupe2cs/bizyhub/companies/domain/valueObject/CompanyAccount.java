@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.companies.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyRemoteIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyLocalIdNotValid;
@@ -20,6 +21,7 @@ import com.groupe2cs.bizyhub.companies.domain.exception.CompanyCountryNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyAccountNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -35,35 +37,35 @@ import java.util.*;
 @Builder
 public class CompanyAccount implements Serializable {
 
-private String account;
+	private String account;
 
-public CompanyAccount(String account) {
-this.account = account;
-}
+	public CompanyAccount(String account) {
+		this.account = account;
+	}
 
-public static CompanyAccount create(String account) {
+	public static CompanyAccount create(String account) {
 
-	return new CompanyAccount(account);
-}
+		return new CompanyAccount(account);
+	}
 
-public String value() {
-return this.account;
-}
+	public String value() {
+		return this.account;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof CompanyAccount that)) return false;
-return this.account.equals(that.account);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CompanyAccount that)) return false;
+		return this.account.equals(that.account);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(account);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(account);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(account);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(account);
+	}
 }

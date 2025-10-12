@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
@@ -20,6 +21,7 @@ import com.groupe2cs.bizyhub.order.domain.exception.OrderPaymentMethodNotValid;
 import com.groupe2cs.bizyhub.order.domain.exception.OrderDeliveryMethodNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -35,35 +37,35 @@ import java.util.*;
 @Builder
 public class OrderDeliveryMethod implements Serializable {
 
-private String deliveryMethod;
+	private String deliveryMethod;
 
-public OrderDeliveryMethod(String deliveryMethod) {
-this.deliveryMethod = deliveryMethod;
-}
+	public OrderDeliveryMethod(String deliveryMethod) {
+		this.deliveryMethod = deliveryMethod;
+	}
 
-public static OrderDeliveryMethod create(String deliveryMethod) {
+	public static OrderDeliveryMethod create(String deliveryMethod) {
 
-	return new OrderDeliveryMethod(deliveryMethod);
-}
+		return new OrderDeliveryMethod(deliveryMethod);
+	}
 
-public String value() {
-return this.deliveryMethod;
-}
+	public String value() {
+		return this.deliveryMethod;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof OrderDeliveryMethod that)) return false;
-return this.deliveryMethod.equals(that.deliveryMethod);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OrderDeliveryMethod that)) return false;
+		return this.deliveryMethod.equals(that.deliveryMethod);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(deliveryMethod);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(deliveryMethod);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(deliveryMethod);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(deliveryMethod);
+	}
 }

@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.fileManager.domain.event;
 
-	import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,20 +18,7 @@ import java.util.*;
 @NoArgsConstructor
 public class FileManagerDeletedEvent implements Serializable {
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-private FileManagerId id;
+	private FileManagerId id;
 
 }

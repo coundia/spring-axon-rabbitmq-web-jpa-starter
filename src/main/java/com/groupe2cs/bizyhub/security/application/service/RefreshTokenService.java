@@ -23,36 +23,36 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RefreshTokenService {
 
-private final JwtDecoder jwtDecoder;
-private final RefreshTokenRepository refreshTokenRepository;
+	private final JwtDecoder jwtDecoder;
+	private final RefreshTokenRepository refreshTokenRepository;
 
-@Transactional
-public void save(String token, MetaRequest metaRequest) {
-try {
-Jwt jwt = jwtDecoder.decode(token);
-String username = jwt.getSubject();
-Instant expiration = jwt.getExpiresAt();
+	@Transactional
+	public void save(String token, MetaRequest metaRequest) {
+		try {
+			Jwt jwt = jwtDecoder.decode(token);
+			String username = jwt.getSubject();
+			Instant expiration = jwt.getExpiresAt();
 
-String tenantId = metaRequest.getTenantId();
+			String tenantId = metaRequest.getTenantId();
 
 //refreshTokenRepository.deleteByUsernameAndTenantId(username,tenantId);
 
-RefreshToken refreshToken = RefreshToken.builder()
-.id(UUID.randomUUID().toString())
-.token(token)
-.username(username)
-.tenant(new Tenant(tenantId))
-.expiration(expiration)
-.createdBy(new User(RequestContext.getUserId(jwt)))
-.build();
+			RefreshToken refreshToken = RefreshToken.builder()
+					.id(UUID.randomUUID().toString())
+					.token(token)
+					.username(username)
+					.tenant(new Tenant(tenantId))
+					.expiration(expiration)
+					.createdBy(new User(RequestContext.getUserId(jwt)))
+					.build();
 
-refreshTokenRepository.save(refreshToken);
+			refreshTokenRepository.save(refreshToken);
 
-log.info("Refresh token saved for {}", username);
+			log.info("Refresh token saved for {}", username);
 
-} catch (Exception e) {
-log.error("Error while saving refresh token: {}", e.getMessage(), e);
-}
-}
+		} catch (Exception e) {
+			log.error("Error while saving refresh token: {}", e.getMessage(), e);
+		}
+	}
 }
 

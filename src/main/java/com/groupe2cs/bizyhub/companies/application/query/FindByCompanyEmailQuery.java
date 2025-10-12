@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByCompanyEmailQuery {
 
-	private final CompanyEmail  email;
+	private final CompanyEmail email;
 	private final MetaRequest metaRequest;
 
 }

@@ -40,43 +40,43 @@ import org.springframework.security.core.Authentication;
 @Slf4j
 public class FindByIdApiKeyController {
 
-private final ApiKeyReadApplicationService applicationService;
+	private final ApiKeyReadApplicationService applicationService;
 
-public FindByIdApiKeyController(ApiKeyReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/id")
-@Operation(
-summary = "Find apiKey by id",
-description = "Returns a single apiKeys that match the given id"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiKeyResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<ApiKeyResponse> findById(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the id to filter by", required = true)
-	@RequestParam String id
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByApiKeyId(ApiKeyId
-	.create(id) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find apiKey by id: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindByIdApiKeyController(ApiKeyReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/id")
+	@Operation(
+			summary = "Find apiKey by id",
+			description = "Returns a single apiKeys that match the given id"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiKeyResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<ApiKeyResponse> findById(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the id to filter by", required = true)
+			@RequestParam String id
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByApiKeyId(ApiKeyId
+					.create(id), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find apiKey by id: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

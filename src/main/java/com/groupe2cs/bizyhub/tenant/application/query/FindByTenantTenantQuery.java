@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByTenantTenantQuery {
 
-	private final TenantTenant  tenant;
+	private final TenantTenant tenant;
 	private final MetaRequest metaRequest;
 
 }

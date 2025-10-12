@@ -33,22 +33,22 @@ import java.util.List;
 @Tag(name = "Company Queries", description = "Endpoints public for listing paginated companies")
 public class CompanyPublicController {
 
-     private final CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
-    private final CompanyRepository repository;
+	private final CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
+	private final CompanyRepository repository;
 
-    @GetMapping
-    @Operation(summary = "List paginated companies", description = "Returns a paginated list of companies based on page and limit parameters")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved list of companies", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CompanyPagedResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-    })
-    public CompanyPagedResponse list(
-            @Parameter(description = "Page number (zero-based index)", example = "0") @RequestParam(defaultValue = "0") int page,
-            @Parameter(description = "Number of items per page", example = "10") @RequestParam(defaultValue = "10") int limit
-    ) {
-        String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
-        Page<Company> paged = repository.findPublicByTenantId(tenantId, PageRequest.of(page, limit));
-        List<CompanyResponse> content = paged.getContent().stream().map(CompanyMapper::toResponse).toList();
-        return CompanyPagedResponse.from(paged, content);
-    }
+	@GetMapping
+	@Operation(summary = "List paginated companies", description = "Returns a paginated list of companies based on page and limit parameters")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Successfully retrieved list of companies", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CompanyPagedResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+	public CompanyPagedResponse list(
+			@Parameter(description = "Page number (zero-based index)", example = "0") @RequestParam(defaultValue = "0") int page,
+			@Parameter(description = "Number of items per page", example = "10") @RequestParam(defaultValue = "10") int limit
+	) {
+		String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
+		Page<Company> paged = repository.findPublicByTenantId(tenantId, PageRequest.of(page, limit));
+		List<CompanyResponse> content = paged.getContent().stream().map(CompanyMapper::toResponse).toList();
+		return CompanyPagedResponse.from(paged, content);
+	}
 }

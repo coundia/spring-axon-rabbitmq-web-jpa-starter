@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.companies.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyRemoteIdNotValid;
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyLocalIdNotValid;
@@ -17,6 +18,7 @@ import com.groupe2cs.bizyhub.companies.domain.exception.CompanyAddressLine2NotVa
 import com.groupe2cs.bizyhub.companies.domain.exception.CompanyCityNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -32,35 +34,35 @@ import java.util.*;
 @Builder
 public class CompanyCity implements Serializable {
 
-private String city;
+	private String city;
 
-public CompanyCity(String city) {
-this.city = city;
-}
+	public CompanyCity(String city) {
+		this.city = city;
+	}
 
-public static CompanyCity create(String city) {
+	public static CompanyCity create(String city) {
 
-	return new CompanyCity(city);
-}
+		return new CompanyCity(city);
+	}
 
-public String value() {
-return this.city;
-}
+	public String value() {
+		return this.city;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof CompanyCity that)) return false;
-return this.city.equals(that.city);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CompanyCity that)) return false;
+		return this.city.equals(that.city);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(city);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(city);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(city);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(city);
+	}
 }

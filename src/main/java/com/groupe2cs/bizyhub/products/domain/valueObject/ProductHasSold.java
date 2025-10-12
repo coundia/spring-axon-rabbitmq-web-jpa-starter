@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.products.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.products.domain.exception.ProductIdNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductRemoteIdNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductLocalIdNotValid;
@@ -12,6 +13,7 @@ import com.groupe2cs.bizyhub.products.domain.exception.ProductIsPublicNotValid;
 import com.groupe2cs.bizyhub.products.domain.exception.ProductHasSoldNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -27,35 +29,35 @@ import java.util.*;
 @Builder
 public class ProductHasSold implements Serializable {
 
-private Boolean hasSold;
+	private Boolean hasSold;
 
-public ProductHasSold(Boolean hasSold) {
-this.hasSold = hasSold;
-}
+	public ProductHasSold(Boolean hasSold) {
+		this.hasSold = hasSold;
+	}
 
-public static ProductHasSold create(Boolean hasSold) {
+	public static ProductHasSold create(Boolean hasSold) {
 
-	return new ProductHasSold(hasSold);
-}
+		return new ProductHasSold(hasSold);
+	}
 
-public Boolean value() {
-return this.hasSold;
-}
+	public Boolean value() {
+		return this.hasSold;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof ProductHasSold that)) return false;
-return this.hasSold.equals(that.hasSold);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ProductHasSold that)) return false;
+		return this.hasSold.equals(that.hasSold);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(hasSold);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(hasSold);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(hasSold);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(hasSold);
+	}
 }

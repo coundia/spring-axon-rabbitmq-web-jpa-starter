@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByProductIsPublicQuery {
 
-	private final ProductIsPublic  isPublic;
+	private final ProductIsPublic isPublic;
 	private final MetaRequest metaRequest;
 
 }

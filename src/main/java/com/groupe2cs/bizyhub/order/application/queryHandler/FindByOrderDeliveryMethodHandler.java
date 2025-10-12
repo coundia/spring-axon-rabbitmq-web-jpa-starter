@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.order.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByOrderDeliveryMethodHandler {
 
-private final OrderRepository repository;
+	private final OrderRepository repository;
 
-@QueryHandler
-public List<OrderResponse> handle(FindByOrderDeliveryMethodQuery query) {
+	@QueryHandler
+	public List<OrderResponse> handle(FindByOrderDeliveryMethodQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<Order> entities = null;
-	 String value = query.getDeliveryMethod().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<Order> entities = null;
+		String value = query.getDeliveryMethod().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByDeliveryMethodAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByDeliveryMethodAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByDeliveryMethodAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByDeliveryMethodAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(OrderMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(OrderMapper::toResponse)
+				.toList();
 	}
 
 

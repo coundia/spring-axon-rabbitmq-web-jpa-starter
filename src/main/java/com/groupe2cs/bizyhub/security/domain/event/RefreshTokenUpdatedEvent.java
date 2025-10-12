@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
-	import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,13 +18,12 @@ import java.util.*;
 @NoArgsConstructor
 public class RefreshTokenUpdatedEvent implements Serializable {
 
-    private RefreshTokenId id;
-    private RefreshTokenToken token;
-    private RefreshTokenUsername username;
-    private RefreshTokenExpiration expiration;
-    private RefreshTokenCreatedBy createdBy;
-    private RefreshTokenTenant tenant;
-
+	private RefreshTokenId id;
+	private RefreshTokenToken token;
+	private RefreshTokenUsername username;
+	private RefreshTokenExpiration expiration;
+	private RefreshTokenCreatedBy createdBy;
+	private RefreshTokenTenant tenant;
 
 
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByOrderBuyerNameQuery {
 
-	private final OrderBuyerName  buyerName;
+	private final OrderBuyerName buyerName;
 	private final MetaRequest metaRequest;
 
 }

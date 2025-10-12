@@ -53,7 +53,7 @@ public class ProductImageService {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		String urlPath = "/api/public/products/" + productId + "/images/" + imageId ;
+		String urlPath = "/api/public/products/" + productId + "/images/" + imageId;
 		String absoluteUrl = buildAbsoluteUrl(urlPath);
 		ProductImage entity = ProductImage.builder()
 				.id(imageId)
@@ -76,16 +76,17 @@ public class ProductImageService {
 
 	@Transactional(readOnly = true)
 	public List<ProductImageResponse> list(String productId) {
-		return productImageRepository.findByProductIdOrderByUpdatedAtAuditDescCreatedAtAuditDesc(productId).stream().map(e ->
-				ProductImageResponse.builder()
-						.id(e.getId())
-						.filename(e.getFilename())
-						.contentType(e.getContentType())
-						.size(e.getSize())
-						.url(normalizeUrl(e.getUrl()))
-						.createdAt(e.getCreatedAtAudit())
-						.build()
-		).toList();
+		return productImageRepository.findByProductIdOrderByUpdatedAtAuditDescCreatedAtAuditDesc(productId).stream()
+				.map(e ->
+						ProductImageResponse.builder()
+								.id(e.getId())
+								.filename(e.getFilename())
+								.contentType(e.getContentType())
+								.size(e.getSize())
+								.url(normalizeUrl(e.getUrl()))
+								.createdAt(e.getCreatedAtAudit())
+								.build()
+				).toList();
 	}
 
 	public void delete(String productId, String imageId) {
@@ -130,7 +131,11 @@ public class ProductImageService {
 
 	private String buildAbsoluteUrl(String urlPath) {
 		if (publicBaseUrl != null && !publicBaseUrl.isBlank()) {
-			String base = publicBaseUrl.endsWith("/") ? publicBaseUrl.substring(0, publicBaseUrl.length() - 1) : publicBaseUrl;
+			String
+					base =
+					publicBaseUrl.endsWith("/") ?
+							publicBaseUrl.substring(0, publicBaseUrl.length() - 1) :
+							publicBaseUrl;
 			return base + urlPath;
 		}
 		return ServletUriComponentsBuilder.fromCurrentContextPath().path(urlPath).toUriString();

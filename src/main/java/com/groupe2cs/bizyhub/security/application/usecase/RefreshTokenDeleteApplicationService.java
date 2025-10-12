@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RefreshTokenDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deleteRefreshToken(RefreshTokenId idVo, MetaRequest metaRequest) {
+	public void deleteRefreshToken(RefreshTokenId idVo, MetaRequest metaRequest) {
 
-DeleteRefreshTokenCommand command = new DeleteRefreshTokenCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteRefreshTokenCommand command = new DeleteRefreshTokenCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

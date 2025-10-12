@@ -3,13 +3,17 @@ package com.groupe2cs.bizyhub.security.application.command;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Builder;
+
 import java.util.Date;
+
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
 import java.util.UUID;
 
 
@@ -22,15 +26,15 @@ import java.util.*;
 @NoArgsConstructor
 @Builder
 public class UpdateApiKeyCommand implements Serializable {
-@TargetAggregateIdentifier
+	@TargetAggregateIdentifier
 	private ApiKeyId id;
-        private ApiKeyAppKey appKey;
-        private ApiKeyUsername username;
-        private ApiKeyActive active;
-        private ApiKeyCreatedAt createdAt;
-        private ApiKeyExpiration expiration;
-        private ApiKeyCreatedBy createdBy;
-        private ApiKeyTenant tenant;
+	private ApiKeyAppKey appKey;
+	private ApiKeyUsername username;
+	private ApiKeyActive active;
+	private ApiKeyCreatedAt createdAt;
+	private ApiKeyExpiration expiration;
+	private ApiKeyCreatedBy createdBy;
+	private ApiKeyTenant tenant;
 
 
 }

@@ -14,10 +14,9 @@ import java.util.Optional;
 
 @Repository
 public interface ProductBisRepository
-        extends JpaRepository<Product, String>, JpaSpecificationExecutor<Product> {
+		extends JpaRepository<Product, String>, JpaSpecificationExecutor<Product> {
 
-    Page<Product> findByStatusesIgnoreCaseOrderByUpdatedAtAuditDescCreatedAtAuditDesc(String status,   Pageable pageable);
-
+	Page<Product> findByStatusesIgnoreCaseOrderByUpdatedAtAuditDescCreatedAtAuditDesc(String status, Pageable pageable);
 
 
 }

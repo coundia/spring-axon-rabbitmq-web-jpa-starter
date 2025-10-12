@@ -21,7 +21,7 @@ public class ChatSyncApplicationService {
 
 	public void syncChat(ChatSyncRequest request, MetaRequest metaRequest) {
 
-		userValidationService.shouldBePremiumUser(metaRequest.getUserId()) ;
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {

@@ -32,14 +32,93 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class ChatAutoResponder {
 
-	private final IAService iaService;
-	private final CommandGateway commandGateway;
-
 	private static final ObjectMapper MAPPER = new ObjectMapper()
 			.registerModule(new JavaTimeModule())
 			.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 			// ⬇️ Empêche l’échec si l’IA ajoute des champs non prévus (ex: "details")
 			.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	private final IAService iaService;
+	private final CommandGateway commandGateway;
+
+	private static ObjectNode normalizeDeltaNode(JsonNode n) {
+		ObjectNode out = n.isObject() ? ((ObjectNode) n).deepCopy() : MAPPER.createObjectNode();
+
+		// description: accepte "description" ou "details"
+		if (isBlank(out.path("description")) && !isBlank(out.path("details"))) {
+			out.put("description", out.path("details").asText());
+		}
+
+		// type: unifie depuis "typeTransactionRaw", "typeEntry" ou "type"
+		String type = null;
+		if (!isBlank(out.path("typeTransactionRaw"))) type = out.path("typeTransactionRaw").asText();
+		else if (!isBlank(out.path("typeEntry"))) type = out.path("typeEntry").asText();
+		else if (!isBlank(out.path("type"))) type = out.path("type").asText();
+		if (type == null || type.isBlank()) type = "IN";
+		out.put("type", type);        // pour DTO (au cas où)
+		out.put("typeEntry", type);   // si DTO attend "typeEntry"
+
+		// dateTransaction: garde tel quel si présent
+		// amount: si string, essaye de parser
+		if (out.has("amount") && out.path("amount").isTextual()) {
+			try {
+				out.put("amount", Double.parseDouble(out.path("amount").asText().replace(" ", "")));
+			} catch (Exception ignore) {
+			}
+		}
+
+		// category: accept "category" (label); l’id sera résolu ensuite
+		// rien à faire ici, mais on garantit la présence du champ
+		if (isBlank(out.path("category")) && !isBlank(out.path("categoryName"))) {
+			out.put("category", out.path("categoryName").asText());
+		}
+
+		return out;
+	}
+
+	// ---------------- helpers ----------------
+
+	private static boolean isBlank(JsonNode n) {
+		return n == null || n.isMissingNode() || n.isNull()
+				|| (n.isTextual() && n.asText().trim().isEmpty());
+	}
+
+	private static String extractJsonOrNullBalanced(String s) {
+		if (s == null) return null;
+		int depth = 0, start = -1;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (c == '{') {
+				if (depth == 0) start = i;
+				depth++;
+			} else if (c == '}') {
+				depth--;
+				if (depth == 0 && start >= 0) {
+					String candidate = s.substring(start, i + 1).trim();
+					if (candidate.startsWith("{") && candidate.endsWith("}")) return candidate;
+					start = -1;
+				}
+			}
+		}
+		return null;
+	}
+
+	private static String text(JsonNode node, String field, String def) {
+		JsonNode n = node.path(field);
+		if (n.isMissingNode() || n.isNull()) return def;
+		String v = n.asText();
+		return (v == null || v.isBlank()) ? def : v;
+	}
+
+	private static String safe(String v) {
+		if (v == null) return "null";
+		return v.length() > 256 ? v.substring(0, 256) + "…" : v;
+	}
+
+	private static String preview(String v) {
+		if (v == null) return "null";
+		String s = v.replace("\n", " ").replace("\r", " ");
+		return s.length() > 200 ? s.substring(0, 200) + "…" : s;
+	}
 
 	@EventHandler
 	public void on(ChatCreatedEvent event) {
@@ -117,7 +196,7 @@ public class ChatAutoResponder {
 					.localId(TransactionLocalId.create(UUID.randomUUID().toString()))
 					.code(TransactionCode.create(UUID.randomUUID().toString()))
 					.description(TransactionDescription.create(description))
-					.amount(TransactionAmount.create(amount*100))
+					.amount(TransactionAmount.create(amount * 100))
 					.account(TransactionAccount.create(event.getAccount().value()))
 					.typeEntry(TransactionTypeEntry.create(typeRaw))
 					.dateTransaction(TransactionDateTransaction.create(when))
@@ -130,8 +209,14 @@ public class ChatAutoResponder {
 					.tenant(TransactionTenant.create(event.getTenant().value()))
 					.build();
 
-			log.info("[ChatAutoResponder] Dispatch CreateTransaction corrId={} amount={} type={} date={} catId={} desc='{}'",
-					correlation, amount, typeRaw, when, resolvedCategoryId, description);
+			log.info(
+					"[ChatAutoResponder] Dispatch CreateTransaction corrId={} amount={} type={} date={} catId={} desc='{}'",
+					correlation,
+					amount,
+					typeRaw,
+					when,
+					resolvedCategoryId,
+					description);
 
 			try {
 				Object result = commandGateway.sendAndWait(tx, 30, TimeUnit.SECONDS);
@@ -143,7 +228,8 @@ public class ChatAutoResponder {
 				UpdateChatCommand fail = UpdateChatCommand.builder()
 						.id(event.getId())
 						.messages(event.getMessages())
-						.responses(new ChatResponses("Échec de création transaction: " + safe(dispatchErr.getMessage())))
+						.responses(new ChatResponses("Échec de création transaction: " +
+								safe(dispatchErr.getMessage())))
 						.responsesJson(new ChatResponsesJson(aiRaw == null ? "" : aiRaw))
 						.state(new ChatState("FAIL"))
 						.build();
@@ -167,82 +253,5 @@ public class ChatAutoResponder {
 					.build();
 			commandGateway.send(fail);
 		}
-	}
-
-	// ---------------- helpers ----------------
-
-	private static ObjectNode normalizeDeltaNode(JsonNode n) {
-		ObjectNode out = n.isObject() ? ((ObjectNode) n).deepCopy() : MAPPER.createObjectNode();
-
-		// description: accepte "description" ou "details"
-		if (isBlank(out.path("description")) && !isBlank(out.path("details"))) {
-			out.put("description", out.path("details").asText());
-		}
-
-		// type: unifie depuis "typeTransactionRaw", "typeEntry" ou "type"
-		String type = null;
-		if (!isBlank(out.path("typeTransactionRaw"))) type = out.path("typeTransactionRaw").asText();
-		else if (!isBlank(out.path("typeEntry")))    type = out.path("typeEntry").asText();
-		else if (!isBlank(out.path("type")))         type = out.path("type").asText();
-		if (type == null || type.isBlank()) type = "IN";
-		out.put("type", type);        // pour DTO (au cas où)
-		out.put("typeEntry", type);   // si DTO attend "typeEntry"
-
-		// dateTransaction: garde tel quel si présent
-		// amount: si string, essaye de parser
-		if (out.has("amount") && out.path("amount").isTextual()) {
-			try {
-				out.put("amount", Double.parseDouble(out.path("amount").asText().replace(" ", "")));
-			} catch (Exception ignore) {}
-		}
-
-		// category: accept "category" (label); l’id sera résolu ensuite
-		// rien à faire ici, mais on garantit la présence du champ
-		if (isBlank(out.path("category")) && !isBlank(out.path("categoryName"))) {
-			out.put("category", out.path("categoryName").asText());
-		}
-
-		return out;
-	}
-
-	private static boolean isBlank(JsonNode n) {
-		return n == null || n.isMissingNode() || n.isNull()
-				|| (n.isTextual() && n.asText().trim().isEmpty());
-	}
-
-	private static String extractJsonOrNullBalanced(String s) {
-		if (s == null) return null;
-		int depth = 0, start = -1;
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			if (c == '{') { if (depth == 0) start = i; depth++; }
-			else if (c == '}') {
-				depth--;
-				if (depth == 0 && start >= 0) {
-					String candidate = s.substring(start, i + 1).trim();
-					if (candidate.startsWith("{") && candidate.endsWith("}")) return candidate;
-					start = -1;
-				}
-			}
-		}
-		return null;
-	}
-
-	private static String text(JsonNode node, String field, String def) {
-		JsonNode n = node.path(field);
-		if (n.isMissingNode() || n.isNull()) return def;
-		String v = n.asText();
-		return (v == null || v.isBlank()) ? def : v;
-	}
-
-	private static String safe(String v) {
-		if (v == null) return "null";
-		return v.length() > 256 ? v.substring(0, 256) + "…" : v;
-	}
-
-	private static String preview(String v) {
-		if (v == null) return "null";
-		String s = v.replace("\n", " ").replace("\r", " ");
-		return s.length() > 200 ? s.substring(0, 200) + "…" : s;
 	}
 }

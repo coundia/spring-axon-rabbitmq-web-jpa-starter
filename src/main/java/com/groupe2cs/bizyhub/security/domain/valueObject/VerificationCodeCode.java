@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeIdNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeNotesNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeTokenNotValid;
@@ -10,6 +11,7 @@ import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeEmailNotV
 import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeCodeNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -25,35 +27,35 @@ import java.util.*;
 @Builder
 public class VerificationCodeCode implements Serializable {
 
-private String code;
+	private String code;
 
-public VerificationCodeCode(String code) {
-this.code = code;
-}
+	public VerificationCodeCode(String code) {
+		this.code = code;
+	}
 
-public static VerificationCodeCode create(String code) {
+	public static VerificationCodeCode create(String code) {
 
-	return new VerificationCodeCode(code);
-}
+		return new VerificationCodeCode(code);
+	}
 
-public String value() {
-return this.code;
-}
+	public String value() {
+		return this.code;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof VerificationCodeCode that)) return false;
-return this.code.equals(that.code);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof VerificationCodeCode that)) return false;
+		return this.code.equals(that.code);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(code);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(code);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(code);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(code);
+	}
 }

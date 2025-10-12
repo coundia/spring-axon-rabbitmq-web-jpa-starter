@@ -76,8 +76,7 @@ public class TransactionUserProjection {
 				entity.setTenant(new Tenant(event.getTenant().value()));
 			}
 
-				entity.setRemoteId(event.getId().value());
-
+			entity.setRemoteId(event.getId().value());
 
 
 			repository.save(entity);

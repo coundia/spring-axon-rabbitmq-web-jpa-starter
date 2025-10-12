@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RolePermissionDeleteApplicationService {
 
-private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-public void deleteRolePermission(RolePermissionId idVo, MetaRequest metaRequest) {
+	public void deleteRolePermission(RolePermissionId idVo, MetaRequest metaRequest) {
 
-DeleteRolePermissionCommand command = new DeleteRolePermissionCommand(idVo);
-commandGateway.sendAndWait(command);
-}
+		DeleteRolePermissionCommand command = new DeleteRolePermissionCommand(idVo);
+		commandGateway.sendAndWait(command);
+	}
 }

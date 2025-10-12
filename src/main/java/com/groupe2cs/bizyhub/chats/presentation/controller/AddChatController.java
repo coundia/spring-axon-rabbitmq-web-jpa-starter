@@ -56,7 +56,7 @@ public class AddChatController {
 					content = @Content(schema = @Schema()))
 	})
 	public ResponseEntity<?> addChat(@Valid @RequestBody ChatRequest request,
-												@AuthenticationPrincipal Jwt jwt) {
+									 @AuthenticationPrincipal Jwt jwt) {
 		try {
 
 			MetaRequest metaRequest = MetaRequest.builder()

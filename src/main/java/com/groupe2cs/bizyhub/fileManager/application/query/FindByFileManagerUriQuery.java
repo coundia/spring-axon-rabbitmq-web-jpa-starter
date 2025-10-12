@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByFileManagerUriQuery {
 
-	private final FileManagerUri  uri;
+	private final FileManagerUri uri;
 	private final MetaRequest metaRequest;
 
 }

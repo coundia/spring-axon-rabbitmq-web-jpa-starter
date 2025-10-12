@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByOrderPaymentMethodQuery {
 
-	private final OrderPaymentMethod  paymentMethod;
+	private final OrderPaymentMethod paymentMethod;
 	private final MetaRequest metaRequest;
 
 }
