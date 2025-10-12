@@ -1,20 +1,10 @@
 package com.groupe2cs.bizyhub.transactions.application.command;
 
 import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import lombok.*;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-import java.util.Date;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
-import java.util.UUID;
-
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -22,18 +12,26 @@ import java.util.*;
 @NoArgsConstructor
 @Builder
 public class UpdateTransactionCommand implements Serializable {
-@TargetAggregateIdentifier
+	@TargetAggregateIdentifier
 	private TransactionId id;
- 	private TransactionName name;
- 	private TransactionAmount amount;
- 	private TransactionDetails details;
- 	private TransactionIsActive isActive;
- 	private TransactionAccount account;
- 	private TransactionCategory category;
- 	private TransactionTypeTransactionRaw typeTransactionRaw;
- 	private TransactionDateTransaction dateTransaction;
- 	private TransactionCreatedBy createdBy;
- 	private TransactionTenant tenant;
+	private TransactionRemoteId remoteId;
+	private TransactionLocalId localId;
+	private TransactionCode code;
+	private TransactionDescription description;
+	private TransactionAmount amount;
+	private TransactionTypeEntry typeEntry;
+	private TransactionDateTransaction dateTransaction;
+	private TransactionStatus status;
+	private TransactionEntityName entityName;
+	private TransactionEntityId entityId;
+	private TransactionAccount account;
+	private TransactionSyncAt syncAt;
+	private TransactionCategory category;
+	private TransactionCompany company;
+	private TransactionCustomer customer;
+	private TransactionDebt debt;
+	private TransactionCreatedBy createdBy;
+	private TransactionTenant tenant;
 
 
 }

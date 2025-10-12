@@ -33,46 +33,47 @@ import org.springframework.security.core.Authentication;
 @Slf4j
 public class UpdateUserRoleController {
 
-private final UserRoleUpdateApplicationService applicationService;
+	private final UserRoleUpdateApplicationService applicationService;
 
-public UpdateUserRoleController(UserRoleUpdateApplicationService  applicationService) {
-this.applicationService = applicationService;
-}
-
-@Operation(summary = "Update a new userRole")
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "UserRole Updated",
-content = @Content(mediaType = "application/json",
-schema = @Schema(implementation = UserRoleResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content)
-})
-@PutMapping(value="{id}",  consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<UserRoleResponse> updateUserRole(
-	@Valid @PathVariable String id,
-	@RequestBody UserRoleRequest request,
-	@AuthenticationPrincipal Jwt jwt
-	) { {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-
-    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	UserRoleResponse response = applicationService.updateUserRole(UserRoleId.create(id),
-	request,
-	metaRequest
-	);
-
-	return ResponseEntity.ok(response);
-
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to Update userRole: {}", ex.getMessage(), ex);
-	return ResponseEntity.internalServerError().build();
+	public UpdateUserRoleController(UserRoleUpdateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@Operation(summary = "Update a new userRole")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "UserRole Updated",
+					content = @Content(mediaType = "application/json",
+							schema = @Schema(implementation = UserRoleResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content)
+	})
+	@PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserRoleResponse> updateUserRole(
+			@Valid @PathVariable String id,
+			@RequestBody UserRoleRequest request,
+			@AuthenticationPrincipal Jwt jwt
+	) {
+		{
+			try {
+
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+				metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+				UserRoleResponse response = applicationService.updateUserRole(UserRoleId.create(id),
+						request,
+						metaRequest
+				);
+
+				return ResponseEntity.ok(response);
+
+			} catch (Exception ex) {
+				//e.printStackTrace();
+				log.error("Failed to Update userRole: {}", ex.getMessage(), ex);
+				return ResponseEntity.internalServerError().build();
+			}
+		}
 	}
-}
 }

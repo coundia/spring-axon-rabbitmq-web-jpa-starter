@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByFileManagerMimeTypeQuery {
 
-	private final FileManagerMimeType  mimeType;
+	private final FileManagerMimeType mimeType;
 	private final MetaRequest metaRequest;
 
 }

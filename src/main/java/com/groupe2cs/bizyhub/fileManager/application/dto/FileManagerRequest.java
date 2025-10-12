@@ -1,9 +1,11 @@
 package com.groupe2cs.bizyhub.fileManager.application.dto;
 
 import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+
 import java.util.UUID;
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,25 +21,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "FileManagerRequest", description = "Request payload for FileManager operations")
 public class FileManagerRequest implements Serializable {
 
-	@Schema(description = "", example = "a3c9ae26-e4d0-463d-854b-d161f6a3954b")
+	@Schema(description = "", example = "64d74eff-89fc-462d-9b5d-3ea876c6d2e6")
 	private String name;
-	@Schema(description = "", example = "b2c367d5-baa0-4104-9267-dedb4232b676")
+	@Schema(description = "", example = "6160cfef-a1bc-4a83-a15b-fc37ff60a958")
 	private String details;
-	@Schema(description = "", example = "b39f64ea-4a52-46b0-acd3-c11e87523911")
+	@Schema(description = "", example = "76d419dd-f7f5-41d9-8687-97379f3fcbf9")
 	private String objectId;
-	@Schema(description = "", example = "9c314a82-9af7-4bd0-a033-7d5a148d9465")
+	@Schema(description = "", example = "791cf8d7-7332-4824-84b1-89f4d92ac1aa")
 	private String objectName;
-	@Schema(description = "", example = "5723e93e-8215-432f-924a-79a801552c46")
+	@Schema(description = "", example = "8638eeb1-5644-482f-8371-816ab8ec1f75")
 	private String originalName;
-	@Schema(description = "", example = "10535479-3b24-4d6e-a03d-d4725513547d")
+	@Schema(description = "", example = "badd41ab-ee1f-41d9-b58f-1ecb7b241b79")
 	private String mimeType;
-	@Schema(description = "", example = "71863L")
+	@Schema(description = "", example = "25039L")
 	private Long size;
-	@Schema(description = "", example = "06ba61cb-95c3-4941-affd-ff522f2497a8")
+	@Schema(description = "", example = "b6eed62b-826f-41fd-bef8-fbdf37e25675")
 	private String path;
-	@Schema(description = "", example = "f71f42d6-f8cb-4721-ba7a-539f40945b19")
+	@Schema(description = "", example = "2cc3a549-4de5-4bcb-939d-ad8942594269")
 	private String uri;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isPublic;
 
 }

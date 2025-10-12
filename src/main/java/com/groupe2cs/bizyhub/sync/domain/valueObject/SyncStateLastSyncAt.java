@@ -1,0 +1,47 @@
+package com.groupe2cs.bizyhub.sync.domain.valueObject;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.io.Serializable;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Builder
+public class SyncStateLastSyncAt implements Serializable {
+
+	private java.time.Instant lastSyncAt;
+
+	public SyncStateLastSyncAt(java.time.Instant lastSyncAt) {
+		this.lastSyncAt = lastSyncAt;
+	}
+
+	public static SyncStateLastSyncAt create(java.time.Instant lastSyncAt) {
+
+		return new SyncStateLastSyncAt(lastSyncAt);
+	}
+
+	public java.time.Instant value() {
+		return this.lastSyncAt;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof SyncStateLastSyncAt that)) return false;
+		return this.lastSyncAt.equals(that.lastSyncAt);
+	}
+
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(lastSyncAt);
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(lastSyncAt);
+	}
+}

@@ -4,7 +4,7 @@ import com.groupe2cs.bizyhub.tenant.domain.valueObject.TenantId;
 
 public class TenantNotFoundException extends RuntimeException {
 
-public TenantNotFoundException(String object, String value) {
-super("Tenant with "+object+": '" + value + "' not found");
-}
+	public TenantNotFoundException(String object, String value) {
+		super("Tenant with " + object + ": '" + value + "' not found");
+	}
 }

@@ -1,22 +1,11 @@
 package com.groupe2cs.bizyhub.settings.domain.valueObject;
 
-import java.util.Objects;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingIdNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingNameNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingValueNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingLocaleNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingDetailsNotValid;
-import com.groupe2cs.bizyhub.settings.domain.exception.SettingIsActiveNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter
@@ -24,38 +13,35 @@ import java.util.*;
 @Builder
 public class SettingIsActive implements Serializable {
 
-private Boolean isActive;
+	private Boolean isActive;
 
-public SettingIsActive(Boolean isActive) {
-this.isActive = isActive;
-}
+	public SettingIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
 
-public static SettingIsActive create(Boolean isActive) {
+	public static SettingIsActive create(Boolean isActive) {
 
-if (isActive == null) {
-throw new SettingIsActiveNotValid("IsActive is invalid");
-}
-return new SettingIsActive(isActive);
-}
+		return new SettingIsActive(isActive);
+	}
 
-public Boolean value() {
-return this.isActive;
-}
+	public Boolean value() {
+		return this.isActive;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof SettingIsActive that)) return false;
-return this.isActive.equals(that.isActive);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof SettingIsActive that)) return false;
+		return this.isActive.equals(that.isActive);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(isActive);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(isActive);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(isActive);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(isActive);
+	}
 }

@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.tenant.domain.event;
 
-	import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,6 @@ public class TenantCreatedEvent implements Serializable {
 	private TenantActive active;
 	private TenantTenant tenant;
 	private TenantCreatedBy createdBy;
-
 
 
 }

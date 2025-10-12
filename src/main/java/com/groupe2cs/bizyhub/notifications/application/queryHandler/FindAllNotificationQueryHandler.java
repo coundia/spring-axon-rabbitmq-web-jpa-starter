@@ -1,57 +1,59 @@
 package com.groupe2cs.bizyhub.notifications.application.queryHandler;
 
+import com.groupe2cs.bizyhub.notifications.application.dto.NotificationPagedResponse;
+import com.groupe2cs.bizyhub.notifications.application.dto.NotificationResponse;
+import com.groupe2cs.bizyhub.notifications.application.mapper.NotificationMapper;
+import com.groupe2cs.bizyhub.notifications.application.query.FindAllNotificationQuery;
+import com.groupe2cs.bizyhub.notifications.infrastructure.entity.Notification;
+import com.groupe2cs.bizyhub.notifications.infrastructure.repository.NotificationRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.queryhandling.QueryHandler;
-import org.springframework.stereotype.Component;
-import com.groupe2cs.bizyhub.notifications.application.dto.*;
-import com.groupe2cs.bizyhub.notifications.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.notifications.application.query.*;
-import com.groupe2cs.bizyhub.notifications.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.notifications.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-
-import org.axonframework.queryhandling.QueryHandler;
-import org.springframework.stereotype.Component;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Slf4j
 @Component
 public class FindAllNotificationQueryHandler {
 
-private final NotificationRepository repository;
+	private final NotificationRepository repository;
 
-public FindAllNotificationQueryHandler(NotificationRepository repository) {
-	this.repository = repository;
-}
+	public FindAllNotificationQueryHandler(NotificationRepository repository) {
+		this.repository = repository;
+	}
 
-@QueryHandler
-public NotificationPagedResponse handle(FindAllNotificationQuery query) {
-int limit = query.getLimit();
-int offset = query.getPage() * limit;
-MetaRequest metaRequest = query.getMetaRequest();
+	@QueryHandler
+	public NotificationPagedResponse handle(FindAllNotificationQuery query) {
+		int limit = query.getLimit();
+		int offset = query.getPage() * limit;
+		MetaRequest metaRequest = query.getMetaRequest();
 
-PageRequest pageable = PageRequest.of(offset / limit, limit);
-Page<Notification> pages = null;
+		PageRequest pageable = PageRequest.of(offset / limit, limit);
+		Page<Notification> pages = null;
 
-if(metaRequest.isAdmin()) {
+		if (metaRequest.isAdmin()) {
 
- log.info("Admin user, fetching all Notifications");
-	pages = repository.findAllByTenantId( metaRequest.getTenantId(),pageable);
-}else{
-log.info("User, fetching own  ");
-pages = repository.findByCreatedById(metaRequest.getUserId(),pageable);
-}
+			log.info("Admin user, fetching all Notifications");
+			pages = repository.findAllByTenantId(metaRequest.getTenantId(), pageable);
+		} else {
 
-List<NotificationResponse> responses = pages.stream()
-	.map(NotificationMapper::toResponse)
-	.toList();
+			log.info("User, fetching own  ");
+			pages = repository.findByCreatedById(metaRequest.getUserId(), pageable);
 
-	return NotificationPagedResponse.from(
-	pages,
-	responses
-	);
+
+		}
+
+		List<NotificationResponse> responses = pages.stream()
+				.map(NotificationMapper::toResponse)
+				.toList();
+
+		return NotificationPagedResponse.from(
+				pages,
+				responses
+		);
 	}
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByVerificationCodeTenantQuery {
 
-	private final VerificationCodeTenant  tenant;
+	private final VerificationCodeTenant tenant;
 	private final MetaRequest metaRequest;
 
 }

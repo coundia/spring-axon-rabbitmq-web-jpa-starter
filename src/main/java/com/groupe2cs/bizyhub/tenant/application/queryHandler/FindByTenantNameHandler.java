@@ -10,41 +10,42 @@ import com.groupe2cs.bizyhub.tenant.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByTenantNameHandler {
 
-private final TenantRepository repository;
+	private final TenantRepository repository;
 
-@QueryHandler
+	@QueryHandler
 
- public TenantResponse handle(FindByTenantNameQuery query) {
+	public TenantResponse handle(FindByTenantNameQuery query) {
 
-    MetaRequest metaRequest = query.getMetaRequest();
-    Tenant entity = null;
+		MetaRequest metaRequest = query.getMetaRequest();
+		Tenant entity = null;
 
-	String value = query.getName().value();
+		String value = query.getName().value();
 
-	if(metaRequest.isAdmin()) {
-	    entity = repository.findByNameAndTenantId(value, metaRequest.getTenantId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }else{
-	    entity = repository.findByNameAndCreatedById(value, metaRequest.getUserId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }
+		if (metaRequest.isAdmin()) {
+			entity = repository.findByNameAndTenantId(value, metaRequest.getTenantId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		} else {
+			entity = repository.findByNameAndCreatedById(value, metaRequest.getUserId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		}
 
-    if (entity == null) {
-        return null;
-    }
+		if (entity == null) {
+			return null;
+		}
 		return TenantMapper.toResponse(entity);
 	}
 

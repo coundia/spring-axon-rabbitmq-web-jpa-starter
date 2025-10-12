@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.security.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByUserRoleUserHandler {
 
-private final UserRoleRepository repository;
+	private final UserRoleRepository repository;
 
-@QueryHandler
-public List<UserRoleResponse> handle(FindByUserRoleUserQuery query) {
+	@QueryHandler
+	public List<UserRoleResponse> handle(FindByUserRoleUserQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<UserRole> entities = null;
-	 String value = query.getUser().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<UserRole> entities = null;
+		String value = query.getUser().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByUserIdAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByUserIdAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByUserIdAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByUserIdAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(UserRoleMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(UserRoleMapper::toResponse)
+				.toList();
 	}
 
 

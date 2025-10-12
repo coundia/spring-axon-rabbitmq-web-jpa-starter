@@ -1,14 +1,15 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.command.*;
-import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
 
+import com.groupe2cs.bizyhub.chats.application.command.CreateChatCommand;
+import com.groupe2cs.bizyhub.chats.application.command.DeleteChatCommand;
+import com.groupe2cs.bizyhub.chats.application.command.UpdateChatCommand;
+import com.groupe2cs.bizyhub.chats.application.dto.ChatSyncRequest;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.UserValidationService;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -16,20 +17,28 @@ public class ChatSyncApplicationService {
 
 	private final ChatGate gateService;
 	private final CommandGateway commandGateway;
+	private final UserValidationService userValidationService;
 
 	public void syncChat(ChatSyncRequest request, MetaRequest metaRequest) {
+
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
+
 		for (var d : request.getDeltas()) {
 			switch (d.getType()) {
 				case "CREATE" -> {
 
 
 					CreateChatCommand command = CreateChatCommand.builder()
-								.messages(ChatMessages.create(d.getMessages()))
-								.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
-								.responses(ChatResponses.create(d.getResponses()))
-								.state(ChatState.create(d.getState()))
-								.account(ChatAccount.create(d.getAccount()))
-						.build();
+							.messages(ChatMessages.create(d.getMessages()))
+							.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
+							.responses(ChatResponses.create(d.getResponses()))
+							.state(ChatState.create(d.getState()))
+							.syncAt(ChatSyncAt.create(d.getSyncAt()))
+							.remoteId(ChatRemoteId.create(d.getRemoteId()))
+							.localId(ChatLocalId.create(d.getLocalId()))
+							.account(ChatAccount.create(d.getAccount()))
+							.dateTransaction(ChatDateTransaction.create(d.getDateTransaction()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -54,8 +63,12 @@ public class ChatSyncApplicationService {
 							.responsesJson(ChatResponsesJson.create(d.getResponsesJson()))
 							.responses(ChatResponses.create(d.getResponses()))
 							.state(ChatState.create(d.getState()))
+							.syncAt(ChatSyncAt.create(d.getSyncAt()))
+							.remoteId(ChatRemoteId.create(d.getRemoteId()))
+							.localId(ChatLocalId.create(d.getLocalId()))
 							.account(ChatAccount.create(d.getAccount()))
-						.build();
+							.dateTransaction(ChatDateTransaction.create(d.getDateTransaction()))
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -67,8 +80,8 @@ public class ChatSyncApplicationService {
 					}
 
 					DeleteChatCommand delete = DeleteChatCommand.builder()
-						.id(ChatId.create(d.getId()))
-						.build();
+							.id(ChatId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

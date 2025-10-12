@@ -1,15 +1,12 @@
 package com.groupe2cs.bizyhub.transactions.domain.event;
 
-	import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-
-import java.io.Serializable;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.*;
-import java.util.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -18,17 +15,24 @@ import java.util.*;
 public class TransactionUpdatedEvent implements Serializable {
 
 	private TransactionId id;
-	private TransactionName name;
+	private TransactionRemoteId remoteId;
+	private TransactionLocalId localId;
+	private TransactionCode code;
+	private TransactionDescription description;
 	private TransactionAmount amount;
-	private TransactionDetails details;
-	private TransactionIsActive isActive;
-	private TransactionAccount account;
-	private TransactionCategory category;
-	private TransactionTypeTransactionRaw typeTransactionRaw;
+	private TransactionTypeEntry typeEntry;
 	private TransactionDateTransaction dateTransaction;
+	private TransactionStatus status;
+	private TransactionEntityName entityName;
+	private TransactionEntityId entityId;
+	private TransactionAccount account;
+	private TransactionSyncAt syncAt;
+	private TransactionCategory category;
+	private TransactionCompany company;
+	private TransactionCustomer customer;
+	private TransactionDebt debt;
 	private TransactionCreatedBy createdBy;
 	private TransactionTenant tenant;
-
 
 
 }

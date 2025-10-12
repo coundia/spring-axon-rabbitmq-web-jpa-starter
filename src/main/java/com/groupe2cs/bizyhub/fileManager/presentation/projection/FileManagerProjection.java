@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.fileManager.presentation.projection;
 
-	import com.groupe2cs.bizyhub.fileManager.domain.event.*;
-	import com.groupe2cs.bizyhub.fileManager.infrastructure.repository.*;
-	import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-	import org.axonframework.eventhandling.EventHandler;
+import com.groupe2cs.bizyhub.fileManager.domain.event.*;
+import com.groupe2cs.bizyhub.fileManager.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import org.axonframework.eventhandling.EventHandler;
 
 import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
@@ -23,117 +23,150 @@ import lombok.RequiredArgsConstructor;
 @ProcessingGroup("FileManager")
 public class FileManagerProjection {
 
-private final FileManagerRepository repository;
+	private final FileManagerRepository repository;
 
 
-@EventHandler
-public void on(FileManagerCreatedEvent event) {
-try {
-FileManager entity = FileManager.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.details(event.getDetails() == null ? null : event.getDetails().value())
- 		.objectId(event.getObjectId() == null ? null : event.getObjectId().value())
- 		.objectName(event.getObjectName() == null ? null : event.getObjectName().value())
- 		.originalName(event.getOriginalName() == null ? null : event.getOriginalName().value())
- 		.mimeType(event.getMimeType() == null ? null : event.getMimeType().value())
- 		.size(event.getSize() == null ? null : event.getSize().value())
- 		.path(event.getPath() == null ? null : event.getPath().value())
- 		.uri(event.getUri() == null ? null : event.getUri().value())
- 		.isPublic(event.getIsPublic() == null ? null : event.getIsPublic().value())
- .build();
-
-entity.setId(event.getId().value());
-
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
-	if(event.getTenant() != null) {
-	entity.setTenant(new Tenant(event.getTenant().value()));
+	private static boolean hasId(Object s) {
+		return s != null;
 	}
 
 
-repository.save(entity);
+	@EventHandler
+	public void on(FileManagerCreatedEvent event) {
+		try {
+			FileManager entity = FileManager.builder().build();
+			if (event.getId() != null && hasId(event.getId().value())) {
+				entity.setId(event.getId().value());
+			}
+			if (event.getName() != null && hasId(event.getName().value())) {
+				entity.setName(event.getName().value());
+			}
+			if (event.getDetails() != null && hasId(event.getDetails().value())) {
+				entity.setDetails(event.getDetails().value());
+			}
+			if (event.getObjectId() != null && hasId(event.getObjectId().value())) {
+				entity.setObjectId(event.getObjectId().value());
+			}
+			if (event.getObjectName() != null && hasId(event.getObjectName().value())) {
+				entity.setObjectName(event.getObjectName().value());
+			}
+			if (event.getOriginalName() != null && hasId(event.getOriginalName().value())) {
+				entity.setOriginalName(event.getOriginalName().value());
+			}
+			if (event.getMimeType() != null && hasId(event.getMimeType().value())) {
+				entity.setMimeType(event.getMimeType().value());
+			}
+			if (event.getSize() != null && hasId(event.getSize().value())) {
+				entity.setSize(event.getSize().value());
+			}
+			if (event.getPath() != null && hasId(event.getPath().value())) {
+				entity.setPath(event.getPath().value());
+			}
+			if (event.getUri() != null && hasId(event.getUri().value())) {
+				entity.setUri(event.getUri().value());
+			}
+			if (event.getIsPublic() != null && hasId(event.getIsPublic().value())) {
+				entity.setIsPublic(event.getIsPublic().value());
+			}
 
 
-log.info("FileManager inserted: {}", entity);
+			entity.setId(event.getId().value());
 
-} catch (Exception e) {
-log.error("Error saving FileManager: {}", e.getMessage(), e);
-throw e;
-}
-}
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
-@EventHandler
-public void on(FileManagerUpdatedEvent event) {
-try {
-FileManager entity = repository.findById(event.getId().value())
-.orElseThrow(() -> new RuntimeException("FileManager not found"));
+/*
+	if(event.getRemoteId().value() == null) {
+		entity.setRemoteId(event.getId().value());
+	}
+	*/
 
-
-	if(event.getId() != null) {
-		entity.setId(event.getId().value());
-    }
-	if(event.getName() != null) {
-		entity.setName(event.getName().value());
-    }
-	if(event.getDetails() != null) {
-		entity.setDetails(event.getDetails().value());
-    }
-	if(event.getObjectId() != null) {
-		entity.setObjectId(event.getObjectId().value());
-    }
-	if(event.getObjectName() != null) {
-		entity.setObjectName(event.getObjectName().value());
-    }
-	if(event.getOriginalName() != null) {
-		entity.setOriginalName(event.getOriginalName().value());
-    }
-	if(event.getMimeType() != null) {
-		entity.setMimeType(event.getMimeType().value());
-    }
-	if(event.getSize() != null) {
-		entity.setSize(event.getSize().value());
-    }
-	if(event.getPath() != null) {
-		entity.setPath(event.getPath().value());
-    }
-	if(event.getUri() != null) {
-		entity.setUri(event.getUri().value());
-    }
-	if(event.getIsPublic() != null) {
-		entity.setIsPublic(event.getIsPublic().value());
-    }
-
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
-
-if(entity.getTenant() == null && event.getTenant() != null) {
-	log.info("Tenant is null on entity, it will be,  updated with tenant ID: {}", event.getTenant().value());
-	entity.setTenant(new Tenant(event.getTenant().value()));
-}
-
-repository.save(entity);
+			repository.save(entity);
 
 
-log.info("FileManager updated successfully: {}", event.getId().value());
-} catch (Exception e) {
-log.error("Error updating FileManager: {}", e.getMessage(), e);
-throw e;
-}
-}
+			log.info("FileManager inserted: {}", entity);
 
-@EventHandler
-public void on(FileManagerDeletedEvent event) {
-try {
+		} catch (Exception e) {
+			log.error("Error saving FileManager: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
+
+	@EventHandler
+	public void on(FileManagerUpdatedEvent event) {
+		try {
+			FileManager entity = repository.findById(event.getId().value())
+					.orElseThrow(() -> new RuntimeException("FileManager not found"));
 
 
-repository.deleteById(event.getId().value());
-log.info("FileManager deleted successfully: {}", event.getId().value());
-} catch (Exception e) {
-log.error("Error deleting FileManager: {}", e.getMessage(), e);
-throw e;
-}
-}
+			if (event.getId() != null && hasId(event.getId().value())) {
+				entity.setId(event.getId().value());
+			}
+			if (event.getName() != null && hasId(event.getName().value())) {
+				entity.setName(event.getName().value());
+			}
+			if (event.getDetails() != null && hasId(event.getDetails().value())) {
+				entity.setDetails(event.getDetails().value());
+			}
+			if (event.getObjectId() != null && hasId(event.getObjectId().value())) {
+				entity.setObjectId(event.getObjectId().value());
+			}
+			if (event.getObjectName() != null && hasId(event.getObjectName().value())) {
+				entity.setObjectName(event.getObjectName().value());
+			}
+			if (event.getOriginalName() != null && hasId(event.getOriginalName().value())) {
+				entity.setOriginalName(event.getOriginalName().value());
+			}
+			if (event.getMimeType() != null && hasId(event.getMimeType().value())) {
+				entity.setMimeType(event.getMimeType().value());
+			}
+			if (event.getSize() != null && hasId(event.getSize().value())) {
+				entity.setSize(event.getSize().value());
+			}
+			if (event.getPath() != null && hasId(event.getPath().value())) {
+				entity.setPath(event.getPath().value());
+			}
+			if (event.getUri() != null && hasId(event.getUri().value())) {
+				entity.setUri(event.getUri().value());
+			}
+			if (event.getIsPublic() != null && hasId(event.getIsPublic().value())) {
+				entity.setIsPublic(event.getIsPublic().value());
+			}
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+			if (entity.getTenant() == null && event.getTenant() != null) {
+				log.info("Tenant is null on entity, it will be,  updated with tenant ID: {}",
+						event.getTenant().value());
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
+			repository.save(entity);
+
+
+			log.info("FileManager updated successfully: {}", event.getId().value());
+		} catch (Exception e) {
+			log.error("Error updating FileManager: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
+
+	@EventHandler
+	public void on(FileManagerDeletedEvent event) {
+		try {
+
+
+			repository.deleteById(event.getId().value());
+			log.info("FileManager deleted successfully: {}", event.getId().value());
+		} catch (Exception e) {
+			log.error("Error deleting FileManager: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
 }

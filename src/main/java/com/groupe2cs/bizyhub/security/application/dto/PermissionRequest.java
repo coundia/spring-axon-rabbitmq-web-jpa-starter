@@ -1,9 +1,11 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
 import java.util.UUID;
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "PermissionRequest", description = "Request payload for Permission operations")
 public class PermissionRequest implements Serializable {
 
-	@Schema(description = "", example = "e690ecb6-b40b-4fdb-8315-d0875003db0b")
+	@Schema(description = "", example = "d6569fac-e9eb-42e2-9ee3-6e4207d41737")
 	private String name;
 
 }

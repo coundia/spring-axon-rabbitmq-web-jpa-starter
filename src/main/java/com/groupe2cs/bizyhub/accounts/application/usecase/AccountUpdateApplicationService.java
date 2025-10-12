@@ -1,41 +1,41 @@
 package com.groupe2cs.bizyhub.accounts.application.usecase;
 
-import com.groupe2cs.bizyhub.accounts.application.dto.*;
-import com.groupe2cs.bizyhub.accounts.application.query.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.accounts.application.mapper.*;
+import com.groupe2cs.bizyhub.accounts.application.command.UpdateAccountCommand;
+import com.groupe2cs.bizyhub.accounts.application.dto.AccountRequest;
+import com.groupe2cs.bizyhub.accounts.application.dto.AccountResponse;
+import com.groupe2cs.bizyhub.accounts.application.mapper.AccountMapper;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.AccountCreatedBy;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.AccountId;
+import com.groupe2cs.bizyhub.accounts.domain.valueObject.AccountTenant;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.accounts.application.command.*;
-import com.groupe2cs.bizyhub.accounts.domain.valueObject.*;
-import java.util.List;
+import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AccountUpdateApplicationService {
 
-private final FileStorageService fileStorageService;
-private final CommandGateway commandGateway;
+	private final FileStorageService fileStorageService;
+	private final CommandGateway commandGateway;
 
 
-public AccountResponse updateAccount(AccountId id,AccountRequest request,
-MetaRequest metaRequest
-){
+	public AccountResponse updateAccount(AccountId id, AccountRequest request,
+										 MetaRequest metaRequest
+	) {
 
-UpdateAccountCommand command = AccountMapper.toUpdateCommand(
-id,
-request
-);
+		UpdateAccountCommand command = AccountMapper.toUpdateCommand(
+				id,
+				request
+		);
 
-command.setCreatedBy(AccountCreatedBy.create(metaRequest.getUserId()));
-command.setTenant(AccountTenant.create(metaRequest.getTenantId()));
+		command.setCreatedBy(AccountCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(AccountTenant.create(metaRequest.getTenantId()));
 
-commandGateway.sendAndWait(command);
+		commandGateway.sendAndWait(command);
 
-return AccountMapper.toResponse(command);
-}
+		return AccountMapper.toResponse(command);
+	}
 
 }

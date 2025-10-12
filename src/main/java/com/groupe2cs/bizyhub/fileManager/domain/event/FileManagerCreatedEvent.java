@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.fileManager.domain.event;
 
-	import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,6 @@ public class FileManagerCreatedEvent implements Serializable {
 	private FileManagerIsPublic isPublic;
 	private FileManagerCreatedBy createdBy;
 	private FileManagerTenant tenant;
-
 
 
 }

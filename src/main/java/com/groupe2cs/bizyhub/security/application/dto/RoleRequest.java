@@ -1,9 +1,11 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
 import java.util.UUID;
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "RoleRequest", description = "Request payload for Role operations")
 public class RoleRequest implements Serializable {
 
-	@Schema(description = "", example = "ffd9ad47-2af8-4556-a97d-fc11c3b6b085")
+	@Schema(description = "", example = "04899ad0-9aa7-4edf-a8af-d28e7dd27ae4")
 	private String name;
 
 }

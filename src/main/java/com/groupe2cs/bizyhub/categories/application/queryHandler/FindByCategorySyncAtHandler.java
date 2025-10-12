@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.categories.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByCategorySyncAtHandler {
 
-private final CategoryRepository repository;
+	private final CategoryRepository repository;
 
-@QueryHandler
-public List<CategoryResponse> handle(FindByCategorySyncAtQuery query) {
+	@QueryHandler
+	public List<CategoryResponse> handle(FindByCategorySyncAtQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<Category> entities = null;
-	 java.time.Instant value = query.getSyncAt().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<Category> entities = null;
+		java.time.Instant value = query.getSyncAt().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findBySyncAtAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findBySyncAtAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findBySyncAtAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findBySyncAtAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(CategoryMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(CategoryMapper::toResponse)
+				.toList();
 	}
 
 

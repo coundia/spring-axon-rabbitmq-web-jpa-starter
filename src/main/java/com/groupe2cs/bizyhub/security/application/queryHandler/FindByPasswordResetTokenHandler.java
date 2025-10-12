@@ -26,11 +26,11 @@ public class FindByPasswordResetTokenHandler {
 		List<PasswordReset> entities = null;
 		String value = query.getToken().value();
 
-		if (metaRequest.isAdmin()) {
-			entities = repository.findByTokenAndTenantId(value, metaRequest.getTenantId());
-		} else {
+		//if (metaRequest.isAdmin()) {
+		entities = repository.findByToken(value);
+		/*} else {
 			entities = repository.findByTokenAndCreatedById(value, metaRequest.getUserId());
-		}
+		}*/
 
 		return entities.stream()
 				.map(PasswordResetMapper::toResponse)

@@ -35,48 +35,48 @@ import org.springframework.security.core.Authentication;
 
 @PreAuthorize("@categoryGate.canList(authentication)")
 @RestController
-@RequestMapping("/api/v1/queries/category")
-@Tag(name = "Category Queries", description = "Endpoints for querying categorys by syncAt")
+@RequestMapping("/api/v1/queries/categories")
+@Tag(name = "Category Queries", description = "Endpoints for querying categories by syncAt")
 @Slf4j
 public class FindBySyncAtCategoryController {
 
-private final CategoryReadApplicationService applicationService;
+	private final CategoryReadApplicationService applicationService;
 
-public FindBySyncAtCategoryController(CategoryReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/syncAt")
-@Operation(
-summary = "Find category by syncAt",
-description = "Returns a list of categorys that match the given syncAt"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<List<CategoryResponse>> findBySyncAt(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the syncAt to filter by", required = true)
-	@RequestParam java.time.Instant syncAt
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByCategorySyncAt(CategorySyncAt
-	.create(syncAt) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find category by syncAt: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindBySyncAtCategoryController(CategoryReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/syncAt")
+	@Operation(
+			summary = "Find category by syncAt",
+			description = "Returns a list of categories that match the given syncAt"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<List<CategoryResponse>> findBySyncAt(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the syncAt to filter by", required = true)
+			@RequestParam java.time.Instant syncAt
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByCategorySyncAt(CategorySyncAt
+					.create(syncAt), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find category by syncAt: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

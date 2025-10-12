@@ -33,48 +33,48 @@ import org.springframework.security.core.Authentication;
 
 public class AddRolePermissionController {
 
-private final RolePermissionCreateApplicationService applicationService;
+	private final RolePermissionCreateApplicationService applicationService;
 
-public AddRolePermissionController(RolePermissionCreateApplicationService applicationService) {
-	this.applicationService = applicationService;
-}
-
-@PostMapping
-@Operation(
-summary = "Create a new rolePermission",
-description = "Creates a new rolePermission and returns the created entity",
-requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-description = "RolePermission request payload",
-required = true,
-content = @Content(schema = @Schema(implementation = RolePermissionRequest.class))
-)
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "201", description = "Successfully created",
-content = @Content(schema = @Schema(implementation = RolePermissionResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content(schema = @Schema()))
-})
-public ResponseEntity<RolePermissionResponse> addRolePermission(@Valid @RequestBody RolePermissionRequest request,
-	@AuthenticationPrincipal Jwt jwt) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-		.build();
-
-		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	RolePermissionResponse response =  applicationService.createRolePermission(
-			request,
-			metaRequest
-	);
-
-	return ResponseEntity.status(HttpStatus.CREATED).body(response);
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to create rolePermission: {}", ex.getMessage());
-	return ResponseEntity.status(500).build();
+	public AddRolePermissionController(RolePermissionCreateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
-}
+
+	@PostMapping
+	@Operation(
+			summary = "Create a new rolePermission",
+			description = "Creates a new rolePermission and returns the created entity",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+					description = "RolePermission request payload",
+					required = true,
+					content = @Content(schema = @Schema(implementation = RolePermissionRequest.class))
+			)
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Successfully created",
+					content = @Content(schema = @Schema(implementation = RolePermissionResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<RolePermissionResponse> addRolePermission(@Valid @RequestBody RolePermissionRequest request,
+																	@AuthenticationPrincipal Jwt jwt) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			RolePermissionResponse response = applicationService.createRolePermission(
+					request,
+					metaRequest
+			);
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception ex) {
+			//e.printStackTrace();
+			log.error("Failed to create rolePermission: {}", ex.getMessage());
+			return ResponseEntity.status(500).build();
+		}
+	}
 }

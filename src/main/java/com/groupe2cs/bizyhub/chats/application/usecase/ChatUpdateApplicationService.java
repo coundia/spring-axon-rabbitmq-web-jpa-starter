@@ -1,56 +1,44 @@
 package com.groupe2cs.bizyhub.chats.application.usecase;
 
-import com.groupe2cs.bizyhub.chats.application.dto.*;
-import com.groupe2cs.bizyhub.chats.application.query.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.chats.domain.valueObject.*;
+import com.groupe2cs.bizyhub.chats.application.command.UpdateChatCommand;
+import com.groupe2cs.bizyhub.chats.application.dto.ChatRequest;
+import com.groupe2cs.bizyhub.chats.application.dto.ChatResponse;
+import com.groupe2cs.bizyhub.chats.application.mapper.ChatMapper;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatCreatedBy;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatId;
+import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatTenant;
+import com.groupe2cs.bizyhub.shared.application.UserValidationService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.chats.application.command.*;
-import com.groupe2cs.bizyhub.chats.application.mapper.*;
-import java.util.List;
+import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class ChatUpdateApplicationService {
 
-private final FileStorageService fileStorageService;
-private final CommandGateway commandGateway;
+	private final FileStorageService fileStorageService;
+	private final CommandGateway commandGateway;
+	private final UserValidationService userValidationService;
 
-public ChatResponse updateChat(
-ChatId id, List<MultipartFile> filesMultipartFile, 
-		String messages,
-		String responsesJson,
-		String responses,
-		String state,
-		String account
-,
-MetaRequest metaRequest
-) {
+	public ChatResponse updateChat(ChatId id, ChatRequest request,
+								   MetaRequest metaRequest
+	) {
 
-UpdateChatCommand command = ChatMapper.toUpdateCommand(
-    id,
-    new ChatMessages(messages),
-     new ChatResponsesJson(responsesJson),
-     new ChatResponses(responses),
-     new ChatState(state),
-     new ChatAccount(account)  
-);
+		userValidationService.shouldBePremiumUser(metaRequest.getUserId());
 
-    command.setCreatedBy(ChatCreatedBy.create(metaRequest.getUserId()));
-    command.setTenant(ChatTenant.create(metaRequest.getTenantId()));
+		UpdateChatCommand command = ChatMapper.toUpdateCommand(
+				id,
+				request
+		);
 
-    commandGateway.sendAndWait(command);
+		command.setCreatedBy(ChatCreatedBy.create(metaRequest.getUserId()));
+		command.setTenant(ChatTenant.create(metaRequest.getTenantId()));
 
-    metaRequest.setObjectId(command.getId().value());
-    metaRequest.setObjectName("chat");
-    fileStorageService.storeFile(filesMultipartFile, metaRequest);
+		commandGateway.sendAndWait(command);
 
-    return ChatMapper.toResponse(command);
-}
-
+		return ChatMapper.toResponse(command);
+	}
 
 }

@@ -11,6 +11,7 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -32,83 +33,83 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PermissionFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private PermissionRepository permissionRepository;
+	@Autowired
+	private PermissionRepository permissionRepository;
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_return_only_user_permissions_for_normal_user() throws Exception {
+	@Test
+	void it_should_return_only_user_permissions_for_normal_user() throws Exception {
 
-List<CreatePermissionCommand> userCommands =
-PermissionFixtures.randomManyViaCommand(
-commandGateway,permissionRepository,
-createdByDataRepository,
-tenantDataRepository,
- 3, login("user", "user"));
-userCommands.forEach(cmd ->
-PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
-);
+		List<CreatePermissionCommand> userCommands =
+				PermissionFixtures.randomManyViaCommand(
+						commandGateway, permissionRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						3, login("user", "user"));
+		userCommands.forEach(cmd ->
+				PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
+		);
 
-login("user", "user");
-ResponseEntity<PermissionPagedResponse> response = this.getForEntity(
-"/v1/admin/queries/permissions?page=0&limit=1000000",
-PermissionPagedResponse.class
-);
-assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+		login("user", "user");
+		ResponseEntity<PermissionPagedResponse> response = this.getForEntity(
+				"/v1/admin/queries/permissions?page=0&limit=1000000",
+				PermissionPagedResponse.class
+		);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
 
-}
+	}
 
-@Test
-void it_should_return_all_permissions_for_admin() throws Exception {
+	@Test
+	void it_should_return_all_permissions_for_admin() throws Exception {
 
-    List<CreatePermissionCommand> userCommands =
-    PermissionFixtures.randomManyViaCommand(
-        commandGateway,
-        permissionRepository,
-         createdByDataRepository,
-         tenantDataRepository,
-         5, login("user", "user")
-      );
-    userCommands.forEach(cmd ->
-    PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
-    );
+		List<CreatePermissionCommand> userCommands =
+				PermissionFixtures.randomManyViaCommand(
+						commandGateway,
+						permissionRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						5, login("user", "user")
+				);
+		userCommands.forEach(cmd ->
+				PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
+		);
 
 
-List<CreatePermissionCommand> adminCommands =
-PermissionFixtures.randomManyViaCommand(
-commandGateway,permissionRepository,
-        createdByDataRepository,
-        tenantDataRepository,
- 5, login("admin", "admin"));
-adminCommands.forEach(cmd ->
-PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
-);
+		List<CreatePermissionCommand> adminCommands =
+				PermissionFixtures.randomManyViaCommand(
+						commandGateway, permissionRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						5, login("admin", "admin"));
+		adminCommands.forEach(cmd ->
+				PermissionFixtures.byIdWaitExist(permissionRepository, cmd.getId().value())
+		);
 
-login("admin", "admin");
-ResponseEntity<PermissionPagedResponse> response = this.getForEntity(
-"/v1/admin/queries/permissions?page=0&limit=1000000",
-PermissionPagedResponse.class
-);
-assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-List<PermissionResponse> content = response.getBody().getContent();
-assertThat(content).isNotEmpty();
+		login("admin", "admin");
+		ResponseEntity<PermissionPagedResponse> response = this.getForEntity(
+				"/v1/admin/queries/permissions?page=0&limit=1000000",
+				PermissionPagedResponse.class
+		);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		List<PermissionResponse> content = response.getBody().getContent();
+		assertThat(content).isNotEmpty();
 
-List<String> expectedIds = userCommands.stream()
-.map(cmd -> cmd.getId().value())
-.collect(Collectors.toList());
+		List<String> expectedIds = userCommands.stream()
+				.map(cmd -> cmd.getId().value())
+				.collect(Collectors.toList());
 
-List<String> actualIds = content.stream()
-.map(PermissionResponse::getId)
-.collect(Collectors.toList());
+		List<String> actualIds = content.stream()
+				.map(PermissionResponse::getId)
+				.collect(Collectors.toList());
 
-assertThat(actualIds).containsAll(expectedIds);
+		assertThat(actualIds).containsAll(expectedIds);
 
-}
+	}
 }

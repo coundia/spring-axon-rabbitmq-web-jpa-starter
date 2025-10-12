@@ -35,48 +35,48 @@ import org.springframework.security.core.Authentication;
 
 @PreAuthorize("@roleGate.canRead(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/admin/queries/role")
+@RequestMapping("/api/v1/admin/queries/roles")
 @Tag(name = "Role Queries", description = "Endpoints for querying roles by id")
 @Slf4j
 public class FindByIdRoleController {
 
-private final RoleReadApplicationService applicationService;
+	private final RoleReadApplicationService applicationService;
 
-public FindByIdRoleController(RoleReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/id")
-@Operation(
-summary = "Find role by id",
-description = "Returns a single roles that match the given id"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<RoleResponse> findById(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the id to filter by", required = true)
-	@RequestParam String id
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByRoleId(RoleId
-	.create(id) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find role by id: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindByIdRoleController(RoleReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/id")
+	@Operation(
+			summary = "Find role by id",
+			description = "Returns a single roles that match the given id"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<RoleResponse> findById(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the id to filter by", required = true)
+			@RequestParam String id
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByRoleId(RoleId
+					.create(id), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find role by id: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

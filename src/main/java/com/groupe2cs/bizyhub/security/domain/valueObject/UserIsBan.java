@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.security.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.security.domain.exception.UserIdNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserUsernameNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserPasswordNotValid;
@@ -14,6 +15,7 @@ import com.groupe2cs.bizyhub.security.domain.exception.UserEnabledNotValid;
 import com.groupe2cs.bizyhub.security.domain.exception.UserIsBanNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -29,35 +31,35 @@ import java.util.*;
 @Builder
 public class UserIsBan implements Serializable {
 
-private Boolean isBan;
+	private Boolean isBan;
 
-public UserIsBan(Boolean isBan) {
-this.isBan = isBan;
-}
+	public UserIsBan(Boolean isBan) {
+		this.isBan = isBan;
+	}
 
-public static UserIsBan create(Boolean isBan) {
+	public static UserIsBan create(Boolean isBan) {
 
-	return new UserIsBan(isBan);
-}
+		return new UserIsBan(isBan);
+	}
 
-public Boolean value() {
-return this.isBan;
-}
+	public Boolean value() {
+		return this.isBan;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof UserIsBan that)) return false;
-return this.isBan.equals(that.isBan);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof UserIsBan that)) return false;
+		return this.isBan.equals(that.isBan);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(isBan);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(isBan);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(isBan);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(isBan);
+	}
 }

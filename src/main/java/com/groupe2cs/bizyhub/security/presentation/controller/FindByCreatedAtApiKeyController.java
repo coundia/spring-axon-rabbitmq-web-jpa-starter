@@ -35,48 +35,48 @@ import org.springframework.security.core.Authentication;
 
 @PreAuthorize("@apiKeyGate.canList(authentication)")
 @RestController
-@RequestMapping("/api/v1/admin/queries/apiKey")
+@RequestMapping("/api/v1/admin/queries/apiKeys")
 @Tag(name = "ApiKey Queries", description = "Endpoints for querying apiKeys by createdAt")
 @Slf4j
 public class FindByCreatedAtApiKeyController {
 
-private final ApiKeyReadApplicationService applicationService;
+	private final ApiKeyReadApplicationService applicationService;
 
-public FindByCreatedAtApiKeyController(ApiKeyReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/createdAt")
-@Operation(
-summary = "Find apiKey by createdAt",
-description = "Returns a list of apiKeys that match the given createdAt"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiKeyResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<List<ApiKeyResponse>> findByCreatedAt(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the createdAt to filter by", required = true)
-	@RequestParam java.time.Instant createdAt
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByApiKeyCreatedAt(ApiKeyCreatedAt
-	.create(createdAt) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find apiKey by createdAt: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindByCreatedAtApiKeyController(ApiKeyReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/createdAt")
+	@Operation(
+			summary = "Find apiKey by createdAt",
+			description = "Returns a list of apiKeys that match the given createdAt"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiKeyResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<List<ApiKeyResponse>> findByCreatedAt(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the createdAt to filter by", required = true)
+			@RequestParam java.time.Instant createdAt
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByApiKeyCreatedAt(ApiKeyCreatedAt
+					.create(createdAt), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find apiKey by createdAt: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

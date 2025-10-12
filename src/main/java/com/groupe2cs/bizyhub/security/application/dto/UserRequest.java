@@ -1,9 +1,11 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
 import java.util.UUID;
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,27 +21,27 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "UserRequest", description = "Request payload for User operations")
 public class UserRequest implements Serializable {
 
-	@Schema(description = "", example = "b120acd0-b028-403a-bef7-0527196b5eb3")
+	@Schema(description = "", example = "57a5c788-e82c-46a3-9f96-2c199a262015")
 	private String username;
-	@Schema(description = "", example = "ed162309-f29b-47f4-8e40-0c6749281a2d")
+	@Schema(description = "", example = "1778c520-d3d9-4cad-9ed7-0601a2076f9b")
 	private String password;
-	@Schema(description = "", example = "288ec3f1-3908-4e85-b38b-4086a1759062")
+	@Schema(description = "", example = "d5bea5d6-3336-499a-81cf-1583e6964b19")
 	private String firstName;
-	@Schema(description = "", example = "0b78762e-0ed3-413b-be6d-6ba8903c0284")
+	@Schema(description = "", example = "7c92febc-4043-4271-9792-bd2569d3b47a")
 	private String lastName;
-	@Schema(description = "", example = "c31a474d-4a0e-48f6-b54c-1a22e3b18418")
+	@Schema(description = "", example = "56b94197-0815-4450-81c8-09e329396814")
 	private String email;
-	@Schema(description = "", example = "7b857659-7c28-492a-a970-d92dfd72d836")
+	@Schema(description = "", example = "93ac156f-f67c-48a6-ba23-ff620b300d90")
 	private String telephone;
-	@Schema(description = "", example = "90")
+	@Schema(description = "", example = "75")
 	private Integer limitPerDay;
 	@Schema(description = "", example = "false")
 	private Boolean isPremium;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean enabled;
-	@Schema(description = "", example = "true")
+	@Schema(description = "", example = "false")
 	private Boolean isBan;
-	@Schema(description = "", example = "51f9293e-8b2a-410a-820a-2d42b3b0e8e1")
+	@Schema(description = "", example = "b7d6ac93-a821-4b0b-96de-ceb47d958b78")
 	private String message;
 
 }

@@ -35,48 +35,48 @@ import org.springframework.security.core.Authentication;
 
 @PreAuthorize("@userGate.canRead(authentication, #id)")
 @RestController
-@RequestMapping("/api/v1/admin/queries/user")
+@RequestMapping("/api/v1/admin/queries/users")
 @Tag(name = "User Queries", description = "Endpoints for querying users by id")
 @Slf4j
 public class FindByIdUserController {
 
-private final UserReadApplicationService applicationService;
+	private final UserReadApplicationService applicationService;
 
-public FindByIdUserController(UserReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/id")
-@Operation(
-summary = "Find user by id",
-description = "Returns a single users that match the given id"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<UserResponse> findById(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the id to filter by", required = true)
-	@RequestParam String id
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByUserId(UserId
-	.create(id) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find user by id: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindByIdUserController(UserReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/id")
+	@Operation(
+			summary = "Find user by id",
+			description = "Returns a single users that match the given id"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<UserResponse> findById(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the id to filter by", required = true)
+			@RequestParam String id
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByUserId(UserId
+					.create(id), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find user by id: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

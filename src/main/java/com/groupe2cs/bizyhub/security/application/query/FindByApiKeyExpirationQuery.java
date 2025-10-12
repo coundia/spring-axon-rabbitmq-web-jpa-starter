@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByApiKeyExpirationQuery {
 
-	private final ApiKeyExpiration  expiration;
+	private final ApiKeyExpiration expiration;
 	private final MetaRequest metaRequest;
 
 }

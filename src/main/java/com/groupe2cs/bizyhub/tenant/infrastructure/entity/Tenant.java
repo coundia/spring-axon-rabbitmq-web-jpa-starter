@@ -26,67 +26,68 @@ import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
 @Entity
 @EntityListeners(AuditListener.class)
 @Table(name = "tenants")
-public class Tenant   extends AbstractAuditableEntity  {
+public class Tenant extends AbstractAuditableEntity {
 
 	@Id
 	private String id;
 
 
-	@Column(nullable = false, 
-		unique = true
+	@Column(nullable = false,
+			unique = true
 
 	)
 
-	private String name ;
+	private String name;
 
-	@Column(nullable = true, 		columnDefinition = "TEXT",
-		unique = false
-
-	)
-
-	private String description ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true, columnDefinition = "TEXT",
+			unique = false
 
 	)
 
-	private String domain ;
+	private String description;
 
-	@Column(nullable = true, 
-		unique = false
-
-	)
-
-	private String language ;
-
-	@Column(nullable = true, 
-		unique = false
+	@Column(nullable = true,
+			unique = false
 
 	)
 
-	private Boolean active ;
+	private String domain;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private String language;
+
+	@Column(nullable = true,
+			unique = false
+
+	)
+
+	private Boolean active;
 	@ManyToOne
 	@JoinColumn(name = "tenant_id", nullable = true)
 	private Tenant tenant;
 	@ManyToOne
 	@JoinColumn(name = "createdBy_id", nullable = true)
 	private User createdBy;
+
 	public Tenant(String id) {
 		this.id = id;
 	}
 
 	@Override
- 	public String toString() {
+	public String toString() {
 		return "Tenant{" +
-		"id='" + id + '\'' +
-			", name=" + name +
-			", description=" + description +
-			", domain=" + domain +
-			", language=" + language +
-			", active=" + active +
-			", tenant=" + tenant +
-			", createdBy=" + createdBy +
-		'}';
+				"id='" + id + '\'' +
+				", name=" + name +
+				", description=" + description +
+				", domain=" + domain +
+				", language=" + language +
+				", active=" + active +
+				", tenant=" + tenant +
+				", createdBy=" + createdBy +
+				'}';
 	}
 }

@@ -1,9 +1,11 @@
 package com.groupe2cs.bizyhub.security.application.dto;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
 import java.util.UUID;
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,9 +21,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "ApiKeyRequest", description = "Request payload for ApiKey operations")
 public class ApiKeyRequest implements Serializable {
 
-	@Schema(description = "", example = "b7c496a5-d955-47c5-bc94-8cb3dbe5d6f8")
+	@Schema(description = "", example = "9ea652ff-cfe8-4765-93e6-13eac4e8ea65")
 	private String appKey;
-	@Schema(description = "", example = "09b13504-3c94-4df3-a51d-ccb0d82502a6")
+	@Schema(description = "", example = "7a1083fe-c60f-49b9-ad4e-8e2e22937d1c")
 	private String username;
 	@Schema(description = "", example = "false")
 	private Boolean active;

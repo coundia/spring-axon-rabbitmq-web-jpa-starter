@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.security.presentation.controller;
 
-	import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
-	import com.groupe2cs.bizyhub.security.application.service.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.repository.RefreshTokenRepository;
-	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-	import com.groupe2cs.bizyhub.security.application.dto.*;
-	import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.RefreshTokenRepository;
+import com.groupe2cs.bizyhub.security.application.service.*;
+import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,27 +29,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LogoutController {
 
-private final JwtService jwtService;
-private final RefreshTokenRepository refreshTokenRepository;
+	private final JwtService jwtService;
+	private final RefreshTokenRepository refreshTokenRepository;
 
-@PostMapping("/logout")
-public ResponseEntity<AuthResponseDto> logout(@AuthenticationPrincipal Jwt jwt) {
+	@PostMapping("/logout")
+	public ResponseEntity<AuthResponseDto> logout(@AuthenticationPrincipal Jwt jwt) {
 
-	log.info("[LogoutController] Logout request received {} ", jwt.getSubject());
+		log.info("[LogoutController] Logout request received {} ", jwt.getSubject());
 
-	MetaRequest metaRequest = new MetaRequest();
-	metaRequest.setTenantId(RequestContext.getTenantId(jwt));
+		MetaRequest metaRequest = new MetaRequest();
+		metaRequest.setTenantId(RequestContext.getTenantId(jwt));
 
-	String username =  jwt.getSubject();
-	String tenantId = metaRequest.getTenantId();
+		String username = jwt.getSubject();
+		String tenantId = metaRequest.getTenantId();
 
-	//refreshTokenRepository.deleteByUsernameAndTenantId(username,tenantId);
+		//refreshTokenRepository.deleteByUsernameAndTenantId(username,tenantId);
 
-	return ResponseEntity.ok(
-		AuthResponseDto.builder()
-			.code(1)
-			.message("Logout successfully")
-			.build()
+		return ResponseEntity.ok(
+				AuthResponseDto.builder()
+						.code(1)
+						.message("Logout successfully")
+						.build()
 		);
 	}
-	}
+}

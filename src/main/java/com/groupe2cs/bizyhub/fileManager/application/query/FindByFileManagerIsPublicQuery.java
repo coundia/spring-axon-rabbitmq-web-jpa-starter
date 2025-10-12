@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByFileManagerIsPublicQuery {
 
-	private final FileManagerIsPublic  isPublic;
+	private final FileManagerIsPublic isPublic;
 	private final MetaRequest metaRequest;
 
 }

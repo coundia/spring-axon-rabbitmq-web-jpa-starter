@@ -11,28 +11,28 @@ import org.springframework.web.server.ResponseStatusException;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RequestContext {
 
-public static String getUserId(Jwt jwt) {
-Object claim = jwt.getClaims().get("userId");
-if (claim == null) {
-log.error("[RequestContext] Missing 'userId' in JWT claims");
-throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User ID is required");
-}
-return claim.toString();
-}
+	public static String getUserId(Jwt jwt) {
+		Object claim = jwt.getClaims().get("userId");
+		if (claim == null) {
+			log.error("[RequestContext] Missing 'userId' in JWT claims");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User ID is required");
+		}
+		return claim.toString();
+	}
 
-public static String getTenantId(Jwt jwt) {
-Object claim = jwt.getClaims().get("tenantId");
-if (claim == null) {
-log.error("[RequestContext] Missing 'tenantId' in JWT claims");
-throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Tenant ID is required");
-}
-String tenantId = claim.toString();
-log.info("[RequestContext] Tenant ID: {}", tenantId);
-return tenantId;
-}
+	public static String getTenantId(Jwt jwt) {
+		Object claim = jwt.getClaims().get("tenantId");
+		if (claim == null) {
+			log.error("[RequestContext] Missing 'tenantId' in JWT claims");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Tenant ID is required");
+		}
+		String tenantId = claim.toString();
+		log.info("[RequestContext] Tenant ID: {}", tenantId);
+		return tenantId;
+	}
 
-public static Boolean isAdmin(Jwt jwt) {
-return "true".equals(jwt.getClaimAsString("isAdmin"));
-}
+	public static Boolean isAdmin(Jwt jwt) {
+		return "true".equals(jwt.getClaimAsString("isAdmin"));
+	}
 }
 

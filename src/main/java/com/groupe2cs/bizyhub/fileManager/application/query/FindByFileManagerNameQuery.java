@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByFileManagerNameQuery {
 
-	private final FileManagerName  name;
+	private final FileManagerName name;
 	private final MetaRequest metaRequest;
 
 }

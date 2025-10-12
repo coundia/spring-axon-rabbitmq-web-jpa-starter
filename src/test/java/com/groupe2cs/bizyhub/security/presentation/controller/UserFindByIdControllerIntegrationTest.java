@@ -11,44 +11,47 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 
 public class UserFindByIdControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private UserRepository repository;
+	@Autowired
+	private UserRepository repository;
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_be_able_to_get_user_by_id() {
+	@Test
+	void it_should_be_able_to_get_user_by_id() {
 
-	String existingId = UserFixtures.randomOneViaCommand(
-	commandGateway,repository,
-        createdByDataRepository,
-        tenantDataRepository,
-	 getCurrentUser()).getId().value();
+		String existingId = UserFixtures.randomOneViaCommand(
+				commandGateway, repository,
+				createdByDataRepository,
+				tenantDataRepository,
+				getCurrentUser()).getId().value();
 
-	 UserFixtures.byIdWaitExist(repository, existingId);
+		UserFixtures.byIdWaitExist(repository, existingId);
 
-	String uri = "/v1/admin/queries/user/id?id=" + existingId;
-	ResponseEntity<UserResponse> response = this.getForEntity(uri, UserResponse.class);
+		String uri = "/v1/admin/queries/user/id?id=" + existingId;
+		ResponseEntity<UserResponse> response = this.getForEntity(uri, UserResponse.class);
 
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-	assertThat(response.getBody()).isNotNull();
-	assertThat(response.getBody().getId()).isEqualTo(existingId);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isNotNull();
+		assertThat(response.getBody().getId()).isEqualTo(existingId);
 	}
 }

@@ -1,6 +1,7 @@
 package com.groupe2cs.bizyhub.fileManager.domain.valueObject;
 
 import java.util.Objects;
+
 import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerIdNotValid;
 import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerNameNotValid;
 import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerDetailsNotValid;
@@ -12,6 +13,7 @@ import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerSizeNotVali
 import com.groupe2cs.bizyhub.fileManager.domain.exception.FileManagerPathNotValid;
 
 import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -27,35 +29,35 @@ import java.util.*;
 @Builder
 public class FileManagerPath implements Serializable {
 
-private String path;
+	private String path;
 
-public FileManagerPath(String path) {
-this.path = path;
-}
+	public FileManagerPath(String path) {
+		this.path = path;
+	}
 
-public static FileManagerPath create(String path) {
+	public static FileManagerPath create(String path) {
 
-	return new FileManagerPath(path);
-}
+		return new FileManagerPath(path);
+	}
 
-public String value() {
-return this.path;
-}
+	public String value() {
+		return this.path;
+	}
 
-@Override
-public boolean equals(Object o) {
-if (this == o) return true;
-if (!(o instanceof FileManagerPath that)) return false;
-return this.path.equals(that.path);
-}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof FileManagerPath that)) return false;
+		return this.path.equals(that.path);
+	}
 
-@Override
-public int hashCode() {
-return java.util.Objects.hash(path);
-}
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(path);
+	}
 
-@Override
-public String toString() {
-return String.valueOf(path);
-}
+	@Override
+	public String toString() {
+		return String.valueOf(path);
+	}
 }

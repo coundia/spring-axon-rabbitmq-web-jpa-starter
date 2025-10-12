@@ -10,41 +10,42 @@ import com.groupe2cs.bizyhub.categories.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByCategoryIdHandler {
 
-private final CategoryRepository repository;
+	private final CategoryRepository repository;
 
-@QueryHandler
+	@QueryHandler
 
- public CategoryResponse handle(FindByCategoryIdQuery query) {
+	public CategoryResponse handle(FindByCategoryIdQuery query) {
 
-    MetaRequest metaRequest = query.getMetaRequest();
-    Category entity = null;
+		MetaRequest metaRequest = query.getMetaRequest();
+		Category entity = null;
 
-	String value = query.getId().value();
+		String value = query.getId().value();
 
-	if(metaRequest.isAdmin()) {
-	    entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }else{
-	    entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
-	    .stream()
-        .findFirst()
-	    .orElse(null);
-	 }
+		if (metaRequest.isAdmin()) {
+			entity = repository.findByIdAndTenantId(value, metaRequest.getTenantId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		} else {
+			entity = repository.findByIdAndCreatedById(value, metaRequest.getUserId())
+					.stream()
+					.findFirst()
+					.orElse(null);
+		}
 
-    if (entity == null) {
-        return null;
-    }
+		if (entity == null) {
+			return null;
+		}
 		return CategoryMapper.toResponse(entity);
 	}
 

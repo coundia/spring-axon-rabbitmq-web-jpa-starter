@@ -1,48 +1,45 @@
 package com.groupe2cs.bizyhub.fileManager.application.dto;
 
-import java.io.Serializable;
-import java.util.concurrent.ThreadLocalRandom;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Schema(name = "FileManagerDeltaDto", description = "Delta DTO for fileManager changes")
 public class FileManagerDeltaDto implements Serializable {
 
-    @Schema(description = "Identifier of the fileManager", example = "uuid")
-    private String id;
+	@Schema(description = "Identifier of the fileManager", example = "uuid")
+	private String id;
 
-    @Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
+	@Schema(description = "Change type: CREATE, UPDATE, DELETE, default CREATE", example = "CREATE")
 	@Builder.Default
-    private String type = "CREATE";
+	private String type = "CREATE";
 
-		@Schema(description = "", example = "96f9a58b-4e95-42ac-ba39-50749f061ef4")
-		private String name;
-		@Schema(description = "", example = "60da64b9-00cd-4991-9ebc-c1adaded9bde")
-		private String details;
-		@Schema(description = "", example = "1b8ab358-f1f6-4250-82c9-1c05f5729ddb")
-		private String objectId;
-		@Schema(description = "", example = "0196c530-2614-40c6-823b-44d7729372da")
-		private String objectName;
-		@Schema(description = "", example = "f3c1e9da-d235-453d-a006-491064a8cead")
-		private String originalName;
-		@Schema(description = "", example = "55472171-04a1-4ab8-8db6-c86495b178a5")
-		private String mimeType;
-		@Schema(description = "", example = "97839L")
-		private Long size;
-		@Schema(description = "", example = "c60da23a-43ea-4228-b1c4-3de289920d81")
-		private String path;
-		@Schema(description = "", example = "c6238901-416d-45b5-b350-9e664f83a5e5")
-		private String uri;
-		@Schema(description = "", example = "false")
-		private Boolean isPublic;
+	@Schema(description = "", example = "432dfb53-738c-4761-a63c-45827833b26d")
+	private String name;
+	@Schema(description = "", example = "bc3b59d2-462c-48cd-a804-22565dfcf6d8")
+	private String details;
+	@Schema(description = "", example = "95e68abb-80be-45f0-a16b-9a123b1a5941")
+	private String objectId;
+	@Schema(description = "", example = "9a06dace-3c1f-416d-b8f8-c66d6cfbcc17")
+	private String objectName;
+	@Schema(description = "", example = "77468eac-adb4-4726-af3d-90a922a0138b")
+	private String originalName;
+	@Schema(description = "", example = "4d64d5d6-cf25-455c-8357-b3bb2c77b52f")
+	private String mimeType;
+	@Schema(description = "", example = "95452L")
+	private Long size;
+	@Schema(description = "", example = "67ce49c0-bdfc-45f6-8f2f-7cf01b2e0950")
+	private String path;
+	@Schema(description = "", example = "fce67735-79e7-47c2-822f-f260527448e0")
+	private String uri;
+	@Schema(description = "", example = "false")
+	private Boolean isPublic;
 
 }

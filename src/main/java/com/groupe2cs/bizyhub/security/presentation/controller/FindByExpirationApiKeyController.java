@@ -35,48 +35,48 @@ import org.springframework.security.core.Authentication;
 
 @PreAuthorize("@apiKeyGate.canList(authentication)")
 @RestController
-@RequestMapping("/api/v1/admin/queries/apiKey")
+@RequestMapping("/api/v1/admin/queries/apiKeys")
 @Tag(name = "ApiKey Queries", description = "Endpoints for querying apiKeys by expiration")
 @Slf4j
 public class FindByExpirationApiKeyController {
 
-private final ApiKeyReadApplicationService applicationService;
+	private final ApiKeyReadApplicationService applicationService;
 
-public FindByExpirationApiKeyController(ApiKeyReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/expiration")
-@Operation(
-summary = "Find apiKey by expiration",
-description = "Returns a list of apiKeys that match the given expiration"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiKeyResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<List<ApiKeyResponse>> findByExpiration(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the expiration to filter by", required = true)
-	@RequestParam java.time.Instant expiration
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByApiKeyExpiration(ApiKeyExpiration
-	.create(expiration) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find apiKey by expiration: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindByExpirationApiKeyController(ApiKeyReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/expiration")
+	@Operation(
+			summary = "Find apiKey by expiration",
+			description = "Returns a list of apiKeys that match the given expiration"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiKeyResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<List<ApiKeyResponse>> findByExpiration(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the expiration to filter by", required = true)
+			@RequestParam java.time.Instant expiration
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByApiKeyExpiration(ApiKeyExpiration
+					.create(expiration), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find apiKey by expiration: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

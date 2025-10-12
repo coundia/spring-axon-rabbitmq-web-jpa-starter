@@ -33,46 +33,49 @@ import org.springframework.security.core.Authentication;
 @Slf4j
 public class UpdateVerificationCodeController {
 
-private final VerificationCodeUpdateApplicationService applicationService;
+	private final VerificationCodeUpdateApplicationService applicationService;
 
-public UpdateVerificationCodeController(VerificationCodeUpdateApplicationService  applicationService) {
-this.applicationService = applicationService;
-}
-
-@Operation(summary = "Update a new verificationCode")
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "VerificationCode Updated",
-content = @Content(mediaType = "application/json",
-schema = @Schema(implementation = VerificationCodeResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content)
-})
-@PutMapping(value="{id}",  consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<VerificationCodeResponse> updateVerificationCode(
-	@Valid @PathVariable String id,
-	@RequestBody VerificationCodeRequest request,
-	@AuthenticationPrincipal Jwt jwt
-	) { {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-	.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-
-    metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	VerificationCodeResponse response = applicationService.updateVerificationCode(VerificationCodeId.create(id),
-	request,
-	metaRequest
-	);
-
-	return ResponseEntity.ok(response);
-
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to Update verificationCode: {}", ex.getMessage(), ex);
-	return ResponseEntity.internalServerError().build();
+	public UpdateVerificationCodeController(VerificationCodeUpdateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@Operation(summary = "Update a new verificationCode")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "VerificationCode Updated",
+					content = @Content(mediaType = "application/json",
+							schema = @Schema(implementation = VerificationCodeResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content)
+	})
+	@PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<VerificationCodeResponse> updateVerificationCode(
+			@Valid @PathVariable String id,
+			@RequestBody VerificationCodeRequest request,
+			@AuthenticationPrincipal Jwt jwt
+	) {
+		{
+			try {
+
+				MetaRequest metaRequest = MetaRequest.builder()
+						.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+						.build();
+
+				metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+				VerificationCodeResponse
+						response =
+						applicationService.updateVerificationCode(VerificationCodeId.create(id),
+								request,
+								metaRequest
+						);
+
+				return ResponseEntity.ok(response);
+
+			} catch (Exception ex) {
+				//e.printStackTrace();
+				log.error("Failed to Update verificationCode: {}", ex.getMessage(), ex);
+				return ResponseEntity.internalServerError().build();
+			}
+		}
 	}
-}
 }

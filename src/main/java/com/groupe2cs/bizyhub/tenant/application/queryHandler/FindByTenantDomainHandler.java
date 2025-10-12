@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.tenant.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByTenantDomainHandler {
 
-private final TenantRepository repository;
+	private final TenantRepository repository;
 
-@QueryHandler
-public List<TenantResponse> handle(FindByTenantDomainQuery query) {
+	@QueryHandler
+	public List<TenantResponse> handle(FindByTenantDomainQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<Tenant> entities = null;
-	 String value = query.getDomain().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<Tenant> entities = null;
+		String value = query.getDomain().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByDomainAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByDomainAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByDomainAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByDomainAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(TenantMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(TenantMapper::toResponse)
+				.toList();
 	}
 
 

@@ -1,0 +1,59 @@
+package com.groupe2cs.bizyhub.chats.presentation.controller;
+
+import com.groupe2cs.bizyhub.chats.application.dto.ChatRequest;
+import com.groupe2cs.bizyhub.chats.application.dto.ChatResponse;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class ChatCreateControllerIntegrationTest extends BaseIntegrationTests {
+
+	@Autowired
+	private CommandGateway commandGateway;
+
+
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
+
+	@Test
+	void it_should_be_able_to_add_chat() {
+
+		ChatRequest requestDTO = new ChatRequest();
+
+		requestDTO.setMessages(UUID.randomUUID().toString());
+		requestDTO.setResponsesJson(UUID.randomUUID().toString());
+		requestDTO.setResponses(UUID.randomUUID().toString());
+		requestDTO.setState(UUID.randomUUID().toString());
+		requestDTO.setSyncAt(java.time.Instant.now().plusSeconds(3600));
+		requestDTO.setRemoteId(UUID.randomUUID().toString());
+		requestDTO.setLocalId(UUID.randomUUID().toString());
+		requestDTO.setAccount(UUID.randomUUID().toString());
+		requestDTO.setDateTransaction(java.time.Instant.now().plusSeconds(3600));
+
+		String uri = "/v1/commands/chat";
+		ResponseEntity<ChatResponse> response = this.postForEntity(uri, requestDTO, ChatResponse.class);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+		assertThat(response.getBody()).isNotNull();
+		assertThat(response.getBody().getId()).isNotNull();
+		assertThat(response.getBody().getMessages()).isEqualTo(requestDTO.getMessages());
+		assertThat(response.getBody().getResponsesJson()).isEqualTo(requestDTO.getResponsesJson());
+		assertThat(response.getBody().getResponses()).isEqualTo(requestDTO.getResponses());
+		assertThat(response.getBody().getState()).isEqualTo(requestDTO.getState());
+		assertThat(response.getBody().getSyncAt()).isEqualTo(requestDTO.getSyncAt());
+		assertThat(response.getBody().getRemoteId()).isEqualTo(requestDTO.getRemoteId());
+		assertThat(response.getBody().getLocalId()).isEqualTo(requestDTO.getLocalId());
+		assertThat(response.getBody().getAccount()).isEqualTo(requestDTO.getAccount());
+		assertThat(response.getBody().getDateTransaction()).isEqualTo(requestDTO.getDateTransaction());
+	}
+}

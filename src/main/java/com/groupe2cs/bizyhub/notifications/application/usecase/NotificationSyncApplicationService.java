@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.notifications.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
-import com.groupe2cs.bizyhub.notifications.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.notifications.application.command.*;
 
+import com.groupe2cs.bizyhub.notifications.application.command.CreateNotificationCommand;
+import com.groupe2cs.bizyhub.notifications.application.command.DeleteNotificationCommand;
+import com.groupe2cs.bizyhub.notifications.application.command.UpdateNotificationCommand;
+import com.groupe2cs.bizyhub.notifications.application.dto.NotificationSyncRequest;
+import com.groupe2cs.bizyhub.notifications.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,13 +24,17 @@ public class NotificationSyncApplicationService {
 
 
 					CreateNotificationCommand command = CreateNotificationCommand.builder()
-								.deviceToken(NotificationDeviceToken.create(d.getDeviceToken()))
-								.title(NotificationTitle.create(d.getTitle()))
-								.message(NotificationMessage.create(d.getMessage()))
-								.status(NotificationStatus.create(d.getStatus()))
-								.reserved(NotificationReserved.create(d.getReserved()))
-								.errorMessage(NotificationErrorMessage.create(d.getErrorMessage()))
-						.build();
+							.deviceToken(NotificationDeviceToken.create(d.getDeviceToken()))
+							.title(NotificationTitle.create(d.getTitle()))
+							.message(NotificationMessage.create(d.getMessage()))
+							.status(NotificationStatus.create(d.getStatus()))
+							.remoteId(NotificationRemoteId.create(d.getRemoteId()))
+							.account(NotificationAccount.create(d.getAccount()))
+							.localId(NotificationLocalId.create(d.getLocalId()))
+							.syncAt(NotificationSyncAt.create(d.getSyncAt()))
+							.reserved(NotificationReserved.create(d.getReserved()))
+							.errorMessage(NotificationErrorMessage.create(d.getErrorMessage()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -55,9 +59,13 @@ public class NotificationSyncApplicationService {
 							.title(NotificationTitle.create(d.getTitle()))
 							.message(NotificationMessage.create(d.getMessage()))
 							.status(NotificationStatus.create(d.getStatus()))
+							.remoteId(NotificationRemoteId.create(d.getRemoteId()))
+							.account(NotificationAccount.create(d.getAccount()))
+							.localId(NotificationLocalId.create(d.getLocalId()))
+							.syncAt(NotificationSyncAt.create(d.getSyncAt()))
 							.reserved(NotificationReserved.create(d.getReserved()))
 							.errorMessage(NotificationErrorMessage.create(d.getErrorMessage()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -69,8 +77,8 @@ public class NotificationSyncApplicationService {
 					}
 
 					DeleteNotificationCommand delete = DeleteNotificationCommand.builder()
-						.id(NotificationId.create(d.getId()))
-						.build();
+							.id(NotificationId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

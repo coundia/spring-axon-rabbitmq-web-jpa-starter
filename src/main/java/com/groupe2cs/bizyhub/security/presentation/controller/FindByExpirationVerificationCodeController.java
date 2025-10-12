@@ -35,48 +35,48 @@ import org.springframework.security.core.Authentication;
 
 @PreAuthorize("@verificationCodeGate.canList(authentication)")
 @RestController
-@RequestMapping("/api/v1/queries/verificationCode")
+@RequestMapping("/api/v1/queries/verificationCodes")
 @Tag(name = "VerificationCode Queries", description = "Endpoints for querying verificationCodes by expiration")
 @Slf4j
 public class FindByExpirationVerificationCodeController {
 
-private final VerificationCodeReadApplicationService applicationService;
+	private final VerificationCodeReadApplicationService applicationService;
 
-public FindByExpirationVerificationCodeController(VerificationCodeReadApplicationService  applicationService) {
-	this.applicationService = applicationService;
-}
-
-@GetMapping("/expiration")
-@Operation(
-summary = "Find verificationCode by expiration",
-description = "Returns a list of verificationCodes that match the given expiration"
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "200", description = "Query successful",
-content = @Content(mediaType = "application/json", schema = @Schema(implementation = VerificationCodeResponse.class))),
-@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
-@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-})
-
-public ResponseEntity<List<VerificationCodeResponse>> findByExpiration(
-	@AuthenticationPrincipal Jwt jwt,
-	@Parameter(description = "Value of the expiration to filter by", required = true)
-	@RequestParam java.time.Instant expiration
-	) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-	.build();
-	metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	var future = applicationService.findByVerificationCodeExpiration(VerificationCodeExpiration
-	.create(expiration) , metaRequest);
-
-	return ResponseEntity.ok(future);
-	} catch (Exception e) {
-	log.error("Failed to find verificationCode by expiration: {}", e.getMessage(), e);
-	return ResponseEntity.internalServerError().build();
+	public FindByExpirationVerificationCodeController(VerificationCodeReadApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
+
+	@GetMapping("/expiration")
+	@Operation(
+			summary = "Find verificationCode by expiration",
+			description = "Returns a list of verificationCodes that match the given expiration"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Query successful",
+					content = @Content(mediaType = "application/json", schema = @Schema(implementation = VerificationCodeResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid parameter", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+	})
+
+	public ResponseEntity<List<VerificationCodeResponse>> findByExpiration(
+			@AuthenticationPrincipal Jwt jwt,
+			@Parameter(description = "Value of the expiration to filter by", required = true)
+			@RequestParam java.time.Instant expiration
+	) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			var future = applicationService.findByVerificationCodeExpiration(VerificationCodeExpiration
+					.create(expiration), metaRequest);
+
+			return ResponseEntity.ok(future);
+		} catch (Exception e) {
+			log.error("Failed to find verificationCode by expiration: {}", e.getMessage(), e);
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 }

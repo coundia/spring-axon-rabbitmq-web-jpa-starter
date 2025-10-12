@@ -11,6 +11,7 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.fileManager.application.command.*;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -32,95 +33,95 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class FileManagerFindAllControllerIntegrationTest extends BaseIntegrationTests {
 
-@Autowired
-private CommandGateway commandGateway;
+	@Autowired
+	private CommandGateway commandGateway;
 
-@Autowired
-private FileManagerRepository fileManagerRepository;
+	@Autowired
+	private FileManagerRepository fileManagerRepository;
 
-@Autowired
-private UserRepository createdByDataRepository ;
-@Autowired
-private TenantRepository tenantDataRepository ;
+	@Autowired
+	private UserRepository createdByDataRepository;
+	@Autowired
+	private TenantRepository tenantDataRepository;
 
-@Test
-void it_should_return_only_user_fileManagers_for_normal_user() throws Exception {
+	@Test
+	void it_should_return_only_user_fileManagers_for_normal_user() throws Exception {
 
-List<CreateFileManagerCommand> userCommands =
-FileManagerFixtures.randomManyViaCommand(
-commandGateway,fileManagerRepository,
-createdByDataRepository,
-tenantDataRepository,
- 3, login("user", "user"));
-userCommands.forEach(cmd ->
-FileManagerFixtures.byIdWaitExist(fileManagerRepository, cmd.getId().value())
-);
+		List<CreateFileManagerCommand> userCommands =
+				FileManagerFixtures.randomManyViaCommand(
+						commandGateway, fileManagerRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						3, login("user", "user"));
+		userCommands.forEach(cmd ->
+				FileManagerFixtures.byIdWaitExist(fileManagerRepository, cmd.getId().value())
+		);
 
-login("user", "user");
-ResponseEntity<FileManagerPagedResponse> response = this.getForEntity(
-"/v1/queries/fileManagers?page=0&limit=1000000",
-FileManagerPagedResponse.class
-);
+		login("user", "user");
+		ResponseEntity<FileManagerPagedResponse> response = this.getForEntity(
+				"/v1/queries/fileManagers?page=0&limit=1000000",
+				FileManagerPagedResponse.class
+		);
 
-assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-List<FileManagerResponse> content = response.getBody().getContent();
-assertThat(content).isNotEmpty();
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		List<FileManagerResponse> content = response.getBody().getContent();
+		assertThat(content).isNotEmpty();
 
-List<String> expectedIds = userCommands.stream()
-.map(cmd -> cmd.getId().value())
-.collect(Collectors.toList());
+		List<String> expectedIds = userCommands.stream()
+				.map(cmd -> cmd.getId().value())
+				.collect(Collectors.toList());
 
-List<String> actualIds = content.stream()
-.map(FileManagerResponse::getId)
-.collect(Collectors.toList());
+		List<String> actualIds = content.stream()
+				.map(FileManagerResponse::getId)
+				.collect(Collectors.toList());
 
-assertThat(actualIds).containsAll(expectedIds);
-}
+		assertThat(actualIds).containsAll(expectedIds);
+	}
 
-@Test
-void it_should_return_all_fileManagers_for_admin() throws Exception {
+	@Test
+	void it_should_return_all_fileManagers_for_admin() throws Exception {
 
-    List<CreateFileManagerCommand> userCommands =
-    FileManagerFixtures.randomManyViaCommand(
-        commandGateway,
-        fileManagerRepository,
-         createdByDataRepository,
-         tenantDataRepository,
-         5, login("user", "user")
-      );
-    userCommands.forEach(cmd ->
-    FileManagerFixtures.byIdWaitExist(fileManagerRepository, cmd.getId().value())
-    );
+		List<CreateFileManagerCommand> userCommands =
+				FileManagerFixtures.randomManyViaCommand(
+						commandGateway,
+						fileManagerRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						5, login("user", "user")
+				);
+		userCommands.forEach(cmd ->
+				FileManagerFixtures.byIdWaitExist(fileManagerRepository, cmd.getId().value())
+		);
 
 
-List<CreateFileManagerCommand> adminCommands =
-FileManagerFixtures.randomManyViaCommand(
-commandGateway,fileManagerRepository,
-        createdByDataRepository,
-        tenantDataRepository,
- 5, login("admin", "admin"));
-adminCommands.forEach(cmd ->
-FileManagerFixtures.byIdWaitExist(fileManagerRepository, cmd.getId().value())
-);
+		List<CreateFileManagerCommand> adminCommands =
+				FileManagerFixtures.randomManyViaCommand(
+						commandGateway, fileManagerRepository,
+						createdByDataRepository,
+						tenantDataRepository,
+						5, login("admin", "admin"));
+		adminCommands.forEach(cmd ->
+				FileManagerFixtures.byIdWaitExist(fileManagerRepository, cmd.getId().value())
+		);
 
-login("admin", "admin");
-ResponseEntity<FileManagerPagedResponse> response = this.getForEntity(
-"/v1/queries/fileManagers?page=0&limit=1000000",
-FileManagerPagedResponse.class
-);
-assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-List<FileManagerResponse> content = response.getBody().getContent();
-assertThat(content).isNotEmpty();
+		login("admin", "admin");
+		ResponseEntity<FileManagerPagedResponse> response = this.getForEntity(
+				"/v1/queries/fileManagers?page=0&limit=1000000",
+				FileManagerPagedResponse.class
+		);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		List<FileManagerResponse> content = response.getBody().getContent();
+		assertThat(content).isNotEmpty();
 
-List<String> expectedIds = userCommands.stream()
-.map(cmd -> cmd.getId().value())
-.collect(Collectors.toList());
+		List<String> expectedIds = userCommands.stream()
+				.map(cmd -> cmd.getId().value())
+				.collect(Collectors.toList());
 
-List<String> actualIds = content.stream()
-.map(FileManagerResponse::getId)
-.collect(Collectors.toList());
+		List<String> actualIds = content.stream()
+				.map(FileManagerResponse::getId)
+				.collect(Collectors.toList());
 
-assertThat(actualIds).containsAll(expectedIds);
+		assertThat(actualIds).containsAll(expectedIds);
 
-}
+	}
 }

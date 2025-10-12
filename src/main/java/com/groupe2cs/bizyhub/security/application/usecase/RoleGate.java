@@ -1,4 +1,5 @@
 package com.groupe2cs.bizyhub.security.application.usecase;
+
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
@@ -86,6 +87,8 @@ public class RoleGate {
 			return false;
 		}
 		Role entity = opt.get();
+
+
 		boolean result = entity.getCreatedBy() != null && userId.equals(entity.getCreatedBy().getId());
 		log.info("canDelete result for userId {} on Role {}: {}", userId, objectId, result);
 		return result;

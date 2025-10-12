@@ -50,7 +50,7 @@ public class FakeIAService implements IAService {
 				//.typeCategoryRaw(type)
 				//	.updatedAt(Instant.now())
 				//.isActive(true)
-			//	.details("")
+				//	.details("")
 				//.reference("")
 				.build();
 
@@ -80,10 +80,7 @@ public class FakeIAService implements IAService {
 					.builder()
 					.id(UUID.randomUUID().toString())
 					.type("CREATE")
-					.name("Transaction " + UUID.randomUUID())
-					.details("Description " + UUID.randomUUID())
 					.amount(new Random().nextDouble() * 1000)
-					.isActive(true)
 					.account(UUID.randomUUID().toString())
 					.category(getCategory(
 							"IN",
@@ -91,7 +88,7 @@ public class FakeIAService implements IAService {
 							"CATEGORY" + UUID.randomUUID(),
 							"fab97fa4-c796-4921-b1d2-db8d671d3a4e"
 					))
-					.typeTransactionRaw("IN")
+					.typeEntry("IN")
 					//.reference(UUID.randomUUID().toString())
 					.build();
 

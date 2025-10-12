@@ -30,48 +30,48 @@ import jakarta.validation.Valid;
 
 public class AddFileManagerController {
 
-private final FileManagerCreateApplicationService applicationService;
+	private final FileManagerCreateApplicationService applicationService;
 
-public AddFileManagerController(FileManagerCreateApplicationService applicationService) {
-	this.applicationService = applicationService;
-}
-
-@PostMapping
-@Operation(
-summary = "Create a new fileManager",
-description = "Creates a new fileManager and returns the created entity",
-requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-description = "FileManager request payload",
-required = true,
-content = @Content(schema = @Schema(implementation = FileManagerRequest.class))
-)
-)
-@ApiResponses(value = {
-@ApiResponse(responseCode = "201", description = "Successfully created",
-content = @Content(schema = @Schema(implementation = FileManagerResponse.class))),
-@ApiResponse(responseCode = "500", description = "Internal server error",
-content = @Content(schema = @Schema()))
-})
-public ResponseEntity<FileManagerResponse> addFileManager(@Valid @RequestBody FileManagerRequest request,
-	@AuthenticationPrincipal Jwt jwt) {
-	try {
-
-	MetaRequest metaRequest = MetaRequest.builder()
-		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
-		.build();
-
-		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-	FileManagerResponse response =  applicationService.createFileManager(
-			request,
-			metaRequest
-	);
-
-	return ResponseEntity.status(HttpStatus.CREATED).body(response);
-	} catch (Exception ex) {
-	//e.printStackTrace();
-	log.error("Failed to create fileManager: {}", ex.getMessage());
-	return ResponseEntity.status(500).build();
+	public AddFileManagerController(FileManagerCreateApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
-}
+
+	@PostMapping
+	@Operation(
+			summary = "Create a new fileManager",
+			description = "Creates a new fileManager and returns the created entity",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+					description = "FileManager request payload",
+					required = true,
+					content = @Content(schema = @Schema(implementation = FileManagerRequest.class))
+			)
+	)
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Successfully created",
+					content = @Content(schema = @Schema(implementation = FileManagerResponse.class))),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = @Content(schema = @Schema()))
+	})
+	public ResponseEntity<FileManagerResponse> addFileManager(@Valid @RequestBody FileManagerRequest request,
+															  @AuthenticationPrincipal Jwt jwt) {
+		try {
+
+			MetaRequest metaRequest = MetaRequest.builder()
+					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.build();
+
+			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+			FileManagerResponse response = applicationService.createFileManager(
+					request,
+					metaRequest
+			);
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception ex) {
+			//e.printStackTrace();
+			log.error("Failed to create fileManager: {}", ex.getMessage());
+			return ResponseEntity.status(500).build();
+		}
+	}
 }

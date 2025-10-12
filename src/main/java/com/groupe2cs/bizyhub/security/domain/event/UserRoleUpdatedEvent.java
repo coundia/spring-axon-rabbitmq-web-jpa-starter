@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
-	import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,6 @@ public class UserRoleUpdatedEvent implements Serializable {
 	private UserRoleRole role;
 	private UserRoleCreatedBy createdBy;
 	private UserRoleTenant tenant;
-
 
 
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByVerificationCodeCodeQuery {
 
-	private final VerificationCodeCode  code;
+	private final VerificationCodeCode code;
 	private final MetaRequest metaRequest;
 
 }

@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.security.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByPasswordResetExpirationHandler {
 
-private final PasswordResetRepository repository;
+	private final PasswordResetRepository repository;
 
-@QueryHandler
-public List<PasswordResetResponse> handle(FindByPasswordResetExpirationQuery query) {
+	@QueryHandler
+	public List<PasswordResetResponse> handle(FindByPasswordResetExpirationQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<PasswordReset> entities = null;
-	 java.time.Instant value = query.getExpiration().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<PasswordReset> entities = null;
+		java.time.Instant value = query.getExpiration().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByExpirationAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByExpirationAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByExpirationAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByExpirationAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(PasswordResetMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(PasswordResetMapper::toResponse)
+				.toList();
 	}
 
 

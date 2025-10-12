@@ -1,11 +1,11 @@
 package com.groupe2cs.bizyhub.tenant.presentation.projection;
 
-	import com.groupe2cs.bizyhub.tenant.domain.event.*;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-	import org.axonframework.eventhandling.EventHandler;
+import com.groupe2cs.bizyhub.tenant.domain.event.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import org.axonframework.eventhandling.EventHandler;
 
 import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
@@ -23,97 +23,120 @@ import lombok.RequiredArgsConstructor;
 @ProcessingGroup("Tenant")
 public class TenantProjection {
 
-private final TenantRepository repository;
+	private final TenantRepository repository;
 
 
-@EventHandler
-public void on(TenantCreatedEvent event) {
-try {
-Tenant entity = Tenant.builder()
-		.id(event.getId() == null ? null : event.getId().value())
- 		.name(event.getName() == null ? null : event.getName().value())
- 		.description(event.getDescription() == null ? null : event.getDescription().value())
- 		.domain(event.getDomain() == null ? null : event.getDomain().value())
- 		.language(event.getLanguage() == null ? null : event.getLanguage().value())
- 		.active(event.getActive() == null ? null : event.getActive().value())
- .build();
-
-entity.setId(event.getId().value());
-
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
-	if(event.getTenant() != null) {
-	entity.setTenant(new Tenant(event.getTenant().value()));
+	private static boolean hasId(Object s) {
+		return s != null;
 	}
 
 
-repository.save(entity);
+	@EventHandler
+	public void on(TenantCreatedEvent event) {
+		try {
+			Tenant entity = Tenant.builder().build();
+			if (event.getId() != null && hasId(event.getId().value())) {
+				entity.setId(event.getId().value());
+			}
+			if (event.getName() != null && hasId(event.getName().value())) {
+				entity.setName(event.getName().value());
+			}
+			if (event.getDescription() != null && hasId(event.getDescription().value())) {
+				entity.setDescription(event.getDescription().value());
+			}
+			if (event.getDomain() != null && hasId(event.getDomain().value())) {
+				entity.setDomain(event.getDomain().value());
+			}
+			if (event.getLanguage() != null && hasId(event.getLanguage().value())) {
+				entity.setLanguage(event.getLanguage().value());
+			}
+			if (event.getActive() != null && hasId(event.getActive().value())) {
+				entity.setActive(event.getActive().value());
+			}
 
 
-log.info("Tenant inserted: {}", entity);
+			entity.setId(event.getId().value());
 
-} catch (Exception e) {
-log.error("Error saving Tenant: {}", e.getMessage(), e);
-throw e;
-}
-}
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+			if (event.getTenant() != null) {
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
 
-@EventHandler
-public void on(TenantUpdatedEvent event) {
-try {
-Tenant entity = repository.findById(event.getId().value())
-.orElseThrow(() -> new RuntimeException("Tenant not found"));
+/*
+	if(event.getRemoteId().value() == null) {
+		entity.setRemoteId(event.getId().value());
+	}
+	*/
 
-
-	if(event.getId() != null) {
-		entity.setId(event.getId().value());
-    }
-	if(event.getName() != null) {
-		entity.setName(event.getName().value());
-    }
-	if(event.getDescription() != null) {
-		entity.setDescription(event.getDescription().value());
-    }
-	if(event.getDomain() != null) {
-		entity.setDomain(event.getDomain().value());
-    }
-	if(event.getLanguage() != null) {
-		entity.setLanguage(event.getLanguage().value());
-    }
-	if(event.getActive() != null) {
-		entity.setActive(event.getActive().value());
-    }
-
-if(event.getCreatedBy() !=null){
-	entity.setCreatedBy( new User(event.getCreatedBy().value()));
-}
-
-if(entity.getTenant() == null && event.getTenant() != null) {
-	log.info("Tenant is null on entity, it will be,  updated with tenant ID: {}", event.getTenant().value());
-	entity.setTenant(new Tenant(event.getTenant().value()));
-}
-
-repository.save(entity);
+			repository.save(entity);
 
 
-log.info("Tenant updated successfully: {}", event.getId().value());
-} catch (Exception e) {
-log.error("Error updating Tenant: {}", e.getMessage(), e);
-throw e;
-}
-}
+			log.info("Tenant inserted: {}", entity);
 
-@EventHandler
-public void on(TenantDeletedEvent event) {
-try {
+		} catch (Exception e) {
+			log.error("Error saving Tenant: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
+
+	@EventHandler
+	public void on(TenantUpdatedEvent event) {
+		try {
+			Tenant entity = repository.findById(event.getId().value())
+					.orElseThrow(() -> new RuntimeException("Tenant not found"));
 
 
-repository.deleteById(event.getId().value());
-log.info("Tenant deleted successfully: {}", event.getId().value());
-} catch (Exception e) {
-log.error("Error deleting Tenant: {}", e.getMessage(), e);
-throw e;
-}
-}
+			if (event.getId() != null && hasId(event.getId().value())) {
+				entity.setId(event.getId().value());
+			}
+			if (event.getName() != null && hasId(event.getName().value())) {
+				entity.setName(event.getName().value());
+			}
+			if (event.getDescription() != null && hasId(event.getDescription().value())) {
+				entity.setDescription(event.getDescription().value());
+			}
+			if (event.getDomain() != null && hasId(event.getDomain().value())) {
+				entity.setDomain(event.getDomain().value());
+			}
+			if (event.getLanguage() != null && hasId(event.getLanguage().value())) {
+				entity.setLanguage(event.getLanguage().value());
+			}
+			if (event.getActive() != null && hasId(event.getActive().value())) {
+				entity.setActive(event.getActive().value());
+			}
+
+			if (event.getCreatedBy() != null) {
+				entity.setCreatedBy(new User(event.getCreatedBy().value()));
+			}
+
+			if (entity.getTenant() == null && event.getTenant() != null) {
+				log.info("Tenant is null on entity, it will be,  updated with tenant ID: {}",
+						event.getTenant().value());
+				entity.setTenant(new Tenant(event.getTenant().value()));
+			}
+
+			repository.save(entity);
+
+
+			log.info("Tenant updated successfully: {}", event.getId().value());
+		} catch (Exception e) {
+			log.error("Error updating Tenant: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
+
+	@EventHandler
+	public void on(TenantDeletedEvent event) {
+		try {
+
+
+			repository.deleteById(event.getId().value());
+			log.info("Tenant deleted successfully: {}", event.getId().value());
+		} catch (Exception e) {
+			log.error("Error deleting Tenant: {}", e.getMessage(), e);
+			throw e;
+		}
+	}
 }

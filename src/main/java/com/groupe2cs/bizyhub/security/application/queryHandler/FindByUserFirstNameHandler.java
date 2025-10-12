@@ -10,33 +10,34 @@ import com.groupe2cs.bizyhub.security.domain.exception.*;
 import com.groupe2cs.bizyhub.shared.application.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import org.axonframework.queryhandling.QueryHandler;
 
+import java.util.List;
+
+import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component
 @RequiredArgsConstructor
 public class FindByUserFirstNameHandler {
 
-private final UserRepository repository;
+	private final UserRepository repository;
 
-@QueryHandler
-public List<UserResponse> handle(FindByUserFirstNameQuery query) {
+	@QueryHandler
+	public List<UserResponse> handle(FindByUserFirstNameQuery query) {
 
-	 MetaRequest metaRequest = query.getMetaRequest();
-	 List<User> entities = null;
-	 String value = query.getFirstName().value();
+		MetaRequest metaRequest = query.getMetaRequest();
+		List<User> entities = null;
+		String value = query.getFirstName().value();
 
-	 if(metaRequest.isAdmin()) {
-	    entities = repository.findByFirstNameAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findByFirstNameAndCreatedById(value, metaRequest.getUserId());
-	 }
+		if (metaRequest.isAdmin()) {
+			entities = repository.findByFirstNameAndTenantId(value, metaRequest.getTenantId());
+		} else {
+			entities = repository.findByFirstNameAndCreatedById(value, metaRequest.getUserId());
+		}
 
- 	return entities.stream()
-	.map(UserMapper::toResponse)
-	.toList();
+		return entities.stream()
+				.map(UserMapper::toResponse)
+				.toList();
 	}
 
 

@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.transactions.application.usecase;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.application.dto.*;
-import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.transactions.application.command.*;
 
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.transactions.application.command.CreateTransactionCommand;
+import com.groupe2cs.bizyhub.transactions.application.command.DeleteTransactionCommand;
+import com.groupe2cs.bizyhub.transactions.application.command.UpdateTransactionCommand;
+import com.groupe2cs.bizyhub.transactions.application.dto.TransactionSyncRequest;
+import com.groupe2cs.bizyhub.transactions.domain.valueObject.*;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,15 +24,23 @@ public class TransactionSyncApplicationService {
 
 
 					CreateTransactionCommand command = CreateTransactionCommand.builder()
-								.name(TransactionName.create(d.getName()))
-								.amount(TransactionAmount.create(d.getAmount()))
-								.details(TransactionDetails.create(d.getDetails()))
-								.isActive(TransactionIsActive.create(d.getIsActive()))
-								.account(TransactionAccount.create(d.getAccount()))
-								.category(TransactionCategory.create(d.getCategory()))
-								.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
-								.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
-						.build();
+							.remoteId(TransactionRemoteId.create(d.getRemoteId()))
+							.localId(TransactionLocalId.create(d.getLocalId()))
+							.code(TransactionCode.create(d.getCode()))
+							.description(TransactionDescription.create(d.getDescription()))
+							.amount(TransactionAmount.create(d.getAmount()))
+							.typeEntry(TransactionTypeEntry.create(d.getTypeEntry()))
+							.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
+							.status(TransactionStatus.create(d.getStatus()))
+							.entityName(TransactionEntityName.create(d.getEntityName()))
+							.entityId(TransactionEntityId.create(d.getEntityId()))
+							.account(TransactionAccount.create(d.getAccount()))
+							.syncAt(TransactionSyncAt.create(d.getSyncAt()))
+							.category(TransactionCategory.create(d.getCategory()))
+							.company(TransactionCompany.create(d.getCompany()))
+							.customer(TransactionCustomer.create(d.getCustomer()))
+							.debt(TransactionDebt.create(d.getDebt()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -53,15 +61,23 @@ public class TransactionSyncApplicationService {
 
 					UpdateTransactionCommand update = UpdateTransactionCommand.builder()
 							.id(TransactionId.create(d.getId()))
-							.name(TransactionName.create(d.getName()))
+							.remoteId(TransactionRemoteId.create(d.getRemoteId()))
+							.localId(TransactionLocalId.create(d.getLocalId()))
+							.code(TransactionCode.create(d.getCode()))
+							.description(TransactionDescription.create(d.getDescription()))
 							.amount(TransactionAmount.create(d.getAmount()))
-							.details(TransactionDetails.create(d.getDetails()))
-							.isActive(TransactionIsActive.create(d.getIsActive()))
-							.account(TransactionAccount.create(d.getAccount()))
-							.category(TransactionCategory.create(d.getCategory()))
-							.typeTransactionRaw(TransactionTypeTransactionRaw.create(d.getTypeTransactionRaw()))
+							.typeEntry(TransactionTypeEntry.create(d.getTypeEntry()))
 							.dateTransaction(TransactionDateTransaction.create(d.getDateTransaction()))
-						.build();
+							.status(TransactionStatus.create(d.getStatus()))
+							.entityName(TransactionEntityName.create(d.getEntityName()))
+							.entityId(TransactionEntityId.create(d.getEntityId()))
+							.account(TransactionAccount.create(d.getAccount()))
+							.syncAt(TransactionSyncAt.create(d.getSyncAt()))
+							.category(TransactionCategory.create(d.getCategory()))
+							.company(TransactionCompany.create(d.getCompany()))
+							.customer(TransactionCustomer.create(d.getCustomer()))
+							.debt(TransactionDebt.create(d.getDebt()))
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -73,8 +89,8 @@ public class TransactionSyncApplicationService {
 					}
 
 					DeleteTransactionCommand delete = DeleteTransactionCommand.builder()
-						.id(TransactionId.create(d.getId()))
-						.build();
+							.id(TransactionId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

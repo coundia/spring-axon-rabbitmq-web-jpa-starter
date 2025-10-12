@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.security.domain.event;
 
-	import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import com.groupe2cs.bizyhub.security.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +18,7 @@ import java.util.*;
 @NoArgsConstructor
 public class UserRoleDeletedEvent implements Serializable {
 
-	
-	
-	
-	
-	
 
-private UserRoleId id;
+	private UserRoleId id;
 
 }

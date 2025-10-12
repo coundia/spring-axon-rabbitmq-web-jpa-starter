@@ -1,9 +1,10 @@
 package com.groupe2cs.bizyhub.security.application.service;
-	import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-	import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-	import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-	import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-	import com.groupe2cs.bizyhub.security.application.dto.*;
+
+import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.security.application.dto.*;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -20,53 +22,60 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RegisterUser {
 
-private final UserRepository userRepository;
-private final PasswordEncoder passwordEncoder;
-private final JwtService jwtService;
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
 
-public AuthResponseDto handle(AuthRequestDto request, MetaRequest metaRequest) {
+	public AuthResponseDto handle(AuthRequestDto request, MetaRequest metaRequest) {
 
-String tenantId = metaRequest.getTenantId();
-if (tenantId == null) {
-	throw new IllegalArgumentException("Tenant ID is required - when multi-tenant");
-}
+		String tenantId = metaRequest.getTenantId();
+		if (tenantId == null) {
+			throw new IllegalArgumentException("Tenant ID is required - when multi-tenant");
+		}
 
-if (userRepository.findByUsernameAndTenantId(request.getUsername(),tenantId).stream()
-        .findFirst().isPresent()) {
-	log.error("User with username {} already exists in tenant {}", request.getUsername(), tenantId);
-	throw new IllegalArgumentException("Username “admin” already exists in tenant");
-}
+		if (userRepository.findByUsernameAndTenantId(request.getUsername(), tenantId).stream()
+				.findFirst().isPresent()) {
 
-User user = User.builder()
-	.id(UUID.randomUUID().toString())
-	.username(request.getUsername())
-	.password(passwordEncoder.encode(request.getPassword()))
-	.tenant(new Tenant(tenantId))
-	.build();
+			String
+					errorMessage =
+					String.format("Le nom d'utilisateur %s est déjà pris, veuillez en choisir un autre.",
+							request.getUsername());
 
-log.info("Registering user: {}", user.getUsername());
-userRepository.save(user);
+			log.error(errorMessage);
 
-UserPrincipal userPrincipal = new UserPrincipal(user);
+			throw new IllegalArgumentException(errorMessage);
+		}
 
-Authentication authentication = new UsernamePasswordAuthenticationToken(
-	userPrincipal,
-	null,
-	userPrincipal.getAuthorities()
-);
+		User user = User.builder()
+				.id(UUID.randomUUID().toString())
+				.username(request.getUsername())
+				.password(passwordEncoder.encode(request.getPassword()))
+				.tenant(new Tenant(tenantId))
+				.build();
 
-String token = jwtService.generateToken(authentication, metaRequest);
+		log.info("Registering user: {}", user.getUsername());
+		userRepository.save(user);
 
-return AuthResponseDto.builder()
-.token(token)
-.username(user.getUsername())
-.id(user.getId())
-.code(1)
-.expirationAt(jwtService.extractExpiration(token))
-.message("Registration successful")
-.tenant(tenantId)
-.build();
-}
+		UserPrincipal userPrincipal = new UserPrincipal(user);
+
+		Authentication authentication = new UsernamePasswordAuthenticationToken(
+				userPrincipal,
+				null,
+				userPrincipal.getAuthorities()
+		);
+
+		String token = jwtService.generateToken(authentication, metaRequest);
+
+		return AuthResponseDto.builder()
+				.token(token)
+				.username(user.getUsername())
+				.id(user.getId())
+				.code(1)
+				.expirationAt(jwtService.extractExpiration(token))
+				.message("Registration successful")
+				.tenant(tenantId)
+				.build();
+	}
 }
 
 

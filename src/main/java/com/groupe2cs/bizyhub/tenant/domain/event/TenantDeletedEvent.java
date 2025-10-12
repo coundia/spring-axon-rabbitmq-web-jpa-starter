@@ -1,8 +1,9 @@
 package com.groupe2cs.bizyhub.tenant.domain.event;
 
-	import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,15 +18,7 @@ import java.util.*;
 @NoArgsConstructor
 public class TenantDeletedEvent implements Serializable {
 
-	
-	
-	
-	
-	
-	
-	
-	
 
-private TenantId id;
+	private TenantId id;
 
 }

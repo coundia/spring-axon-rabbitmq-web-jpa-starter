@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByUserIsPremiumQuery {
 
-	private final UserIsPremium  isPremium;
+	private final UserIsPremium isPremium;
 	private final MetaRequest metaRequest;
 
 }

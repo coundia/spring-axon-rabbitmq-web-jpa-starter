@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByVerificationCodeExpirationQuery {
 
-	private final VerificationCodeExpiration  expiration;
+	private final VerificationCodeExpiration expiration;
 	private final MetaRequest metaRequest;
 
 }

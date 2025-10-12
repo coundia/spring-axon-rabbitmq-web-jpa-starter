@@ -11,15 +11,19 @@ import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.application.command.*;
+
 import java.util.UUID;
 
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.mock.web.MockMultipartFile;
+
 import static org.awaitility.Awaitility.await;
 
 public class UserRoleFixtures {
@@ -39,25 +43,25 @@ public class UserRoleFixtures {
 	}
 
 	public static List<CreateUserRoleCommand> randomManyViaCommand(
-		CommandGateway commandGateway,
-		UserRoleRepository repository,
-        UserRepository userDataRepository,
-        RoleRepository roleDataRepository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		int count,
-		User user
+			CommandGateway commandGateway,
+			UserRoleRepository repository,
+			UserRepository userDataRepository,
+			RoleRepository roleDataRepository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			int count,
+			User user
 	) {
 		List<CreateUserRoleCommand> items = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			CreateUserRoleCommand command = randomOneViaCommand(
-			commandGateway,
-			 repository,
-            userDataRepository,
-            roleDataRepository,
-            createdByDataRepository,
-            tenantDataRepository,
-			 user);
+					commandGateway,
+					repository,
+					userDataRepository,
+					roleDataRepository,
+					createdByDataRepository,
+					tenantDataRepository,
+					user);
 			items.add(command);
 		}
 		return items;
@@ -67,19 +71,21 @@ public class UserRoleFixtures {
 		repository.deleteAll();
 	}
 
-		public static CreateUserRoleCommand randomOneViaCommand(
-		CommandGateway commandGateway,
-		UserRoleRepository  repository,
-        UserRepository userDataRepository,
-        RoleRepository roleDataRepository,
-        UserRepository createdByDataRepository,
-        TenantRepository tenantDataRepository,
-		 User user) {
+	public static CreateUserRoleCommand randomOneViaCommand(
+			CommandGateway commandGateway,
+			UserRoleRepository repository,
+			UserRepository userDataRepository,
+			RoleRepository roleDataRepository,
+			UserRepository createdByDataRepository,
+			TenantRepository tenantDataRepository,
+			User user) {
 
-			CreateUserRoleCommand command = CreateUserRoleCommand.builder()
-				.user(UserRoleUser.create(UserFixtures.randomOneViaCommand(commandGateway,userDataRepository,user).getId().value()))
-				.role(UserRoleRole.create(RoleFixtures.randomOneViaCommand(commandGateway,roleDataRepository, user).getId().value()))
-			.build();
+		CreateUserRoleCommand command = CreateUserRoleCommand.builder()
+				.user(UserRoleUser.create(UserFixtures.randomOneViaCommand(commandGateway, userDataRepository, user)
+						.getId().value()))
+				.role(UserRoleRole.create(RoleFixtures.randomOneViaCommand(commandGateway, roleDataRepository, user)
+						.getId().value()))
+				.build();
 
 		command.setCreatedBy(UserRoleCreatedBy.create(user.getId()));
 		command.setTenant(UserRoleTenant.create(user.getTenant().getId()));
@@ -90,13 +96,13 @@ public class UserRoleFixtures {
 
 
 	public static CreateUserRoleCommand randomOneViaCommand(
-        CommandGateway commandGateway,
-        UserRoleRepository  repository,
-        User user
-        ) {
+			CommandGateway commandGateway,
+			UserRoleRepository repository,
+			User user
+	) {
 
-        CreateUserRoleCommand command = CreateUserRoleCommand.builder()
-        .build();
+		CreateUserRoleCommand command = CreateUserRoleCommand.builder()
+				.build();
 
 		command.setCreatedBy(UserRoleCreatedBy.create(user.getId()));
 		command.setTenant(UserRoleTenant.create(user.getTenant().getId()));

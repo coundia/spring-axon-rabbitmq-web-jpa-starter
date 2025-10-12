@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FindByRolePermissionIdQuery {
 
-	private final RolePermissionId  id;
+	private final RolePermissionId id;
 	private final MetaRequest metaRequest;
 
 }

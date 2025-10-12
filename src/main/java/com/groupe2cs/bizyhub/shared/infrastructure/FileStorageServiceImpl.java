@@ -1,15 +1,21 @@
 package com.groupe2cs.bizyhub.shared.infrastructure;
 
-import java.nio.file.Paths;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import org.springframework.stereotype.Service;
-import java.nio.file.Path;
-import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerCreateApplicationService;
-import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerRequest;
-import java.util.UUID;
-import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 import java.nio.file.Files;
+import java.io.IOException;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
+
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerRequest;
+import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerCreateApplicationService;
+
+import java.nio.file.Path;
+
+import org.springframework.stereotype.Service;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+
+import java.nio.file.Paths;
 
 import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerRequest;
 import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerCreateApplicationService;
@@ -31,13 +37,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FileStorageServiceImpl implements FileStorageService {
 
+	private final FileManagerCreateApplicationService fileManagerCreateApplicationService;
 	@Value("${app.file.upload-dir:uploads}")
 	private String uploadDir;
-
 	@Value("${app.file.uri:http://localhost:8080/api/v1/files}")
 	private String baseFileUri;
-
-	private final FileManagerCreateApplicationService fileManagerCreateApplicationService;
 
 	@Override
 	public String storeFile(List<MultipartFile> files, MetaRequest metaRequest) {
