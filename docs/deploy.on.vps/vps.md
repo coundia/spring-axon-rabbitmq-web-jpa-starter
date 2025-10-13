@@ -87,10 +87,15 @@ server {
 
 
 sudo ln -s /etc/nginx/sites-available/bizyhub /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/cloud.megastore.sn /etc/nginx/sites-enabled/
+ 
 sudo nginx -t && sudo systemctl reload nginx
 
 sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d votre-domaine.com
+
+
+# disable dns all before
+sudo certbot certonly --standalone --force-renewal -d cloud.megastore.sn   -m contact@megastore.sn --agree-tos
 
 
 

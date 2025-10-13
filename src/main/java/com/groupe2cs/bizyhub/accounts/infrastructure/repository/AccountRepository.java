@@ -174,8 +174,8 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 			SELECT e FROM Account e
 			WHERE e.syncAt >= :#{#syncAt.atZone(T(java.time.ZoneOffset).UTC)
 			.toLocalDate().atStartOfDay(T(java.time.ZoneOffset).UTC).toInstant()}
-			  AND e.createdBy.id <> :userId
-			  AND EXISTS (
+			  AND e.createdBy.id = :userId
+			  OR EXISTS (
 			        SELECT 1
 			        FROM AccountUser au JOIN User u ON (
 			                (au.identity IS NOT NULL AND au.identity = u.username)

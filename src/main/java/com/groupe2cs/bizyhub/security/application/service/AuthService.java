@@ -23,6 +23,8 @@ public class AuthService {
 			MetaRequest metaRequest
 	) {
 
+		log.info("AuthService.handle called with username: {} for tenant: {}", request.getUsername(), metaRequest.getTenantId());
+
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
 						request.getUsername(),
