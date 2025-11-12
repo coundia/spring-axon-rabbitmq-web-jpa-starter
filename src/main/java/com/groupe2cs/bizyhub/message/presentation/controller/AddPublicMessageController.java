@@ -2,13 +2,10 @@ package com.groupe2cs.bizyhub.message.presentation.controller;
 
 import com.groupe2cs.bizyhub.message.application.usecase.*;
 import com.groupe2cs.bizyhub.message.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.shared.application.NotificationService;
 import com.groupe2cs.bizyhub.shared.application.UserResolverService;
-import com.groupe2cs.bizyhub.shared.domain.MailSender;
-import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 
+import com.groupe2cs.bizyhub.shared.infrastructure.AsyncMailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,12 +33,10 @@ public class AddPublicMessageController {
 	private final MessageCreateApplicationService applicationService;
 	private final UserResolverService userResolverService;
 	private final CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
-
-	private final MailSender mailSender;
+	private final AsyncMailService asyncMailService;
 
 	@Value("${app.email.to:contact@pcoundia.com}")
 	private String to;
-
 
 	@PostMapping
 	@Operation(
@@ -62,30 +57,22 @@ public class AddPublicMessageController {
 	public ResponseEntity<MessageResponse> addMessage(@Valid @RequestBody MessageRequest request,
 													  @AuthenticationPrincipal Jwt jwt) {
 		try {
-
 			log.info("received request to create message: {}", request);
 
-			String userId = userResolverService.resolveUserId(null, null, null,null);
+			String userId = userResolverService.resolveUserId(null, null, null, null);
 
 			MetaRequest metaRequest = MetaRequest.builder()
 					.userId(userId)
 					.tenantId(currentTenantIdentifierResolver.resolveCurrentTenantIdentifier())
 					.build();
 
+			MessageResponse response = applicationService.createMessage(request, metaRequest);
 
-			MessageResponse response = applicationService.createMessage(
-					request,
-					metaRequest
-			);
-
-			mailSender.send(
-
+			asyncMailService.send(
 					"no-reply@pcoundia.com",
 					to,
-					request.getCode()+" "+request.getPlateforme()+" "+request.getEmail(),
-					"<h1>New Message Received</h1><p>"+request.getContent()+"</p>"+
-							"<p>From: "+request.getEmail()+"</p>"
-
+					request.getCode() + " " + request.getPlateforme() + " " + request.getEmail(),
+					"<h1>New Message Received</h1><p>" + request.getContent() + "</p><p>From: " + request.getEmail() + "</p>"
 			);
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
