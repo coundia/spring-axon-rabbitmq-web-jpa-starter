@@ -28,11 +28,9 @@ public List<MessageResponse> handle(FindByMessageSyncAtQuery query) {
 	 List<Message> entities = null;
 	 java.time.Instant value = query.getSyncAt().value();
 
-	 if(metaRequest.isAdmin()) {
+
 	    entities = repository.findBySyncAtAndTenantId(value, metaRequest.getTenantId());
-	 }else{
-	    entities = repository.findBySyncAtAndCreatedById(value, metaRequest.getUserId());
-	 }
+
 
  	return entities.stream()
 	.map(MessageMapper::toResponse)

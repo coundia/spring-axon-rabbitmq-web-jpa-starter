@@ -24,11 +24,11 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/commands/message")
-@Tag(name = "Message commands", description = "Endpoints for managing messages")
+@RequestMapping("/api/public/messages")
+@Tag(name = "Add Message commands", description = "Endpoints for managing messages")
 @Slf4j
 @RequiredArgsConstructor
-public class AddMessageController {
+public class AddPublicMessageController {
 
 	private final MessageCreateApplicationService applicationService;
 	private final UserResolverService userResolverService;

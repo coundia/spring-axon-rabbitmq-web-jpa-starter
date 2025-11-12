@@ -12,9 +12,11 @@ import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.VerificationCode;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.VerificationCodeRepository;
+import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 import com.groupe2cs.bizyhub.shared.application.CodeGenerator;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Instant;
 import java.util.UUID;
 
+@Tag(name = "Auth", description = "Endpoints for authentication")
 @RestController
 @RequestMapping("/api/auth")
 @Slf4j
@@ -49,7 +52,7 @@ public class RemoveMyData {
 
 
 	@PostMapping("/remove-my-data")
-	public ResponseEntity<AuthResponseDto> checkCode(@Valid @RequestBody VerificationCodeRequest request) {
+	public ResponseEntity<ApiResponseDto> checkCode(@Valid @RequestBody VerificationCodeRequest request) {
 		try {
 			String tenantId = currentTenantIdentifierResolver.resolveCurrentTenantIdentifier();
 			String username = request.getUsername();
@@ -62,8 +65,8 @@ public class RemoveMyData {
 			if (v == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 			v.setStatus(STATUS_USED);
 			verificationCodeRepository.save(v);
-			MetaRequest metaRequest = MetaRequest.builder().tenantId(tenantId).build();
-			User user = userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
+
+			 userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
 				User
 						u =
 						User.builder().id(UUID.randomUUID().toString()).username(username)
@@ -77,32 +80,17 @@ public class RemoveMyData {
 
 				return userRepository.save(u);
 			});
-			UserPrincipal userPrincipal = new UserPrincipal(user);
-			Authentication
-					authentication =
-					new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
-			String token = jwtService.generateToken(authentication, metaRequest);
-
-			//reset password
-			_changePassword(username, tenantId, UUID.randomUUID().toString());
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(
-					AuthResponseDto.builder().code(1).token(token).tenant(tenantId).username(username)
-							.message("Login successful").build()
+					ApiResponseDto.builder().code(1)
+							.message("Data deleted").build()
 			);
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			log.error("check-code failed: {}", ex.getMessage());
 			return ResponseEntity.status(500).build();
 		}
 	}
 
-	private User _changePassword(String username, String tenantId, String newPassword) {
-		return userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
-			User
-					u =
-					User.builder().id(UUID.randomUUID().toString()).username(username)
-							.password(passwordEncoder.encode(newPassword)).tenant(new Tenant(tenantId)).build();
-			return userRepository.save(u);
-		});
-	}
+
 }
