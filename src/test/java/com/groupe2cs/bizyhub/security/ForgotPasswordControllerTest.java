@@ -1,30 +1,26 @@
 package com.groupe2cs.bizyhub.security;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.application.service.*;
-
-import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
-
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.config.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.groupe2cs.bizyhub.security.application.dto.ForgotPasswordRequestDto;
+import com.groupe2cs.bizyhub.security.application.dto.ResetPasswordDto;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.PasswordReset;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.PasswordResetRepository;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.transaction.TestTransaction;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.UUID;
 
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.DEFAULT_TENANT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

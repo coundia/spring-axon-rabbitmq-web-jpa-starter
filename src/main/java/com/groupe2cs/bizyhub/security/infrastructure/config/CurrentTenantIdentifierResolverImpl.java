@@ -1,9 +1,6 @@
 package com.groupe2cs.bizyhub.security.infrastructure.config;
 
-import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
-
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +8,9 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.DEFAULT_TENANT;
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.TENANT_HEADER;
 
 
 @Slf4j

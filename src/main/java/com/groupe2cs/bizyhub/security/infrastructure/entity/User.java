@@ -1,27 +1,13 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import jakarta.persistence.OneToMany;
-
-import java.util.List;
-import java.util.ArrayList;
-
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-
-import java.time.*;
-import java.util.*;
-
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.AbstractAuditableEntity;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.AuditListener;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter

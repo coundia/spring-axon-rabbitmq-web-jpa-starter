@@ -1,26 +1,26 @@
 package com.groupe2cs.bizyhub.companies.presentation.controller;
 
-import com.groupe2cs.bizyhub.companies.domain.valueObject.CompanyId;
-import com.groupe2cs.bizyhub.companies.application.usecase.CompanyUpdateApplicationService;
 import com.groupe2cs.bizyhub.companies.application.dto.CompanyRequest;
 import com.groupe2cs.bizyhub.companies.application.dto.CompanyResponse;
+import com.groupe2cs.bizyhub.companies.application.usecase.CompanyUpdateApplicationService;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.CompanyId;
 import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.*;
 
 @PreAuthorize("@companyGate.canEdit(authentication, #id)")
 @RestController

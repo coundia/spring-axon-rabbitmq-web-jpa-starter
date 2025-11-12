@@ -1,10 +1,13 @@
 package com.groupe2cs.bizyhub.security.application.mapper;
 
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.domain.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.security.application.command.CreatePermissionCommand;
+import com.groupe2cs.bizyhub.security.application.command.DeletePermissionCommand;
+import com.groupe2cs.bizyhub.security.application.command.UpdatePermissionCommand;
+import com.groupe2cs.bizyhub.security.application.dto.PermissionRequest;
+import com.groupe2cs.bizyhub.security.application.dto.PermissionResponse;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
 
 public class PermissionMapper {
 

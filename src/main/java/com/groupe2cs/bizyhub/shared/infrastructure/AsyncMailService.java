@@ -1,12 +1,13 @@
 package com.groupe2cs.bizyhub.shared.infrastructure;
 
 
-import java.util.concurrent.CompletableFuture;
+import com.groupe2cs.bizyhub.shared.domain.MailSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import com.groupe2cs.bizyhub.shared.domain.MailSender;
+
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor

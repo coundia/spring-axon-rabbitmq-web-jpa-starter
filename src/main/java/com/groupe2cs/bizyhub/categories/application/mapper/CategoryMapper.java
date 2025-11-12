@@ -1,10 +1,12 @@
 package com.groupe2cs.bizyhub.categories.application.mapper;
 
-import com.groupe2cs.bizyhub.categories.application.dto.*;
+import com.groupe2cs.bizyhub.categories.application.command.CreateCategoryCommand;
+import com.groupe2cs.bizyhub.categories.application.command.DeleteCategoryCommand;
+import com.groupe2cs.bizyhub.categories.application.command.UpdateCategoryCommand;
+import com.groupe2cs.bizyhub.categories.application.dto.CategoryRequest;
+import com.groupe2cs.bizyhub.categories.application.dto.CategoryResponse;
 import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
-import com.groupe2cs.bizyhub.categories.domain.*;
-import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.categories.application.command.*;
+import com.groupe2cs.bizyhub.categories.infrastructure.entity.Category;
 
 public class CategoryMapper {
 

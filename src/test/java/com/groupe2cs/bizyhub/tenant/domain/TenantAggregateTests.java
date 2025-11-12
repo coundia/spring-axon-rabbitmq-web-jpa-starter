@@ -1,16 +1,15 @@
 package com.groupe2cs.bizyhub.tenant.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import com.groupe2cs.bizyhub.shared.BaseUnitTests;
+import com.groupe2cs.bizyhub.tenant.domain.exception.TenantIdNotValid;
+import com.groupe2cs.bizyhub.tenant.domain.exception.TenantNameNotValid;
 import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.tenant.domain.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class TenantAggregateTests extends BaseUnitTests {

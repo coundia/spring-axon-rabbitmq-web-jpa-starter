@@ -1,19 +1,21 @@
 package com.groupe2cs.bizyhub.security.presentation.projection;
 
-import com.groupe2cs.bizyhub.security.domain.event.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.security.domain.event.RolePermissionCreatedEvent;
+import com.groupe2cs.bizyhub.security.domain.event.RolePermissionDeletedEvent;
+import com.groupe2cs.bizyhub.security.domain.event.RolePermissionUpdatedEvent;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.Permission;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.RolePermission;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.RolePermissionRepository;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import org.axonframework.eventhandling.EventHandler;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
-import org.axonframework.config.ProcessingGroup;
 import org.springframework.stereotype.Component;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
-import lombok.RequiredArgsConstructor;
 
 @AllowReplay(value = false)
 @Slf4j

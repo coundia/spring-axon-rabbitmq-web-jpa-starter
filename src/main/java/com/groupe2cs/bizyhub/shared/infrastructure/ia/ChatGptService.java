@@ -5,7 +5,6 @@ package com.groupe2cs.bizyhub.shared.infrastructure.ia;
 
 import com.groupe2cs.bizyhub.categories.application.dto.CategoryRequest;
 import com.groupe2cs.bizyhub.categories.application.usecase.CategoryCreateApplicationService;
-import com.groupe2cs.bizyhub.categories.domain.valueObject.CategoryLocalId;
 import com.groupe2cs.bizyhub.categories.infrastructure.entity.Category;
 import com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
@@ -23,7 +22,6 @@ import org.springframework.web.client.RestTemplate;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;

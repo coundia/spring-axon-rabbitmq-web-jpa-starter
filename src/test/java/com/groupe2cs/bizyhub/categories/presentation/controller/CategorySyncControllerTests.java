@@ -1,27 +1,24 @@
 package com.groupe2cs.bizyhub.categories.presentation.controller;
 
-import com.groupe2cs.bizyhub.categories.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.*;
-import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.categories.application.dto.CategoryDeltaDto;
+import com.groupe2cs.bizyhub.categories.application.dto.CategorySyncRequest;
+import com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures;
+import com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.categories.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
+import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
-import com.groupe2cs.bizyhub.shared.*;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
 import java.util.UUID;
 
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategorySyncControllerTests extends BaseIntegrationTests {
 

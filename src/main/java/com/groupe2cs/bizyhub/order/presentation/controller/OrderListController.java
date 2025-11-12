@@ -1,13 +1,9 @@
 package com.groupe2cs.bizyhub.order.presentation.controller;
 
-import com.groupe2cs.bizyhub.order.application.dto.*;
-import com.groupe2cs.bizyhub.order.application.usecase.*;
+import com.groupe2cs.bizyhub.order.application.dto.OrderPagedResponse;
+import com.groupe2cs.bizyhub.order.application.usecase.OrderReadApplicationService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
-import com.groupe2cs.bizyhub.order.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.order.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.order.application.mapper.*;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,18 +11,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.axonframework.queryhandling.QueryGateway;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.CompletableFuture;
-
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 
 
 @PreAuthorize("@orderGate.canList(authentication)")

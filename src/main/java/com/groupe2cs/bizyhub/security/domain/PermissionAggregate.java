@@ -1,23 +1,25 @@
 package com.groupe2cs.bizyhub.security.domain;
 
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.domain.event.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.security.application.command.CreatePermissionCommand;
+import com.groupe2cs.bizyhub.security.application.command.DeletePermissionCommand;
+import com.groupe2cs.bizyhub.security.application.command.UpdatePermissionCommand;
+import com.groupe2cs.bizyhub.security.domain.event.PermissionCreatedEvent;
+import com.groupe2cs.bizyhub.security.domain.event.PermissionDeletedEvent;
+import com.groupe2cs.bizyhub.security.domain.event.PermissionUpdatedEvent;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionId;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionTenant;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
-
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter

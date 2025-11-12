@@ -1,19 +1,16 @@
 package com.groupe2cs.bizyhub.companies.application.queryHandler;
 
-import com.groupe2cs.bizyhub.companies.application.mapper.*;
-import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-import com.groupe2cs.bizyhub.companies.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.companies.application.dto.*;
-import com.groupe2cs.bizyhub.companies.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.companies.application.query.*;
-import com.groupe2cs.bizyhub.companies.domain.exception.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
+import com.groupe2cs.bizyhub.companies.application.dto.CompanyResponse;
+import com.groupe2cs.bizyhub.companies.application.mapper.CompanyMapper;
+import com.groupe2cs.bizyhub.companies.application.query.FindByCompanyIsDefaultQuery;
+import com.groupe2cs.bizyhub.companies.infrastructure.entity.Company;
+import com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;
+import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-import org.axonframework.queryhandling.QueryHandler;
 
 
 @Component

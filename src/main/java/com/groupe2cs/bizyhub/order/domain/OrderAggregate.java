@@ -1,23 +1,22 @@
 package com.groupe2cs.bizyhub.order.domain;
 
+import com.groupe2cs.bizyhub.order.application.command.CreateOrderCommand;
+import com.groupe2cs.bizyhub.order.application.command.DeleteOrderCommand;
+import com.groupe2cs.bizyhub.order.application.command.UpdateOrderCommand;
+import com.groupe2cs.bizyhub.order.domain.event.OrderCreatedEvent;
+import com.groupe2cs.bizyhub.order.domain.event.OrderDeletedEvent;
+import com.groupe2cs.bizyhub.order.domain.event.OrderUpdatedEvent;
 import com.groupe2cs.bizyhub.order.domain.valueObject.*;
-import com.groupe2cs.bizyhub.order.domain.event.*;
-import com.groupe2cs.bizyhub.order.application.command.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
-
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter

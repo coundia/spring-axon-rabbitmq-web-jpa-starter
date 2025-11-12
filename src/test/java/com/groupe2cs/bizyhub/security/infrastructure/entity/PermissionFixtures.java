@@ -1,28 +1,18 @@
 package com.groupe2cs.bizyhub.security.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.application.command.CreatePermissionCommand;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionCreatedBy;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionName;
+import com.groupe2cs.bizyhub.security.domain.valueObject.PermissionTenant;
+import com.groupe2cs.bizyhub.security.infrastructure.repository.PermissionRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.security.application.command.*;
-
-import java.util.UUID;
-
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.mock.web.MockMultipartFile;
 
 import static org.awaitility.Awaitility.await;
 

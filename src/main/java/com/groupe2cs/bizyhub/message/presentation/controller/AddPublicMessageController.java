@@ -1,27 +1,30 @@
 package com.groupe2cs.bizyhub.message.presentation.controller;
 
-import com.groupe2cs.bizyhub.message.application.usecase.*;
-import com.groupe2cs.bizyhub.message.application.dto.*;
+import com.groupe2cs.bizyhub.message.application.dto.MessageRequest;
+import com.groupe2cs.bizyhub.message.application.dto.MessageResponse;
+import com.groupe2cs.bizyhub.message.application.usecase.MessageCreateApplicationService;
 import com.groupe2cs.bizyhub.shared.application.UserResolverService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-
 import com.groupe2cs.bizyhub.shared.infrastructure.AsyncMailService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/public/messages")
@@ -72,7 +75,11 @@ public class AddPublicMessageController {
 					"no-reply@pcoundia.com",
 					to,
 					request.getCode() + " " + request.getPlateforme() + " " + request.getEmail(),
-					"<h1>New Message Received</h1><p>" + request.getContent() + "</p><p>From: " + request.getEmail() + "</p>"
+					"<h1>New Message Received</h1><p>" +
+							request.getContent() +
+							"</p><p>From: " +
+							request.getEmail() +
+							"</p>"
 			);
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);

@@ -1,22 +1,11 @@
 package com.groupe2cs.bizyhub.order.domain.valueObject;
 
-import java.util.Objects;
-
-import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
-import com.groupe2cs.bizyhub.order.domain.exception.OrderProductIdNotValid;
-import com.groupe2cs.bizyhub.order.domain.exception.OrderUserIdNotValid;
-import com.groupe2cs.bizyhub.order.domain.exception.OrderIdentifiantNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter

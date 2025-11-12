@@ -1,19 +1,18 @@
 package com.groupe2cs.bizyhub.tenant.presentation.projection;
 
-import com.groupe2cs.bizyhub.tenant.domain.event.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.tenant.domain.event.TenantCreatedEvent;
+import com.groupe2cs.bizyhub.tenant.domain.event.TenantDeletedEvent;
+import com.groupe2cs.bizyhub.tenant.domain.event.TenantUpdatedEvent;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import org.axonframework.eventhandling.EventHandler;
-
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
-import org.axonframework.config.ProcessingGroup;
 import org.springframework.stereotype.Component;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
-import lombok.RequiredArgsConstructor;
 
 @AllowReplay(value = false)
 @Slf4j

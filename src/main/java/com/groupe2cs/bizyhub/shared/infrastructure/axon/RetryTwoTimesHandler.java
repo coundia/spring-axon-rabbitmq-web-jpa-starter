@@ -1,9 +1,9 @@
 package com.groupe2cs.bizyhub.shared.infrastructure.axon;
 
 
-import org.axonframework.eventhandling.ListenerInvocationErrorHandler;
 import org.axonframework.eventhandling.EventMessage;
 import org.axonframework.eventhandling.EventMessageHandler;
+import org.axonframework.eventhandling.ListenerInvocationErrorHandler;
 
 public class RetryTwoTimesHandler implements ListenerInvocationErrorHandler {
 

@@ -1,10 +1,12 @@
 package com.groupe2cs.bizyhub.companies.application.mapper;
 
-import com.groupe2cs.bizyhub.companies.application.dto.*;
+import com.groupe2cs.bizyhub.companies.application.command.CreateCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.command.DeleteCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.command.UpdateCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.dto.CompanyRequest;
+import com.groupe2cs.bizyhub.companies.application.dto.CompanyResponse;
 import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-import com.groupe2cs.bizyhub.companies.domain.*;
-import com.groupe2cs.bizyhub.companies.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.companies.application.command.*;
+import com.groupe2cs.bizyhub.companies.infrastructure.entity.Company;
 
 public class CompanyMapper {
 

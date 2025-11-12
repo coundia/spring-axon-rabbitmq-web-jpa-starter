@@ -1,10 +1,12 @@
 package com.groupe2cs.bizyhub.fileManager.application.mapper;
 
-import com.groupe2cs.bizyhub.fileManager.application.dto.*;
+import com.groupe2cs.bizyhub.fileManager.application.command.CreateFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.application.command.DeleteFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.application.command.UpdateFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerRequest;
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerResponse;
 import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
-import com.groupe2cs.bizyhub.fileManager.domain.*;
-import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.fileManager.application.command.*;
+import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.FileManager;
 
 public class FileManagerMapper {
 

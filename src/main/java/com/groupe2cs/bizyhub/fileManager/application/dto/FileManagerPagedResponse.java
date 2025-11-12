@@ -1,17 +1,12 @@
 package com.groupe2cs.bizyhub.fileManager.application.dto;
 
-import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.fileManager.infrastructure.entity.FileManager;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import org.springframework.data.domain.Page;
 
 import java.io.Serializable;
 import java.util.List;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.domain.Page;
 
 @Getter
 @Setter

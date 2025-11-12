@@ -1,20 +1,14 @@
 package com.groupe2cs.bizyhub.shared.presentation.data;
 
 
-import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
 import com.groupe2cs.bizyhub.security.application.dto.VerificationCodeRequest;
-import com.groupe2cs.bizyhub.security.application.dto.VerificationCodeResponse;
 import com.groupe2cs.bizyhub.security.application.service.JwtService;
-import com.groupe2cs.bizyhub.security.application.service.RegisterUser;
-import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
 import com.groupe2cs.bizyhub.security.application.usecase.VerificationCodeCreateApplicationService;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.VerificationCode;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.VerificationCodeRepository;
 import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
-import com.groupe2cs.bizyhub.shared.application.CodeGenerator;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -23,8 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,7 +58,7 @@ public class RemoveMyData {
 			v.setStatus(STATUS_USED);
 			verificationCodeRepository.save(v);
 
-			 userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
+			userRepository.findFirstByUsernameAndTenantId(username, tenantId).orElseGet(() -> {
 				User
 						u =
 						User.builder().id(UUID.randomUUID().toString()).username(username)

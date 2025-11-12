@@ -1,10 +1,12 @@
 package com.groupe2cs.bizyhub.products.application.mapper;
 
-import com.groupe2cs.bizyhub.products.application.dto.*;
+import com.groupe2cs.bizyhub.products.application.command.CreateProductCommand;
+import com.groupe2cs.bizyhub.products.application.command.DeleteProductCommand;
+import com.groupe2cs.bizyhub.products.application.command.UpdateProductCommand;
+import com.groupe2cs.bizyhub.products.application.dto.ProductRequest;
+import com.groupe2cs.bizyhub.products.application.dto.ProductResponse;
 import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import com.groupe2cs.bizyhub.products.domain.*;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.products.application.command.*;
+import com.groupe2cs.bizyhub.products.infrastructure.entity.Product;
 
 public class ProductMapper {
 

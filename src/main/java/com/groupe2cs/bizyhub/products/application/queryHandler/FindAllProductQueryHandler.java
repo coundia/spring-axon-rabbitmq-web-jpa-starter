@@ -1,22 +1,19 @@
 package com.groupe2cs.bizyhub.products.application.queryHandler;
 
+import com.groupe2cs.bizyhub.products.application.dto.ProductPagedResponse;
+import com.groupe2cs.bizyhub.products.application.dto.ProductResponse;
+import com.groupe2cs.bizyhub.products.application.mapper.ProductMapper;
+import com.groupe2cs.bizyhub.products.application.query.FindAllProductQuery;
+import com.groupe2cs.bizyhub.products.infrastructure.entity.Product;
+import com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.queryhandling.QueryHandler;
-import org.springframework.stereotype.Component;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.products.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.products.application.query.*;
-import com.groupe2cs.bizyhub.products.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.products.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-
-import org.axonframework.queryhandling.QueryHandler;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j

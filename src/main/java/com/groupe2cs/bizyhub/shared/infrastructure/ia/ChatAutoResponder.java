@@ -3,12 +3,12 @@
 
 package com.groupe2cs.bizyhub.shared.infrastructure.ia;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.groupe2cs.bizyhub.chats.application.command.UpdateChatCommand;
 import com.groupe2cs.bizyhub.chats.domain.event.ChatCreatedEvent;
 import com.groupe2cs.bizyhub.chats.domain.valueObject.ChatResponses;

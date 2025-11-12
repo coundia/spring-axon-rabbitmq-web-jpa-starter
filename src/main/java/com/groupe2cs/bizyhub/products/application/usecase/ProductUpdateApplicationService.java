@@ -1,20 +1,18 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
 
-import com.groupe2cs.bizyhub.products.application.mapper.*;
+import com.groupe2cs.bizyhub.products.application.command.UpdateProductCommand;
+import com.groupe2cs.bizyhub.products.application.dto.ProductRequest;
+import com.groupe2cs.bizyhub.products.application.dto.ProductResponse;
+import com.groupe2cs.bizyhub.products.application.mapper.ProductMapper;
+import com.groupe2cs.bizyhub.products.domain.valueObject.ProductCreatedBy;
+import com.groupe2cs.bizyhub.products.domain.valueObject.ProductId;
+import com.groupe2cs.bizyhub.products.domain.valueObject.ProductTenant;
 import com.groupe2cs.bizyhub.shared.application.UserValidationService;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import com.groupe2cs.bizyhub.products.application.query.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.products.application.command.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-
-import java.util.List;
-
+import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

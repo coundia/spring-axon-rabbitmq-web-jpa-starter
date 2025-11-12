@@ -1,23 +1,22 @@
 package com.groupe2cs.bizyhub.security.domain;
 
+import com.groupe2cs.bizyhub.security.application.command.CreateUserRoleCommand;
+import com.groupe2cs.bizyhub.security.application.command.DeleteUserRoleCommand;
+import com.groupe2cs.bizyhub.security.application.command.UpdateUserRoleCommand;
+import com.groupe2cs.bizyhub.security.domain.event.UserRoleCreatedEvent;
+import com.groupe2cs.bizyhub.security.domain.event.UserRoleDeletedEvent;
+import com.groupe2cs.bizyhub.security.domain.event.UserRoleUpdatedEvent;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.domain.event.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
-
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter

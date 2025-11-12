@@ -1,28 +1,17 @@
 package com.groupe2cs.bizyhub.companies.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.companies.application.dto.*;
-import com.groupe2cs.bizyhub.companies.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.companies.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.companies.application.command.CreateCompanyCommand;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
+import com.groupe2cs.bizyhub.companies.infrastructure.repository.CompanyRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.companies.application.command.*;
-
-import java.util.UUID;
-
-import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.mock.web.MockMultipartFile;
 
 import static org.awaitility.Awaitility.await;
 

@@ -1,8 +1,6 @@
 package com.groupe2cs.bizyhub.shared.presentation.status;
 
 import com.groupe2cs.bizyhub.shared.application.ApiResponseDto;
-
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

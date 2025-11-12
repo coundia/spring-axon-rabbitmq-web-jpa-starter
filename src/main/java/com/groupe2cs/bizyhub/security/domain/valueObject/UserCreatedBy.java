@@ -1,31 +1,11 @@
 package com.groupe2cs.bizyhub.security.domain.valueObject;
 
-import java.util.Objects;
-
-import com.groupe2cs.bizyhub.security.domain.exception.UserIdNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserUsernameNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserPasswordNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserFirstNameNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserLastNameNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserEmailNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserTelephoneNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserLimitPerDayNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserIsPremiumNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserEnabledNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserIsBanNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserMessageNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.UserCreatedByNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter

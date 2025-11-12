@@ -7,8 +7,6 @@ import com.groupe2cs.bizyhub.products.application.mapper.ProductMapper;
 import com.groupe2cs.bizyhub.products.domain.valueObject.ProductCreatedBy;
 import com.groupe2cs.bizyhub.products.domain.valueObject.ProductTenant;
 import com.groupe2cs.bizyhub.products.infrastructure.repository.ProductRepository;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
 import com.groupe2cs.bizyhub.shared.application.UserValidationService;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 import lombok.RequiredArgsConstructor;

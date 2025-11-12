@@ -1,15 +1,12 @@
 package com.groupe2cs.bizyhub.message.domain.event;
 
-	import com.groupe2cs.bizyhub.message.domain.valueObject.*;
-
-import java.io.Serializable;
+import com.groupe2cs.bizyhub.message.domain.valueObject.MessageId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.*;
-import java.util.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -17,25 +14,7 @@ import java.util.*;
 @NoArgsConstructor
 public class MessageDeletedEvent implements Serializable {
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-private MessageId id;
+	private MessageId id;
 
 }

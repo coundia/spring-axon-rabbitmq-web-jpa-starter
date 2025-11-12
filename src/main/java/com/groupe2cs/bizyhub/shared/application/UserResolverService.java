@@ -1,12 +1,12 @@
 // Service that resolves a userId (String) from identifiant/telephone/email/username or returns guest's id.
 package com.groupe2cs.bizyhub.shared.application;
 
-import java.util.Optional;
-
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.shared.infrastructure.reponsitories.UserFinderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.groupe2cs.bizyhub.shared.infrastructure.reponsitories.UserFinderRepository;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+
+import java.util.Optional;
 
 @Service
 public class UserResolverService {

@@ -1,8 +1,8 @@
 package com.groupe2cs.bizyhub.security.application.service;
 
-import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.application.dto.AuthRequestDto;
+import com.groupe2cs.bizyhub.security.application.dto.AuthResponseDto;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,7 +23,9 @@ public class AuthService {
 			MetaRequest metaRequest
 	) {
 
-		log.info("AuthService.handle called with username: {} for tenant: {}", request.getUsername(), metaRequest.getTenantId());
+		log.info("AuthService.handle called with username: {} for tenant: {}",
+				request.getUsername(),
+				metaRequest.getTenantId());
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(

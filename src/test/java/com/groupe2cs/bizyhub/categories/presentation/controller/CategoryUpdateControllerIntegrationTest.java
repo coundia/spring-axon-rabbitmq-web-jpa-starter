@@ -1,25 +1,19 @@
 package com.groupe2cs.bizyhub.categories.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.categories.application.dto.*;
-import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.categories.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.categories.application.command.CreateCategoryCommand;
+import com.groupe2cs.bizyhub.categories.infrastructure.entity.CategoryFixtures;
+import com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.categories.application.command.*;
-
-import java.util.UUID;
-
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

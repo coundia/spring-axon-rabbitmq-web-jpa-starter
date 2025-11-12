@@ -1,23 +1,22 @@
 package com.groupe2cs.bizyhub.companies.domain;
 
+import com.groupe2cs.bizyhub.companies.application.command.CreateCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.command.DeleteCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.command.UpdateCompanyCommand;
+import com.groupe2cs.bizyhub.companies.domain.event.CompanyCreatedEvent;
+import com.groupe2cs.bizyhub.companies.domain.event.CompanyDeletedEvent;
+import com.groupe2cs.bizyhub.companies.domain.event.CompanyUpdatedEvent;
 import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-import com.groupe2cs.bizyhub.companies.domain.event.*;
-import com.groupe2cs.bizyhub.companies.application.command.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
-
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter

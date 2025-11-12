@@ -1,10 +1,12 @@
 package com.groupe2cs.bizyhub.tenant.application.mapper;
 
-import com.groupe2cs.bizyhub.tenant.application.dto.*;
+import com.groupe2cs.bizyhub.tenant.application.command.CreateTenantCommand;
+import com.groupe2cs.bizyhub.tenant.application.command.DeleteTenantCommand;
+import com.groupe2cs.bizyhub.tenant.application.command.UpdateTenantCommand;
+import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
+import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
 import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
-import com.groupe2cs.bizyhub.tenant.domain.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.tenant.application.command.*;
+import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
 
 public class TenantMapper {
 

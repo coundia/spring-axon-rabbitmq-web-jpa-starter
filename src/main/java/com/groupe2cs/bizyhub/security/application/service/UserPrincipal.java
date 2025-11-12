@@ -1,14 +1,13 @@
 package com.groupe2cs.bizyhub.security.application.service;
 
+import com.groupe2cs.bizyhub.security.infrastructure.entity.Role;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.IdentifiableUser;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-
-
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 import java.util.Collection;
 import java.util.Set;

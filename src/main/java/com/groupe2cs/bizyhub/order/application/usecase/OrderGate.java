@@ -1,11 +1,8 @@
 package com.groupe2cs.bizyhub.order.application.usecase;
 
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
-import com.groupe2cs.bizyhub.security.application.service.UserPrincipal;
-import com.groupe2cs.bizyhub.security.application.service.JwtService;
 import com.groupe2cs.bizyhub.order.infrastructure.entity.Order;
-import com.groupe2cs.bizyhub.order.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
+import com.groupe2cs.bizyhub.order.infrastructure.repository.OrderRepository;
+import com.groupe2cs.bizyhub.security.application.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

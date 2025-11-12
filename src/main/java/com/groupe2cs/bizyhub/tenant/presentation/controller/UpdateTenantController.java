@@ -1,28 +1,24 @@
 package com.groupe2cs.bizyhub.tenant.presentation.controller;
 
-import com.groupe2cs.bizyhub.tenant.domain.valueObject.*;
-import com.groupe2cs.bizyhub.tenant.application.usecase.*;
-import com.groupe2cs.bizyhub.tenant.application.dto.*;
-import com.groupe2cs.bizyhub.tenant.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+import com.groupe2cs.bizyhub.tenant.application.dto.TenantRequest;
+import com.groupe2cs.bizyhub.tenant.application.dto.TenantResponse;
+import com.groupe2cs.bizyhub.tenant.application.usecase.TenantUpdateApplicationService;
+import com.groupe2cs.bizyhub.tenant.domain.valueObject.TenantId;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.AllArgsConstructor;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/admin/commands/tenant")

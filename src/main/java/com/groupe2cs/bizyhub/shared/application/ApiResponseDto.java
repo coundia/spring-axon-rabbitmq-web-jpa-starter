@@ -1,7 +1,7 @@
 package com.groupe2cs.bizyhub.shared.application;
 
-import lombok.Builder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

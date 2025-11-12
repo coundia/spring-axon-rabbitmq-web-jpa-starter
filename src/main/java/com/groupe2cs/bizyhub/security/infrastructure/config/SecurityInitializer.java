@@ -1,21 +1,20 @@
 package com.groupe2cs.bizyhub.security.infrastructure.config;
 
-import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-
-import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
-
 import com.groupe2cs.bizyhub.security.infrastructure.repository.*;
 import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-
-
+import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
 
 @Component
 @RequiredArgsConstructor

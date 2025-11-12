@@ -1,28 +1,17 @@
 package com.groupe2cs.bizyhub.categories.infrastructure.entity;
 
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.categories.application.dto.*;
-import com.groupe2cs.bizyhub.categories.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.categories.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.UserFixtures;
+import com.groupe2cs.bizyhub.categories.application.command.CreateCategoryCommand;
+import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import com.groupe2cs.bizyhub.categories.infrastructure.repository.CategoryRepository;
 import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.Tenant;
-import com.groupe2cs.bizyhub.tenant.infrastructure.entity.TenantFixtures;
 import com.groupe2cs.bizyhub.tenant.infrastructure.repository.TenantRepository;
-import com.groupe2cs.bizyhub.categories.application.command.*;
-
-import java.util.UUID;
-
-import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.mock.web.MockMultipartFile;
 
 import static org.awaitility.Awaitility.await;
 

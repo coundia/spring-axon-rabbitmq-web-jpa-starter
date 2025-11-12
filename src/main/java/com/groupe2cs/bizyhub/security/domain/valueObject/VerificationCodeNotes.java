@@ -1,20 +1,11 @@
 package com.groupe2cs.bizyhub.security.domain.valueObject;
 
-import java.util.Objects;
-
-import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeIdNotValid;
-import com.groupe2cs.bizyhub.security.domain.exception.VerificationCodeNotesNotValid;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
-import java.util.*;
 
 @Getter
 @Setter

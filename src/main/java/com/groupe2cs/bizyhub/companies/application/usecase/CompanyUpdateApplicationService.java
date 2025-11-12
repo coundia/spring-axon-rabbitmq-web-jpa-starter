@@ -1,20 +1,18 @@
 package com.groupe2cs.bizyhub.companies.application.usecase;
 
-import com.groupe2cs.bizyhub.companies.application.dto.*;
+import com.groupe2cs.bizyhub.companies.application.command.UpdateCompanyCommand;
+import com.groupe2cs.bizyhub.companies.application.dto.CompanyRequest;
+import com.groupe2cs.bizyhub.companies.application.dto.CompanyResponse;
+import com.groupe2cs.bizyhub.companies.application.mapper.CompanyMapper;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.CompanyCreatedBy;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.CompanyId;
+import com.groupe2cs.bizyhub.companies.domain.valueObject.CompanyTenant;
 import com.groupe2cs.bizyhub.shared.application.UserValidationService;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-import com.groupe2cs.bizyhub.companies.application.command.*;
-import com.groupe2cs.bizyhub.companies.application.query.*;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.companies.application.mapper.*;
-
-import java.util.List;
-
+import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

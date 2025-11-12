@@ -2,8 +2,8 @@ package com.groupe2cs.bizyhub.shared.application;
 
 import com.groupe2cs.bizyhub.shared.domain.MailSender;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service

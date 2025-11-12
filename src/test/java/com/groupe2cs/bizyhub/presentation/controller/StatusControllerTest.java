@@ -1,9 +1,6 @@
 package com.groupe2cs.bizyhub.presentation.controller;
 
-import com.groupe2cs.bizyhub.shared.*;
-
-import java.util.UUID;
-
+import com.groupe2cs.bizyhub.shared.BaseIntegrationTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 

@@ -1,15 +1,13 @@
 package com.groupe2cs.bizyhub.products.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.application.UserValidationService;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import com.groupe2cs.bizyhub.products.application.dto.*;
-import com.groupe2cs.bizyhub.products.application.mapper.*;
+import com.groupe2cs.bizyhub.products.application.dto.ProductPagedResponse;
+import com.groupe2cs.bizyhub.products.application.dto.ProductResponse;
 import com.groupe2cs.bizyhub.products.application.query.*;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

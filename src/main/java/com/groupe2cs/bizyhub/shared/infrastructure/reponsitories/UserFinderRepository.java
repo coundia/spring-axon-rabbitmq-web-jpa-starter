@@ -1,11 +1,11 @@
 // Spring Data repository for User entity with finders used by user resolution.
 package com.groupe2cs.bizyhub.shared.infrastructure.reponsitories;
 
-import java.util.Optional;
-
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+
+import java.util.Optional;
 
 @Repository
 public interface UserFinderRepository extends JpaRepository<User, String> {

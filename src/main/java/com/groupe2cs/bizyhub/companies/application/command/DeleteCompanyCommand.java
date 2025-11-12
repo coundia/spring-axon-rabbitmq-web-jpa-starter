@@ -1,24 +1,10 @@
 package com.groupe2cs.bizyhub.companies.application.command;
 
-import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-
-import java.util.Date;
-
+import com.groupe2cs.bizyhub.companies.domain.valueObject.CompanyId;
+import lombok.*;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-import java.util.UUID;
-
-
-import java.time.*;
-import java.util.*;
+import java.io.Serializable;
 
 @Getter
 @Setter

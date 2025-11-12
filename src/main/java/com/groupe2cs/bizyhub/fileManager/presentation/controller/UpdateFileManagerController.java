@@ -1,28 +1,24 @@
 package com.groupe2cs.bizyhub.fileManager.presentation.controller;
 
-import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
-import com.groupe2cs.bizyhub.fileManager.application.usecase.*;
-import com.groupe2cs.bizyhub.fileManager.application.dto.*;
-import com.groupe2cs.bizyhub.fileManager.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerRequest;
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerResponse;
+import com.groupe2cs.bizyhub.fileManager.application.usecase.FileManagerUpdateApplicationService;
+import com.groupe2cs.bizyhub.fileManager.domain.valueObject.FileManagerId;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-
+import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.AllArgsConstructor;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/commands/fileManager")

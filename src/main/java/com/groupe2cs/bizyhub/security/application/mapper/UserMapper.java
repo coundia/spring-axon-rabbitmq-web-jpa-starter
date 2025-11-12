@@ -1,10 +1,12 @@
 package com.groupe2cs.bizyhub.security.application.mapper;
 
-import com.groupe2cs.bizyhub.security.application.dto.*;
+import com.groupe2cs.bizyhub.security.application.command.CreateUserCommand;
+import com.groupe2cs.bizyhub.security.application.command.DeleteUserCommand;
+import com.groupe2cs.bizyhub.security.application.command.UpdateUserCommand;
+import com.groupe2cs.bizyhub.security.application.dto.UserRequest;
+import com.groupe2cs.bizyhub.security.application.dto.UserResponse;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.domain.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
 
 public class UserMapper {
 

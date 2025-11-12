@@ -1,16 +1,12 @@
 package com.groupe2cs.bizyhub.message.application.dto;
 
-import com.groupe2cs.bizyhub.message.infrastructure.entity.*;
+import com.groupe2cs.bizyhub.message.infrastructure.entity.Message;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import org.springframework.data.domain.Page;
+
 import java.io.Serializable;
 import java.util.List;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.domain.Page;
 
 @Getter
 @Setter
@@ -20,8 +16,8 @@ import org.springframework.data.domain.Page;
 @Schema(name = "MessagePagedResponse", description = "Paginated response for Message results")
 public class MessagePagedResponse implements Serializable {
 
-@Schema(description = "List of paginated Message items")
-private List<MessageResponse> content;
+	@Schema(description = "List of paginated Message items")
+	private List<MessageResponse> content;
 
 	@Schema(description = "Current page number", example = "0")
 	private int page;
@@ -37,11 +33,11 @@ private List<MessageResponse> content;
 
 	public static MessagePagedResponse from(Page<Message> page, List<MessageResponse> content) {
 		return MessagePagedResponse.builder()
-		.content(content)
-		.page(page.getNumber())
-		.size(page.getSize())
-		.totalElements(page.getTotalElements())
-		.totalPages(page.getTotalPages())
-		.build();
-		}
+				.content(content)
+				.page(page.getNumber())
+				.size(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
+				.build();
+	}
 }

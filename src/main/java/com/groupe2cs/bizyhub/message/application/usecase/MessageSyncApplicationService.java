@@ -1,14 +1,14 @@
 package com.groupe2cs.bizyhub.message.application.usecase;
-import com.groupe2cs.bizyhub.security.infrastructure.repository.UserRepository;
-import com.groupe2cs.bizyhub.message.application.dto.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-import com.groupe2cs.bizyhub.message.application.command.*;
-import com.groupe2cs.bizyhub.message.domain.valueObject.*;
 
+import com.groupe2cs.bizyhub.message.application.command.CreateMessageCommand;
+import com.groupe2cs.bizyhub.message.application.command.DeleteMessageCommand;
+import com.groupe2cs.bizyhub.message.application.command.UpdateMessageCommand;
+import com.groupe2cs.bizyhub.message.application.dto.MessageSyncRequest;
+import com.groupe2cs.bizyhub.message.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -24,22 +24,22 @@ public class MessageSyncApplicationService {
 
 
 					CreateMessageCommand command = CreateMessageCommand.builder()
-								.code(MessageCode.create(d.getCode()))
-								.email(MessageEmail.create(d.getEmail()))
-								.phone(MessagePhone.create(d.getPhone()))
-								.content(MessageContent.create(d.getContent()))
-								.plateforme(MessagePlateforme.create(d.getPlateforme()))
-								.source(MessageSource.create(d.getSource()))
-								.agent(MessageAgent.create(d.getAgent()))
-								.status(MessageStatus.create(d.getStatus()))
-								.description(MessageDescription.create(d.getDescription()))
-								.isActive(MessageIsActive.create(d.getIsActive()))
-								.isDefault(MessageIsDefault.create(d.getIsDefault()))
-								.remoteId(MessageRemoteId.create(d.getRemoteId()))
-								.localId(MessageLocalId.create(d.getLocalId()))
-								.depotAt(MessageDepotAt.create(d.getDepotAt()))
-								.syncAt(MessageSyncAt.create(d.getSyncAt()))
-						.build();
+							.code(MessageCode.create(d.getCode()))
+							.email(MessageEmail.create(d.getEmail()))
+							.phone(MessagePhone.create(d.getPhone()))
+							.content(MessageContent.create(d.getContent()))
+							.plateforme(MessagePlateforme.create(d.getPlateforme()))
+							.source(MessageSource.create(d.getSource()))
+							.agent(MessageAgent.create(d.getAgent()))
+							.status(MessageStatus.create(d.getStatus()))
+							.description(MessageDescription.create(d.getDescription()))
+							.isActive(MessageIsActive.create(d.getIsActive()))
+							.isDefault(MessageIsDefault.create(d.getIsDefault()))
+							.remoteId(MessageRemoteId.create(d.getRemoteId()))
+							.localId(MessageLocalId.create(d.getLocalId()))
+							.depotAt(MessageDepotAt.create(d.getDepotAt()))
+							.syncAt(MessageSyncAt.create(d.getSyncAt()))
+							.build();
 
 
 					if (metaRequest.getTenantId() != null) {
@@ -75,7 +75,7 @@ public class MessageSyncApplicationService {
 							.localId(MessageLocalId.create(d.getLocalId()))
 							.depotAt(MessageDepotAt.create(d.getDepotAt()))
 							.syncAt(MessageSyncAt.create(d.getSyncAt()))
-						.build();
+							.build();
 
 
 					commandGateway.sendAndWait(update);
@@ -87,8 +87,8 @@ public class MessageSyncApplicationService {
 					}
 
 					DeleteMessageCommand delete = DeleteMessageCommand.builder()
-						.id(MessageId.create(d.getId()))
-						.build();
+							.id(MessageId.create(d.getId()))
+							.build();
 
 					commandGateway.sendAndWait(delete);
 				}

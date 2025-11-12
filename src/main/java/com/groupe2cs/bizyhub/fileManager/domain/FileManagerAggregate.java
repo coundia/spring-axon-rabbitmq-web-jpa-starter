@@ -1,23 +1,22 @@
 package com.groupe2cs.bizyhub.fileManager.domain;
 
+import com.groupe2cs.bizyhub.fileManager.application.command.CreateFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.application.command.DeleteFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.application.command.UpdateFileManagerCommand;
+import com.groupe2cs.bizyhub.fileManager.domain.event.FileManagerCreatedEvent;
+import com.groupe2cs.bizyhub.fileManager.domain.event.FileManagerDeletedEvent;
+import com.groupe2cs.bizyhub.fileManager.domain.event.FileManagerUpdatedEvent;
 import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
-import com.groupe2cs.bizyhub.fileManager.domain.event.*;
-import com.groupe2cs.bizyhub.fileManager.application.command.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
-
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter

@@ -1,14 +1,13 @@
 package com.groupe2cs.bizyhub.order.application.usecase;
 
-import com.groupe2cs.bizyhub.order.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import com.groupe2cs.bizyhub.order.application.dto.OrderPagedResponse;
+import com.groupe2cs.bizyhub.order.application.dto.OrderResponse;
 import com.groupe2cs.bizyhub.order.application.query.*;
-import com.groupe2cs.bizyhub.order.application.dto.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
 import com.groupe2cs.bizyhub.order.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

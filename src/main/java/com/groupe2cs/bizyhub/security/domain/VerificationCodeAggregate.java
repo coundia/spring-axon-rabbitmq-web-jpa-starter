@@ -1,23 +1,22 @@
 package com.groupe2cs.bizyhub.security.domain;
 
+import com.groupe2cs.bizyhub.security.application.command.CreateVerificationCodeCommand;
+import com.groupe2cs.bizyhub.security.application.command.DeleteVerificationCodeCommand;
+import com.groupe2cs.bizyhub.security.application.command.UpdateVerificationCodeCommand;
+import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeCreatedEvent;
+import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeDeletedEvent;
+import com.groupe2cs.bizyhub.security.domain.event.VerificationCodeUpdatedEvent;
 import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.domain.event.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
-
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter

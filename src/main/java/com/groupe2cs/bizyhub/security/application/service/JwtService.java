@@ -1,22 +1,19 @@
 package com.groupe2cs.bizyhub.security.application.service;
 
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.security.infrastructure.config.*;
-
-import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.*;
-
-
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
+
+import static com.groupe2cs.bizyhub.security.infrastructure.config.ConstanteConfig.IS_ADMIN;
 
 
 @Slf4j

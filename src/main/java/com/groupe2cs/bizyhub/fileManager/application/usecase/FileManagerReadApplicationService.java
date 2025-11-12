@@ -1,14 +1,13 @@
 package com.groupe2cs.bizyhub.fileManager.application.usecase;
 
-import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.fileManager.application.dto.*;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerPagedResponse;
+import com.groupe2cs.bizyhub.fileManager.application.dto.FileManagerResponse;
 import com.groupe2cs.bizyhub.fileManager.application.query.*;
-import com.groupe2cs.bizyhub.fileManager.application.mapper.*;
 import com.groupe2cs.bizyhub.fileManager.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

@@ -1,19 +1,17 @@
 package com.groupe2cs.bizyhub.order.application.usecase;
 
+import com.groupe2cs.bizyhub.order.application.command.UpdateOrderCommand;
+import com.groupe2cs.bizyhub.order.application.dto.OrderRequest;
+import com.groupe2cs.bizyhub.order.application.dto.OrderResponse;
+import com.groupe2cs.bizyhub.order.application.mapper.OrderMapper;
+import com.groupe2cs.bizyhub.order.domain.valueObject.OrderCreatedBy;
+import com.groupe2cs.bizyhub.order.domain.valueObject.OrderId;
+import com.groupe2cs.bizyhub.order.domain.valueObject.OrderTenant;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
-import com.groupe2cs.bizyhub.shared.infrastructure.*;
-import com.groupe2cs.bizyhub.order.application.query.*;
-import com.groupe2cs.bizyhub.order.application.command.*;
-import com.groupe2cs.bizyhub.order.domain.valueObject.*;
-import com.groupe2cs.bizyhub.order.application.dto.*;
-import com.groupe2cs.bizyhub.order.application.mapper.*;
-
-import java.util.List;
-
+import com.groupe2cs.bizyhub.shared.infrastructure.FileStorageService;
+import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

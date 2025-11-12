@@ -1,16 +1,14 @@
 package com.groupe2cs.bizyhub.products.domain;
 
+import com.groupe2cs.bizyhub.products.domain.exception.*;
+import com.groupe2cs.bizyhub.products.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.BaseUnitTests;
+import org.junit.jupiter.api.Test;
+
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import com.groupe2cs.bizyhub.products.domain.valueObject.*;
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.shared.*;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import com.groupe2cs.bizyhub.products.domain.exception.*;
 
 
 public class ProductAggregateTests extends BaseUnitTests {

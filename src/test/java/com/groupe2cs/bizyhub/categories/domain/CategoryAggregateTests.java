@@ -1,15 +1,16 @@
 package com.groupe2cs.bizyhub.categories.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryCodeNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryIdNotValid;
+import com.groupe2cs.bizyhub.categories.domain.exception.CategoryNameNotValid;
 import com.groupe2cs.bizyhub.categories.domain.valueObject.*;
-import com.groupe2cs.bizyhub.shared.*;
-import com.groupe2cs.bizyhub.categories.domain.exception.*;
+import com.groupe2cs.bizyhub.shared.BaseUnitTests;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class CategoryAggregateTests extends BaseUnitTests {

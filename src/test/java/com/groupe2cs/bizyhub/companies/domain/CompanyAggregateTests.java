@@ -1,16 +1,16 @@
 package com.groupe2cs.bizyhub.companies.domain;
 
+import com.groupe2cs.bizyhub.companies.domain.exception.CompanyCodeNotValid;
+import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIdNotValid;
+import com.groupe2cs.bizyhub.companies.domain.exception.CompanyIsDefaultNotValid;
 import com.groupe2cs.bizyhub.companies.domain.valueObject.*;
-import com.groupe2cs.bizyhub.companies.domain.exception.*;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import com.groupe2cs.bizyhub.shared.*;
+import com.groupe2cs.bizyhub.shared.BaseUnitTests;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class CompanyAggregateTests extends BaseUnitTests {

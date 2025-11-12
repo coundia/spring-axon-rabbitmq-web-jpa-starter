@@ -1,10 +1,14 @@
 package com.groupe2cs.bizyhub.security.application.mapper;
 
-import com.groupe2cs.bizyhub.security.application.dto.*;
-import com.groupe2cs.bizyhub.security.domain.valueObject.*;
-import com.groupe2cs.bizyhub.security.domain.*;
-import com.groupe2cs.bizyhub.security.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.security.application.command.*;
+import com.groupe2cs.bizyhub.security.application.command.CreateUserRoleCommand;
+import com.groupe2cs.bizyhub.security.application.command.DeleteUserRoleCommand;
+import com.groupe2cs.bizyhub.security.application.command.UpdateUserRoleCommand;
+import com.groupe2cs.bizyhub.security.application.dto.UserRoleRequest;
+import com.groupe2cs.bizyhub.security.application.dto.UserRoleResponse;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleId;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleRole;
+import com.groupe2cs.bizyhub.security.domain.valueObject.UserRoleUser;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.UserRole;
 
 public class UserRoleMapper {
 

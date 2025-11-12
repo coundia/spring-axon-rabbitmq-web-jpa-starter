@@ -1,17 +1,14 @@
 package com.groupe2cs.bizyhub.order.domain;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import com.groupe2cs.bizyhub.order.domain.exception.OrderIdNotValid;
 import com.groupe2cs.bizyhub.order.domain.valueObject.*;
+import com.groupe2cs.bizyhub.shared.BaseUnitTests;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import com.groupe2cs.bizyhub.order.domain.exception.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.Test;
-import com.groupe2cs.bizyhub.shared.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class OrderAggregateTests extends BaseUnitTests {

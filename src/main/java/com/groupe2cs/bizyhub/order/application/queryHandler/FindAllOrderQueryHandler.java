@@ -1,22 +1,19 @@
 package com.groupe2cs.bizyhub.order.application.queryHandler;
 
+import com.groupe2cs.bizyhub.order.application.dto.OrderPagedResponse;
+import com.groupe2cs.bizyhub.order.application.dto.OrderResponse;
+import com.groupe2cs.bizyhub.order.application.mapper.OrderMapper;
+import com.groupe2cs.bizyhub.order.application.query.FindAllOrderQuery;
+import com.groupe2cs.bizyhub.order.infrastructure.entity.Order;
+import com.groupe2cs.bizyhub.order.infrastructure.repository.OrderRepository;
+import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.queryhandling.QueryHandler;
-import org.springframework.stereotype.Component;
-import com.groupe2cs.bizyhub.order.application.dto.*;
-import com.groupe2cs.bizyhub.order.infrastructure.repository.*;
-import com.groupe2cs.bizyhub.order.application.query.*;
-import com.groupe2cs.bizyhub.order.infrastructure.entity.*;
-import com.groupe2cs.bizyhub.order.application.mapper.*;
-import com.groupe2cs.bizyhub.shared.application.dto.*;
-
-import org.axonframework.queryhandling.QueryHandler;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
