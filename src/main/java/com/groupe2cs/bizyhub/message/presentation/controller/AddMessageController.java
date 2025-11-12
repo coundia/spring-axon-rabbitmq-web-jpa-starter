@@ -2,6 +2,8 @@ package com.groupe2cs.bizyhub.message.presentation.controller;
 
 import com.groupe2cs.bizyhub.message.application.usecase.*;
 import com.groupe2cs.bizyhub.message.application.dto.*;
+import com.groupe2cs.bizyhub.security.infrastructure.entity.User;
+import com.groupe2cs.bizyhub.shared.application.UserResolverService;
 import com.groupe2cs.bizyhub.shared.infrastructure.audit.RequestContext;
 import com.groupe2cs.bizyhub.shared.application.dto.MetaRequest;
 
@@ -10,6 +12,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.http.HttpStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +27,12 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/commands/message")
 @Tag(name = "Message commands", description = "Endpoints for managing messages")
 @Slf4j
-
+@RequiredArgsConstructor
 public class AddMessageController {
 
 	private final MessageCreateApplicationService applicationService;
-
-	public AddMessageController(MessageCreateApplicationService applicationService) {
-		this.applicationService = applicationService;
-	}
+	private final UserResolverService userResolverService;
+	private final CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
 
 	@PostMapping
 	@Operation(
@@ -52,11 +54,15 @@ public class AddMessageController {
 													  @AuthenticationPrincipal Jwt jwt) {
 		try {
 
+			log.info("received request to create message: {}", request);
+
+			String userId = userResolverService.resolveUserId(null, null, null,null);
+
 			MetaRequest metaRequest = MetaRequest.builder()
-					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
+					.userId(userId)
+					.tenantId(currentTenantIdentifierResolver.resolveCurrentTenantIdentifier())
 					.build();
 
-			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
 
 			MessageResponse response = applicationService.createMessage(
 					request,
