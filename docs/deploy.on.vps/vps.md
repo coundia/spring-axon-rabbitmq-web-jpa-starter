@@ -95,7 +95,7 @@ sudo apt install certbot python3-certbot-nginx -y
 
 
 # disable dns all before
-sudo certbot certonly --standalone --force-renewal -d cloud.megastore.sn   -m contact@megastore.sn --agree-tos
+sudo certbot certonly --standalone --force-renewal -d cloud.megastore.sn   -m contact@pcoundia.com --agree-tos
 
 
 

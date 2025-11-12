@@ -19,7 +19,7 @@ public class SendTestsMailController {
 
 	private final NotificationService notificationService;
 
-	@Value("${spring.mail.username:'noreply@pcoundia.com'}")
+	@Value("${spring.mail.username:noreply@pcoundia.com}")
 	private String from;
 
 	@Operation(
