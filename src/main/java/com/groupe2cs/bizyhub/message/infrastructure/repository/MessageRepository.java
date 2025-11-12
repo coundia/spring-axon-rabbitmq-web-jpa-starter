@@ -164,8 +164,6 @@ public interface MessageRepository extends JpaRepository<Message, String> {
 
 
 
-    @Query("SELECT e FROM Message e WHERE e.tenant.id = :tenantId AND e.isPublic = true ORDER BY e.updatedAtAudit DESC, e.createdAtAudit DESC")
-    Page<Message> findPublicByTenantId(String tenantId, Pageable pageable);
 
 
 }

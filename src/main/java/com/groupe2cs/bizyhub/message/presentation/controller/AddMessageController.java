@@ -33,48 +33,48 @@ import org.springframework.security.core.Authentication;
 
 public class AddMessageController {
 
-	private final MessageCreateApplicationService applicationService;
+private final MessageCreateApplicationService applicationService;
 
-	public AddMessageController(MessageCreateApplicationService applicationService) {
-		this.applicationService = applicationService;
+public AddMessageController(MessageCreateApplicationService applicationService) {
+	this.applicationService = applicationService;
+}
+
+@PostMapping
+@Operation(
+summary = "Create a new message",
+description = "Creates a new message and returns the created entity",
+requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+description = "Message request payload",
+required = true,
+content = @Content(schema = @Schema(implementation = MessageRequest.class))
+)
+)
+@ApiResponses(value = {
+@ApiResponse(responseCode = "201", description = "Successfully created",
+content = @Content(schema = @Schema(implementation = MessageResponse.class))),
+@ApiResponse(responseCode = "500", description = "Internal server error",
+content = @Content(schema = @Schema()))
+})
+public ResponseEntity<MessageResponse> addMessage(@Valid @RequestBody MessageRequest request,
+	@AuthenticationPrincipal Jwt jwt) {
+	try {
+
+	MetaRequest metaRequest = MetaRequest.builder()
+		.userId(RequestContext.getUserId(jwt))		.tenantId(RequestContext.getTenantId(jwt))
+		.build();
+
+		metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
+
+	MessageResponse response =  applicationService.createMessage(
+			request,
+			metaRequest
+	);
+
+	return ResponseEntity.status(HttpStatus.CREATED).body(response);
+	} catch (Exception ex) {
+	//e.printStackTrace();
+	log.error("Failed to create message: {}", ex.getMessage());
+	return ResponseEntity.status(500).build();
 	}
-
-	@PostMapping
-	@Operation(
-			summary = "Create a new message",
-			description = "Creates a new message and returns the created entity",
-			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-					description = "Message request payload",
-					required = true,
-					content = @Content(schema = @Schema(implementation = MessageRequest.class))
-			)
-	)
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "201", description = "Successfully created",
-					content = @Content(schema = @Schema(implementation = MessageResponse.class))),
-			@ApiResponse(responseCode = "500", description = "Internal server error",
-					content = @Content(schema = @Schema()))
-	})
-	public ResponseEntity<MessageResponse> addMessage(@Valid @RequestBody MessageRequest request,
-													  @AuthenticationPrincipal Jwt jwt) {
-		try {
-
-			MetaRequest metaRequest = MetaRequest.builder()
-					.userId(RequestContext.getUserId(jwt)).tenantId(RequestContext.getTenantId(jwt))
-					.build();
-
-			metaRequest.setIsAdmin(RequestContext.isAdmin(jwt));
-
-			MessageResponse response = applicationService.createMessage(
-					request,
-					metaRequest
-			);
-
-			return ResponseEntity.status(HttpStatus.CREATED).body(response);
-		} catch (Exception ex) {
-			//e.printStackTrace();
-			log.error("Failed to create message: {}", ex.getMessage());
-			return ResponseEntity.status(500).build();
-		}
-	}
+}
 }

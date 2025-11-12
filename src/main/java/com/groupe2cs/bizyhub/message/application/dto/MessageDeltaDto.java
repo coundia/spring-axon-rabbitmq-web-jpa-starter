@@ -26,31 +26,31 @@ public class MessageDeltaDto implements Serializable {
 	@Builder.Default
     private String type = "CREATE";
 
-		@Schema(description = "", example = "75349af4-c2fe-45c8-90a6-3cb47741bf3e")
+		@Schema(description = "", example = "61fbd71e-fd5f-42a3-9128-9f0fb119ab03")
 		private String code;
-		@Schema(description = "", example = "5c39cc84-0b51-4f24-864e-5d2d38c4c93b")
+		@Schema(description = "", example = "22b1181e-ad43-43b2-b23a-d794dc6d5f81")
 		private String email;
-		@Schema(description = "", example = "644cb894-9cee-4425-bd3e-19df9bdab4f5")
+		@Schema(description = "", example = "0bb18e82-7e2a-4bdb-82ea-600ef13be32e")
 		private String phone;
-		@Schema(description = "", example = "f11490bc-9595-4abe-ba6a-2bf5ded54b3b")
+		@Schema(description = "", example = "34c491c8-fabc-4dce-9f6b-d6a1cbc04ff5")
 		private String content;
-		@Schema(description = "", example = "618fc804-a2d4-46bf-a55f-b6d241f4af7a")
+		@Schema(description = "", example = "af20bbde-3d29-42b7-aa42-f7d506592117")
 		private String plateforme;
-		@Schema(description = "", example = "c029fcc8-5b6d-4663-91af-7341bc3caf4c")
+		@Schema(description = "", example = "dcb9da64-83e4-47c1-a721-7f8a5b342187")
 		private String source;
-		@Schema(description = "", example = "86311a30-dfc6-430d-80c9-df4e195580f3")
+		@Schema(description = "", example = "dbd3830d-b34d-44ba-a336-f0b028b4ae0b")
 		private String agent;
-		@Schema(description = "", example = "690062ce-68c1-4e06-8a01-c536a02a3b2b")
+		@Schema(description = "", example = "f79025f9-48da-4a6d-bf98-88c088a6c664")
 		private String status;
-		@Schema(description = "", example = "1ad31860-1180-4515-82f8-55502295a3e1")
+		@Schema(description = "", example = "9a5bcd68-a673-4c1e-9123-f86b8ed18f11")
 		private String description;
 		@Schema(description = "", example = "true")
 		private Boolean isActive;
 		@Schema(description = "", example = "true")
 		private Boolean isDefault;
-		@Schema(description = "", example = "509f5294-c8e2-4b10-bcf8-3a993234fe3f")
+		@Schema(description = "", example = "644d96ed-538a-4230-bb22-2f26a9557ebe")
 		private String remoteId;
-		@Schema(description = "", example = "fc6bdd5c-f341-4ba5-bc21-907c2d866eb3")
+		@Schema(description = "", example = "65a1dc16-9fb6-443d-abbf-1cbcb9da9d75")
 		private String localId;
 		@Schema(description = "", example = "java.time.Instant.now().plusSeconds(3600)")
 		private java.time.Instant depotAt;
