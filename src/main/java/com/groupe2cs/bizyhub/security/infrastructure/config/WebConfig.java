@@ -13,14 +13,16 @@ import java.util.List;
 @Configuration
 public class WebConfig {
 
-	@Value("${app.cors.allowed-origins:http://localhost:4200}")
+	@Value("${app.cors.allowed-origins:https://www.pcoundia.com,https://pcoundia.com,http://localhost:4200,http://localhost:4321}")
 	private String allowedOrigins;
 
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
 
-		config.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
+		//todo
+		config.setAllowedOriginPatterns(List.of("*"));
+		//config.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
 		config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 		config.setExposedHeaders(List.of("Authorization"));
